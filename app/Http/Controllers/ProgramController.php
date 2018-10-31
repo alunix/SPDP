@@ -76,7 +76,7 @@ class ProgramController extends Controller
         $fileNameToStore=$filename.'_'.time().'.'.$extension;
         
         //Upload Pdf file
-        $path =$request ->file('file_link')->storeAs('public/cadanganProgramPDF',$fileNameToStore);
+        $path =$request ->file('file_link')->storeAs('public/cadangan_program_baharu',$fileNameToStore);
         
         }
             else{
@@ -95,6 +95,7 @@ class ProgramController extends Controller
             $programs = new Program();
             $programs -> lecturer_name = $request -> input('lecturer_name');
             $programs -> fakulti = $request -> input('fakulti');
+            $programs -> doc_title =$request -> input('doc_title');
             $programs -> file_name = $fileNameWithExt;
             $programs -> file_link = $fileNameToStore;
             $programs -> lecturer_id = $lecturer_id; 
@@ -102,7 +103,7 @@ class ProgramController extends Controller
 
             $programs -> save();
 
-            return redirect('/program-baharu')->with('Cadangan program telah berjaya dimuat naik');
+            return redirect('/program-baharu')->with('success','Cadangan program telah berjaya dimuat naik');
 
 
     }
@@ -113,13 +114,15 @@ class ProgramController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
-        $url = Storage::disk('public')->url($filename);
+        // $url = Storage::disk('public')->url($filename);
 
         ///$file = Storage::disk('public')->get($filename);
         // return response()->download(storage_path("app/public/{$filename}"));
         //return view ('pjk-view-program-baharu')->with
+        $program = Program::find($id);
+        return view('posts.view-program-baharu')->with('program',$program);
        
     }
 
@@ -131,7 +134,8 @@ class ProgramController extends Controller
      */
     public function edit($id)
     {
-        //
+        $program = Program::find($id);
+        return view('posts.view-program-baharu')->with('program',$program);
     }
 
     /**
@@ -143,7 +147,33 @@ class ProgramController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+
+            'lecturer_name' => 'required|string|max:20',
+            'fakulti' => 'required|string|max:255',
+            'file_link' => 'required|file|max:1999',
+           
+
+
+        ]);
+
+            $programs =Program::find($id);
+            $programs -> lecturer_name = $request -> input('lecturer_name');
+            $programs -> fakulti = $request -> input('fakulti');
+            $programs -> doc_title =$request -> input('doc_title');
+            $programs -> file_name = $fileNameWithExt;
+            $programs -> file_link = $fileNameToStore;
+            $programs -> lecturer_id = $lecturer_id; 
+            
+
+            $programs -> save();
+
+            return redirect('/program-baharu')->with('success','Cadangan program telah berjaya dimuat naik');
+
+
+
+        
+
     }
 
     /**

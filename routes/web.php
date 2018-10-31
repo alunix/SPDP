@@ -42,6 +42,8 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\pjkMiddleware'], function() 
 
 	//Route::get('/pjk/program-baharu', 'ProgramController@showListProgramPengajian')->name('pjk_program.index');
 	Route::match(['get', 'post'], '/pjk/program-baharu', 'ProgramController@showListProgramPengajian');
+	Route::match(['get', 'post'], '/programs/{program}', 'ProgramController@show');
+
 });
 
 Route::group(['middleware' => 'SPDP\Http\Middleware\penilaiMiddleware'], function() {

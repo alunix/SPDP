@@ -22,7 +22,7 @@ class CreateProgramsTable extends Migration
             $table->string('file_name'); //To show the name of the file
             $table->integer('lecturer_id')->unsigned();
             $table->foreign('lecturer_id')->references('id')->on('users');
-            $table->string('status_program')->default('Belum Disemak');
+            $table->string('status_program');
 
             $table->timestamps();
         });

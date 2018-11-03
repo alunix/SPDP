@@ -1,12 +1,10 @@
 <?php
 
 namespace SPDP\Http\Controllers;
-use SPDP\Program;
 use SPDP\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
-class ProgramController extends Controller
+class UserController extends Controller
 {
    /**
      * Display a listing of the resource.
@@ -17,11 +15,8 @@ class ProgramController extends Controller
 
     public function index()
     {
-        
-
-        
-        $programs = Program::all();
-        return view ('posts/fakulti-insert-programs')->with('programs',$programs);
+        $users = User::all();
+        return view ('posts/pjk-melantik-penilai')->with('users',$users);
     }
 
     /**
@@ -37,27 +32,12 @@ class ProgramController extends Controller
 
     // }
 
-       public function showListProgramPengajian(Request $request)
+       public function showListProgramPengajian()
      {
 
-    
         $programs = Program::all();
-        
         return view ('pjk-view-program-baharu')->with('programs',$programs);
 
-     }
-
-     public function showListPanelPenilai(Request $request,$id)
-     {
-        
-         $program = Program::find($id);
-       
-         $users = User::where('type','penilai')->get();
-
-      
-
-        // $users= User::all();
-         return view ('posts/pjk-melantik-penilai')->with('users',$users)->with('program',$program);
      }
 
 
@@ -136,11 +116,11 @@ class ProgramController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request,$id)
+    public function show($id)
     {
        
-        
-         $program = Program::find($id);
+
+        $program = Program::find($id);
         return view('posts/view-program-baharu')->with('program',$program);
        
     }
@@ -153,7 +133,8 @@ class ProgramController extends Controller
      */
     public function edit($id)
     {
-        
+        $program = Program::find($id);
+        return view('posts.view-program-baharu')->with('program',$program);
     }
 
     /**
@@ -175,56 +156,20 @@ class ProgramController extends Controller
             $program =Program::find($id);
             
             
-            
-            // $program -> status_program = 'Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai'; 
-           
-            
-
-            // $program -> save();
-
-            
-
-            //return redirect('/programs/{program}/pelantikan-penilai')->with('program',$program);
-            // return redirect('/programs/{program}/pelantikan-penilai')->with('program',$program);
-           
-            /* Might use this might nah */
-            // return redirect()->route('pelantikan_penilai.show')->with('program',$program);
-
-            return redirect()->route('/dashboard');
-
-           // return redirect()->route('pelantikan_penilai.show');
-            
-            break;
-        
-            case 'reject-program': 
-                //action for save-draft here
-            break;
-        }
-
-            
-
-
-        
-
-    }
-
-    public function submitListPanelPenilai(Request $request, $id)    {      
-            
-            $program =Program::find($id);
-            
-            
             $program -> status_program = 'Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai'; 
            
             
 
             $program -> save();
 
-            // return redirect('/dashboard');
+            return redirect('/dashboard');
 
-            return redirect('/programs/{program}/pelantikan-penilai')->with('program',$program);
-            
-           
+            break;
         
+            case 'reject-program': 
+                //action for save-draft here
+            break;
+        }
 
             
 

@@ -10,6 +10,7 @@
             <div class="card-body">
                     <form method="POST" action="{{ route('program.page.submit') }}" enctype="multipart/form-data">
                         @csrf
+                        
 
 
                         <div class="form-group row">
@@ -105,7 +106,7 @@
        
 <hr>
 
-</div> 
+    </div> 
 @endforeach
 @else
 

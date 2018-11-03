@@ -21,6 +21,8 @@ Route::get('/', 'HomeController@index')->middleware('auth'); //Redirect index pa
 
 
 /*........................................Start middleware.............................*/
+
+/*----------------------- Bahagian pihak fakulti ------------- */	
 Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware'], function() {
 
 	// Route::match(['get', 'post'], '/fakulti-dashboard/', 'HomeController@fakulti');
@@ -34,15 +36,30 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware'], functio
 
 });
 
+/*----------------------- Pusat Jaminan Kualiti(PJK) ------------- */	
 Route::group(['middleware' => 'SPDP\Http\Middleware\pjkMiddleware'], function() {
 
 	Route::match(['get', 'post'], '/pjk-dashboard/', 'HomeController@pjk');
 	
-	/*----------------------- PJK mahu melihat program pengajian daripada fakulti ------------- */
-
-	//Route::get('/pjk/program-baharu', 'ProgramController@showListProgramPengajian')->name('pjk_program.index');
+	/*----------------------- PJK menerima program pengajian daripada fakulti ------------- */	
 	Route::match(['get', 'post'], '/pjk/program-baharu', 'ProgramController@showListProgramPengajian');
-	Route::match(['get', 'post'], '/programs/{program}', 'ProgramController@show');
+	
+	
+	/*----------------------- First penilaian program pengajian  ------------- */	
+	Route::get( '/programs/{program}', 'ProgramController@show')-> name('program.show');	
+	Route::patch( '/programs/{program}/pelantikan-penilai', 'ProgramController@update')-> name('program.show.submit');
+
+	/*-----------------------Pelantikan penilai---------------------------------------------*/
+	 Route::get('/programs/{program}/pelantikan-penilai','ProgramController@showListPanelPenilai')->name('pelantikan_penilai.show');
+	// Route::patch('/programs/{program}/pelantikan-penilai','ProgramController@submitLisPaneltPenilai')->name('pelantikan_penilai.submit');
+
+	
+	
+
+	
+
+
+
 
 });
 
@@ -68,6 +85,6 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\senatMiddleware'], function(
 
 
 
-Auth::routes();
+
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -5,18 +5,18 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Permohonan Program Pengajian Baharu </div>
+                <div class="card-header">Pelantikan Panel Penilai </div>
 
             <div class="card-body">
-                     
-                     
+                     <form method="POST" action="{{ route('program.show.submit',['program' => $program->id])}}" enctype="multipart/form-data" >
+                    
+                     {!! method_field('patch') !!}                 
+                
+
 
                         @csrf
-                    
 
-                        
-
-                         <div class="form-group row">
+                        <div class="form-group row">
                             <label for="doc_title" class="col-md-4 col-form-label text-md-right">{{ __('Tajuk Program') }}</label>
 
                             <div class="col-md-6">
@@ -71,23 +71,46 @@
 
                         </div>
 
+
+                        <table class="table">
+
+                        <thead>
+                            <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Nama</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Pelantikan</th>
+
+
+                            
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @if( ! $users->isEmpty() )
+        @foreach($users as $user)
+            <tr>
+                <th scope="row">{{ $user->id }}</th>
+                <td>{{ $user->name }}</td>               
+                <td>{{ $user->email }}</td>
+             <td> <input type="checkbox" name="checked[]" value="{{ $user->id }}"> </td> 
+            </tr>
+        @endforeach
+    @endif
+    </tbody>
+                        </table>
+
+                        
+
+                         
               
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-5">
                        
-                                <!-- <button a href="/programs/{program}/pelantikan-penilai"class="btn btn-success" value="accept-program" name="submitbutton">
-                                {{ __('Lulus') }}
-                                </button> -->
-
-                                <a href="/programs/{{$program->id}}/pelantikan-penilai">
-                                    <input type="button" class="btn btn-success" value="Lulus" />
-                                </a>
-                                
-                                
-                                
-                                <button type="submit" class="btn btn-danger" value="reject-program" name="submitbutton" >
-                                {{ __('Tidak lulus') }}
+                                <button type="submit" class="btn btn-success" value="accept-program" name="submitbutton">
+                                {{ __('Hantar') }}
                                 </button>
+                                
+                               
                              
 
                             </div>
@@ -110,13 +133,3 @@
 </div>
 
 @endsection
-
-<!-- @if($errors->any())
-        <div class="row collapse">
-            <ul class="alert-box warning radius">
-                @foreach($errors->all() as $error)
-                    <li> {{ $error }} </li>
-                @endforeach
-            </ul>
-        </div>
-        @endif -->

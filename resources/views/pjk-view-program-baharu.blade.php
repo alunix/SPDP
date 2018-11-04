@@ -18,33 +18,40 @@
       <a href="{{ url()->previous() }}" class="btn btn-default">Back</a>
                       
 <h4> Program yang diterima  </h4>
-<hr>
 
-@if(isset($programs))
-@if (count($programs)>0)
 
+<table class="table table-striped">
+
+<thead>
+    <tr>
+    <th scope="col">Permohonan ID</th>
+    <th scope="col">Tajuk dokumen</th>
+    <th scope="col">Ketua fakulti</th>
+    <th scope="col">Fakulti</th>
+    <th scope="col">Tarikh dihantar</th>
+
+
+    
+    </tr>
+</thead>
+<tbody>
+
+ <!-- <table class="table  table-striped"> -->
+
+@if( ! $programs->isEmpty() )
 @foreach($programs as $program)
-        @if($program->status_program=='Belum disemak') 
-            <div class ='well'>
-                <h6><a href="/programs/{{$program->id}}">{{$program->doc_title}} </a> </h6>
-                <h6> Permohonan ID: {{$program->id}} </h6>
-                <h6> Nama Ketua Fakulti: {{$program->lecturer_name}} </h6>
-                <h6> Fakulti : {{$program->fakulti}}  </h6>           
-                <h6> Tarikh dihantar : {{$program->created_at}}  </h6>
-      
-       
-       
-       @endif
-
-
-</div> 
+<tr>
+<th scope="row">{{$program->id}}</th>
+<td><a href="/programs/{{$program->id}}">{{$program->doc_title}}</td>               
+<td>{{$program->lecturer_name}} </td>
+<td>{{$program->fakulti}} </td> 
+<td>{{$program->created_at}}  </td> 
+</tr>
 @endforeach
-@else
-
-<p> Tiada cadangan program telah dijumpai </p>
-
 @endif
-@endif
+</tbody>
+</table>
+
 
                         
 

@@ -82,6 +82,8 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 
+                            
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -97,6 +99,11 @@
                                 @endif
                             </li>
                         @else
+                        <li class="nav-item">
+                                <a href="#" class="navbar-left"><img src="/img/navbar/baseline_notifications_black_18dp.png"></a>
+                        </li>
+                        
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>

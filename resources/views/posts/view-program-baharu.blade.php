@@ -80,7 +80,7 @@
                                 </button> -->
 
                                 <a href="/programs/{{$program->id}}/pelantikan-penilai">
-                                    <input type="button" class="btn btn-success" value="Lulus" />
+                                    <input type="button" class="btn btn-success" value="Lantik penilai" />
                                 </a>
                                 
                                 

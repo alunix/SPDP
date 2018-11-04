@@ -41,7 +41,7 @@ class ProgramController extends Controller
      {
 
     
-        $programs = Program::all();
+        $programs = Program::where('status_program','Belum disemak')->get();
         
         return view ('pjk-view-program-baharu')->with('programs',$programs);
 
@@ -168,38 +168,21 @@ class ProgramController extends Controller
         
 
 
-        switch($request->submitbutton) {
+       
+            
+            /* Find permohonan id then change the status program */
+            $program =Program::find($id);           
+            $program -> status_program = 'Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai'; 
+            $program -> save();
 
-            case 'accept-program': 
             
-            $program =Program::find($id);
-            
-            
-            
-            // $program -> status_program = 'Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai'; 
+
            
-            
-
-            // $program -> save();
-
-            
-
-            //return redirect('/programs/{program}/pelantikan-penilai')->with('program',$program);
-            // return redirect('/programs/{program}/pelantikan-penilai')->with('program',$program);
-           
-            /* Might use this might nah */
-            // return redirect()->route('pelantikan_penilai.show')->with('program',$program);
 
             return redirect()->route('/dashboard');
 
-           // return redirect()->route('pelantikan_penilai.show');
-            
-            break;
+          
         
-            case 'reject-program': 
-                //action for save-draft here
-            break;
-        }
 
             
 

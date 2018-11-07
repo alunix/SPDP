@@ -3,6 +3,8 @@
 namespace SPDP\Http\Controllers;
 use SPDP\Program;
 use SPDP\User;
+use SPDP\Penilain;
+use SPDP\Penilaian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -53,11 +55,9 @@ class ProgramController extends Controller
          $program = Program::find($id);
        
          $users = User::where('type','penilai')->get();
-
-      
-
-        // $users= User::all();
+        
          return view ('posts/pjk-melantik-penilai')->with('users',$users)->with('program',$program);
+     
      }
 
 
@@ -141,6 +141,7 @@ class ProgramController extends Controller
        
         
          $program = Program::find($id);
+         
         return view('posts/view-program-baharu')->with('program',$program);
        
     }
@@ -165,22 +166,56 @@ class ProgramController extends Controller
      */
     public function update(Request $request, $id)    {      
         
-        
+        $this->validate($request,[
+
+            'checked' => 'required',
+           
 
 
-       
-            
+        ]);
+
+                      
             /* Find permohonan id then change the status program */
+
             $program =Program::find($id);           
-            $program -> status_program = 'Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai'; 
-            $program -> save();
+            // $program -> status_program = 'Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai'; 
+            // $program -> save();
+
+            /* Get value $user->id from table pemilihan penilai */
+            $selectedPenilai = $request->input('checked');
+
+            
+            $programID = $program->id;
+            
+            $penilaianPJK = auth()->user()->id;
+
+            
+
+            $penilaians = new Penilaian();            
+            $penilaians -> dokumen_id = $programID;
+            $penilaians -> penilaian_pjk = $penilaianPJK;
+            $penilaians -> penilaian_panel_1= $selectedPenilai[0];
+            $penilaians -> penilaian_panel_2 = $selectedPenilai[1];
+            //$penilaians -> penilaian_panel_3 = $selectedPenilai[2];
+           
+            $penilaians -> save();
+            
+            return redirect(url('/programs/senarai-penilaian'));
+
+            // $params = request()->all();
+
+            // return ($params);
+            
+            
+            
+
+           
 
             
 
            
 
-            return redirect()->route('/dashboard');
-
+           
           
         
 
@@ -191,30 +226,14 @@ class ProgramController extends Controller
 
     }
 
-    public function submitListPanelPenilai(Request $request, $id)    {      
-            
-            $program =Program::find($id);
-            
-            
-            $program -> status_program = 'Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai'; 
-           
-            
-
-            $program -> save();
-
-            // return redirect('/dashboard');
-
-            return redirect('/programs/{program}/pelantikan-penilai')->with('program',$program);
-            
-           
-        
-
-            
-
-
-        
+    public function submitListPanelPenilai(Request $request, $id)    { 
 
     }
+
+   
+   
+
+
 
     /**
      * Remove the specified resource from storage.

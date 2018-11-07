@@ -14,7 +14,8 @@ class PenilaianController extends Controller
      */
     public function index()
     {
-        //
+        $penilaians = Penilaian::all();
+        return view ('posts/senarai-penilaian-program')->with('penilaians',$penilaians);
     }
 
     /**

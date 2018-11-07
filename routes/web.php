@@ -46,13 +46,22 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\pjkMiddleware'], function() 
 	
 	
 	/*----------------------- First penilaian program pengajian  ------------- */	
-	Route::get( '/programs/{program}', 'ProgramController@show')-> name('program.show');	
-	Route::patch( '/programs/{program}/pelantikan-penilai', 'ProgramController@update')-> name('program.show.submit');
+	Route::get('/programs/senarai-penilaian','PenilaianController@index')->name('penilaian.show');
+	Route::get( '/programs/{program}', 'ProgramController@show')->name('program.show');	
+	
+	
 
 	/*-----------------------Pelantikan penilai---------------------------------------------*/
+	
+	
 	 Route::get('/programs/{program}/pelantikan-penilai','ProgramController@showListPanelPenilai')->name('pelantikan_penilai.show');
-	// Route::patch('/programs/{program}/pelantikan-penilai','ProgramController@submitLisPaneltPenilai')->name('pelantikan_penilai.submit');
+	Route::patch( '/programs/{program}/pelantikan-penilai', 'ProgramController@update')-> name('pelantikan_penilai.submit');
+	
+	/*-----------------------Senarai penilaian yang ongoing---------------------------------------------*/
 
+	
+
+	
 	
 	
 

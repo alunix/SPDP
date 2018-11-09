@@ -15,14 +15,20 @@ class CreateProgramsTable extends Migration
     {
         Schema::create('programs', function (Blueprint $table) {
             $table->increments('id');
+            //$table->integer('penilaianID')->unsigned();
             $table->string('lecturer_name');
             $table->string('fakulti');
             $table->string('file_link');
             $table->string('doc_title');
             $table->string('file_name'); //To show the name of the file
             $table->integer('lecturer_id')->unsigned();
-            $table->foreign('lecturer_id')->references('id')->on('users');
+            //$table->foreign('penilaianID')->references('id')->on('penilaians');
+            $table->foreign('lecturer_id')->references('id')->on('users');  
+
             $table->string('status_program');
+           
+            
+
 
             $table->timestamps();
         });

@@ -3,6 +3,7 @@
 namespace SPDP\Http\Controllers;
 
 use SPDP\Penilaian;
+use SPDP\Program;
 use Illuminate\Http\Request;
 
 class PenilaianController extends Controller
@@ -23,6 +24,13 @@ class PenilaianController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function showProgramPenilai()
+    {
+        $programs = Program::where('status_program','Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai')->get();
+        return view ('pjk-view-program-baharu')->with('programs',$programs);
+    }
+
+
     public function create()
     {
         //
@@ -36,7 +44,37 @@ class PenilaianController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+
+           
+            'laporan_panel_penilai' => 'required|file|max:1999',
+           
+
+
+        ]);
+
+        //Handle file upload
+        if($request->hasFile('laporan_panel_penilai'))
+        
+        {
+
+            $fileNameWithExt=$request -> file('laporan_panel_penilai')->getClientOriginalName();
+
+        // Get the full file name
+            $filename = pathinfo($fileNameWithExt,PATHINFO_FILENAME);            
+
+        //Get the extension file name
+            $extension = $request ->file('laporan_panel_penilai')-> getClientOriginalExtension();
+        //File name to store
+        $fileNameToStore=$filename.'_'.time().'.'.$extension;
+        
+        //Upload Pdf file
+        $path =$request ->file('laporan_panel_penilai')->storeAs('public/laporan_panel_penilai',$fileNameToStore);
+        
+        }
+            else{
+                $fileNameToStore = 'noPDF.pdf';
+            }
     }
 
     /**
@@ -47,7 +85,10 @@ class PenilaianController extends Controller
      */
     public function show(Penilaian $penilaian)
     {
-        //
+        $program = Program::find($id);
+         
+        return view('posts/penilai-view-program-baharu')->with('program',$program);
+
     }
 
     /**

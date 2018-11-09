@@ -200,6 +200,17 @@ class ProgramController extends Controller
            
             $penilaians -> save();
             
+            $penilaian= Penilaian::find($id);
+            $penilaianID= $penilaian->id;
+            $program -> status_program = 'Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai'; 
+            $program -> penilaianID = $penilaianID;
+            $program -> save();
+
+            
+
+
+
+            
             return redirect(url('/programs/senarai-penilaian'));
 
             // $params = request()->all();

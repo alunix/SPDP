@@ -76,19 +76,47 @@
                                 
               
                         <div class="form-group row mb-0">
+
                             <div class="col-md-6 offset-md-5">
                        
-                                
-
-                                <a href="/programs/{{@$program[id]}}/pelantikan-penilai">
+                            @if(Auth::user()->type == "pjk")
+                                 
+                                 
+                            <a href="/programs/{{@$program[id]}}/pelantikan-penilai">
                                     <input type="button" class="btn btn-success" value="Lantik penilai" />
-                                </a>
+                                    
+                            </a>
                                 
                                 
-                                
-                                <button type="submit" class="btn btn-danger" value="reject-program" name="submitbutton" >
+                            
+                            <button type="submit" class="btn btn-danger" value="reject-program" name="submitbutton" >
                                 {{ __('Tidak lulus') }}
-                                </button>
+                            </button>
+                            
+                            @elseif(Auth::user()->type=="penilai")
+                            
+                            <a href="/programs/{{@$program[id]}}/kelulusan-permohonan">
+                                    <input type="button" class="btn btn-success" value="Lulus permohonan" />
+                                    
+                            </a>
+                                
+                                
+                            
+                            <!-- <button type="submit" class="btn btn-danger" value="reject-program" name="submitbutton" >
+                                {{ __('Tidak lulus') }}
+                            </button> -->
+                            
+                            <a href="/programs/{{@$program[id]}}/pelantikan-penilai">
+                                    <input type="button" class="btn btn-danger" value="Tidak lulus" />
+                                    
+                            </a>
+
+
+                            
+                            
+                            @endif    
+
+                              
                              
 
                             </div>

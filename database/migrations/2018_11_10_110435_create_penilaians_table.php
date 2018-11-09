@@ -22,6 +22,7 @@ class CreatePenilaiansTable extends Migration
             $table->integer('penilaian_panel_3')->unsigned()->nullable();
             $table->integer('penilaian_jppa')->unsigned()->nullable();
             $table->integer('penilaian_senat')->unsigned()->nullable();
+
             $table->foreign('dokumen_id')->references('id')->on('programs');
             $table->foreign('penilaian_pjk')->references('id')->on('users');
             $table->foreign('penilaian_panel_1')->references('id')->on('users');

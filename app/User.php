@@ -28,4 +28,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function hasRole($type)
+{
+    return User::where('type', $type);
+}
+
+
+
+
 }

@@ -20,7 +20,21 @@ Route::get('/dashboard', 'HomeController@index')->name('/dashboard'); // Redirec
 Route::get('/', 'HomeController@index')->middleware('auth'); //Redirect index page to login if not authenticated and will return homepage if authenticated.
 
 
+
 /*........................................Start middleware.............................*/
+
+/* Pages that are shared across multiplse users */
+// Route::get('programs/{program}', ['middleware' => 'type:pjk,penilai', function ($id) {
+// 	//
+	
+// }]);
+
+// Route::group(['middleware' => 'type:pjk,penilai'], function () {
+// 	Route::get('programs/{program}','ProgramController@show')->name('program.show');
+	
+// });
+
+Route::get('programs/{program}', ['middleware' => 'type:pjk,penilai', 'uses' => 'ProgramController@show']);
 
 /*----------------------- Bahagian pihak fakulti ------------- */	
 Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware'], function() {
@@ -47,7 +61,7 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\pjkMiddleware'], function() 
 	
 	/*----------------------- First penilaian program pengajian  ------------- */	
 	Route::get('/programs/senarai-penilaian','PenilaianController@index')->name('penilaian.show');
-	Route::get( '/programs/{program}', 'ProgramController@show')->name('program.show');	
+	// Route::get( '/programs/{program}', 'ProgramController@show')->name('program.show');	
 	
 	
 
@@ -75,6 +89,10 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\pjkMiddleware'], function() 
 Route::group(['middleware' => 'SPDP\Http\Middleware\penilaiMiddleware'], function() {
 
 	Route::match(['get', 'post'], '/penilai-dashboard/', 'HomeController@penilai');
+	Route::get('/panel-penilai/program-baharu','PenilaianController@showProgramPenilai');
+	// Route::get( '/programs/{program}', 'ProgramController@show')->name('program.show');	
+	Route::get('/programs/{program}/kelulusan-permohonan','PeilaianController@show')->name('penilai.laporan.show');
+	Route::post('/programs/{program}/kelulusan-permohonan','PeilaianController@store')->name('penilai.laporan.submit');
 
 });
 

@@ -15,6 +15,11 @@
                     @endif
 
                     You are logged in!
+
+                     <form action="http://spdp.com/panel-penilai/program-baharu">
+    <input type="submit" value="Lihat Semua Permohonan Baharu" />
+</form>
+
                 </div>
             </div>
         </div>

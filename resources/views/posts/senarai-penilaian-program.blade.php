@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">Senarai penilaian program </div>
 
-            <div class="card-body">
+            <div class="card-body" style="width:500px;">
             
                         <table class="table table-striped">                  
                         
@@ -35,8 +35,8 @@
                 <th scope="row">{{ $penilaian->dokumen_id }}</th>               
                 <th scope="row">{{ $penilaian->penilaian_pjk }}</th>
                 <th scope="row">{{ $penilaian->penilaian_panel_1}}</th>
-                <th scope="row">{{ $penilaian->penilaian_panel_1}}</th>
-                <th scope="row">{{ $penilaian->penilaian_panel_1}}</th>
+                <th scope="row">{{ $penilaian->penilaian_panel_2}}</th>
+                <th scope="row">{{ $penilaian->penilaian_panel_3}}</th>
                 <th scope="row">{{ $penilaian->jppa }}</th>
                 <th scope="row">{{ $penilaian->senat}}</th>
             </tr>

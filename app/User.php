@@ -34,10 +34,12 @@ class User extends Authenticatable
     return User::where('type', $type)->get();
 }
 
-public function Posts(){
+public function program(){
 
-    return $this->hasMany('SPDP\Post');
+    return $this->hasMany('SPDP\Program');
 }
+
+
 
 
 

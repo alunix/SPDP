@@ -16,8 +16,16 @@ class Program extends Model
 
  public function user(){
 
-    return $this->hasMany('SPDP\User');
+    return $this->belongsTo('SPDP\User');
 
  }
+
+ public function penilaian(){
+    // return $this->hasOne('SPDP\Penilaian','penilaianID');
+    return $this->hasOne('SPDP\Penilaian','dokumen_id');
+
+ }
+
+ 
 
 }

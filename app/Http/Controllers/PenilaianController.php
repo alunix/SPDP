@@ -45,6 +45,55 @@ class PenilaianController extends Controller
     public function store(Request $request)
     {
         
+       
+    }       
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \SPDP\Penilaian  $penilaian
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Penilaian $penilaian,$id,Program $program) /* Trying to pass two parameters which are $penilaian and $program */
+    {
+        $program = Program::find($id);
+
+        $programID= $program->id;
+       
+        // $programID->load('penilaians');
+
+
+        // $penilaian = Penilaian::find($id)->where;
+
+         
+        return view('panel_penilai.panel-lulus-permohonan')->with('penilaian',$program->penilaian);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \SPDP\Penilaian  $penilaian
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $program = Program::find($id);
+
+        $programID= $program->id;
+        $program=Program::find($programID);
+        return view('panel_penilai.panel-lulus-permohonan')->with('penilaian',$program->penilaian)->with('program',$program);
+
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \SPDP\Penilaian  $penilaian
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
         $this->validate($request,[
 
            
@@ -87,43 +136,6 @@ class PenilaianController extends Controller
 
             return redirect('/dashboard');
 
-    }       
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \SPDP\Penilaian  $penilaian
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Penilaian $penilaian,$id)
-    {
-        $program = Program::find($id);
-         
-        return view('panel_penilai/panel-lulus-permohonan')->with('program',$program);
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \SPDP\Penilaian  $penilaian
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Penilaian $penilaian)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \SPDP\Penilaian  $penilaian
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Penilaian $penilaian)
-    {
-        //
     }
 
     /**

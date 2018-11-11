@@ -99,8 +99,10 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\penilaiMiddleware'], functio
 	Route::match(['get', 'post'], '/penilai-dashboard/', 'HomeController@penilai');
 	Route::get('/panel-penilai/program-baharu','PenilaianController@showProgramPenilai');
 	// Route::get( '/programs/{program}', 'ProgramController@show')->name('program.show');	
-	Route::get('/programs/{program}/kelulusan-permohonan','PenilaianController@show')->name('penilai.laporan.show');
-	Route::patch('/programs/{program}/kelulusan-permohonan','PenilaianController@store')->name('penilai.laporan.submit');
+	// Route::get('/programs/{program}/kelulusan-permohonan','PenilaianController@edit')->name('penilai.laporan.show');
+	// Route::patch('/programs/{program}/kelulusan-permohonan','PenilaianController@store')->name('penilai.laporan.submit');
+	Route::get('/programs/{program}/kelulusan-permohonan/{penilaian}','PenilaianController@edit')->name('penilai.laporan.show');
+	Route::patch('/programs/{program}/kelulusan-permohonan/{penilaian}','PenilaianController@update')->name('penilai.laporan.submit');
 
 });
 

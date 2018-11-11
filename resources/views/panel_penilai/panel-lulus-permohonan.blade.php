@@ -10,7 +10,7 @@
             <div class="card-body">
                  
                     
-                     <form method="POST" action="{{ route('penilai.laporan.submit',['program' => $program->id])}}" enctype="multipart/form-data" >
+                     <form method="POST" action="{{ route('penilai.laporan.submit',['program' => $program->id,'penilaian'=>$penilaian->id])}}" enctype="multipart/form-data" >
                      {!! method_field('patch') !!}                 
                 
 

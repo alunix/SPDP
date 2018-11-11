@@ -132,14 +132,15 @@ class ProgramController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request,$id)
+    public function show(Request $request,$id,Penilaian $penilaian)
     {
        
         
          $program = Program::find($id);
+         $programID= $program->id;
          
-        return view('posts/view-program-baharu')->with('program',$program);
-       
+        return view('posts/view-program-baharu')->with('program',$program)->with('penilaian',$program->penilaian);;
+        
     }
 
     /**
@@ -178,8 +179,8 @@ class ProgramController extends Controller
             /* Find permohonan id then change the status program */
 
             $program =Program::find($id);           
-            // $program -> status_program = 'Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai'; 
-            // $program -> save();
+            $program -> status_program = 'Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai'; 
+            $program -> save();
 
             /* Get value $user->id from table pemilihan penilai */
             $selectedPenilai = $request->input('checked');
@@ -200,12 +201,21 @@ class ProgramController extends Controller
            
             $penilaians -> save();
             
-            $penilaian= Penilaian::find($id);
+            
+            
+            //$penilaian= Penilaian::find($id);
+
+            /* Get the id of the last id inserted row */
+            $penilaianID= $penilaians->id;
+
+           
+            
+
             /*Update the status program from Belum Disemak to kelulusan pjk. */
             $program -> status_program = 'Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai)';           
             /* Add the penilaianID on program table */            
-            $program = Program::find($id);
-            $program->penilaianID = $penilaian->id;
+            $program = Program::find($id);            
+            $program->penilaianID = $penilaianID;
             $program -> save();
          
 
@@ -216,10 +226,7 @@ class ProgramController extends Controller
             
             return redirect(url('/senarai-penilaian'));
 
-            // $params = request()->all();
-
-            // return ($params);
-            
+         
             
             
 

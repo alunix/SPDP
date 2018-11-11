@@ -128,14 +128,29 @@ class PenilaianController extends Controller
 
 
             //Add laporan panel penilai to the penilaian table
-            $penilaian= Penilaian::find($id);
+
+           
+            /* Cari program since penilaian belongs to program then baru boleh cari penilaian through eloquent relationship */
+            $program= Program::find($id);
+            $penilaian = $program->penilaian;
+
+            /* Status semakan program telah dikemaskini berdasarkan progress */
+            $program -> status_program = 'Diluluskan oleh Panel Penilai(Laporan telah dikeluarkan dan akan dilampirkan oleh PJK)'; 
+
             $penilaian -> laporan_panel_penilai =$fileNameWithExt;
-            $penilaian -> laporan_panel_penilai_link =$$fileNameToStore;
-            $penilaian->save();           
+            $penilaian -> laporan_panel_penilai_link =$fileNameToStore;
+
+            $program ->save();
+            $penilaian -> save();        
+            
+         
+           
             
 
-            return redirect('/dashboard');
-
+            
+           
+           //return redirect('/dashboard');
+           return redirect('/');
     }
 
     /**

@@ -101,8 +101,9 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\penilaiMiddleware'], functio
 	// Route::get( '/programs/{program}', 'ProgramController@show')->name('program.show');	
 	// Route::get('/programs/{program}/kelulusan-permohonan','PenilaianController@edit')->name('penilai.laporan.show');
 	// Route::patch('/programs/{program}/kelulusan-permohonan','PenilaianController@store')->name('penilai.laporan.submit');
-	Route::get('/programs/{program}/kelulusan-permohonan/{penilaian}','PenilaianController@edit')->name('penilai.laporan.show');
 	Route::patch('/programs/{program}/kelulusan-permohonan/{penilaian}','PenilaianController@update')->name('penilai.laporan.submit');
+	Route::get('/programs/{program}/kelulusan-permohonan/{penilaian}','PenilaianController@edit')->name('penilai.laporan.show');
+	
 
 });
 

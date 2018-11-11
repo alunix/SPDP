@@ -88,32 +88,51 @@
 <h4> Program yang dihantar  </h4>
 <hr>
 
-@if(isset($programs))
-@if (count($programs)>0)
 
+
+         <table class="table table-striped">
+
+<thead>
+    <tr>
+    <th scope="col">Permohonan ID</th>
+    <th scope="col">Tajuk</th>
+    <th scope="col">Nama</th>
+    <th scope="col">Fakulti</th>
+    <th scope="col">File</th>
+    <th scope="col">Status</th>
+    <th scope="col">Tarikh</th>
+    
+
+
+    
+    </tr>
+</thead>
+<tbody>
+@if( ! $programs->isEmpty() )
 @foreach($programs as $program)
-   <div class ='well'>
-       
-       <h6> Dokumen ID : {{$program->id}}  </h6>    
-       <h6> Tajuk Dokumen : {{$program->doc_title}}  </h6>       
-       <h6> Nama Ketua Fakulti: {{$program->lecturer_name}} </h6>
-       <h6> Fakulti : {{$program->fakulti}}  </h6>
-       <h6> Nama file : <a href ="<?php echo asset("storage/cadangan_program_baharu/$program->file_link")?>">{{ basename($program->file_name) }} </a> </h6>
-       <h6> Status permohonan : {{$program->status_program}}  </h6>
-       <h6> Tarikh dihantar : {{$program->created_at}}  </h6>
-       <h6> Tarikh dikemaskini : {{$program->updated_at}}  </h6>
-       
-       
-<hr>
+<tr>
+<th scope="row">{{$program->id}}</th>
+<td> {{$program->doc_title}}</td>               
+<td>{{$program->lecturer_name}}</td>
+<td>{{$program->fakulti}}</td>
+<td> <a href ="<?php echo asset("storage/cadangan_program_baharu/$program->file_link")?>">{{ basename($program->file_name) }}</td>
+<td>{{$program->status_program}} </td>
+<td> {{$program->created_at}}</td>
 
-    </div> 
+</tr>
 @endforeach
+
+</tbody>
+</table>
+
+
+
 @else
 
 <p> Tiada cadangan program telah dijumpai </p>
 
 @endif
-@endif
+
 
 
 

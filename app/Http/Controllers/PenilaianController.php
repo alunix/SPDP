@@ -44,6 +44,7 @@ class PenilaianController extends Controller
      */
     public function store(Request $request)
     {
+        
         $this->validate($request,[
 
            
@@ -75,7 +76,18 @@ class PenilaianController extends Controller
             else{
                 $fileNameToStore = 'noPDF.pdf';
             }
-    }
+
+
+            //Add laporan panel penilai to the penilaian table
+            $penilaian= Penilaian::find($id);
+            $penilaian -> laporan_panel_penilai =$fileNameWithExt;
+            $penilaian -> laporan_panel_penilai_link =$$fileNameToStore;
+            $penilaian->save();           
+            
+
+            return redirect('/dashboard');
+
+    }       
 
     /**
      * Display the specified resource.
@@ -83,11 +95,11 @@ class PenilaianController extends Controller
      * @param  \SPDP\Penilaian  $penilaian
      * @return \Illuminate\Http\Response
      */
-    public function show(Penilaian $penilaian)
+    public function show(Penilaian $penilaian,$id)
     {
         $program = Program::find($id);
          
-        return view('posts/penilai-view-program-baharu')->with('program',$program);
+        return view('panel_penilai/panel-lulus-permohonan')->with('program',$program);
 
     }
 

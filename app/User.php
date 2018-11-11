@@ -31,7 +31,12 @@ class User extends Authenticatable
 
     public function hasRole($type)
 {
-    return User::where('type', $type);
+    return User::where('type', $type)->get();
+}
+
+public function Posts(){
+
+    return $this->hasMany('SPDP\Post');
 }
 
 

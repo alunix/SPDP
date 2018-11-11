@@ -8,9 +8,9 @@
                 <div class="card-header">Pelantikan Panel Penilai </div>
 
             <div class="card-body">
-                 
+                     
                     
-                     <form method="POST" action="{{ route('penilai.laporan.submit',['program' => $program->id])}}" enctype="multipart/form-data" >
+                     <form method="POST" action="{{ route('pelantikan_penilai.submit',['program' => $program->id])}}" >
                      {!! method_field('patch') !!}                 
                 
 
@@ -72,24 +72,11 @@
                                 <a href ="<?php echo asset("storage/cadangan_program_baharu/$program->file_link")?>">{{ basename($program->file_name) }} </a>
                                 </div>
 
-                        </div>
-
-                      <div class="form-group row">
-                            <label for="laporan_panel_penilai" class="col-md-4 col-form-label text-md-right">{{ __('Lampiran laporan panel penilai') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="laporan_panel_penilai" type="file" class="form-control{{ $errors->has('laporan_panel_penilai') ? ' is-invalid' : '' }}" name="laporan_panel_penilai" value="{{ old('laporan_panel_penilai') }}" required autofocus>
-
-                                @if ($errors->has('laporan_panel_penilai'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('laporan_panel_penilai') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div> 
+                        </div>   
 
                         
 
+                       
 
 
 

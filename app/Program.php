@@ -14,6 +14,10 @@ class Program extends Model
 
    protected $table = 'programs';
 
- 
+ public function user(){
+
+    return $this->hasMany('SPDP\User');
+
+ }
 
 }

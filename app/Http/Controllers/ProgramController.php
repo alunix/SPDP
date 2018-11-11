@@ -52,11 +52,7 @@ class ProgramController extends Controller
      public function showListPanelPenilai(Request $request,$id)
      {
         
-         $program = Program::find($id);
-       
-         $users = User::where('type','penilai')->get();
         
-         return view ('posts/pjk-melantik-penilai')->with('users',$users)->with('program',$program);
      
      }
 
@@ -154,7 +150,11 @@ class ProgramController extends Controller
      */
     public function edit($id)
     {
-        
+        $program = Program::find($id);
+       
+        $users = User::where('type','penilai')->get();
+       
+        return view ('posts/pjk-melantik-penilai')->with('users',$users)->with('program',$program);
     }
 
     /**
@@ -196,22 +196,25 @@ class ProgramController extends Controller
             $penilaians -> penilaian_pjk = $penilaianPJK;
             $penilaians -> penilaian_panel_1= $selectedPenilai[0];
             $penilaians -> penilaian_panel_2 = $selectedPenilai[1];
-            //$penilaians -> penilaian_panel_3 = $selectedPenilai[2];
+            $penilaians -> penilaian_panel_3 = $selectedPenilai[2];
            
             $penilaians -> save();
             
             $penilaian= Penilaian::find($id);
-            $penilaianID= $penilaian->id;
-            $program -> status_program = 'Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai'; 
-            $program -> penilaianID = $penilaianID;
+            /*Update the status program from Belum Disemak to kelulusan pjk. */
+            $program -> status_program = 'Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai)';           
+            /* Add the penilaianID on program table */            
+            $program = Program::find($id);
+            $program->penilaianID = $penilaian->id;
             $program -> save();
+         
 
             
 
 
 
             
-            return redirect(url('/programs/senarai-penilaian'));
+            return redirect(url('/senarai-penilaian'));
 
             // $params = request()->all();
 

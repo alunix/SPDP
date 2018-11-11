@@ -90,16 +90,23 @@ return [
             'model' => SPDP\User::class,
         ],
 
-        'admins' => [
+        'programs' => [
             'driver' => 'eloquent',
-            'model' => busplannersystem\Admin::class,
+            'model' => SPDP\Program::class,
         ],
 
-        'operators' => [
-            'driver' => 'eloquent',
-            'model' => busplannersystem\Operator::class,
+        // 'operators' => [
+        //     'driver' => 'eloquent',
+        //     'model' => busplannersystem\Operator::class,
 
-        ],
+        // ],
+
+        // 'penilaians' => [
+        //     'driver' => 'eloquent',
+        //     'model' =>  busplannersystem\Penilaian::class,
+
+
+        // ],
 
         'users' => [
             'driver' => 'database',

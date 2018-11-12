@@ -18,6 +18,8 @@
     <input type="submit" value="Lihat Semua Program Yang Diterima" />
 </form>
 
+<button type="submit" id="my-id" name="btn_add"><img src=""></button>
+
                 
                 </div>
             </div>

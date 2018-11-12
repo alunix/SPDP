@@ -112,10 +112,48 @@
                                     
                             </a>
 
+                            @elseif(Auth::user()->type=="jppa")
+                            
+                            <a href="/programs/{{@$program[id]}}/kelulusan-permohonan/{{$penilaian->id}}">
+                                    <input type="button" class="btn btn-success" value="Lulus permohonan" />
+                                    
+                            </a>
+                                
+                                
+                            
+                            <!-- <button type="submit" class="btn btn-danger" value="reject-program" name="submitbutton" >
+                                {{ __('Tidak lulus') }}
+                            </button> -->
+                            
+                            <a href="/programs/{{@$program[id]}}/pelantikan-penilai">
+                                    <input type="button" class="btn btn-danger" value="Tidak lulus" />
+                                    
+                            </a>
+
+                            @elseif(Auth::user()->type=="senat")
+                            
+                            <a href="/programs/{{@$program[id]}}/kelulusan-permohonan/{{$penilaian->id}}">
+                                    <input type="button" class="btn btn-success" value="Lulus permohonan" />
+                                    
+                            </a>
+                                
+                                
+                            
+                            <!-- <button type="submit" class="btn btn-danger" value="reject-program" name="submitbutton" >
+                                {{ __('Tidak lulus') }}
+                            </button> -->
+                            
+                            <a href="/programs/{{@$program[id]}}/pelantikan-penilai">
+                                    <input type="button" class="btn btn-danger" value="Tidak lulus" />
+                                    
+                            </a>
+
 
                             
                             
                             @endif    
+
+                            
 
                               
                              

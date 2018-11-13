@@ -20,6 +20,10 @@
 
 <button type="submit" id="my-id" name="btn_add"><img src=""></button>
 
+<button class="mdc-button">
+  Button
+</button>
+
                 
                 </div>
             </div>

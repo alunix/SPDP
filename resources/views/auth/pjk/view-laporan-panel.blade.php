@@ -9,9 +9,14 @@
 
             <div class="card-body">
                      
-                     
+            <form method="POST" action="{{ route('pjk.perakuan.submit',['program' => $program->id,'penilaian'=>$penilaian->id])}}" >
+                     {!! method_field('patch') !!}                 
+                
+
 
                         @csrf
+
+                      
 
                          <div class="form-group row">
                             <label for="penilaian_id" class="col-md-4 col-form-label text-md-right">{{ __('Penilaian ID') }}</label>

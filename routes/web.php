@@ -80,6 +80,13 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\pjkMiddleware'], function() 
 	
 	
 	/*-----------------------Senarai penilaian yang ongoing---------------------------------------------*/
+	Route::get('pjk/laporan-panel-penilai','PenilaianController@index')->name('pjk.perakuan.show');
+
+
+
+	/*-----------------------Lampiran perakuan PJK ---------------------------------------------*/
+	Route::patch('/programs/{program}/lampiran-pusat-jaminan-kualiti/{penilaian}','PenilaianController@editLaporanPanel')->name('pjk.perakuan.show');
+	Route::get('/programs/{program}/lampiran-pusat-jaminan-kualiti/{penilaian}','PenilaianController@updateLaporanPanel')->name('pjk.perakuan.submit');
 
 	
 

@@ -8,6 +8,8 @@
                 <div class="card-header">Senarai penilaian program </div>
 
             <div class="card-body" style="width:500px;">
+        {{--<form method="GET" action="{{ ['program' => $program->id,'penilaian'=>$penilaian->id]}}" > --}}
+                  
             
                         <table class="table table-striped">                  
                         
@@ -31,8 +33,9 @@
                         @if( ! $penilaians->isEmpty() )
         @foreach($penilaians as $penilaian)
             <tr>
-                <th scope="row">{{ $penilaian->id }}</th>
-                <th scope="row">{{ $penilaian->dokumen_id }}</th>               
+                 <th scope="row">{{ $penilaian->id }}</th>
+                <th scope="row>"><a href="/programs/{program}/lampiran-pusat-jaminan-kualiti/{penilaian}">{{$penilaian->id}}</th>        
+                <th scope="row">{{ $penilaian->dokumen_id }}</th>                
                 <th scope="row">{{ $penilaian->penilaian_pjk }}</th>
                 <th scope="row">{{ $penilaian->penilaian_panel_1}}</th>
                 <th scope="row">{{ $penilaian->penilaian_panel_2}}</th>

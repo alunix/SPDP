@@ -18,11 +18,15 @@
     <input type="submit" value="Lihat Semua Program Yang Diterima" />
 </form>
 
-<button type="submit" id="my-id" name="btn_add"><img src=""></button>
 
-<button class="mdc-button">
-  Button
-</button>
+                       <form action="http://spdp.com/pjk/laporan-panel-penilai">
+    <input type="submit" value="Laporan Panel Penilai" />
+</form>
+
+
+<!-- // <button class="mdc-button">
+//   Button
+// </button> -->
 
                 
                 </div>

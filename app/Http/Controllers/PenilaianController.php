@@ -17,6 +17,17 @@ class PenilaianController extends Controller
     {
         $penilaians = Penilaian::all();
         return view ('posts/senarai-penilaian-program')->with('penilaians',$penilaians);
+
+        // $penilaians = Penilaian::all();
+        // return view ('posts/senarai-penilaian-program')->with('penilaians',$program->penilaian)->with('program',$program);
+
+    }
+
+    public function editLaporanPanel(){
+
+        $penilaians = Penilaian::all();
+        return view ('pjk/view-laporan-panel')->with('penilaians',$program->penilaian)->with('program',$program);
+
     }
 
     /**
@@ -56,17 +67,7 @@ class PenilaianController extends Controller
      */
     public function show(Penilaian $penilaian,$id,Program $program) /* Trying to pass two parameters which are $penilaian and $program */
     {
-        $program = Program::find($id);
-
-        $programID= $program->id;
-       
-        // $programID->load('penilaians');
-
-
-        // $penilaian = Penilaian::find($id)->where;
-
-         
-        return view('panel_penilai.panel-lulus-permohonan')->with('penilaian',$program->penilaian);
+      
     }
 
     /**
@@ -79,8 +80,7 @@ class PenilaianController extends Controller
     {
         $program = Program::find($id);
 
-        $programID= $program->id;
-        $program=Program::find($programID);
+        
         return view('panel_penilai.panel-lulus-permohonan')->with('penilaian',$program->penilaian)->with('program',$program);
 
     }
@@ -151,6 +151,10 @@ class PenilaianController extends Controller
            
            //return redirect('/dashboard');
            return redirect('/');
+    }
+
+    public function updateLaporanPanel(Request $request, $id){
+
     }
 
     /**

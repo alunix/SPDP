@@ -25,4 +25,11 @@ class Penilaian extends Model
     
      }
 
+     public function scopeLaporanPanelPenilai(){
+
+        $penilaians = Penilaian::all();
+        return view ('posts/senarai-penilaian-program')->with('penilaians',$penilaians);
+
+     }
+
 }

@@ -155,7 +155,7 @@ class ProgramController extends Controller
        
         $users = User::where('type','penilai')->get();
        
-        return view ('posts/pjk-melantik-penilai')->with('users',$users)->with('program',$program);
+        return view ('pjk.pjk-melantik-penilai')->with('users',$users)->with('program',$program);
     }
 
     /**

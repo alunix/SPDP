@@ -13,17 +13,16 @@ class PenilaianController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
      
 
         $penilaians = Penilaian::with('program')->get();
         $programs= Program::with('penilaian')->get();
-        $program= Program::find($id);
-        $penilaian= Penilaian::find($id);
+       
        
         
-        return view('posts.senarai-penilaian-program')->with('penilaians', $penilaians)->with('programs',$programs)->with('penilaian', $penilaian)->with('program',$program);
+        return view('pjk.senarai-penilaian-program')->with('penilaians', $penilaians)->with('programs',$programs);
 
         
       

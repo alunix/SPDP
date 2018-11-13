@@ -29,9 +29,11 @@ class PenilaianController extends Controller
 
     }
 
-    public function editLaporanPanel(){
+    public function editLaporanPanel($id){
 
-        $penilaians = Penilaian::all();
+        $penilaian = Penilaian::find($id);
+        $program= Program::find($id);
+
         return view ('pjk/view-laporan-panel')->with('penilaians',$program->penilaian)->with('program',$program);
 
     }

@@ -14,7 +14,7 @@ class AddPerakuanJppaLinkToPenilaians extends Migration
     public function up()
     {
         Schema::table('penilaians', function (Blueprint $table) {
-            //
+            $table->string('perakuan_jppa_link')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddPerakuanJppaLinkToPenilaians extends Migration
     public function down()
     {
         Schema::table('penilaians', function (Blueprint $table) {
-            //
+            $table->dropColumn('perakuan_jppa_link');
         });
     }
 }

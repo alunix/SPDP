@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Pelantikan Panel Penilai </div>
+
+           
+                <div class="card-header">Lampiran laporan panel penilai </div>         
 
             <div class="card-body">
                  
@@ -74,6 +76,7 @@
 
                         </div>
 
+                        
                       <div class="form-group row">
                             <label for="laporan_panel_penilai" class="col-md-4 col-form-label text-md-right">{{ __('Lampiran laporan panel penilai') }}</label>
 
@@ -88,7 +91,7 @@
                             </div>
                         </div> 
 
-                        
+                  
 
 
 

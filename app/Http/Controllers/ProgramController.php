@@ -137,7 +137,7 @@ class ProgramController extends Controller
        
         
          $program = Program::find($id);
-         $programID= $program->id;
+         //$programID= $program->id;
          
         return view('posts/view-program-baharu')->with('program',$program)->with('penilaian',$program->penilaian);;
         

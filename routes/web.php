@@ -58,7 +58,7 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware'], functio
 });
 
 /*----------------------- Pusat Jaminan Kualiti(PJK) ------------- */	
-Route::group(['middleware' => 'SPDP\Http\Middleware\pjkMiddleware'], function() {
+// Route::group(['middleware' => 'SPDP\Http\Middleware\pjkMiddleware'], function() {
 
 	Route::match(['get', 'post'], '/pjk-dashboard/', 'HomeController@pjk');
 	
@@ -85,34 +85,39 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\pjkMiddleware'], function() 
 
 
 	/*-----------------------Lampiran perakuan PJK ---------------------------------------------*/
-	Route::patch('/programs/{program}/lampiran-pusat-jaminan-kualiti/{penilaian}','PenilaianController@editLaporanPanel')->name('pjk.perakuan.show');
-	Route::get('/programs/{program}/lampiran-pusat-jaminan-kualiti/{penilaian}','PenilaianController@updateLaporanPanel')->name('pjk.perakuan.submit');
-
-	
-
-	
+	Route::patch('/penilaian/{penilaian}','PenilaianController@updateLaporanPanel')->name('pjk.perakuan.submit');
+	Route::get('/penilaian/{penilaian}','PenilaianController@editLaporanPanel')->name('pjk.perakuan.show');
 	
 	
 
 	
 
+	
+	
+	
+
+	
 
 
 
-});
 
-Route::group(['middleware' => 'SPDP\Http\Middleware\penilaiMiddleware'], function() {
+// });
+
+// Route::group(['middleware' => 'SPDP\Http\Middleware\penilaiMiddleware'], function() {
 
 	Route::match(['get', 'post'], '/penilai-dashboard/', 'HomeController@penilai');
 	Route::get('/panel-penilai/program-baharu','PenilaianController@showProgramPenilai');
 	// Route::get( '/programs/{program}', 'ProgramController@show')->name('program.show');	
 	// Route::get('/programs/{program}/kelulusan-permohonan','PenilaianController@edit')->name('penilai.laporan.show');
 	// Route::patch('/programs/{program}/kelulusan-permohonan','PenilaianController@store')->name('penilai.laporan.submit');
+
 	Route::patch('/programs/{program}/kelulusan-permohonan/{penilaian}','PenilaianController@update')->name('penilai.laporan.submit');
 	Route::get('/programs/{program}/kelulusan-permohonan/{penilaian}','PenilaianController@edit')->name('penilai.laporan.show');
+
+	
 	
 
-});
+// });
 
 Route::group(['middleware' => 'SPDP\Http\Middleware\jppaMiddleware'], function(){
 

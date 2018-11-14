@@ -24,6 +24,8 @@ class PenilaianController extends Controller
         
         return view('pjk.senarai-penilaian-program')->with('penilaians', $penilaians)->with('programs',$programs);
 
+
+        
         
       
 
@@ -31,11 +33,17 @@ class PenilaianController extends Controller
 
     public function editLaporanPanel($id){
 
-        $penilaian = Penilaian::find($id);
-        $program= Program::find($id);
+       $penilaian=Penilaian::find($id);
+       
+       $penilaian_id=$penilaian->id;
+       $penilaian=Penilaian::find($penilaian_id);   
+       
+       
+       return view('pjk.lampiran-pjk')->with('program',$penilaian->program)->with('penilaian',$penilaian);
 
-        return view ('pjk/view-laporan-panel')->with('penilaians',$program->penilaian)->with('program',$program);
-
+        
+   
+        
     }
 
     /**
@@ -86,11 +94,14 @@ class PenilaianController extends Controller
      */
     public function edit($id)
     {
-        $program = Program::find($id);
-
         
+        
+        $program = Program::find($id);
+        $programID= $program->id;
+        $program=Program::find($programID);
         return view('panel_penilai.panel-lulus-permohonan')->with('penilaian',$program->penilaian)->with('program',$program);
 
+       
     }
 
     /**
@@ -162,6 +173,64 @@ class PenilaianController extends Controller
     }
 
     public function updateLaporanPanel(Request $request, $id){
+
+        $this->validate($request,[
+
+           
+            'perakuan_pjk' => 'required|file|max:1999',
+           
+
+
+        ]);
+
+        //Handle file upload
+        if($request->hasFile('perakuan_pjk'))
+        
+        {
+
+            $fileNameWithExt=$request -> file('perakuan_pjk')->getClientOriginalName();
+
+        // Get the full file name
+            $filename = pathinfo($fileNameWithExt,PATHINFO_FILENAME);            
+
+        //Get the extension file name
+            $extension = $request ->file('perakuan_pjk')-> getClientOriginalExtension();
+        //File name to store
+        $fileNameToStore=$filename.'_'.time().'.'.$extension;
+        
+        //Upload Pdf file
+        $path =$request ->file('perakuan_pjk')->storeAs('public/perakuan_pjk',$fileNameToStore);
+        
+        }
+            else{
+                $fileNameToStore = 'noPDF.pdf';
+            }
+
+
+            //Add laporan panel penilai to the penilaian table
+
+           
+            /* Cari program since penilaian belongs to program then baru boleh cari penilaian through eloquent relationship */
+            $program= Program::find($id);
+            $penilaian = $program->penilaian;
+
+            /* Status semakan program telah dikemaskini berdasarkan progress */
+            $program -> status_program = 'Perakuan PJK telah dilampirkan bersama laporan panel penilai (Akan disemak oleh pihak JPPA)'; 
+
+            $penilaian -> perakuan_pjk =$fileNameWithExt;
+            $penilaian -> perakuan_pjk_link =$fileNameToStore;
+
+            $program ->save();
+            $penilaian -> save();        
+            
+         
+           
+            
+
+            
+           
+          
+           return redirect('/');
 
     }
 

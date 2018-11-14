@@ -10,7 +10,7 @@
             <div class="card-body">
                  
                     
-                     <form method="POST" action="{{ route('penilai.laporan.submit',['program' => $program->id,'penilaian'=>$penilaian->id])}}" enctype="multipart/form-data" >
+                     <form method="POST" action="{{ route('pjk.perakuan.submit',['penilaian'=>$penilaian->id])}}" enctype="multipart/form-data" >
                      {!! method_field('patch') !!}                 
                 
 
@@ -65,24 +65,37 @@
 
                               
 
-                         <div class="form-group row">
-                             <label for="file_link" class="col-md-4 col-form-label text-md-right">{{ __('Link Kepada File') }}</label>
+                        <div class="form-group row">
+                             
+                             <label for="file_link" class="col-md-4 col-form-label text-md-right">{{ __('Lampiran permohonan program') }}</label>
 
                                 <div class="col-md-6">
-                                <a href ="<?php echo asset("storage/cadangan_program_baharu/$program->file_link")?>">{{ basename($program->file_name) }} </a>
+
+                                <a href ="<?php echo asset("storage/cadangan_program_baharu/$program->file_link")?>">{{ basename($program->file_name) }} </a> 
+                                
+
                                 </div>
 
                         </div>
 
-                      <div class="form-group row">
+                        <div class="form-group row">
                             <label for="laporan_panel_penilai" class="col-md-4 col-form-label text-md-right">{{ __('Lampiran laporan panel penilai') }}</label>
 
                             <div class="col-md-6">
-                                <input id="laporan_panel_penilai" type="file" class="form-control{{ $errors->has('laporan_panel_penilai') ? ' is-invalid' : '' }}" name="laporan_panel_penilai" value="{{ old('laporan_panel_penilai') }}" required autofocus>
+                                <a href ="<?php echo asset("storage/laporan_panel_penilai/$penilaian->laporan_panel_penilai_link")?>">{{ basename($penilaian->laporan_panel_penilai) }} </a>
+                            </div>
 
-                                @if ($errors->has('laporan_panel_penilai'))
+                        </div> 
+
+                         <div class="form-group row">
+                            <label for="perakuan_pjk" class="col-md-4 col-form-label text-md-right">{{ __('Lampiran perakuan PJK') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="perakuan_pjk" type="file" class="form-control{{ $errors->has('perakuan_pjk') ? ' is-invalid' : '' }}" name="perakuan_pjk" value="{{ old('perakuan_pjk') }}" required autofocus>
+
+                                @if ($errors->has('perakuan_pjk'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('laporan_panel_penilai') }}</strong>
+                                        <strong>{{ $errors->first('perakuan_pjk') }}</strong>
                                     </span>
                                 @endif
                             </div>

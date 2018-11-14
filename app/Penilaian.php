@@ -19,9 +19,17 @@ class Penilaian extends Model
 
 
     public function program(){
-        // return $this->belongsTo('SPDP\Program','dokumen_id');// set the foreign key (second parameter)
-        // return $this->belongsTo('SPDP\Program','penilaianID');// set the foreign key (second parameter)
-        return $this->belongsTo('SPDP\Program','penilaianID');
+     
+     
+      // return $this->belongsTo('SPDP\Program','dokumen_id');// set the foreign key (second parameter)
+      return $this->belongsTo('SPDP\Program','dokumen_id');// set the foreign key (second parameter)
+
+      
+
+       
+        
+        
+       
     
      }
 

@@ -24,7 +24,6 @@ class PenilaianController extends Controller
         
         return view('pjk.senarai-penilaian-program')->with('penilaians', $penilaians)->with('programs',$programs);
 
-
         
         
       
@@ -35,13 +34,18 @@ class PenilaianController extends Controller
 
        $penilaian=Penilaian::find($id);
        
-       $penilaian_id=$penilaian->id;
-       $penilaian=Penilaian::find($penilaian_id);   
-       
-       
-       return view('pjk.lampiran-pjk')->with('program',$penilaian->program)->with('penilaian',$penilaian);
+        $penilaian_id=$penilaian->id;
+        $penilaian=Penilaian::find($penilaian_id);
 
-        
+      
+
+
+       
+       
+       
+        return view('pjk.lampiran-pjk')->with('program',$penilaian->program)->with('penilaian',$penilaian);
+
+   
    
         
     }
@@ -53,6 +57,8 @@ class PenilaianController extends Controller
      */
     public function showProgramPenilai()
     {
+        // $programs = Program::where('status_program','Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai')->get();
+
         $programs = Program::where('status_program','Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai')->get();
         return view ('pjk-view-program-baharu')->with('programs',$programs);
     }
@@ -83,7 +89,9 @@ class PenilaianController extends Controller
      */
     public function show(Penilaian $penilaian,$id,Program $program) /* Trying to pass two parameters which are $penilaian and $program */
     {
-      
+        /* Main function but mcm tak betul , testing other possibilities */
+
+  
     }
 
     /**
@@ -97,8 +105,8 @@ class PenilaianController extends Controller
         
         
         $program = Program::find($id);
-        $programID= $program->id;
-        $program=Program::find($programID);
+        // $programID= $program->id;
+        // $program=Program::find($programID);
         return view('panel_penilai.panel-lulus-permohonan')->with('penilaian',$program->penilaian)->with('program',$program);
 
        
@@ -211,8 +219,10 @@ class PenilaianController extends Controller
 
            
             /* Cari program since penilaian belongs to program then baru boleh cari penilaian through eloquent relationship */
-            $program= Program::find($id);
-            $penilaian = $program->penilaian;
+            $penilaian= Penilaian::find($id);
+            $program = $penilaian->program;
+
+           
 
             /* Status semakan program telah dikemaskini berdasarkan progress */
             $program -> status_program = 'Perakuan PJK telah dilampirkan bersama laporan panel penilai (Akan disemak oleh pihak JPPA)'; 

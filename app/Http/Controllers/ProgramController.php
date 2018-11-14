@@ -44,8 +44,11 @@ class ProgramController extends Controller
 
     
         $programs = Program::where('status_program','Belum disemak')->get();
+       
         
         return view ('pjk-view-program-baharu')->with('programs',$programs);
+
+     
 
      }
 
@@ -132,17 +135,52 @@ class ProgramController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request,$id,Penilaian $penilaian)
-    {
+    public function show(Request $request,$id)  {
+       
+                
+
+    
+
+        
+        
+        
+      
+         
+
+        
+        /* Main function but mcm tak betul , testing other possibilities */
+
+        $program= Program::find($id);
        
         
-         $program = Program::find($id);
-         //$programID= $program->id;
-         
-        return view('posts/view-program-baharu')->with('program',$program)->with('penilaian',$program->penilaian);;
+       
+        
+
+
+
+        $role=auth()->user()->type;
+
+        if($role=="pjk")
+            return view('posts/view-program-baharu')->with('program',$program);
+        else
+           // return view('posts/view-program-baharu')->with('program',$program);
+           return view('posts/view-program-baharu')->with('program',$program)->with('penilaian',$program->penilaian);
+
+        
+
+           
+            
+            // return view('posts/view-program-baharu')->with('program',$program)->with('penilaian',$program->penilaian);
+
+           // return view('posts/view-program-baharu')->with('program',$program);
+
+            
+
+      
+
+       
         
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -203,20 +241,20 @@ class ProgramController extends Controller
             
             
             
-            //$penilaian= Penilaian::find($id);
+            // //$penilaian= Penilaian::find($id);
 
-            /* Get the id of the last id inserted row */
-            $penilaianID= $penilaians->id;
+            // /* Get the id of the last id inserted row */
+            // $penilaianID= $penilaians->id;
 
            
             
 
-            /*Update the status program from Belum Disemak to kelulusan pjk. */
-            $program -> status_program = 'Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai)';           
-            /* Add the penilaianID on program table */            
-            $program = Program::find($id);            
-            $program->penilaianID = $penilaianID;
-            $program -> save();
+            // /*Update the status program from Belum Disemak to kelulusan pjk. */
+            // $program -> status_program = 'Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai)';           
+            // /* Add the penilaianID on program table */            
+            // $program = Program::find($id);            
+            // $program->penilaianID = $penilaianID;
+            // $program -> save();
          
 
             

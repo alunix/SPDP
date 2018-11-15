@@ -17,7 +17,7 @@
                         <thead>
                             <tr>
                             <th scope="col">Penilaian ID</th>
-                            <th scope="col">Dokumen ID</th>
+                            <th scope="col">Tajuk Dokumen</th>
                             <th scope="col">Kelulusan PJK</th>
                             <th scope="col">Kelulusan Panel Penilai Pertama</th>
                             <th scope="col">Kelulusan Panel Penilai Kedua</th>
@@ -30,13 +30,22 @@
                             </tr>
                         </thead>
                         <tbody>
+                       
                         @if( ! $penilaians->isEmpty() )
+
+                       
         @foreach($penilaians as $penilaian)
             <tr>
                  {{--<th scope="row"><a href="/programs/{program}/lampiran-pusat-jaminan-kualiti/{penilaian}">{{ $penilaian->id }}</th>--}}
-                 <th scope="row"><a href="/penilaian/{{$penilaian->id}}">{{ $penilaian->id }}</th>
+                 
+                 @if(Auth::user()->type == "pjk")
+                <th scope="row"><a href="/penilaian/{{$penilaian->id}}">{{ $penilaian->id }}</th>
+                
+                @elseif(Auth::user()->type=="jppa")
+                <th scope="row"><a href="/jppa/penilaian/{{$penilaian->id}}">{{ $penilaian->id }}</th>
+                @endif
 
-                <th scope="row>">{{$penilaian->dokumen_id}}</th>
+                <th scope="row>">{{$penilaian->program['doc_title']}}</th>
                 <th scope="row">{{ $penilaian->penilaian_pjk }}</th>
                 <th scope="row">{{ $penilaian->penilaian_panel_1}}</th>
                 <th scope="row">{{ $penilaian->penilaian_panel_2}}</th>
@@ -45,6 +54,9 @@
                 <th scope="row">{{ $penilaian->senat}}</th>
             </tr>
         @endforeach
+        @else
+            No penilaian are found
+
     @endif
     </tbody>
                         </table>

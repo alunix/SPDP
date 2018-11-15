@@ -80,7 +80,7 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware'], functio
 	
 	
 	/*-----------------------Senarai penilaian yang ongoing---------------------------------------------*/
-	Route::get('pjk/laporan-panel-penilai','PenilaianController@index')->name('pjk.perakuan.show');
+	Route::get('senarai-penilaian-perakuan','PenilaianController@penilaianPJK_JPPA')->name('pjk.perakuan.show');
 
 
 
@@ -119,12 +119,21 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware'], functio
 
 // });
 
-Route::group(['middleware' => 'SPDP\Http\Middleware\jppaMiddleware'], function(){
+// Route::group(['middleware' => 'SPDP\Http\Middleware\jppaMiddleware'], function(){
 
 	Route::match(['get', 'post'], '/jppa-dashboard/', 'HomeController@jppa');
 
+	/*-----------------------Lampiran perakuan JPPA ---------------------------------------------*/
+	Route::patch('/jppa/penilaian/{penilaian}','PenilaianController@updatePerakuanPJK')->name('jppa.perakuan.submit');
+	Route::get('/jppa/penilaian/{penilaian}','PenilaianController@editPerakuanPJK')->name('jppa.perakuan.show');
 
-});
+	Route::get('/jppa/permohonan-baharu','PenilaianController@editPerakuanPJK')->name('jppa.perakuan.show');
+
+
+	
+
+
+// });
 
 Route::group(['middleware' => 'SPDP\Http\Middleware\senatMiddleware'], function(){
 

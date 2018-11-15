@@ -14,7 +14,14 @@
                         </div>
                     @endif
 
+                    
                     You are logged in!
+
+                     <form action="http://spdp.com/senarai-penilaian-perakuan">
+    <input type="submit" value="Lihat Semua Permohonan Baharu Daripada PJK" />
+</form>
+
+
                 </div>
             </div>
         </div>

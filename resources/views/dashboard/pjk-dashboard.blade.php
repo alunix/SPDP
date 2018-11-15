@@ -19,8 +19,12 @@
 </form>
 
 
-                       <form action="http://spdp.com/pjk/laporan-panel-penilai">
-    <input type="submit" value="Laporan Panel Penilai" />
+                       <form action="http://spdp.com/senarai-penilaian">
+    <input type="submit" value="Assigned penilaians" />
+</form>
+
+ <form action="http://spdp.com/senarai-penilaian-perakuan">
+    <input type="submit" value="Penilaian untuk perakuan" />
 </form>
 
 

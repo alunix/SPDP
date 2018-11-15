@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Lampiran Perakuan PJK </div>
+                <div class="card-header">Lampiran Perakuan JPPA </div>
 
             <div class="card-body">
                  
@@ -89,39 +89,40 @@
                             </div>
 
                         </div> 
-                        
 
-                        @if( ! empty($penilaian['perakuan_pjk']))
-
-                            
-                            <div class="form-group row">
+                         <div class="form-group row">
                             <label for="perakuan_pjk" class="col-md-4 col-form-label text-md-right">{{ __('Lampiran perakuan PJK') }}</label>
-
+                            
                             <div class="col-md-6">
                                 <a href ="<?php echo asset("storage/perakuan_pjk/$penilaian->perakuan_pjk_link")?>">{{ basename($penilaian->perakuan_pjk) }} </a>
                             </div>
 
                         </div> 
 
-                       
-                        
-                        
-                        @else
                          <div class="form-group row">
-                            <label for="perakuan_pjk" class="col-md-4 col-form-label text-md-right">{{ __('Lampiran perakuan PJK') }}</label>
+                            <label for="perakuan_jppa" class="col-md-4 col-form-label text-md-right">{{ __('Lampiran perakuan JPPA') }}</label>
 
                             <div class="col-md-6">
-                                <input id="perakuan_pjk" type="file" class="form-control{{ $errors->has('perakuan_pjk') ? ' is-invalid' : '' }}" name="perakuan_pjk" value="{{ old('perakuan_pjk') }}" required autofocus>
+                                <input id="perakuan_jppa" type="file" class="form-control{{ $errors->has('perakuan_jppa') ? ' is-invalid' : '' }}" name="perakuan_jppa" value="{{ old('perakuan_jppa') }}" required autofocus>
 
-                                @if ($errors->has('perakuan_pjk'))
+                                @if ($errors->has('perakuan_jppa'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('perakuan_pjk') }}</strong>
+                                        <strong>{{ $errors->first('perakuan_jppa') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div> 
 
-                        <div class="form-group row mb-0">
+                        </div> 
+
+                        
+
+
+
+
+ 
+
+<div class="form-group row mb-0">
     <div class="col-md-6 offset-md-5">
 
         <button type="submit" class="btn btn-success" value="accept-program" name="submitbutton">
@@ -133,18 +134,6 @@
 
     </div>
 </div>
-
-    //
-@endif
-                        
-
-                        
-
-
-
-
- 
-
 
 
 

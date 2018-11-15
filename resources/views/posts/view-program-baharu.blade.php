@@ -112,7 +112,7 @@
 
                             @elseif(Auth::user()->type=="jppa")
                             
-                            <a href="/programs/{{program}}/kelulusan-permohonan/{{penilaian}}">
+                            <a href="/jppa/penilaian/{{penilaian}}">
                                     <input type="button" class="btn btn-success" value="Lulus permohonan" />
                                     
                             </a>

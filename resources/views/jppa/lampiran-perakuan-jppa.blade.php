@@ -10,7 +10,7 @@
             <div class="card-body">
                  
                     
-                     <form method="POST" action="{{ route('pjk.perakuan.submit',['penilaian'=>$penilaian->id])}}" enctype="multipart/form-data" >
+                     <form method="POST" action="{{ route('jppa.perakuan.submit',['penilaian'=>$penilaian->id])}}" enctype="multipart/form-data" >
                      {!! method_field('patch') !!}                 
                 
 
@@ -113,7 +113,7 @@
                             </div>
                         </div> 
 
-                        </div> 
+                        
 
                         
 
@@ -151,4 +151,9 @@
 </div>
 </div>
 
+<!-- @if ($errors->any())
+        {{ implode('', $errors->all('<div>:message</div>')) }}
+@endif -->
+
 @endsection
+

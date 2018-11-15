@@ -127,7 +127,7 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware'], functio
 	Route::patch('/jppa/penilaian/{penilaian}','PenilaianController@updatePerakuanPJK')->name('jppa.perakuan.submit');
 	Route::get('/jppa/penilaian/{penilaian}','PenilaianController@editPerakuanPJK')->name('jppa.perakuan.show');
 
-	Route::get('/jppa/permohonan-baharu','PenilaianController@editPerakuanPJK')->name('jppa.perakuan.show');
+	
 
 
 	

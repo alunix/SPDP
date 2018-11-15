@@ -323,29 +323,29 @@ class PenilaianController extends Controller
         $this->validate($request,[
 
            
-            'perakuan_pjk' => 'required|file|max:1999',
+            'perakuan_jppa' => 'required|file|max:1999',
            
 
 
         ]);
 
         //Handle file upload
-        if($request->hasFile('perakuan_pjk'))
+        if($request->hasFile('perakuan_jppa'))
         
         {
 
-            $fileNameWithExt=$request -> file('perakuan_pjk')->getClientOriginalName();
+            $fileNameWithExt=$request -> file('perakuan_jppa')->getClientOriginalName();
 
         // Get the full file name
             $filename = pathinfo($fileNameWithExt,PATHINFO_FILENAME);            
 
         //Get the extension file name
-            $extension = $request ->file('perakuan_pjk')-> getClientOriginalExtension();
+            $extension = $request ->file('perakuan_jppa')-> getClientOriginalExtension();
         //File name to store
         $fileNameToStore=$filename.'_'.time().'.'.$extension;
         
         //Upload Pdf file
-        $path =$request ->file('perakuan_pjk')->storeAs('public/perakuan_pjk',$fileNameToStore);
+        $path =$request ->file('perakuan_jppa')->storeAs('public/perakuan_jppa',$fileNameToStore);
         
         }
             else{
@@ -363,10 +363,10 @@ class PenilaianController extends Controller
            
 
             /* Status semakan program telah dikemaskini berdasarkan progress */
-            $program -> status_program = 'Perakuan PJK telah dilampirkan bersama laporan panel penilai (Akan disemak oleh pihak JPPA)'; 
+            $program -> status_program = 'Perakuan JPPA telah dilampirkan, permohonan akan dihantar kepada pihak Senat'; 
 
-            $penilaian -> perakuan_pjk =$fileNameWithExt;
-            $penilaian -> perakuan_pjk_link =$fileNameToStore;
+            $penilaian -> perakuan_jppa =$fileNameWithExt;
+            $penilaian -> perakuan_jppa_link =$fileNameToStore;
 
             $program ->save();
             $penilaian -> save();        

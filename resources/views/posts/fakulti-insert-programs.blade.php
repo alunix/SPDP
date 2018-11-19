@@ -86,6 +86,7 @@
                          <hr>
 
 <h4> Program yang dihantar  </h4>
+<h5>Jumlah permohonan yang dihantar : {{$programs->count()}}</h5>
 <hr>
 
 

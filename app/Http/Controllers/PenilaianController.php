@@ -124,6 +124,24 @@ class PenilaianController extends Controller
          
      }
 
+     public function editPerakuanJPPA($id){
+
+        $penilaian=Penilaian::find($id);
+        
+         $penilaian_id=$penilaian->id;
+         $penilaian=Penilaian::find($penilaian_id);      
+ 
+ 
+        
+        
+        
+         return view('jppa.lampiran-perakuan-jppa')->with('program',$penilaian->program)->with('penilaian',$penilaian);
+ 
+    
+    
+         
+     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -381,6 +399,71 @@ class PenilaianController extends Controller
            return redirect('/');
 
     }
+
+    public function updatePerakuanJPPA(Request $request, $id){
+
+        $this->validate($request,[
+
+           
+            'perakuan_senat' => 'required|file|max:1999',
+           
+
+
+        ]);
+
+        //Handle file upload
+        if($request->hasFile('perakuan_senat'))
+        
+        {
+
+            $fileNameWithExt=$request -> file('perakuan_senat')->getClientOriginalName();
+
+        // Get the full file name
+            $filename = pathinfo($fileNameWithExt,PATHINFO_FILENAME);            
+
+        //Get the extension file name
+            $extension = $request ->file('perakuan_senat')-> getClientOriginalExtension();
+        //File name to store
+        $fileNameToStore=$filename.'_'.time().'.'.$extension;
+        
+        //Upload Pdf file
+        $path =$request ->file('perakuan_senat')->storeAs('public/perakuan_senat',$fileNameToStore);
+        
+        }
+            else{
+                $fileNameToStore = 'noPDF.pdf';
+            }
+
+
+            //Add laporan panel penilai to the penilaian table
+
+           
+            /* Cari program since penilaian belongs to program then baru boleh cari penilaian through eloquent relationship */
+            $penilaian= Penilaian::find($id);
+            $program = $penilaian->program;
+
+           
+
+            /* Status semakan program telah dikemaskini berdasarkan progress */
+            $program -> status_program = 'Perakuan JPPA telah dilampirkan, permohonan akan dihantar kepada pihak Senat'; 
+
+            $penilaian -> perakuan_senat =$fileNameWithExt;
+            $penilaian -> perakuan_senat_link =$fileNameToStore;
+
+            $program ->save();
+            $penilaian -> save();        
+            
+         
+           
+            
+
+            
+           
+          
+           return redirect('/');
+
+    }
+
 
 
 

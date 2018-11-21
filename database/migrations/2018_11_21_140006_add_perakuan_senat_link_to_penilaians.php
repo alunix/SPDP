@@ -13,7 +13,7 @@ class AddPerakuanSenatLinkToPenilaians extends Migration
      */
     public function up()
     {
-        Schema::table('penilains', function (Blueprint $table) {
+        Schema::table('penilaians', function (Blueprint $table) {
             $table->string('perakuan_senat_link')->nullable();
         });
     }
@@ -25,7 +25,7 @@ class AddPerakuanSenatLinkToPenilaians extends Migration
      */
     public function down()
     {
-        Schema::table('penilains', function (Blueprint $table) {
+        Schema::table('penilaians', function (Blueprint $table) {
             $table->string('perakuan_senat_link')->nullable();
         });
     }

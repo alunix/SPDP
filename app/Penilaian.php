@@ -4,6 +4,7 @@ namespace SPDP;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use SPDP\Program;
 
 class Penilaian extends Model
 {
@@ -18,10 +19,19 @@ class Penilaian extends Model
     protected $table = 'penilaians';
     //protected $primaryKey= 'id';
 
-   public function updatePenilaianPJK(Request$request){
+    public function create(){
+      $penilaians = new Penilaian();            
+      $penilaians -> dokumen_id = $programID;
+      $penilaians -> penilaian_pjk = $penilaianPJK;
+      $penilaians -> penilaian_panel_1= $selectedPenilai[0];
+      $penilaians -> penilaian_panel_2 = $selectedPenilai[1];
+      $penilaians -> penilaian_panel_3 = $selectedPenilai[2];
+     
+      $penilaians -> save();
 
+    }
 
-   }
+   
 
     public function program(){
      
@@ -37,6 +47,8 @@ class Penilaian extends Model
        
     
      }
+
+
 
      public function scopeLaporanPanelPenilai(){
 

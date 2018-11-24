@@ -76,7 +76,7 @@ class ProgramController extends Controller
         ]);
 
         $programs= new Program();
-        $programs->createProgram($request);        
+        $programs->create($request);        
         return redirect('/program-baharu')->with('success','Cadangan program telah berjaya dimuat naik');
 
 
@@ -89,27 +89,8 @@ class ProgramController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request,$id)  {
-       
-                
-
-    
-
-        
-        
-        
-      
-         
-
-        
         /* Main function but mcm tak betul , testing other possibilities */
-
         $program= Program::find($id);
-       
-        
-       
-        
-
-
 
         $role=auth()->user()->type;
 
@@ -118,20 +99,6 @@ class ProgramController extends Controller
         else
            // return view('posts/view-program-baharu')->with('program',$program);
            return view('posts/view-program-baharu')->with('program',$program)->with('penilaian',$program->penilaian);
-
-        
-
-           
-            
-            // return view('posts/view-program-baharu')->with('program',$program)->with('penilaian',$program->penilaian);
-
-           // return view('posts/view-program-baharu')->with('program',$program);
-
-            
-
-      
-
-       
         
     }
     /**
@@ -182,7 +149,6 @@ class ProgramController extends Controller
             $penilaianPJK = auth()->user()->id;
 
             
-
             $penilaians = new Penilaian();            
             $penilaians -> dokumen_id = $programID;
             $penilaians -> penilaian_pjk = $penilaianPJK;
@@ -191,51 +157,7 @@ class ProgramController extends Controller
             $penilaians -> penilaian_panel_3 = $selectedPenilai[2];
            
             $penilaians -> save();
-            
-            
-            
-            // //$penilaian= Penilaian::find($id);
-
-            // /* Get the id of the last id inserted row */
-            // $penilaianID= $penilaians->id;
-
-           
-            
-
-            // /*Update the status program from Belum Disemak to kelulusan pjk. */
-            // $program -> status_program = 'Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai)';           
-            // /* Add the penilaianID on program table */            
-            // $program = Program::find($id);            
-            // $program->penilaianID = $penilaianID;
-            // $program -> save();
-         
-
-            
-
-
-
-            
             return redirect(url('/senarai-penilaian'));
-
-         
-            
-            
-
-           
-
-            
-
-           
-
-           
-          
-        
-
-            
-
-
-        
-
     }
 
     public function submitListPanelPenilai(Request $request, $id)    { 

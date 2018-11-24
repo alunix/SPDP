@@ -197,7 +197,7 @@ class PenilaianController extends Controller
      * @param  \SPDP\Penilaian  $penilaian
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
         $this->validate($request,[
 
@@ -208,9 +208,10 @@ class PenilaianController extends Controller
 
         ]);
         
-        //Trying to move method from controller to model 24/11/2018
-        $penilaian= Penialain::find($id);
-        $penilaian->updatePenilaianPJK($request);
+        // //Trying to move method from controller to model 24/11/2018
+        // $program= Program::find($id);
+        // $program->updatePenilaianPJK($request);
+        // Penilaian::where('id', $id)->updatePenilaianPJK($request->all());
 
         //Handle file upload
         if($request->hasFile('laporan_panel_penilai'))

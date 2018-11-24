@@ -4,6 +4,7 @@ namespace SPDP;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use SPDP\Penilaian;
 
 class Program extends Model
 {
@@ -16,7 +17,7 @@ class Program extends Model
    protected $table = 'programs';
 
 
-   public function createProgram(Request $request){
+   public function create(Request $request){
       //Handle file upload
       if($request->hasFile('file_link'))
         
@@ -64,6 +65,8 @@ class Program extends Model
 
 
    }
+
+
 
  public function user(){
 

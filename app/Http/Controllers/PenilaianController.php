@@ -23,27 +23,13 @@ class PenilaianController extends Controller
         $penilaians = Penilaian::whereHas('program', function($query){
                 $query->where('status_program','=', 'Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai)');           
       
-        })->get();     
-
-       
-      
-            
-            return view('pjk.senarai-penilaian-program')->with('penilaians',$penilaians);
+        })->get();
+        return view('pjk.senarai-penilaian-program')->with('penilaians',$penilaians);
     }
         public function penilaianPJK_JPPA()
         {
          
             $role = auth()->user()->type;
-    
-            // $penilaians = Penilaian::with('program')->get();
-           //$programs= Program::with('penilaian')->get();
-    
-           //$programs=Program::where('status_program','Diluluskan oleh Panel Penilai(Laporan telah dikeluarkan dan akan dilampirkan oleh PJK)')->get();
-    
-          // $penilaians = Penilaian::with('program')->whereHas('status_program','Diluluskan oleh Panel Penilai(Laporan telah dikeluarkan dan akan dilampirkan oleh PJK)')->get();
-    
-      
-    
     
             if($role=='pjk'){
               
@@ -221,6 +207,10 @@ class PenilaianController extends Controller
 
 
         ]);
+        
+        //Trying to move method from controller to model 24/11/2018
+        $penilaian= Penialain::find($id);
+        $penilaian->updatePenilaianPJK($request);
 
         //Handle file upload
         if($request->hasFile('laporan_panel_penilai'))

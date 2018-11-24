@@ -19,9 +19,7 @@ class ProgramController extends Controller
 
     public function index()
     {
-        
-
-        
+             
         $programs = Program::all();
         return view ('posts/fakulti-insert-programs')->with('programs',$programs);
     }
@@ -44,8 +42,6 @@ class ProgramController extends Controller
 
     
         $programs = Program::where('status_program','Belum disemak')->get();
-       
-        
         return view ('pjk-view-program-baharu')->with('programs',$programs);
 
      
@@ -79,52 +75,9 @@ class ProgramController extends Controller
 
         ]);
 
-        //Handle file upload
-        if($request->hasFile('file_link'))
-        
-        {
-
-            $fileNameWithExt=$request -> file('file_link')->getClientOriginalName();
-
-        // Get the full file name
-            $filename = pathinfo($fileNameWithExt,PATHINFO_FILENAME);            
-
-        //Get the extension file name
-            $extension = $request ->file('file_link')-> getClientOriginalExtension();
-        //File name to store
-        $fileNameToStore=$filename.'_'.time().'.'.$extension;
-        
-        //Upload Pdf file
-        $path =$request ->file('file_link')->storeAs('public/cadangan_program_baharu',$fileNameToStore);
-        
-        }
-            else{
-                $fileNameToStore = 'noPDF.pdf';
-            }
-            
-
-        
-
-
-        //Create a new Program
-
-        $lecturer_id = auth()->user()->id;
-        $lecturer_name= auth()->user()->name;
-       
-            
-            $programs = new Program();
-            $programs -> lecturer_name = $request -> input('lecturer_name');
-            $programs -> fakulti = $request -> input('fakulti');
-            $programs -> doc_title =$request -> input('doc_title');
-            $programs -> file_name = $fileNameWithExt;
-            $programs -> file_link = $fileNameToStore;
-            $programs -> lecturer_id = $lecturer_id;
-            $programs -> status_program = ('Belum disemak');
-            
-
-            $programs -> save();
-
-            return redirect('/program-baharu')->with('success','Cadangan program telah berjaya dimuat naik');
+        $programs= new Program();
+        $programs->createProgram($request);        
+        return redirect('/program-baharu')->with('success','Cadangan program telah berjaya dimuat naik');
 
 
     }

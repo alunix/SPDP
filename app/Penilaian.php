@@ -3,6 +3,7 @@
 namespace SPDP;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 class Penilaian extends Model
 {
@@ -17,6 +18,10 @@ class Penilaian extends Model
     protected $table = 'penilaians';
     //protected $primaryKey= 'id';
 
+   public function updatePenilaianPJK(Request$request){
+
+
+   }
 
     public function program(){
      

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddLaporanPanelPenilaiColumnsToPenilaiansTable extends Migration
+class CreateProgressPermohonansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AddLaporanPanelPenilaiColumnsToPenilaiansTable extends Migration
      */
     public function up()
     {
-        Schema::table('penilaians', function (Blueprint $table) {
-            $table->string('laporan_panel_penilai')->nullable();
+        Schema::create('progress_permohonans', function (Blueprint $table) {
+            $table->increments('id');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +26,6 @@ class AddLaporanPanelPenilaiColumnsToPenilaiansTable extends Migration
      */
     public function down()
     {
-        Schema::table('penilaians', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('progress_permohonans');
     }
 }

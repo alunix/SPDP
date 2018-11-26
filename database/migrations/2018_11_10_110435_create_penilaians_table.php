@@ -15,13 +15,23 @@ class CreatePenilaiansTable extends Migration
     {
         Schema::create('penilaians', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('dokumen_id')->unsigned();
+            $table->integer('dokumen_id')->unsigned()->unique();
             $table->integer('penilaian_pjk')->unsigned();
             $table->integer('penilaian_panel_1')->unsigned();
             $table->integer('penilaian_panel_2')->unsigned()->nullable();
             $table->integer('penilaian_panel_3')->unsigned()->nullable();
             $table->integer('penilaian_jppa')->unsigned()->nullable();
             $table->integer('penilaian_senat')->unsigned()->nullable();
+            $table->string('laporan_panel_penilai');
+            $table->string('laporan_panel_penilai_link');
+            $table->string('perakuan_pjk');
+            $table->string('perakuan_pjk_link');
+            $table->string('perakuan_jppa');
+            $table->string('perakuan_jppa_link');
+            $table->string('perakuan_senat');
+            $table->string('perakuan_senat_link');
+
+
 
             $table->foreign('dokumen_id')->references('id')->on('programs');
             $table->foreign('penilaian_pjk')->references('id')->on('users');

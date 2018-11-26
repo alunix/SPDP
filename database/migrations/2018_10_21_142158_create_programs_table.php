@@ -33,9 +33,9 @@ class CreateProgramsTable extends Migration
             $table->timestamps();
         });
 
-        Schema::table('priorities', function($table) {
-            $table->foreign('lecturer_id')->references('id')->on('users');  
-        });
+        // Schema::table('priorities', function($table) {
+        //     $table->foreign('lecturer_id')->references('id')->on('users');  
+        // });
     }
 
     /**

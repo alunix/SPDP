@@ -97,7 +97,6 @@ class ProgramController extends Controller
         if($role=="pjk")
             return view('posts/view-program-baharu')->with('program',$program);
         else
-           // return view('posts/view-program-baharu')->with('program',$program);
            return view('posts/view-program-baharu')->with('program',$program)->with('penilaian',$program->penilaian);
         
     }
@@ -139,24 +138,13 @@ class ProgramController extends Controller
             $program =Program::find($id);           
             $program -> status_program = 'Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai'; 
             $program -> save();
-
-            /* Get value $user->id from table pemilihan penilai */
-            $selectedPenilai = $request->input('checked');
-
-            
+          
+            //Get value of dokumen_id from program id to be used as foreign key in penilaian table
             $programID = $program->id;
             
-            $penilaianPJK = auth()->user()->id;
-
-            
-            $penilaians = new Penilaian();            
-            $penilaians -> dokumen_id = $programID;
-            $penilaians -> penilaian_pjk = $penilaianPJK;
-            $penilaians -> penilaian_panel_1= $selectedPenilai[0];
-            $penilaians -> penilaian_panel_2 = $selectedPenilai[1];
-            $penilaians -> penilaian_panel_3 = $selectedPenilai[2];
-           
-            $penilaians -> save();
+            //Create a new penilaian in penilaian table
+            $penilaians = new Penilaian();
+            $penilaians->create($request,$programID);
             return redirect(url('/senarai-penilaian'));
     }
 

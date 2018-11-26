@@ -19,7 +19,6 @@ class ProgramController extends Controller
 
     public function index()
     {
-             
         $programs = Program::all();
         return view ('posts/fakulti-insert-programs')->with('programs',$programs);
     }

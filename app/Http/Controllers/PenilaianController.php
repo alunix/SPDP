@@ -186,7 +186,6 @@ class PenilaianController extends Controller
 
             /* Status semakan program telah dikemaskini berdasarkan progress */
             $program -> status_program = 'Diluluskan oleh Panel Penilai(Laporan telah dikeluarkan dan akan dilampirkan oleh PJK)'; 
-
             $penilaian -> laporan_panel_penilai =$fileNameWithExt;
             $penilaian -> laporan_panel_penilai_link =$fileNameToStore;
 

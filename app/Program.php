@@ -40,13 +40,8 @@ class Program extends Model
           else{
               $fileNameToStore = 'noPDF.pdf';
           }
-          
-
-      
-
 
       //Create a new Program
-
       $lecturer_id = auth()->user()->id;
       $lecturer_name= auth()->user()->name;
      
@@ -59,8 +54,6 @@ class Program extends Model
           $programs -> file_link = $fileNameToStore;
           $programs -> lecturer_id = $lecturer_id;
           $programs -> status_program = ('Belum disemak');
-          
-
           $programs -> save();
 
 

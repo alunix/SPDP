@@ -109,9 +109,7 @@ class ProgramController extends Controller
     public function edit($id)
     {
         $program = Program::find($id);
-       
         $users = User::where('type','penilai')->get();
-       
         return view ('pjk.pjk-melantik-penilai')->with('users',$users)->with('program',$program);
     }
 
@@ -127,21 +125,16 @@ class ProgramController extends Controller
         $this->validate($request,[
 
             'checked' => 'required',
-           
-
 
         ]);
-
-                      
             /* Find permohonan id then change the status program */
-
             $program =Program::find($id);           
             $program -> status_program = 'Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai'; 
             $program -> save();
           
             //Get value of dokumen_id from program id to be used as foreign key in penilaian table
             $programID = $program->id;
-            
+
             //Create a new penilaian in penilaian table
             $penilaians = new Penilaian();
             $penilaians->create($request,$programID);

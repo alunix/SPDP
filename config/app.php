@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Bus Planner System'),
+    'name' => env('APP_NAME', 'SPDP'),
 
     /*
     |--------------------------------------------------------------------------

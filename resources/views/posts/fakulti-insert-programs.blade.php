@@ -101,7 +101,7 @@
     <th scope="col">Fakulti</th>
     <th scope="col">File</th>
     <th scope="col">Status</th>
-    <th scope="col">Tarikh</th>
+    <th scope="col">Tarikh/Masa</th>
     
 
 
@@ -118,7 +118,7 @@
 <td>{{$program->fakulti}}</td>
 <td> <a href ="<?php echo asset("storage/cadangan_program_baharu/$program->file_link")?>">{{ basename($program->file_name) }}</td>
 <td>{{$program->status_program}} </td>
-<td> {{$program->created_at}}</td>
+<td> {{$program->created_at->format('h:i a d/m/Y') }}</td>
 
 </tr>
 @endforeach

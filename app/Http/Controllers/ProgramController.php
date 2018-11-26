@@ -70,11 +70,8 @@ class ProgramController extends Controller
             'lecturer_name' => 'required|string|max:20',
             'fakulti' => 'required|string|max:255',
             'file_link' => 'required|file|max:1999',
-           
-
-
         ]);
-
+        
         $programs= new Program();
         $programs->create($request);        
         return redirect('/program-baharu')->with('success','Cadangan program telah berjaya dimuat naik');
@@ -91,7 +88,6 @@ class ProgramController extends Controller
     public function show(Request $request,$id)  {
         /* Main function but mcm tak betul , testing other possibilities */
         $program= Program::find($id);
-
         $role=auth()->user()->type;
 
         if($role=="pjk")

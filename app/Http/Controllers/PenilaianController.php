@@ -32,20 +32,13 @@ class PenilaianController extends Controller
             $role = auth()->user()->type;
     
             if($role=='pjk'){
-              
 
                 $penilaians = Penilaian::whereHas('program', function($query){
                     $query->where('status_program','=',  'Diluluskan oleh Panel Penilai(Laporan telah dikeluarkan dan akan dilampirkan oleh PJK)');           
           
             })->get();
-    
-    
-              
-              
-               
+
                return view('pjk.senarai-penilaian-program')->with('penilaians',$penilaians);
-              
-       
     
             }
         
@@ -53,22 +46,10 @@ class PenilaianController extends Controller
 
                 $penilaians = Penilaian::whereHas('program', function($query){
                     $query->where('status_program','=',   'Perakuan PJK telah dilampirkan bersama laporan panel penilai (Akan disemak oleh pihak JPPA)');           
-
-                
-              
                 })->get();
                 
                 return view('pjk.senarai-penilaian-program')->with('penilaians',$penilaians);
             }
-        
-
-        
-        
-
-       
-        
-        
-      
 
     }
 
@@ -78,54 +59,25 @@ class PenilaianController extends Controller
        
         $penilaian_id=$penilaian->id;
         $penilaian=Penilaian::find($penilaian_id);
-
-      
-
-
-       
-       
-       
         return view('pjk.lampiran-pjk')->with('program',$penilaian->program)->with('penilaian',$penilaian);
 
-   
-   
-        
     }
 
     public function editPerakuanPJK($id){
 
         $penilaian=Penilaian::find($id);
+        $penilaian_id=$penilaian->id;
+        $penilaian=Penilaian::find($penilaian_id);
         
-         $penilaian_id=$penilaian->id;
-         $penilaian=Penilaian::find($penilaian_id);      
- 
- 
-        
-        
-        
-         return view('jppa.lampiran-perakuan-jppa')->with('program',$penilaian->program)->with('penilaian',$penilaian);
- 
-    
-    
-         
+        return view('jppa.lampiran-perakuan-jppa')->with('program',$penilaian->program)->with('penilaian',$penilaian);
      }
 
      public function editPerakuanJPPA($id){
 
-        $penilaian=Penilaian::find($id);
-        
-         $penilaian_id=$penilaian->id;
-         $penilaian=Penilaian::find($penilaian_id);      
- 
- 
-        
-        
-        
-         return view('jppa.lampiran-perakuan-jppa')->with('program',$penilaian->program)->with('penilaian',$penilaian);
- 
-    
-    
-         
+        $penilaian=Penilaian::find($id);        
+        $penilaian_id=$penilaian->id;
+        $penilaian=Penilaian::find($penilaian_id);
+        return view('jppa.lampiran-perakuan-jppa')->with('program',$penilaian->program)->with('penilaian',$penilaian);
      }
 
     /**
@@ -136,7 +88,6 @@ class PenilaianController extends Controller
     public function showProgramPenilai()
     {
         // $programs = Program::where('status_program','Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai')->get();
-
         $programs = Program::where('status_program','Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai')->get();
         return view ('pjk-view-program-baharu')->with('programs',$programs);
     }
@@ -180,14 +131,8 @@ class PenilaianController extends Controller
      */
     public function edit($id)
     {
-        
-        
         $program = Program::find($id);
-        // $programID= $program->id;
-        // $program=Program::find($programID);
         return view('panel_penilai.panel-lulus-permohonan')->with('penilaian',$program->penilaian)->with('program',$program);
-
-       
     }
 
     /**
@@ -200,12 +145,7 @@ class PenilaianController extends Controller
     public function update(Request $request,$id)
     {
         $this->validate($request,[
-
-           
             'laporan_panel_penilai' => 'required|file|max:1999',
-           
-
-
         ]);
         
         // //Trying to move method from controller to model 24/11/2018
@@ -226,10 +166,10 @@ class PenilaianController extends Controller
         //Get the extension file name
             $extension = $request ->file('laporan_panel_penilai')-> getClientOriginalExtension();
         //File name to store
-        $fileNameToStore=$filename.'_'.time().'.'.$extension;
+            $fileNameToStore=$filename.'_'.time().'.'.$extension;
         
         //Upload Pdf file
-        $path =$request ->file('laporan_panel_penilai')->storeAs('public/laporan_panel_penilai',$fileNameToStore);
+            $path =$request ->file('laporan_panel_penilai')->storeAs('public/laporan_panel_penilai',$fileNameToStore);
         
         }
             else{
@@ -266,83 +206,49 @@ class PenilaianController extends Controller
     public function updateLaporanPanel(Request $request, $id){
 
         $this->validate($request,[
-
-           
             'perakuan_pjk' => 'required|file|max:1999',
-           
-
-
         ]);
 
         //Handle file upload
         if($request->hasFile('perakuan_pjk'))
         
         {
-
             $fileNameWithExt=$request -> file('perakuan_pjk')->getClientOriginalName();
-
         // Get the full file name
             $filename = pathinfo($fileNameWithExt,PATHINFO_FILENAME);            
-
         //Get the extension file name
             $extension = $request ->file('perakuan_pjk')-> getClientOriginalExtension();
         //File name to store
         $fileNameToStore=$filename.'_'.time().'.'.$extension;
-        
         //Upload Pdf file
         $path =$request ->file('perakuan_pjk')->storeAs('public/perakuan_pjk',$fileNameToStore);
-        
         }
             else{
                 $fileNameToStore = 'noPDF.pdf';
             }
-
-
             //Add laporan panel penilai to the penilaian table
-
-           
             /* Cari program since penilaian belongs to program then baru boleh cari penilaian through eloquent relationship */
             $penilaian= Penilaian::find($id);
             $program = $penilaian->program;
-
-           
-
             /* Status semakan program telah dikemaskini berdasarkan progress */
             $program -> status_program = 'Perakuan PJK telah dilampirkan bersama laporan panel penilai (Akan disemak oleh pihak JPPA)'; 
-
             $penilaian -> perakuan_pjk =$fileNameWithExt;
             $penilaian -> perakuan_pjk_link =$fileNameToStore;
-
             $program ->save();
-            $penilaian -> save();        
-            
-         
-           
-            
-
-            
-           
-          
-           return redirect('/');
+            $penilaian -> save();    
+            return redirect('/');
 
     }
 
     public function updatePerakuanPJK(Request $request, $id){
 
         $this->validate($request,[
-
-           
             'perakuan_jppa' => 'required|file|max:1999',
-           
-
-
         ]);
 
         //Handle file upload
         if($request->hasFile('perakuan_jppa'))
-        
         {
-
             $fileNameWithExt=$request -> file('perakuan_jppa')->getClientOriginalName();
 
         // Get the full file name
@@ -368,57 +274,35 @@ class PenilaianController extends Controller
             /* Cari program since penilaian belongs to program then baru boleh cari penilaian through eloquent relationship */
             $penilaian= Penilaian::find($id);
             $program = $penilaian->program;
-
-           
-
             /* Status semakan program telah dikemaskini berdasarkan progress */
             $program -> status_program = 'Perakuan JPPA telah dilampirkan, permohonan akan dihantar kepada pihak Senat'; 
-
             $penilaian -> perakuan_jppa =$fileNameWithExt;
             $penilaian -> perakuan_jppa_link =$fileNameToStore;
-
             $program ->save();
-            $penilaian -> save();        
-            
-         
-           
-            
-
-            
-           
-          
-           return redirect('/');
+            $penilaian -> save();      
+            return redirect('/');
 
     }
 
     public function updatePerakuanJPPA(Request $request, $id){
 
         $this->validate($request,[
-
-           
             'perakuan_senat' => 'required|file|max:1999',
-           
-
-
         ]);
 
         //Handle file upload
         if($request->hasFile('perakuan_senat'))
         
         {
-
             $fileNameWithExt=$request -> file('perakuan_senat')->getClientOriginalName();
-
         // Get the full file name
-            $filename = pathinfo($fileNameWithExt,PATHINFO_FILENAME);            
-
+            $filename = pathinfo($fileNameWithExt,PATHINFO_FILENAME);  
         //Get the extension file name
             $extension = $request ->file('perakuan_senat')-> getClientOriginalExtension();
         //File name to store
-        $fileNameToStore=$filename.'_'.time().'.'.$extension;
-        
+            $fileNameToStore=$filename.'_'.time().'.'.$extension;
         //Upload Pdf file
-        $path =$request ->file('perakuan_senat')->storeAs('public/perakuan_senat',$fileNameToStore);
+            $path =$request ->file('perakuan_senat')->storeAs('public/perakuan_senat',$fileNameToStore);
         
         }
             else{
@@ -433,25 +317,14 @@ class PenilaianController extends Controller
             $penilaian= Penilaian::find($id);
             $program = $penilaian->program;
 
-           
-
             /* Status semakan program telah dikemaskini berdasarkan progress */
             $program -> status_program = 'Perakuan JPPA telah dilampirkan, permohonan akan dihantar kepada pihak Senat'; 
-
             $penilaian -> perakuan_senat =$fileNameWithExt;
             $penilaian -> perakuan_senat_link =$fileNameToStore;
-
             $program ->save();
-            $penilaian -> save();        
-            
-         
-           
-            
+            $penilaian -> save();
 
-            
-           
-          
-           return redirect('/');
+            return redirect('/');
 
     }
 

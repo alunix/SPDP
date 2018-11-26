@@ -23,18 +23,18 @@ class Program extends Model
         
       {
 
-          $fileNameWithExt=$request -> file('file_link')->getClientOriginalName();
+        $fileNameWithExt=$request -> file('file_link')->getClientOriginalName();
 
       // Get the full file name
-          $filename = pathinfo($fileNameWithExt,PATHINFO_FILENAME);            
+        $filename = pathinfo($fileNameWithExt,PATHINFO_FILENAME);            
 
       //Get the extension file name
-          $extension = $request ->file('file_link')-> getClientOriginalExtension();
+        $extension = $request ->file('file_link')-> getClientOriginalExtension();
       //File name to store
-      $fileNameToStore=$filename.'_'.time().'.'.$extension;
+        $fileNameToStore=$filename.'_'.time().'.'.$extension;
       
       //Upload Pdf file
-      $path =$request ->file('file_link')->storeAs('public/cadangan_program_baharu',$fileNameToStore);
+        $path =$request ->file('file_link')->storeAs('public/cadangan_program_baharu',$fileNameToStore);
       
       }
           else{

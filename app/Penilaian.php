@@ -36,27 +36,13 @@ class Penilaian extends Model
    
 
     public function program(){
-     
-     
       // return $this->belongsTo('SPDP\Program','dokumen_id');// set the foreign key (second parameter)
       return $this->belongsTo('SPDP\Program','dokumen_id');// set the foreign key (second parameter)
-
-      
-
-       
-        
-        
-       
-    
      }
-
-
-
+     
      public function scopeLaporanPanelPenilai(){
-
         $penilaians = Penilaian::all();
         return view ('posts/senarai-penilaian-program')->with('penilaians',$penilaians);
-
      }
 
 }

@@ -87,7 +87,7 @@ class PenilaianController extends Controller
      */
     public function showProgramPenilai()
     {
-        // $programs = Program::where('status_program','Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai')->get();
+        
         $programs = Program::where('status_program','Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai')->get();
         return view ('pjk-view-program-baharu')->with('programs',$programs);
     }

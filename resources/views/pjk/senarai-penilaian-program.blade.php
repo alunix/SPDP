@@ -17,6 +17,7 @@
                         <thead>
                             <tr>
                             <th scope="col">Penilaian ID</th>
+                            <th scope="col">Jenis permohonan</th>
                             <th scope="col">Tajuk Dokumen</th>
                             <th scope="col">Kelulusan PJK</th>
                             <th scope="col">Kelulusan Panel Penilai Pertama</th>                          
@@ -42,8 +43,9 @@
                 @elseif(Auth::user()->type=="jppa")
                 <th scope="row"><a href="/jppa/penilaian/{{$penilaian->id}}">{{ $penilaian->id }}</th>
                 @endif
-
-                <th scope="row>">{{$penilaian->program['doc_title']}}</th>
+                
+                <th scope="row>">{{$penilaian->program->jenis_permohonan->jenis_permohonan_huraian}}</th>
+                <th scope="row>">{{$penilaian->program->doc_title}}</th>
                 <th scope="row">{{ $penilaian->penilaian_pjk }}</th>
                 <th scope="row">{{ $penilaian->penilaian_panel_1}}</th>               
                 <th scope="row">{{ $penilaian->jppa }}</th>

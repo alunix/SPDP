@@ -47,7 +47,7 @@
 <td><a href="/programs/{{$program->id}}">{{$program->doc_title}}</td>               
 <td>{{$program->lecturer_name}} </td>
 <td>{{$program->fakulti}} </td> 
-<td>{{$program->created_at}}  </td> 
+<td>{{$program->created_at->format('h:i a d/m/Y')}}  </td> 
 </tr>
 @endforeach
 @endif

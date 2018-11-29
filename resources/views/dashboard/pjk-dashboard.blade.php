@@ -15,16 +15,16 @@
                     @endif
 
                        <form action="http://spdp.com/pjk/program-baharu">
-    <input type="submit" value="Lihat Semua Program Yang Diterima" />
+    <input type="submit" value="Lihat Semua Permohonan Yang Diterima" />
 </form>
 
 
-                       <form action="http://spdp.com/senarai-penilaian">
+                       <!-- <form action="http://spdp.com/senarai-penilaian">
     <input type="submit" value="Assigned penilaians" />
-</form>
+</form> -->
 
  <form action="http://spdp.com/senarai-penilaian-perakuan">
-    <input type="submit" value="Penilaian untuk perakuan" />
+    <input type="submit" value="Perakuan laporan penilaian" />
 </form>
 
 

@@ -79,7 +79,7 @@ class ProgramController extends Controller
         
         $programs= new Program();
         $programs->create($request);        
-        return redirect('/program-baharu')->with('success','Cadangan program telah berjaya dimuat naik');
+        return redirect('/senarai-program-dihantar')->with('success','Cadangan program telah berjaya dimuat naik');
 
 
     }

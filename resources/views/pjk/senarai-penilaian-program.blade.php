@@ -19,9 +19,7 @@
                             <th scope="col">Penilaian ID</th>
                             <th scope="col">Tajuk Dokumen</th>
                             <th scope="col">Kelulusan PJK</th>
-                            <th scope="col">Kelulusan Panel Penilai Pertama</th>
-                            <th scope="col">Kelulusan Panel Penilai Kedua</th>
-                            <th scope="col">Kelulusan Panel Penilai Ketiga</th>
+                            <th scope="col">Kelulusan Panel Penilai Pertama</th>                          
                             <th scope="col">Kelulusan JPPA</th>
                             <th scope="col">Kelulusan Senat</th>
 
@@ -47,9 +45,7 @@
 
                 <th scope="row>">{{$penilaian->program['doc_title']}}</th>
                 <th scope="row">{{ $penilaian->penilaian_pjk }}</th>
-                <th scope="row">{{ $penilaian->penilaian_panel_1}}</th>
-                <th scope="row">{{ $penilaian->penilaian_panel_2}}</th>
-                <th scope="row">{{ $penilaian->penilaian_panel_3}}</th>
+                <th scope="row">{{ $penilaian->penilaian_panel_1}}</th>               
                 <th scope="row">{{ $penilaian->jppa }}</th>
                 <th scope="row">{{ $penilaian->senat}}</th>
             </tr>

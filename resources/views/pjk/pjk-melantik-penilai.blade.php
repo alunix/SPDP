@@ -97,7 +97,7 @@
 <th scope="row">{{ $user->id }}</th>
 <td>{{ $user->name }}</td>               
 <td>{{ $user->email }}</td>
-<td> <input type="checkbox" name="checked[]" value="{{ $user->id }}"> </td> 
+<td> <input type="radio" name="checked[]" value="{{ $user->id }}"> </td> 
 </tr>
 @endforeach
 @endif

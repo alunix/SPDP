@@ -18,9 +18,10 @@ class CreateProgramsTable extends Migration
            
             $table->string('lecturer_name');
             $table->string('fakulti');
-            $table->string('file_link');
             $table->string('doc_title');
+            $table->string('jenis_permohonan');
             $table->string('file_name'); //To show the name of the file
+            $table->string('file_link');
             $table->integer('lecturer_id')->unsigned();
             
             $table->foreign('lecturer_id')->references('id')->on('users');  

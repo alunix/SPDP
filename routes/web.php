@@ -49,11 +49,13 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware'], functio
 	// Route::match(['get', 'post'], '/fakulti-dashboard/', 'HomeController@fakulti');
 	// Route::match(['get', 'post'], '/program-baharu/', 'ProgramController@index','ProgramController@create');
 
-	Route::get('/program-baharu', 'HomeController@fakulti')->name('fakulti.dashboard');
+	//Route::get('/program-baharu', 'HomeController@fakulti')->name('fakulti.dashboard');
+	// Route::get('/permohonan-baru', 'FakultiController@permohonanBaru')->name('fakulti.dashboard');
+	
 
 	/*----------------------- Fakulti nak create a new program pengajian ------------- */
-	Route::get('/program-baharu', 'ProgramController@index')->name('program.page');
-	Route::post('/program-baharu', 'ProgramController@store')->name('program.page.submit');
+	Route::get('/permohonan-baharu', 'ProgramController@index')->name('program.page');
+	Route::post('/permohonan-baharu', 'ProgramController@store')->name('program.page.submit');
 
 });
 

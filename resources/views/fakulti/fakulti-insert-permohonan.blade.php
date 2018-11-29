@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Penyediaan Dokumen Program Baharu Akreditasi Sementara</div>
+                <div class="card-header">Permohonan Baharu</div>
 
             <div class="card-body">
                     <form method="POST" action="{{ route('program.page.submit') }}" enctype="multipart/form-data">
@@ -14,7 +14,7 @@
 
 
                         <div class="form-group row">
-                            <label for="lecturer_name" class="col-md-4 col-form-label text-md-right">{{ __('Nama Ketua Fakulti') }}</label>
+                            <label for="lecturer_name" class="col-md-4 col-form-label text-md-right">{{ __('Penghantar') }}</label>
 
                             <div class="col-md-6">
                                 <input id="lecturer_name" type="text" class="form-control" name="lecturer_name" value="{{ Auth::user()->name }}" required autofocus readonly>
@@ -38,6 +38,23 @@
                             </div>
                         </div>
 
+                          <div class="form-group row">
+                            <label for="jenis_permohonan" class="col-md-4 col-form-label text-md-right">{{ __('Jenis permohonan') }}</label>
+
+                            <div class="col-md-6">
+                            <select class=”form-control” name='jenis_permohonan' style="width:330px;" id='jenis_permohonan'>
+                                
+                                <option value=#>Sila pilih</option>
+                                <option value='A'>Permohonan Program Pengajian Baru</option>
+                                <option value='B'>Permohonan Semakan Program Pengajian</option>
+                                <option value='C'>Permohonan Kursus Baru</option>
+                                <option value='D'>Permohonan Semakan Kursus</option>
+                                <option value='E'>Permohonan Akreditasi Penuh/Audit Pemantauan</option>
+                                <option value='F'>Permohonan Penjumudan Program Pengajian</option>
+                            </select>
+                            </div>
+                        </div>
+
 
                          <div class="form-group row">
                             <label for="doc_title" class="col-md-4 col-form-label text-md-right">{{ __('Document title') }}</label>
@@ -52,6 +69,20 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="versi_dokumen" class="col-md-4 col-form-label text-md-right">{{ __('Versi') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="versi_dokumen" type="text" class="form-control{{ $errors->has('versi_dokumen') ? ' is-invalid' : '' }}" name="versi_dokumen" value="{{ old('versi_dokumen') }}" required autofocus>
+
+                                @if ($errors->has('versi_dokumen'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('versi_dokumen') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
 
 
 

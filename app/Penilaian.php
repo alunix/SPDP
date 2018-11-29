@@ -17,7 +17,7 @@ class Penilaian extends Model
     ];
 
     protected $table = 'penilaians';
-    //protected $primaryKey= 'id';
+   
 
     public static function create(Request $request,$programID){
       $selectedPenilai = $request->input('checked');
@@ -36,7 +36,7 @@ class Penilaian extends Model
    
 
     public function program(){
-      // return $this->belongsTo('SPDP\Program','dokumen_id');// set the foreign key (second parameter)
+    
       return $this->belongsTo('SPDP\Program','dokumen_id');// set the foreign key (second parameter)
      }
      

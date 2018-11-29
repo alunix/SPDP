@@ -8,7 +8,7 @@ use SPDP\Penilaian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-class ProgramController extends Controller
+class FakultiController extends Controller
 {
    /**
      * Display a listing of the resource.
@@ -19,8 +19,14 @@ class ProgramController extends Controller
 
     public function index()
     {
-        $programs = Program::all();
-        return view ('fakulti.fakulti-insert-permohonan')->with('programs',$programs);
+      
+        return view ('fakulti.permohonan-baharu.blade.php');
+    }
+
+    public function permohonanBaru()
+    {
+      
+        return view ('fakulti.permohonan-baharu');
     }
 
     /**
@@ -31,30 +37,8 @@ class ProgramController extends Controller
     // public function create(array $data)
     // {
 
-    //     
-        
 
-    // }
-
-       public function showListProgramPengajian(Request $request)
-     {
-
-    
-        $programs = Program::where('status_program','Belum disemak')->get();
-        return view ('pjk-view-program-baharu')->with('programs',$programs);
-
-     
-
-     }
-
-     public function showListPanelPenilai(Request $request,$id)
-     {
-        
-        
-     
-     }
-
-
+      
 
     /**
      * Store a newly created resource in storage.
@@ -136,11 +120,6 @@ class ProgramController extends Controller
             return redirect(url('/senarai-penilaian'));
     }
 
-    public function submitListPanelPenilai(Request $request, $id)    { 
-
-    }
-
-   
    
 
 

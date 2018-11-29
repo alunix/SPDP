@@ -14,34 +14,10 @@
                         </div>
                     @endif
                     
+                    <form action="http://spdp.com/permohonan-baru"  >
+    <input type="submit" value="Permohonan Baharu" />
+</form>
                     
-                     <form action="http://spdp.com/program-baharu"  >
-    <input type="submit" value="Permohonan Program Pengajian Mod Campuran" />
-</form>
-
-     <form action="http://spdp.com/program-baharu"  >
-    <input type="submit" value="Permohonan Program Pengajian Mod Penyelidikan(Pascasiswaszah)" />
-</form>
-
-     <form action="http://spdp.com/program-baharu"  >
-    <input type="submit" value="Permohonan Semakan Program: Kerja Kursus dan Mod Campuran" />
-</form>
-
-<form action="http://spdp.com/program-baharu"  >
-    <input type="submit" value="Permohonan Semakan Program: Mod Penyelidikan" />
-</form>
-
-<form action="http://spdp.com/program-baharu"  >
-    <input type="submit" value="Permohonan Kursus Baharu" />
-</form>
-
-<form action="http://spdp.com/program-baharu"  >
-    <input type="submit" value="Permohonan Kursus Elektif Bebas" />
-</form>
-
-<form action="http://spdp.com/program-baharu"  >
-    <input type="submit" value="Permohonan Penjumudan Program" />
-</form>
                             
                            
 

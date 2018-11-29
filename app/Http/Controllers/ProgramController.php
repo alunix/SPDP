@@ -32,7 +32,12 @@ class ProgramController extends Controller
     // {
 
     //     
-        
+    
+    public function permohonanDihantar()
+    {
+        $programs = Program::all();
+        return view ('fakulti.senarai-permohonan-dihantar')->with('programs',$programs);
+    }
 
     // }
 
@@ -68,6 +73,7 @@ class ProgramController extends Controller
 
             'lecturer_name' => 'required|string|max:20',
             'fakulti' => 'required|string|max:255',
+            'jenis_permohonan' => 'required|string|max:255',
             'file_link' => 'required|file|max:1999',
         ]);
         

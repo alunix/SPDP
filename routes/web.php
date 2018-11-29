@@ -57,6 +57,9 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware'], functio
 	Route::get('/permohonan-baharu', 'ProgramController@index')->name('program.page');
 	Route::post('/permohonan-baharu', 'ProgramController@store')->name('program.page.submit');
 
+	/*----------------------- Fakulti nak semak permohonan yang dihantar ------------- */
+	Route::get('/senarai-permohonan-dihantar', 'ProgramController@permohonanDihantar')->name('program.dihantar');
+
 });
 
 /*----------------------- Pusat Jaminan Kualiti(PJK) ------------- */	

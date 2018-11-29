@@ -9,7 +9,7 @@ use SPDP\Penilaian;
 class Program extends Model
 {
     protected $fillable = [
-       'lecturer_name', 'fakulti' , 'file_link' ,'status_program','file_name','doc_title',
+       'lecturer_name', 'fakulti' , 'file_link' ,'status_program','file_name','doc_title','jenis_permohonan',
 
 
    ];
@@ -50,6 +50,7 @@ class Program extends Model
           $programs -> lecturer_name = $request -> input('lecturer_name');
           $programs -> fakulti = $request -> input('fakulti');
           $programs -> doc_title =$request -> input('doc_title');
+          $programs -> jenis_permohonan =$request -> input('jenis_permohonan');
           $programs -> file_name = $fileNameWithExt;
           $programs -> file_link = $fileNameToStore;
           $programs -> lecturer_id = $lecturer_id;

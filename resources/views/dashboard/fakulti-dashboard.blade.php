@@ -14,8 +14,12 @@
                         </div>
                     @endif
                     
-                    <form action="http://spdp.com/permohonan-baru"  >
+                    <form action="http://spdp.com/permohonan-baharu"  >
     <input type="submit" value="Permohonan Baharu" />
+</form>
+
+                         <form action="http://spdp.com/senarai-permohonan-dihantar"  >
+    <input type="submit" value="Permohonan yang dihantar" />
 </form>
                     
                             

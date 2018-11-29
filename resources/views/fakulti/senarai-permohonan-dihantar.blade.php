@@ -24,9 +24,10 @@
 
 <thead>
     <tr>
-    <th scope="col">Permohonan ID</th>
+    <th scope="col">ID</th>
+    <th scope="col">Jenis Permohonan</th>
     <th scope="col">Tajuk</th>
-    <th scope="col">Nama</th>
+    <th scope="col">Penghantar</th>
     <th scope="col">Fakulti</th>
     <th scope="col">File</th>
     <th scope="col">Status</th>
@@ -42,6 +43,7 @@
 @foreach($programs as $program)
 <tr>
 <th scope="row">{{$program->id}}</th>
+<td> {{$program->jenis_permohonan->jenis_permohonan_huraian}}</td>   
 <td> {{$program->doc_title}}</td>               
 <td>{{$program->lecturer_name}}</td>
 <td>{{$program->fakulti}}</td>

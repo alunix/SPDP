@@ -39,18 +39,18 @@
                         </div>
 
                           <div class="form-group row">
-                            <label for="jenis_permohonan" class="col-md-4 col-form-label text-md-right">{{ __('Jenis permohonan') }}</label>
+                            <label for="jenis_permohonan_id" class="col-md-4 col-form-label text-md-right">{{ __('Jenis permohonan') }}</label>
 
                             <div class="col-md-6">
-                            <select class=”form-control” name='jenis_permohonan' style="width:330px;" id='jenis_permohonan'>
+                            <select class=”form-control” name='jenis_permohonan_id' style="width:330px;" id='jenis_permohonan_id'>
                                 
                                 <option value=#>Sila pilih</option>
-                                <option value='program_baru'>Permohonan Program Pengajian Baru</option>
-                                <option value='semakan_program'>Permohonan Semakan Program Pengajian</option>
-                                <option value='kursus_baru'>Permohonan Kursus Baru</option>
-                                <option value='semakan_kursus'>Permohonan Semakan Kursus</option>
-                                <option value='audit_pmtn'>Permohonan Akreditasi Penuh/Audit Pemantauan</option>
-                                <option value='program_jumud'>Permohonan Penjumudan Program Pengajian</option>
+                                <option value=1>Permohonan Program Pengajian Baru</option>
+                                <option value=2>Permohonan Semakan Program Pengajian</option>
+                                <option value=3>Permohonan Kursus Baru</option>
+                                <option value=4>Permohonan Semakan Kursus</option>
+                                <option value=5>Permohonan Akreditasi Penuh/Audit Pemantauan</option>
+                                <option value=6>Permohonan Penjumudan Program Pengajian</option>
                             </select>
                             </div>
                         </div>

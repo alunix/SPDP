@@ -50,7 +50,7 @@ class Program extends Model
           $programs -> lecturer_name = $request -> input('lecturer_name');
           $programs -> fakulti = $request -> input('fakulti');
           $programs -> doc_title =$request -> input('doc_title');
-          $programs -> jenis_permohonan =$request -> input('jenis_permohonan');
+          $programs -> jenis_permohonan_id =$request -> input('jenis_permohonan_id');
           $programs -> file_name = $fileNameWithExt;
           $programs -> file_link = $fileNameToStore;
           $programs -> lecturer_id = $lecturer_id;
@@ -76,6 +76,15 @@ class Program extends Model
   
 
  }
+
+ public function jenis_permohonan(){
+  // return $this->hasOne('SPDP\Penilaian','penilaianID');
+   return $this->belongsTo('SPDP\JenisPermohonan');
+
+
+
+
+}
 
  
 

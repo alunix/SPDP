@@ -11,4 +11,8 @@ class JenisPermohonan extends Model
   
   
      ];
+
+     public function program(){
+        return $this->hasOne('SPDP\Program');
+     }
 }

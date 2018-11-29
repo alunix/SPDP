@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Senarai permohonanan dokumen program baharu</div>
+                <div class="card-header"><h4>Senarai permohonanan baharu</h4></div>
 
             <div class="card-body">
             <!-- <form method="POST" action="{{ route('program.page.submit') }}" enctype="multipart/form-data">
@@ -17,7 +17,7 @@
 
       <a href="{{ url()->previous() }}" class="btn btn-default">Back</a>
                       
-<h4> Program yang diterima  </h4>
+
 
 
 <table class="table table-striped">
@@ -25,6 +25,7 @@
 <thead>
     <tr>
     <th scope="col">Permohonan ID</th>
+    <th scope="col">Jenis permohonan</th>
     <th scope="col">Tajuk dokumen</th>
     <th scope="col">Ketua fakulti</th>
     <th scope="col">Fakulti</th>
@@ -42,6 +43,7 @@
 @foreach($programs as $program)
 <tr>
 <th scope="row">{{$program->id}}</th>
+<td>{{$program->jenis_permohonan->jenis_permohonan_huraian}} </td>
 <td><a href="/programs/{{$program->id}}">{{$program->doc_title}}</td>               
 <td>{{$program->lecturer_name}} </td>
 <td>{{$program->fakulti}} </td> 

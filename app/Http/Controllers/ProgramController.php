@@ -73,13 +73,13 @@ class ProgramController extends Controller
 
             'lecturer_name' => 'required|string|max:20',
             'fakulti' => 'required|string|max:255',
-            'jenis_permohonan' => 'required|string|max:255',
+            'jenis_permohonan_id' => 'required|integer|max:255',
             'file_link' => 'required|file|max:1999',
         ]);
         
         $programs= new Program();
         $programs->create($request);        
-        return redirect('/senarai-program-dihantar')->with('success','Cadangan program telah berjaya dimuat naik');
+        return redirect('/senarai-permohonan-dihantar')->with('success','Cadangan program telah berjaya dimuat naik');
 
 
     }
@@ -96,7 +96,7 @@ class ProgramController extends Controller
         $role=auth()->user()->type;
 
         if($role=="pjk")
-            return view('posts/view-program-baharu')->with('program',$program);
+            return view('posts/view-program-baharu')->with('program',$program)->with('jenis_permohonan',$program->jenis_permohonan);
         else
            return view('posts/view-program-baharu')->with('program',$program)->with('penilaian',$program->penilaian);
         

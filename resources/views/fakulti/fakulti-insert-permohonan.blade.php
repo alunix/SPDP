@@ -45,11 +45,11 @@
                             <select class=”form-control” name='jenis_permohonan_id' style="width:330px;" id='jenis_permohonan_id'>
                                 
                                 <option value=#>Sila pilih</option>
-                                <option value=1>Permohonan Program Pengajian Baru</option>
-                                <option value=2>Permohonan Semakan Program Pengajian</option>
-                                <option value=3>Permohonan Kursus Baru</option>
-                                <option value=4>Permohonan Semakan Kursus</option>
-                                <option value=5>Permohonan Akreditasi Penuh/Audit Pemantauan</option>
+                                <option value=1>Program Pengajian Baru</option>
+                                <option value=2>Semakan Program Pengajian</option>
+                                <option value=3>Kursus Baru</option>
+                                <option value=4>Semakan Kursus</option>
+                                <option value=5>Akreditasi Penuh/Audit Pemantauan</option>
                                 <option value=6>Permohonan Penjumudan Program Pengajian</option>
                             </select>
                             </div>
@@ -57,7 +57,7 @@
 
 
                          <div class="form-group row">
-                            <label for="doc_title" class="col-md-4 col-form-label text-md-right">{{ __('Tajuk dokumen') }}</label>
+                            <label for="doc_title" class="col-md-4 col-form-label text-md-right">{{ __('Nama program/kursus') }}</label>
 
                             <div class="col-md-6">
                                 <input id="doc_title" type="text" class="form-control{{ $errors->has('doc_title') ? ' is-invalid' : '' }}" name="doc_title" value="{{ old('doc_title') }}" required autofocus>
@@ -86,7 +86,7 @@
 
 
                         <div class="form-group row">
-                            <label for="file_link" class="col-md-4 col-form-label text-md-right">{{ __('Link PDF') }}</label>
+                            <label for="file_link" class="col-md-4 col-form-label text-md-right">{{ __('Muat naik dokumen(fail pdf)') }}</label>
 
                             <div class="col-md-6">
                                 <input id="file_link" type="file" class="form-control{{ $errors->has('file_link') ? ' is-invalid' : '' }}" name="file_link" value="{{ old('file_link') }}" required autofocus>

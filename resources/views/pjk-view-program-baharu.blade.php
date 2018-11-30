@@ -26,7 +26,7 @@
     <tr>
     <th scope="col">Permohonan ID</th>
     <th scope="col">Jenis permohonan</th>
-    <th scope="col">Tajuk dokumen</th>
+    <th scope="col">Nama program/kursus</th>
     <th scope="col">Ketua fakulti</th>
     <th scope="col">Fakulti</th>
     <th scope="col">Tarikh dihantar</th>

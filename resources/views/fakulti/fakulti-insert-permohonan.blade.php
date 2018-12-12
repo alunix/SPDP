@@ -50,7 +50,7 @@
                                 <option value=3>Kursus Baru</option>
                                 <option value=4>Semakan Kursus</option>
                                 <option value=5>Akreditasi Penuh/Audit Pemantauan</option>
-                                <option value=6>Permohonan Penjumudan Program Pengajian</option>
+                                <option value=6>Penjumudan Program Pengajian</option>
                             </select>
                             </div>
                         </div>

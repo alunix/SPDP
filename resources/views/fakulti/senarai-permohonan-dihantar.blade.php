@@ -4,14 +4,11 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card" style="width:60rem;">
+            <div class="card" style="width:65rem;">
                 <div class="card-header" >Permohonan yang dihantar</div>
 
                 <div class="card-body">
-                @push('styles')
-                <link href="{{ asset('css/styles.scss') }}" rel="stylesheet">
-                @endpush
-
+               
     <div class="container">
  
     <h5> Program yang dihantar  </h5>

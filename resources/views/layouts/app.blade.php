@@ -25,6 +25,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/styles.scss') }}" rel="stylesheet">
 
     <style>
         .links > a {
@@ -68,8 +69,8 @@
             
             @import "@material/button/mdc-button";
 
-             @stack('styles');
-            
+             /* @stack('styles.scss');
+             */
     </style>
 </head>
 <body>

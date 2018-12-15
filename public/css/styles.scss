@@ -22,6 +22,19 @@
     padding:2px;
   }
 
+  /* Fakulti page buttons start */
+  .btn-glyphicon {
+    padding:8px;
+    background:#ffffff;
+    margin-right:4px;
+}
+.icon-btn {
+    padding: 1px 15px 3px 2px;
+    border-radius:50px;
+}
+/* Fakulti page buttons ends */
+
+
   @import "bourbon";
 
   $color_purple: #5133AB;

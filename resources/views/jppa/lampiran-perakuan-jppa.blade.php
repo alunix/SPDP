@@ -124,15 +124,17 @@
 
 <div class="form-group row mb-0">
     <div class="col-md-6 offset-md-5">
-
         <button type="submit" class="btn btn-success" value="accept-program" name="submitbutton">
         {{ __('Hantar') }}
         </button>
-        
-       
-     
-
     </div>
+
+      <div class="col-md-6 offset-md-5">
+            <button type="submit" class="btn btn-danger" value="accept-program" name="submitbutton">
+            {{ __('Tidak lulus') }}
+            </button>
+    </div>
+    
 </div>
 
 

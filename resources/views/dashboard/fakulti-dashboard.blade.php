@@ -5,7 +5,8 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header" >Halaman Ketua Fakulti</div>
+                <div class="card-header" >Halaman Fakulti</div>
+               
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,13 +15,17 @@
                         </div>
                     @endif
                     
-                    <form action="http://spdp.com/permohonan-baharu"  >
-    <input type="submit" value="Permohonan Baharu" />
-</form>
+                   
 
-                         <form action="http://spdp.com/senarai-permohonan-dihantar"  >
-    <input type="submit" value="Permohonan yang dihantar" />
-</form>
+<a class="btn icon-btn btn-success" href="http://spdp.com/permohonan-baharu">
+<!-- <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span> -->
+Permohonan Baharu
+</a>
+
+<a class="btn icon-btn btn-info" href="http://spdp.com/senarai-permohonan-dihantar">
+<!-- <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span> -->
+Permohonan Dihantar
+</a>
                     
                             
                            

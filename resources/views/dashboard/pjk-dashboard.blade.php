@@ -14,23 +14,18 @@
                         </div>
                     @endif
 
-                       <form action="http://spdp.com/pjk/program-baharu">
+                       <form action="{{ route('pjk.list.ProgramBaharu') }}">
     <input type="submit" value="Lihat Semua Permohonan Yang Diterima" />
 </form>
 
 
-                       <!-- <form action="http://spdp.com/senarai-penilaian">
-    <input type="submit" value="Assigned penilaians" />
-</form> -->
+                    
 
- <form action="http://spdp.com/senarai-penilaian-perakuan">
+  <form action="{{ route('penilaian.show') }}">
     <input type="submit" value="Perakuan laporan penilaian" />
 </form>
 
 
-<!-- // <button class="mdc-button">
-//   Button
-// </button> -->
 
                 
                 </div>

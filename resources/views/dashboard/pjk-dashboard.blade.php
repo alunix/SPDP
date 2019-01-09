@@ -21,7 +21,7 @@
 
                     
 
-  <form action="{{ route('penilaian.show') }}">
+ <form action="http://spdp.com/senarai-penilaian-perakuan">
     <input type="submit" value="Perakuan laporan penilaian" />
 </form>
 

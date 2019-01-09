@@ -48,7 +48,7 @@
                                 <option value=#>Sila pilih</option>
                                 <option value='senat'>Urus Setia Senat</option>
                                 <option value='jppa'>Jawatankuasa Perancangan dan Perkembangan Akademik (JPPA)</option>
-                                <!-- <option value='penilai'>Panel Penilai</option> -->
+                                <option value='penilai'>Panel Penilai</option>
                                 <option value='pjk'>Pusat Jaminan Kualiti (PJK)</option>
                                 <option value='fakulti'>Ketua Jabatan Fakulti</option>
                             </select>

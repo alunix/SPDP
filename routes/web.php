@@ -38,7 +38,7 @@ Route::get('/', 'HomeController@index')->middleware('auth'); //Redirect index pa
 
 // });
 
-Route::get('programs/{program}', 'ProgramController@show')->middleware('type:pjk,penilai');
+Route::get('programs/{program}', 'PermohonanController@show')->middleware('type:pjk,penilai');
 
 
 
@@ -54,11 +54,11 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware'], functio
 	
 
 	/*----------------------- Fakulti nak create a new program pengajian ------------- */
-	Route::get('/permohonan-baharu', 'ProgramController@index')->name('program.page');
-	Route::post('/permohonan-baharu', 'ProgramController@store')->name('program.page.submit');
+	Route::get('/permohonan-baharu', 'PermohonanController@index')->name('program.page');
+	Route::post('/permohonan-baharu', 'PermohonanController@store')->name('program.page.submit');
 
 	/*----------------------- Fakulti nak semak permohonan yang dihantar ------------- */
-	Route::get('/senarai-permohonan-dihantar', 'ProgramController@permohonanDihantar')->name('program.dihantar');
+	Route::get('/senarai-permohonan-dihantar', 'PermohonanController@permohonanDihantar')->name('program.dihantar');
 
 });
 
@@ -68,20 +68,20 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware'], functio
 	Route::match(['get', 'post'], '/pjk-dashboard/', 'HomeController@pjk');
 	
 	/*----------------------- PJK menerima program pengajian daripada fakulti ------------- */	
-	Route::match(['get', 'post'], '/pjk/program-baharu', 'ProgramController@showListProgramPengajian')->name('pjk.list.ProgramBaharu');
+	Route::match(['get', 'post'], '/pjk/program-baharu', 'PermohonanController@showListProgramPengajian')->name('pjk.list.ProgramBaharu');
 	
 	
 	/*----------------------- First penilaian program pengajian  ------------- */	
 	// Route::get('/programs/senarai-penilaian','PenilaianController@index')->name('penilaian.show');
-	// Route::get( '/programs/{program}', 'ProgramController@show')->name('program.show');	
+	// Route::get( '/programs/{program}', 'PermohonanController@show')->name('program.show');	
 	Route::get('/senarai-penilaian','PenilaianController@index')->name('penilaian.show');
 	
 	
 
 	/*-----------------------Pelantikan penilai---------------------------------------------*/
 	
-	 Route::patch( '/programs/{program}/pelantikan-penilai', 'ProgramController@update')-> name('pelantikan_penilai.submit');
-	 Route::get('/programs/{program}/pelantikan-penilai','ProgramController@edit')->name('pelantikan_penilai.show');
+	 Route::patch( '/programs/{program}/pelantikan-penilai', 'PermohonanController@update')-> name('pelantikan_penilai.submit');
+	 Route::get('/programs/{program}/pelantikan-penilai','PermohonanController@edit')->name('pelantikan_penilai.show');
 	
 	
 	/*-----------------------Senarai penilaian yang ongoing---------------------------------------------*/

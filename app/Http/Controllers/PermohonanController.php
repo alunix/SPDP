@@ -1,14 +1,14 @@
 <?php
 
 namespace SPDP\Http\Controllers;
-use SPDP\Program;
+use SPDP\Permohonan;
 use SPDP\User;
 use SPDP\Penilain;
 use SPDP\Penilaian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-class ProgramController extends Controller
+class PermohonanController extends Controller
 {
    /**
      * Display a listing of the resource.
@@ -19,8 +19,8 @@ class ProgramController extends Controller
 
     public function index()
     {
-        $programs = Program::all();
-        return view ('fakulti.fakulti-insert-permohonan')->with('programs',$programs);
+        $permohonans = Permohonan::all();
+        return view ('fakulti.fakulti-insert-permohonan')->with('permohonans',$permohonans);
     }
 
     /**
@@ -35,18 +35,18 @@ class ProgramController extends Controller
     
     public function permohonanDihantar()
     {
-        $programs = Program::all();
-        return view ('fakulti.senarai-permohonan-dihantar')->with('programs',$programs);
+        $permohonans = Permohonan::all();
+        return view ('fakulti.senarai-permohonan-dihantar')->with('permohonans',$permohonans);
     }
 
     // }
 
-       public function showListProgramPengajian(Request $request)
+       public function showListPermohonanPengajian(Request $request)
      {
 
     
-        $programs = Program::where('status_program','Belum disemak')->get();
-        return view ('pjk-view-program-baharu')->with('programs',$programs);
+        $permohonans = Permohonan::where('status_permohonan','Belum disemak')->get();
+        return view ('pjk-view-permohonan-baharu')->with('permohonans',$permohonans);
 
      
 
@@ -77,9 +77,9 @@ class ProgramController extends Controller
             'file_link' => 'required|file|max:1999',
         ]);
         
-        $programs= new Program();
-        $programs->create($request);        
-        return redirect('/senarai-permohonan-dihantar')->with('success','Cadangan program telah berjaya dimuat naik');
+        $permohonans= new Permohonan();
+        $permohonans->create($request);        
+        return redirect('/senarai-permohonan-dihantar')->with('success','Cadangan permohonan telah berjaya dimuat naik');
 
 
     }
@@ -92,13 +92,13 @@ class ProgramController extends Controller
      */
     public function show(Request $request,$id)  {
         /* Main function but mcm tak betul , testing other possibilities */
-        $program= Program::find($id);
+        $permohonan= Permohonan::find($id);
         $role=auth()->user()->type;
 
         if($role=="pjk")
-            return view('posts/view-program-baharu')->with('program',$program)->with('jenis_permohonan',$program->jenis_permohonan);
+            return view('posts/view-permohonan-baharu')->with('permohonan',$permohonan)->with('jenis_permohonan',$permohonan->jenis_permohonan);
         else
-           return view('posts/view-program-baharu')->with('program',$program)->with('penilaian',$program->penilaian);
+           return view('posts/view-permohonan-baharu')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
         
     }
     /**
@@ -109,9 +109,9 @@ class ProgramController extends Controller
      */
     public function edit($id)
     {
-        $program = Program::find($id);
+        $permohonan = Permohonan::find($id);
         $users = User::where('type','penilai')->get();
-        return view ('pjk.pjk-melantik-penilai')->with('users',$users)->with('program',$program);
+        return view ('pjk.pjk-melantik-penilai')->with('users',$users)->with('permohonan',$permohonan);
     }
 
     /**
@@ -128,17 +128,17 @@ class ProgramController extends Controller
             'checked' => 'required',
 
         ]);
-            /* Find permohonan id then change the status program */
-            $program =Program::find($id);           
-            $program -> status_program = 'Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai'; 
-            $program -> save();
+            /* Find permohonan id then change the status permohonan */
+            $permohonan =Permohonan::find($id);           
+            $permohonan -> status_permohonan = 'Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai'; 
+            $permohonan -> save();
           
-            //Get value of dokumen_id from program id to be used as foreign key in penilaian table
-            $programID = $program->id;
+            //Get value of dokumen_id from permohonan id to be used as foreign key in penilaian table
+            $permohonanID = $permohonan->id;
 
             //Create a new penilaian in penilaian table
             $penilaians = new Penilaian();
-            $penilaians->create($request,$programID);
+            $penilaians->create($request,$permohonanID);
             return redirect(url('/senarai-penilaian'));
     }
 

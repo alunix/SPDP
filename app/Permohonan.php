@@ -14,7 +14,7 @@ class Program extends Model
 
    ];
 
-   protected $table = 'programs';
+   protected $table = 'permohonans';
 
 
    public function create(Request $request){

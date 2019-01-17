@@ -9,7 +9,7 @@ use SPDP\Penilaian;
 class Program extends Model
 {
     protected $fillable = [
-       'lecturer_name', 'fakulti' , 'file_link' ,'status_program','file_name','doc_title','jenis_permohonan',
+       'nama_penghantar', 'fakulti' , 'file_link' ,'status_program','file_name','doc_title','jenis_permohonan',
 
 
    ];
@@ -41,21 +41,21 @@ class Program extends Model
               $fileNameToStore = 'noPDF.pdf';
           }
 
-      //Create a new Program
-      $lecturer_id = auth()->user()->id;
-      $lecturer_name= auth()->user()->name;
+      //Permohonan baharu
+      $user_id = auth()->user()->id;
+      // $nama_penghantar= auth()->user()->name;
      
           
-          $programs= new Program();
-          $programs -> lecturer_name = $request -> input('lecturer_name');
-          $programs -> fakulti = $request -> input('fakulti');
-          $programs -> doc_title =$request -> input('doc_title');
-          $programs -> jenis_permohonan_id =$request -> input('jenis_permohonan_id');
-          $programs -> file_name = $fileNameWithExt;
-          $programs -> file_link = $fileNameToStore;
-          $programs -> lecturer_id = $lecturer_id;
-          $programs -> status_program = ('Belum disemak');
-          $programs -> save();
+          $permohonans= new Permohonan();
+          // $permohonans -> nama_penghantar = $request -> input('nama_penghantar');
+          $permohonans -> fakulti = $request -> input('fakulti');
+          $permohonans -> doc_title =$request -> input('doc_title');
+          $permohonans -> jenis_permohonan_id =$request -> input('jenis_permohonan_id');
+          $permohonans -> file_name = $fileNameWithExt;
+          $permohonans -> file_link = $fileNameToStore;
+          $permohonans -> id_penghantar = $user_id;
+          $permohonans -> status_permohonan = ('Belum disemak');
+          $permohonans -> save();
 
 
    }

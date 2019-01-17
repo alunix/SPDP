@@ -29,7 +29,7 @@ class CreatePenilaiansTable extends Migration
             $table->string('perakuan_senat')->nullable();;
             $table->string('perakuan_senat_link')->nullable();
 
-            $table->foreign('dokumen_id')->references('id')->on('programs');
+            $table->foreign('dokumen_id')->references('id')->on('permohonans');
             $table->foreign('penilaian_pjk')->references('id')->on('users');
             $table->foreign('penilaian_panel_1')->references('id')->on('users');
             $table->foreign('penilaian_jppa')->references('id')->on('users');

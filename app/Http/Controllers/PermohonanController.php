@@ -4,7 +4,6 @@ namespace SPDP\Http\Controllers;
 use SPDP\Permohonan;
 use SPDP\User;
 use SPDP\Penilain;
-use SPDP\Penilaian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -71,7 +70,7 @@ class PermohonanController extends Controller
     {
         $this->validate($request,[
 
-            'lecturer_name' => 'required|string|max:20',
+            'nama_penghantar' => 'required|string|max:20',
             'fakulti' => 'required|string|max:255',
             'jenis_permohonan_id' => 'required|integer|max:255',
             'file_link' => 'required|file|max:1999',

@@ -16,15 +16,15 @@ class CreatePermohonansTable extends Migration
         Schema::create('permohonans', function (Blueprint $table) {
             $table->increments('id');
            
-            $table->string('lecturer_name');
+            // $table->string('nama_penghantar');
             $table->string('fakulti');
             $table->string('doc_title');
             $table->integer('jenis_permohonan_id')->unsigned();
             $table->string('file_name'); //To show the name of the file
             $table->string('file_link');
-            $table->integer('lecturer_id')->unsigned();
+            $table->integer('id_penghantar')->unsigned();
             
-            $table->foreign('lecturer_id')->references('id')->on('users');
+            $table->foreign('id_penghantar')->references('id')->on('users');
             $table->foreign('jenis_permohonan_id')->references('id')->on('jenis_permohonans');    
 
             $table->string('status_program');

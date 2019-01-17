@@ -14,10 +14,10 @@
 
 
                         <div class="form-group row">
-                            <label for="lecturer_name" class="col-md-4 col-form-label text-md-right">{{ __('Penghantar') }}</label>
+                            <label for="nama_penghantar" class="col-md-4 col-form-label text-md-right">{{ __('Penghantar') }}</label>
 
                             <div class="col-md-6">
-                                <input id="lecturer_name" type="text" class="form-control" name="lecturer_name" value="{{ Auth::user()->name }}" required autofocus readonly>
+                                <input id="nama_penghantar" type="text" class="form-control" name="nama_penghantar" value="{{ Auth::user()->name }}" required autofocus readonly>
 
                                
                             </div>

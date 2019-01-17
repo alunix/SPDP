@@ -34,7 +34,7 @@ class Permohonan extends Model
         $fileNameToStore=$filename.'_'.time().'.'.$extension;
       
       //Upload Pdf file
-        $path =$request ->file('file_link')->storeAs('public/cadangan_program_baharu',$fileNameToStore);
+        $path =$request ->file('file_link')->storeAs('public/cadangan_permohonan_baharu',$fileNameToStore);
       
       }
           else{

@@ -21,12 +21,12 @@
 
 <thead>
     <tr>
-    <th scope="col">ID</th>
-    <th scope="col">Jenis Permohonan</th>
+    <th scope="col">No</th>
+    <th scope="col">Jenis</th>
     <th scope="col">Nama program/semakan</th>
     <th scope="col">Penghantar</th>
     <th scope="col">Fakulti</th>
-    <th scope="col">Dokumen dimuat naik</th>
+    <th scope="col">Dokumen</th>
     <th scope="col">Tarikh/Masa Penghantaran</th>    
     <th scope="col">Status</th>
     <th scope="col">Tarikh/Masa Status</th>    
@@ -46,7 +46,7 @@
 <td> {{$program->doc_title}}</td>               
 <td>{{$program->user->name}}</td>
 <td>{{$program->fakulti}}</td>
-<td> <a href ="<?php echo asset("storage/cadangan_program_baharu/$program->file_link")?>">{{ basename($program->file_name) }}</td>
+<td> <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/$program->file_link")?>">{{ basename($program->file_name) }}</td>
 <td> {{$program->created_at->format('h:i a d/m/Y') }}</td>
 <td>{{$program->status_permohonan}} </td>
 <td> {{$program->updated_at->format('h:i a d/m/Y') }}</td>

@@ -38,7 +38,7 @@ Route::get('/', 'HomeController@index')->middleware('auth'); //Redirect index pa
 
 // });
 
-Route::get('programs/{program}', 'PermohonanController@show')->middleware('type:pjk,penilai');
+Route::get('permohonan/{permohonan}', 'PermohonanController@show')->middleware('type:pjk,penilai')->name('view-permohonan-baharu');
 
 
 

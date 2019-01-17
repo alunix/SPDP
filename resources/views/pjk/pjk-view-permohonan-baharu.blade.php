@@ -26,7 +26,7 @@
     <th scope="col">Permohonan ID</th>
     <th scope="col">Jenis permohonan</th>
     <th scope="col">Nama program/kursus</th>
-    <th scope="col">Ketua fakulti</th>
+    <th scope="col">Nama penghantar</th>
     <th scope="col">Fakulti</th>
     <th scope="col">Tarikh dihantar</th>
 
@@ -39,14 +39,16 @@
  <!-- <table class="table  table-striped"> -->
 
 @if( ! $permohonans->isEmpty() )
-@foreach($permohonans as $program)
+@foreach($permohonans as $permohonan)
 <tr>
-<th scope="row">{{$program->id}}</th>
-<td>{{$program->jenis_permohonan->jenis_permohonan_huraian}} </td>
-<td><a href="/programs/{{$program->id}}">{{$program->doc_title}}</td>               
-<td>{{$program->lecturer_name}} </td>
-<td>{{$program->fakulti}} </td> 
-<td>{{$program->created_at->format('h:i a d/m/Y')}}  </td> 
+<th scope="row">{{$permohonan->id}}</th>
+<td>{{$permohonan->jenis_permohonan->jenis_permohonan_huraian}} </td>
+<!-- <td><a href="/permohonan/{{$permohonan->id}}">{{$permohonan->doc_title}}</td>                -->
+<td>{{$permohonan->doc_title}}</td>   
+<td>{{$permohonan->user->name}} </td>
+<td>{{$permohonan->fakulti}} </td> 
+<td>{{$permohonan->created_at->format('h:i a d/m/Y')}}  </td> 
+<td><a href="{{ route('view-permohonan-baharu',$permohonan->id) }}" class="btn btn-primary">SELECT</a></td>
 </tr>
 @endforeach
 @endif

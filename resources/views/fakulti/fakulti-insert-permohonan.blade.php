@@ -8,7 +8,7 @@
                 <div class="card-header">Permohonan Baharu</div>
 
             <div class="card-body">
-                    <form method="POST" action="{{ route('program.page.submit') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('permohonan.index.submit') }}" enctype="multipart/form-data">
                         @csrf
                         
 

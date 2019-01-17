@@ -34,9 +34,9 @@ class User extends Authenticatable
     return User::where('type', $type)->get();
 }
 
-public function programs(){
+public function permohonan(){
 
-    return $this->hasMany('SPDP\Program');
+    return $this->hasMany('SPDP\Permohonan');
 }
 
 

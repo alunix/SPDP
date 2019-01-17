@@ -40,12 +40,12 @@ class PermohonanController extends Controller
 
     // }
 
-       public function showListPermohonanPengajian(Request $request)
+       public function showListPermohonanBaharu(Request $request)
      {
 
     
         $permohonans = Permohonan::where('status_permohonan','Belum disemak')->get();
-        return view ('pjk-view-permohonan-baharu')->with('permohonans',$permohonans);
+        return view ('pjk.pjk-view-permohonan-baharu')->with('permohonans',$permohonans);
 
      
 

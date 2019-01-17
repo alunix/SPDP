@@ -8,8 +8,7 @@
                 <div class="card-header"><h4>Senarai permohonanan baharu</h4></div>
 
             <div class="card-body">
-            <!-- <form method="POST" action="{{ route('program.page.submit') }}" enctype="multipart/form-data">
-                        @csrf           -->
+           
 
                      
 
@@ -39,8 +38,8 @@
 
  <!-- <table class="table  table-striped"> -->
 
-@if( ! $programs->isEmpty() )
-@foreach($programs as $program)
+@if( ! $permohonans->isEmpty() )
+@foreach($permohonans as $program)
 <tr>
 <th scope="row">{{$program->id}}</th>
 <td>{{$program->jenis_permohonan->jenis_permohonan_huraian}} </td>

@@ -12,7 +12,7 @@
     <div class="container">
  
     <h5> Program yang dihantar  </h5>
-<h5>Jumlah permohonan yang dihantar : {{$programs->count()}}</h5>
+<h5>Jumlah permohonan yang dihantar : {{$permohonans->count()}}</h5>
 <hr>
 
 
@@ -38,17 +38,17 @@
     </tr>
 </thead>
 <tbody>
-@if( ! $programs->isEmpty() )
-@foreach($programs as $program)
+@if( ! $permohonans->isEmpty() )
+@foreach($permohonans as $program)
 <tr>
 <th scope="row">{{$program->id}}</th>
 <td> {{$program->jenis_permohonan->jenis_permohonan_huraian}}</td>   
 <td> {{$program->doc_title}}</td>               
-<td>{{$program->lecturer_name}}</td>
+<td>{{$program->user->name}}</td>
 <td>{{$program->fakulti}}</td>
 <td> <a href ="<?php echo asset("storage/cadangan_program_baharu/$program->file_link")?>">{{ basename($program->file_name) }}</td>
 <td> {{$program->created_at->format('h:i a d/m/Y') }}</td>
-<td>{{$program->status_program}} </td>
+<td>{{$program->status_permohonan}} </td>
 <td> {{$program->updated_at->format('h:i a d/m/Y') }}</td>
 
 </tr>

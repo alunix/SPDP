@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use SPDP\Penilaian;
 
-class Program extends Model
+class Permohonan extends Model
 {
     protected $fillable = [
        'nama_penghantar', 'fakulti' , 'file_link' ,'status_program','file_name','doc_title','jenis_permohonan',
@@ -64,7 +64,7 @@ class Program extends Model
 
  public function user(){
 
-    return $this->belongsTo('SPDP\User');
+    return $this->belongsTo('SPDP\User','id_penghantar');
 
  }
 

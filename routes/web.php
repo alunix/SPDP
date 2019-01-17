@@ -54,8 +54,8 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware'], functio
 	
 
 	/*----------------------- Fakulti nak create a new program pengajian ------------- */
-	Route::get('/permohonan-baharu', 'PermohonanController@index')->name('program.page');
-	Route::post('/permohonan-baharu', 'PermohonanController@store')->name('program.page.submit');
+	Route::get('/permohonan-baharu', 'PermohonanController@index')->name('permohonan.index');
+	Route::post('/permohonan-baharu', 'PermohonanController@store')->name('permohonan.index.submit');
 
 	/*----------------------- Fakulti nak semak permohonan yang dihantar ------------- */
 	Route::get('/senarai-permohonan-dihantar', 'PermohonanController@permohonanDihantar')->name('program.dihantar');
@@ -68,7 +68,7 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware'], functio
 	Route::match(['get', 'post'], '/pjk-dashboard/', 'HomeController@pjk');
 	
 	/*----------------------- PJK menerima program pengajian daripada fakulti ------------- */	
-	Route::match(['get', 'post'], '/pjk/program-baharu', 'PermohonanController@showListProgramPengajian')->name('pjk.list.ProgramBaharu');
+	Route::match(['get', 'post'], '/pjk/permohonan-baharu', 'PermohonanController@showListPermohonanBaharu')->name('pjk.list.permohonanBaharu');
 	
 	
 	/*----------------------- First penilaian program pengajian  ------------- */	

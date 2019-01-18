@@ -5,7 +5,7 @@
     <div class="row justify-content-center" >
         <div class="col-md-8">
             <div class="card">
-                <h3> Sistem Penyediaan Dokumen Program </h3>
+                <h3> Halaman Log Masuk </h3>
                {{-- <div class="card-header">{{ __('Log masuk') }}</div>--}}
 
                 <div class="card-body">

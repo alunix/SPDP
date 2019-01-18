@@ -80,8 +80,8 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware'], functio
 
 	/*-----------------------Pelantikan penilai---------------------------------------------*/
 	
-	 Route::patch( '/programs/{program}/pelantikan-penilai', 'PermohonanController@update')-> name('pelantikan_penilai.submit');
-	 Route::get('/programs/{program}/pelantikan-penilai','PermohonanController@edit')->name('pelantikan_penilai.show');
+	 Route::patch( '/permohonan/{permohonan}/pelantikan-penilai', 'PermohonanController@update')-> name('pelantikan_penilai.submit');
+	 Route::get('/permohonan/{permohonan}/pelantikan-penilai','PermohonanController@edit')->name('pelantikan_penilai.show');
 	
 	
 	/*-----------------------Senarai penilaian yang ongoing---------------------------------------------*/

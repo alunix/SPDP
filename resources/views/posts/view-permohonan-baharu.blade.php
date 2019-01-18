@@ -20,8 +20,8 @@
                             <label for="doc_title" class="col-md-4 col-form-label text-md-right">{{ __('Tajuk Program') }}</label>
 
                             <div class="col-md-6">
-                                {{--<input id="doc_title" type="text" value="{{ old('doc_title', $program->doc_title)}}" class="form-control" name="doc_title"  required autofocus readonly>--}}
-                                <input id="doc_title" type="text" value="{{ @$program['doc_title'] }}"  class="form-control" name="doc_title"  required autofocus readonly>
+                                {{--<input id="doc_title" type="text" value="{{ old('doc_title', $permohonan->doc_title)}}" class="form-control" name="doc_title"  required autofocus readonly>--}}
+                                <input id="doc_title" type="text" value="{{ @$permohonan['doc_title'] }}"  class="form-control" name="doc_title"  required autofocus readonly>
                                
                             </div>
                         </div>
@@ -31,7 +31,7 @@
                             <label for="lecturer_name" class="col-md-4 col-form-label text-md-right">{{ __('Nama Ketua Fakulti') }}</label>
 
                             <div class="col-md-6">
-                                <input id="lecturer_name" type="text"  value="{{ @$program['lecturer_name']}}" class="form-control" name="lecturer_name"  required autofocus readonly>
+                                <input id="lecturer_name" type="text"  value="{{ @$permohonan['lecturer_name']}}" class="form-control" name="lecturer_name"  required autofocus readonly>
 
                                
                             </div>
@@ -41,7 +41,7 @@
                             <label for="fakulti" class="col-md-4 col-form-label text-md-right">{{ __('Fakulti') }}</label>
 
                             <div class="col-md-6">
-                                <input id="fakulti" type="text"  value="{{ @$program['fakulti']}}" class="form-control" name="fakulti"  required autofocus readonly>
+                                <input id="fakulti" type="text"  value="{{ @$permohonan['fakulti']}}" class="form-control" name="fakulti"  required autofocus readonly>
 
                                
                             </div>
@@ -52,7 +52,7 @@
                             <label for="created_at" class="col-md-4 col-form-label text-md-right">{{ __('Tarikh dihantar') }}</label>
 
                             <div class="col-md-6">
-                                <input id="created_at" type="text" value="{{ @$program['created_at']}}" class="form-control" name="created_at"  required autofocus readonly>
+                                <input id="created_at" type="text" value="{{ @$permohonan['created_at']}}" class="form-control" name="created_at"  required autofocus readonly>
 
                                
                             </div>
@@ -69,8 +69,8 @@
                                                     
                                
                                
-                                <!-- <a href ="<?php echo asset("storage/cadangan_program_baharu/{{@$program[file_link]}}")?>">{{ basename(@$program[file_name]) }} </a> -->
-                                <a href ="<?php echo asset("storage/cadangan_program_baharu/$program->file_link")?>">{{ basename(@$program[file_name]) }} </a>
+                                <!-- <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/{{@$permohonan[file_link]}}")?>">{{ basename(@$permohonan[file_name]) }} </a> -->
+                                <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/$permohonan->file_link")?>">{{ basename(@$permohonan[file_name]) }} </a>
                                 </div>
                                 
                         </div>
@@ -83,20 +83,20 @@
                             @if(Auth::user()->type == "pjk")
                                  
                                  
-                            <a href="/programs/{{@$program[id]}}/pelantikan-penilai">
+                            <a href="{{ route('pelantikan_penilai.show', ['permohonan' => $permohonan->id])  }}">
                                     <input type="button" class="btn btn-success" value="Lantik penilai" />
                                     
                             </a>
                                 
                                 
                             
-                            <button type="submit" class="btn btn-danger" value="reject-program" name="submitbutton" >
+                            <button type="submit" class="btn btn-danger" value="reject-permohonan" name="submitbutton" >
                                 {{ __('Tidak lulus') }}
                             </button>
                             
                             @elseif(Auth::user()->type=="penilai")
                             
-                            <a href="/programs/{{$program->id}}/kelulusan-permohonan/{{$penilaian->id}}">
+                            <a href="/permohonans/{{$permohonan->id}}/kelulusan-permohonan/{{$penilaian->id}}">
                                     <input type="button" class="btn btn-success" value="Lulus permohonan" />
                                     
                             </a>
@@ -105,7 +105,7 @@
                             
                             
                             
-                            <a href="/programs/{{@$program[id]}}/pelantikan-penilai">
+                            <a href="/permohonans/{{@$permohonan[id]}}/pelantikan-penilai">
                                     <input type="button" class="btn btn-danger" value="Tidak lulus" />
                                     
                             </a>
@@ -119,29 +119,29 @@
                                 
                                 
                             
-                            <!-- <button type="submit" class="btn btn-danger" value="reject-program" name="submitbutton" >
+                            <!-- <button type="submit" class="btn btn-danger" value="reject-permohonan" name="submitbutton" >
                                 {{ __('Tidak lulus') }}
                             </button> -->
                             
-                            <a href="/programs/{{@$program[id]}}/pelantikan-penilai">
+                            <a href="/permohonans/{{@$permohonan[id]}}/pelantikan-penilai">
                                     <input type="button" class="btn btn-danger" value="Tidak lulus" />
                                     
                             </a>
 
                             @elseif(Auth::user()->type=="senat")
                             
-                            <a href="/programs/{{@$program[id]}}/kelulusan-permohonan/{{$penilaian->id}}">
+                            <a href="/permohonans/{{@$permohonan[id]}}/kelulusan-permohonan/{{$penilaian->id}}">
                                     <input type="button" class="btn btn-success" value="Lulus permohonan" />
                                     
                             </a>
                                 
                                 
                             
-                            <!-- <button type="submit" class="btn btn-danger" value="reject-program" name="submitbutton" >
+                            <!-- <button type="submit" class="btn btn-danger" value="reject-permohonan" name="submitbutton" >
                                 {{ __('Tidak lulus') }}
                             </button> -->
                             
-                            <a href="/programs/{{@$program[id]}}/pelantikan-penilai">
+                            <a href="/permohonans/{{@$permohonan[id]}}/pelantikan-penilai">
                                     <input type="button" class="btn btn-danger" value="Tidak lulus" />
                                     
                             </a>

@@ -17,15 +17,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function index()
-    // {
-    //     return view('home');
-        
-    // }
-        // This is for after authenticated, which homepage the system will redirect.
+
+    // This is for after authenticated, which homepage the system will redirect.
     public function index(){
-        $type = auth()->user()->type;
-        switch ($type) {
+        $type = auth()->user()->role;
+        switch ($role) {
             case 'fakulti':
                     return view('dashboard/fakulti-dashboard');
                 break;

@@ -80,7 +80,7 @@
 
                             <div class="col-md-6 offset-md-5">
                        
-                            @if(Auth::user()->type == "pjk")
+                            @if(Auth::user()->role == "pjk")
                                  
                                  
                             <a href="{{ route('pelantikan_penilai.show', ['permohonan' => $permohonan->id])  }}">
@@ -94,7 +94,7 @@
                                 {{ __('Tidak lulus') }}
                             </button>
                             
-                            @elseif(Auth::user()->type=="penilai")
+                            @elseif(Auth::user()->role=="penilai")
                             
                             <a href="/permohonans/{{$permohonan->id}}/kelulusan-permohonan/{{$penilaian->id}}">
                                     <input type="button" class="btn btn-success" value="Lulus permohonan" />
@@ -110,7 +110,7 @@
                                     
                             </a>
 
-                            @elseif(Auth::user()->type=="jppa")
+                            @elseif(Auth::user()->role=="jppa")
                             
                             <a href="/jppa/penilaian/{{penilaian}}">
                                     <input type="button" class="btn btn-success" value="Lulus permohonan" />
@@ -128,7 +128,7 @@
                                     
                             </a>
 
-                            @elseif(Auth::user()->type=="senat")
+                            @elseif(Auth::user()->role=="senat")
                             
                             <a href="/permohonans/{{@$permohonan[id]}}/kelulusan-permohonan/{{$penilaian->id}}">
                                     <input type="button" class="btn btn-success" value="Lulus permohonan" />

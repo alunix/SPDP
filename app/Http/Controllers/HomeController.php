@@ -20,7 +20,7 @@ class HomeController extends Controller
 
     // This is for after authenticated, which homepage the system will redirect.
     public function index(){
-        $type = auth()->user()->role;
+        $role = auth()->user()->role;
         switch ($role) {
             case 'fakulti':
                     return view('dashboard/fakulti-dashboard');

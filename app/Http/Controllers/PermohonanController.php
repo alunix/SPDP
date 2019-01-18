@@ -92,7 +92,7 @@ class PermohonanController extends Controller
     public function show(Request $request,$id)  {
         /* Main function but mcm tak betul , testing other possibilities */
         $permohonan= Permohonan::find($id);
-        $role=auth()->user()->type;
+        $role=auth()->user()->role;
 
         if($role=="pjk")
             return view('posts/view-permohonan-baharu')->with('permohonan',$permohonan)->with('jenis_permohonan',$permohonan->jenis_permohonan);
@@ -109,7 +109,7 @@ class PermohonanController extends Controller
     public function edit($id)
     {
         $permohonan = Permohonan::find($id);
-        $users = User::where('type','penilai')->get();
+        $users = User::where('role','penilai')->get();
         return view ('pjk.pjk-melantik-penilai')->with('users',$users)->with('permohonan',$permohonan);
     }
 

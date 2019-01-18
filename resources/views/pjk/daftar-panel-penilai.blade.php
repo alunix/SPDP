@@ -39,49 +39,10 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="type" class="col-md-4 col-form-label text-md-right">{{ __('Jenis Pengguna') }}</label>
-
-                            <div class="col-md-6">
-                            <select class=”form-control” name='type' style="width:330px;" id='type'>
-                                
-                                <option value=#>Sila pilih</option>
-                                <option value='senat'>Urus Setia Senat</option>
-                                <option value='jppa'>Jawatankuasa Perancangan dan Perkembangan Akademik (JPPA)</option>
-                                <!-- <option value='penilai'>Panel Penilai</option> -->
-                                <option value='pjk'>Pusat Jaminan Kualiti (PJK)</option>
-                                <option value='fakulti'>Ketua Jabatan Fakulti</option>
-                            </select>
-                            </div>
-                        </div>
-
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Kata laluan') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" style="height:100x" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Pengesahan kata laluan') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                            </div>
-                        </div>
-
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Daftar') }}
+                                    {{ __('Daftar Penilai') }}
                                 </button>
                             </div>
                         </div>

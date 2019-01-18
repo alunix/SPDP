@@ -40,10 +40,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="type" class="col-md-4 col-form-label text-md-right">{{ __('Jenis Pengguna') }}</label>
+                            <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Jenis Pengguna') }}</label>
 
                             <div class="col-md-6">
-                            <select class=”form-control” name='type' style="width:330px;" id='type'>
+                            <select class=”form-control” name='role' style="width:330px;" id='role'>
                                 
                                 <option value=#>Sila pilih</option>
                                 <option value='senat'>Urus Setia Senat</option>

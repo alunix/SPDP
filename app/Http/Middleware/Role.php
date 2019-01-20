@@ -33,49 +33,14 @@ public function handle($request, Closure $next, $types)
     // if (!Auth::check()) // I included this check because you have it, but it really should be part of your 'auth' middleware, most likely added as part of a route group.
     //     return redirect('login');
 
-    //$user = \SPDP\User::find( \Auth::user()->id);
-
+    $user = \SPDP\User::find( \Auth::user()->id);
     
-    //$user = Auth::user();
 
-    // if($user->isAdmin())
-    //     return $next($request);
+    $roles = explode(',', $roles);
 
-
-
-    // $types = explode(',', $types);
-    
-       
-    // if($request->user()){
-
-    //     if($request->user()->hasRole($type) ){
-    //     return $next($request);
-    //     }
-    //     else SPDP::abort(403);
-        
-
-    // }
-
-          
-    // if($request->$user){
-
-    //     if($request->$user->hasRole($type) ){
-    //     return $next($request);
-    //     }
-    //     else SPDP::abort(403);
-        
-
-    // }
-
-    //$user =$request->user();
-     $user = \SPDP\User::find( \Auth::user()->id);
-    //$user=$request->SPDP\User::find( \Auth::user()->id);
-
-    $types = explode(',', $types);
-
-    foreach ($types as $type) {
+    foreach ($roles as $role) {
       // if user has given role, continue processing the request
-      if ($user->hasRole($type)) {
+      if ($user->hasRole($role)) {
         return $next($request);
       }
     }

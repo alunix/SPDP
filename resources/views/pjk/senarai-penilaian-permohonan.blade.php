@@ -16,13 +16,13 @@
 
                         <thead>
                             <tr>
-                            <th scope="col">Penilaian ID</th>
+                            <th scope="col">ID</th>
                             <th scope="col">Jenis permohonan</th>
                             <th scope="col">Tajuk Dokumen</th>
-                            <th scope="col">Kelulusan PJK</th>
-                            <th scope="col">Kelulusan Panel Penilai Pertama</th>                          
-                            <th scope="col">Kelulusan JPPA</th>
-                            <th scope="col">Kelulusan Senat</th>
+                            <th scope="col">PJK</th>
+                            <th scope="col">Panel Penilai Pertama</th>                          
+                            <th scope="col">JPPA</th>
+                            <th scope="col">Senat</th>
 
 
                             

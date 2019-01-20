@@ -29,9 +29,9 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function hasRole($type)
+    public function hasRole($role)
 {
-    return User::where('type', $type)->get();
+    return User::where('role', $role)->get();
 }
 
 public function permohonan(){

@@ -25,7 +25,7 @@
     <input type="submit" value="Perakuan laporan penilaian" />
 </form>
 
-<form action="{{ route('pjk.daftar_panel_penilai.show') }}">
+<form action="{{ route('register.panel_penilai.show') }}">
     <input type="submit" value="Daftar Panel Penilai" />
 </form>
 

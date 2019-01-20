@@ -5,6 +5,7 @@ namespace SPDP\Http\Controllers\Auth;
 use SPDP\User;
 use SPDP\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -70,5 +71,22 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'role' => $data['role'],
         ]);
+    }
+
+    public function create_panel_penilai($id)
+    {  
+        $users = User::where('role','penilai')->get();
+       return view ('pjk.daftar-panel-penilai')->with('users',$users);
+    }
+
+
+    public function store_panel_penilai(Request $request,$id)
+    {
+        $user= new User();
+        $user->name = $request -> input('name');
+        $user->email = $request -> input('email');
+        $user->role = 'penilai';
+        $user->password= Hash::make('abcd123');
+        $user->save();
     }
 }

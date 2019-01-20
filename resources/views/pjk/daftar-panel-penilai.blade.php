@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Pendafataran Panel Penilai') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register.panel_penilai.submit') }}">
                         @csrf
 
                         <div class="form-group row">
@@ -46,6 +46,36 @@
                                 </button>
                             </div>
                         </div>
+
+                        <table class="table table-striped">
+
+<thead>
+    <tr>
+    <th scope="col">No</th>
+    <th scope="col">Nama</th>
+    <th scope="col">Email</th>
+    <th scope="col">Tarikh pendaftaran</th>
+
+    
+
+    
+    </tr>
+</thead>
+<tbody>
+@if( ! $users->isEmpty() )
+@foreach($users as $user)
+<tr>
+<th scope="row">{{ $user->id }}</th>
+<td>{{ $user->name }}</td>               
+<td>{{ $user->email }}</td>
+<td>{{ $user->created_at }}</td>
+
+</tr>
+@endforeach
+@endif
+</tbody>
+</table>
+
                     </form>
                 </div>
             </div>

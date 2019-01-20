@@ -17,7 +17,7 @@ class fakultiMiddleware
     public function handle($request, Closure $next)
     {
 
-        if ($request->user() && $request->user()->type != 'fakulti' )
+        if ($request->user() && $request->user()->role != 'fakulti' )
                     { 
                     return new Response(view('unauthorized')->with('role', 'Pihak Fakulti' ));
                     }

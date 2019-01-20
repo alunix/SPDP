@@ -21,13 +21,17 @@
 
                     
 
- <form action="http://spdp.com/senarai-penilaian-perakuan">
+ <form action="{{ route('pjk.senarai_perakuan.show') }}">
     <input type="submit" value="Perakuan laporan penilaian" />
 </form>
+
+
 
 <form action="{{ route('register.panel_penilai.show') }}">
     <input type="submit" value="Daftar Panel Penilai" />
 </form>
+
+
 
 
 

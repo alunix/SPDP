@@ -73,20 +73,5 @@ class RegisterController extends Controller
         ]);
     }
 
-    public function create_panel_penilai($id)
-    {  
-        $users = User::where('role','penilai')->get();
-       return view ('pjk.daftar-panel-penilai')->with('users',$users);
-    }
-
-
-    public function store_panel_penilai(Request $request,$id)
-    {
-        $user= new User();
-        $user->name = $request -> input('name');
-        $user->email = $request -> input('email');
-        $user->role = 'penilai';
-        $user->password= Hash::make('abcd123');
-        $user->save();
-    }
+    
 }

@@ -3,9 +3,10 @@
 namespace SPDP\Http\Controllers;
 
 use SPDP\Penilaian;
-use SPDP\Program;
+use SPDP\Permohonan;
 use SPDP\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class PenilaianController extends Controller
 {
@@ -18,7 +19,7 @@ class PenilaianController extends Controller
     {
      
         
-        /* Acceesing penilaian relationship to check status program which is in Program */    
+        /* Accessing penilaian relationship to check status program which is in Program */    
 
         $penilaians = Penilaian::whereHas('program', function($query){
                 $query->where('status_program','=', 'Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai)');           
@@ -29,7 +30,7 @@ class PenilaianController extends Controller
         public function penilaianPJK_JPPA()
         {
          
-            $role = auth()->user()->type;
+            $role = auth()->user()->role;
     
             if($role=='pjk'){
 
@@ -325,6 +326,25 @@ class PenilaianController extends Controller
 
             return redirect('/');
 
+    }
+
+    public function create_panel_penilai()
+    {  
+        $users = User::where('role','penilai')->get();
+       return view ('pjk.daftar-panel-penilai')->with('users',$users);
+    }
+
+
+    public function store_panel_penilai(Request $request)
+    {
+        $user= new User();
+        $user->name = $request -> input('name');
+        $user->email = $request -> input('email');
+        $user->role = 'penilai';
+        $user->password= Hash::make('abcd123');
+        $user->save();
+
+        return redirect()->route('register.panel_penilai.show');
     }
 
 

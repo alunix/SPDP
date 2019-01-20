@@ -77,8 +77,8 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware'], functio
 	Route::get('/senarai-penilaian','PenilaianController@index')->name('penilaian.show');
 	
 	/*-----------------------Daftar penilai---------------------------------------------*/
-	Route::get('/pendaftaran-panel-penilai', 'Auth\RegisterController@create_panel_penilai')->name('register.panel_penilai.show');
-	Route::post('/pendaftaran-panel-penilai', 'Auth\RegisterController@store_panel_penilai')->name('register.panel_penilai.submit');
+	Route::get('/pendaftaran-panel-penilai', 'PenilaianController@create_panel_penilai')->name('register.panel_penilai.show');
+	Route::post('/pendaftaran-panel-penilai', 'PenilaianController@store_panel_penilai')->name('register.panel_penilai.submit');
 
 
 
@@ -89,7 +89,7 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware'], functio
 	
 	
 	/*-----------------------Senarai penilaian yang ongoing---------------------------------------------*/
-	Route::get('senarai-penilaian-perakuan','PenilaianController@penilaianPJK_JPPA')->name('pjk.perakuan.show');
+	Route::get('senarai-penilaian-perakuan','PenilaianController@penilaianPJK_JPPA')->name('pjk.senarai_perakuan.show');
 
 
 

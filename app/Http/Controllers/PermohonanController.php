@@ -3,7 +3,7 @@
 namespace SPDP\Http\Controllers;
 use SPDP\Permohonan;
 use SPDP\User;
-use SPDP\Penilain;
+use SPDP\Penilaian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 

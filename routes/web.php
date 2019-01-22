@@ -43,6 +43,9 @@ Route::get('permohonan/{permohonan}', 'PermohonanController@show')->middleware('
 
 
 
+
+
+
 /*----------------------- Bahagian pihak fakulti ------------- */	
 Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware'], function() {
 
@@ -60,6 +63,14 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware'], functio
 	/*----------------------- Fakulti nak semak permohonan yang dihantar ------------- */
 	Route::get('/senarai-permohonan-dihantar', 'PermohonanController@permohonanDihantar')->name('program.dihantar');
 
+	/*----------------------- Fakulti nak mengemas kini tetapan profil ------------- */
+	Route::get('/tetapan', 'FakultiController@index')->name('settings');
+
+
+
+
+	
+
 });
 
 /*----------------------- Pusat Jaminan Kualiti(PJK) ------------- */	
@@ -74,7 +85,7 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware'], functio
 	/*----------------------- First penilaian program pengajian  ------------- */	
 	// Route::get('/programs/senarai-penilaian','PenilaianController@index')->name('penilaian.show');
 	// Route::get( '/programs/{program}', 'PermohonanController@show')->name('program.show');	
-	Route::get('/senarai-penilaian','PenilaianController@index')->name('penilaian.show');
+	Route::get('/senarai-penilaian','PenilaianController@index')->middleware('role:pjk','auth')->name('penilaian.show');
 	
 	/*-----------------------Daftar penilai---------------------------------------------*/
 	Route::get('/pendaftaran-panel-penilai', 'PenilaianController@create_panel_penilai')->name('register.panel_penilai.show');

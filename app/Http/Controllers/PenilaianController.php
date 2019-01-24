@@ -90,7 +90,7 @@ class PenilaianController extends Controller
     {
         
         $permohonans = Permohonan::where('status_permohonan','Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai')->get();
-        return view ('pjk-view-permohonan-baharu')->with('permohonans',$permohonans);
+        return view ('panel_penilai.senarai-permohonan-baharu')->with('permohonans',$permohonans);
     }
 
 

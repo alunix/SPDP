@@ -126,13 +126,13 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware'], functio
 // Route::group(['middleware' => 'SPDP\Http\Middleware\penilaiMiddleware'], function() {
 
 	Route::match(['get', 'post'], '/penilai-dashboard/', 'HomeController@penilai');
-	Route::get('/panel-penilai/program-baharu','PenilaianController@showProgramPenilai');
+	Route::get('/panel-penilai/permohonan-baharu','PenilaianController@showPermohonanPenilai')->name('penilai.permohonan-baharu');
 	// Route::get( '/programs/{program}', 'ProgramController@show')->name('program.show');	
 	// Route::get('/programs/{program}/kelulusan-permohonan','PenilaianController@edit')->name('penilai.laporan.show');
 	// Route::patch('/programs/{program}/kelulusan-permohonan','PenilaianController@store')->name('penilai.laporan.submit');
 
-	Route::patch('/programs/{program}/kelulusan-permohonan/{penilaian}','PenilaianController@update')->name('penilai.laporan.submit');
-	Route::get('/programs/{program}/kelulusan-permohonan/{penilaian}','PenilaianController@edit')->name('penilai.laporan.show');
+	Route::patch('/permohonans/{permohonan}/kelulusan-permohonan/{penilaian}','PenilaianController@update')->name('penilai.laporan.submit');
+	Route::get('/permohonans/{permohonan}/kelulusan-permohonan/{penilaian}','PenilaianController@edit')->name('penilai.laporan.show');
 
 	
 	

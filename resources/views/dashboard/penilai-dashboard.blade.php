@@ -16,8 +16,8 @@
 
                     You are logged in!
 
-                     <form action="http://spdp.com/panel-penilai/program-baharu">
-    <input type="submit" value="Lihat Semua Permohonan Baharu" />
+                    <form action="{{ route('penilai.permohonan-baharu') }}">
+    <input type="submit" value="Permohonan Baharu" />
 </form>
 
                 </div>

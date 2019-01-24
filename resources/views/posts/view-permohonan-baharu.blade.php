@@ -70,7 +70,7 @@
                                
                                
                                 <!-- <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/{{@$permohonan[file_link]}}")?>">{{ basename(@$permohonan[file_name]) }} </a> -->
-                                <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/$permohonan->file_link")?>">{{ basename(@$permohonan[file_name]) }} </a>
+                                <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/{{@$permohonan[file_link]}}")?>">{{ basename(@$permohonan[file_name]) }} </a>
                                 </div>
                                 
                         </div>
@@ -97,7 +97,7 @@
                             @elseif(Auth::user()->role=="penilai")
                             
                             <a href="/permohonans/{{$permohonan->id}}/kelulusan-permohonan/{{$penilaian->id}}">
-                                    <input type="button" class="btn btn-success" value="Lulus permohonan" />
+                                    <input `type`="button" class="btn btn-success" value="Lulus permohonan" />
                                     
                             </a>
                                 

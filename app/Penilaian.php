@@ -38,6 +38,26 @@ class Penilaian extends Model
     
       return $this->belongsTo('SPDP\Permohonan','dokumen_id');// set the foreign key (second parameter)
      }
+
+     public function pjk(){
+    
+      return $this->belongsTo('SPDP\User','penilaian_pjk');// set the foreign key (second parameter)
+     }
+
+     public function panel_penilai(){
+    
+      return $this->belongsTo('SPDP\User','penilaian_panel_1');// set the foreign key (second parameter)
+   }
+
+   public function jppa(){
+    
+      return $this->belongsTo('SPDP\User','penilaian_jppa');// set the foreign key (second parameter)
+   }
+
+   public function senat(){
+    
+      return $this->belongsTo('SPDP\User','penilaian_senat');// set the foreign key (second parameter)
+   }
      
      public function scopeLaporanPanelPenilai(){
         $penilaians = Penilaian::all();

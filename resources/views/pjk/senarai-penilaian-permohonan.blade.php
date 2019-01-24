@@ -35,19 +35,19 @@
                        
         @foreach($penilaians as $penilaian)
             <tr>
-                 {{--<th scope="row"><a href="/programs/{program}/lampiran-pusat-jaminan-kualiti/{penilaian}">{{ $penilaian->id }}</th>--}}
+                 {{--<th scope="row"><a href="/permohonans/{permohonan}/lampiran-pusat-jaminan-kualiti/{penilaian}">{{ $penilaian->id }}</th>--}}
                  
-                 @if(Auth::user()->type == "pjk")
+                 @if(Auth::user()->role == "pjk")
                 <th scope="row"><a href="/penilaian/{{$penilaian->id}}">{{ $penilaian->id }}</th>
                 
-                @elseif(Auth::user()->type=="jppa")
+                @elseif(Auth::user()->role=="jppa")
                 <th scope="row"><a href="/jppa/penilaian/{{$penilaian->id}}">{{ $penilaian->id }}</th>
                 @endif
                 
-                <th scope="row>">{{$penilaian->program->jenis_permohonan->jenis_permohonan_huraian}}</th>
-                <th scope="row>">{{$penilaian->program->doc_title}}</th>
-                <th scope="row">{{ $penilaian->penilaian_pjk }}</th>
-                <th scope="row">{{ $penilaian->penilaian_panel_1}}</th>               
+                <th scope="row>">{{$penilaian->permohonan->jenis_permohonan->jenis_permohonan_huraian}}</th>
+                <th scope="row>">{{$penilaian->permohonan->doc_title}}</th>
+                <th scope="row">{{ $penilaian->pjk->name }}</th>
+                <th scope="row">{{ $penilaian->panel_penilai->name}}</th>               
                 <th scope="row">{{ $penilaian->jppa }}</th>
                 <th scope="row">{{ $penilaian->senat}}</th>
             </tr>

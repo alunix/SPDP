@@ -5,6 +5,7 @@ namespace SPDP;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use SPDP\Penilaian;
+use SPDP\KemajuanPermohonan;
 
 class Permohonan extends Model
 {
@@ -56,6 +57,8 @@ class Permohonan extends Model
           $permohonans -> id_penghantar = $user_id;
           $permohonans -> status_permohonan = ('Belum disemak');
           $permohonans -> save();
+
+         
 
 
    }

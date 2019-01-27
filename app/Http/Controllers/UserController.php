@@ -131,10 +131,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        $program = Program::find($id);
-        return view('posts.view-program-baharu')->with('program',$program);
+    public function edit()
+    {   
+        $user = auth()->user();
+
+        return view('auth.settings')->with('user',$user);
     }
 
     /**
@@ -144,40 +145,31 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)    {      
+    public function update(Request $request)    {      
         
         
 
-
-        switch($request->submitbutton) {
-
-            case 'accept-program': 
+        try{
+            $this->validate($request, [
+                'name' => 'required',
+                'email' => 'required',
+                'fakulti'=>'required',
+            ]);
             
-            $program =Program::find($id);
+            $user = auth()->user()->id;
+            $user->name = $request->get('name');
+            $user->email = $request->get('email');
+            $user->fakulti = $request->get('fakulti');
+    
             
+            $user->save();
+            return redirect('/settings')->with('success', 'User Info Updated');
             
-            $program -> status_program = 'Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai'; 
-           
-            
-
-            $program -> save();
-
-            return redirect('/dashboard');
-
-            break;
-        
-            case 'reject-program': 
-                //action for save-draft here
-            break;
-        }
-
-            
-
-
-        
+            }catch (Exception $e) {
+                return view('errors.1062');
+            }
 
     }
-
     /**
      * Remove the specified resource from storage.
      *

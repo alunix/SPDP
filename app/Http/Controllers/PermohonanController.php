@@ -71,14 +71,16 @@ class PermohonanController extends Controller
         $this->validate($request,[
 
             'nama_penghantar' => 'required|string|max:20',
-            'fakulti' => 'required|string|max:255',
             'jenis_permohonan_id' => 'required|integer|max:255',
             'file_link' => 'required|file|max:1999',
         ]);
         
         $permohonans= new Permohonan();
-        $permohonans->create($request);        
-        return redirect('/senarai-permohonan-dihantar')->with('success','Cadangan permohonan telah berjaya dimuat naik');
+        $permohonans->create($request);   
+        $msg = [
+            'message' => 'Permohonan berjaya dihantar',
+           ];     
+        return redirect('/senarai-permohonan-dihantar')->with($msg);
 
 
     }

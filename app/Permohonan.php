@@ -48,8 +48,6 @@ class Permohonan extends Model
      
           
           $permohonans= new Permohonan();
-          // $permohonans -> nama_penghantar = $request -> input('nama_penghantar');
-          $permohonans -> fakulti = $request -> input('fakulti');
           $permohonans -> doc_title =$request -> input('doc_title');
           $permohonans -> jenis_permohonan_id =$request -> input('jenis_permohonan_id');
           $permohonans -> file_name = $fileNameWithExt;

@@ -144,14 +144,18 @@
         </nav>
 
         <main class="py-4">
+         <!-- Message in blade testing on 27/1/2019 by Bezane -->
+ @if (Session::has('message'))
+       <div class="alert alert-success" role="alert">
+           {{Session::get('message')}}
+       </div>
+  @elseif (Session::has('error'))
+       <div class="alert alert-warning" role="alert">
+           {{Session::get('error')}}
+       </div>
+  @endif
+  <!-- End message -->
             @yield('content')
         </main>
     </div>
 
-    <!-- <div class="navbar_bottom">
-        <a href="{{ url('/') }}" class="active">Home</a>
-        <a href="{{ url('/operator/login') }}">Operator Login</a>
-        <a href="{{ url('/operator/registration') }}">Operator Register</a>
-    </div>
-</body>
-</html> -->

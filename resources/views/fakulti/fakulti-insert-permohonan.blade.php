@@ -24,19 +24,7 @@
                         </div>
 
 
-                        <div class="form-group row">
-                            <label for="fakulti" class="col-md-4 col-form-label text-md-right">{{ __('Fakulti') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="fakulti" type="text" class="form-control{{ $errors->has('fakulti') ? ' is-invalid' : '' }}" name="fakulti" value="{{ old('fakulti') }}" required autofocus>
-
-                                @if ($errors->has('fakulti'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('fakulti') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+                  
 
                           <div class="form-group row">
                             <label for="jenis_permohonan_id" class="col-md-4 col-form-label text-md-right">{{ __('Jenis permohonan') }}</label>

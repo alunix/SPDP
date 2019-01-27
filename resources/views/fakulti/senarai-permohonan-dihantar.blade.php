@@ -11,7 +11,7 @@
                
     <div class="container">
  
-    <h5> Program yang dihantar  </h5>
+   
 <h5>Jumlah permohonan yang dihantar : {{$permohonans->count()}}</h5>
 <hr>
 
@@ -21,11 +21,10 @@
 
 <thead>
     <tr>
-    <th scope="col">No</th>
+    <th scope="col">ID</th>
     <th scope="col">Jenis</th>
     <th scope="col">Nama program/semakan</th>
     <th scope="col">Penghantar</th>
-    <th scope="col">Fakulti</th>
     <th scope="col">Dokumen</th>
     <th scope="col">Tarikh/Masa Penghantaran</th>    
     <th scope="col">Status</th>
@@ -45,7 +44,6 @@
 <td> {{$program->jenis_permohonan->jenis_permohonan_huraian}}</td>   
 <td> {{$program->doc_title}}</td>               
 <td>{{$program->user->name}}</td>
-<td>{{$program->fakulti}}</td>
 <td> <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/$program->file_link")?>">{{ basename($program->file_name) }}</td>
 <td> {{$program->created_at->format('h:i a d/m/Y') }}</td>
 <td>{{$program->status_permohonan}} </td>

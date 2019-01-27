@@ -17,7 +17,7 @@ class CreatePermohonansTable extends Migration
             $table->increments('id');
            
             // $table->string('nama_penghantar');
-            $table->string('fakulti');
+           
             $table->string('doc_title');
             $table->integer('jenis_permohonan_id')->unsigned();
             $table->string('file_name'); //To show the name of the file

@@ -156,14 +156,21 @@ class UserController extends Controller
                 'fakulti'=>'required',
             ]);
             
-            $user = auth()->user()->id;
+            $user = auth()->user();
+            $user = User::find($user->id);  
             $user->name = $request->get('name');
             $user->email = $request->get('email');
             $user->fakulti = $request->get('fakulti');
     
             
             $user->save();
-            return redirect('/settings')->with('success', 'User Info Updated');
+            
+            $msg = [
+                'message' => 'Maklumat pengguna berjaya dikemaskini',
+               ];
+
+
+            return redirect('/settings')->with($msg);
             
             }catch (Exception $e) {
                 return view('errors.1062');

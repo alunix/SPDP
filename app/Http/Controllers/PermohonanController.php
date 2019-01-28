@@ -6,6 +6,7 @@ use SPDP\User;
 use SPDP\Penilaian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use SPDP\Services\PermohonanClass;
 
 class PermohonanController extends Controller
 {
@@ -66,7 +67,7 @@ class PermohonanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PermohonanClass $pc,Request $request)
     {
         $this->validate($request,[
 
@@ -74,14 +75,8 @@ class PermohonanController extends Controller
             'jenis_permohonan_id' => 'required|integer|max:255',
             'file_link' => 'required|file|max:1999',
         ]);
-        
-        $permohonans= new Permohonan();
-        $permohonans->create($request);   
-        $msg = [
-            'message' => 'Permohonan berjaya dihantar',
-           ];     
-        return redirect('/senarai-permohonan-dihantar')->with($msg);
-
+       
+        return $pc->create($request);
 
     }
 

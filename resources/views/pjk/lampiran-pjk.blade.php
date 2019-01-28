@@ -24,17 +24,17 @@
 
                             <div class="col-md-6">
                                 {{--<input id="doc_title" type="text" value="{{ old('doc_title', $program->doc_title)}}" class="form-control" name="doc_title"  required autofocus readonly>--}}
-                                <input id="doc_title" type="text" value="{{ $penilaian->program['doc_title'] }}"  class="form-control" name="doc_title"  required autofocus readonly>
+                                <input id="doc_title" type="text" value="{{ $permohonan->doc_title }}"  class="form-control" name="doc_title"  required autofocus readonly>
                                
                             </div>
                         </div>
                             
 
                         <div class="form-group row">
-                            <label for="lecturer_name" class="col-md-4 col-form-label text-md-right">{{ __('Nama Ketua Fakulti') }}</label>
+                            <label for="nama_penghantar" class="col-md-4 col-form-label text-md-right">{{ __('Nama Penghantar') }}</label>
 
                             <div class="col-md-6">
-                                <input id="lecturer_name" type="text"  value="{{$penilaian->program['lecturer_name']}}" class="form-control" name="lecturer_name"  required autofocus readonly>
+                                <input id="nama_penghantar" type="text"  value="{{$permohonan->user->name}}" class="form-control" name="nama_penghantar"  required autofocus readonly>
 
                                
                             </div>
@@ -44,7 +44,7 @@
                             <label for="fakulti" class="col-md-4 col-form-label text-md-right">{{ __('Fakulti') }}</label>
 
                             <div class="col-md-6">
-                                <input id="fakulti" type="text"  value="{{ $penilaian->program['fakulti']}}" class="form-control" name="fakulti"  required autofocus readonly>
+                                <input id="fakulti" type="text"  value="{{$permohonan->user->fakulti}}" class="form-control" name="fakulti"  required autofocus readonly>
 
                                
                             </div>
@@ -55,7 +55,7 @@
                             <label for="created_at" class="col-md-4 col-form-label text-md-right">{{ __('Tarikh dihantar') }}</label>
 
                             <div class="col-md-6">
-                                <input id="created_at" type="text" value="{{ $penilaian->program['created_at']}}" class="form-control" name="created_at"  required autofocus readonly>
+                                <input id="created_at" type="text" value="{{ $permohonan->created_at}}" class="form-control" name="created_at"  required autofocus readonly>
 
                                
                             </div>
@@ -72,7 +72,7 @@
                                 <div class="col-md-6">
 
                                 
-                                <a href ="<?php echo asset("storage/cadangan_program_baharu/{$penilaian->program['file_link']}")?>">{{ basename($penilaian->program['file_name']) }} </a> 
+                                <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/{$penilaian->permohonan->file_link}")?>">{{ basename($penilaian->permohonan['file_name']) }} </a> 
 
                                 
                                 

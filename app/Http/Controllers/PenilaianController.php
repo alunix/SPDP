@@ -90,7 +90,7 @@ class PenilaianController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showpermohonanPenilai()
+    public function showPermohonanPenilai()
     {
         
         $permohonans = Permohonan::where('status_permohonan','Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai')->get();
@@ -147,64 +147,14 @@ class PenilaianController extends Controller
      * @param  \SPDP\Penilaian  $penilaian
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(PenilaianClass $pcm,Request $request,$id)
     {
         $this->validate($request,[
             'laporan_panel_penilai' => 'required|file|max:1999',
         ]);
-        
-        // //Trying to move method from controller to model 24/11/2018
-        // $permohonan= permohonan::find($id);
-        // $permohonan->updatePenilaianPJK($request);
-        // Penilaian::where('id', $id)->updatePenilaianPJK($request->all());
 
-        //Handle file upload
-        if($request->hasFile('laporan_panel_penilai'))
-        
-        {
-
-            $fileNameWithExt=$request -> file('laporan_panel_penilai')->getClientOriginalName();
-
-        // Get the full file name
-            $filename = pathinfo($fileNameWithExt,PATHINFO_FILENAME);            
-
-        //Get the extension file name
-            $extension = $request ->file('laporan_panel_penilai')-> getClientOriginalExtension();
-        //File name to store
-            $fileNameToStore=$filename.'_'.time().'.'.$extension;
-        
-        //Upload Pdf file
-            $path =$request ->file('laporan_panel_penilai')->storeAs('public/laporan_panel_penilai',$fileNameToStore);
-        
-        }
-            else{
-                $fileNameToStore = 'noPDF.pdf';
-            }
-
-
-            //Add laporan panel penilai to the penilaian table
-
-           
-            /* Cari permohonan since penilaian belongs to permohonan then baru boleh cari penilaian through eloquent relationship */
-            $permohonan= permohonan::find($id);
-            $penilaian = $permohonan->penilaian;
-
-            /* Status semakan permohonan telah dikemaskini berdasarkan progress */
-            $permohonan -> status_permohonan = 'Diluluskan oleh Panel Penilai(Laporan telah dikeluarkan dan akan dilampirkan oleh PJK)'; 
-            $penilaian -> laporan_panel_penilai =$fileNameWithExt;
-            $penilaian -> laporan_panel_penilai_link =$fileNameToStore;
-
-            $permohonan ->save();
-            $penilaian -> save();        
-            
-         
-           
-            
-
-            
-           
-           //return redirect('/dashboard');
-           return redirect('/');
+        return $pc->update($request,$id);
+       
     }
 
     public function updateLaporanPanel(PenilaianClass $pc,Request $request, $id){

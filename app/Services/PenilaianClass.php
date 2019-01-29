@@ -71,9 +71,55 @@ class PenilaianClass
      * @param  \SPDP\A  $a
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, A $a)
+    public function update(Request $request,$id)
     {
-        //
+         //Handle file upload
+         if($request->hasFile('laporan_panel_penilai'))
+        
+         {
+ 
+             $fileNameWithExt=$request -> file('laporan_panel_penilai')->getClientOriginalName();
+ 
+         // Get the full file name
+             $filename = pathinfo($fileNameWithExt,PATHINFO_FILENAME);            
+ 
+         //Get the extension file name
+             $extension = $request ->file('laporan_panel_penilai')-> getClientOriginalExtension();
+         //File name to store
+             $fileNameToStore=$filename.'_'.time().'.'.$extension;
+         
+         //Upload Pdf file
+             $path =$request ->file('laporan_panel_penilai')->storeAs('public/laporan_panel_penilai',$fileNameToStore);
+         
+         }
+             else{
+                 $fileNameToStore = 'noPDF.pdf';
+             }
+ 
+ 
+             //Add laporan panel penilai to the penilaian table
+ 
+            
+             /* Cari permohonan since penilaian belongs to permohonan then baru boleh cari penilaian through eloquent relationship */
+             $permohonan= Permohonan::find($id);
+             $penilaian = $permohonan->penilaian;
+ 
+             /* Status semakan permohonan telah dikemaskini berdasarkan progress */
+             $permohonan -> status_permohonan = 'Diluluskan oleh Panel Penilai(Laporan telah dikeluarkan dan akan dilampirkan oleh PJK)'; 
+             $penilaian -> laporan_panel_penilai =$fileNameWithExt;
+             $penilaian -> laporan_panel_penilai_link =$fileNameToStore;
+ 
+             $permohonan ->save();
+             $penilaian -> save();        
+             
+          
+            
+             
+ 
+             
+            
+            //return redirect('/dashboard');
+            return redirect('/');
     }
 
     public function updateLaporanPanel(Request $request, $id){

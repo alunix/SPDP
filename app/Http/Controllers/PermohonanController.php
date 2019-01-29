@@ -117,25 +117,15 @@ class PermohonanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)    {      
+    public function update(PermohonanClass $pc,Request $request, $id)    {      
         
         $this->validate($request,[
 
             'checked' => 'required',
 
         ]);
-            /* Find permohonan id then change the status permohonan */
-            $permohonan =Permohonan::find($id);           
-            $permohonan -> status_permohonan = 'Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai'; 
-            $permohonan -> save();
-          
-            //Get value of dokumen_id from permohonan id to be used as foreign key in penilaian table
-            $permohonanID = $permohonan->id;
-
-            //Create a new penilaian in penilaian table
-            $penilaians = new Penilaian();
-            $penilaians->create($request,$permohonanID);
-            return redirect(url('/senarai-penilaian'));
+            return $pc->update($request,$id);
+           
     }
 
     public function submitListPanelPenilai(Request $request, $id)    { 

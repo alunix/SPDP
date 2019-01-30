@@ -12,7 +12,7 @@ class JenisPermohonan extends Model
   
      ];
 
-     public function program(){
-        return $this->hasOne('SPDP\Program');
+     public function permohonan(){
+        return $this->hasOne('SPDP\Permohonan');
      }
 }

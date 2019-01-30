@@ -19,18 +19,7 @@ class Penilaian extends Model
     protected $table = 'penilaians';
    
 
-    public static function create(Request $request,$programID){
-      $selectedPenilai = $request->input('checked');
-      $penilaianPJK = auth()->user()->id;
-
-      $penilaians = new Penilaian();
-      $penilaians -> dokumen_id = $programID;
-      $penilaians -> penilaian_pjk = $penilaianPJK;
-      $penilaians -> penilaian_panel_1= $selectedPenilai[0];
-     
-      $penilaians -> save();
-
-    }
+ 
 
 
 

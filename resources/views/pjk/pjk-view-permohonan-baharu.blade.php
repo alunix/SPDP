@@ -46,7 +46,7 @@
 <!-- <td><a href="/permohonan/{{$permohonan->id}}">{{$permohonan->doc_title}}</td>                -->
 <td>{{$permohonan->doc_title}}</td>   
 <td>{{$permohonan->user->name}} </td>
-<td>{{$permohonan->fakulti}} </td> 
+<td>{{$permohonan->user->fakulti}} </td> 
 <td>{{$permohonan->created_at->format('h:i a d/m/Y')}}  </td> 
 <td><a href="{{ route('view-permohonan-baharu',$permohonan->id) }}" class="btn btn-primary">SELECT</a></td>
 </tr>

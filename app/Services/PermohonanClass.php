@@ -79,6 +79,43 @@ class PermohonanClass
         //
     }
 
+    public function storePermohonanTidakDilulus(Request $request,$id)
+     {    
+        
+         //Handle file upload
+         if($request->hasFile('laporan_pjk'))
+        
+         {
+             $fileNameWithExt=$request -> file('laporan_pjk')->getClientOriginalName();
+         // Get the full file name
+             $filename = pathinfo($fileNameWithExt,PATHINFO_FILENAME);            
+         //Get the extension file name
+             $extension = $request ->file('laporan_pjk')-> getClientOriginalExtension();
+         //File name to store
+         $fileNameToStore=$filename.'_'.time().'.'.$extension;
+         //Upload Pdf file
+         $path =$request ->file('laporan_pjk')->storeAs('public/laporan_pjk',$fileNameToStore);
+         }
+             else{
+                 $fileNameToStore = 'noPDF.pdf';
+             }
+             //Add laporan PJK
+             /* Cari permohonan ID
+             
+            
+             /* Status semakan permohonan telah dikemaskini berdasarkan progress */
+             $permohonan= Permohonan::find($id);
+             $permohonan -> status_permohonan = 'Laporan tidak dilulus oleh PJK'; 
+             $penilaian -> laporan_pjk =$fileNameWithExt;
+             $penilaian -> laporan_pjk_link =$fileNameToStore;
+             $permohonan ->save();
+             
+             return redirect('/');
+        
+        
+     
+     }
+
     /**
      * Display the specified resource.
      *
@@ -120,6 +157,16 @@ class PermohonanClass
 
          //Create a new penilaian in penilaian table
          $penilaians = new Penilaian();
+         $selectedPenilai = $request->input('checked');
+         $penilaianPJK = auth()->user()->id;
+   
+         $penilaians = new Penilaian();
+         $penilaians -> dokumen_id = $programID;
+         $penilaians -> penilaian_pjk = $penilaianPJK;
+         $penilaians -> penilaian_panel_1= $selectedPenilai[0];
+        
+         $penilaians -> save();
+   
          $penilaians->create($request,$permohonanID);
          return redirect(url('/senarai-penilaian'));
     }

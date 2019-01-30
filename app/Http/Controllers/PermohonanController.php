@@ -59,6 +59,26 @@ class PermohonanController extends Controller
      
      }
 
+     public function permohonanTidakDilulus(Request $request,$id)
+     {
+        $permohonan= Permohonan::find($id);
+        return view('pjk.permohonan-tidak-dilulus')->with('permohonan',$permohonan)->with('jenis_permohonan',$permohonan->jenis_permohonan);
+
+        
+     
+     }
+
+     public function storePermohonanTidakDilulus(PermohonanClass $pc,Request $request,$id)
+     {    
+        $this->validate($request,[
+
+            'laporan_pjk' => 'required|file|max:1999',
+        ]);
+        
+        $pc->storePermohonanTidakDilulus($request,$id);
+     
+     }
+
 
 
     /**
@@ -73,7 +93,7 @@ class PermohonanController extends Controller
 
             'nama_penghantar' => 'required|string|max:20',
             'jenis_permohonan_id' => 'required|integer|max:255',
-            'file_link' => 'required|file|max:1999',
+            'file_link' => 'required|mimes:pdf|max:1999',
         ]);
        
         return $pc->create($request);

@@ -34,7 +34,7 @@ class Permohonan extends Model
 
  public function jenis_permohonan(){
   // return $this->hasOne('SPDP\Penilaian','penilaianID');
-   return $this->belongsTo('SPDP\JenisPermohonan');
+   return $this->belongsTo('SPDP\JenisPermohonan','jenis_permohonan_id');
 
 
 

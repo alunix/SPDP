@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Permohonan Baharu Diterima </div>
+                <div class="card-header">{{$permohonan->jenis_permohonan->jenis_permohonan_huraian}}</div>
 
             <div class="card-body">
                      
@@ -28,10 +28,10 @@
                             
 
                         <div class="form-group row">
-                            <label for="lecturer_name" class="col-md-4 col-form-label text-md-right">{{ __('Nama Ketua Fakulti') }}</label>
+                            <label for="nama_penghantar" class="col-md-4 col-form-label text-md-right">{{ __('Nama penghantar') }}</label>
 
                             <div class="col-md-6">
-                                <input id="lecturer_name" type="text"  value="{{ @$permohonan['lecturer_name']}}" class="form-control" name="lecturer_name"  required autofocus readonly>
+                                <input id="nama_penghantar" type="text"  value="{{ $permohonan->user->name}}" class="form-control" name="nama_penghantar"  required autofocus readonly>
 
                                
                             </div>
@@ -52,7 +52,7 @@
                             <label for="created_at" class="col-md-4 col-form-label text-md-right">{{ __('Tarikh dihantar') }}</label>
 
                             <div class="col-md-6">
-                                <input id="created_at" type="text" value="{{ @$permohonan['created_at']}}" class="form-control" name="created_at"  required autofocus readonly>
+                                <input id="created_at" type="text" value="{{ $permohonan->created_at}}" class="form-control" name="created_at"  required autofocus readonly>
 
                                
                             </div>
@@ -69,8 +69,8 @@
                                                     
                                
                                
-                                <!-- <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/{{@$permohonan[file_link]}}")?>">{{ basename(@$permohonan[file_name]) }} </a> -->
-                                <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/{{@$permohonan[file_link]}}")?>">{{ basename(@$permohonan[file_name]) }} </a>
+                                <!-- <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/{{$permohonan->file_link}}")?>">{{ basename(@$permohonan[file_name]) }} </a> -->
+                                <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/{{$permohonan->file_link}}")?>">{{ basename($permohonan->file_name) }} </a>
                                 </div>
                                 
                         </div>
@@ -90,9 +90,10 @@
                                 
                                 
                             
-                            <button type="submit" class="btn btn-danger" value="reject-permohonan" name="submitbutton" >
-                                {{ __('Tidak lulus') }}
-                            </button>
+                            <a href="{{ route('pjk.permohonanTidakDilulus', ['permohonan' => $permohonan->id])  }}">
+                                    <input type="button" class="btn btn-danger" value="Tidak Lulus" />
+                                    
+                            </a>
                             
                             @elseif(Auth::user()->role=="penilai")
                             

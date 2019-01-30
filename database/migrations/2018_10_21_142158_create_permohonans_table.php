@@ -23,8 +23,13 @@ class CreatePermohonansTable extends Migration
             $table->string('file_name'); //To show the name of the file
             $table->string('file_link');
             $table->integer('id_penghantar')->unsigned();
+            $table->integer('id_pjk')->unsigned()->nullable();
+            $table->string('laporan_pjk')->nullable();
+            $table->string('laporan_pjk_link')->nullable();
+
             
             $table->foreign('id_penghantar')->references('id')->on('users');
+            $table->foreign('id_pjk')->references('id')->on('users');
             $table->foreign('jenis_permohonan_id')->references('id')->on('jenis_permohonans');    
 
             $table->string('status_permohonan');

@@ -38,7 +38,8 @@ Route::get('/', 'HomeController@index')->middleware('auth'); //Redirect index pa
 
 // });
 
-Route::get('permohonan/{permohonan}', 'PermohonanController@show')->middleware('role:pjk,penilai')->name('view-permohonan-baharu');
+
+
 
 
 
@@ -99,6 +100,10 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware'], functio
 	
 	 Route::patch( '/permohonan/{permohonan}/pelantikan-penilai', 'PermohonanController@update')-> name('pelantikan_penilai.submit');
 	 Route::get('/permohonan/{permohonan}/pelantikan-penilai','PermohonanController@edit')->name('pelantikan_penilai.show');
+
+	 Route::get('permohonan/{permohonan}', 'PermohonanController@show')->middleware('role:pjk,penilai')->name('view-permohonan-baharu');
+	 Route::get('permohonan/{permohonan}/tidak-dilulus', 'PermohonanController@permohonanTidakDilulus')->name('pjk.permohonanTidakDilulus');	
+	 Route::post('permohonan/{permohonan}/tidak-dilulus', 'PermohonanController@storePermohonanTidakDilulus')->name('pjk.permohonanTidakDilulus.submit');	
 	
 	
 	/*-----------------------Senarai penilaian yang ongoing---------------------------------------------*/

@@ -167,92 +167,25 @@ class PenilaianController extends Controller
 
     }
 
-    public function updatePerakuanPJK(Request $request, $id){
+    public function updatePerakuanPJK(PenilaianClass $pc,Request $request, $id){
 
         $this->validate($request,[
             'perakuan_jppa' => 'required|file|max:1999',
         ]);
-
-        //Handle file upload
-        if($request->hasFile('perakuan_jppa'))
-        {
-            $fileNameWithExt=$request -> file('perakuan_jppa')->getClientOriginalName();
-
-        // Get the full file name
-            $filename = pathinfo($fileNameWithExt,PATHINFO_FILENAME);            
-
-        //Get the extension file name
-            $extension = $request ->file('perakuan_jppa')-> getClientOriginalExtension();
-        //File name to store
-        $fileNameToStore=$filename.'_'.time().'.'.$extension;
         
-        //Upload Pdf file
-        $path =$request ->file('perakuan_jppa')->storeAs('public/perakuan_jppa',$fileNameToStore);
-        
-        }
-            else{
-                $fileNameToStore = 'noPDF.pdf';
-            }
-
-
-            //Add laporan panel penilai to the penilaian table
-
-           
-            /* Cari permohonan since penilaian belongs to permohonan then baru boleh cari penilaian through eloquent relationship */
-            $penilaian= Penilaian::find($id);
-            $permohonan = $penilaian->permohonan;
-            /* Status semakan permohonan telah dikemaskini berdasarkan progress */
-            $permohonan -> status_permohonan = 'Perakuan JPPA telah dilampirkan, permohonan akan dihantar kepada pihak Senat'; 
-            $penilaian -> perakuan_jppa =$fileNameWithExt;
-            $penilaian -> perakuan_jppa_link =$fileNameToStore;
-            $permohonan ->save();
-            $penilaian -> save();      
-            return redirect('/');
+        return $pc->updatePerakuanPJK($request,$id);
 
     }
 
-    public function updatePerakuanJPPA(Request $request, $id){
+    public function updatePerakuanJPPA(PenilaianClass $pc,Request $request, $id){
 
         $this->validate($request,[
             'perakuan_senat' => 'required|file|max:1999',
         ]);
 
-        //Handle file upload
-        if($request->hasFile('perakuan_senat'))
-        
-        {
-            $fileNameWithExt=$request -> file('perakuan_senat')->getClientOriginalName();
-        // Get the full file name
-            $filename = pathinfo($fileNameWithExt,PATHINFO_FILENAME);  
-        //Get the extension file name
-            $extension = $request ->file('perakuan_senat')-> getClientOriginalExtension();
-        //File name to store
-            $fileNameToStore=$filename.'_'.time().'.'.$extension;
-        //Upload Pdf file
-            $path =$request ->file('perakuan_senat')->storeAs('public/perakuan_senat',$fileNameToStore);
-        
-        }
-            else{
-                $fileNameToStore = 'noPDF.pdf';
-            }
+        return $pc->updatePerakuanJPPA($request,$id);
 
-
-            //Add laporan panel penilai to the penilaian table
-
-           
-            /* Cari permohonan since penilaian belongs to permohonan then baru boleh cari penilaian through eloquent relationship */
-            $penilaian= Penilaian::find($id);
-            $permohonan = $penilaian->permohonan;
-
-            /* Status semakan permohonan telah dikemaskini berdasarkan progress */
-            $permohonan -> status_permohonan = 'Perakuan JPPA telah dilampirkan, permohonan akan dihantar kepada pihak Senat'; 
-            $penilaian -> perakuan_senat =$fileNameWithExt;
-            $penilaian -> perakuan_senat_link =$fileNameToStore;
-            $permohonan ->save();
-            $penilaian -> save();
-
-            return redirect('/');
-
+       
     }
 
     public function create_panel_penilai()

@@ -16,6 +16,8 @@ class Permohonan extends Model
    ];
 
    protected $table = 'permohonans';
+
+   
    
  public function user(){
 

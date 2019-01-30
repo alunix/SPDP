@@ -48,6 +48,7 @@
 <td> {{$program->created_at->format('h:i a d/m/Y') }}</td>
 <td>{{$program->status_permohonan}} </td>
 <td> {{$program->updated_at->format('h:i a d/m/Y') }}</td>
+<td><a href="{{ route('fakulti.kemajuanPermohonan',$program->id) }}" class="btn btn-primary">SELECT</a></td>
 
 </tr>
 @endforeach

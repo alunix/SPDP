@@ -3,6 +3,7 @@
 namespace SPDP\Http\Controllers;
 
 use SPDP\KemajuanPermohonan;
+use SPDP\Permohonan;
 use Illuminate\Http\Request;
 
 class KemajuanPermohonanController extends Controller
@@ -44,9 +45,14 @@ class KemajuanPermohonanController extends Controller
      * @param  \SPDP\KemajuanPermohonan  $kemajuanPermohonan
      * @return \Illuminate\Http\Response
      */
-    public function show(KemajuanPermohonan $kemajuanPermohonan)
+    public function show(KemajuanPermohonan $kj,$id)
     {
-        //
+        $permohonan= Permohonan::find($id);
+
+        $kjs = KemajuanPermohonan::where('permohonan_id',$permohonan->id)->get();
+
+        return view('fakulti.kemajuan-permohonan')->with('kjs',$kjs)->with('permohonan',$permohonan);
+
     }
 
     /**

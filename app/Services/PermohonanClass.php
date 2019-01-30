@@ -4,6 +4,9 @@ namespace SPDP\Services;
 
 use SPDP\Permohonan;
 use Illuminate\Http\Request;
+use SPDP\KemajuanPermohonan;
+use SPDP\Laporan;
+use SPDP\Penilaian;
 
 class PermohonanClass 
 {
@@ -106,12 +109,11 @@ class PermohonanClass
              /* Status semakan permohonan telah dikemaskini berdasarkan progress */
              $permohonan= Permohonan::find($id);
              $permohonan -> status_permohonan = 'Laporan tidak dilulus oleh PJK'; 
-             $penilaian -> laporan_pjk =$fileNameWithExt;
-             $penilaian -> laporan_pjk_link =$fileNameToStore;
+             $permohonan -> laporan_pjk =$fileNameWithExt;
+             $permohonan -> laporan_pjk_link =$fileNameToStore;
              $permohonan ->save();
              
-             return redirect('/');
-        
+            
         
      
      }
@@ -151,23 +153,25 @@ class PermohonanClass
          $permohonan =Permohonan::find($id);           
          $permohonan -> status_permohonan = 'Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai'; 
          $permohonan -> save();
-       
-         //Get value of dokumen_id from permohonan id to be used as foreign key in penilaian table
-         $permohonanID = $permohonan->id;
+
+        //Create a new kemajuan permohonan for each progress
+         $kj = new KemajuanPermohonan();
+         $kj-> permohonan_id = $permohonan->id;
+         $kj-> status_permohonan= $permohonan->status_permohonan;
+         $kj->save();
+         
 
          //Create a new penilaian in penilaian table
          $penilaians = new Penilaian();
          $selectedPenilai = $request->input('checked');
          $penilaianPJK = auth()->user()->id;
-   
-         $penilaians = new Penilaian();
-         $penilaians -> dokumen_id = $programID;
+        
+         $penilaians -> dokumen_id = $permohonan->id;
          $penilaians -> penilaian_pjk = $penilaianPJK;
          $penilaians -> penilaian_panel_1= $selectedPenilai[0];
-        
          $penilaians -> save();
    
-         $penilaians->create($request,$permohonanID);
+         
          return redirect(url('/senarai-penilaian'));
     }
 

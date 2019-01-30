@@ -76,6 +76,8 @@ class PermohonanController extends Controller
         ]);
         
         $pc->storePermohonanTidakDilulus($request,$id);
+        return redirect('/home');
+        
      
      }
 

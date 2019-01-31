@@ -55,14 +55,20 @@ class PermohonanClass
      
      
           
-          $permohonans= new Permohonan();
-          $permohonans -> doc_title =$request -> input('doc_title');
-          $permohonans -> jenis_permohonan_id =$request -> input('jenis_permohonan_id');
-          $permohonans -> file_name = $fileNameWithExt;
-          $permohonans -> file_link = $fileNameToStore;
-          $permohonans -> id_penghantar = $user_id;
-          $permohonans -> status_permohonan = ('Belum disemak');
-          $permohonans -> save();
+          $permohonan= new Permohonan();
+          $permohonan -> doc_title =$request -> input('doc_title');
+          $permohonan -> jenis_permohonan_id =$request -> input('jenis_permohonan_id');
+          $permohonan -> file_name = $fileNameWithExt;
+          $permohonan -> file_link = $fileNameToStore;
+          $permohonan -> id_penghantar = $user_id;
+          $permohonan -> status_permohonan = ('Belum disemak');
+          $permohonan -> save();
+
+           //Create a new kemajuan permohonan for each progress
+         $kj = new KemajuanPermohonan();
+         $kj-> permohonan_id = $permohonan->id;
+         $kj-> status_permohonan= $permohonan->status_permohonan;
+         $kj->save();
 
         $msg = [
             'message' => 'Permohonan berjaya dihantar',
@@ -112,6 +118,12 @@ class PermohonanClass
              $permohonan -> laporan_pjk =$fileNameWithExt;
              $permohonan -> laporan_pjk_link =$fileNameToStore;
              $permohonan ->save();
+
+        //Create a new kemajuan permohonan for each progress
+         $kj = new KemajuanPermohonan();
+         $kj-> permohonan_id = $permohonan->id;
+         $kj-> status_permohonan= $permohonan->status_permohonan;
+         $kj->save();
              
             
         

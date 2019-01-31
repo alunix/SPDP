@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{$permohonan->jenis_permohonan->jenis_permohonan_huraian}}</div>
+                <div class="card-header">Program Pengajian Baharu</div>
 
             <div class="card-body">
                      
@@ -20,8 +20,8 @@
                             <label for="doc_title" class="col-md-4 col-form-label text-md-right">{{ __('Tajuk Program') }}</label>
 
                             <div class="col-md-6">
-                                {{--<input id="doc_title" type="text" value="{{ old('doc_title', $permohonan->doc_title)}}" class="form-control" name="doc_title"  required autofocus readonly>--}}
-                                <input id="doc_title" type="text" value="{{ @$permohonan['doc_title'] }}"  class="form-control" name="doc_title"  required autofocus readonly>
+                               
+                                <input id="doc_title" type="text" value="{{ $permohonan->doc_title }}"  class="form-control" name="doc_title"  required autofocus readonly>
                                
                             </div>
                         </div>

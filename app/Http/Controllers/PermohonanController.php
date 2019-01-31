@@ -111,12 +111,41 @@ class PermohonanController extends Controller
     public function show(Request $request,$id)  {
         /* Main function but mcm tak betul , testing other possibilities */
         $permohonan= Permohonan::find($id);
-        $role=auth()->user()->role;
+        // $role=auth()->user()->role;
 
-        if($role=="pjk")
-            return view('posts/view-permohonan-baharu')->with('permohonan',$permohonan)->with('jenis_permohonan',$permohonan->jenis_permohonan);
-        else
-           return view('posts/view-permohonan-baharu')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
+        // if($role=="pjk")
+        //     return view('posts/view-permohonan-baharu')->with('permohonan',$permohonan)->with('jenis_permohonan',$permohonan->jenis_permohonan);
+        // else
+        //    return view('posts/view-permohonan-baharu')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
+
+        $jp =$permohonan->jenis_permohonan->jenis_permohonan_kod;
+
+        switch ($jp) {
+            case 'program_baharu':
+                    return view('dashboard/fakulti-dashboard');
+                break;
+            case 'semakan_program':
+                    return view('dashboard/pjk-dashboard');
+                break; 
+            case 'kursus_baru':
+                return view('dashboard/senat-dashboard');
+            break; 
+            case 'semakan_kursus':
+                    return view('dashboard/penilai-dashboard');
+                break; 
+            case 'akreditasi_penuh':
+                    return view('dashboard/jppa-dashboard');
+                break; 
+            case 'penjumudan_program':
+                return view('dashboard/jppa-dashboard');
+            break; 
+            default:
+                    return view ('/login'); 
+                break;
+        }
+
+
+
         
     }
     /**

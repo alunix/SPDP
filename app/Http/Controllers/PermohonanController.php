@@ -7,6 +7,7 @@ use SPDP\Penilaian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use SPDP\Services\PermohonanClass;
+use SPDP\Services\RedirectPermohonan;
 
 class PermohonanController extends Controller
 {
@@ -28,11 +29,7 @@ class PermohonanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function create(array $data)
-    // {
-
-    //     
-    
+   
     public function permohonanDihantar()
     {
         $permohonans = Permohonan::all();
@@ -118,33 +115,10 @@ class PermohonanController extends Controller
         // else
         //    return view('posts/view-permohonan-baharu')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
 
-        $jp =$permohonan->jenis_permohonan->jenis_permohonan_kod;
+        // $jp =$permohonan->jenis_permohonan->jenis_permohonan_kod;
 
-        switch ($jp) {
-            case 'program_baharu':
-                    return view('dashboard/fakulti-dashboard');
-                break;
-            case 'semakan_program':
-                    return view('dashboard/pjk-dashboard');
-                break; 
-            case 'kursus_baru':
-                return view('dashboard/senat-dashboard');
-            break; 
-            case 'semakan_kursus':
-                    return view('dashboard/penilai-dashboard');
-                break; 
-            case 'akreditasi_penuh':
-                    return view('dashboard/jppa-dashboard');
-                break; 
-            case 'penjumudan_program':
-                return view('dashboard/jppa-dashboard');
-            break; 
-            default:
-                    return view ('/login'); 
-                break;
-        }
-
-
+    $rp = new RedirectPermohonan();
+    return $rp->redirect($permohonan);
 
         
     }

@@ -31,10 +31,10 @@
                             
 
                         <div class="form-group row">
-                            <label for="lecturer_name" class="col-md-4 col-form-label text-md-right">{{ __('Nama Ketua Fakulti') }}</label>
+                            <label for="nama_penghantar" class="col-md-4 col-form-label text-md-right">{{ __('Nama penghantar') }}</label>
 
                             <div class="col-md-6">
-                                <input id="lecturer_name" type="text"  value="{{ @$permohonan['lecturer_name']}}" class="form-control" name="lecturer_name"  required autofocus readonly>
+                                <input id="nama_penghantar" type="text"  value="{{ $permohonan->user->name}}" class="form-control" name="nama_penghantar"  required autofocus readonly>
 
                                
                             </div>
@@ -44,7 +44,7 @@
                             <label for="fakulti" class="col-md-4 col-form-label text-md-right">{{ __('Fakulti') }}</label>
 
                             <div class="col-md-6">
-                                <input id="fakulti" type="text"  value="{{ @$permohonan['fakulti']}}" class="form-control" name="fakulti"  required autofocus readonly>
+                                <input id="fakulti" type="text"  value="{{ $permohonan->user->fakulti}}" class="form-control" name="fakulti"  required autofocus readonly>
 
                                
                             </div>

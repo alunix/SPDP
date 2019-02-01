@@ -11,16 +11,45 @@ use SPDP\Services\KemajuanPermohonanClass;
 use SPDP\Services\MuatNaikLaporan;
 
 
-class PermohonanClass 
+class RedirectPermohonan
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function redirect(Permohonan $permohonan)
     {
-        //
+        $jp =$permohonan->jenis_permohonan->jenis_permohonan_kod;
+        switch ($jp) {
+            case 'program_baharu':
+                    return view('jenis_permohonan_view.program-pengajian-baharu')->with('permohonan',$permohonan)->with('jenis_permohonan',$permohonan->jenis_permohonan);;
+            break;
+            case 'semakan_program':
+            return view('jenis_permohonan_view.program_pengajian_baharu');
+            break; 
+            case 'kursus_teras_baharu':
+            return view('jenis_permohonan_view.program_pengajian_baharu');
+            break; 
+            case 'kursus_elektif_baharu':
+            return view('jenis_permohonan_view.program_pengajian_baharu');
+            break; 
+            case 'semakan_kursus_teras':
+            return view('jenis_permohonan_view.program_pengajian_baharu');
+                break; 
+            case 'semakan_kursus_elekttif':
+            return view('jenis_permohonan_view.program_pengajian_baharu');
+                break; 
+            case 'akreditasi_penuh':
+            return view('jenis_permohonan_view.program_pengajian_baharu');
+                break; 
+            case 'penjumudan_program':
+            return view('jenis_permohonan_view.penjumudan_program');
+            break; 
+            default:
+                    return view ('/home'); 
+                break;
+        }
     }
 
     /**

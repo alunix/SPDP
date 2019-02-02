@@ -35,10 +35,12 @@
                                 <option value=#>Sila pilih</option>
                                 <option value=1>Program Pengajian Baru</option>
                                 <option value=2>Semakan Program Pengajian</option>
-                                <option value=3>Kursus Baru</option>
-                                <option value=4>Semakan Kursus</option>
-                                <option value=5>Akreditasi Penuh/Audit Pemantauan</option>
-                                <option value=6>Penjumudan Program Pengajian</option>
+                                <option value=3>Kursus Teras Baru</option>
+                                <option value=4>Kursus Elektif Baru</option>
+                                <option value=5>Semakan Kursus Teras</option>
+                                <option value=6>Semakan Kursus Elektif</option>
+                                <option value=7>Akreditasi Penuh/Audit Pemantauan</option>
+                                <option value=8>Penjumudan Program Pengajian</option>
                             </select>
                             </div>
                         </div>

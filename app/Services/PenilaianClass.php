@@ -30,6 +30,11 @@ class PenilaianClass
     {
       
     }
+    
+    public function createPerakuanPjk(Request $request,Permohonan $permohonan)
+    {
+      $penilaian = new Penilaian();
+    }
 
     /**
      * Store a newly created resource in storage.

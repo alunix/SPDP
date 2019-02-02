@@ -32,32 +32,32 @@ class PermohonanClass
     {   
 
 
-        //Handle file upload
-      if($request->hasFile('file_link'))
+            //Handle file upload
+        if($request->hasFile('file_link'))
         
-      {
+        {
 
         $fileNameWithExt=$request -> file('file_link')->getClientOriginalName();
 
-      // Get the full file name
+        // Get the full file name
         $filename = pathinfo($fileNameWithExt,PATHINFO_FILENAME);            
 
-      //Get the extension file name
+        //Get the extension file name
         $extension = $request ->file('file_link')-> getClientOriginalExtension();
-      //File name to store
+        //File name to store
         $fileNameToStore=$filename.'_'.time().'.'.$extension;
-      
-      //Upload Pdf file
+        
+        //Upload Pdf file
         $path =$request ->file('file_link')->storeAs('public/cadangan_permohonan_baharu',$fileNameToStore);
-      
-      }
-          else{
-              $fileNameToStore = 'noPDF.pdf';
-          }
+        
+        }
+            else{
+                $fileNameToStore = 'noPDF.pdf';
+            }
 
         //Permohonan baharu
         $user_id = auth()->user()->id;
-        
+
         $permohonan= new Permohonan();
         $permohonan -> doc_title =$request -> input('doc_title');
         $permohonan -> jenis_permohonan_id =$request -> input('jenis_permohonan_id');

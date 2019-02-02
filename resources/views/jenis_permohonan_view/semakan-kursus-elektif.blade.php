@@ -63,13 +63,13 @@
                               
                              
                         <div class="form-group row">
-                             <label for="file_link" class="col-md-4 col-form-label text-md-right">{{ __('Link Kepada File') }}</label>
+                             <label for="file_link" class="col-md-4 col-form-label text-md-right">{{ __('Link Kepada Fail') }}</label>
 
                                 <div class="col-md-6">                       
                                                     
                                
                                
-                                <!-- <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/{{$permohonan->file_link}}")?>">{{ basename(@$permohonan[file_name]) }} </a> -->
+                                
                                 <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/{{$permohonan->file_link}}")?>">{{ basename($permohonan->file_name) }} </a>
                                 </div>
                                 
@@ -85,6 +85,11 @@
                                  
                             <a href="{{ route('pelantikan_penilai.show', ['permohonan' => $permohonan->id])  }}">
                                     <input type="button" class="btn btn-success" value="Lantik penilai" />
+                                    
+                            </a>
+
+                            <a href="{{ route('pelantikan_penilai.show', ['permohonan' => $permohonan->id])  }}">
+                                    <input type="button" class="btn btn-success" value="Lulus Permohonan" />
                                     
                             </a>
                                 

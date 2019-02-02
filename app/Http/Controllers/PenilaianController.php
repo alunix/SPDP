@@ -28,6 +28,30 @@ class PenilaianController extends Controller
         })->get();
         return view('pjk.senarai-penilaian-permohonan')->with('penilaians',$penilaians);
     }
+
+    public function showPerakuanPJK($id)
+    {
+
+        $permohonan = Permohonan::find($id);
+        return view ('pjk.perakuan-pjk')->with('permohonan',$permohonan);
+        
+     
+        
+       
+    }
+
+    public function uploadPerakuanPjk(Request $request,$id)
+    {
+
+        $permohonan = Permohonan::find($id);
+        $penilaian = new PenilaianClass();
+        
+        return $penilaian->createPerakuanPjk($request,$permohonan);
+        
+     
+        
+       
+    }
         public function penilaianPJK_JPPA()
         {
          
@@ -121,7 +145,7 @@ class PenilaianController extends Controller
      * @param  \SPDP\Penilaian  $penilaian
      * @return \Illuminate\Http\Response
      */
-    public function show(Penilaian $penilaian,$id,permohonan $permohonan) /* Trying to pass two parameters which are $penilaian and $permohonan */
+    public function show(Penilaian $penilaian,$id,Permohonan $permohonan) /* Trying to pass two parameters which are $penilaian and $permohonan */
     {
         /* Main function but mcm tak betul , testing other possibilities */
 

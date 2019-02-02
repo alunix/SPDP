@@ -106,19 +106,12 @@ class PermohonanController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request,$id)  {
+        
         /* Main function but mcm tak betul , testing other possibilities */
         $permohonan= Permohonan::find($id);
-        // $role=auth()->user()->role;
-
-        // if($role=="pjk")
-        //     return view('posts/view-permohonan-baharu')->with('permohonan',$permohonan)->with('jenis_permohonan',$permohonan->jenis_permohonan);
-        // else
-        //    return view('posts/view-permohonan-baharu')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
-
-        // $jp =$permohonan->jenis_permohonan->jenis_permohonan_kod;
-
-    $rp = new RedirectPermohonan();
-    return $rp->redirect($permohonan);
+       
+        $rp = new RedirectPermohonan();
+        return $rp->redirect($permohonan);
 
         
     }

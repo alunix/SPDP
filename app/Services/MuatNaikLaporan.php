@@ -28,10 +28,10 @@ class MuatNaikLaporan
      */
     public function create(Permohonan $permohonan)
     {
-          $kj = new KemajuanPermohonan();
-         $kj-> permohonan_id = $permohonan->id;
-         $kj-> status_permohonan= $permohonan->status_permohonan;
-         $kj->save();
+        $kj = new KemajuanPermohonan();
+        $kj-> permohonan_id = $permohonan->id;
+        $kj-> status_permohonan= $permohonan->status_permohonan;
+        $kj->save();
     }
 
     /**

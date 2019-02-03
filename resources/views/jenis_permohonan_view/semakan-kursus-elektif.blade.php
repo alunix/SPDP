@@ -88,7 +88,7 @@
                                     
                             </a>
 
-                            <a href="{{ route('pelantikan_penilai.show', ['permohonan' => $permohonan->id])  }}">
+                            <a href="{{ route('pjk.perakuanLulus.show', ['permohonan' => $permohonan->id])  }}">
                                     <input type="button" class="btn btn-success" value="Lulus Permohonan" />
                                     
                             </a>
@@ -116,44 +116,7 @@
                                     
                             </a>
 
-                            @elseif(Auth::user()->role=="jppa")
-                            
-                            <a href="/jppa/penilaian/{{penilaian}}">
-                                    <input type="button" class="btn btn-success" value="Lulus permohonan" />
-                                    
-                            </a>
-                                
-                                
-                            
-                            <!-- <button type="submit" class="btn btn-danger" value="reject-permohonan" name="submitbutton" >
-                                {{ __('Tidak lulus') }}
-                            </button> -->
-                            
-                            <a href="/permohonans/{{@$permohonan[id]}}/pelantikan-penilai">
-                                    <input type="button" class="btn btn-danger" value="Tidak lulus" />
-                                    
-                            </a>
-
-                            @elseif(Auth::user()->role=="senat")
-                            
-                            <a href="/permohonans/{{@$permohonan[id]}}/kelulusan-permohonan/{{$penilaian->id}}">
-                                    <input type="button" class="btn btn-success" value="Lulus permohonan" />
-                                    
-                            </a>
-                                
-                                
-                            
-                            <!-- <button type="submit" class="btn btn-danger" value="reject-permohonan" name="submitbutton" >
-                                {{ __('Tidak lulus') }}
-                            </button> -->
-                            
-                            <a href="/permohonans/{{@$permohonan[id]}}/pelantikan-penilai">
-                                    <input type="button" class="btn btn-danger" value="Tidak lulus" />
-                                    
-                            </a>
-
-
-                            
+                           
                             
                             @endif    
 

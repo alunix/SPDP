@@ -5,6 +5,8 @@ namespace SPDP\Services;
 use SPDP\Penilaian;
 use SPDP\Permohonan;
 use SPDP\User;
+use SPDP\Laporan;
+use SPDP\LaporanClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -34,6 +36,14 @@ class PenilaianClass
     public function createPerakuanPjk(Request $request,Permohonan $permohonan)
     {
       $penilaian = new Penilaian();
+      $penilaian->dokumen_id= $permohonan->id;
+      $penilaian->perakuan_pjk=  $role = auth()->user()->id;
+      $penilaian->save();
+
+      $laporan = new LaporanClass();
+      $laporan->createLaporan($request,$penilaian);
+
+
     }
 
     /**

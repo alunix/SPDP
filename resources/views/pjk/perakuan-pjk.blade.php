@@ -10,7 +10,7 @@
             <div class="card-body">
                  
                     
-                     <form method="POST" action="{{ route('pjk.perakuan.submit',['penilaian'=>$penilaian->id])}}" enctype="multipart/form-data" >
+                     <form method="POST" action="{{ route('pjk.perakuanLulus.submit',['permohonan'=>$permohonan->id])}}" enctype="multipart/form-data" >
                      {!! method_field('patch') !!}                 
                 
 
@@ -72,7 +72,7 @@
                                 <div class="col-md-6">
 
                                 
-                                <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/{$penilaian->permohonan->file_link}")?>">{{ basename($penilaian->permohonan['file_name']) }} </a> 
+                                <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/{$permohonan->file_link}")?>">{{ basename($permohonan->file_name) }} </a> 
 
                                 
                                 

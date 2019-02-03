@@ -29,7 +29,7 @@ class PenilaianController extends Controller
         return view('pjk.senarai-penilaian-permohonan')->with('penilaians',$penilaians);
     }
 
-    public function showPerakuanPJK($id)
+    public function showPerakuanPjk($id)
     {
 
         $permohonan = Permohonan::find($id);

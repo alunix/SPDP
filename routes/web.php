@@ -99,8 +99,8 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware'], functio
 	Route::post('/pendaftaran-panel-penilai', 'PenilaianController@store_panel_penilai')->name('register.panel_penilai.submit');
 
 	/*-----------------------PJK Lulus permohonan dan ingin memuat naik perakuan tanpa panel penilai---------------------------------------------*/
-	Route::get( '/permohonan/{permohonan}/perakuan-pjk', 'PenilaianControllerr@pjkLulusPermohonanEdit')-> name('pelantikan_penilai.submit');
-	Route::post('/permohonan/{permohonan}/perakuan-pjk','PenilaianController@pjkLulusPermohonanUpdate')->name('pelantikan_penilai.show');
+	Route::get( '/permohonan/{permohonan}/perakuan-pjk', 'PenilaianController@showPerakuanPjk')-> name('pjk.perakuanLulus.show');
+	Route::post('/permohonan/{permohonan}/perakuan-pjk','PenilaianController@uploadPerakuanPjk')->name('pjk.perakuanLulus.submit');
 
 	/*-----------------------Pelantikan penilai---------------------------------------------*/
 	
@@ -109,8 +109,8 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware'], functio
 
 	 Route::get('permohonan/{permohonan}', 'PermohonanController@show')->middleware('role:pjk,penilai')->name('view-permohonan-baharu');
 
-	 Route::patch('permohonan/{permohonan}/tidak-dilulus', 'PermohonanController@showPerakuanPjk')->name('pjk.perakuanLaporan.show');	
-	 Route::get('permohonan/{permohonan}/tidak-dilulus', 'PermohonanController@permohonanTidakDilulus')->name('pjk.perakuanLaporan.submit');	
+	 Route::patch('permohonan/{permohonan}/tidak-dilulus', 'PermohonanController@storePermohonanTidakDilulus')->name('pjk.permohonanTidakDilulus');	
+	 Route::get('permohonan/{permohonan}/tidak-dilulus', 'PermohonanController@permohonanTidakDilulus')->name('pjk.permohonanTidakDilulus.submit');	
 	
 	
 	

@@ -40,6 +40,7 @@ class PenilaianClass
         switch ($role) {
             case 'pjk':
             $penilaian->penilaian_pjk= $user_id;
+            break;
             case 'jppa':
             $penilaian->penilaian_jppa=$user_id;
                 break; 
@@ -56,12 +57,24 @@ class PenilaianClass
     public function createPerakuanPjk(Request $request,$permohonan)
     {   
 
-      $penilaian = $this->create($request,$permohonan);
-      $laporan = new LaporanClass();
-      $attached = 'perakuan_pjk';
-    //   return $laporan->createLaporan($request,$penilaian,$attached);\
-        $A = $laporan->createLaporan($request,$penilaian,$attached);
-        return $A;
+    $penilaian = $this->create($request,$permohonan);
+    $attached = 'perakuan_pjk';
+    $laporan = new LaporanClass();
+    $laporan->createLaporan($request,$penilaian,$attached);
+
+    
+    $permohonan=Permohonan::find($permohonan->id);
+    $permohonan->status_permohonan='Diluluskan oleh PJK';
+    $permohonan->save();
+
+    $kj = new KemajuanPermohonanClass();
+    $kj->create($permohonan);
+
+    $msg = [
+        'message' => 'Laporan berjaya dimuat naik',
+       ];
+    return redirect('/home')->with($msg);
+
 
 
     }

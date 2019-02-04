@@ -35,7 +35,7 @@
 @if( ! $kjs->isEmpty() )
 @foreach($kjs as $kj)
 <tr>
-<th scope="row">{{$kj->id}}</th>
+<th scope="row">{{ $loop->iteration}}</th>
 <td> {{$kj->status_permohonan}}</td>   
 <td> {{$kj->created_at->format('h:i a d/m/Y') }}</td>               
 

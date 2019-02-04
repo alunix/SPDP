@@ -6,7 +6,7 @@ use SPDP\Penilaian;
 use SPDP\Permohonan;
 use SPDP\User;
 use SPDP\Laporan;
-use SPDP\LaporanClass;
+use SPDP\Services\LaporanClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -28,20 +28,40 @@ class PenilaianClass
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
-    {
-      
+    public function create(Request $request,$permohonan)
+    {   
+        
+        $role =auth()->user()->role;
+        $user_id = auth()->user()->id;
+
+        $penilaian = new Penilaian();
+        $penilaian->dokumen_id= $permohonan->id;
+
+        switch ($role) {
+            case 'pjk':
+            $penilaian->penilaian_pjk= $user_id;
+            case 'jppa':
+            $penilaian->penilaian_jppa=$user_id;
+                break; 
+            default:
+                    return null;
+                break;
+        }
+        $penilaian->save();
+
+        return $penilaian;
+
     }
     
-    public function createPerakuanPjk(Request $request,Permohonan $permohonan)
-    {
-      $penilaian = new Penilaian();
-      $penilaian->dokumen_id= $permohonan->id;
-      $penilaian->perakuan_pjk=  $role = auth()->user()->id;
-      $penilaian->save();
+    public function createPerakuanPjk(Request $request,$permohonan)
+    {   
 
+      $penilaian = $this->create($request,$permohonan);
       $laporan = new LaporanClass();
-      $laporan->createLaporan($request,$penilaian);
+      $attached = 'perakuan_pjk';
+    //   return $laporan->createLaporan($request,$penilaian,$attached);\
+        $A = $laporan->createLaporan($request,$penilaian,$attached);
+        return $A;
 
 
     }
@@ -88,6 +108,9 @@ class PenilaianClass
      */
     public function update(Request $request,$id)
     {
+        $laporan = new LaporanClass();
+        $laporan->createLaporan();
+
          //Handle file upload
          if($request->hasFile('laporan_panel_penilai'))
         

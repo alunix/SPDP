@@ -27,8 +27,68 @@ class LaporanClass
      *
      * @return \Illuminate\Http\Response
      */
-    public function createLaporan(Request $request,Penialain $penilaian)
-    {
+    public function createLaporan(Request $request,$penilaian,$attached)
+    {   
+        //get the role of the current user
+         $role = auth()->user()->role;
+        //get filenametoStore directory from a function in the class
+        $attachedLocation = $this->getFileNameToStore($role);
+
+        //Handle file upload
+        if($request->hasFile($attached))
+        
+        {
+
+            $fileNameWithExt=$request -> file($attached)->getClientOriginalName();
+
+        // Get the full file name
+            $filename = pathinfo($fileNameWithExt,PATHINFO_FILENAME);            
+
+        //Get the extension file name
+            $extension = $request ->file($attached)-> getClientOriginalExtension();
+        //File name to store
+            $fileNameToStore=$filename.'_'.time().'.'.$extension;
+        
+        //Upload Pdf file
+            $path =$request ->file($attached)->storeAs($attachedLocation,$fileNameToStore);
+        
+        }
+            else{
+                $fileNameToStore = 'noPDF.pdf';
+            }
+
+        $laporan = new Laporan();
+        $laporan->penilaian_id_laporan=$penilaian->id; 	
+
+        switch ($role) {
+            case 'pjk':
+            $laporan->perakuan_pjk= $filename;
+            $laporan->perakuan_pjk_link= $fileNameToStore;
+            case 'senat':
+            $laporan->perakuan_senat= $filename;
+            $laporan->perakuan_senat_link= $fileNameToStore;
+            break; 
+            case 'penilai':
+            $laporan->laporan_panel_penilai = $filename;
+            $laporan->laporan_panel_penilai_link= $fileNameToStore;
+                break; 
+            case 'jppa':
+            $laporan->perakuan_jppa= $filename;
+            $laporan->perakuan_jppa_link= $fileNameToStore;
+                break; 
+            default:
+                    return 'public/pdf_error';
+                break;
+        }
+
+        
+       
+        $laporan->save();
+
+        return $laporan;
+        
+
+
       
     }
     
@@ -43,6 +103,42 @@ class LaporanClass
       
 
 
+    }
+
+    public function uploadLaporan(Request $request,Permohonan $permohonan)
+    {
+      $penilaian = new Penilaian();
+      $penilaian->dokumen_id= $permohonan->id;
+      $penilaian->perakuan_pjk=  $role = auth()->user()->id;
+      $penilaian->save();
+
+      $laporan = new LaporanClass();
+      
+
+
+    }
+
+    public function getFileNameToStore($role)
+    {
+        // $role = auth()->user()->role;
+
+        switch ($role) {
+            case 'pjk':
+                    return 'public/laporan_pjk';
+                break; 
+            case 'senat':
+                return 'public/perakuan_senat';
+            break; 
+            case 'penilai':
+                    return 'public/laporan_panel_penilai';
+                break; 
+            case 'jppa':
+                    return 'public/perakuan_jppa';
+                break; 
+            default:
+                    return 'public/pdf_error';
+                break;
+        }
     }
 
     /**

@@ -17,7 +17,7 @@ class CreatePenilaiansTable extends Migration
             $table->increments('id');
             $table->integer('dokumen_id')->unsigned()->unique();
             $table->integer('penilaian_pjk')->unsigned();
-            $table->integer('penilaian_panel_1')->unsigned();
+            $table->integer('penilaian_panel_1')->unsigned()->nullable();
             $table->integer('penilaian_jppa')->unsigned()->nullable();
             $table->integer('penilaian_senat')->unsigned()->nullable();
             // $table->string('laporan_panel_penilai')->nullable();;

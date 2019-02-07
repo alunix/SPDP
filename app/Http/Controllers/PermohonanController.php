@@ -31,9 +31,11 @@ class PermohonanController extends Controller
      */
    
     public function permohonanDihantar()
-    {
-        $permohonans = Permohonan::all();
-        return view ('fakulti.senarai-permohonan-dihantar')->with('permohonans',$permohonans);
+    {   
+        $user_id =auth()->user()->id;
+        $user= User::find($user_id);
+        
+        return view ('fakulti.senarai-permohonan-dihantar')->with('permohonans',$user->permohonans);
     }
 
     // }

@@ -65,11 +65,7 @@
                         <div class="form-group row">
                              <label for="file_link" class="col-md-4 col-form-label text-md-right">{{ __('Link Kepada File') }}</label>
 
-                                <div class="col-md-6">                       
-                                                    
-                               
-                               
-                                <!-- <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/{{$permohonan->file_link}}")?>">{{ basename(@$permohonan[file_name]) }} </a> -->
+                                <div class="col-md-6"> 
                                 <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/{{$permohonan->file_link}}")?>">{{ basename($permohonan->file_name) }} </a>
                                 </div>
                                 
@@ -80,50 +76,15 @@
 
                             <div class="col-md-6 offset-md-5">
                        
-                            @if(Auth::user()->role == "pjk")
-                                 
-                                 
-                            <a href="{{ route('pelantikan_penilai.show', ['permohonan' => $permohonan->id])  }}">
-                                    <input type="button" class="btn btn-success" value="Lantik penilai" />
-                                    
-                            </a>
-                                
-                                
-                            
-                            <a href="{{ route('pjk.permohonanTidakDilulus', ['permohonan' => $permohonan->id])  }}">
-                                    <input type="button" class="btn btn-danger" value="Tidak Lulus" />
-                                    
-                            </a>
-                            
-                            @elseif(Auth::user()->role=="penilai")
-                            
-                            <a href="/permohonans/{{$permohonan->id}}/kelulusan-permohonan/{{$penilaian->id}}">
-                                    <input `type`="button" class="btn btn-success" value="Lulus permohonan" />
-                                    
-                            </a>
-                                
-                                
-                            
-                            
-                            
-                            <a href="/permohonans/{{@$permohonan[id]}}/pelantikan-penilai">
-                                    <input type="button" class="btn btn-danger" value="Tidak lulus" />
-                                    
-                            </a>
+                          
 
-                            @elseif(Auth::user()->role=="jppa")
+                            @if(Auth::user()->role=="jppa")
                             
                             <a href="/jppa/penilaian/{{penilaian}}">
                                     <input type="button" class="btn btn-success" value="Lulus permohonan" />
                                     
                             </a>
-                                
-                                
-                            
-                            <!-- <button type="submit" class="btn btn-danger" value="reject-permohonan" name="submitbutton" >
-                                {{ __('Tidak lulus') }}
-                            </button> -->
-                            
+                        
                             <a href="/permohonans/{{@$permohonan[id]}}/pelantikan-penilai">
                                     <input type="button" class="btn btn-danger" value="Tidak lulus" />
                                     
@@ -135,36 +96,15 @@
                                     <input type="button" class="btn btn-success" value="Lulus permohonan" />
                                     
                             </a>
-                                
-                                
-                            
-                            <!-- <button type="submit" class="btn btn-danger" value="reject-permohonan" name="submitbutton" >
-                                {{ __('Tidak lulus') }}
-                            </button> -->
-                            
+                           
                             <a href="/permohonans/{{@$permohonan[id]}}/pelantikan-penilai">
                                     <input type="button" class="btn btn-danger" value="Tidak lulus" />
                                     
                             </a>
-
-
-                            
-                            
-                            @endif    
-
-                            
-
-                              
-                             
+                            @endif   
 
                             </div>
                         </div>
-
-                        
-                        
-
-                     
-                      
 
                          <hr style="border-color:white;">
                         

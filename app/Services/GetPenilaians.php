@@ -24,21 +24,19 @@ class GetPenilaians
 
         switch ($role) {
             case 'pjk':
-            $penilaians = Penilaian::all();
-           
-               break; 
+            $penilaians = Penilaian::all();           
+            break; 
+            case 'penilai':
+            $penilaian= Penilaian::all();
+            $penilaians= $penilaians->permohonan->where('status_permohonan','=','Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai');           
+            break; 
             case 'senat':
             $penilaians = Penilaian::whereHas('permohonan', function($query){
                 $query->where('status_permohonan','=', 'Perakuan JPPA telah dilampirkan, permohonan akan dihantar kepada pihak Senat');           
       
-        })->get();
+            })->get();
                break; 
-            case 'penilai':
-            $penilaian= Penilaian::all();
-            $penilaians= $penilaians->permohonan->where('status_permohonan','=','Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai');
            
-       
-                break; 
             case 'jppa':
             $laporan->perakuan_jppa= $filename;
             $laporan->perakuan_jppa_link= $fileNameToStore;

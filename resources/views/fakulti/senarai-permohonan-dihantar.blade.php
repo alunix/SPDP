@@ -21,6 +21,7 @@
 
 <thead>
     <tr>
+    <th scope="col">No</th>
     <th scope="col">ID</th>
     <th scope="col">Jenis</th>
     <th scope="col">Nama program/semakan</th>
@@ -40,7 +41,8 @@
 @if( ! $permohonans->isEmpty() )
 @foreach($permohonans as $program)
 <tr>
-<th scope="row">{{$program->id}}</th>
+<th scope="row">{{$loop->iteration}}</th>
+<td> {{$program->id}}</td>  
 <td> {{$program->jenis_permohonan->jenis_permohonan_huraian}}</td>   
 <td> {{$program->doc_title}}</td>               
 <td>{{$program->user->name}}</td>

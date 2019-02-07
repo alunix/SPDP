@@ -34,9 +34,9 @@ class User extends Authenticatable
     return User::where('role', $role)->get();
 }
 
-public function permohonan(){
+public function permohonans(){
 
-    return $this->hasMany('SPDP\Permohonan');
+    return $this->hasMany('SPDP\Permohonan','id_penghantar');
 }
 
 

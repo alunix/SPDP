@@ -48,7 +48,7 @@ Route::get('/', 'HomeController@index')->middleware('auth'); //Redirect index pa
 
 
 /*----------------------- Bahagian pihak fakulti ------------- */	
-Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware'], function() {
+Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware','middleware' => 'auth'], function() {
 
 	// Route::match(['get', 'post'], '/fakulti-dashboard/', 'HomeController@fakulti');
 	// Route::match(['get', 'post'], '/program-baharu/', 'ProgramController@index','ProgramController@create');

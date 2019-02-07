@@ -96,11 +96,11 @@ class LaporanClass
          case 'pjk':
          $laporan->perakuan_pjk= $filename;
          $laporan->perakuan_pjk_link= $fileNameToStore;
-         break; 
+            break; 
          case 'senat':
          $laporan->perakuan_senat= $filename;
          $laporan->perakuan_senat_link= $fileNameToStore;
-         break; 
+            break; 
          case 'penilai':
          $laporan->laporan_panel_penilai = $filename;
          $laporan->laporan_panel_penilai_link= $fileNameToStore;

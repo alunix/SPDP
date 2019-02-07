@@ -11,7 +11,7 @@
                
     <div class="container">
  
-   <h4>Permohonan ID :{{$permohonan->id}}</h4>
+   <h5>Permohonan ID :{{$permohonan->id}}</h5>
 
 
 
@@ -21,7 +21,7 @@
 
 <thead>
     <tr>
-    <th scope="col">ID</th>
+    <th scope="col">No</th>
     <th scope="col">Status Permohonan</th>
     <th scope="col">Tarikh/Masa Status</th>    
 

@@ -18,14 +18,13 @@ class PenilaianController extends Controller
      */
     public function index()
     {
-     
+        // $penilaian = new PenilaianClass();
+        // $penilaians = $penilaian->getPenilaian();
+
+        $penilaians = Penilaian::all();
         
         /* Accessing penilaian relationship to check status permohonan which is in permohonan */    
 
-        $penilaians = Penilaian::whereHas('permohonan', function($query){
-                $query->where('status_permohonan','=', 'Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai)');           
-      
-        })->get();
         return view('pjk.senarai-penilaian-permohonan')->with('penilaians',$penilaians);
     }
 

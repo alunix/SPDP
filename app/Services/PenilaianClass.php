@@ -13,21 +13,7 @@ use Illuminate\Support\Facades\Hash;
 
 class PenilaianClass 
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create(Request $request,$permohonan)
     {   
         
@@ -123,30 +109,9 @@ class PenilaianClass
     {
         $laporan = new LaporanClass();
         $laporan->createLaporan();
+        $attached= 'laporan_panel_penilai';
 
-         //Handle file upload
-         if($request->hasFile('laporan_panel_penilai'))
-        
-         {
- 
-             $fileNameWithExt=$request -> file('laporan_panel_penilai')->getClientOriginalName();
- 
-         // Get the full file name
-             $filename = pathinfo($fileNameWithExt,PATHINFO_FILENAME);            
- 
-         //Get the extension file name
-             $extension = $request ->file('laporan_panel_penilai')-> getClientOriginalExtension();
-         //File name to store
-             $fileNameToStore=$filename.'_'.time().'.'.$extension;
-         
-         //Upload Pdf file
-             $path =$request ->file('laporan_panel_penilai')->storeAs('public/laporan_panel_penilai',$fileNameToStore);
-         
-         }
-             else{
-                 $fileNameToStore = 'noPDF.pdf';
-             }
- 
+        $operator_id = Operator::where('user_id_operators', '=', $user_id)->value('operator_id');
  
              //Add laporan panel penilai to the penilaian table
  

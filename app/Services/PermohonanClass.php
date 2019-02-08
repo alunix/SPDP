@@ -160,31 +160,7 @@ class PermohonanClass
      * @param  \SPDP\A  $a
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-         /* Find permohonan id then change the status permohonan */
-         $permohonan =Permohonan::find($id);           
-         $permohonan -> status_permohonan = 'Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai'; 
-         $permohonan -> save();
-
-          //Create a new kemajuan permohonan for each progress
-          $kp = new KemajuanPermohonanClass();
-          $kp->create($permohonan);
-         
-
-         //Create a new penilaian in penilaian table
-         $penilaians = new Penilaian();
-         $selectedPenilai = $request->input('checked');
-         $penilaianPJK = auth()->user()->id;
-        
-         $penilaians -> dokumen_id = $permohonan->id;
-         $penilaians -> penilaian_pjk = $penilaianPJK;
-         $penilaians -> penilaian_panel_1= $selectedPenilai[0];
-         $penilaians -> save();
-   
-         
-         return redirect(url('/senarai-penilaian'));
-    }
+    
 
     /**
      * Remove the specified resource from storage.

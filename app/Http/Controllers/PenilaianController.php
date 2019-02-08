@@ -8,6 +8,7 @@ use SPDP\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use SPDP\Services\PenilaianClass;
+use SPDP\Services\PenilaianPJK;
 
 class PenilaianController extends Controller
 {
@@ -43,7 +44,7 @@ class PenilaianController extends Controller
     {
 
         $permohonan = Permohonan::find($id);
-        $penilaian = new PenilaianClass();
+        $penilaian = new PenilaianPJK();
         
         return $penilaian->createPerakuanPjk($request,$permohonan);
         
@@ -108,11 +109,6 @@ class PenilaianController extends Controller
         return view('jppa.lampiran-perakuan-jppa')->with('permohonan',$penilaian->permohonan)->with('penilaian',$penilaian);
      }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function showPermohonanPenilai()
     {
         
@@ -121,72 +117,31 @@ class PenilaianController extends Controller
     }
 
 
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        
-       
-    }       
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \SPDP\Penilaian  $penilaian
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Penilaian $penilaian,$id,Permohonan $permohonan) /* Trying to pass two parameters which are $penilaian and $permohonan */
-    {
-        /* Main function but mcm tak betul , testing other possibilities */
-
-  
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \SPDP\Penilaian  $penilaian
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+   
+    public function showLaporanPenilai($id)
     {
         $permohonan = Permohonan::find($id);
         return view('panel_penilai.panel-lulus-permohonan')->with('penilaian',$permohonan->penilaian)->with('permohonan',$permohonan);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \SPDP\Penilaian  $penilaian
-     * @return \Illuminate\Http\Response
-     */
-    public function update(PenilaianClass $pcm,Request $request,$id)
+  
+    public function uploadLaporanPenilai(PenilaianPenilai $pp,Request $request,$id)
     {
         $this->validate($request,[
             'laporan_panel_penilai' => 'required|file|max:1999',
         ]);
 
-        return $pc->update($request,$id);
+        return $pp->update($request,$id);
        
     }
 
-    public function updateLaporanPanel(PenilaianClass $pc,Request $request, $id){
+    public function updateLaporanPanel(PenilaianPJK $pp,Request $request, $id){
 
         $this->validate($request,[
             'perakuan_pjk' => 'required|file|max:1999',
         ]);
         
-        return $pc->updateLaporanPanel($request,$id);
+        return $pp->updateLaporanPanel($request,$id);
 
     }
 

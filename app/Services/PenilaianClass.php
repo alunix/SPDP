@@ -40,30 +40,7 @@ class PenilaianClass
 
     }
     
-    public function createPerakuanPjk(Request $request,$permohonan)
-    {   
 
-    $penilaian = $this->create($request,$permohonan);
-    $attached = 'perakuan_pjk';
-    $laporan = new LaporanClass();
-    $laporan->createLaporan($request,$penilaian,$attached);
-
-    
-    $permohonan=Permohonan::find($permohonan->id);
-    $permohonan->status_permohonan='Diluluskan oleh PJK';
-    $permohonan->save();
-
-    $kj = new KemajuanPermohonanClass();
-    $kj->create($permohonan);
-
-    $msg = [
-        'message' => 'Laporan berjaya dimuat naik',
-       ];
-    return redirect('/home')->with($msg);
-
-
-
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -105,39 +82,7 @@ class PenilaianClass
      * @param  \SPDP\A  $a
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
-    {
-        $laporan = new LaporanClass();
-        $laporan->createLaporan();
-        $attached= 'laporan_panel_penilai';
-
-        $operator_id = Operator::where('user_id_operators', '=', $user_id)->value('operator_id');
- 
-             //Add laporan panel penilai to the penilaian table
- 
-            
-             /* Cari permohonan since penilaian belongs to permohonan then baru boleh cari penilaian through eloquent relationship */
-             $permohonan= Permohonan::find($id);
-             $penilaian = $permohonan->penilaian;
- 
-             /* Status semakan permohonan telah dikemaskini berdasarkan progress */
-             $permohonan -> status_permohonan = 'Diluluskan oleh Panel Penilai(Laporan telah dikeluarkan dan akan dilampirkan oleh PJK)'; 
-             $penilaian -> laporan_panel_penilai =$fileNameWithExt;
-             $penilaian -> laporan_panel_penilai_link =$fileNameToStore;
- 
-             $permohonan ->save();
-             $penilaian -> save();        
-             
-          
-            
-             
- 
-             
-            
-            //return redirect('/dashboard');
-            return redirect('/');
-    }
-
+    
     public function updateLaporanPanel(Request $request, $id){
 
   

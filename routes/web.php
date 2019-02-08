@@ -104,8 +104,8 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware','middlewa
 
 	/*-----------------------Pelantikan penilai---------------------------------------------*/
 	
-	 Route::patch( '/permohonan/{permohonan}/pelantikan-penilai', 'PermohonanController@update')-> name('pelantikan_penilai.submit');
-	 Route::get('/permohonan/{permohonan}/pelantikan-penilai','PermohonanController@edit')->name('pelantikan_penilai.show');
+	 Route::patch( '/permohonan/{permohonan}/pelantikan-penilai', 'PermohonanController@pelantikanPenilaiSubmit')-> name('pelantikan_penilai.submit');
+	 Route::get('/permohonan/{permohonan}/pelantikan-penilai','PermohonanController@showPelantikanPenilai')->name('pelantikan_penilai.show');
 
 	 Route::get('permohonan/{permohonan}', 'PermohonanController@show')->middleware('role:pjk,penilai')->name('view-permohonan-baharu');
 
@@ -146,8 +146,8 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware','middlewa
 	// Route::get('/programs/{program}/kelulusan-permohonan','PenilaianController@edit')->name('penilai.laporan.show');
 	// Route::patch('/programs/{program}/kelulusan-permohonan','PenilaianController@store')->name('penilai.laporan.submit');
 
-	Route::patch('/permohonans/{permohonan}/kelulusan-permohonan/{penilaian}','PenilaianController@update')->name('penilai.laporan.submit');
-	Route::get('/permohonans/{permohonan}/kelulusan-permohonan/{penilaian}','PenilaianController@edit')->name('penilai.laporan.show');
+	Route::patch('/permohonans/{permohonan}/kelulusan-permohonan/{penilaian}','PenilaianController@uploadLaporanPenilai')->name('penilai.laporan.submit');
+	Route::get('/permohonans/{permohonan}/kelulusan-permohonan/{penilaian}','PenilaianController@showLaporanPenilai')->name('penilai.laporan.show');
 
 	
 	

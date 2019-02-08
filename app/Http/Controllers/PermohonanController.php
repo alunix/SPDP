@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use SPDP\Services\PermohonanClass;
 use SPDP\Services\RedirectPermohonan;
+use SPDP\Services\PenilaianPJK;
 
 class PermohonanController extends Controller
 {
@@ -34,7 +35,6 @@ class PermohonanController extends Controller
     {   
         $user_id =auth()->user()->id;
         $user= User::find($user_id);
-        
         return view ('fakulti.senarai-permohonan-dihantar')->with('permohonans',$user->permohonans);
     }
 
@@ -55,11 +55,6 @@ class PermohonanController extends Controller
                     return null;
                 break;
         }
-
-    
-        // $permohonans = Permohonan::where('jenis_permohonan','!=','Belum disemak')->get();
-         
-
        
         return view ('pjk.pjk-view-permohonan-baharu')->with('permohonans',$permohonans);
 
@@ -139,7 +134,7 @@ class PermohonanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function showPelantikanPenilai($id)
     {
         $permohonan = Permohonan::find($id);
         $users = User::where('role','penilai')->get();
@@ -153,14 +148,14 @@ class PermohonanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PermohonanClass $pc,Request $request, $id)    {      
+    public function pelantikanPenilaiSubmit(PenilaianPJK $pp,Request $request, $id)    {      
         
         $this->validate($request,[
 
             'checked' => 'required',
 
         ]);
-            return $pc->update($request,$id);
+            return $pp->pelantikanPenilaiSubmit($request,$id);
            
     }
 

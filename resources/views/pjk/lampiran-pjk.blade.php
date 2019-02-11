@@ -85,7 +85,7 @@
                             <label for="laporan_panel_penilai" class="col-md-4 col-form-label text-md-right">{{ __('Lampiran laporan panel penilai') }}</label>
 
                             <div class="col-md-6">
-                                <a href ="<?php echo asset("storage/laporan_panel_penilai/$penilaian->laporan_panel_penilai_link")?>">{{ basename($penilaian->laporan_panel_penilai) }} </a>
+                                <a href ="<?php echo asset("storage/laporan_panel_penilai/$laporan->laporan_panel_penilai_link")?>">{{ basename($laporan->laporan_panel_penilai) }} </a>
                             </div>
 
                         </div> 

@@ -28,6 +28,12 @@ class Penilaian extends Model
       return $this->belongsTo('SPDP\Permohonan','dokumen_id');// set the foreign key (second parameter)
      }
 
+     public function laporan(){
+    
+      return $this->hasOne('SPDP\Laporan','penilaian_id_laporan');// set the foreign key (second parameter)
+     }
+
+
      public function pjk(){
     
       return $this->belongsTo('SPDP\User','penilaian_pjk');// set the foreign key (second parameter)

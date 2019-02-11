@@ -23,30 +23,32 @@ class RedirectPermohonan
         $jp =$permohonan->jenis_permohonan->jenis_permohonan_kod;
 
         
+
+        
         switch ($jp) {
             case 'program_baharu':
-                    return view('jenis_permohonan_view.program-pengajian-baharu')->with('permohonan',$permohonan)->with('jenis_permohonan',$permohonan->jenis_permohonan);;
+                    return view('jenis_permohonan_view.program-pengajian-baharu')->with('permohonan',$permohonan)->with('jenis_permohonan',$permohonan->jenis_permohonan)->with('penilaian',$permohonan->penilaian);
             break;
             case 'semakan_program':
-            return view('jenis_permohonan_view.program_pengajian_baharu')->with('permohonan',$permohonan)->with('jenis_permohonan',$permohonan->jenis_permohonan);
+            return view('jenis_permohonan_view.program_pengajian_baharu')->with('permohonan',$permohonan)->with('jenis_permohonan',$permohonan->jenis_permohonan)->with('penilaian',$permohonan->penilaian);
             break; 
             case 'kursus_teras_baharu':
-            return view('jenis_permohonan_view.semakan-program')->with('permohonan',$permohonan);
+            return view('jenis_permohonan_view.kursus-wajib-baharu')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
             break; 
             case 'kursus_elektif_baharu':
-            return view('jenis_permohonan_view.kursus-elektif-baharu')->with('permohonan',$permohonan);
+            return view('jenis_permohonan_view.kursus-elektif-baharu')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
             break; 
             case 'semakan_kursus_teras':
-            return view('jenis_permohonan_view.kursus-wajib-baharu')->with('permohonan',$permohonan);
+            return view('jenis_permohonan_view.kursus-wajib-baharu')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
                 break; 
             case 'semakan_kursus_elektif':
-            return view('jenis_permohonan_view.semakan-kursus-elektif')->with('permohonan',$permohonan);
+            return view('jenis_permohonan_view.semakan-kursus-elektif')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
                 break; 
             case 'akreditasi_penuh':
-            return view('jenis_permohonan_view.program_pengajian_baharu')->with('permohonan',$permohonan);
+            return view('jenis_permohonan_view.program_pengajian_baharu')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
                 break; 
             case 'penjumudan_program':
-            return view('jenis_permohonan_view.penjumudan_program')->with('permohonan',$permohonan);
+            return view('jenis_permohonan_view.penjumudan_program')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
             break; 
             default:
                     return view ('/home'); 

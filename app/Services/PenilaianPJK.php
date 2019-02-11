@@ -69,6 +69,104 @@ class PenilaianPJK
          return redirect(url('/senarai-penilaian'));
     }
 
+    public function showPerakuanPjk($id)
+    {   
+        $permohonan = Permohonan::find($id);
+        $jp =$permohonan->jenis_permohonan->jenis_permohonan_kod;
+ 
+        switch ($jp) {
+            case 'program_baharu':
+                    return $this->viewProgramBaharu($id);
+            break;
+            case 'semakan_program':
+                    return $this->viewProgramBaharu($id);
+            break; 
+            case 'kursus_teras_baharu':
+            return $this->viewKursusTerasElektifBaharu($id);
+            break; 
+            case 'kursus_elektif_baharu':
+                return $this->viewKursusTerasElektifBaharu($id);
+            break; 
+            case 'semakan_kursus_teras':
+            return view('jenis_permohonan_view.kursus-wajib-baharu')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
+                break; 
+            case 'semakan_kursus_elektif':
+            return view('jenis_permohonan_view.semakan-kursus-elektif')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
+                break; 
+            case 'akreditasi_penuh':
+            return view('jenis_permohonan_view.program_pengajian_baharu')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
+                break; 
+            case 'penjumudan_program':
+            return view('jenis_permohonan_view.penjumudan_program')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
+            break; 
+            default:
+                    return view ('/home'); 
+                break;
+        }
+        
+    }
+
+    
+    public function uploadPerakuanPjk($request,$permohonan)
+    {   
+       $id= $permohonan->id;
+       $jp =$permohonan->jenis_permohonan->jenis_permohonan_kod;
+       
+        switch ($jp) {
+            case 'program_baharu':
+            return $this->updateLaporanPanel($request,$id);
+            break;
+            case 'semakan_program':
+            return $this->updateLaporanPanel($request,$id);
+            break; 
+            case 'kursus_teras_baharu':
+            return $this->createPerakuanPjk($request,$permohonan);
+            break; 
+            case 'kursus_elektif_baharu':
+                return $this->createPerakuanPjk($request,$permohonan);
+            break; 
+            case 'semakan_kursus_teras':
+            return view('jenis_permohonan_view.kursus-wajib-baharu')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
+                break; 
+            case 'semakan_kursus_elektif':
+            return view('jenis_permohonan_view.semakan-kursus-elektif')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
+                break; 
+            case 'akreditasi_penuh':
+            return view('jenis_permohonan_view.program_pengajian_baharu')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
+                break; 
+            case 'penjumudan_program':
+            return view('jenis_permohonan_view.penjumudan_program')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
+            break; 
+            default:
+                    return view ('/home'); 
+                break;
+        }
+
+        
+    }
+
+    public function viewProgramBaharu($id)
+    {
+        $penilaian=Penilaian::find($id);
+       $laporan=Laporan::where('penilaian_id_laporan',$penilaian->id)->get();
+    
+       $laporan= $penilaian->laporan;
+
+       
+        
+        return view('pjk.lampiran-pjk')->with('permohonan',$penilaian->permohonan)->with('penilaian',$penilaian)->with('laporan',$laporan);
+
+        
+    }
+
+    public function viewKursusTerasElektifBaharu($id)
+    {
+         $permohonan = Permohonan::find($id);
+        return view ('pjk.perakuan-pjk')->with('permohonan',$permohonan);
+
+        
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -109,159 +207,38 @@ class PenilaianPJK
      * @param  \SPDP\A  $a
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
-    {
-        $laporan = new LaporanClass();
-        $laporan->createLaporan();
-        $attached= 'laporan_panel_penilai';
 
-        $operator_id = Operator::where('user_id_operators', '=', $user_id)->value('operator_id');
- 
-             //Add laporan panel penilai to the penilaian table
- 
-            
-             /* Cari permohonan since penilaian belongs to permohonan then baru boleh cari penilaian through eloquent relationship */
-             $permohonan= Permohonan::find($id);
-             $penilaian = $permohonan->penilaian;
- 
-             /* Status semakan permohonan telah dikemaskini berdasarkan progress */
-             $permohonan -> status_permohonan = 'Diluluskan oleh Panel Penilai(Laporan telah dikeluarkan dan akan dilampirkan oleh PJK)'; 
-             $penilaian -> laporan_panel_penilai =$fileNameWithExt;
-             $penilaian -> laporan_panel_penilai_link =$fileNameToStore;
- 
-             $permohonan ->save();
-             $penilaian -> save();        
-             
-          
-            
-             
- 
-             
-            
-            //return redirect('/dashboard');
-            return redirect('/');
-    }
 
     public function updateLaporanPanel(Request $request, $id){
-
-  
-       
-
-        //Handle file upload
-        if($request->hasFile('perakuan_pjk'))
-        
-        {
-            $fileNameWithExt=$request -> file('perakuan_pjk')->getClientOriginalName();
-        // Get the full file name
-            $filename = pathinfo($fileNameWithExt,PATHINFO_FILENAME);            
-        //Get the extension file name
-            $extension = $request ->file('perakuan_pjk')-> getClientOriginalExtension();
-        //File name to store
-        $fileNameToStore=$filename.'_'.time().'.'.$extension;
-        //Upload Pdf file
-        $path =$request ->file('perakuan_pjk')->storeAs('public/perakuan_pjk',$fileNameToStore);
-        }
-            else{
-                $fileNameToStore = 'noPDF.pdf';
-            }
-            //Add laporan panel penilai to the penilaian table
-            /* Cari permohonan since penilaian belongs to permohonan then baru boleh cari penilaian through eloquent relationship */
-            $penilaian= Penilaian::find($id);
-            $permohonan = $penilaian->permohonan;
-            /* Status semakan permohonan telah dikemaskini berdasarkan progress */
-            $permohonan -> status_permohonan = 'Perakuan PJK telah dilampirkan bersama laporan panel penilai (Akan disemak oleh pihak JPPA)'; 
-            $penilaian -> perakuan_pjk =$fileNameWithExt;
-            $penilaian -> perakuan_pjk_link =$fileNameToStore;
-            $permohonan ->save();
-            $penilaian -> save();    
-            return redirect('/');
-
-    }
-
-    public function updatePerakuanPJK(Request $request, $id){
-
-       
-
-        //Handle file upload
-        if($request->hasFile('perakuan_jppa'))
-        {
-            $fileNameWithExt=$request -> file('perakuan_jppa')->getClientOriginalName();
-
-        // Get the full file name
-            $filename = pathinfo($fileNameWithExt,PATHINFO_FILENAME);            
-
-        //Get the extension file name
-            $extension = $request ->file('perakuan_jppa')-> getClientOriginalExtension();
-        //File name to store
-        $fileNameToStore=$filename.'_'.time().'.'.$extension;
-        
-        //Upload Pdf file
-        $path =$request ->file('perakuan_jppa')->storeAs('public/perakuan_jppa',$fileNameToStore);
-        
-        }
-            else{
-                $fileNameToStore = 'noPDF.pdf';
-            }
-
-
-            //Add laporan panel penilai to the penilaian table
-
+      
            
             /* Cari permohonan since penilaian belongs to permohonan then baru boleh cari penilaian through eloquent relationship */
             $penilaian= Penilaian::find($id);
             $permohonan = $penilaian->permohonan;
+            //Upload perakuan
+            $attached = 'perakuan_pjk';
+            $laporan = new LaporanClass();
+            $laporan_id= $penilaian->laporan->laporan_id;
+            $laporan->uploadLaporan( $request,$penilaian,$attached,$laporan_id);
+
             /* Status semakan permohonan telah dikemaskini berdasarkan progress */
-            $permohonan -> status_permohonan = 'Perakuan JPPA telah dilampirkan, permohonan akan dihantar kepada pihak Senat'; 
-            $penilaian -> perakuan_jppa =$fileNameWithExt;
-            $penilaian -> perakuan_jppa_link =$fileNameToStore;
+            $permohonan -> status_permohonan = 'Perakuan PJK telah dilampirkan bersama laporan panel penilai (Akan disemak oleh pihak JPPA)';
             $permohonan ->save();
-            $penilaian -> save();      
-            return redirect('/');
+
+            $kj= new KemajuanPermohonanClass();
+            $kj->create($permohonan);
+
+            $msg = [
+                'message' => 'Perakuan berjaya dimuatnaik',
+               ];  
+            
+            return redirect('/')->with($msg);
 
     }
 
-    public function updatePerakuanJPPA(Request $request, $id){
+   
 
-       
     
-        //Handle file upload
-        if($request->hasFile('perakuan_senat'))
-        
-        {
-            $fileNameWithExt=$request -> file('perakuan_senat')->getClientOriginalName();
-        // Get the full file name
-            $filename = pathinfo($fileNameWithExt,PATHINFO_FILENAME);  
-        //Get the extension file name
-            $extension = $request ->file('perakuan_senat')-> getClientOriginalExtension();
-        //File name to store
-            $fileNameToStore=$filename.'_'.time().'.'.$extension;
-        //Upload Pdf file
-            $path =$request ->file('perakuan_senat')->storeAs('public/perakuan_senat',$fileNameToStore);
-        
-        }
-            else{
-                $fileNameToStore = 'noPDF.pdf';
-            }
-
-
-            //Add laporan panel penilai to the penilaian table
-
-           
-            /* Cari permohonan since penilaian belongs to permohonan then baru boleh cari penilaian through eloquent relationship */
-            $penilaian= Penilaian::find($id);
-            $permohonan = $penilaian->permohonan;
-
-            /* Status semakan permohonan telah dikemaskini berdasarkan progress */
-            $permohonan -> status_permohonan = 'Perakuan JPPA telah dilampirkan, permohonan akan dihantar kepada pihak Senat'; 
-            $penilaian -> perakuan_senat =$fileNameWithExt;
-            $penilaian -> perakuan_senat_link =$fileNameToStore;
-            $permohonan ->save();
-            $penilaian -> save();
-
-            return redirect('/');
-
-    }
-
 
     public function store_panel_penilai(Request $request)
     {

@@ -25,8 +25,8 @@
                             <label for="doc_title" class="col-md-4 col-form-label text-md-right">{{ __('Tajuk permohonan') }}</label>
 
                             <div class="col-md-6">
-                                {{--<input id="doc_title" type="text" value="{{ old('doc_title', $permohonan->doc_title)}}" class="form-control" name="doc_title"  required autofocus readonly>--}}
-                                <input id="doc_title" type="text" value="{{ @$permohonan['doc_title'] }}"  class="form-control" name="doc_title"  required autofocus readonly>
+                                
+                                <input id="doc_title" type="text" value="{{ $permohonan->doc_title }}"  class="form-control" name="doc_title"  required autofocus readonly>
                                
                             </div>
                         </div>
@@ -36,7 +36,7 @@
                             <label for="lecturer_name" class="col-md-4 col-form-label text-md-right">{{ __('Nama Ketua Fakulti') }}</label>
 
                             <div class="col-md-6">
-                                <input id="lecturer_name" type="text"  value="{{ @$permohonan['lecturer_name']}}" class="form-control" name="lecturer_name"  required autofocus readonly>
+                                <input id="lecturer_name" type="text"  value="{{ $permohonan->user->name}}" class="form-control" name="lecturer_name"  required autofocus readonly>
 
                                
                             </div>
@@ -46,7 +46,7 @@
                             <label for="fakulti" class="col-md-4 col-form-label text-md-right">{{ __('Fakulti') }}</label>
 
                             <div class="col-md-6">
-                                <input id="fakulti" type="text"  value="{{ @$permohonan['fakulti']}}" class="form-control" name="fakulti"  required autofocus readonly>
+                                <input id="fakulti" type="text"  value="{{ $permohonan->user->fakulti}}" class="form-control" name="fakulti"  required autofocus readonly>
 
                                
                             </div>

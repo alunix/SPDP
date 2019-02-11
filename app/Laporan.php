@@ -7,9 +7,23 @@ use Illuminate\Database\Eloquent\Model;
 class Laporan extends Model
 {
     //
+   
 
-
+    protected $fillable = [
+        'laporan_id','penilaian_id_laporan',
+        'laporan_panel_penilai',
+        'laporan_panel_penilai_link',
+        'perakuan_pjk',
+       'perakuan_pjk_link',
+       'perakuan_jppa',
+       'perakuan_jppa_link',
+       'perakuan_senat',
+     'perakuan_senat_link',
+  
+  
+     ];
     protected $primaryKey = 'laporan_id';
+    protected $table = 'laporans';
     
     public function penilaian(){
     

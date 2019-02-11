@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use SPDP\Services\PenilaianClass;
 use SPDP\Services\PenilaianPJK;
+use SPDP\Services\PenilaianPenilai;
 
 class PenilaianController extends Controller
 {
@@ -31,9 +32,10 @@ class PenilaianController extends Controller
 
     public function showPerakuanPjk($id)
     {
-
-        $permohonan = Permohonan::find($id);
-        return view ('pjk.perakuan-pjk')->with('permohonan',$permohonan);
+        $pp = new PenilaianPJK();
+        return $pp->showPerakuanPjk($id);
+        // $permohonan = Permohonan::find($id);
+        // return view ('pjk.perakuan-pjk')->with('permohonan',$permohonan);
         
      
         
@@ -42,12 +44,15 @@ class PenilaianController extends Controller
 
     public function uploadPerakuanPjk(Request $request,$id)
     {
+        $this->validate($request,[
+            'perakuan_pjk' => 'required|file|max:1999',
+        ]);
 
         $permohonan = Permohonan::find($id);
         $penilaian = new PenilaianPJK();
-        
-        return $penilaian->createPerakuanPjk($request,$permohonan);
-        
+        // return $penilaian->createPerakuanPjk($request,$permohonan);
+
+        return $penilaian->uploadPerakuanPjk($request,$permohonan);
      
         
        
@@ -79,20 +84,25 @@ class PenilaianController extends Controller
 
     }
 
-    public function editLaporanPanel($id){
+    // public function editLaporanPanel($id){
 
-       $penilaian=Penilaian::find($id);
+    //    $penilaian=Penilaian::find($id);
        
-        $penilaian_id=$penilaian->id;
-        $penilaian=Penilaian::find($penilaian_id);
+    //     $penilaian_id=$penilaian->id;
+    //     $penilaian=Penilaian::find($penilaian_id);
 
         
 
-        return view('pjk.lampiran-pjk')->with('permohonan',$penilaian->permohonan)->with('penilaian',$penilaian);
+    //     return view('pjk.lampiran-pjk')->with('permohonan',$penilaian->permohonan)->with('penilaian',$penilaian);
 
-    }
+    //     $pp = new PenilaianPJK();
+    //    return $pp->showPerakuanPjk($id);
 
-    public function editPerakuanPJK($id){
+    // }
+
+    public function editLaporanPJK($id){
+
+        $pp = new PenilaianPJK();
 
         $penilaian=Penilaian::find($id);
         $penilaian_id=$penilaian->id;
@@ -131,19 +141,19 @@ class PenilaianController extends Controller
             'laporan_panel_penilai' => 'required|file|max:1999',
         ]);
 
-        return $pp->update($request,$id);
+        return $pp->uploadLaporanPenilai($request,$id);
        
     }
 
-    public function updateLaporanPanel(PenilaianPJK $pp,Request $request, $id){
+    // public function updateLaporanPanel(PenilaianPJK $pp,Request $request, $id){
 
-        $this->validate($request,[
-            'perakuan_pjk' => 'required|file|max:1999',
-        ]);
+    //     $this->validate($request,[
+    //         'perakuan_pjk' => 'required|file|max:1999',
+    //     ]);
         
-        return $pp->updateLaporanPanel($request,$id);
+    //     return $pp->updateLaporanPanel($request,$id);
 
-    }
+    // }
 
     public function updatePerakuanPJK(PenilaianClass $pc,Request $request, $id){
 

@@ -134,7 +134,7 @@ class PermohonanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function showPelantikanPenilai($id)
+    public function  showPelantikanPenilai($id)
     {
         $permohonan = Permohonan::find($id);
         $users = User::where('role','penilai')->get();

@@ -28,11 +28,11 @@ class Permohonan extends Model
  public function penilaian(){
     // return $this->hasOne('SPDP\Penilaian','penilaianID');
      return $this->hasOne('SPDP\Penilaian','dokumen_id');
-
-
-  
-
  }
+
+
+
+
 
  public function jenis_permohonan(){
   // return $this->hasOne('SPDP\Penilaian','penilaianID');

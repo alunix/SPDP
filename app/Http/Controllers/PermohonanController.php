@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Session;
 use SPDP\Services\PermohonanClass;
 use SPDP\Services\RedirectPermohonan;
 use SPDP\Services\PenilaianPJK;
+use SPDP\Services\SenaraiPermohonan;
 
 class PermohonanController extends Controller
 {
@@ -33,9 +34,12 @@ class PermohonanController extends Controller
    
     public function permohonanDihantar()
     {   
-        $user_id =auth()->user()->id;
-        $user= User::find($user_id);
-        return view ('fakulti.senarai-permohonan-dihantar')->with('permohonans',$user->permohonans);
+        // $user_id =auth()->user()->id;
+        // $user= User::find($user_id);
+        // return view ('fakulti.senarai-permohonan-dihantar')->with('permohonans',$user->permohonans);
+
+        $permohonan = new SenaraiPermohonan();
+        return $permohonan->index();
     }
 
     // }

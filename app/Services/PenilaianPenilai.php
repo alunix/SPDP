@@ -14,41 +14,6 @@ use Illuminate\Support\Facades\Hash;
 
 class PenilaianPenilai
 {
-    
-    public function create(Request $request,$permohonan)
-    {   
-        
-        $role =auth()->user()->role;
-        $user_id = auth()->user()->id;
-
-        $penilaian = new Penilaian();
-        $penilaian->dokumen_id= $permohonan->id;
-
-        switch ($role) {
-            case 'pjk':
-            $penilaian->penilaian_pjk= $user_id;
-            break;
-            case 'jppa':
-            $penilaian->penilaian_jppa=$user_id;
-                break; 
-            default:
-                    return null;
-                break;
-        }
-        $penilaian->save();
-
-        return $penilaian;
-
-    }
-    
-
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //

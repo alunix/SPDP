@@ -20,14 +20,8 @@ class CreatePenilaiansTable extends Migration
             $table->integer('penilaian_panel_1')->unsigned()->nullable();
             $table->integer('penilaian_jppa')->unsigned()->nullable();
             $table->integer('penilaian_senat')->unsigned()->nullable();
-            // $table->string('laporan_panel_penilai')->nullable();;
-            // $table->string('laporan_panel_penilai_link')->nullable();;
-            // $table->string('perakuan_pjk')->nullable();;
-            // $table->string('perakuan_pjk_link')->nullable();;
-            // $table->string('perakuan_jppa')->nullable();;
-            // $table->string('perakuan_jppa_link')->nullable();;
-            // $table->string('perakuan_senat')->nullable();;
-            // $table->string('perakuan_senat_link')->nullable();
+            $table->integer('status_penilaian');
+
 
             $table->foreign('dokumen_id')->references('id')->on('permohonans');
             $table->foreign('penilaian_pjk')->references('id')->on('users');

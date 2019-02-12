@@ -20,8 +20,7 @@ class PenilaianController extends Controller
      */
     public function index()
     {
-        // $penilaian = new PenilaianClass();
-        // $penilaians = $penilaian->getPenilaian();
+       
 
         $penilaians = Penilaian::all();
         
@@ -34,8 +33,7 @@ class PenilaianController extends Controller
     {
         $pp = new PenilaianPJK();
         return $pp->showPerakuanPjk($id);
-        // $permohonan = Permohonan::find($id);
-        // return view ('pjk.perakuan-pjk')->with('permohonan',$permohonan);
+        
         
      
         
@@ -49,8 +47,7 @@ class PenilaianController extends Controller
         ]);
 
         $permohonan = Permohonan::find($id);
-        $penilaian = new PenilaianPJK();
-        // return $penilaian->createPerakuanPjk($request,$permohonan);
+        $penilaian = new PenilaianPJK();       
 
         return $penilaian->uploadPerakuanPjk($request,$permohonan);
      
@@ -82,23 +79,7 @@ class PenilaianController extends Controller
                 return view('pjk.senarai-penilaian-permohonan')->with('penilaians',$penilaians);
             }
 
-    }
-
-    // public function editLaporanPanel($id){
-
-    //    $penilaian=Penilaian::find($id);
-       
-    //     $penilaian_id=$penilaian->id;
-    //     $penilaian=Penilaian::find($penilaian_id);
-
-        
-
-    //     return view('pjk.lampiran-pjk')->with('permohonan',$penilaian->permohonan)->with('penilaian',$penilaian);
-
-    //     $pp = new PenilaianPJK();
-    //    return $pp->showPerakuanPjk($id);
-
-    // }
+    }  
 
     public function editLaporanPJK($id){
 
@@ -143,17 +124,7 @@ class PenilaianController extends Controller
 
         return $pp->uploadLaporanPenilai($request,$id);
        
-    }
-
-    // public function updateLaporanPanel(PenilaianPJK $pp,Request $request, $id){
-
-    //     $this->validate($request,[
-    //         'perakuan_pjk' => 'required|file|max:1999',
-    //     ]);
-        
-    //     return $pp->updateLaporanPanel($request,$id);
-
-    // }
+    }  
 
     public function updatePerakuanPJK(PenilaianClass $pc,Request $request, $id){
 

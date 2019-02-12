@@ -56,14 +56,15 @@ class PenilaianPJK
          
 
          //Create a new penilaian in penilaian table
-         $penilaians = new Penilaian();
+       
          $selectedPenilai = $request->input('checked');
-         $penilaianPJK = auth()->user()->id;
         
-         $penilaians -> dokumen_id = $permohonan->id;
-         $penilaians -> penilaian_pjk = $penilaianPJK;
-         $penilaians -> penilaian_panel_1= $selectedPenilai[0];
-         $penilaians -> save();
+
+        $penilaian = new PenilaianClass();
+        $penilaian =  $penilaian->create($permohonan);
+        $penilaian -> dokumen_id = $permohonan->id;
+        $penilaian -> penilaian_panel_1= $selectedPenilai[0];
+        $penilaian -> save();
    
          
          return redirect(url('/senarai-penilaian'));

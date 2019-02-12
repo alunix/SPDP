@@ -31,6 +31,10 @@
     <input type="submit" value="Daftar Panel Penilai" />
 </form>
 
+<form action="{{ route('penilaian.show') }}">
+    <input type="submit" value="Senarai penilaian" />
+</form>
+
 
 
 

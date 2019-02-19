@@ -12,7 +12,7 @@ use SPDP\Services\KemajuanPermohonanClass;
 use SPDP\Services\MuatNaikLaporan;
 
 
-class StatusPermohonan
+class StatusPermohonanClass
 {
     /**
      * Display a listing of the resource.
@@ -26,9 +26,7 @@ class StatusPermohonan
         
 
         switch ($role) {
-            case 'fakulti':
-                    return $this->fakulti();
-                break;
+            
             case 'pjk':
             return $this->pjk();
                 break; 
@@ -51,19 +49,9 @@ class StatusPermohonan
        
     }
 
-    public function fakulti(){
-
-        $user_id =auth()->user()->id;
-        $user= User::find($user_id);
-        return view ('fakulti.senarai-permohonan-dihantar')->with('permohonans',$user->permohonans);
-
-
-
-      
-        
-        }
     public function pjk(Request $req){
-        return view('dashboard/pjk-dashboard');
+        
+       
             
         }
     public function penilai(Request $req){

@@ -15,6 +15,7 @@ class CreateStatusPermohonansTable extends Migration
     {
         Schema::create('status_permohonans', function (Blueprint $table) {
             $table->increments('status_id');
+            $table->string('jenis_permohonan_huraian');
             $table->timestamps();
         });
     }

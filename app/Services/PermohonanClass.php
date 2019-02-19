@@ -64,7 +64,7 @@ class PermohonanClass
         $permohonan -> file_name = $fileNameWithExt;
         $permohonan -> file_link = $fileNameToStore;
         $permohonan -> id_penghantar = $user_id;
-        $permohonan -> status_permohonan = ('Belum disemak');
+        $permohonan -> status_permohonan_id = 1;
         $permohonan -> save();
 
         //Create a new kemajuan permohonan for each progress

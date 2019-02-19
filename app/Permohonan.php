@@ -30,6 +30,11 @@ class Permohonan extends Model
      return $this->hasOne('SPDP\Penilaian','dokumen_id');
  }
 
+ public function status_permohonan(){
+   // return $this->hasOne('SPDP\Penilaian','penilaianID');
+    return $this->belongsTo('SPDP\StatusPermohonan','status_permohonan_id');
+}
+
 
 
 

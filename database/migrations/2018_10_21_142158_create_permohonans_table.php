@@ -26,12 +26,13 @@ class CreatePermohonansTable extends Migration
             $table->integer('id_pjk')->unsigned()->nullable();
             $table->string('laporan_pjk')->nullable();
             $table->string('laporan_pjk_link')->nullable();
-            $table->integer('status_permohonan')->unsigned();
+            $table->integer('status_permohonan_id')->unsigned();
 
             
             $table->foreign('id_penghantar')->references('id')->on('users');
             $table->foreign('id_pjk')->references('id')->on('users');
-            $table->foreign('jenis_permohonan_id')->references('id')->on('jenis_permohonans');    
+            $table->foreign('jenis_permohonan_id')->references('id')->on('jenis_permohonans');
+            $table->foreign('status_permohonan_id')->references('status_id')->on('status_permohonans');    
 
             
            

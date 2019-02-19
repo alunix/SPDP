@@ -48,7 +48,7 @@
 <td>{{$program->user->name}}</td>
 <td> <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/$program->file_link")?>">{{ basename($program->file_name) }}</td>
 <td> {{$program->created_at->format('h:i a d/m/Y') }}</td>
-<td>{{$program->status_permohonan}} </td>
+<td>{{$program->status_permohonan->status_permohonan_huraian}} </td>
 <td> {{$program->updated_at->format('h:i a d/m/Y') }}</td>
 <td><a href="{{ route('fakulti.kemajuanPermohonan',$program->id) }}" class="btn btn-primary">SELECT</a></td>
 

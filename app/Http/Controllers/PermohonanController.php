@@ -46,24 +46,8 @@ class PermohonanController extends Controller
 
        public function showListPermohonanBaharu(Request $request)
      {  
-        $role =auth()->user()->role;
-        
-        switch ($role) {
-            case 'pjk':
-            $permohonans = Permohonan::where('jenis_permohonan_id','!=','8')->where('status_permohonan','=','Belum disemak')->get();
-            break;
-            case 'jppa':
-            $permohonans = Permohonan::whereHas('jenis_permohonan_id','=','8')->where('status_permohonan','=','Belum disemak')->get();
-                break; 
-            default:
-                    return null;
-                break;
-        }
-       
-        return view ('pjk.pjk-view-permohonan-baharu')->with('permohonans',$permohonans);
-
-     
-
+        $sp = new SenaraiPermohonan();
+        return  $sp->index();
      }
 
      public function showListPanelPenilai(Request $request,$id)

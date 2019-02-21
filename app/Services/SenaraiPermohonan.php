@@ -26,26 +26,18 @@ class SenaraiPermohonan
         
 
         switch ($role) {
-            case 'fakulti':
-                    return $this->fakulti();
-                break;
             case 'pjk':
-            return $this->pjk();
-                break; 
-            case 'senat':
-            return $this->senat();
-            break; 
-            case 'penilai':
-            return $this->penilai();
-                break; 
+            $permohonans= $this->pjk();
             case 'jppa':
-            return $this->jppa();
+            $permohonans= $this->jppa();
                 break; 
             default:
-                    return view ('/login'); 
+                    return null;
                 break;
         }
+
         
+        return view ('fakulti.senarai-permohonan-dihantar')->with('permohonans',$permohonans);
 
         
        
@@ -63,15 +55,17 @@ class SenaraiPermohonan
         
         $user_id =auth()->user()->id;
         $user= User::find($user_id);
-        return view ('fakulti.senarai-permohonan-dihantar')->with('permohonans',$user->permohonans);
-
-
-
-      
+        
         
         }
-    public function pjk(Request $req){
-        return view('dashboard/pjk-dashboard');
+
+
+    public function pjk(){
+
+     $permohonans = Permohonan::where('jenis_permohonan_id','!=','8')->where('status_permohonan_id','=','1')->get();
+
+     return $permohonans;
+        
             
         }
     public function penilai(Request $req){
@@ -79,11 +73,13 @@ class SenaraiPermohonan
                 
         }
     public function jppa(Request $req){
-        return view('dashboard/jppa-dashboard');
+        $permohonans = Permohonan::whereHas('jenis_permohonan_id','=','8')->where('status_permohonan_id','=','Belum disemak')->get();
+        return $permohonans;
                 
         }
     public function senat(Request $req){
-        return view('dashboard/senat-dashboard');
+        $permohonans = Permohonan::where('status_permohonan_id','=','5')->get();
+        return $permohonans;
                 
         }
     

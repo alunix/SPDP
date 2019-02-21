@@ -86,7 +86,7 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware','middlewa
 	Route::match(['get', 'post'], '/pjk-dashboard/', 'HomeController@pjk');
 	
 	/*----------------------- PJK menerima program pengajian daripada fakulti ------------- */	
-	Route::match(['get', 'post'], '/pjk/permohonan-baharu', 'PermohonanController@showListPermohonanBaharu')->name('pjk.list.permohonanBaharu');
+	Route::match(['get', 'post'], '/senarai-permohonan-baharu', 'PermohonanController@showListPermohonanBaharu')->name('senaraiPermohonanBaharu');
 	
 	
 	/*----------------------- First penilaian program pengajian  ------------- */	

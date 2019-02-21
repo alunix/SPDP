@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                       <form action="{{ route('pjk.list.permohonanBaharu') }}">
+                       <form action="{{ route('senaraiPermohonanBaharu') }}">
     <input type="submit" value="Lihat Semua Permohonan Yang Diterima" />
 </form>
 

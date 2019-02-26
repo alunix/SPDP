@@ -95,7 +95,11 @@ class PenilaianController extends Controller
        
     }  
 
-    
+    public function showPerakuanSenat($id)
+    {
+        $pp = new PenilaianSenat();
+        return $pp->showPerakuanPjk($id);
+    }
 
     public function uploadPerakuanSenat(PenilaianClass $pc,Request $request, $id){
 

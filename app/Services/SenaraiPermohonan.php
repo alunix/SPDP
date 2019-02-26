@@ -31,13 +31,19 @@ class SenaraiPermohonan
             case 'jppa':
             $permohonans= $this->jppa();
                 break; 
+            case 'penilai':
+            $permohonans= $this->penilai();
+                break; 
+            case 'senat':
+            $permohonans= $this->senat();
+                break;
             default:
                     return null;
                 break;
         }
 
         
-        return view ('fakulti.senarai-permohonan-dihantar')->with('permohonans',$permohonans);
+        return view ('pjk.pjk-view-permohonan-baharu.blade')->with('permohonans',$permohonans);
 
         
        
@@ -69,7 +75,9 @@ class SenaraiPermohonan
             
         }
     public function penilai(Request $req){
-        return view('dashboard/penilai-dashboard');
+        $permohonans = Permohonan::where('status_permohonan_id','=','2')->get();
+
+        return $permohonans;
                 
         }
     public function jppa(Request $req){
@@ -77,7 +85,7 @@ class SenaraiPermohonan
         return $permohonans;
                 
         }
-    public function senat(Request $req){
+    public function senat(Request $req){        
         $permohonans = Permohonan::where('status_permohonan_id','=','5')->get();
         return $permohonans;
                 

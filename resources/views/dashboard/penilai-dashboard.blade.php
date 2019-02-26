@@ -16,7 +16,7 @@
 
                     You are logged in!
 
-                    <form action="{{ route('penilai.permohonan-baharu') }}">
+                    <form action="{{ route('senaraiPermohonanBaharu') }}">
     <input type="submit" value="Permohonan Baharu" />
 </form>
 

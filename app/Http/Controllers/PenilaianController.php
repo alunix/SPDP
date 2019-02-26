@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use SPDP\Services\PenilaianClass;
 use SPDP\Services\PenilaianPJK;
+use SPDP\Services\PenilaianJppa;
+use SPDP\Services\PenilaianSenat;
 use SPDP\Services\PenilaianPenilai;
 
 class PenilaianController extends Controller
@@ -20,12 +22,8 @@ class PenilaianController extends Controller
      */
     public function index()
     {
-       
-
-        $penilaians = Penilaian::all();
-        
-        /* Accessing penilaian relationship to check status permohonan which is in permohonan */    
-
+       $penilaians = Penilaian::all();
+       /* Accessing penilaian relationship to check status permohonan which is in permohonan */    
         return view('pjk.senarai-penilaian-permohonan')->with('penilaians',$penilaians);
     }
 
@@ -33,11 +31,6 @@ class PenilaianController extends Controller
     {
         $pp = new PenilaianPJK();
         return $pp->showPerakuanPjk($id);
-        
-        
-     
-        
-       
     }
 
     public function uploadPerakuanPjk(Request $request,$id)
@@ -54,45 +47,20 @@ class PenilaianController extends Controller
         
        
     }
-        public function penilaianPJK_JPPA()
-        {
-         
-            $role = auth()->user()->role;
-    
-            if($role=='pjk'){
+   
 
-                $penilaians = Penilaian::whereHas('permohonan', function($query){
-                    $query->where('status_permohonan','=',  'Diluluskan oleh Panel Penilai(Laporan telah dikeluarkan dan akan dilampirkan oleh PJK)');           
-          
-            })->get();
+    // public function uploadPerakuanJppa($id){
 
-               return view('pjk.senarai-penilaian-permohonan')->with('penilaians',$penilaians);
-    
-            }
+    //     $pp = new PenilaianPJK();
+
+    //     $penilaian=Penilaian::find($id);
+    //     $penilaian_id=$penilaian->id;
+    //     $penilaian=Penilaian::find($penilaian_id);
         
-            elseif($role=='jppa'){
+    //     return view('jppa.lampiran-perakuan-jppa')->with('permohonan',$penilaian->permohonan)->with('penilaian',$penilaian);
+    //  }
 
-                $penilaians = Penilaian::whereHas('permohonan', function($query){
-                    $query->where('status_permohonan','=',   'Perakuan PJK telah dilampirkan bersama laporan panel penilai (Akan disemak oleh pihak JPPA)');           
-                })->get();
-                
-                return view('pjk.senarai-penilaian-permohonan')->with('penilaians',$penilaians);
-            }
-
-    }  
-
-    public function editLaporanPJK($id){
-
-        $pp = new PenilaianPJK();
-
-        $penilaian=Penilaian::find($id);
-        $penilaian_id=$penilaian->id;
-        $penilaian=Penilaian::find($penilaian_id);
-        
-        return view('jppa.lampiran-perakuan-jppa')->with('permohonan',$penilaian->permohonan)->with('penilaian',$penilaian);
-     }
-
-     public function editPerakuanJPPA($id){
+     public function showPerakuanJPPA($id){
 
         $penilaian=Penilaian::find($id);        
         $penilaian_id=$penilaian->id;
@@ -100,14 +68,15 @@ class PenilaianController extends Controller
         return view('jppa.lampiran-perakuan-jppa')->with('permohonan',$penilaian->permohonan)->with('penilaian',$penilaian);
      }
 
-    public function showPermohonanPenilai()
-    {
+     public function uploadPerakuanJppa(PenilaianClass $pc,Request $request, $id){
+
+        $this->validate($request,[
+            'perakuan_jppa' => 'required|file|max:1999',
+        ]);
         
-        $permohonans = Permohonan::where('status_permohonan','Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai')->get();
-        return view ('panel_penilai.senarai-permohonan-baharu')->with('permohonans',$permohonans);
+        return $pc->updatePerakuanPJK($request,$id);
+
     }
-
-
    
     public function showLaporanPenilai($id)
     {
@@ -126,17 +95,9 @@ class PenilaianController extends Controller
        
     }  
 
-    public function updatePerakuanPJK(PenilaianClass $pc,Request $request, $id){
+    
 
-        $this->validate($request,[
-            'perakuan_jppa' => 'required|file|max:1999',
-        ]);
-        
-        return $pc->updatePerakuanPJK($request,$id);
-
-    }
-
-    public function updatePerakuanJPPA(PenilaianClass $pc,Request $request, $id){
+    public function uploadPerakuanSenat(PenilaianClass $pc,Request $request, $id){
 
         $this->validate($request,[
             'perakuan_senat' => 'required|file|max:1999',

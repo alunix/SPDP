@@ -15,6 +15,10 @@
                     @endif
 
                     You are logged in!
+                    <form action="{{ route('senaraiPermohonanBaharu') }}">
+    <input type="submit" value="Lihat Semua Permohonan Yang Diterima" />
+</form>
+
                 </div>
             </div>
         </div>

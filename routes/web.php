@@ -86,7 +86,7 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware','middlewa
 	Route::match(['get', 'post'], '/pjk-dashboard/', 'HomeController@pjk');
 	
 	/*----------------------- PJK menerima program pengajian daripada fakulti ------------- */	
-	Route::match(['get', 'post'], '/senarai-permohonan-baharu', 'PermohonanController@showListPermohonanBaharu')->name('senaraiPermohonanBaharu');
+	Route::match(['get', 'post'], '/senarai-permohonan-baharu', 'PermohonanController@showListPermohonanBaharu')->middleware('auth')->name('senaraiPermohonanBaharu');
 	
 	
 	/*----------------------- First penilaian program pengajian  ------------- */	
@@ -158,11 +158,11 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware','middlewa
 
 // Route::group(['middleware' => 'SPDP\Http\Middleware\jppaMiddleware'], function(){
 
-	Route::match(['get', 'post'], '/jppa-dashboard/', 'HomeController@jppa');
+	
 
 	/*-----------------------Lampiran perakuan JPPA ---------------------------------------------*/
-	Route::patch('/jppa/penilaian/{penilaian}','PenilaianController@updatePerakuanPJK')->name('jppa.perakuan.submit');
-	Route::get('/jppa/penilaian/{penilaian}','PenilaianController@editPerakuanPJK')->name('jppa.perakuan.show');
+	Route::patch('/jppa/penilaian/{penilaian}','PenilaianController@uploadPerakuanJppa')->name('jppa.perakuan.submit');
+	Route::get('/jppa/penilaian/{penilaian}','PenilaianController@showPerakuanJppa')->name('jppa.perakuan.show');
 
 	
 

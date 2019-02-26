@@ -17,7 +17,7 @@
                     
                     You are logged in!
 
-                     <form action="http://spdp.com/senarai-penilaian-perakuan">
+                    <form action="{{ route('senaraiPermohonanBaharu') }}">
     <input type="submit" value="Lihat Semua Permohonan Baharu Daripada PJK" />
 </form>
 

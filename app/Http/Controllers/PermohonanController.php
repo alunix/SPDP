@@ -34,12 +34,11 @@ class PermohonanController extends Controller
    
     public function permohonanDihantar()
     {   
-        // $user_id =auth()->user()->id;
-        // $user= User::find($user_id);
-        // return view ('fakulti.senarai-permohonan-dihantar')->with('permohonans',$user->permohonans);
+        $user_id =auth()->user()->id;
+        $user= User::find($user_id);
+        return view ('fakulti.senarai-permohonan-dihantar')->with('permohonans',$user->permohonans);
 
-        $permohonan = new SenaraiPermohonan();
-        return $permohonan->index();
+      
     }
 
     // }

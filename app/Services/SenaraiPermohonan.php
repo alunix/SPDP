@@ -28,6 +28,7 @@ class SenaraiPermohonan
         switch ($role) {
             case 'pjk':
             $permohonans= $this->pjk();
+            break;
             case 'jppa':
             $permohonans= $this->jppa();
                 break; 
@@ -49,23 +50,6 @@ class SenaraiPermohonan
        
     }
 
-    public function fakulti(){
-
-        // $fakulti = auth()->user()->fakulti;
-
-
-        // $permohonans = Permohonan::where('user->fakulti', $fakulti)->get();
-
-        // return $permohonans;
-
-        
-        $user_id =auth()->user()->id;
-        $user= User::find($user_id);
-        
-        
-        }
-
-
     public function pjk(){
 
      $permohonans = Permohonan::where('jenis_permohonan_id','!=','8')->where('status_permohonan_id','=','1')->get();
@@ -81,7 +65,7 @@ class SenaraiPermohonan
                 
         }
     public function jppa(Request $req){
-        $permohonans = Permohonan::whereHas('jenis_permohonan_id','=','8')->where('status_permohonan_id','=','Belum disemak')->get();
+        $permohonans = Permohonan::whereHas('jenis_permohonan_id','=','8')->where('status_permohonan_id','=','1')->get();
         return $permohonans;
                 
         }

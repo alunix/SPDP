@@ -9,7 +9,7 @@ use SPDP\Laporan;
 use SPDP\Services\LaporanClass;
 use SPDP\Services\PenilaianClass;
 use SPDP\Services\KemajuanPermohonanClass;
-use SPDP\Services\StatusPermohonan;
+use SPDP\Services\StatusPermohonanClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -29,9 +29,9 @@ class PenilaianPJK
 
     
     $permohonan=Permohonan::find($permohonan->id);
-    $sp = new StatusPermohonan();    
+    $sp = new StatusPermohonanClass();    
     // $permohonan->status_permohonan='Diluluskan oleh PJK';
-    $permohonan->status_permohonan=$sp->getStatusPermohonan($permohonan);
+    $permohonan->status_permohonan_id=$sp->getStatusPermohonan($permohonan);
     $permohonan->save();
 
     $kj = new KemajuanPermohonanClass();
@@ -49,8 +49,9 @@ class PenilaianPJK
     public function pelantikanPenilaiSubmit(Request $request, $id)
     {
          /* Find permohonan id then change the status permohonan */
-         $permohonan =Permohonan::find($id);           
-         $permohonan -> status_permohonan = 'Diluluskan oleh PJK(Permohonan akan dinilai oleh panel penilai'; 
+         $permohonan =Permohonan::find($id);   
+         $sp = new StatusPermohonanClass();            
+         $permohonan -> status_permohonan_id = $sp->getStatusPermohonan($permohonan);
          $permohonan -> save();
 
           //Create a new kemajuan permohonan for each progress

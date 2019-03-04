@@ -59,7 +59,7 @@ class StatusPermohonan
       
         
         }
-    public function pjk(Request $req){
+    public function pjk(){
         return view('dashboard/pjk-dashboard');
             
         }

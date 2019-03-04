@@ -44,7 +44,7 @@ class SenaraiPermohonan
         }
 
         
-        return view ('pjk.pjk-view-permohonan-baharu.blade')->with('permohonans',$permohonans);
+        return view ('pjk.pjk-view-permohonan-baharu')->with('permohonans',$permohonans);
 
         
        

@@ -52,8 +52,8 @@ class StatusPermohonanClass
     public function pjk($permohonan){
 
         $jp =$permohonan->jenis_permohonan->jenis_permohonan_kod;
-        $penilaian_id=Penilaian::where('dokumen_id',$jp->id);
-        $laporan=Laporan::where('penilaian_id_laporan',$penilaian_id)->get();
+        $penilaian_id=Penilaian::where('dokumen_id',$permohonan->id)->value('id');
+        $laporan=Laporan::where('penilaian_id_laporan',$penilaian_id)->first();
         
 
         
@@ -62,6 +62,8 @@ class StatusPermohonanClass
         switch ($jp) {
             case 'program_baharu':
             case 'semakan_program': //same condition yang akan lalui panel penilai
+            
+            foreach($permohonans as $program){
             if($laporan->laporan_panel_penilai_link->isEmpty() ){
 
                 return '2';
@@ -70,6 +72,8 @@ class StatusPermohonanClass
 
                 return '4';
             }
+        }
+        endforeach;
             break;
            
             case 'kursus_teras_baharu':

@@ -63,7 +63,7 @@ class StatusPermohonanClass
             case 'program_baharu':
             case 'semakan_program': //same condition yang akan lalui panel penilai
             
-            foreach($permohonans as $program){
+            
             if($laporan->laporan_panel_penilai_link->isEmpty() ){
 
                 return '2';
@@ -72,8 +72,7 @@ class StatusPermohonanClass
 
                 return '4';
             }
-        }
-        endforeach;
+       
             break;
            
             case 'kursus_teras_baharu':

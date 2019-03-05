@@ -101,13 +101,14 @@ class PenilaianController extends Controller
         return $pp->showPerakuanPjk($id);
     }
 
-    public function uploadPerakuanSenat(PenilaianClass $pc,Request $request, $id){
+    public function uploadPerakuanSenat(Request $request, $id){
 
         $this->validate($request,[
             'perakuan_senat' => 'required|file|max:1999',
         ]);
-
-        return $pc->updatePerakuanJPPA($request,$id);
+        
+        $pc = new PenilaianSenat();
+        return $pc->uploadPerakuanSenat($request,$id);
 
        
     }

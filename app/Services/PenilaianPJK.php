@@ -29,8 +29,7 @@ class PenilaianPJK
 
     
     $permohonan=Permohonan::find($permohonan->id);
-    $sp = new StatusPermohonanClass();    
-    // $permohonan->status_permohonan='Diluluskan oleh PJK';
+    $sp = new StatusPermohonanClass();
     $permohonan->status_permohonan_id=$sp->getStatusPermohonan($permohonan);
     $permohonan->save();
 
@@ -119,17 +118,13 @@ class PenilaianPJK
        
         switch ($jp) {
             case 'program_baharu':
-            return $this->updateLaporanPanel($request,$id);
-            break;
             case 'semakan_program':
             return $this->updateLaporanPanel($request,$id);
-            break; 
+            break;
             case 'kursus_teras_baharu':
-            return $this->createPerakuanPjk($request,$permohonan);
-            break; 
             case 'kursus_elektif_baharu':
-                return $this->createPerakuanPjk($request,$permohonan);
-            break; 
+            return $this->createPerakuanPjk($request,$permohonan);
+            break;
             case 'semakan_kursus_teras':
             return view('jenis_permohonan_view.kursus-wajib-baharu')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
                 break; 
@@ -172,46 +167,7 @@ class PenilaianPJK
         
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \SPDP\A  $a
-     * @return \Illuminate\Http\Response
-     */
-    public function show(A $a)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \SPDP\A  $a
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(A $a)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \SPDP\A  $a
-     * @return \Illuminate\Http\Response
-     */
+   
 
 
     public function updateLaporanPanel(Request $request, $id){
@@ -227,7 +183,7 @@ class PenilaianPJK
             $laporan->uploadLaporan( $request,$penilaian,$attached,$laporan_id);
 
             /* Status semakan permohonan telah dikemaskini berdasarkan progress */
-            $permohonan -> status_permohonan = 'Perakuan PJK telah dilampirkan bersama laporan panel penilai (Akan disemak oleh pihak JPPA)';
+            $permohonan -> status_permohonan_id = 4;
             $permohonan ->save();
 
             $kj= new KemajuanPermohonanClass();

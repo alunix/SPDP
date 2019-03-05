@@ -54,6 +54,8 @@ class StatusPermohonanClass
         $jp =$permohonan->jenis_permohonan->jenis_permohonan_kod;
         $penilaian_id=Penilaian::where('dokumen_id',$permohonan->id)->value('id');
         $laporan=Laporan::where('penilaian_id_laporan',$penilaian_id)->first();
+
+        return $laporan;
         
 
         
@@ -63,8 +65,8 @@ class StatusPermohonanClass
             case 'program_baharu':
             case 'semakan_program': //same condition yang akan lalui panel penilai
             
-            
-            if($laporan->laporan_panel_penilai_link->isEmpty() ){
+            if(!$laporan->isEmpty() ){
+            if($laporan->laporan_panel_penilai_link == null ){
 
                 return '2';
             }
@@ -72,6 +74,7 @@ class StatusPermohonanClass
 
                 return '4';
             }
+        }
        
             break;
            

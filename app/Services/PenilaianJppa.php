@@ -13,58 +13,33 @@ use Illuminate\Support\Facades\Hash;
 
 class PenilaianJppa
 {
-    
-   
 
-    public function store(Request $request)
-    {
-        //
-    }
+        public function updatePerakuanPJK(Request $request, $id){
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \SPDP\A  $a
-     * @return \Illuminate\Http\Response
-     */
-    public function show(A $a)
-    {
-        //
-    }
+              /* Cari permohonan since penilaian belongs to permohonan then baru boleh cari penilaian through eloquent relationship */
+         $penilaian= Penilaian::find($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \SPDP\A  $a
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(A $a)
-    {
-        //
-    }
-
-    public function updatePerakuanPJK(Request $request, $id){
-
-            $attached = 'perakuan_jppa';
-            $laporan = new LaporanClass();
-
-            $penilaian= Penilaian::find($id);
-            $laporan_id= $penilaian->laporan->laporan_id;
-            $laporan->uploadLaporan($request,$penilaian,$attached,$laporan_id);
-
-           
-            /* Cari permohonan since penilaian belongs to permohonan then baru boleh cari penilaian through eloquent relationship */
-           
-            $permohonan = $penilaian->permohonan;
-            /* Status semakan permohonan telah dikemaskini berdasarkan progress */
-            $permohonan -> status_permohonan = 'Perakuan JPPA telah dilampirkan, permohonan akan dihantar kepada pihak Senat';
-            $permohonan ->save();
-            $penilaian -> save();      
-            return redirect('/');
+         $attached = 'perakuan_jppa';
+         $laporan = new LaporanClass();
+         $laporan_id= $penilaian->laporan->laporan_id;
+         $laporan->uploadLaporan( $request,$penilaian,$attached,$laporan_id);
+     
+        
+         $permohonan = $penilaian->permohonan;
+         /* Status semakan permohonan telah dikemaskini berdasarkan progress */
+         $permohonan -> status_permohonan_id = 5;       
+         $permohonan ->save();
+         $penilaian -> save();
+ 
+         $kj= new KemajuanPermohonanClass();
+         $kj->create($permohonan);
+ 
+         $msg = [
+             'message' => 'Perakuan berjaya dimuatnaik',
+            ];  
+ 
+         return redirect('/')->with($msg);
 
     }
-    public function destroy(A $a)
-    {
-        //
-    }
+
 }

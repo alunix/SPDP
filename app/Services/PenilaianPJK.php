@@ -80,17 +80,13 @@ class PenilaianPJK
  
         switch ($jp) {
             case 'program_baharu':
-                    return $this->viewProgramBaharu($id);
-            break;
             case 'semakan_program':
                     return $this->viewProgramBaharu($id);
-            break; 
+            break;
             case 'kursus_teras_baharu':
-            return $this->viewKursusTerasElektifBaharu($id);
-            break; 
             case 'kursus_elektif_baharu':
-                return $this->viewKursusTerasElektifBaharu($id);
-            break; 
+            return $this->viewKursusTerasElektifBaharu($id);
+            break;
             case 'semakan_kursus_teras':
             return view('jenis_permohonan_view.kursus-wajib-baharu')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
                 break; 
@@ -166,10 +162,7 @@ class PenilaianPJK
 
         
     }
-
-   
-
-
+    
     public function updateLaporanPanel(Request $request, $id){
       
            

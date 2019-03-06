@@ -58,18 +58,18 @@ class SenaraiPermohonan
         
             
         }
-    public function penilai(Request $req){
+    public function penilai(){
         $permohonans = Permohonan::where('status_permohonan_id','=','2')->get();
 
         return $permohonans;
                 
         }
-    public function jppa(Request $req){
+    public function jppa(){
         $permohonans = Permohonan::whereHas('jenis_permohonan_id','=','8')->where('status_permohonan_id','=','1')->get();
         return $permohonans;
                 
         }
-    public function senat(Request $req){        
+    public function senat(){        
         $permohonans = Permohonan::where('status_permohonan_id','=','5')->get();
         return $permohonans;
                 

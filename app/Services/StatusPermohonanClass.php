@@ -34,7 +34,7 @@ class StatusPermohonanClass
             return $this->senat();
             break; 
             case 'penilai':
-            return $this->penilai();
+            return $this->penilai($permohonan);
                 break; 
             case 'jppa':
             return $this->jppa();
@@ -55,7 +55,7 @@ class StatusPermohonanClass
         $penilaian_id=Penilaian::where('dokumen_id',$permohonan->id)->value('id');
         $laporan=Laporan::where('penilaian_id_laporan',$penilaian_id)->first();
 
-        return $laporan;
+        //return $laporan; //nak check laporan
         
 
         
@@ -65,16 +65,12 @@ class StatusPermohonanClass
             case 'program_baharu':
             case 'semakan_program': //same condition yang akan lalui panel penilai
             
-            if(!$laporan->isEmpty() ){
-            if($laporan->laporan_panel_penilai_link == null ){
-
-                return '2';
-            }
-            else{
-
+            if($laporan == null)
+                return '2'; //if no laporan are found that means permohonan masih disemak oleh panel penilai
+            else
                 return '4';
-            }
-        }
+            
+        
        
             break;
            
@@ -106,7 +102,7 @@ class StatusPermohonanClass
        
             
         }
-    public function penilai(Request $req){
+    public function penilai($permohonan){
         return view('dashboard/penilai-dashboard');
                 
         }

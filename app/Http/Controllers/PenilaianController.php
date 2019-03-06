@@ -47,18 +47,6 @@ class PenilaianController extends Controller
         
        
     }
-   
-
-    // public function uploadPerakuanJppa($id){
-
-    //     $pp = new PenilaianPJK();
-
-    //     $penilaian=Penilaian::find($id);
-    //     $penilaian_id=$penilaian->id;
-    //     $penilaian=Penilaian::find($penilaian_id);
-        
-    //     return view('jppa.lampiran-perakuan-jppa')->with('permohonan',$penilaian->permohonan)->with('penilaian',$penilaian);
-    //  }
 
      public function showPerakuanJPPA($id){
 

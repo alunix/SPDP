@@ -14,40 +14,7 @@ use Illuminate\Support\Facades\Hash;
 
 class PenilaianPenilai
 {
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \SPDP\A  $a
-     * @return \Illuminate\Http\Response
-     */
-    public function show(A $a)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \SPDP\A  $a
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(A $a)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \SPDP\A  $a
-     * @return \Illuminate\Http\Response
-     */
+  
     public function uploadLaporanPenilai(Request $request,$id)
     {   
         
@@ -74,7 +41,8 @@ class PenilaianPenilai
              $penilaian = $permohonan->penilaian;
  
              /* Status semakan permohonan telah dikemaskini berdasarkan progress */
-             $permohonan -> status_permohonan = 'Diluluskan oleh Panel Penilai(Laporan telah dikeluarkan dan akan dilampirkan oleh PJK)';
+                    
+             $permohonan -> status_permohonan_id = 3;
              $permohonan ->save();
 
              $kj= new KemajuanPermohonanClass();
@@ -87,20 +55,4 @@ class PenilaianPenilai
             return redirect('/')->with($msg);
     }
 
-   
-    
-
-    
-
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \SPDP\A  $a
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(A $a)
-    {
-        //
-    }
 }

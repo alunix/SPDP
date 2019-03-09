@@ -143,8 +143,9 @@ class PenilaianPJK
 
     public function viewProgramBaharu($id)
     {
-        $penilaian=Penilaian::find($id);
-       $laporan=Laporan::where('penilaian_id_laporan',$penilaian->id)->get();
+    $permohonan=Permohonan::find($id);
+    $penilaian= $permohonan->penilaian;
+    // $laporan=Laporan::where('penilaian_id_laporan',$penilaian->id)->get();
     
        $laporan= $penilaian->laporan;
 
@@ -167,8 +168,9 @@ class PenilaianPJK
       
            
             /* Cari permohonan since penilaian belongs to permohonan then baru boleh cari penilaian through eloquent relationship */
-            $penilaian= Penilaian::find($id);
-            $permohonan = $penilaian->permohonan;
+            $permohonan= Permohonan::find($id);
+            $penilaian= $permohonan->penilaian;
+            
             //Upload perakuan
             $attached = 'perakuan_pjk';
             $laporan = new LaporanClass();

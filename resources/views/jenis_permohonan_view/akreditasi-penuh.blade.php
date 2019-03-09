@@ -65,11 +65,7 @@
                         <div class="form-group row">
                              <label for="file_link" class="col-md-4 col-form-label text-md-right">{{ __('Link Kepada File') }}</label>
 
-                                <div class="col-md-6">                       
-                                                    
-                               
-                               
-                                <!-- <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/{{$permohonan->file_link}}")?>">{{ basename(@$permohonan[file_name]) }} </a> -->
+                                <div class="col-md-6"> 
                                 <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/{{$permohonan->file_link}}")?>">{{ basename($permohonan->file_name) }} </a>
                                 </div>
                                 

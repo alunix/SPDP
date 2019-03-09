@@ -33,13 +33,19 @@ class PenilaianController extends Controller
         return $pp->showPerakuanPjk($id);
     }
 
+   
+
     public function uploadPerakuanPjk(Request $request,$id)
     {
         $this->validate($request,[
             'perakuan_pjk' => 'required|file|max:1999',
         ]);
 
-        $permohonan = Permohonan::find($id);
+        
+        $penilaian = Penilaian::find($id);
+        $permohonan= $penilaian->permohonan;
+
+      
         $penilaian = new PenilaianPJK();       
 
         return $penilaian->uploadPerakuanPjk($request,$permohonan);

@@ -54,10 +54,21 @@ class SenaraiPermohonan
 
      $permohonans = Permohonan::where('jenis_permohonan_id','!=','8')->where('status_permohonan_id','=','1')->get();
 
+     
      return $permohonans;
         
             
         }
+    
+    public function perakuanPjk(){
+
+            $permohonans = Permohonan::where('jenis_permohonan_id','!=','8')->where('status_permohonan_id','=',3)->get();
+       
+            return view ('pjk.senarai-perakuan-penilaian')->with('permohonans',$permohonans);
+               
+                   
+               }
+    
     public function penilai(){
         $permohonans = Permohonan::where('status_permohonan_id','=','2')->get();
 

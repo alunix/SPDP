@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"><h4>Senarai permohonanan baharu</h4></div>
+                <div class="card-header"><h4>Senarai permohonan untuk diperakukan</h4></div>
 
             <div class="card-body">
            
@@ -49,7 +49,7 @@
 <td>{{$permohonan->user->fakulti}} </td> 
 <td>{{$permohonan->created_at->format('h:i a d/m/Y')}}  </td> 
 
-<td><a href="{{ route('view-permohonan-baharu',$permohonan->id) }}" class="btn btn-primary">SELECT</a></td>
+<td><a href="{{ route('pjk.perakuan.show',$permohonan->id) }}" class="btn btn-primary">SELECT</a></td>
 </tr>
 @endforeach
 @endif

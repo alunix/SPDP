@@ -49,11 +49,10 @@ class PermohonanController extends Controller
         return  $sp->index();
      }
 
-     public function showListPanelPenilai(Request $request,$id)
+     public function senaraiPerakuanPjk()
      {
-        
-        
-     
+        $sp = new SenaraiPermohonan();
+        return  $sp->perakuanPjk();
      }
 
      public function permohonanTidakDilulus(Request $request,$id)

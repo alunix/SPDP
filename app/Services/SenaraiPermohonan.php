@@ -76,7 +76,7 @@ class SenaraiPermohonan
                 
         }
     public function jppa(){
-        $permohonans = Permohonan::whereHas('jenis_permohonan_id','=','8')->where('status_permohonan_id','=','1')->get();
+        $permohonans = Permohonan::where('jenis_permohonan_id','=','8')->where('status_permohonan_id','=','1')->orWhere('status_permohonan_id','=','2')->get();
         return $permohonans;
                 
         }

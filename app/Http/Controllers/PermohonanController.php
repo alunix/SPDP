@@ -43,7 +43,7 @@ class PermohonanController extends Controller
 
     // }
 
-       public function showListPermohonanBaharu(Request $request)
+       public function showListPermohonanBaharu()
      {  
         $sp = new SenaraiPermohonan();
         return  $sp->index();

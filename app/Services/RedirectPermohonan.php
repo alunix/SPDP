@@ -27,6 +27,7 @@ class RedirectPermohonan
         
         switch ($jp) {
             case 'program_baharu':
+            
                     return view('jenis_permohonan_view.program-pengajian-baharu')->with('permohonan',$permohonan)->with('jenis_permohonan',$permohonan->jenis_permohonan)->with('penilaian',$permohonan->penilaian);
             break;
             case 'semakan_program':

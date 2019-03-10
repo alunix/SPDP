@@ -69,14 +69,6 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware','middlewa
 	Route::post('/settings', 'UserController@update')->name('settings.submit');
 
 	Route::get('/kemajuan-permohonan/{permohonan}', 'KemajuanPermohonanController@show')->name('fakulti.kemajuanPermohonan');
-	
-
-
-
-
-
-
-	
 
 });
 
@@ -90,8 +82,7 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware','middlewa
 	
 	
 	/*----------------------- First penilaian program pengajian  ------------- */	
-	// Route::get('/programs/senarai-penilaian','PenilaianController@index')->name('penilaian.show');
-	// Route::get( '/programs/{program}', 'PermohonanController@show')->name('program.show');	
+
 	Route::get('/senarai-penilaian','PenilaianController@index')->middleware('role:pjk','auth')->name('penilaian.show');
 	
 	/*-----------------------Daftar penilai---------------------------------------------*/
@@ -122,22 +113,6 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware','middlewa
 	Route::get('senarai-penilaian-perakuan','PermohonanController@senaraiPerakuanPjk')->name('pjk.senarai_perakuan.show');
 
 
-
-	
-	
-	
-
-	
-
-	
-	
-	
-
-	
-
-
-
-
 // });
 
 // Route::group(['middleware' => 'SPDP\Http\Middleware\penilaiMiddleware'], function() {
@@ -161,8 +136,8 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware','middlewa
 	
 
 	/*-----------------------Lampiran perakuan JPPA ---------------------------------------------*/
-	Route::patch('/jppa/penilaian/{penilaian}','PenilaianController@uploadPerakuanJppa')->name('jppa.perakuan.submit');
-	Route::get('/jppa/penilaian/{penilaian}','PenilaianController@showPerakuanJppa')->name('jppa.perakuan.show');
+	Route::patch('/jppa/permohonan/{permohonan}/lampiran-perakuan','PenilaianController@uploadPerakuanJppa')->name('jppa.perakuan.submit');
+	Route::get('/jppa/permohonan/{permohonan}/lampiran-perakuan','PenilaianController@showPerakuanJppa')->name('jppa.perakuan.show');
 
 	
 

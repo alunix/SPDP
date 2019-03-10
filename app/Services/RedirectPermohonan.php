@@ -27,11 +27,10 @@ class RedirectPermohonan
         
         switch ($jp) {
             case 'program_baharu':
+            case 'semakan_program':
             
                     return view('jenis_permohonan_view.program-pengajian-baharu')->with('permohonan',$permohonan)->with('jenis_permohonan',$permohonan->jenis_permohonan)->with('penilaian',$permohonan->penilaian);
-            break;
-            case 'semakan_program':
-            return view('jenis_permohonan_view.program_pengajian_baharu')->with('permohonan',$permohonan)->with('jenis_permohonan',$permohonan->jenis_permohonan)->with('penilaian',$permohonan->penilaian);
+            
             break; 
             case 'kursus_teras_baharu':
             return view('jenis_permohonan_view.kursus-wajib-baharu')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);

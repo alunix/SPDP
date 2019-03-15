@@ -40,12 +40,10 @@ class PenilaianController extends Controller
         $this->validate($request,[
             'perakuan_pjk' => 'required|file|max:1999',
         ]);
+        
 
         
-        $penilaian = Penilaian::find($id);
-        $permohonan= $penilaian->permohonan;
-
-      
+        $permohonan = Permohonan::find($id);
         $penilaian = new PenilaianPJK();       
 
         return $penilaian->uploadPerakuanPjk($request,$permohonan);

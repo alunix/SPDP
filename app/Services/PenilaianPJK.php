@@ -41,8 +41,6 @@ class PenilaianPJK
        ];
     return redirect('/home')->with($msg);
 
-
-
     }
 
     public function pelantikanPenilaiSubmit(Request $request, $id)
@@ -68,9 +66,8 @@ class PenilaianPJK
         $penilaian -> dokumen_id = $permohonan->id;
         $penilaian -> penilaian_panel_1= $selectedPenilai[0];
         $penilaian -> save();
-   
          
-         return redirect(url('/senarai-penilaian'));
+        return redirect(url('/senarai-penilaian'));
     }
 
     public function showPerakuanPjk($id)
@@ -85,10 +82,8 @@ class PenilaianPJK
             break;
             case 'kursus_teras_baharu':
             case 'kursus_elektif_baharu':
-            return $this->viewKursusTerasElektifBaharu($id);
-            break;
             case 'semakan_kursus_teras':
-            return view('jenis_permohonan_view.kursus-wajib-baharu')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
+            return $this->viewKursusTerasElektifBaharu($id);
                 break; 
             case 'semakan_kursus_elektif':
             return view('jenis_permohonan_view.semakan-kursus-elektif')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
@@ -119,11 +114,13 @@ class PenilaianPJK
             break;
             case 'kursus_teras_baharu':
             case 'kursus_elektif_baharu':
+            
             return $this->createPerakuanPjk($request,$permohonan);
             break;
             case 'semakan_kursus_teras':
-            return view('jenis_permohonan_view.kursus-wajib-baharu')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
-                break; 
+            return $this->semakanKursusTeras($request,$permohonan);
+           
+            break; 
             case 'semakan_kursus_elektif':
             return view('jenis_permohonan_view.semakan-kursus-elektif')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
                 break; 
@@ -191,6 +188,34 @@ class PenilaianPJK
             return redirect('/')->with($msg);
 
     }
+
+    public function semakanKursusTeras(Request $request, $id){
+      
+           
+        /* Cari permohonan since penilaian belongs to permohonan then baru boleh cari penilaian through eloquent relationship */
+        $permohonan= Permohonan::find($id);
+        $penilaian= $permohonan->penilaian;
+        
+        //Upload perakuan
+        $attached = 'perakuan_pjk';
+        $laporan = new LaporanClass();
+        $laporan_id= $penilaian->laporan->laporan_id;
+        $laporan->uploadLaporan( $request,$penilaian,$attached,$laporan_id);
+
+        /* Status semakan permohonan telah dikemaskini berdasarkan progress */
+        $permohonan -> status_permohonan_id = 4;
+        $permohonan ->save();
+
+        $kj= new KemajuanPermohonanClass();
+        $kj->create($permohonan);
+
+        $msg = [
+            'message' => 'Perakuan berjaya dimuatnaik',
+           ];  
+        
+        return redirect('/')->with($msg);
+
+}
 
    
 

@@ -39,7 +39,7 @@ class RedirectPermohonan
             return view('jenis_permohonan_view.kursus-elektif-baharu')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
             break; 
             case 'semakan_kursus_teras':
-            return view('jenis_permohonan_view.kursus-wajib-baharu')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
+            return view('jenis_permohonan_view.semakan-kursus-teras')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
                 break; 
             case 'semakan_kursus_elektif':
             return view('jenis_permohonan_view.semakan-kursus-elektif')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);

@@ -81,7 +81,11 @@
                             <div class="col-md-6 offset-md-5">
                        
                             @if(Auth::user()->role == "pjk")
-                                 
+
+                             <a href="{{ route('pjk.perakuanLulus.show', ['permohonan' => $permohonan->id])  }}">
+                                    <input type="button" class="btn btn-success" value="Lulus permohonan" />
+                                    
+                            </a> 
                                  
                             <a href="{{ route('pelantikan_penilai.show', ['permohonan' => $permohonan->id])  }}">
                                     <input type="button" class="btn btn-success" value="Lantik penilai" />

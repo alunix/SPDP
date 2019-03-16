@@ -10,7 +10,7 @@ use SPDP\KemajuanPermohonan;
 class Permohonan extends Model
 {
     protected $fillable = [
-       'nama_penghantar', 'fakulti' , 'file_link' ,'status_program','file_name','doc_title','jenis_permohonan',
+       'nama_penghantar', 'fakulti' , 'file_link' ,'status_program','file_name','doc_title','jenis_permohonan', 'status_permohonan_id','id',
 
 
    ];

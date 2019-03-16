@@ -81,7 +81,8 @@ class StatusPermohonanClass
                 return '7';
             break; 
             case 'semakan_kursus_teras'://will figure out the rest 3/3/2019
-            return view('jenis_permohonan_view.kursus-wajib-baharu')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
+                
+                return 4;
                 break; 
             case 'semakan_kursus_elektif':
             return view('jenis_permohonan_view.semakan-kursus-elektif')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);

@@ -22,7 +22,7 @@ class PenilaianPJK
     public function createPerakuanPjk(Request $request,$permohonan)
     {   
     $penilaian = new PenilaianClass();
-    $penilaian = $penilaian->create($request,$permohonan);
+    $penilaian = $penilaian->create($permohonan);
     $attached = 'perakuan_pjk';
     $laporan = new LaporanClass();
     $laporan->createLaporan($request,$penilaian,$attached);
@@ -74,6 +74,7 @@ class PenilaianPJK
     {   
         $permohonan = Permohonan::find($id);
         $jp =$permohonan->jenis_permohonan->jenis_permohonan_kod;
+        $status_permohonan = $permohonan->value('status_permohonan_id');
  
         switch ($jp) {
             case 'program_baharu':
@@ -82,9 +83,19 @@ class PenilaianPJK
             break;
             case 'kursus_teras_baharu':
             case 'kursus_elektif_baharu':
-            case 'semakan_kursus_teras':
+           
             return $this->viewKursusTerasElektifBaharu($id);
-                break; 
+                break;
+            case 'semakan_kursus_teras':
+            if($status_permohonan == '1'  ) // if permohonan require minority changes then create a new perakuan
+           
+            return $this->viewKursusTerasElektifBaharu($id);
+        else if ($status_permohonan == '3'  )
+            return  $this->viewProgramBaharu($id);
+        else 
+            return;
+
+            break;
             case 'semakan_kursus_elektif':
             return view('jenis_permohonan_view.semakan-kursus-elektif')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
                 break; 
@@ -106,6 +117,7 @@ class PenilaianPJK
     {   
        $id= $permohonan->id;
        $jp =$permohonan->jenis_permohonan->jenis_permohonan_kod;
+      
        
         switch ($jp) {
             case 'program_baharu':
@@ -189,31 +201,22 @@ class PenilaianPJK
 
     }
 
-    public function semakanKursusTeras(Request $request, $id){
-      
+    public function semakanKursusTeras(Request $request, $permohonan){
            
         /* Cari permohonan since penilaian belongs to permohonan then baru boleh cari penilaian through eloquent relationship */
-        $permohonan= Permohonan::find($id);
-        $penilaian= $permohonan->penilaian;
         
-        //Upload perakuan
-        $attached = 'perakuan_pjk';
-        $laporan = new LaporanClass();
-        $laporan_id= $penilaian->laporan->laporan_id;
-        $laporan->uploadLaporan( $request,$penilaian,$attached,$laporan_id);
+        $status_permohonan = $permohonan->value('status_permohonan_id');
 
-        /* Status semakan permohonan telah dikemaskini berdasarkan progress */
-        $permohonan -> status_permohonan_id = 4;
-        $permohonan ->save();
-
-        $kj= new KemajuanPermohonanClass();
-        $kj->create($permohonan);
-
-        $msg = [
-            'message' => 'Perakuan berjaya dimuatnaik',
-           ];  
         
-        return redirect('/')->with($msg);
+        
+        if($status_permohonan == '1'  ) // if permohonan require minority changes then create a new perakuan
+            return $this->createPerakuanPjk($request,$permohonan);
+        else if ($status_permohonan == '3'  )
+            return $this->updateLaporanPanel($request,$permohonan);
+        else 
+            return;
+        
+        
 
 }
 

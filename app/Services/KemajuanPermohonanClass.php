@@ -30,7 +30,7 @@ class KemajuanPermohonanClass
     {
           $kj = new KemajuanPermohonan();
          $kj-> permohonan_id = $permohonan->id;
-         $kj-> status_permohonan= $permohonan->status_permohonan;
+         $kj-> status_permohonan= $permohonan->status_permohonan_id;
          $kj->save();
     }
 

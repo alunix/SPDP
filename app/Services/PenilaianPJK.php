@@ -122,7 +122,7 @@ class PenilaianPJK
         switch ($jp) {
             case 'program_baharu':
             case 'semakan_program':
-            return $this->updateLaporanPanel($request,$id);
+            return $this->updateLaporanPanel($request,$permohonan);
             break;
             case 'kursus_teras_baharu':
             case 'kursus_elektif_baharu':
@@ -152,11 +152,9 @@ class PenilaianPJK
 
     public function viewProgramBaharu($id)
     {
-    $permohonan=Permohonan::find($id);
-    $penilaian= $permohonan->penilaian;
-    // $laporan=Laporan::where('penilaian_id_laporan',$penilaian->id)->get();
-    
-       $laporan= $penilaian->laporan;
+        $permohonan=Permohonan::find($id);
+        $penilaian= $permohonan->penilaian;
+        $laporan= $penilaian->laporan;
 
        
         
@@ -167,17 +165,16 @@ class PenilaianPJK
 
     public function viewKursusTerasElektifBaharu($id)
     {
-         $permohonan = Permohonan::find($id);
+        $permohonan = Permohonan::find($id);
         return view ('pjk.perakuan-pjk')->with('permohonan',$permohonan);
 
         
     }
     
-    public function updateLaporanPanel(Request $request, $id){
+    public function updateLaporanPanel(Request $request, $permohonan){
       
            
             /* Cari permohonan since penilaian belongs to permohonan then baru boleh cari penilaian through eloquent relationship */
-            $permohonan= Permohonan::find($id);
             $penilaian= $permohonan->penilaian;
             
             //Upload perakuan
@@ -218,11 +215,7 @@ class PenilaianPJK
         
         
 
-}
-
-   
-
-    
+}    
 
     public function store_panel_penilai(Request $request)
     {
@@ -237,14 +230,5 @@ class PenilaianPJK
     }
 
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \SPDP\A  $a
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(A $a)
-    {
-        //
-    }
+   
 }

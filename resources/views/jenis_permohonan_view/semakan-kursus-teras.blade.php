@@ -101,7 +101,7 @@
                             
                             @elseif(Auth::user()->role=="penilai")
                             
-                            <a href="/permohonans/{{$permohonan->id}}/kelulusan-permohonan/{{$penilaian->id}}">
+                            <a href="/permohonans/{{$permohonan->id}}/kelulusan-permohonan">
                                     <input `type`="button" class="btn btn-success" value="Lulus permohonan" />
                                     
                             </a>

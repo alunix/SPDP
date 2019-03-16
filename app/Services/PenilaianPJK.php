@@ -48,7 +48,7 @@ class PenilaianPJK
          /* Find permohonan id then change the status permohonan */
          $permohonan =Permohonan::find($id);   
          $sp = new StatusPermohonanClass();            
-         $permohonan -> status_permohonan_id = $sp->getStatusPermohonan($permohonan);
+         $permohonan -> status_permohonan_id = 2;
          $permohonan -> save();
 
           //Create a new kemajuan permohonan for each progress

@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Hash;
 class PenilaianJppa
 {
 
-        public function uploadPerakuan(Request $request, $id){
+        public function uploadPerakuan(Request $request, $permohonan){
 
               /* Cari permohonan since penilaian belongs to permohonan then baru boleh cari penilaian through eloquent relationship */
          $penilaian= Penilaian::find($id);

@@ -55,12 +55,6 @@ class PenilaianController extends Controller
      public function showPerakuanJPPA($id){
 
         $permohonan =Permohonan::find($id);
-        
-        
-
-        
-
-
         return view('jppa.lampiran-perakuan-jppa')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
      }
 
@@ -70,8 +64,10 @@ class PenilaianController extends Controller
             'perakuan_jppa' => 'required|file|max:1999',
         ]);
 
+        $permohonan= Permohonan::find($id);
+
         $pj= new PenilaianJppa();
-        return $pj->uploadPerakuan($request,$id);
+        return $pj->uploadPerakuan($request,$permohonan);
 
     }
    

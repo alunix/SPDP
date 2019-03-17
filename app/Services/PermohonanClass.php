@@ -131,45 +131,5 @@ class PermohonanClass
      
      }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \SPDP\A  $a
-     * @return \Illuminate\Http\Response
-     */
-    public function show(A $a)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \SPDP\A  $a
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(A $a)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \SPDP\A  $a
-     * @return \Illuminate\Http\Response
-     */
-    
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \SPDP\A  $a
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(A $a)
-    {
-        //
-    }
+   
 }

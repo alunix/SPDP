@@ -82,6 +82,7 @@
 
                         </div>
 
+                        @if($permohonan->jenis_permohonan_id!=8)
                         <div class="form-group row">
                             <label for="laporan_panel_penilai" class="col-md-4 col-form-label text-md-right">{{ __('Lampiran laporan panel penilai') }}</label>
 
@@ -100,6 +101,7 @@
                             </div>
 
                         </div> 
+                        @endif   
 
                          <div class="form-group row">
                             <label for="perakuan_jppa" class="col-md-4 col-form-label text-md-right">{{ __('Lampiran perakuan JPPA') }}</label>

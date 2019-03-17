@@ -87,17 +87,14 @@ class PenilaianPJK
             return $this->viewKursusTerasElektifBaharu($id);
                 break;
             case 'semakan_kursus_teras':
+            case 'semakan_kursus_elektif':
             if($status_permohonan == '1'  ) // if permohonan require minority changes then create a new perakuan
            
             return $this->viewKursusTerasElektifBaharu($id);
-        else if ($status_permohonan == '3'  )
+                else if ($status_permohonan == '3'  )
             return  $this->viewProgramBaharu($id);
-        else 
+                else 
             return;
-
-            break;
-            case 'semakan_kursus_elektif':
-            return view('jenis_permohonan_view.semakan-kursus-elektif')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
                 break; 
             case 'akreditasi_penuh':
             return view('jenis_permohonan_view.program_pengajian_baharu')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
@@ -115,8 +112,7 @@ class PenilaianPJK
     
     public function uploadPerakuanPjk($request,$permohonan)
     {   
-       $id= $permohonan->id;
-       $jp =$permohonan->jenis_permohonan->jenis_permohonan_kod;
+      $jp =$permohonan->jenis_permohonan->jenis_permohonan_kod;
       
        
         switch ($jp) {
@@ -134,7 +130,7 @@ class PenilaianPJK
            
             break; 
             case 'semakan_kursus_elektif':
-            return view('jenis_permohonan_view.semakan-kursus-elektif')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
+            return $this->semakanKursusElektif($request,$permohonan);
                 break; 
             case 'akreditasi_penuh':
             return view('jenis_permohonan_view.program_pengajian_baharu')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
@@ -184,7 +180,9 @@ class PenilaianPJK
             $laporan->uploadLaporan( $request,$penilaian,$attached,$laporan_id);
 
             /* Status semakan permohonan telah dikemaskini berdasarkan progress */
-            $permohonan -> status_permohonan_id = 4;
+            $sp = new StatusPermohonanClass();
+            $permohonan->status_permohonan_id=$sp->getStatusPermohonan($permohonan);
+            // $permohonan -> status_permohonan_id = 4;
             $permohonan ->save();
 
             $kj= new KemajuanPermohonanClass();
@@ -212,8 +210,22 @@ class PenilaianPJK
             return $this->updateLaporanPanel($request,$permohonan);
         else 
             return;
-        
-        
+}    
+
+public function semakanKursusElektif(Request $request, $permohonan){
+           
+    /* Cari permohonan since penilaian belongs to permohonan then baru boleh cari penilaian through eloquent relationship */
+    
+    $status_permohonan = $permohonan->value('status_permohonan_id');
+    
+    if($status_permohonan == '1'  ) // if permohonan require minority changes then create a new perakuan
+        return $this->createPerakuanPjk($request,$permohonan);
+    else if ($status_permohonan == '3'  )
+        return $this->updateLaporanPanel($request,$permohonan);
+    else 
+        return;
+    
+    
 
 }    
 

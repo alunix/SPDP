@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Program Pengajian Baharu</div>
+                <div class="card-header">Penjumudan Program</div>
 
             <div class="card-body">
                      
@@ -80,24 +80,25 @@
 
                             @if(Auth::user()->role=="jppa")
                             
-                            <a href="/jppa/penilaian/{{penilaian}}">
+                            <a href="{{ route('jppa.perakuan.show',$permohonan->id) }}">
+                          
                                     <input type="button" class="btn btn-success" value="Lulus permohonan" />
                                     
                             </a>
                         
-                            <a href="/permohonans/{{@$permohonan[id]}}/pelantikan-penilai">
+                            <a href="/permohonans/{{$permohonan->id}}/pelantikan-penilai">
                                     <input type="button" class="btn btn-danger" value="Tidak lulus" />
                                     
                             </a>
 
                             @elseif(Auth::user()->role=="senat")
                             
-                            <a href="/permohonans/{{@$permohonan[id]}}/kelulusan-permohonan/{{$penilaian->id}}">
+                            <!-- <a href="/permohonans/{{$permohonan->id}}/kelulusan-permohonan/{{$penilaian->id}}">
                                     <input type="button" class="btn btn-success" value="Lulus permohonan" />
                                     
-                            </a>
+                            </a> -->
                            
-                            <a href="/permohonans/{{@$permohonan[id]}}/pelantikan-penilai">
+                            <a href="/permohonans/{{$permohonan->id}}/pelantikan-penilai">
                                     <input type="button" class="btn btn-danger" value="Tidak lulus" />
                                     
                             </a>

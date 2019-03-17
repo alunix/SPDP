@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Program Pengajian Baharu</div>
+                <div class="card-header">Kursus Elektif Baharu</div>
 
             <div class="card-body">
                      
@@ -81,7 +81,7 @@
                             <div class="col-md-6 offset-md-5">
                                  
                             <a href="{{ route('pjk.perakuanLulus.show', ['permohonan' => $permohonan->id])  }}">
-                                    <input type="button" class="btn btn-success" value="Lulus" />
+                                    <input type="button" class="btn btn-success" value="Lulus permohonan" />
                                     
                             </a>
                             

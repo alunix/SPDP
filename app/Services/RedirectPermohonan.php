@@ -48,11 +48,10 @@ class RedirectPermohonan
             return view('jenis_permohonan_view.program_pengajian_baharu')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
                 break; 
             case 'penjumudan_program':
-            return view('jenis_permohonan_view.penjumudan_program')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
-            break; 
+            return view('jenis_permohonan_view.penjumudan-program')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
+                break; 
             default:
-                    return view ('/home'); 
-                break;
+                    return;
         }
     }
 

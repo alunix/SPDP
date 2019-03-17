@@ -85,7 +85,7 @@ class StatusPermohonanClass
                 return 4;
                 break; 
             case 'semakan_kursus_elektif':
-            return view('jenis_permohonan_view.semakan-kursus-elektif')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
+                return 7;
                 break; 
             case 'akreditasi_penuh':
             return view('jenis_permohonan_view.program_pengajian_baharu')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);

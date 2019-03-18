@@ -16,20 +16,18 @@ class PenilaianJppa
 
         public function uploadPerakuan(Request $request, $permohonan){
 
-            $jp =$permohonan->jenis_permohonan_id;
+        $jp =$permohonan->jenis_permohonan_id;
         
         if($jp!=8){
 
              /* Cari permohonan since penilaian belongs to permohonan then baru boleh cari penilaian through eloquent relationship */
-         $penilaian= Penilaian::find($id);
-
+         $penilaian = $permohonan->penilaian;
          $attached = 'perakuan_jppa';
          $laporan = new LaporanClass();
          $laporan_id= $penilaian->laporan->laporan_id;
          $laporan->uploadLaporan( $request,$penilaian,$attached,$laporan_id);
-     
         
-         $permohonan = $penilaian->permohonan;
+        
          /* Status semakan permohonan telah dikemaskini berdasarkan progress */
          $permohonan -> status_permohonan_id = 5;       
          $permohonan ->save();
@@ -43,15 +41,9 @@ class PenilaianJppa
             ];  
  
          return redirect('/')->with($msg);
-
-
-
         }
-
         else    
             return $this->penjumudanProgram($request,$permohonan);
-        
-       
 
     }
 

@@ -82,7 +82,7 @@
 
                         </div>
 
-                        @if($permohonan->jenis_permohonan_id!=8)
+                        @if($permohonan->penilaian->laporan->laporan_panel_penilai_link!=null)
                         <div class="form-group row">
                             <label for="laporan_panel_penilai" class="col-md-4 col-form-label text-md-right">{{ __('Lampiran laporan panel penilai') }}</label>
 
@@ -116,15 +116,6 @@
                                 @endif
                             </div>
                         </div> 
-
-                        
-
-                        
-
-
-
-
- 
 
 <div class="form-group row mb-0">
     <div class="col-md-6 offset-md-5">

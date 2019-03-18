@@ -27,7 +27,6 @@ class PermohonanController extends Controller
         $user_id =auth()->user()->id;
         $user= User::find($user_id);
         return view ('fakulti.senarai-permohonan-dihantar')->with('permohonans',$user->permohonans);
-
       
     }
 
@@ -49,8 +48,6 @@ class PermohonanController extends Controller
      {
         $permohonan= Permohonan::find($id);
         return view('pjk.permohonan-tidak-dilulus')->with('permohonan',$permohonan)->with('jenis_permohonan',$permohonan->jenis_permohonan);
-
-        
      
      }
 

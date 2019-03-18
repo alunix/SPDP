@@ -197,15 +197,11 @@ class PenilaianPJK
     }
 
     public function semakanKursusTeras(Request $request, $permohonan){
-           
-        /* Cari permohonan since penilaian belongs to permohonan then baru boleh cari penilaian through eloquent relationship */
-        
-        $status_permohonan = $permohonan->value('status_permohonan_id');
 
-        
-        
+        $status_permohonan = $permohonan->status_permohonan_id;
+
         if($status_permohonan == '1'  ) // if permohonan require minority changes then create a new perakuan
-            return $this->createPerakuanPjk($request,$permohonan);
+           return $this->createPerakuanPjk($request,$permohonan);
         else if ($status_permohonan == '3'  )
             return $this->updateLaporanPanel($request,$permohonan);
         else 
@@ -215,8 +211,7 @@ class PenilaianPJK
 public function semakanKursusElektif(Request $request, $permohonan){
            
     /* Cari permohonan since penilaian belongs to permohonan then baru boleh cari penilaian through eloquent relationship */
-    
-    $status_permohonan = $permohonan->value('status_permohonan_id');
+    $status_permohonan = $permohonan->status_permohonan_id;
     
     if($status_permohonan == '1'  ) // if permohonan require minority changes then create a new perakuan
         return $this->createPerakuanPjk($request,$permohonan);
@@ -224,9 +219,6 @@ public function semakanKursusElektif(Request $request, $permohonan){
         return $this->updateLaporanPanel($request,$permohonan);
     else 
         return;
-    
-    
-
 }    
 
     public function store_panel_penilai(Request $request)

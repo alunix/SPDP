@@ -95,7 +95,7 @@
 
                             @elseif(Auth::user()->role=="jppa")
                             
-                            <a href="/jppa/penilaian/{{penilaian}}">
+                            <a href="{{ route('jppa.perakuan.show', ['permohonan' => $permohonan->id])  }}">
                                     <input type="button" class="btn btn-success" value="Lulus permohonan" />
                                     
                             </a>
@@ -104,7 +104,7 @@
                             
                         
                             
-                            <a href="/permohonans/{{@$permohonan[id]}}/pelantikan-penilai">
+                            <a href="/permohonans/{{$permohonan->id}}/pelantikan-penilai">
                                     <input type="button" class="btn btn-danger" value="Tidak lulus" />
                                     
                             </a>

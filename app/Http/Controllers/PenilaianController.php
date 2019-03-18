@@ -51,7 +51,13 @@ class PenilaianController extends Controller
      public function showPerakuanJPPA($id){
 
         $permohonan =Permohonan::find($id);
+
+        if($permohonan->jenis_permohonan_id!=8)
         return view('jppa.lampiran-perakuan-jppa')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
+        else
+        return view('jppa.lampiran-perakuan-penjumudan')->with('permohonan',$permohonan);
+
+        
      }
 
      public function uploadPerakuanJppa(Request $request, $id){

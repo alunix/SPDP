@@ -80,28 +80,7 @@
 
                                 </div>
 
-                        </div>
-
-                        @if($permohonan->penilaian->laporan->laporan_panel_penilai_link!=null)
-                        <div class="form-group row">
-                            <label for="laporan_panel_penilai" class="col-md-4 col-form-label text-md-right">{{ __('Lampiran laporan panel penilai') }}</label>
-
-                            <div class="col-md-6">
-                            <a href ="<?php echo asset("storage/laporan_panel_penilai/{$permohonan->penilaian->laporan->laporan_panel_penilai_link}")?>">{{ basename($permohonan->penilaian->laporan->laporan_panel_penilai) }} </a>
-                            </div>
-
-                        </div> 
-                        @endif   
-
-                         <div class="form-group row">
-                            <label for="perakuan_pjk" class="col-md-4 col-form-label text-md-right">{{ __('Lampiran perakuan PJK') }}</label>
-                            
-                            <div class="col-md-6">
-                                
-                                <a href ="<?php echo asset("storage/laporan_pjk/{$permohonan->penilaian->laporan->perakuan_pjk_link}")?>">{{ basename($permohonan->penilaian->laporan->perakuan_pjk) }} </a>
-                            </div>
-
-                        </div> 
+                        </div>   
                         
 
                          <div class="form-group row">

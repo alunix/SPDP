@@ -76,7 +76,7 @@ class PenilaianJppa
         'message' => 'Laporan berjaya dimuat naik',
        ];
 
-
+       return redirect('/')->with($msg);
     }
 
 }

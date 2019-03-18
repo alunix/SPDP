@@ -16,7 +16,9 @@ class CreateKemajuanPermohonansTable extends Migration
         Schema::create('kemajuan_permohonans', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('permohonan_id')->unsigned();
-             $table->string('status_permohonan')->nullable();;
+             $table->integer('status_permohonan')->unsigned()->nullable();
+
+             $table->foreign('status_permohonan')->references('status_id')->on('status_permohonans');
            
             $table->timestamps();
         });

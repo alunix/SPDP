@@ -36,7 +36,7 @@
 @foreach($kjs as $kj)
 <tr>
 <th scope="row">{{ $loop->iteration}}</th>
-<td> {{$kj->status_permohonan}}</td>   
+<td> {{$kj->statusPermohonan->status_permohonan_huraian}}</td>   
 <td> {{$kj->created_at->format('h:i a d/m/Y') }}</td>               
 
 

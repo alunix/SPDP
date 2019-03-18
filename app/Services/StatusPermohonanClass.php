@@ -72,14 +72,7 @@ class StatusPermohonanClass
             
         }
     
-    public function jppa(Request $req){
-        return 5;
-                
-        }
-    public function senat(Request $req){
-        return view('dashboard/senat-dashboard');
-                
-        }
+   
     
 
    

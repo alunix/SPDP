@@ -15,11 +15,7 @@ use SPDP\Services\PenilaianPenilai;
 
 class PenilaianController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+  
     public function index()
     {
        $penilaians = Penilaian::all();
@@ -119,17 +115,4 @@ class PenilaianController extends Controller
         
     }
 
-    
-
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \SPDP\Penilaian  $penilaian
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Penilaian $penilaian)
-    {
-        //
-    }
 }

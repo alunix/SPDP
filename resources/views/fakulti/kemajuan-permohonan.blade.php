@@ -23,11 +23,7 @@
     <tr>
     <th scope="col">No</th>
     <th scope="col">Status Permohonan</th>
-    <th scope="col">Tarikh/Masa Status</th>    
-
-    
-
-
+    <th scope="col">Tarikh/Masa Status</th> 
     
     </tr>
 </thead>
@@ -43,6 +39,8 @@
 </tr>
 @endforeach
 
+
+
 </tbody>
 </table>
 
@@ -51,6 +49,48 @@
 @else
 
 <p> Tiada permohonan telah dijumpai </p>
+
+@endif
+
+
+
+<h5> Laporan yang telah dikeluarkan</h5>
+
+<table class="table table-striped">
+
+<thead>
+    <tr>
+    <th scope="col">No</th>
+    <th scope="col">Laporan PJK</th>
+    <th scope="col">Laporan Panel Penilai</th>
+    <th scope="col">Laporan JPPA</th>
+    <th scope="col">Laporan Senat</th>
+    <th scope="col">Tarikh/Masa Laporan</th> 
+    
+    </tr>
+</thead>
+<tbody>
+@if( ! $kjs->isEmpty() )
+@foreach($kjs as $kj)
+<tr>
+<th scope="row">{{ $loop->iteration}}</th>
+<td> {{$kj->statusPermohonan->status_permohonan_huraian}}</td>   
+<td> {{$kj->created_at->format('h:i a d/m/Y') }}</td>               
+
+
+</tr>
+@endforeach
+
+
+
+</tbody>
+</table>
+
+
+
+@else
+
+<p> Tiada laporan telah dikeluarkan</p>
 
 @endif
 

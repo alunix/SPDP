@@ -86,7 +86,7 @@
                             </a>
                             
                             <a href="{{ route('pjk.permohonanTidakDilulus', ['permohonan' => $permohonan->id])  }}">
-                                    <input type="button" class="btn btn-danger" value="Tidak Lulus" />
+                                    <input type="button" class="btn btn-danger" value="Penambahbaikan" />
                                     
                             </a>
 

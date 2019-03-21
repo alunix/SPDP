@@ -87,7 +87,7 @@
                             </a>
                         
                             <a href="/permohonans/{{$permohonan->id}}/pelantikan-penilai">
-                                    <input type="button" class="btn btn-danger" value="Tidak lulus" />
+                                    <input type="button" class="btn btn-danger" value="Penambahbaikan" />
                                     
                             </a>
 
@@ -99,7 +99,7 @@
                             </a> -->
                            
                             <a href="/permohonans/{{$permohonan->id}}/pelantikan-penilai">
-                                    <input type="button" class="btn btn-danger" value="Tidak lulus" />
+                                    <input type="button" class="btn btn-danger" value="Penambahbaikan" />
                                     
                             </a>
                             @endif   

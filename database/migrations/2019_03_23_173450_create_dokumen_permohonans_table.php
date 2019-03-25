@@ -14,6 +14,7 @@ class CreateDokumenPermohonansTable extends Migration
     public function up()
     {
         Schema::create('dokumen_permohonans', function (Blueprint $table) {
+            
             $table->increments('dokumen_permohonan_id');
             $table->integer('permohonan_id')->unsigned();
             $table->string('file_name'); //To show the name of the file

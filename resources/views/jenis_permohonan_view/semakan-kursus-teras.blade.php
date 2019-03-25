@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Semakan Kursus Teras</div>
+                <div class="card-header">{{$permohonan->jenis_permohonan->jenis_permohonan_huraian}}</div>
 
             <div class="card-body">
                      

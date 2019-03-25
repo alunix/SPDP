@@ -14,30 +14,20 @@ class CreatePermohonansTable extends Migration
     public function up()
     {
         Schema::create('permohonans', function (Blueprint $table) {
-            $table->increments('id');
-           
-            // $table->string('nama_penghantar');
-           
+            
+            
+            $table->increments('permohonan_id');
             $table->string('doc_title');
             $table->integer('jenis_permohonan_id')->unsigned();
-            $table->string('file_name'); //To show the name of the file
-            $table->string('file_link');
+            $table->integer('dokumen_permohonan_id')->unsigned();
             $table->integer('id_penghantar')->unsigned();
-            $table->integer('id_pjk')->unsigned()->nullable();
-            $table->string('laporan_pjk')->nullable();
-            $table->string('laporan_pjk_link')->nullable();
             $table->integer('status_permohonan_id')->unsigned();
 
-            
             $table->foreign('id_penghantar')->references('id')->on('users');
             $table->foreign('id_pjk')->references('id')->on('users');
             $table->foreign('jenis_permohonan_id')->references('id')->on('jenis_permohonans');
-            $table->foreign('status_permohonan_id')->references('status_id')->on('status_permohonans');    
-
-            
-           
-            
-
+            $table->foreign('status_permohonan_id')->references('status_id')->on('status_permohonans');
+            $table->foreign('dokumen_permohohonan_id')->references('dokumen_permohonan_id')->on('dokumen_permohonans');  
 
             $table->timestamps();
         });

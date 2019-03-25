@@ -26,6 +26,11 @@ Permohonan Baharu
 <!-- <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span> -->
 Permohonan Dihantar
 </a>
+
+
+<a class="btn icon-btn btn-info" href="{{ route('dokumenPermohonan.penambahbaikkan.show) }}">
+Muat naik penambahbaikkan
+</a>
                     
                             
                            

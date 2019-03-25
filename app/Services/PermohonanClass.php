@@ -9,47 +9,28 @@ use SPDP\Laporan;
 use SPDP\Penilaian;
 use SPDP\Services\KemajuanPermohonanClass;
 use SPDP\Services\MuatNaikLaporan;
+use SPDP\DokumenPermohonan;
+use SPDP\Services\DokumenPermohonanClass;
 
 
 class PermohonanClass 
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create(Request $request)
     {   
 
-
-            //Handle file upload
+        //Handle file upload
         if($request->hasFile('file_link'))
-        
         {
-
         $fileNameWithExt=$request -> file('file_link')->getClientOriginalName();
-
         // Get the full file name
-        $filename = pathinfo($fileNameWithExt,PATHINFO_FILENAME);            
-
+        $filename = pathinfo($fileNameWithExt,PATHINFO_FILENAME);
         //Get the extension file name
         $extension = $request ->file('file_link')-> getClientOriginalExtension();
         //File name to store
-        $fileNameToStore=$filename.'_'.time().'.'.$extension;
-        
+        $fileNameToStore=$filename.'_'.time().'.'.$extension;        
         //Upload Pdf file
         $path =$request ->file('file_link')->storeAs('public/cadangan_permohonan_baharu',$fileNameToStore);
-        
         }
             else{
                 $fileNameToStore = 'noPDF.pdf';
@@ -61,11 +42,12 @@ class PermohonanClass
         $permohonan= new Permohonan();
         $permohonan -> doc_title =$request -> input('doc_title');
         $permohonan -> jenis_permohonan_id =$request -> input('jenis_permohonan_id');
-        $permohonan -> file_name = $fileNameWithExt;
-        $permohonan -> file_link = $fileNameToStore;
         $permohonan -> id_penghantar = $user_id;
         $permohonan -> status_permohonan_id = 1;
         $permohonan -> save();
+
+        $dk = new DokumenPermohonanClass();
+        $dk->create($permohonan,$fileNameWithExt,$fileNameToStore);
 
         //Create a new kemajuan permohonan for each progress
         $kp = new KemajuanPermohonanClass();

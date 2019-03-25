@@ -22,7 +22,7 @@ class Laporan extends Model
   
   
      ];
-    protected $primaryKey = 'laporan_id';
+    protected $primaryKey = 'dokumen_permohonan_id';
     protected $table = 'laporans';
     
     public function penilaian(){

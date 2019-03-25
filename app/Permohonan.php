@@ -40,6 +40,10 @@ public function kemajuan_permohonans(){
     return $this->hasMany('SPDP\KemajuanPermohonan','permohonan_id');
 }
 
+public function dokumen_permohonans(){
+    return $this->hasMany('SPDP\KemajuanPermohonan','permohonan_id');
+}
+
 
 
 

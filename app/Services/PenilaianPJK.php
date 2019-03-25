@@ -75,10 +75,12 @@ class PenilaianPJK
         $permohonan = Permohonan::find($id);
         $jp =$permohonan->jenis_permohonan->jenis_permohonan_kod;
         $status_permohonan = $permohonan->value('status_permohonan_id');
+
+        
  
         switch ($jp) {
             case 'program_baharu':
-            case 'semakan_program':
+           
                     return $this->viewProgramBaharu($id);
             break;
             case 'kursus_teras_baharu':
@@ -88,6 +90,9 @@ class PenilaianPJK
                 break;
             case 'semakan_kursus_teras':
             case 'semakan_kursus_elektif':
+            case 'semakan_program':
+
+           
             if($status_permohonan == '1'  ) // if permohonan require minority changes then create a new perakuan
            
             return $this->viewKursusTerasElektifBaharu($id);

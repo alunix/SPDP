@@ -10,8 +10,8 @@ class DokumenPermohonan extends Model
        
   
      ];
-    protected $primaryKey = 'laporan_id';
-    protected $table = 'laporans';
+    protected $primaryKey = 'dokumen_permohonan_id';
+    protected $table = 'dokumen_permohonans';
     
     public function penilaian(){
     

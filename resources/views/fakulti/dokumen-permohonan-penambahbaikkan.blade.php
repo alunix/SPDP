@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Lampiran Perakuan PJK </div>
+                <div class="card-header">Memuat naik penambahbaikkan</div>
 
             <div class="card-body">
                  
@@ -14,7 +14,7 @@
                      {!! method_field('patch') !!} 
                         @csrf
                             <div class="form-group row">
-                            <label for="doc_title" class="col-md-4 col-form-label text-md-right">{{ __('Tajuk Program') }}</label>
+                            <label for="doc_title" class="col-md-4 col-form-label text-md-right">{{ __('Tajuk Permohonan') }}</label>
 
                             <div class="col-md-6">
                                
@@ -34,15 +34,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="fakulti" class="col-md-4 col-form-label text-md-right">{{ __('Fakulti') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="fakulti" type="text"  value="{{$permohonan->user->fakulti}}" class="form-control" name="fakulti"  required autofocus readonly>
-
-                               
-                            </div>
-                        </div>
+                     
                   
 
                         <div class="form-group row">
@@ -54,33 +46,13 @@
                                
                             </div>
                         </div> 
-
-
-
-                              
-
-                        <div class="form-group row">
-                             
-                             <label for="file_link" class="col-md-4 col-form-label text-md-right">{{ __('Lampiran permohonan') }}</label>
-
-                                <div class="col-md-6">
-
-                                
-                                <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/{$permohonan->file_link}")?>">{{ basename($permohonan->file_name) }} </a> 
-
-                                
-                                
-
-                                </div>
-
-                        </div>
                   
 
                         @if( ! empty($penilaian['perakuan_pjk']))
 
                             
                             <div class="form-group row">
-                            <label for="perakuan_pjk" class="col-md-4 col-form-label text-md-right">{{ __('Lampiran perakuan PJK') }}</label>
+                            <label for="perakuan_pjk" class="col-md-4 col-form-label text-md-right">{{ __('Fail penambahbaikkan') }}</label>
 
                             <div class="col-md-6">
                                 <a href ="<?php echo asset("storage/perakuan_pjk/$penilaian->perakuan_pjk_link")?>">{{ basename($penilaian->perakuan_pjk) }} </a>
@@ -93,7 +65,7 @@
                         
                         @else
                          <div class="form-group row">
-                            <label for="perakuan_pjk" class="col-md-4 col-form-label text-md-right">{{ __('Lampiran perakuan PJK') }}</label>
+                            <label for="perakuan_pjk" class="col-md-4 col-form-label text-md-right">{{ __('Fail penambahbaikkan') }}</label>
 
                             <div class="col-md-6">
                                 <input id="perakuan_pjk" type="file" class="form-control{{ $errors->has('perakuan_pjk') ? ' is-invalid' : '' }}" name="perakuan_pjk" value="{{ old('perakuan_pjk') }}" required autofocus>
@@ -105,6 +77,33 @@
                                 @endif
                             </div>
                         </div> 
+
+                        @endif
+
+                        
+         <table class="table table-striped">
+
+<thead>
+    <tr>
+    <th scope="col">No/Versi</th>
+    <th scope="col">Fail yang telah dimuat naik</th>
+    <th scope="col">Tarikh/Masa </th> 
+    
+    </tr>
+</thead>
+<tbody>
+
+
+
+</tbody>
+</table>
+
+
+
+
+
+
+
 
                         <div class="form-group row mb-0">
     <div class="col-md-6 offset-md-5">
@@ -119,8 +118,8 @@
     </div>
 </div>
 
-    //
-@endif
+    
+
                         
 
                         

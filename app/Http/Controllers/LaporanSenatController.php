@@ -2,20 +2,10 @@
 
 namespace SPDP\Http\Controllers;
 
-use SPDP\DokumenPermohonan;
+use SPDP\LaporanSenat;
 use Illuminate\Http\Request;
-use SPDP\Penilaian;
-use SPDP\Permohonan;
-use SPDP\User;
-use Illuminate\Support\Facades\Hash;
-use SPDP\Services\PenilaianClass;
-use SPDP\Services\DokumenPermohonanClass;
-use SPDP\Services\PenilaianPJK;
-use SPDP\Services\PenilaianJppa;
-use SPDP\Services\PenilaianSenat;
-use SPDP\Services\PenilaianPenilai;
 
-class DokumenPermohonanController extends Controller
+class LaporanSenatController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -51,22 +41,21 @@ class DokumenPermohonanController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \SPDP\DokumenPermohonan  $dokumenPermohonan
+     * @param  \SPDP\LaporanSenat  $laporanSenat
      * @return \Illuminate\Http\Response
      */
-    public function showPenambahbaikkan(DokumenPermohonan $dokumenPermohonan,$id)
+    public function show(LaporanSenat $laporanSenat)
     {
-        $permohonan = Permohonan::find($id);
-        return view ('fakulti.dokumen-permohonan-penambahbaikkan')->with('permohonan',$permohonan);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \SPDP\DokumenPermohonan  $dokumenPermohonan
+     * @param  \SPDP\LaporanSenat  $laporanSenat
      * @return \Illuminate\Http\Response
      */
-    public function edit(DokumenPermohonan $dokumenPermohonan)
+    public function edit(LaporanSenat $laporanSenat)
     {
         //
     }
@@ -75,10 +64,10 @@ class DokumenPermohonanController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \SPDP\DokumenPermohonan  $dokumenPermohonan
+     * @param  \SPDP\LaporanSenat  $laporanSenat
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DokumenPermohonan $dokumenPermohonan)
+    public function update(Request $request, LaporanSenat $laporanSenat)
     {
         //
     }
@@ -86,10 +75,10 @@ class DokumenPermohonanController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \SPDP\DokumenPermohonan  $dokumenPermohonan
+     * @param  \SPDP\LaporanSenat  $laporanSenat
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DokumenPermohonan $dokumenPermohonan)
+    public function destroy(LaporanSenat $laporanSenat)
     {
         //
     }

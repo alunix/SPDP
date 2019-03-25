@@ -5,8 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header" >Halaman Fakulti</div>
-               
+                <div class="card-header">Halaman Fakulti</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -15,9 +14,7 @@
                         </div>
                     @endif
                     
-                   
-
-<a class="btn icon-btn btn-success" href="http://spdp.com/permohonan-baharu">
+                    <a class="btn icon-btn btn-success" href="http://spdp.com/permohonan-baharu">
 <!-- <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span> -->
 Permohonan Baharu
 </a>
@@ -28,12 +25,6 @@ Permohonan Dihantar
 </a>
 
 
-<a class="btn icon-btn btn-info" href="{{ route('dokumenPermohonan.penambahbaikkan.show) }}">
-Muat naik penambahbaikkan
-</a>
-                    
-                            
-                           
 
                     
                 </div>

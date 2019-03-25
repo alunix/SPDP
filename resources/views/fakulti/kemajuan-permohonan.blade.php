@@ -12,6 +12,9 @@
     <div class="container">
  
    <h5>Permohonan ID :{{$permohonan->id}}</h5>
+   <a class="btn icon-btn btn-info" href="{{ route('dokumenPermohonan.penambahbaikkan.show',$permohonan->id) }}">
+Muat naik penambahbaikkan
+</a>
 
 
 

@@ -70,6 +70,9 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware','middlewa
 
 	Route::get('/kemajuan-permohonan/{permohonan}', 'KemajuanPermohonanController@show')->name('fakulti.kemajuanPermohonan');
 
+	/*----------------------- Fakulti nak memuat naik laporan---------------------------- */
+	Route::get('/muat-naik-penambahbaikkan/{permohonan}', 'DokumenPermohonanController@showPenambahbaikkan')->name('dokumenPermohonan.penambahbaikkan.show');
+
 });
 
 /*----------------------- Pusat Jaminan Kualiti(PJK) ------------- */	

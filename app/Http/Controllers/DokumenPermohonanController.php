@@ -4,6 +4,16 @@ namespace SPDP\Http\Controllers;
 
 use SPDP\DokumenPermohonan;
 use Illuminate\Http\Request;
+use SPDP\Penilaian;
+use SPDP\Permohonan;
+use SPDP\User;
+use Illuminate\Support\Facades\Hash;
+use SPDP\Services\PenilaianClass;
+use SPDP\Services\DokumenPermohonanClass;
+use SPDP\Services\PenilaianPJK;
+use SPDP\Services\PenilaianJppa;
+use SPDP\Services\PenilaianSenat;
+use SPDP\Services\PenilaianPenilai;
 
 class DokumenPermohonanController extends Controller
 {
@@ -44,9 +54,10 @@ class DokumenPermohonanController extends Controller
      * @param  \SPDP\DokumenPermohonan  $dokumenPermohonan
      * @return \Illuminate\Http\Response
      */
-    public function show(DokumenPermohonan $dokumenPermohonan)
+    public function showPenambahbaikkan(DokumenPermohonan $dokumenPermohonan,$id)
     {
-        //
+        $permohonan = Permohonan::find($id);
+        return view ('');
     }
 
     /**

@@ -19,7 +19,7 @@ class CreateDokumenPermohonansTable extends Migration
             $table->integer('permohonan_id')->unsigned();
             $table->string('file_name'); //To show the name of the file
             $table->string('file_link');
-            $table->integer('versi')->unsigned();
+            $table->integer('versi');
             
             $table->foreign('permohonan_id')->references('permohonan_id')->on('permohonans');
 

@@ -18,7 +18,6 @@ class PermohonanClass
 
     public function create(Request $request)
     {   
-
         //Handle file upload
         if($request->hasFile('file_link'))
         {
@@ -58,17 +57,6 @@ class PermohonanClass
            ];  
 
         return redirect('/senarai-permohonan-dihantar')->with($msg);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     public function storePermohonanTidakDilulus(KemajuanPermohonanClass $kp,Request $request,$id)

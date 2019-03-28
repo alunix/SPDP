@@ -17,14 +17,16 @@ class DokumenPermohonanClass
 
     public function create($permohonan,$fileNameWithExt,$fileNameToStore)
     {   
+
+      
         $dp = new DokumenPermohonan();
-        $dp->permohonan_id= $permohonan->permohonan_id;
+        $dp->permohonan_id= $permohonan->id;
         $dp->file_name = $fileNameWithExt;
         $dp->file_link=$fileNameToStore;
         $dp->versi = 1;
         $dp->save();
 
-        return redirect('/senarai-permohonan-dihantar')->with($msg);
+        // return redirect('/senarai-permohonan-dihantar')->with($msg);
     }
 
     

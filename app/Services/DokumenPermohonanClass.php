@@ -47,6 +47,12 @@ class DokumenPermohonanClass
         return redirect('/senarai-permohonan-dihantar')->with($msg);
     }
 
+    public function show(KemajuanPermohonan $kj,$id)
+    {
+        $permohonan= Permohonan::find($id);
+        return view('fakulti.kemajuan-permohonan')->with('kjs',$permohonan->kemajuan_permohonans)->with('permohonan',$permohonan)->with('dokumen_permohonans',$permohonan->dokumen_permohonans);
+
+    }
 
 
    

@@ -63,6 +63,9 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware','middlewa
 
 	/*----------------------- Fakulti nak semak permohonan yang dihantar ------------- */
 	Route::get('/senarai-permohonan-dihantar', 'PermohonanController@permohonanDihantar')->name('permohonan.dihantar');
+	
+	/*----------------------- Senarai dokumen permohonan ------------- */
+	Route::get('/senarai-dokumen-permohonan/{permohonan}', 'DokumenPermohonanController@show')->name('dokumenPermohonan.dihantar');
 
 	/*----------------------- Fakulti nak mengemas kini tetapan profil ------------- */
 	Route::get('/settings', 'UserController@edit')->name('settings');

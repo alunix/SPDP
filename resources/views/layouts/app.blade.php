@@ -26,6 +26,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/styles.scss') }}" rel="stylesheet">
+    
+
 
     <style>
         .links > a {
@@ -105,9 +107,7 @@
                                 @endif
                             </li>
                         @else
-                        <li class="nav-item">
-                                <a href="#" class="navbar-left"><img src="/img/navbar/baseline_notifications_black_18dp.png"></a>
-                        </li>
+                       
                         
 
                             <li class="nav-item dropdown">

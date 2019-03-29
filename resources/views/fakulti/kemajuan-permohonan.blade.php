@@ -12,9 +12,49 @@
     <div class="container">
  
    <h5>Permohonan ID :{{$permohonan->id}}</h5>
-   <a class="btn icon-btn btn-info" href="{{ route('dokumenPermohonan.penambahbaikkan.show',$permohonan->id) }}">
+   <a class="btn icon-btn btn-info" href="{{ route('dokumenPermohonan.penambahbaikkan.show',$permohonan->permohonan_id) }}">
 Muat naik penambahbaikkan
 </a>
+<br><br>
+<h5>Dokumen yang telah dihantar</h5>
+
+<table class="table table-striped">
+
+<thead>
+    <tr>
+    <th scope="col">No</th>
+    <th scope="col">Versi</th>
+    <th scope="col">Dokumen</th>
+    <th scope="col">Tarikh/Masa Penghantaran</th>
+    
+    
+    </tr>
+</thead>
+<tbody>
+@if( ! $dokumen_permohonans->isEmpty() )
+@foreach($dokumen_permohonans as $dk)
+<tr>
+<th scope="row">{{ $loop->iteration}}</th>
+<td> {{$dk->versi}}</td>   
+<td><a href ="<?php echo asset("storage/cadangan_permohonan_baharu/$dk->file_link")?>">{{ basename($dk->file_name) }}</td> </a>
+<td> {{$dk->created_at}}</td>             
+
+
+</tr>
+@endforeach
+
+
+
+</tbody>
+</table>
+
+
+
+@else
+
+<p> Tiada dokumen permohonna telah dihantar</p>
+
+@endif
 
 
 

@@ -16,8 +16,12 @@ class Permohonan extends Model
    ];
 
    protected $table = 'permohonans';
+   protected $primaryKey = 'permohonan_id';
 
-   
+   public function version_counts(){
+    
+    return $this->dokumen_permohonans()->count();
+ }
    
  public function user(){
 
@@ -41,12 +45,8 @@ public function kemajuan_permohonans(){
 }
 
 public function dokumen_permohonans(){
-    return $this->hasMany('SPDP\KemajuanPermohonan','permohonan_id');
+    return $this->hasMany('SPDP\DokumenPermohonan','permohonan_id');
 }
-
-
-
-
 
  public function jenis_permohonan(){
   // return $this->hasOne('SPDP\Penilaian','penilaianID');

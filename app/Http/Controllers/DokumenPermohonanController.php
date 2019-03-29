@@ -22,9 +22,11 @@ class DokumenPermohonanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function show($id)
     {
-        //
+        $permohonan= Permohonan::find($id);
+        return view('fakulti.senarai-dokumen-permohonan')->with('dokumen_permohonans',$permohonan->dokumen_permohonans)->with('permohonans',$permohonan);
+
     }
 
     /**

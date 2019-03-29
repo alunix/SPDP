@@ -24,9 +24,9 @@
     <th scope="col">No</th>
     <th scope="col">ID</th>
     <th scope="col">Jenis</th>
+    <th scope="col">Bilangan penghantaran</th>
     <th scope="col">Nama program/semakan</th>
     <th scope="col">Penghantar</th>
-    <th scope="col">Dokumen</th>
     <th scope="col">Tarikh/Masa Penghantaran</th>    
     <th scope="col">Status</th>
     <th scope="col">Tarikh/Masa Status</th>    
@@ -42,15 +42,18 @@
 @foreach($permohonans as $program)
 <tr>
 <th scope="row">{{$loop->iteration}}</th>
-<td> {{$program->id}}</td>  
+<td> {{$program->permohonan_id}}</td>  
 <td> {{$program->jenis_permohonan->jenis_permohonan_huraian}}</td>   
-<td> {{$program->doc_title}}</td>               
+<td> {{$program->version_counts()}}</td>
+<td> {{$program->doc_title}}</td>                 
 <td>{{$program->user->name}}</td>
-<td> <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/$program->file_link")?>">{{ basename($program->file_name) }}</td>
 <td> {{$program->created_at->format('h:i a d/m/Y') }}</td>
 <td>{{$program->status_permohonan->status_permohonan_huraian}} </td>
 <td> {{$program->updated_at->format('h:i a d/m/Y') }}</td>
-<td><a href="{{ route('fakulti.kemajuanPermohonan',$program->id) }}" class="btn btn-primary">SELECT</a></td>
+<td><a href="{{ route('fakulti.kemajuanPermohonan',$program->permohonan_id) }}" class="btn btn-primary">SELECT</a></td>
+<td><a href="{{ route('dokumenPermohonan.dihantar',$program->permohonan_id) }}" class="btn btn-primary">Dokumen</a></td>
+<td><a href="{{ route('fakulti.kemajuanPermohonan',$program->permohonan_id) }}" class="btn btn-primary">SELECT</a></td>
+
 
 </tr>
 @endforeach

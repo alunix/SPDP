@@ -34,6 +34,7 @@ class PermohonanClass
             else{
                 $fileNameToStore = 'noPDF.pdf';
             }
+        $fileSize = $request->file('file_link')->getSize();
 
         //Permohonan baharu
         $user_id = auth()->user()->id;
@@ -46,7 +47,7 @@ class PermohonanClass
         $permohonan -> save();
 
         $dk = new DokumenPermohonanClass();
-        $dk->create($permohonan,$fileNameWithExt,$fileNameToStore,$request);
+        $dk->create($permohonan,$fileNameWithExt,$fileNameToStore,$request,$fileSize);
 
         //Create a new kemajuan permohonan for each progress
         $kp = new KemajuanPermohonanClass();

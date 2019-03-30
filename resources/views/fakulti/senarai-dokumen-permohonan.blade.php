@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card" style="width:65rem;">
-                <div class="card-header" >Senarai dokumen permohonan</div>
+                <div class="card-header" >Sejarah versi dokumen</div>
 
                 <div class="card-body">
                
@@ -19,8 +19,8 @@
 <thead>
     <tr>
     <th scope="col">No</th>
-    <th scope="col">Versi</th>
     <th scope="col">Dokumen</th>
+    <th scope="col">Size</th>
     <th scope="col">Komen</th>
     <th scope="col">Tarikh/Masa Penghantaran</th>
  
@@ -32,12 +32,14 @@
 @if( ! $dokumen_permohonans->isEmpty() )
 @foreach($dokumen_permohonans as $dk)
 <tr>
-<th scope="row">{{ $loop->iteration}}</th>
-<td> {{$dk->versi}}</td>   
+
+<th scope="row">{{$dk->versi}}</th>
+
 <td><a href ="<?php echo asset("storage/cadangan_permohonan_baharu/$dk->file_link")?>">{{ basename($dk->file_name) }}</td> </a>
+<td> {{$dk->file_size}} KB</td>
 <td> {{$dk->komen}}</td>   
 
-<td> {{$dk->created_at->format('h:i a d/m/Y')}}</td>             
+<td> {{$dk->created_at->format('d/m/Y h:i a')}}</td>             
 
 
 </tr>

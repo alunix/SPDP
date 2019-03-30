@@ -15,7 +15,7 @@ use SPDP\DokumenPermohonan;
 class DokumenPermohonanClass 
 {
 
-    public function create($permohonan,$fileNameWithExt,$fileNameToStore,$request)
+    public function create($permohonan,$fileNameWithExt,$fileNameToStore,$request,$fileSize)
     {   
 
       
@@ -23,15 +23,16 @@ class DokumenPermohonanClass
         $dp->permohonan_id= $permohonan->permohonan_id;
         $dp->file_name = $fileNameWithExt;
         $dp->file_link=$fileNameToStore;
-        $dp -> komen =$request -> input('summary-ckeditor');
-        $dp->versi = 1;
+        $dp->file_size=$fileSize/1000;
+        $dp ->komen =$request -> input('summary-ckeditor');
+        $dp->versi = 1.0;
         $dp->save();
 
         // return redirect('/senarai-permohonan-dihantar')->with($msg);
     }
 
     
-    public function update($permohonan,$fileNameWithExt,$fileNameToStore,$request)
+    public function update($permohonan,$fileNameWithExt,$fileNameToStore,$request,$fileSize)
     {   
         $dk = DokumenPermohonan::where('permohonan_id',$permohonan->permohonan_id)->get();
         $version_count = count($dk);
@@ -42,6 +43,7 @@ class DokumenPermohonanClass
         $dp->permohonan_id= $permohonan->permohonan_id;
         $dp->file_name = $fileNameWithExt;
         $dp->file_link=$fileNameToStore;
+        $dp->file_size=$fileSize;
         $dp -> komen =$request -> input('summary-ckeditor');
         $dp->versi = $version_count+1;
         $dp->save();

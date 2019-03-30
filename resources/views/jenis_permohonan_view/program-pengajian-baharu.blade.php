@@ -8,14 +8,7 @@
                 <div class="card-header">Program pengajian baharu</div>
 
             <div class="card-body">
-                     
-                     
-
                         @csrf
-                    
-
-                        
-
                          <div class="form-group row">
                             <label for="doc_title" class="col-md-4 col-form-label text-md-right">{{ __('Tajuk Program') }}</label>
 
@@ -58,19 +51,21 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="versi" class="col-md-4 col-form-label text-md-right">{{ __('Versi') }}</label>
 
+                            <div class="col-md-6">
+                                <input id="versi" type="text" value="{{ $dp->versi}}" class="form-control" name="versi"  required autofocus readonly>
 
-                              
+                               
+                            </div>
+                        </div>
                              
                         <div class="form-group row">
                              <label for="file_link" class="col-md-4 col-form-label text-md-right">{{ __('Link Kepada File') }}</label>
 
-                                <div class="col-md-6">                       
-                                                    
-                               
-                               
-                               
-                                <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/{$permohonan->file_link}")?>">{{ basename($permohonan->file_name) }} </a>
+                                <div class="col-md-6">       
+                                <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/{$dp->file_link}")?>">{{ basename($dp->file_name) }} </a>
                                 </div>
                                 
                         </div>
@@ -88,7 +83,6 @@
                                     
                             </a>
                                 
-                                
                             
                             <a href="{{ route('pjk.permohonanTidakDilulus', ['permohonan' => $permohonan->id])  }}">
                                     <input type="button" class="btn btn-danger" value="Penambahbaikan" />
@@ -97,14 +91,10 @@
                             
                             @elseif(Auth::user()->role=="penilai")
                             
-                            <a href="/permohonans/{{$permohonan->id}}/kelulusan-permohonan">
+                            <a href="/permohonans/{{$permohonan->permohonan_id}}/kelulusan-permohonan">
                                     <input `type`="button" class="btn btn-success" value="Lulus permohonan" />
                                     
                             </a>
-                                
-                                
-                            
-                            
                             
                             <a href="/permohonans/{{@$permohonan[id]}}/pelantikan-penilai">
                                     <input type="button" class="btn btn-danger" value="Penambahbaikan" />
@@ -117,12 +107,6 @@
                                     <input type="button" class="btn btn-success" value="Lulus permohonan" />
                                     
                             </a>
-                                
-                                
-                            
-                            <!-- <button type="submit" class="btn btn-danger" value="reject-permohonan" name="submitbutton" >
-                                {{ __('Penambahbaikan') }}
-                            </button> -->
                             
                             <a href="/permohonans/{{@$permohonan[id]}}/pelantikan-penilai">
                                     <input type="button" class="btn btn-danger" value="Penambahbaikan" />
@@ -135,37 +119,15 @@
                                     <input type="button" class="btn btn-success" value="Lulus permohonan" />
                                     
                             </a>
-                                
-                                
-                            
-                            <!-- <button type="submit" class="btn btn-danger" value="reject-permohonan" name="submitbutton" >
-                                {{ __('Penambahbaikan') }}
-                            </button> -->
                             
                             <a href="/permohonans/{{@$permohonan[id]}}/pelantikan-penilai">
                                     <input type="button" class="btn btn-danger" value="Penambahbaikan" />
                                     
                             </a>
-
-
-                            
                             
                             @endif    
-
-                            
-
-                              
-                             
-
                             </div>
                         </div>
-
-                        
-                        
-
-                     
-                      
-
                          <hr style="border-color:white;">
                         
 

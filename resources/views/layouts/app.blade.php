@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
+
 <head>
 
     <!-- Fav Icon Testing -->
@@ -16,8 +18,11 @@
 
     <title> SPDP</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+   
+
+
+
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -26,6 +31,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/styles.scss') }}" rel="stylesheet">
+
+
 
     
 
@@ -79,8 +86,11 @@
              /* @stack('styles.scss');
              */
     </style>
+
+
 </head>
 <body>
+
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">

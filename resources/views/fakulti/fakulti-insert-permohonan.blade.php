@@ -1,8 +1,11 @@
 @extends('layouts.app')
 
-      
+
+
 
 @section('content')
+
+
 <div class="container">
   
     <div class="row justify-content-center">
@@ -99,6 +102,8 @@
                         </div>
                     </div>
 
+  
+
                         
 
                          <div class="form-group row mb-0">
@@ -113,16 +118,29 @@
                        
                 
             </div>
+            
         </div>
         
     </div>
     
+    
 </div>
 
-
-
-
+<script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+<script>
+    CKEDITOR.replace( 'summary-ckeditor' );
+</script>
 
 @endsection
+
+
+
+
+
+
+
+
+
+
 
 

@@ -15,7 +15,7 @@ class CreatePenilaiansTable extends Migration
     {
         Schema::create('penilaians', function (Blueprint $table) {
             $table->increments('id');
-            // $table->integer('dokumen_id')->unsigned()->unique();
+            $table->integer('permohonan_id_penilaian')->unsigned()->unique();
             $table->integer('penilaian_pjk')->unsigned()->nullable();;
             $table->integer('penilaian_panel_1')->unsigned()->nullable();
             $table->integer('penilaian_jppa')->unsigned()->nullable();
@@ -23,7 +23,7 @@ class CreatePenilaiansTable extends Migration
             $table->integer('status_penilaian');
 
 
-            // $table->foreign('dokumen_id')->references('id')->on('permohonans');
+            $table->foreign('permohonan_id_penilaian')->references('permohonan_id')->on('permohonans');
             $table->foreign('penilaian_pjk')->references('id')->on('users');
             $table->foreign('penilaian_panel_1')->references('id')->on('users');
             $table->foreign('penilaian_jppa')->references('id')->on('users');

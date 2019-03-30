@@ -20,7 +20,7 @@ class PenilaianClass
         $role =auth()->user()->role;
         $user_id = auth()->user()->id;
         $penilaian = new Penilaian();
-        $penilaian->dokumen_id= $permohonan->id;
+        $penilaian->permohonan_id_penilaian= $permohonan->permohonan_id;
 
         switch ($role) {
             case 'pjk':

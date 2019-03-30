@@ -63,7 +63,6 @@ class PenilaianPJK
 
         $penilaian = new PenilaianClass();
         $penilaian =  $penilaian->create($permohonan);
-        $penilaian -> dokumen_id = $permohonan->id;
         $penilaian -> penilaian_panel_1= $selectedPenilai[0];
         $penilaian -> save();
          

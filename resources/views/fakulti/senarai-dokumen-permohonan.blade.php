@@ -20,7 +20,7 @@
     <tr>
     <th scope="col">No</th>
     <th scope="col">Dokumen</th>
-    <th scope="col">Size</th>
+    <th scope="col">Saiz</th>
     <th scope="col">Komen</th>
     <th scope="col">Tarikh/Masa Penghantaran</th>
  

@@ -2,6 +2,7 @@
 
 namespace SPDP\Http\Controllers;
 use SPDP\Permohonan;
+use SPDP\DokumenPermohonan;
 use SPDP\User;
 use SPDP\Penilaian;
 use Illuminate\Http\Request;
@@ -91,7 +92,8 @@ class PermohonanController extends Controller
     {
         $permohonan = Permohonan::find($id);
         $users = User::where('role','penilai')->get();
-        return view ('pjk.pjk-melantik-penilai')->with('users',$users)->with('permohonan',$permohonan);
+        $dp = DokumenPermohonan::where('permohonan_id',$permohonan->permohonan_id)->orderBy('versi', 'DESC')->first();
+        return view ('pjk.pjk-melantik-penilai')->with('users',$users)->with('permohonan',$permohonan)->with('dp',$dp);
     }
 
   

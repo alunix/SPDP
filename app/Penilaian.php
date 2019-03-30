@@ -25,7 +25,7 @@ class Penilaian extends Model
 
     public function permohonan(){
     
-      return $this->belongsTo('SPDP\Permohonan','dokumen_id');// set the foreign key (second parameter)
+      return $this->belongsTo('SPDP\Permohonan','permohonan_id_penilaian');// set the foreign key (second parameter)
      }
 
      public function laporan(){

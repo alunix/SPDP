@@ -15,12 +15,12 @@ class CreateLaporanJppasTable extends Migration
     {
         Schema::create('laporan_jppas', function (Blueprint $table) {
             $table->increments('laporan_jppa_id');
-            $table->integer('permohonan_id_laporan')->unsigned();
+            $table->integer('dokumen_permohonan_id')->unsigned();
             $table->string('tajuk_fail');
             $table->string('tajuk_fail_link');
             $table->integer('versi_permohonan_dokumen');
 
-            $table->foreign('permohonan_id_laporan')->references('permohonan_id')->on('permohonans');
+            $table->foreign('dokumen_permohonan_id')->references('dokumen_permohonan_id')->on('dokumen_permohonans');
         });
     }
 

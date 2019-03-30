@@ -74,11 +74,16 @@
                         <div class="form-group row mb-0">
 
                             <div class="col-md-6 offset-md-5">
+
+                            <a href="{{ route('dokumenPermohonan.dihantar', ['permohonan' => $permohonan->permohonan_id])  }}">
+                                    <input type="button" class="btn btn-info" value="Lihat versi sejarah" />
+                                    
+                            </a>
                        
                             @if(Auth::user()->role == "pjk")
                                  
                                  
-                            <a href="{{ route('pelantikan_penilai.show', ['permohonan' => $permohonan->id])  }}">
+                            <a href="{{ route('pelantikan_penilai.show', ['permohonan' => $permohonan->permohonan_id])  }}">
                                     <input type="button" class="btn btn-success" value="Lantik penilai" />
                                     
                             </a>

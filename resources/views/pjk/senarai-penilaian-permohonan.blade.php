@@ -5,10 +5,10 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Senarai penilaian program </div>
+                <div class="card-header">Senarai penilaian permohonan</div>
 
             <div class="card-body" style="width:500px;">
-        {{--<form method="GET" action="{{ ['program' => $program->id,'penilaian'=>$penilaian->id]}}" >  --}}
+    
                   
             
                         <table class="table table-striped">                  

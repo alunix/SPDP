@@ -48,7 +48,7 @@
 <td>{{$permohonan->user->name}} </td>
 <td>{{$permohonan->fakulti}} </td> 
 <td>{{$permohonan->created_at->format('h:i a d/m/Y')}}  </td> 
-<td><a href="{{ route('view-permohonan-baharu',$permohonan->id) }}" class="btn btn-primary">SELECT</a></td>
+<td><a href="{{ route('view-permohonan-baharu',$permohonan->permohonan_id) }}" class="btn btn-primary">SELECT</a></td>
 </tr>
 @endforeach
 @endif

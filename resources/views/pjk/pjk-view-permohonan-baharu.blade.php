@@ -25,6 +25,7 @@
     <tr>
     <th scope="col">Permohonan ID</th>
     <th scope="col">Jenis permohonan</th>
+    <th scope="col">Bilangan penghantaran</th>
     <th scope="col">Nama program/kursus</th>
     <th scope="col">Nama penghantar</th>
     <th scope="col">Fakulti</th>
@@ -41,15 +42,15 @@
 @if( ! $permohonans->isEmpty() )
 @foreach($permohonans as $permohonan)
 <tr>
-<th scope="row">{{$permohonan->id}}</th>
+<th scope="row">{{$permohonan->permohonan_id}}</th>
 <td>{{$permohonan->jenis_permohonan->jenis_permohonan_huraian}} </td>
-<!-- <td><a href="/permohonan/{{$permohonan->id}}">{{$permohonan->doc_title}}</td>                -->
+<td>{{$permohonan->version_counts()}}</td>   
 <td>{{$permohonan->doc_title}}</td>   
 <td>{{$permohonan->user->name}} </td>
 <td>{{$permohonan->user->fakulti}} </td> 
 <td>{{$permohonan->created_at->format('h:i a d/m/Y')}}  </td> 
 
-<td><a href="{{ route('view-permohonan-baharu',$permohonan->id) }}" class="btn btn-primary">SELECT</a></td>
+<td><a href="{{ route('view-permohonan-baharu',$permohonan->permohonan_id) }}" class="btn btn-primary">SELECT</a></td>
 </tr>
 @endforeach
 @endif

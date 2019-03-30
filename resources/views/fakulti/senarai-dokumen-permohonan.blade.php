@@ -21,7 +21,9 @@
     <th scope="col">No</th>
     <th scope="col">Versi</th>
     <th scope="col">Dokumen</th>
+    <th scope="col">Komen</th>
     <th scope="col">Tarikh/Masa Penghantaran</th>
+ 
     
     
     </tr>
@@ -33,6 +35,8 @@
 <th scope="row">{{ $loop->iteration}}</th>
 <td> {{$dk->versi}}</td>   
 <td><a href ="<?php echo asset("storage/cadangan_permohonan_baharu/$dk->file_link")?>">{{ basename($dk->file_name) }}</td> </a>
+<td> {{$dk->komen}}</td>   
+
 <td> {{$dk->created_at->format('h:i a d/m/Y')}}</td>             
 
 

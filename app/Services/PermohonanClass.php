@@ -46,17 +46,17 @@ class PermohonanClass
         $permohonan -> save();
 
         $dk = new DokumenPermohonanClass();
-        return  $dk->create($permohonan,$fileNameWithExt,$fileNameToStore);
+        $dk->create($permohonan,$fileNameWithExt,$fileNameToStore,$request);
 
         //Create a new kemajuan permohonan for each progress
         $kp = new KemajuanPermohonanClass();
-       return $kp->create($permohonan);
+        $kp->create($permohonan);
                   
         $msg = [
             'message' => 'Permohonan berjaya dihantar',
            ];  
 
-           return redirect()->route('permohonan.dihantar', [$param])->with($msg);
+           return redirect()->route('permohonan.dihantar')->with($msg);
     }
 
     public function storePermohonanTidakDilulus(KemajuanPermohonanClass $kp,Request $request,$id)

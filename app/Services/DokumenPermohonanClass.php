@@ -15,14 +15,15 @@ use SPDP\DokumenPermohonan;
 class DokumenPermohonanClass 
 {
 
-    public function create($permohonan,$fileNameWithExt,$fileNameToStore)
+    public function create($permohonan,$fileNameWithExt,$fileNameToStore,$request)
     {   
 
       
         $dp = new DokumenPermohonan();
-        $dp->permohonan_id= $permohonan->id;
+        $dp->permohonan_id= $permohonan->permohonan_id;
         $dp->file_name = $fileNameWithExt;
         $dp->file_link=$fileNameToStore;
+        $dp -> komen =$request -> input('summary-ckeditor');
         $dp->versi = 1;
         $dp->save();
 
@@ -30,15 +31,18 @@ class DokumenPermohonanClass
     }
 
     
-    public function update($permohonan,$fileNameWithExt,$fileNameToStore)
+    public function update($permohonan,$fileNameWithExt,$fileNameToStore,$request)
     {   
         $dk = DokumenPermohonan::where('permohonan_id',$permohonan->permohonan_id)->get();
         $version_count = count($dk);
+
+        
 
         $dp = new DokumenPermohonan();
         $dp->permohonan_id= $permohonan->permohonan_id;
         $dp->file_name = $fileNameWithExt;
         $dp->file_link=$fileNameToStore;
+        $dp -> komen =$request -> input('summary-ckeditor');
         $dp->versi = $version_count+1;
         $dp->save();
 

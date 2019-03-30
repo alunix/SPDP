@@ -33,7 +33,7 @@
 <th scope="row">{{ $loop->iteration}}</th>
 <td> {{$dk->versi}}</td>   
 <td><a href ="<?php echo asset("storage/cadangan_permohonan_baharu/$dk->file_link")?>">{{ basename($dk->file_name) }}</td> </a>
-<td> {{$dk->created_at}}</td>             
+<td> {{$dk->created_at->format('h:i a d/m/Y')}}</td>             
 
 
 </tr>

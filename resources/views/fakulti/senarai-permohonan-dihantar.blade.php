@@ -50,7 +50,7 @@
 <td> {{$program->created_at->format('h:i a d/m/Y') }}</td>
 <td>{{$program->status_permohonan->status_permohonan_huraian}} </td>
 <td> {{$program->updated_at->format('h:i a d/m/Y') }}</td>
-<td><a href="{{ route('fakulti.kemajuanPermohonan',$program->permohonan_id) }}" class="btn btn-primary">SELECT</a></td>
+<td><a href="{{ route('fakulti.kemajuanPermohonan',$program->permohonan_id) }}" class="btn btn-primary">Kemajuan</a></td>
 <td><a href="{{ route('dokumenPermohonan.dihantar',$program->permohonan_id) }}" class="btn btn-primary">Dokumen</a></td>
 <td><a href="{{ route('fakulti.kemajuanPermohonan',$program->permohonan_id) }}" class="btn btn-primary">SELECT</a></td>
 

@@ -148,6 +148,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class, 
         Collective\Html\HtmlServiceProvider::class, //Laravel CollectiveS
+        
 
         /*
          * Package Service Providers...
@@ -161,6 +162,7 @@ return [
         // SPDP\Providers\BroadcastServiceProvider::class,
         SPDP\Providers\EventServiceProvider::class,
         SPDP\Providers\RouteServiceProvider::class,
+        Unisharp\Ckeditor\ServiceProvider::class, //TextArea ckEditor
 
     ],
 
@@ -213,6 +215,8 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class, //laravel collective
         'role' => SPDP\Http\Middleware\Role::class,
+        
+        
 
     ],
 

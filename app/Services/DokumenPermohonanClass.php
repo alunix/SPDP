@@ -45,7 +45,7 @@ class DokumenPermohonanClass
         $dp->file_link=$fileNameToStore;
         $dp->file_size=$fileSize;
         $dp -> komen =$request -> input('summary-ckeditor');
-        $dp->versi = $version_count+1;
+        $dp->versi = $version_count+1.0;
         $dp->save();
 
 

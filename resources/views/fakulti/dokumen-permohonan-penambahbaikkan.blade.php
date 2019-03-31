@@ -33,8 +33,6 @@
                                
                             </div>
                         </div>
-
-                     
                   
 
                         <div class="form-group row">
@@ -46,39 +44,6 @@
                                
                             </div>
                         </div> 
-                  
-
-                        @if( ! empty($penilaian['perakuan_pjk']))
-
-                            
-                            <div class="form-group row">
-                            <label for="perakuan_pjk" class="col-md-4 col-form-label text-md-right">{{ __('Fail penambahbaikkan') }}</label>
-
-                            <div class="col-md-6">
-                                <a href ="<?php echo asset("storage/perakuan_pjk/$penilaian->perakuan_pjk_link")?>">{{ basename($penilaian->perakuan_pjk) }} </a>
-                            </div>
-
-                        </div> 
-
-                       
-                        
-                        
-                        @else
-                         <div class="form-group row">
-                            <label for="perakuan_pjk" class="col-md-4 col-form-label text-md-right">{{ __('Fail penambahbaikkan') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="perakuan_pjk" type="file" class="form-control{{ $errors->has('perakuan_pjk') ? ' is-invalid' : '' }}" name="perakuan_pjk" value="{{ old('perakuan_pjk') }}" required autofocus>
-
-                                @if ($errors->has('perakuan_pjk'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('perakuan_pjk') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div> 
-
-                        @endif
 
                         
          <table class="table table-striped">
@@ -93,27 +58,34 @@
 </thead>
 <tbody>
 
+<tbody>
+@if( ! $dokumen_permohonans->isEmpty() )
+@foreach($dokumen_permohonans as $program)
+<tr>
+<th scope="row">{{$program->versi}}</th>
+<td> {{$program->file_link}}</td>  
+<td> {{$program->saiz}}</td>  
 
+</tr>
+@endforeach
+
+</tbody>
 
 </tbody>
 </table>
 
+@else
 
+<p> Tiada dokumen permohonan telah dijumpai </p>
 
+@endif
 
-
-
-
-
-                        <div class="form-group row mb-0">
+<div class="form-group row mb-0">
     <div class="col-md-6 offset-md-5">
 
         <button type="submit" class="btn btn-success" value="accept-program" name="submitbutton">
         {{ __('Hantar') }}
         </button>
-        
-       
-     
 
     </div>
 </div>

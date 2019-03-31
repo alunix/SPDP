@@ -24,7 +24,7 @@ class Permohonan extends Model
  }
 
  public function dokumen_permohonan(){
-    return $this->dokumen_permohonans()->orderBy('versi', 'DESC')->first();
+    return $this->dokumen_permohonans()->orderBy('versi', 'DESC')->first(); //retrieve dokumen terkini
 }
    
  public function user(){

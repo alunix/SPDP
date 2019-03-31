@@ -25,7 +25,7 @@ class DokumenPermohonanController extends Controller
     public function show($id)
     {
         $permohonan= Permohonan::find($id);
-        return view('fakulti.senarai-dokumen-permohonan')->with('dokumen_permohonans',$permohonan->dokumen_permohonans)->with('permohonans',$permohonan);
+        return view('fakulti.senarai-dokumen-permohonan')->with('dokumen_permohonans',$permohonan->dokumen_permohonans)->with('permohonan',$permohonan);
 
     }
 
@@ -59,8 +59,16 @@ class DokumenPermohonanController extends Controller
     public function showPenambahbaikkan(DokumenPermohonan $dokumenPermohonan,$id)
     {
         $permohonan = Permohonan::find($id);
-        return view ('fakulti.dokumen-permohonan-penambahbaikkan')->with('permohonan',$permohonan);
+        return view ('fakulti.dokumen-permohonan-penambahbaikkan')->with('permohonan',$permohonan)->with('dokumen_permohonans',$permohonan->dokumen_permohonans);
     }
+
+    public function submitPenambahbaikkan(DokumenPermohonan $dokumenPermohonan,$id)
+    {
+        $permohonan = Permohonan::find($id);
+        
+        return view ('fakulti.dokumen-permohonan-penambahbaikkan')->with('permohonan',$permohonan)->with('dokumen_permohonans',$permohonan->dokumen_permohonans);
+    }
+
 
     /**
      * Show the form for editing the specified resource.

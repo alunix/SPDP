@@ -22,6 +22,10 @@ class Permohonan extends Model
     
     return $this->dokumen_permohonans()->count();
  }
+
+ public function dokumen_permohonan(){
+    return $this->dokumen_permohonans()->orderBy('versi', 'DESC')->first();
+}
    
  public function user(){
 

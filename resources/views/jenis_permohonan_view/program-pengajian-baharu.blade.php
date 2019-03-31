@@ -55,7 +55,7 @@
                             <label for="versi" class="col-md-4 col-form-label text-md-right">{{ __('Versi') }}</label>
 
                             <div class="col-md-6">
-                                <input id="versi" type="text" value="{{ $dp->versi}}" class="form-control" name="versi"  required autofocus readonly>
+                                <input id="versi" type="text" value="{{ $permohonan->dokumen_permohonan()->versi}}" class="form-control" name="versi"  required autofocus readonly>
 
                                
                             </div>
@@ -65,7 +65,7 @@
                              <label for="file_link" class="col-md-4 col-form-label text-md-right">{{ __('Link Kepada File') }}</label>
 
                                 <div class="col-md-6">       
-                                <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/{$dp->file_link}")?>">{{ basename($dp->file_name) }} </a>
+                                <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/{$permohonan->dokumen_permohonan()->file_link}")?>">{{ basename($permohonan->dokumen_permohonan()->file_name) }} </a>
                                 </div>
                                 
                         </div>

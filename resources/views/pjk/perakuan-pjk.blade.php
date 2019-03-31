@@ -61,8 +61,15 @@
                             </div>
                         </div> 
 
+                        <div class="form-group row">
+                            <label for="versi" class="col-md-4 col-form-label text-md-right">{{ __('Versi') }}</label>
 
+                            <div class="col-md-6">
+                                <input id="versi" type="text" value="{{ $permohonan->dokumen_permohonan()->versi}}" class="form-control" name="versi"  required autofocus readonly>
 
+                               
+                            </div>
+                        </div>
                               
 
                         <div class="form-group row">
@@ -72,7 +79,7 @@
                                 <div class="col-md-6">
 
                                 
-                                <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/{$permohonan->file_link}")?>">{{ basename($permohonan->file_name) }} </a> 
+                                <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/{$permohonan->dokumen_permohonan()->file_link}")?>">{{ basename($permohonan->dokumen_permohonan()->file_name) }} </a> 
 
                                 
                                 

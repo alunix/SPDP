@@ -59,26 +59,40 @@
                         </div>
 
 
+                        
+                        <div class="form-group row">
+                            <label for="versi" class="col-md-4 col-form-label text-md-right">{{ __('Versi') }}</label>
 
+                            <div class="col-md-6">
+                                <input id="versi" type="text" value="{{ $permohonan->dokumen_permohonan()->versi}}" class="form-control" name="versi"  required autofocus readonly>
+
+                               
+                            </div>
+                        </div>
                               
                              
                         <div class="form-group row">
                              <label for="file_link" class="col-md-4 col-form-label text-md-right">{{ __('Link Kepada File') }}</label>
 
-                                <div class="col-md-6">                       
-                                                    
-                               
-                               
-                               
-                                <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/{{$permohonan->file_link}}")?>">{{ basename($permohonan->file_name) }} </a>
+                                <div class="col-md-6">       
+                                <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/{$permohonan->dokumen_permohonan()->file_link}")?>">{{ basename($permohonan->dokumen_permohonan()->file_name) }} </a>
                                 </div>
                                 
                         </div>
+                              
+                             
+                     
                                 
               
                         <div class="form-group row mb-0">
 
                             <div class="col-md-6 offset-md-5">
+
+                            <a href="{{ route('dokumenPermohonan.dihantar', ['permohonan' => $permohonan->permohonan_id])  }}">
+                                    <input type="button" class="btn btn-info" value="Lihat versi sejarah" />
+                                    
+                            </a>
+                       
                                  
                             <a href="{{ route('pjk.perakuanLulus.show', ['permohonan' => $permohonan->id])  }}">
                                     <input type="button" class="btn btn-success" value="Lulus permohonan" />

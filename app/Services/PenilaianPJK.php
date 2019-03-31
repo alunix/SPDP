@@ -44,8 +44,10 @@ class PenilaianPJK
     }
 
     public function pelantikanPenilaiSubmit(Request $request, $id)
-    {
-         /* Find permohonan id then change the status permohonan */
+    {      
+
+        try {
+             /* Find permohonan id then change the status permohonan */
          $permohonan =Permohonan::find($id);   
          $sp = new StatusPermohonanClass();            
          $permohonan -> status_permohonan_id = 2;
@@ -67,6 +69,14 @@ class PenilaianPJK
         $penilaian -> save();
          
         return redirect(url('/senarai-penilaian'));
+          } catch (\Illuminate\Database\QueryException $e){
+            $errorCode = $e->errorInfo[1];
+            if($errorCode == 1062){
+                return 'Duplicate Entry';
+            }
+          }
+
+        
     }
 
     public function showPerakuanPjk($id)
@@ -186,7 +196,6 @@ class PenilaianPJK
             /* Status semakan permohonan telah dikemaskini berdasarkan progress */
             $sp = new StatusPermohonanClass();
             $permohonan->status_permohonan_id=$sp->getStatusPermohonan($permohonan);
-            // $permohonan -> status_permohonan_id = 4;
             $permohonan ->save();
 
             $kj= new KemajuanPermohonanClass();

@@ -19,9 +19,7 @@ class LaporanClass
         $laporan = new Laporan();
         $laporan->penilaian_id_laporan = $penilaian->id;
         $laporan->save();
-
         $laporan_id= $laporan->laporan_id;
-
         $uploadedLaporan= $this->uploadLaporan($request,$penilaian,$attached,$laporan_id);
       
     }

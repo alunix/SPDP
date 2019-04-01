@@ -59,40 +59,24 @@ class DokumenPermohonanController extends Controller
     public function showPenambahbaikkan(DokumenPermohonan $dokumenPermohonan,$id)
     {
         $permohonan = Permohonan::find($id);
-        return view ('fakulti.dokumen-permohonan-penambahbaikkan')->with('permohonan',$permohonan);
+        $dps= $permohonan->dokumen_permohonans;
+        return view ('fakulti.dokumen-permohonan-penambahbaikkan')->with('permohonan',$permohonan)->with('dps',$dps);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \SPDP\DokumenPermohonan  $dokumenPermohonan
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(DokumenPermohonan $dokumenPermohonan)
+    public function uploadPenambahbaikkan(DokumenPermohonanClass $dp,Request $request)
     {
-        //
-    }
+        $permohonan = Permohonan::find($id);
+        $this->validate($request,[
+            'dokumen' => 'required|file|max:1999',
+        ]);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \SPDP\DokumenPermohonan  $dokumenPermohonan
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, DokumenPermohonan $dokumenPermohonan)
-    {
-        //
-    }
+        $attached = 'dokumen';
+        $permohonan = Permohonan::find($id);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \SPDP\DokumenPermohonan  $dokumenPermohonan
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(DokumenPermohonan $dokumenPermohonan)
-    {
-        //
+        $dp = new DokumenPermohonanClass();
+        return $dp->update($attached,$request,$permohonan);
+        
+
+
     }
 }

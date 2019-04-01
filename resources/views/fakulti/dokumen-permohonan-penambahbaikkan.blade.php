@@ -10,8 +10,8 @@
             <div class="card-body">
                  
                     
-                     <form method="POST" action="{{ route('pjk.perakuanLulus.submit',['permohonan'=>$permohonan->id])}}" enctype="multipart/form-data" >
-                     {!! method_field('patch') !!} 
+                     <form method="POST" action="{{ route('dokumenPermohonan.penambahbaikkan.submit',['permohonan'=>$permohonan->permohonan_id])}}" enctype="multipart/form-data" >
+                     
                         @csrf
                             <div class="form-group row">
                             <label for="doc_title" class="col-md-4 col-form-label text-md-right">{{ __('Tajuk Permohonan') }}</label>
@@ -33,7 +33,6 @@
                                
                             </div>
                         </div>
-
                      
                   
 
@@ -46,39 +45,32 @@
                                
                             </div>
                         </div> 
-                  
-
-                        @if( ! empty($penilaian['perakuan_pjk']))
-
-                            
-                            <div class="form-group row">
-                            <label for="perakuan_pjk" class="col-md-4 col-form-label text-md-right">{{ __('Fail penambahbaikkan') }}</label>
-
-                            <div class="col-md-6">
-                                <a href ="<?php echo asset("storage/perakuan_pjk/$penilaian->perakuan_pjk_link")?>">{{ basename($penilaian->perakuan_pjk) }} </a>
-                            </div>
-
-                        </div> 
-
-                       
                         
                         
-                        @else
                          <div class="form-group row">
-                            <label for="perakuan_pjk" class="col-md-4 col-form-label text-md-right">{{ __('Fail penambahbaikkan') }}</label>
+                            <label for="dokumen" class="col-md-4 col-form-label text-md-right">{{ __('Fail penambahbaikkan') }}</label>
 
                             <div class="col-md-6">
-                                <input id="perakuan_pjk" type="file" class="form-control{{ $errors->has('perakuan_pjk') ? ' is-invalid' : '' }}" name="perakuan_pjk" value="{{ old('perakuan_pjk') }}" required autofocus>
+                                <input id="dokumen" type="file" class="form-control{{ $errors->has('dokumen') ? ' is-invalid' : '' }}" name="dokumen" value="{{ old('dokumen') }}" required autofocus>
 
-                                @if ($errors->has('perakuan_pjk'))
+                                @if ($errors->has('dokumen'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('perakuan_pjk') }}</strong>
+                                        <strong>{{ $errors->first('dokumen') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div> 
 
-                        @endif
+                        <div class="form-group row">
+                        <label for="summary-ckeditor" class="col-md-4 col-form-label text-md-right">{{ __('Komen(Tidak diwajibkan)') }}</label>
+
+                        <div class="col-md-6">
+                        <textarea class="form-control" id="summary-ckeditor" name="summary-ckeditor"></textarea>
+                        </div>
+                        </div>
+
+
+                        
 
                         
          <table class="table table-striped">
@@ -87,23 +79,39 @@
     <tr>
     <th scope="col">No/Versi</th>
     <th scope="col">Fail yang telah dimuat naik</th>
+    <th scope="col">Saiz</th>
+    <th scope="col">Komen</th>
+    
     <th scope="col">Tarikh/Masa </th> 
     
     </tr>
 </thead>
 <tbody>
+@if( ! $dps->isEmpty() )
+@foreach($dps as $dp)
+<tr>
+<th scope="row">{{$dp->versi}}</th>
+<td><a href ="<?php echo asset("storage/cadangan_permohonan_baharu/{$dp->file_link}")?>">{{ basename($dp->file_name) }} </a></td>  
+<td> {{$dp->file_size}} KB</td> 
+<td> {{$dp->komen}}</td> 
+<td> {{$dp->created_at->format('h:i a d/m/Y')}} </td> 
+  
+
+              
 
 
+
+</tr>
+@endforeach
 
 </tbody>
 </table>
 
+@else
 
+<p> Tiada dokumen permohonan telah dijumpai</p>
 
-
-
-
-
+@endif
 
                         <div class="form-group row mb-0">
     <div class="col-md-6 offset-md-5">

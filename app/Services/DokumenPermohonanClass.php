@@ -25,19 +25,20 @@ class DokumenPermohonanClass
         $dp->file_link=$fileNameToStore;
         $dp->file_size=$fileSize/1000;
         $dp ->komen =$request -> input('summary-ckeditor');
-        $dp->versi = 1.0;
+        $dp->versi = 1;
         $dp->save();
 
         // return redirect('/senarai-permohonan-dihantar')->with($msg);
     }
 
     
-    public function update($permohonan,$request,$attached)
+    public function update($permohonan,Request $request,$attached,$fileSize)
     {   
+        
         //Handle file upload
         if($request->hasFile($attached))
         {
-        $fileNameWithExt=$request -> file($attached)->getClientOriginalName();
+        $fileNameWithExt=$request->file($attached)->getClientOriginalName();
         // Get the full file name
         $filename = pathinfo($fileNameWithExt,PATHINFO_FILENAME);
         //Get the extension file name
@@ -50,24 +51,19 @@ class DokumenPermohonanClass
             else{
                 $fileNameToStore = 'noPDF.pdf';
             }
-        $fileSize = $request->file($attached)->getSize();
-
-
-        $dk = DokumenPermohonan::where('permohonan_id',$permohonan->permohonan_id)->get();
-        $version_count = count($dk);
-
+        // $fileSize = $request->file($attached)->getSize();
+        
+        
         $dp = new DokumenPermohonan();
         $dp->permohonan_id= $permohonan->permohonan_id;
         $dp->file_name = $fileNameWithExt;
         $dp->file_link=$fileNameToStore;
         $dp->file_size=$fileSize;
-        $dp -> komen =$request -> input('summary-ckeditor');
-        $dp->versi = $version_count+1.0;
+        $dp ->komen =$request -> input('summary-ckeditor');
+        $dp->versi =((int)$permohonan->version_counts())+1;
         $dp->save();
 
-
-
-        return redirect('/senarai-permohonan-dihantar')->with($msg);
+        return redirect('/senarai-permohonan-dihantar');
     }
 
     public function show(KemajuanPermohonan $kj,$id)

@@ -63,18 +63,19 @@ class DokumenPermohonanController extends Controller
         return view ('fakulti.dokumen-permohonan-penambahbaikkan')->with('permohonan',$permohonan)->with('dps',$dps);
     }
 
-    public function uploadPenambahbaikkan(DokumenPermohonanClass $dp,Request $request)
+    public function uploadPenambahbaikkan(Request $request,$id)
     {
         $permohonan = Permohonan::find($id);
         $this->validate($request,[
             'dokumen' => 'required|file|max:1999',
         ]);
-
+        $fileSize = $request->file('dokumen')->getSize();
         $attached = 'dokumen';
         $permohonan = Permohonan::find($id);
+        
 
         $dp = new DokumenPermohonanClass();
-        return $dp->update($attached,$request,$permohonan);
+        return $dp->update($permohonan,$request,$attached,$fileSize);
         
 
 

@@ -21,7 +21,7 @@ class CreateDokumenPermohonansTable extends Migration
             $table->string('file_link');
             $table->integer('file_size'); 
             $table->string('komen')->nullable();
-            $table->decimal('versi',4,1);
+            $table->integer('versi');
             
             $table->foreign('permohonan_id')->references('permohonan_id')->on('permohonans');
 

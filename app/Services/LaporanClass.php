@@ -13,16 +13,21 @@ use Illuminate\Support\Facades\Hash;
 class LaporanClass 
 {
     
-    public function createLaporan(Request $request,$penilaian,$attached)
+    public function createLaporan(Request $request,$permohonan,$attached)
     {   
+       
         
         $laporan = new Laporan();
-        $laporan->penilaian_id_laporan = $penilaian->id;
+        $laporan->dokumen_permohonan_id= $permohonan->permohonan_id;
+        $laporan->id_penghantar= auth()->user()->id;
+        
+
         $laporan->save();
-
         $laporan_id= $laporan->laporan_id;
+     
 
-        $uploadedLaporan= $this->uploadLaporan($request,$penilaian,$attached,$laporan_id);
+        
+        // $uploadedLaporan= $this->uploadLaporan($request,$penilaian,$attached,$laporan_id); //tukar on 2.4.2019
       
     }
    
@@ -30,13 +35,12 @@ class LaporanClass
     public function uploadLaporan(Request $request,$penilaian,$attached,$laporan_id)
     {
      //get the role of the current user
-     $role = auth()->user()->role;
+    $role = auth()->user()->role;
      //get filenametoStore directory from a function in the class
      $attachedLocation = $this->getFileNameToStore($role);
 
      //Handle file upload
      if($request->hasFile($attached))
-     
      {
          $fileNameWithExt=$request -> file($attached)->getClientOriginalName();
 

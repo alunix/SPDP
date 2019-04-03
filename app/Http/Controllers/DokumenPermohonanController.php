@@ -28,79 +28,35 @@ class DokumenPermohonanController extends Controller
         return view('fakulti.senarai-dokumen-permohonan')->with('dokumen_permohonans',$permohonan->dokumen_permohonans)->with('permohonan',$permohonan);
 
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \SPDP\DokumenPermohonan  $dokumenPermohonan
-     * @return \Illuminate\Http\Response
-     */
+     
     public function showPenambahbaikkan(DokumenPermohonan $dokumenPermohonan,$id)
     {
         $permohonan = Permohonan::find($id);
-        return view ('fakulti.dokumen-permohonan-penambahbaikkan')->with('permohonan',$permohonan)->with('dokumen_permohonans',$permohonan->dokumen_permohonans);
+        $dps= $permohonan->dokumen_permohonans;
+        return view ('fakulti.dokumen-permohonan-penambahbaikkan')->with('permohonan',$permohonan)->with('dps',$dps);
     }
 
-    public function submitPenambahbaikkan(DokumenPermohonan $dokumenPermohonan,$id)
+    public function uploadPenambahbaikkan(Request $request,$id)
     {
         $permohonan = Permohonan::find($id);
+        $this->validate($request,[
+            'dokumen' => 'required|file|max:1999',
+        ]);
+       
+        $attached = 'dokumen';
+        $permohonan = Permohonan::find($id);
         
-        return view ('fakulti.dokumen-permohonan-penambahbaikkan')->with('permohonan',$permohonan)->with('dokumen_permohonans',$permohonan->dokumen_permohonans);
-    }
+
+        $dp = new DokumenPermohonanClass();
+        $dp->update($permohonan,$request,$attached);
+
+        $msg = [
+            'message' => 'Dokumen berjaya dimuat naik',
+           ];  
+
+        return redirect()->route('dokumenPermohonan.penambahbaikkan.show', [$permohonan->permohonan_id])->with($msg);
+        
 
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \SPDP\DokumenPermohonan  $dokumenPermohonan
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(DokumenPermohonan $dokumenPermohonan)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \SPDP\DokumenPermohonan  $dokumenPermohonan
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, DokumenPermohonan $dokumenPermohonan)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \SPDP\DokumenPermohonan  $dokumenPermohonan
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(DokumenPermohonan $dokumenPermohonan)
-    {
-        //
     }
 }

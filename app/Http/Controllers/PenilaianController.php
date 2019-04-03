@@ -85,8 +85,11 @@ class PenilaianController extends Controller
         $this->validate($request,[
             'laporan_panel_penilai' => 'required|file|max:1999',
         ]);
+        
+        $permohonan =Permohonan::find($id);
+      
 
-        return $pp->uploadLaporanPenilai($request,$id);
+        return $pp->uploadLaporanPenilai($request,$permohonan);
        
     }  
 

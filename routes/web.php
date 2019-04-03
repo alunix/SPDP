@@ -75,7 +75,7 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware','middlewa
 
 	/*----------------------- Fakulti nak memuat naik laporan---------------------------- */
 	Route::get('/muat-naik-penambahbaikkan/{permohonan}', 'DokumenPermohonanController@showPenambahbaikkan')->name('dokumenPermohonan.penambahbaikkan.show');
-	Route::post('/muat-naik-penambahbaikkan/{permohonan}', 'DokumenPermohonanController@submitPenambahbaikkan')->name('dokumenPermohonan.penambahbaikkan.submit');
+	Route::post('/muat-naik-penambahbaikkan/{permohonan}', 'DokumenPermohonanController@uploadPenambahbaikkan')->name('dokumenPermohonan.penambahbaikkan.submit');
 
 });
 

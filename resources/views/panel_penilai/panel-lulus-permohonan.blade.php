@@ -12,7 +12,7 @@
             <div class="card-body">
                  
                     
-                     <form method="POST" action="{{ route('penilai.laporan.submit',['permohonan' => $permohonan->id,'penilaian'=>$penilaian->id])}}" enctype="multipart/form-data" >
+                     <form method="POST" action="{{ route('penilai.laporan.submit',['permohonan' => $permohonan->permohonan_id,'penilaian'=>$penilaian->id])}}" enctype="multipart/form-data" >
                      {!! method_field('patch') !!}                 
                 
 

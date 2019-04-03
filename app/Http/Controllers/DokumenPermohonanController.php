@@ -28,34 +28,7 @@ class DokumenPermohonanController extends Controller
         return view('fakulti.senarai-dokumen-permohonan')->with('dokumen_permohonans',$permohonan->dokumen_permohonans)->with('permohonans',$permohonan);
 
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \SPDP\DokumenPermohonan  $dokumenPermohonan
-     * @return \Illuminate\Http\Response
-     */
+     
     public function showPenambahbaikkan(DokumenPermohonan $dokumenPermohonan,$id)
     {
         $permohonan = Permohonan::find($id);
@@ -69,13 +42,19 @@ class DokumenPermohonanController extends Controller
         $this->validate($request,[
             'dokumen' => 'required|file|max:1999',
         ]);
-        $fileSize = $request->file('dokumen')->getSize();
+       
         $attached = 'dokumen';
         $permohonan = Permohonan::find($id);
         
 
         $dp = new DokumenPermohonanClass();
-        return $dp->update($permohonan,$request,$attached,$fileSize);
+        $dp->update($permohonan,$request,$attached);
+
+        $msg = [
+            'message' => 'Dokumen berjaya dimuat naik',
+           ];  
+
+        return redirect()->route('dokumenPermohonan.penambahbaikkan.show', [$permohonan->permohonan_id])->with($msg);
         
 
 

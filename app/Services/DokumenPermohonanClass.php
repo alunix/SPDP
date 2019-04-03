@@ -32,7 +32,7 @@ class DokumenPermohonanClass
     }
 
     
-    public function update($permohonan,Request $request,$attached,$fileSize)
+    public function update($permohonan,Request $request,$attached)
     {   
         
         //Handle file upload
@@ -51,19 +51,19 @@ class DokumenPermohonanClass
             else{
                 $fileNameToStore = 'noPDF.pdf';
             }
-        // $fileSize = $request->file($attached)->getSize();
+        $fileSize = $request->file($attached)->getSize();
         
         
         $dp = new DokumenPermohonan();
         $dp->permohonan_id= $permohonan->permohonan_id;
         $dp->file_name = $fileNameWithExt;
         $dp->file_link=$fileNameToStore;
-        $dp->file_size=$fileSize;
+        $dp->file_size=$fileSize/1000;
         $dp ->komen =$request -> input('summary-ckeditor');
         $dp->versi =((int)$permohonan->version_counts())+1;
         $dp->save();
 
-        return redirect('/senarai-permohonan-dihantar');
+      
     }
 
     public function show(KemajuanPermohonan $kj,$id)

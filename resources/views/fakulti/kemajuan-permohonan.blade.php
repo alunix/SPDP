@@ -17,15 +17,6 @@ Muat naik penambahbaikkan
 </a>
 <br><br>
 
-
-
-
-
-
-
-
-
-
          <table class="table table-striped">
 
 <thead>
@@ -70,10 +61,10 @@ Muat naik penambahbaikkan
 <thead>
     <tr>
     <th scope="col">No</th>
-    <th scope="col">Laporan PJK</th>
-    <th scope="col">Laporan Panel Penilai</th>
-    <th scope="col">Laporan JPPA</th>
-    <th scope="col">Laporan Senat</th>
+    <th scope="col">Laporan</th>
+    <th scope="col">Dihantar</th>
+    <th scope="col">Pihak</th>
+    <th scope="col">Versi</th>
     <th scope="col">Tarikh/Masa Laporan</th> 
     
     </tr>

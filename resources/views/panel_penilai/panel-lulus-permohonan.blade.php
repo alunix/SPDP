@@ -57,7 +57,7 @@
                             <label for="created_at" class="col-md-4 col-form-label text-md-right">{{ __('Tarikh dihantar') }}</label>
 
                             <div class="col-md-6">
-                                <input id="created_at" type="text" value="{{ @$permohonan['created_at']}}" class="form-control" name="created_at"  required autofocus readonly>
+                                <input id="created_at" type="text" value="{{$permohonan->created_at}}" class="form-control" name="created_at"  required autofocus readonly>
 
                                
                             </div>
@@ -71,7 +71,7 @@
                              <label for="file_link" class="col-md-4 col-form-label text-md-right">{{ __('Link Kepada File') }}</label>
 
                                 <div class="col-md-6">
-                                <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/$permohonan->file_link")?>">{{ basename($permohonan->file_name) }} </a>
+                                <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/{$permohonan->dokumen_permohonan()->file_link}")?>">{{ basename($permohonan->dokumen_permohonan()->file_name) }} </a>
                                 </div>
 
                         </div>

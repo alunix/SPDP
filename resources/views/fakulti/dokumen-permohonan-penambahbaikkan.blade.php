@@ -69,6 +69,16 @@
                         </div>
                         </div>
 
+                        <div class="form-group row mb-0">
+    <div class="col-md-6 offset-md-5">
+
+        <button type="submit" class="btn btn-success" value="accept-program" name="submitbutton">
+        {{ __('Hantar') }}
+        </button>
+
+    </div>
+</div>
+<br>
 
                         
 
@@ -78,7 +88,7 @@
 <thead>
     <tr>
     <th scope="col">No/Versi</th>
-    <th scope="col">Fail yang telah dimuat naik</th>
+    <th scope="col">Fail </th>
     <th scope="col">Saiz</th>
     <th scope="col">Komen</th>
     
@@ -113,15 +123,7 @@
 
 @endif
 
-<div class="form-group row mb-0">
-    <div class="col-md-6 offset-md-5">
 
-        <button type="submit" class="btn btn-success" value="accept-program" name="submitbutton">
-        {{ __('Hantar') }}
-        </button>
-
-    </div>
-</div>
 
     
 

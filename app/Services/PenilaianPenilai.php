@@ -22,11 +22,7 @@ class PenilaianPenilai
         $attached= 'laporan_panel_penilai';
         
         $lc= new LaporanClass();
-        // $lc->createLaporan($request,$penilaian,$attached);
         $lc->createLaporan($request,$permohonan,$attached);
-    
-        /* Cari permohonan since penilaian belongs to permohonan then baru boleh cari penilaian through eloquent relationship */
-        $penilaian = $permohonan->penilaian;
 
         /* Status semakan permohonan telah dikemaskini berdasarkan progress */
         $permohonan -> status_permohonan_id = 3;

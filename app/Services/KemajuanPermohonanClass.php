@@ -14,10 +14,10 @@ class KemajuanPermohonanClass
   
     public function create(Permohonan $permohonan)
     {
-          $kj = new KemajuanPermohonan();
-         $kj-> permohonan_id = $permohonan->permohonan_id;
-         $kj-> status_permohonan= $permohonan->status_permohonan_id;
-         $kj->save();
+        $kj = new KemajuanPermohonan();
+        $kj-> permohonan_id = $permohonan->permohonan_id;
+        $kj-> status_permohonan= $permohonan->status_permohonan_id;
+        $kj->save();
     }
 
 }

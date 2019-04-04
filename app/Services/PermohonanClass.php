@@ -80,8 +80,7 @@ class PermohonanClass
              else{
                  $fileNameToStore = 'noPDF.pdf';
              }
-             //Add laporan PJK
-             /* Cari permohonan ID
+           
              
             
              /* Status semakan permohonan telah dikemaskini berdasarkan progress */

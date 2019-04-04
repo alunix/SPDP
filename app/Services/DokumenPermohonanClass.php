@@ -51,9 +51,9 @@ class DokumenPermohonanClass
             else{
                 $fileNameToStore = 'noPDF.pdf';
             }
+        
         $fileSize = $request->file($attached)->getSize();
-        
-        
+                
         $dp = new DokumenPermohonan();
         $dp->permohonan_id= $permohonan->permohonan_id;
         $dp->file_name = $fileNameWithExt;
@@ -63,8 +63,39 @@ class DokumenPermohonanClass
         $dp->versi =((int)$permohonan->version_counts())+1;
         $dp->save();
 
+        $permohonan->status_permohonan_id= $this->getStatusPermohonan($permohonan->permohonan_id);
+        $permohonan->save();
+
+        $kp= new KemajuanPermohonanClass();
+        $kp->create($permohonan);
+
+
       
     }
+
+    public function getStatusPermohonan($permohonan_id)
+    {
+        switch ($permohonan_id) {
+            case 8:
+                return 12;
+            break;
+            case 9:
+                return 13;
+            break; 
+            case 10:
+                return 14;
+            break; 
+            case 11:
+                return 15;
+            break; 
+            
+            default:
+                return;
+                break;
+        }
+
+    }
+
 
     public function show(KemajuanPermohonan $kj,$id)
     {
@@ -72,6 +103,8 @@ class DokumenPermohonanClass
         return view('fakulti.kemajuan-permohonan')->with('kjs',$permohonan->kemajuan_permohonans)->with('permohonan',$permohonan)->with('dokumen_permohonans',$permohonan->dokumen_permohonans);
 
     }
+
+   
 
 
    

@@ -89,7 +89,7 @@
                             </a>
                                 
                             
-                            <a href="{{ route('pjk.permohonanTidakDilulus', ['permohonan' => $permohonan->id])  }}">
+                            <a href="{{ route('laporan.permohonanTidakDilulus', ['permohonan' => $permohonan->permohonan_id])  }}">
                                     <input type="button" class="btn btn-danger" value="Penambahbaikan" />
                                     
                             </a>
@@ -101,7 +101,7 @@
                                     
                             </a>
                             
-                            <a href="/permohonans/{{@$permohonan[id]}}/pelantikan-penilai">
+                            <a href="{{route('laporan.permohonanTidakDilulus',$permohonan->permohonan_id)}}">
                                     <input type="button" class="btn btn-danger" value="Penambahbaikan" />
                                     
                             </a>
@@ -113,7 +113,7 @@
                                     
                             </a>
                             
-                            <a href="/permohonans/{{@$permohonan[id]}}/pelantikan-penilai">
+                            <a href="{{route('laporan.permohonanTidakDilulus',$permohonan->permohonan_id)}}">
                                     <input type="button" class="btn btn-danger" value="Penambahbaikan" />
                                     
                             </a>
@@ -125,7 +125,7 @@
                                     
                             </a>
                             
-                            <a href="/permohonans/{{@$permohonan[id]}}/pelantikan-penilai">
+                            <a href="{{route('laporan.permohonanTidakDilulus',$permohonan->permohonan_id)}}">
                                     <input type="button" class="btn btn-danger" value="Penambahbaikan" />
                                     
                             </a>

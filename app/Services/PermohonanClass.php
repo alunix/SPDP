@@ -57,14 +57,14 @@ class PermohonanClass
             'message' => 'Permohonan berjaya dihantar',
            ];  
 
-           return redirect()->route('permohonan.dihantar')->with($msg);
+        return redirect()->route('permohonan.dihantar')->with($msg);
     }
 
-    public function storePermohonanTidakDilulus(KemajuanPermohonanClass $kp,Request $request,$id)
+    public function storePermohonanTidakDilulus(Request $request,$id)
      {    
         
          //Handle file upload
-         if($request->hasFile('laporan_pjk'))
+         if($request->hasFile('dokumen'))
         
          {
              $fileNameWithExt=$request -> file('laporan_pjk')->getClientOriginalName();
@@ -84,7 +84,7 @@ class PermohonanClass
              
             
              /* Status semakan permohonan telah dikemaskini berdasarkan progress */
-             $permohonan= Permohonan::find($id);
+             $permohonan= Permohonan::find($permohonan->permohonan_id);
              $permohonan -> status_permohonan = 'Laporan tidak dilulus oleh PJK'; 
              $permohonan -> laporan_pjk =$fileNameWithExt;
              $permohonan -> laporan_pjk_link =$fileNameToStore;

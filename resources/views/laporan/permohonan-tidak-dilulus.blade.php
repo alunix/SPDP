@@ -8,9 +8,8 @@
                 <div class="card-header">Permohonan Tidak Dilulus </div>
 
             <div class="card-body">
-                 
                     
-                     <form method="POST" action="{{ route('pjk.permohonanTidakDilulus.submit',['permohonan'=>$permohonan->id])}}" enctype="multipart/form-data" >
+                     <form method="POST" action="{{ route('laporan.permohonanTidakDilulus.submit',['permohonan'=>$permohonan->permohonan_id])}}" enctype="multipart/form-data" >
                      {!! method_field('patch') !!}     
 
                         @csrf
@@ -39,7 +38,7 @@
 
                         <div class="form-group row">
                              
-                            <label for="file_link" class="col-md-4 col-form-label text-md-right">{{ __('Lampiran permohonan program') }}</label>
+                            <label for="file_link" class="col-md-4 col-form-label text-md-right">{{ __('Lampiran permohonan') }}</label>
 
                             <div class="col-md-6">
                                 
@@ -48,6 +47,29 @@
                             </div>
 
                         </div>
+
+                        <div class="form-group row">
+                            <label for="dokumen" class="col-md-4 col-form-label text-md-right">{{ __('Lampiran laporan') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="dokumen" type="file" class="form-control{{ $errors->has('dokumen') ? ' is-invalid' : '' }}" name="dokumen" value="{{ old('dokumen') }}" required autofocus>
+
+                                @if ($errors->has('dokumen'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('dokumen') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div> 
+
+                        
+                        <div class="form-group row">
+                        <label for="summary-ckeditor" class="col-md-4 col-form-label text-md-right">{{ __('Komen(Tidak diwajibkan)') }}</label>
+
+                        <div class="col-md-6">
+                        <textarea class="form-control" id="summary-ckeditor" name="summary-ckeditor"></textarea>
+                        </div>
+                    </div>
                         
 
                        

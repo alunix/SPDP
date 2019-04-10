@@ -93,14 +93,10 @@
                                  
                             <a href="{{ route('pjk.perakuanLulus.show', ['permohonan' => $permohonan->id])  }}">
                                     <input type="button" class="btn btn-success" value="Lulus permohonan" />
-                                    
                             </a>
-                                
-                                
                             
-                            <a href="{{ route('pjk.permohonanTidakDilulus', ['permohonan' => $permohonan->id])  }}">
+                            <a href="{{ route('laporan.permohonanTidakDilulus', ['permohonan' => $permohonan->id])  }}">
                                     <input type="button" class="btn btn-danger" value="Penambahbaikan" />
-                                    
                             </a>
                             
                  
@@ -109,16 +105,10 @@
                             
                             <a href="{{ route('jppa.perakuan.show', ['permohonan' => $permohonan->id])  }}">
                                     <input type="button" class="btn btn-success" value="Lulus permohonan" />
-                                    
                             </a>
                                 
-                                
-                            
-                        
-                            
-                            <a href="/permohonans/{{$permohonan->id}}/pelantikan-penilai">
+                            <a href="{{ route('laporan.permohonanTidakDilulus', ['permohonan' => $permohonan->id])  }}">
                                     <input type="button" class="btn btn-danger" value="Penambahbaikan" />
-                                    
                             </a>
 
                             @elseif(Auth::user()->role=="senat")
@@ -128,31 +118,17 @@
                                     
                             </a>
                             
-                            <a href="/permohonans/{{@$permohonan[id]}}/pelantikan-penilai">
+                            <a href="{{ route('laporan.permohonanTidakDilulus', ['permohonan' => $permohonan->id])  }}">
                                     <input type="button" class="btn btn-danger" value="Penambahbaikan" />
                                     
                             </a>
                             
                             @endif    
 
-                            
-
-                              
-                             
-
                             </div>
                         </div>
 
-                        
-                        
-
-                     
-                      
-
                          <hr style="border-color:white;">
-                        
-
-                       
                 </div>
             </div>
         </div>
@@ -160,13 +136,3 @@
 </div>
 
 @endsection
-
-<!-- @if($errors->any())
-        <div class="row collapse">
-            <ul class="alert-box warning radius">
-                @foreach($errors->all() as $error)
-                    <li> {{ $error }} </li>
-                @endforeach
-            </ul>
-        </div>
-        @endif -->

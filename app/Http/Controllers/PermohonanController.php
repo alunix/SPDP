@@ -49,24 +49,26 @@ class PermohonanController extends Controller
      public function permohonanTidakDilulus(Request $request,$id)
      {
         $permohonan= Permohonan::find($id);
-        return view('pjk.permohonan-tidak-dilulus')->with('permohonan',$permohonan)->with('jenis_permohonan',$permohonan->jenis_permohonan);
+        return view('laporan.permohonan-tidak-dilulus')->with('permohonan',$permohonan)->with('jenis_permohonan',$permohonan->jenis_permohonan);
      
      }
 
-     public function storePermohonanTidakDilulus(PermohonanClass $pc,Request $request,$id)
+     public function storePermohonanTidakDilulus(Request $request,$id)
      {    
         $this->validate($request,[
 
-            'laporan_pjk' => 'required|file|max:1999',
+            'dokumen' => 'required|file|max:1999',
         ]);
         
-        $pc->storePermohonanTidakDilulus($request,$id);
+        $permohonan = Permohonan::find($id);
+        $pc = new PermohonanClass();
+        $pc->storePermohonanTidakDilulus($request,$permohonan->permohonan_id);
         return redirect('/home');
         
      
      }
 
-    public function store(PermohonanClass $pc,Request $request)
+    public function store(Request $request)
     {
         $this->validate($request,[
 
@@ -74,11 +76,12 @@ class PermohonanController extends Controller
             'jenis_permohonan_id' => 'required|integer|max:255',
             'file_link' => 'required|mimes:pdf|max:1999',
         ]);
-       
+      
+        $pc = new PermohonanClass();       
         return $pc->create($request);
 
     }  
-    public function show(Request $request,$id)  {
+    public function show($id)  {
         
         /* Main function but mcm tak betul , testing other possibilities */
         $permohonan= Permohonan::find($id);

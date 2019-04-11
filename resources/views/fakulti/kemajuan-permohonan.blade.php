@@ -17,6 +17,8 @@ Muat naik penambahbaikkan
 </a>
 <br><br>
 
+<h5>Kemajuan permohonan</h5>
+
          <table class="table table-striped">
 
 <thead>
@@ -48,7 +50,7 @@ Muat naik penambahbaikkan
 
 @else
 
-<p> Tiada permohonan telah dijumpai </p>
+<p> Tiada kemajuan permohonan </p>
 
 @endif
 
@@ -70,12 +72,15 @@ Muat naik penambahbaikkan
     </tr>
 </thead>
 <tbody>
-@if( ! $kjs->isEmpty() )
-@foreach($kjs as $kj)
+@if( ! $laporans->isEmpty() )
+@foreach($laporans as $laporan)
 <tr>
 <th scope="row">{{ $loop->iteration}}</th>
-<td> {{$kj->statusPermohonan->status_permohonan_huraian}}</td>   
-<td> {{$kj->created_at->format('h:i a d/m/Y') }}</td>               
+<td><a href ="<?php echo asset("storage/cadangan_permohonan_baharu/$laporan->tajuk_fail_link")?>">{{ basename($laporan->tajuk_fail_link) }}</td> </a>
+<td> {{$laporan->id_penghantar_nama->name}}</td>
+<td> {{$laporan->id_penghantar_nama->role}}</td>
+<td> {{$laporan->versi_laporan}}</td>
+<td> {{$laporan->created_at}}</td>
 
 
 </tr>

@@ -33,6 +33,12 @@ class Permohonan extends Model
 
  }
 
+ public function laporans(){
+
+    return $this->dokumen_permohonans()->laporans();
+
+ }
+
  public function penilaian(){
     // return $this->hasOne('SPDP\Penilaian','penilaianID');
      return $this->hasOne('SPDP\Penilaian','permohonan_id_penilaian');
@@ -55,10 +61,6 @@ public function dokumen_permohonans(){
  public function jenis_permohonan(){
   // return $this->hasOne('SPDP\Penilaian','penilaianID');
    return $this->belongsTo('SPDP\JenisPermohonan','jenis_permohonan_id');
-
-
-
-
 }
 
  

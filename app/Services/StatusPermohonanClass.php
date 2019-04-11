@@ -38,6 +38,8 @@ class StatusPermohonanClass
         }
     }
 
+   
+
     public function pjk($permohonan){
 
         $jp =$permohonan->jenis_permohonan->jenis_permohonan_kod;

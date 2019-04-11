@@ -29,6 +29,11 @@ class Laporan extends Model
     
         return $this->belongsTo('SPDP\Penilaian','penilaian_id_laporan');// set the foreign key (second parameter)
        }
+    
+       public function id_penghantar_nama(){
+    
+        return $this->belongsTo('SPDP\User','id_penghantar');// set the foreign key (second parameter)
+       }
 
 
 

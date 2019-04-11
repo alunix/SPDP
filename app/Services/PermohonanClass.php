@@ -11,6 +11,7 @@ use SPDP\Services\KemajuanPermohonanClass;
 use SPDP\Services\MuatNaikLaporan;
 use SPDP\DokumenPermohonan;
 use SPDP\Services\DokumenPermohonanClass;
+use SPDP\Services\LaporanClass;
 
 
 class PermohonanClass 
@@ -63,42 +64,49 @@ class PermohonanClass
     public function storePermohonanTidakDilulus(Request $request,$id)
      {    
         
-         //Handle file upload
-         if($request->hasFile('dokumen'))
-        
-         {
-             $fileNameWithExt=$request -> file('laporan_pjk')->getClientOriginalName();
-         // Get the full file name
-             $filename = pathinfo($fileNameWithExt,PATHINFO_FILENAME);            
-         //Get the extension file name
-             $extension = $request ->file('laporan_pjk')-> getClientOriginalExtension();
-         //File name to store
-         $fileNameToStore=$filename.'_'.time().'.'.$extension;
-         //Upload Pdf file
-         $path =$request ->file('laporan_pjk')->storeAs('public/laporan_pjk',$fileNameToStore);
-         }
-             else{
-                 $fileNameToStore = 'noPDF.pdf';
-             }
-           
-             
-            
-             /* Status semakan permohonan telah dikemaskini berdasarkan progress */
-             $permohonan= Permohonan::find($permohonan->permohonan_id);
-             $permohonan -> status_permohonan = 'Laporan tidak dilulus oleh PJK'; 
-             $permohonan -> laporan_pjk =$fileNameWithExt;
-             $permohonan -> laporan_pjk_link =$fileNameToStore;
-             $permohonan ->save();
+        $attached='dokumen';
+        $permohonan= Permohonan::find($id);
 
+        $laporan = new LaporanClass();
+        $laporan->createLaporan($request,$permohonan,$attached);
+
+        $permohonan->status_permohonan_id=$this->getStatusPenambahbaikkan();
+        $permohonan->save();
+             
         //Create a new kemajuan permohonan for each progress
         $kp = new KemajuanPermohonanClass();
         $kp->create($permohonan);
 
-        
-             
-            
-        
+        $msg = [
+            'message' => 'Laporan berjaya dimuat naik',
+           ];  
+
+        return redirect()->route('home')->with($msg);
      
+     }
+
+     public function getStatusPenambahbaikkan()
+     {
+         $role = auth()->user()->role;
+ 
+         switch ($role) {
+             
+             case 'pjk':
+             return 9;
+                 break; 
+             case 'senat':
+             return 11;
+             break; 
+             case 'penilai':
+             return 8;
+                 break; 
+             case 'jppa':
+             return 10;
+                 break; 
+             default:
+                     return ; 
+                 break;
+         }
      }
 
    

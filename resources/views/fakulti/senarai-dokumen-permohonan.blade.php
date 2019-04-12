@@ -39,7 +39,9 @@
 <td> {{$dk->file_size}} KB</td>
 <td> {{$dk->komen}}</td>   
 
-<td> {{$dk->created_at->format('d/m/Y h:i a')}}</td>             
+<td> {{$dk->created_at->format('d/m/Y h:i a')}}</td>
+
+<td><a href="{{ route('senaraiLaporan.show',$dk->dokumen_permohonan_id) }}" class="btn btn-primary">Senarai laporan</a></td>
 
 
 </tr>

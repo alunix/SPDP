@@ -42,7 +42,8 @@ class LaporanClass
         }
         
         $laporan = new Laporan();
-        $laporan->dokumen_permohonan_id= $permohonan->permohonan_id;
+      
+        $laporan->dokumen_permohonan_id= $permohonan->dokumen_permohonan()->dokumen_permohonan_id; //retrieve latest dokumen_permohonan_id from permohonan has many dokumen permohonans
         $laporan->id_penghantar= auth()->user()->id;
         $laporan->tajuk_fail=$fileNameWithExt;
         $laporan->tajuk_fail_link= $fileNameToStore;

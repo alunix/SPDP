@@ -27,36 +27,30 @@ class PermohonanController extends Controller
     {   
         $user_id =auth()->user()->id;
         $user= User::find($user_id);
-        
         return view ('fakulti.senarai-permohonan-dihantar')->with('permohonans',$user->permohonans);
-      
     }
 
- 
-
-       public function showListPermohonanBaharu()
-     {  
+    public function showListPermohonanBaharu()
+    {  
         $sp = new SenaraiPermohonan();
         return  $sp->index();
-     }
+    }
 
-     public function senaraiPerakuanPjk()
-     {
+    public function senaraiPerakuanPjk()
+    {
         $sp = new SenaraiPermohonan();
         return  $sp->perakuanPjk();
-     }
+    }
 
-     public function permohonanTidakDilulus(Request $request,$id)
-     {
+    public function permohonanTidakDilulus(Request $request,$id)
+    {
         $permohonan= Permohonan::find($id);
         return view('laporan.permohonan-tidak-dilulus')->with('permohonan',$permohonan)->with('jenis_permohonan',$permohonan->jenis_permohonan);
-     
-     }
+    }
 
      public function storePermohonanTidakDilulus(Request $request,$id)
      {    
         $this->validate($request,[
-
             'dokumen' => 'required|file|max:1999',
         ]);
         
@@ -64,14 +58,11 @@ class PermohonanController extends Controller
         $pc = new PermohonanClass();
         $pc->storePermohonanTidakDilulus($request,$permohonan->permohonan_id);
         return redirect('/home');
-        
-     
      }
 
     public function store(Request $request)
     {
         $this->validate($request,[
-
             'nama_penghantar' => 'required|string|max:20',
             'jenis_permohonan_id' => 'required|integer|max:255',
             'file_link' => 'required|mimes:pdf|max:1999',
@@ -79,20 +70,17 @@ class PermohonanController extends Controller
       
         $pc = new PermohonanClass();       
         return $pc->create($request);
-
     }  
     public function show($id)  {
-        
+
         /* Main function but mcm tak betul , testing other possibilities */
         $permohonan= Permohonan::find($id);
-       
         $rp = new RedirectPermohonan();
         return $rp->redirect($permohonan);
-        
     }
    
-    public function  showPelantikanPenilai($id)
-    {
+    public function  showPelantikanPenilai($id) {
+
         $permohonan = Permohonan::find($id);
         $users = User::where('role','penilai')->get();
         $dp = DokumenPermohonan::where('permohonan_id',$permohonan->permohonan_id)->orderBy('versi', 'DESC')->first();
@@ -103,12 +91,9 @@ class PermohonanController extends Controller
     public function pelantikanPenilaiSubmit(PenilaianPJK $pp,Request $request, $id)    {      
         
         $this->validate($request,[
-
             'checked' => 'required',
-
         ]);
             return $pp->pelantikanPenilaiSubmit($request,$id);
-           
     }
 
 }

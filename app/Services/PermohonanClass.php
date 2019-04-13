@@ -4,12 +4,7 @@ namespace SPDP\Services;
 
 use SPDP\Permohonan;
 use Illuminate\Http\Request;
-use SPDP\KemajuanPermohonan;
-use SPDP\Laporan;
-use SPDP\Penilaian;
 use SPDP\Services\KemajuanPermohonanClass;
-use SPDP\Services\MuatNaikLaporan;
-use SPDP\DokumenPermohonan;
 use SPDP\Services\DokumenPermohonanClass;
 use SPDP\Services\LaporanClass;
 

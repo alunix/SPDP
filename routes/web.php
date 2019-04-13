@@ -168,4 +168,3 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\senatMiddleware'], function(
 
 
 
-Route::get('/home', 'HomeController@index')->name('home');

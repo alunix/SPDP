@@ -2,16 +2,17 @@
 
 namespace SPDP\Services;
 
-use SPDP\Penilaian;
+
 use SPDP\Permohonan;
 use SPDP\User;
-use SPDP\Laporan;
 use SPDP\Services\LaporanClass;
 use SPDP\Services\PenilaianClass;
 use SPDP\Services\KemajuanPermohonanClass;
 use SPDP\Services\StatusPermohonanClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Notification;
+use SPDP\Notifications\PermohonanBaharu;
 
 
 class PenilaianPJK
@@ -48,20 +49,29 @@ class PenilaianPJK
 
         try {
              /* Find permohonan id then change the status permohonan */
-         $permohonan =Permohonan::find($id);   
-         $sp = new StatusPermohonanClass();            
-         $permohonan -> status_permohonan_id = 2;
-         $permohonan -> save();
+        $permohonan =Permohonan::find($id);   
+        $permohonan -> status_permohonan_id = 2;
+        $permohonan -> save();
 
-          //Create a new kemajuan permohonan for each progress
-          $kp = new KemajuanPermohonanClass();
-          $kp->create($permohonan);
-         
+        //Create a new kemajuan permohonan for each progress
+        $kp = new KemajuanPermohonanClass();
+        $kp->create($permohonan);
 
-         //Create a new penilaian in penilaian table
-       
-         $selectedPenilai = $request->input('checked');
+        //Create a new penilaian in penilaian table
+        $selectedPenilai = $request->input('checked'); //retrieve id of the user
+        $user= User::find($selectedPenilai[0]); // 13/4/2019 - sambung coding to send notification as email kepada panel penilai
+        Notification::route('mail',$user->email)->notify(new PermohonanBaharu($permohonan,$user));
+
         
+
+
+
+
+
+
+
+        
+
 
         $penilaian = new PenilaianClass();
         $penilaian =  $penilaian->create($permohonan);
@@ -89,33 +99,33 @@ class PenilaianPJK
  
         switch ($jp) {
             case 'program_baharu':
-           
                     return $this->viewProgramBaharu($id);
             break;
+            
             case 'kursus_teras_baharu':
             case 'kursus_elektif_baharu':
-           
             return $this->viewKursusTerasElektifBaharu($id);
                 break;
+
             case 'semakan_kursus_teras':
             case 'semakan_kursus_elektif':
-            case 'semakan_program':
-
-           
+            case 'semakan_program':            
             if($status_permohonan == '1'  ) // if permohonan require minority changes then create a new perakuan
-           
             return $this->viewKursusTerasElektifBaharu($id);
                 else if ($status_permohonan == '3'  )
             return  $this->viewProgramBaharu($id);
                 else 
             return;
-                break; 
+                break;
+
             case 'akreditasi_penuh':
             return view('jenis_permohonan_view.program_pengajian_baharu')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
-                break; 
+                break;
+
             case 'penjumudan_program':
             return view('jenis_permohonan_view.penjumudan_program')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
-            break; 
+            break;
+
             default:
                     return view ('/home'); 
                 break;
@@ -134,21 +144,24 @@ class PenilaianPJK
             case 'semakan_program':
             return $this->updateLaporanPanel($request,$permohonan);
             break;
+
             case 'kursus_teras_baharu':
             case 'kursus_elektif_baharu':
-            
             return $this->createPerakuanPjk($request,$permohonan);
             break;
+
             case 'semakan_kursus_teras':
-            return $this->semakanKursusTeras($request,$permohonan);
-           
+            return $this->semakanKursusTeras($request,$permohonan);           
             break; 
+
             case 'semakan_kursus_elektif':
             return $this->semakanKursusElektif($request,$permohonan);
                 break; 
+
             case 'akreditasi_penuh':
             return view('jenis_permohonan_view.program_pengajian_baharu')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
-                break; 
+                break;
+
             case 'penjumudan_program':
             return view('jenis_permohonan_view.penjumudan_program')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
             break; 
@@ -165,9 +178,6 @@ class PenilaianPJK
         $permohonan=Permohonan::find($id);
         $penilaian= $permohonan->penilaian;
         $laporan= $penilaian->laporan;
-
-       
-        
         return view('pjk.lampiran-pjk')->with('permohonan',$penilaian->permohonan)->with('penilaian',$penilaian)->with('laporan',$laporan);
 
         
@@ -177,12 +187,9 @@ class PenilaianPJK
     {
         $permohonan = Permohonan::find($id);
         return view ('pjk.perakuan-pjk')->with('permohonan',$permohonan);
-
-        
     }
     
     public function updateLaporanPanel(Request $request, $permohonan){
-      
            
             /* Cari permohonan since penilaian belongs to permohonan then baru boleh cari penilaian through eloquent relationship */
             $penilaian= $permohonan->penilaian;

@@ -56,7 +56,7 @@ Muat naik penambahbaikkan
 
 
 
-<h5> Laporan yang telah dikeluarkan</h5>
+<h5> Semua laporan yang telah dikeluarkan</h5>
 
 <table class="table table-striped">
 

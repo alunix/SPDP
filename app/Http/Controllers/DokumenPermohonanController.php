@@ -29,7 +29,7 @@ class DokumenPermohonanController extends Controller
 
     }
      
-    public function showPenambahbaikkan(DokumenPermohonan $dokumenPermohonan,$id)
+    public function showPenambahbaikkan($id)
     {
         $permohonan = Permohonan::find($id);
         $dps= $permohonan->dokumen_permohonans;

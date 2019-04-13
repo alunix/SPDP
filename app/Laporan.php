@@ -35,6 +35,11 @@ class Laporan extends Model
         return $this->belongsTo('SPDP\User','id_penghantar');// set the foreign key (second parameter)
        }
 
+       public function laporan_penilai(){
+    
+        return $this->belongsTo('SPDP\User','id_penghantar');// set the foreign key (second parameter)
+       }
+
 
 
 

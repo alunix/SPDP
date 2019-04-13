@@ -43,14 +43,12 @@ class StatusPermohonanClass
     public function pjk($permohonan){
 
         $jp =$permohonan->jenis_permohonan->jenis_permohonan_kod;
-        $penilaian_id=Penilaian::where('dokumen_id',$permohonan->id)->value('id');
-        $laporan=Laporan::where('penilaian_id_laporan',$penilaian_id)->first();
+      
         
         switch ($jp) {
             case 'program_baharu':
             case 'semakan_program': //same condition yang akan lalui panel penilai
-            
-            if($laporan == null)
+            if($permohonan->status_permohonan_id==1)
                 return '2'; //if no laporan are found that means permohonan masih disemak oleh panel penilai
             else
                 return '4';

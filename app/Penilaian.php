@@ -5,6 +5,7 @@ namespace SPDP;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use SPDP\Program;
+use SPDP\Laporan;
 
 class Penilaian extends Model
 {
@@ -17,11 +18,6 @@ class Penilaian extends Model
     ];
 
     protected $table = 'penilaians';
-   
-
- 
-
-
 
     public function permohonan(){
     
@@ -54,9 +50,13 @@ class Penilaian extends Model
       return $this->belongsTo('SPDP\User','penilaian_senat');// set the foreign key (second parameter)
    }
      
-     public function scopeLaporanPanelPenilai(){
-        $penilaians = Penilaian::all();
-        return view ('posts/senarai-penilaian-program')->with('penilaians',$penilaians);
+     public function laporan_panel_penilai($permohonan){
+      
+      $penilaian= $permohonan->penilaian;
+
+      $id_penilai = $penilaian->penilaian_panel_1;
+      $laporan_panel= Laporan::where('id_penghantar',$id_penilai)->where('dokumen_permohonan_id',$permohonan->permohonan_id)->orderBy('created_at', 'DESC')->first();
+      return $laporan_panel;
      }
 
 }

@@ -12,7 +12,9 @@ use SPDP\Services\StatusPermohonanClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Notification;
+use SPDP\Laporan;
 use SPDP\Notifications\PermohonanBaharu;
+use SPDP\Notifications\PermohonanDiluluskan;
 
 
 class PenilaianPJK
@@ -86,6 +88,7 @@ class PenilaianPJK
         $permohonan = Permohonan::find($id);
         $jp =$permohonan->jenis_permohonan->jenis_permohonan_kod;
         $status_permohonan = $permohonan->value('status_permohonan_id');
+
  
         switch ($jp) {
             case 'program_baharu':
@@ -128,35 +131,36 @@ class PenilaianPJK
     {   
       $jp =$permohonan->jenis_permohonan->jenis_permohonan_kod;
        
-        switch ($jp) {
-            case 'program_baharu':
-            case 'semakan_program':
-            return $this->updateLaporanPanel($request,$permohonan);
-            break;
+    switch ($jp) {
 
-            case 'kursus_teras_baharu':
-            case 'kursus_elektif_baharu':
-            return $this->createPerakuanPjk($request,$permohonan);
-            break;
+        case 'program_baharu':
+        case 'semakan_program':
+        return $this->updateLaporanPanel($request,$permohonan);
+        break;
 
-            case 'semakan_kursus_teras':
-            return $this->semakanKursusTeras($request,$permohonan);           
+        case 'kursus_teras_baharu':
+        case 'kursus_elektif_baharu':
+        return $this->createPerakuanPjk($request,$permohonan);
+        break;
+
+        case 'semakan_kursus_teras':
+        return $this->semakanKursusTeras($request,$permohonan);           
+        break; 
+
+        case 'semakan_kursus_elektif':
+        return $this->semakanKursusElektif($request,$permohonan);
             break; 
 
-            case 'semakan_kursus_elektif':
-            return $this->semakanKursusElektif($request,$permohonan);
-                break; 
+        case 'akreditasi_penuh':
+        return view('jenis_permohonan_view.program_pengajian_baharu')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
+            break;
 
-            case 'akreditasi_penuh':
-            return view('jenis_permohonan_view.program_pengajian_baharu')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
-                break;
-
-            case 'penjumudan_program':
-            return view('jenis_permohonan_view.penjumudan_program')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
-            break; 
-            default:
-                    return; 
-                break;
+        case 'penjumudan_program':
+        return view('jenis_permohonan_view.penjumudan_program')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
+        break; 
+        default:
+                return; 
+            break;
         }
     }
 
@@ -164,8 +168,12 @@ class PenilaianPJK
     {
         $permohonan=Permohonan::find($id);
         $penilaian= $permohonan->penilaian;
-        $laporan= $penilaian->laporan;
-        return view('pjk.lampiran-pjk')->with('permohonan',$penilaian->permohonan)->with('penilaian',$penilaian)->with('laporan',$laporan);
+
+        $id_penilai = $penilaian->penilaian_panel_1;
+        $laporan_panel= Laporan::where('id_penghantar',$id_penilai)->where('dokumen_permohonan_id',$permohonan->permohonan_id)->orderBy('created_at', 'DESC')->first();
+
+        //$laporan= $penilaian->laporan;
+        return view('pjk.lampiran-pjk')->with('permohonan',$penilaian->permohonan)->with('penilaian',$penilaian)->with('laporan',$laporan_panel);
     }
 
     public function viewKursusTerasElektifBaharu($id)
@@ -176,33 +184,32 @@ class PenilaianPJK
     
     public function updateLaporanPanel(Request $request, $permohonan){
            
-            /* Cari permohonan since penilaian belongs to permohonan then baru boleh cari penilaian through eloquent relationship */
-            $penilaian= $permohonan->penilaian;
-            
-            //Upload perakuan
-            $attached = 'perakuan_pjk';
-            $laporan = new LaporanClass();
-            $laporan_id= $penilaian->laporan->laporan_id;
-            $laporan->uploadLaporan( $request,$penilaian,$attached,$laporan_id);
+        /*Cari permohonan since penilaian belongs to permohonan then baru boleh cari penilaian through eloquent relationship */
+        $penilaian= $permohonan->penilaian;
+        
+        //Upload perakuan
+        $attached = 'perakuan_pjk';
+        $laporan = new LaporanClass();
+        $laporan->createLaporan($request,$permohonan,$attached);
 
-            /* Status semakan permohonan telah dikemaskini berdasarkan progress */
-            $sp = new StatusPermohonanClass();
-            $permohonan->status_permohonan_id=$sp->getStatusPermohonan($permohonan);
-            $permohonan ->save();
+        /*Status semakan permohonan telah dikemaskini berdasarkan progress */
+        $sp = new StatusPermohonanClass();
+        $permohonan->status_permohonan_id=$sp->getStatusPermohonan($permohonan);
+        $permohonan ->save();
 
-            //Hantar email kepada penghantar
-            $penghantar = User::find($permohonan->id_penghantar);
-            Notification::route('mail',$penghantar->email)->notify(new PermohonanDiluluskan($permohonan,$penghantar)); 
+        //Hantar email kepada penghantar
+        $penghantar = User::find($permohonan->id_penghantar);
+        Notification::route('mail',$penghantar->email)->notify(new PermohonanDiluluskan($permohonan,$penghantar)); 
 
-            //Kemajuan permohonan baharu
-            $kj= new KemajuanPermohonanClass();
-            $kj->create($permohonan);
+        //Kemajuan permohonan baharu
+        $kj= new KemajuanPermohonanClass();
+        $kj->create($permohonan);
 
-            $msg = [
-                'message' => 'Perakuan berjaya dimuatnaik',
-               ];  
-            
-            return redirect()->route('home')->with($msg);
+        $msg = [
+            'message' => 'Perakuan berjaya dimuatnaik',
+            ];  
+        
+        return redirect()->route('home')->with($msg);
 
     }
 

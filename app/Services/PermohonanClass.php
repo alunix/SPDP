@@ -3,11 +3,13 @@
 namespace SPDP\Services;
 
 use SPDP\Permohonan;
+use SPDP\User;
 use Illuminate\Http\Request;
 use SPDP\Services\KemajuanPermohonanClass;
 use SPDP\Services\DokumenPermohonanClass;
 use SPDP\Services\LaporanClass;
-
+use SPDP\Notifications\PerluPenambahbaikkan;
+use Notification;
 
 class PermohonanClass 
 {
@@ -71,6 +73,10 @@ class PermohonanClass
         //Create a new kemajuan permohonan for each progress
         $kp = new KemajuanPermohonanClass();
         $kp->create($permohonan);
+
+        //Hantar email kepada penghantar
+        $penghantar = User::find($permohonan->id_penghantar);
+        Notification::route('mail',$penghantar->email)->notify(new PerluPenambahbaikkan($permohonan,$penghantar)); //hantar email kepada penghantar
 
         $msg = [
             'message' => 'Laporan berjaya dimuat naik',

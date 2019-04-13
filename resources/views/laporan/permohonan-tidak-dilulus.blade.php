@@ -69,7 +69,8 @@
                         <div class="col-md-6">
                         <textarea class="form-control" id="summary-ckeditor" name="summary-ckeditor"></textarea>
                         </div>
-                    </div>
+                        
+                        </div>
                         
 
                        

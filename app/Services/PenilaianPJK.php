@@ -17,9 +17,6 @@ use SPDP\Notifications\PermohonanBaharu;
 
 class PenilaianPJK
 {
-    
-
-    
     public function createPerakuanPjk(Request $request,$permohonan)
     {   
     $penilaian = new PenilaianClass();
@@ -34,21 +31,25 @@ class PenilaianPJK
     $permohonan->status_permohonan_id=$sp->getStatusPermohonan($permohonan);
     $permohonan->save();
 
+    //Hantar email kepada penghantar
+    $penghantar = User::find($permohonan->id_penghantar);
+    Notification::route('mail',$penghantar->email)->notify(new PermohonanDiluluskan($permohonan,$penghantar)); //hantar email kepada penghantar
+
     $kj = new KemajuanPermohonanClass();
     $kj->create($permohonan);
 
     $msg = [
         'message' => 'Laporan berjaya dimuat naik',
        ];
-    return redirect('/home')->with($msg);
+    return redirect()->route('home')->with($msg);
 
     }
 
     public function pelantikanPenilaiSubmit(Request $request, $id)
     {      
-
         try {
-             /* Find permohonan id then change the status permohonan */
+        
+        /* Find permohonan id then change the status permohonan */
         $permohonan =Permohonan::find($id);   
         $permohonan -> status_permohonan_id = 2;
         $permohonan -> save();
@@ -57,21 +58,13 @@ class PenilaianPJK
         $kp = new KemajuanPermohonanClass();
         $kp->create($permohonan);
 
+     
+        
+
         //Create a new penilaian in penilaian table
-        $selectedPenilai = $request->input('checked'); //retrieve id of the user
-        $user= User::find($selectedPenilai[0]); // 13/4/2019 - sambung coding to send notification as email kepada panel penilai
-        Notification::route('mail',$user->email)->notify(new PermohonanBaharu($permohonan,$user));
-
-        
-
-
-
-
-
-
-
-        
-
+        $selectedPenilai = $request->input('checked'); //retrieve id of panel penilai
+        $user= User::find($selectedPenilai[0]); 
+        Notification::route('mail',$user->email)->notify(new PermohonanBaharu($permohonan,$user)); //hantar email kepada panel penilai
 
         $penilaian = new PenilaianClass();
         $penilaian =  $penilaian->create($permohonan);
@@ -86,7 +79,6 @@ class PenilaianPJK
             }
           }
 
-        
     }
 
     public function showPerakuanPjk($id)
@@ -94,8 +86,6 @@ class PenilaianPJK
         $permohonan = Permohonan::find($id);
         $jp =$permohonan->jenis_permohonan->jenis_permohonan_kod;
         $status_permohonan = $permohonan->value('status_permohonan_id');
-
-        
  
         switch ($jp) {
             case 'program_baharu':
@@ -113,7 +103,7 @@ class PenilaianPJK
             if($status_permohonan == '1'  ) // if permohonan require minority changes then create a new perakuan
             return $this->viewKursusTerasElektifBaharu($id);
                 else if ($status_permohonan == '3'  )
-            return  $this->viewProgramBaharu($id);
+                    return  $this->viewProgramBaharu($id);
                 else 
             return;
                 break;
@@ -137,7 +127,6 @@ class PenilaianPJK
     public function uploadPerakuanPjk($request,$permohonan)
     {   
       $jp =$permohonan->jenis_permohonan->jenis_permohonan_kod;
-      
        
         switch ($jp) {
             case 'program_baharu':
@@ -166,11 +155,9 @@ class PenilaianPJK
             return view('jenis_permohonan_view.penjumudan_program')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
             break; 
             default:
-                    return view ('/home'); 
+                    return; 
                 break;
         }
-
-        
     }
 
     public function viewProgramBaharu($id)
@@ -179,8 +166,6 @@ class PenilaianPJK
         $penilaian= $permohonan->penilaian;
         $laporan= $penilaian->laporan;
         return view('pjk.lampiran-pjk')->with('permohonan',$penilaian->permohonan)->with('penilaian',$penilaian)->with('laporan',$laporan);
-
-        
     }
 
     public function viewKursusTerasElektifBaharu($id)
@@ -205,6 +190,11 @@ class PenilaianPJK
             $permohonan->status_permohonan_id=$sp->getStatusPermohonan($permohonan);
             $permohonan ->save();
 
+            //Hantar email kepada penghantar
+            $penghantar = User::find($permohonan->id_penghantar);
+            Notification::route('mail',$penghantar->email)->notify(new PermohonanDiluluskan($permohonan,$penghantar)); 
+
+            //Kemajuan permohonan baharu
             $kj= new KemajuanPermohonanClass();
             $kj->create($permohonan);
 
@@ -212,14 +202,13 @@ class PenilaianPJK
                 'message' => 'Perakuan berjaya dimuatnaik',
                ];  
             
-            return redirect('/')->with($msg);
+            return redirect()->route('home')->with($msg);
 
     }
 
     public function semakanKursusTeras(Request $request, $permohonan){
 
         $status_permohonan = $permohonan->status_permohonan_id;
-
         if($status_permohonan == '1'  ) // if permohonan require minority changes then create a new perakuan
            return $this->createPerakuanPjk($request,$permohonan);
         else if ($status_permohonan == '3'  )
@@ -249,7 +238,6 @@ public function semakanKursusElektif(Request $request, $permohonan){
         $user->role = 'penilai';
         $user->password= Hash::make('abcd123');
         $user->save();
-
         return redirect()->route('register.panel_penilai.show');
     }
 

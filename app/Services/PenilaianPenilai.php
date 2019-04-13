@@ -10,6 +10,8 @@ use SPDP\Services\LaporanClass;
 use SPDP\Services\KemajuanPermohonanClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Notification;
+use SPDP\Notifications\PermohonanDiluluskan;
 
 
 class PenilaianPenilai
@@ -17,8 +19,6 @@ class PenilaianPenilai
   
     public function uploadLaporanPenilai(Request $request,$permohonan)
     {   
-        
-       
         $attached= 'laporan_panel_penilai';
         
         $lc= new LaporanClass();
@@ -28,6 +28,10 @@ class PenilaianPenilai
         $permohonan -> status_permohonan_id = 3;
         $permohonan ->save();
 
+        //Hantar email kepada penghantar
+        $penghantar = User::find($permohonan->id_penghantar);
+        Notification::route('mail',$penghantar->email)->notify(new PermohonanDiluluskan($permohonan,$penghantar)); //hantar email kepada penghantar
+
         $kj= new KemajuanPermohonanClass();
         $kj->create($permohonan);
 
@@ -35,7 +39,7 @@ class PenilaianPenilai
         'message' => 'Lampiran berjaya dimuatnaik',
         ];  
     
-    return redirect('/')->with($msg);
+        return redirect('/')->with($msg);
     }
 
 }

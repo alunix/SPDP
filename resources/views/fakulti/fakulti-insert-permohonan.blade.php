@@ -65,20 +65,6 @@
                             </div>
                         </div>
 
-                        <!-- <div class="form-group row">
-                            <label for="versi_dokumen" class="col-md-4 col-form-label text-md-right">{{ __('Versi') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="versi_dokumen" type="text" class="form-control{{ $errors->has('versi_dokumen') ? ' is-invalid' : '' }}" name="versi_dokumen" value="1.0" required autofocus readonly>
-
-                                @if ($errors->has('versi_dokumen'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('versi_dokumen') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div> -->
-
 
                         <div class="form-group row">
                             <label for="file_link" class="col-md-4 col-form-label text-md-right">{{ __('Muat naik dokumen(fail pdf)') }}</label>
@@ -100,7 +86,8 @@
                         <div class="col-md-6">
                         <textarea class="form-control" id="summary-ckeditor" name="summary-ckeditor"></textarea>
                         </div>
-                    </div>
+                        
+                        </div>
 
                     
 

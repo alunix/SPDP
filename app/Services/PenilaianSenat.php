@@ -8,23 +8,20 @@ use SPDP\User;
 use SPDP\Laporan;
 use SPDP\Services\LaporanClass;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+
 
 
 class PenilaianSenat
-{
-    
-   
+{ 
     public function uploadPerakuanSenat(Request $request, $id){
 
-         /* Cari permohonan since penilaian belongs to permohonan then baru boleh cari penilaian through eloquent relationship */
-         $penilaian= Penilaian::find($id);
+        /* Cari permohonan since penilaian belongs to permohonan then baru boleh cari penilaian through eloquent relationship */
+        $penilaian= Penilaian::find($id);
 
         $attached = 'perakuan_senat';
         $laporan = new LaporanClass();
         $laporan_id= $penilaian->laporan->laporan_id;
         $laporan->uploadLaporan( $request,$penilaian,$attached,$laporan_id);
-    
        
         $permohonan = $penilaian->permohonan;
         /* Status semakan permohonan telah dikemaskini berdasarkan progress */

@@ -20,8 +20,6 @@ class PermohonanController extends Controller
         $permohonans = Permohonan::all();
         return view ('fakulti.fakulti-insert-permohonan')->with('permohonans',$permohonans);
     }
-
-   
    
     public function permohonanDihantar()
     {   
@@ -57,7 +55,7 @@ class PermohonanController extends Controller
         $permohonan = Permohonan::find($id);
         $pc = new PermohonanClass();
         $pc->storePermohonanTidakDilulus($request,$permohonan->permohonan_id);
-        return redirect('/home');
+        return redirect()->route('home');
      }
 
     public function store(Request $request)

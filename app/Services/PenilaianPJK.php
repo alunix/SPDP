@@ -44,13 +44,11 @@ class PenilaianPJK
         'message' => 'Laporan berjaya dimuat naik',
        ];
     return redirect()->route('home')->with($msg);
-
     }
 
     public function pelantikanPenilaiSubmit(Request $request, $id)
     {      
         try {
-        
         /* Find permohonan id then change the status permohonan */
         $permohonan =Permohonan::find($id);   
         $permohonan -> status_permohonan_id = 2;
@@ -59,9 +57,6 @@ class PenilaianPJK
         //Create a new kemajuan permohonan for each progress
         $kp = new KemajuanPermohonanClass();
         $kp->create($permohonan);
-
-     
-        
 
         //Create a new penilaian in penilaian table
         $selectedPenilai = $request->input('checked'); //retrieve id of panel penilai
@@ -77,7 +72,7 @@ class PenilaianPJK
           } catch (\Illuminate\Database\QueryException $e){
             $errorCode = $e->errorInfo[1];
             if($errorCode == 1062){
-                return 'Duplicate Entry';
+                return 'Duplicate Entry for';
             }
           }
 

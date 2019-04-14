@@ -61,56 +61,37 @@
                                
                             </div>
                         </div> 
-
-
-
                               
 
                         <div class="form-group row">
-                             
                              <label for="file_link" class="col-md-4 col-form-label text-md-right">{{ __('Lampiran permohonan') }}</label>
-
                                 <div class="col-md-6">
-
-                                
                                 <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/{$permohonan->file_link}")?>">{{ basename($permohonan->file_name) }} </a> 
-
-                                
-                                
-
                                 </div>
-
                         </div>
 
                         @if($permohonan->penilaian->laporan->laporan_panel_penilai_link!=null)
                         <div class="form-group row">
                             <label for="laporan_panel_penilai" class="col-md-4 col-form-label text-md-right">{{ __('Lampiran laporan panel penilai') }}</label>
-
                             <div class="col-md-6">
                             <a href ="<?php echo asset("storage/laporan_panel_penilai/{$permohonan->penilaian->laporan->laporan_panel_penilai_link}")?>">{{ basename($permohonan->penilaian->laporan->laporan_panel_penilai) }} </a>
                             </div>
-
                         </div> 
                         @endif   
 
                          <div class="form-group row">
                             <label for="perakuan_pjk" class="col-md-4 col-form-label text-md-right">{{ __('Lampiran perakuan PJK') }}</label>
-                            
                             <div class="col-md-6">
-                                
                                 <a href ="<?php echo asset("storage/laporan_pjk/{$permohonan->penilaian->laporan->perakuan_pjk_link}")?>">{{ basename($permohonan->penilaian->laporan->perakuan_pjk) }} </a>
                             </div>
-
                         </div> 
                         
 
                          <div class="form-group row">
                             <label for="perakuan_jppa" class="col-md-4 col-form-label text-md-right">{{ __('Lampiran perakuan JPPA') }}</label>
-
                             <div class="col-md-6">
                                 <input id="perakuan_jppa" type="file" class="form-control{{ $errors->has('perakuan_jppa') ? ' is-invalid' : '' }}" name="perakuan_jppa" value="{{ old('perakuan_jppa') }}" required autofocus>
-
-                                @if ($errors->has('perakuan_jppa'))
+                        @if ($errors->has('perakuan_jppa'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('perakuan_jppa') }}</strong>
                                     </span>
@@ -118,31 +99,21 @@
                             </div>
                         </div> 
 
-<div class="form-group row mb-0">
-    <div class="col-md-6 offset-md-5">
-        <button type="submit" class="btn btn-success" value="accept-program" name="submitbutton">
-        {{ __('Hantar') }}
-        </button>
-    </div>
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-5">
+                                <button type="submit" class="btn btn-success" value="accept-program" name="submitbutton">
+                                {{ __('Hantar') }}
+                                </button>
+                        </div>
 
-      <div class="col-md-6 offset-md-5">
-            <button type="submit" class="btn btn-danger" value="accept-program" name="submitbutton">
-            {{ __('Tidak lulus') }}
-            </button>
-    </div>
-    
-</div>
-
-
-
-
-
-
+                        <div class="col-md-6 offset-md-5">
+                                    <button type="submit" class="btn btn-danger" value="accept-program" name="submitbutton">
+                                    {{ __('Tidak lulus') }}
+                                    </button>
+                        </div>
+                        </div>
 
  <hr style="border-color:white;">
-
-
-
 </div>
 </div>
 </div>

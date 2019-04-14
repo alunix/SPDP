@@ -61,10 +61,10 @@ class StatusPermohonanClass
             break; 
             case 'semakan_kursus_teras'://will figure out the rest 3/3/2019
                 return 4;
-                break; 
+            break; 
             case 'semakan_kursus_elektif':
                 return 7;
-                break;
+            break;
             default:
                     return view ('/home'); 
                 break;

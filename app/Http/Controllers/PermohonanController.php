@@ -70,11 +70,47 @@ class PermohonanController extends Controller
         return $pc->create($request);
     }  
     public function show($id)  {
-
+        
         /* Main function but mcm tak betul , testing other possibilities */
         $permohonan= Permohonan::find($id);
-        $rp = new RedirectPermohonan();
-        return $rp->redirect($permohonan);
+
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
+
+        $permohonans= Permohonan::all();
+        $count= count($permohonans);
+
+        $permohonans_id= $user->permohonans->pluck('permohonan_id');
+
+ 
+       if(count($permohonans_id)!=0){ //check whether fakulti does have permohonans
+
+        for($i=0;$i<=$count;$i++){
+
+            if($permohonan->permohonan_id == $permohonans_id[$i]){ //loop to check whether user can see permohonan fakulti 
+                $rp = new RedirectPermohonan();
+                return $rp->redirect($permohonan);
+            }
+            
+
+        }
+
+        abort(403, 'Unauthorized action.');
+
+       }
+
+       else    
+            abort(403, 'Unauthorized action.');
+
+
+
+
+
+
+        
+
+
+       
     }
    
     public function  showPelantikanPenilai($id) {

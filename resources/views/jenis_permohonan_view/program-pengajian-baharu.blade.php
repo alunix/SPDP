@@ -25,7 +25,6 @@
 
                             <div class="col-md-6">
                                 <input id="nama_penghantar" type="text"  value="{{ $permohonan->user->name}}" class="form-control" name="nama_penghantar"  required autofocus readonly>
-
                                
                             </div>
                         </div>
@@ -46,7 +45,6 @@
 
                             <div class="col-md-6">
                                 <input id="created_at" type="text" value="{{ $permohonan->created_at}}" class="form-control" name="created_at"  required autofocus readonly>
-
                                
                             </div>
                         </div>
@@ -71,14 +69,15 @@
                         </div>
                                 
               
-                        <div class="form-group row mb-0">
+                            <div class="form-group row mb-0">
 
                             <div class="col-md-6 offset-md-5">
 
                             <a href="{{ route('dokumenPermohonan.dihantar', ['permohonan' => $permohonan->permohonan_id])  }}">
                                     <input type="button" class="btn btn-info" value="Lihat versi sejarah" />
-                                    
                             </a>
+
+
                        
                             @if(Auth::user()->role == "pjk")
                                  
@@ -133,6 +132,53 @@
                             @endif    
                             </div>
                         </div>
+                        <br>
+
+
+                       
+
+<table class="table table-striped">
+
+<thead>
+    <tr>
+    <th scope="col">No</th>
+    <th scope="col">Laporan</th>
+    <th scope="col">Dihantar</th>
+    <th scope="col">Pihak</th>
+    <th scope="col">Versi</th>
+    <th scope="col">Tarikh/Masa Laporan</th> 
+    
+    </tr>
+</thead>
+<tbody>
+@if( ! $laporans->isEmpty() )
+@foreach($laporans as $laporan)
+<tr>
+<th scope="row">{{ $loop->iteration}}</th>
+<td><a href ="<?php echo asset("storage/cadangan_permohonan_baharu/$laporan->tajuk_fail_link")?>">{{ basename($laporan->tajuk_fail_link) }}</td> </a>
+<td> {{$laporan->id_penghantar_nama->name}}</td>
+<td> {{$laporan->id_penghantar_nama->role}}</td>
+<td> {{$laporan->versi_laporan}}</td>
+<td> {{$laporan->created_at}}</td>
+
+
+</tr>
+@endforeach
+
+
+
+</tbody>
+</table>
+
+
+
+@else
+
+<p> Tiada laporan telah dikeluarkan</p>
+
+@endif
+
+
                          <hr style="border-color:white;">
                         
 

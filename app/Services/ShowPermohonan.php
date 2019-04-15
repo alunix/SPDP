@@ -38,19 +38,21 @@ class ShowPermohonan
            abort(403,'Tidak dibenarkan');
         }
 
-        if(count($permohonans_id)!=0){ //check whether fakulti does have permohonans
-            for($i=0;$i<count($permohonans_id);$i++){ // fixed bug where the loop was i<count instead of i<=count // basic first year error
+        if(count($permohonans_id)==0) //check whether fakulti does have permohonans
+        {
+            abort(403, 'Tidak dibenarkan');
             
-                    if($permohonan->permohonan_id == $permohonans_id[$i]) {
-                    
-                                    $rp = new RedirectPermohonan();
-                                    return $rp->redirect($permohonan);
-                    }
-            } 
-            abort(403, 'Tidak dibenarkan');
         }
-        else 
-            abort(403, 'Tidak dibenarkan');
+
+        for($i=0;$i<count($permohonans_id);$i++){ // fixed bug where the loop was i<count instead of i<=count // basic first year error
+            
+            if($permohonan->permohonan_id == $permohonans_id[$i]) {
+            
+                            $rp = new RedirectPermohonan();
+                            return $rp->redirect($permohonan);
+            }
+                } 
+                abort(403, 'Tidak dibenarkan');
                 
     }
 
@@ -60,28 +62,32 @@ class ShowPermohonan
             return 0;
          }
         
-        $fakulti = $this->isFakulti();
+        $isFakulti = $this->isFakulti();
 
-        if($fakulti==0){
+        if($isFakulti==0){
             return 1;
         }
 
         else{
-            $user_id = auth()->user()->id;
-            $user = User::find($user_id);
-            $permohonans_id= $user->permohonans->pluck('permohonan_id');
-   
-            if(count($permohonans_id)!=0){ //check whether fakulti does have permohonans
-               for($i=0;$i<count($permohonans_id);$i++){ // fixed bug where the loop was i<count instead of i<=count // basic first year error
-               
-                       if($permohonan->permohonan_id == $permohonans_id[$i]) {
-                                       return 1;
-                       }
-               } 
-               return 0;
-           }
-           else 
-               return 0;
+
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
+        $permohonans_id= $user->permohonans->pluck('permohonan_id');
+
+        if(count($permohonans_id)==0) //check whether fakulti does have permohonans
+        {
+            return 0;
+            die();
+        }
+
+        for($i=0;$i<count($permohonans_id);$i++){ // fixed bug where the loop was i<count instead of i<=count // basic first year error
+           
+                if($permohonan->permohonan_id == $permohonans_id[$i]) {
+                                   return 1;
+                   }
+           } 
+           return 0;
+
         }
 
     }

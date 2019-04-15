@@ -19,7 +19,21 @@ class DokumenPermohonanController extends Controller
     public function show($id)
     {
         $permohonan= Permohonan::find($id);
-        return view('fakulti.senarai-dokumen-permohonan')->with('dokumen_permohonans',$permohonan->dokumen_permohonans)->with('permohonan',$permohonan);
+
+        $sp= new ShowPermohonan();
+        $dp = $sp->getBoolPermohonan($permohonan);
+
+        
+        if($dp == 0){
+            abort(403,'Tidak dibenarkan');
+        }
+        else{
+            return view('fakulti.senarai-dokumen-permohonan')->with('dokumen_permohonans',$permohonan->dokumen_permohonans)->with('permohonan',$permohonan);
+        }
+
+
+
+       
 
     }
      
@@ -43,24 +57,37 @@ class DokumenPermohonanController extends Controller
     }
 
     public function uploadPenambahbaikkan(Request $request,$id)
-    {
-        $permohonan = Permohonan::find($id);
+    {   
         $this->validate($request,[
             'dokumen' => 'required|file|max:1999',
         ]);
-       
-        $attached = 'dokumen';
+
         $permohonan = Permohonan::find($id);
-        
 
-        $dp = new DokumenPermohonanClass();
-        $dp->update($permohonan,$request,$attached);
+        $sp= new ShowPermohonan();
+        $dp = $sp->getBoolPermohonan($permohonan);
 
-        $msg = [
-            'message' => 'Dokumen berjaya dimuat naik',
-           ];  
+        if($dp == 0){
+            abort(403,'Tidak dibenarkan');
+        }
+        else{
+            $attached = 'dokumen';
+            $permohonan = Permohonan::find($id);
+            
+    
+            $dp = new DokumenPermohonanClass();
+            $dp->update($permohonan,$request,$attached);
+    
+            $msg = [
+                'message' => 'Dokumen berjaya dimuat naik',
+               ];  
+    
+            return redirect()->route('dokumenPermohonan.penambahbaikkan.show', [$permohonan->permohonan_id])->with($msg);
+        }
 
-        return redirect()->route('dokumenPermohonan.penambahbaikkan.show', [$permohonan->permohonan_id])->with($msg);
+       
+       
+       
         
 
 

@@ -162,7 +162,14 @@ class PenilaianPJK
     public function viewProgramBaharu($id)
     {
         $permohonan=Permohonan::find($id);
+
+        if($permohonan==null)
+            abort(403);
+
         $penilaian= $permohonan->penilaian;
+
+        if($penilaian==null)
+            abort(403);
 
         $id_penilai = $penilaian->penilaian_panel_1;
         $laporan_panel= Laporan::where('id_penghantar',$id_penilai)->where('dokumen_permohonan_id',$permohonan->permohonan_id)->orderBy('created_at', 'DESC')->first();

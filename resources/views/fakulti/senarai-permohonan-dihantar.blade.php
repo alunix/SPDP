@@ -39,20 +39,20 @@
 </thead>
 <tbody>
 @if( ! $permohonans->isEmpty() )
-@foreach($permohonans as $program)
+@foreach($permohonans as $permohonan)
 <tr>
 <th scope="row">{{$loop->iteration}}</th>
-<td> {{$program->permohonan_id}}</td>  
-<td> {{$program->jenis_permohonan->jenis_permohonan_huraian}}</td>   
-<td> {{$program->version_counts()}}</td>
-<td> {{$program->doc_title}}</td>                 
-<td>{{$program->user->name}}</td>
-<td> {{$program->created_at->format('h:i a d/m/Y') }}</td>
-<td>{{$program->status_permohonan->status_permohonan_huraian}} </td>
-<td> {{$program->updated_at->format('h:i a d/m/Y') }}</td>
-<td><a href="{{ route('fakulti.kemajuanPermohonan',$program->permohonan_id) }}" class="btn btn-primary">Kemajuan</a></td>
-<td><a href="{{ route('dokumenPermohonan.dihantar',$program->permohonan_id) }}" class="btn btn-primary">Dokumen</a></td>
-<td><a href="{{ route('fakulti.kemajuanPermohonan',$program->permohonan_id) }}" class="btn btn-primary">SELECT</a></td>
+<td> {{$permohonan->permohonan_id}}</td>  
+<td> {{$permohonan->jenis_permohonan->jenis_permohonan_huraian}}</td>   
+<td> {{$permohonan->version_counts()}}</td>
+<td> {{$permohonan->doc_title}}</td>                 
+<td>{{$permohonan->user->name}}</td>
+<td> {{$permohonan->created_at->format('h:i a d/m/Y') }}</td>
+<td>{{$permohonan->status_permohonan->status_permohonan_huraian}} </td>
+<td> {{$permohonan->updated_at->format('h:i a d/m/Y') }}</td>
+<td><a href="{{ route('fakulti.kemajuanPermohonan',$permohonan->permohonan_id) }}" class="btn btn-primary">Kemajuan</a></td>
+<td><a href="{{ route('dokumenPermohonan.dihantar',$permohonan->permohonan_id) }}" class="btn btn-primary">Dokumen</a></td>
+<td><a href="{{ route('view-permohonan-baharu',$permohonan->permohonan_id)}}" class="btn btn-primary">SELECT</a></td>
 
 
 </tr>

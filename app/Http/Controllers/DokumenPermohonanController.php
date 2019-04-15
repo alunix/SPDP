@@ -2,18 +2,12 @@
 
 namespace SPDP\Http\Controllers;
 
-use SPDP\DokumenPermohonan;
+
 use Illuminate\Http\Request;
-use SPDP\Penilaian;
 use SPDP\Permohonan;
-use SPDP\User;
-use Illuminate\Support\Facades\Hash;
-use SPDP\Services\PenilaianClass;
 use SPDP\Services\DokumenPermohonanClass;
-use SPDP\Services\PenilaianPJK;
-use SPDP\Services\PenilaianJppa;
-use SPDP\Services\PenilaianSenat;
-use SPDP\Services\PenilaianPenilai;
+use SPDP\Services\ShowPermohonan;
+
 
 class DokumenPermohonanController extends Controller
 {
@@ -32,8 +26,20 @@ class DokumenPermohonanController extends Controller
     public function showPenambahbaikkan($id)
     {
         $permohonan = Permohonan::find($id);
-        $dps= $permohonan->dokumen_permohonans;
-        return view ('fakulti.dokumen-permohonan-penambahbaikkan')->with('permohonan',$permohonan)->with('dps',$dps);
+
+        $sp = new ShowPermohonan();
+        $dp=  $sp->getBoolPermohonan($permohonan);
+
+        if($dp == 0){
+            abort(403,'Tidak dibenarkan');
+        }
+        else{
+            $dps= $permohonan->dokumen_permohonans;
+            return view ('fakulti.dokumen-permohonan-penambahbaikkan')->with('permohonan',$permohonan)->with('dps',$dps);
+        }
+
+
+       
     }
 
     public function uploadPenambahbaikkan(Request $request,$id)

@@ -63,37 +63,5 @@ class LaporanController extends Controller
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \SPDP\Laporan  $laporan
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Laporan $laporan)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \SPDP\Laporan  $laporan
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Laporan $laporan)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \SPDP\Laporan  $laporan
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Laporan $laporan)
-    {
-        //
-    }
+   
 }

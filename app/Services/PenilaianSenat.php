@@ -36,7 +36,7 @@ class PenilaianSenat
             'message' => 'Perakuan berjaya dimuatnaik',
            ];  
 
-        return redirect('/')->with($msg);
+        return redirect()->route('home')->with($msg);
 
     }
     

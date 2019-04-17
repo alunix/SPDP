@@ -52,7 +52,7 @@
 <td> {{$permohonan->updated_at->format('h:i a d/m/Y') }}</td>
 <td><a href="{{ route('fakulti.kemajuanPermohonan',$permohonan->permohonan_id) }}" class="btn btn-primary">Kemajuan</a></td>
 <td><a href="{{ route('dokumenPermohonan.dihantar',$permohonan->permohonan_id) }}" class="btn btn-primary">Dokumen</a></td>
-<td><a href="{{ route('view-permohonan-baharu',$permohonan->permohonan_id)}}" class="btn btn-primary">SELECT</a></td>
+
 
 
 </tr>

@@ -85,28 +85,7 @@ class LaporanClass
     }
 
 
-    // public function getFileNameToStore($role)
-    // {
-
-    //     switch ($role) {
-    //         case 'pjk':
-    //                 return 'public/laporan_pjk';
-    //             break; 
-    //         case 'senat':
-    //             return 'public/perakuan_senat';
-    //         break; 
-    //         case 'penilai':
-    //                 return 'public/laporan_panel_penilai';
-    //             break; 
-    //         case 'jppa':
-    //                 return 'public/perakuan_jppa';
-    //             break; 
-    //         default:
-    //                 return 'public/pdf_error';
-    //             break;
-    //     }
-    // }
-
+ 
    
     
 

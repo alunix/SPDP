@@ -64,6 +64,17 @@ class DokumenPermohonanController extends Controller
 
         $permohonan = Permohonan::find($id);
 
+         if($permohonan->status_permohonan_id!=8 && $permohonan->status_permohonan_id!=9 && $permohonan->status_permohonan_id!=10 && $permohonan->status_permohonan_id!=11){
+      
+            $msg = [
+                'error' => 'Permohonan masih tidak memerlukan penambahbaikkan',
+               ];  
+            
+            return redirect()->route('dokumenPermohonan.penambahbaikkan.show', [$permohonan->permohonan_id])->with('permohonan',$permohonan)->with('jenis_permohonan',$permohonan->jenis_permohonan)->with($msg);
+            die();
+            
+        }
+       
         $sp= new ShowPermohonan();
         $dp = $sp->getBoolPermohonan($permohonan);
 
@@ -83,9 +94,9 @@ class DokumenPermohonanController extends Controller
                ];  
     
             return redirect()->route('dokumenPermohonan.penambahbaikkan.show', [$permohonan->permohonan_id])->with($msg);
-        }
+        
 
-       
+    }       
        
        
         

@@ -33,7 +33,10 @@ class DokumenPermohonanClass
 
     
     public function update($permohonan,Request $request,$attached)
-    {   
+    {    
+        
+       
+
         
         //Handle file upload
         if($request->hasFile($attached))
@@ -63,19 +66,20 @@ class DokumenPermohonanClass
         $dp->versi =((int)$permohonan->version_counts())+1;
         $dp->save();
 
-        $permohonan->status_permohonan_id= $this->getStatusPermohonan($permohonan->permohonan_id);
+        $permohonan->status_permohonan_id= $this->getStatusPermohonan($permohonan->status_permohonan_id);
         $permohonan->save();
 
         $kp= new KemajuanPermohonanClass();
         $kp->create($permohonan);
-
+        
+        
 
       
     }
 
-    public function getStatusPermohonan($permohonan_id)
+    public function getStatusPermohonan($status_permohonan_id)
     {
-        switch ($permohonan_id) {
+        switch ($status_permohonan_id) {
             case 8:
                 return 12;
             break;

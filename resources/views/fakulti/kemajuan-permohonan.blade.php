@@ -12,10 +12,15 @@
     <div class="container">
  
    <h5>Permohonan ID :{{$permohonan->id}}</h5>
+
+   @if($permohonan->status_permohonan_id == 8 or $permohonan->status_permohonan_id == 9 or $permohonan->status_permohonan_id == 10 or $permohonan->status_permohonan_id == 11  )
    <a class="btn icon-btn btn-info" href="{{ route('dokumenPermohonan.penambahbaikkan.show',$permohonan->permohonan_id) }}">
 Muat naik penambahbaikkan
 </a>
 <br><br>
+    @else
+    @endif
+
 
 <h5>Kemajuan permohonan</h5>
 
@@ -66,6 +71,7 @@ Muat naik penambahbaikkan
     <th scope="col">Laporan</th>
     <th scope="col">Dihantar</th>
     <th scope="col">Pihak</th>
+    <th scope="col">Komen</th>
     <th scope="col">Versi</th>
     <th scope="col">Tarikh/Masa Laporan</th> 
     
@@ -79,8 +85,9 @@ Muat naik penambahbaikkan
 <td><a href ="<?php echo asset("storage/cadangan_permohonan_baharu/$laporan->tajuk_fail_link")?>">{{ basename($laporan->tajuk_fail_link) }}</td> </a>
 <td> {{$laporan->id_penghantar_nama->name}}</td>
 <td> {{$laporan->id_penghantar_nama->role}}</td>
+<td> {{$laporan->komen}}</td>
 <td> {{$laporan->versi_laporan}}</td>
-<td> {{$laporan->created_at}}</td>
+<td> {{$laporan->created_at->format('h:i a d/m/Y') }}</td>
 
 
 </tr>

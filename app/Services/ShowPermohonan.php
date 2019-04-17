@@ -5,6 +5,7 @@ namespace SPDP\Services;
 
 use SPDP\User;
 use SPDP\Services\RedirectPermohonan;
+use SPDP\Permohonan;
 
 
 class ShowPermohonan
@@ -34,12 +35,9 @@ class ShowPermohonan
 
     public function fakulti($permohonans_id,$permohonan){
 
-        $permohonan= Permohonan::find($permohonan->permohonan_id);
-
-
         if($permohonan==null){
-           abort(403,'Tidak dibenarkan');
-        }
+            abort(403,'Tidak dibenarkan');
+         }
 
         if(count($permohonans_id)==0) //check whether fakulti does have permohonans
         { 

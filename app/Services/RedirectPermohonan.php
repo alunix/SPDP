@@ -15,22 +15,15 @@ use SPDP\Services\MuatNaikLaporan;
 class RedirectPermohonan
 {
  
-    public function redirect(Permohonan $permohonan)
-    {
+    public function redirect($permohonan)
+    
+    {   
+        if($permohonan==null){
+            abort(404);
+        }
         $jp =$permohonan->jenis_permohonan->jenis_permohonan_kod;
 
-        // $penilaian = Penilaian::where(['permohonan_id_penilaian' => $permohonan->penilaian->id])->first();
-
-
-        // $id_penilai = $penilaian->penilaian_panel_1;
-        // $id_pjk = $penilaian->penilaian_pjk;
-        // $id_jppa = $penilaian->penilaian_jppa;
-        // $id_senat= $penilaian->penilaian_senat;
-
-        // $laporan_panel= Laporan::where('id_penghantar',$id_penilai)->where('dokumen_permohonan_id',$permohonan->permohonan_id)->orderBy('created_at', 'DESC')->first();
-        // $laporan_pjk=Laporan::where('id_penghantar',$id_pjk)->where('dokumen_permohonan_id',$permohonan->permohonan_id)->orderBy('created_at', 'DESC')->first();
-        // $laporan_jppa=Laporan::where('id_penghantar',$id_jppa)->where('dokumen_permohonan_id',$permohonan->permohonan_id)->orderBy('created_at', 'DESC')->first();
-        // $laporan_senat=Laporan::where('id_penghantar',$id_senat)->where('dokumen_permohonan_id',$permohonan->permohonan_id)->orderBy('created_at', 'DESC')->first();
+       
 
   
         

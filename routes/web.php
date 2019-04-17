@@ -112,7 +112,7 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware','middlewa
 	 Route::patch( '/permohonan/{permohonan}/pelantikan-penilai', 'PermohonanController@pelantikanPenilaiSubmit')-> name('pelantikan_penilai.submit');
 	 Route::get('/permohonan/{permohonan}/pelantikan-penilai','PermohonanController@showPelantikanPenilai')->name('pelantikan_penilai.show');
 
-	 Route::get('permohonan/{permohonan}', 'PermohonanController@show')->middleware('role:pjk,penilai')->name('view-permohonan-baharu');
+	 Route::get('permohonan/{permohonan}', 'PermohonanController@show')->middleware('auth')->name('view-permohonan-baharu');
 
 	 Route::patch('permohonan/{permohonan}/penambahbaikkan', 'PermohonanController@storePermohonanTidakDilulus')->name('laporan.permohonanTidakDilulus');	
 	 Route::get('permohonan/{permohonan}/penambahbaikkan', 'PermohonanController@permohonanTidakDilulus')->name('laporan.permohonanTidakDilulus.submit');	

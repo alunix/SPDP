@@ -15,10 +15,9 @@ class LaporanClass
     
     public function createLaporan(Request $request,$permohonan,$attached)
     {   
-         //get the role of the current user
-    $role = auth()->user()->role;
+       
     //get filenametoStore directory from a function in the class
-    $attachedLocation = $this->getFileNameToStore($role);
+    $attachedLocation = 'public/laporan';
 
     //Handle file upload
     if($request->hasFile($attached))
@@ -40,46 +39,73 @@ class LaporanClass
         else{
             $fileNameToStore = 'noPDF.pdf';
         }
+
+        //get the role of the current user
+        $user_id = auth()->user()->id;
+
+        // $laporans_id = $permohonan->dokumen_permohonans->where('id_penghantar',$user_id);
+        $laporans_id = $permohonan->dokumen_permohonans->pluck('dokumen_permohonan_id');
+        $laporan_count = Laporan::where('id_penghantar',$user_id)->where('dokumen_permohonan_id',$laporans_id)->get();
+
         
-        $laporan = new Laporan();
-        $laporan->dokumen_permohonan_id= $permohonan->dokumen_permohonan()->dokumen_permohonan_id; //retrieve latest dokumen_permohonan_id from permohonan has many dokumen permohonans
-        $laporan->id_penghantar= auth()->user()->id;
-        $laporan ->komen =$request -> input('summary-ckeditor');
-        $laporan->tajuk_fail=$fileNameWithExt;
-        $laporan->tajuk_fail_link= $fileNameToStore;
-        $laporan->versi_laporan= 1;
-        $laporan->save();
+
+        if($laporans_id==null){
+            $laporan = new Laporan();
+            $laporan->dokumen_permohonan_id= $permohonan->dokumen_permohonan()->dokumen_permohonan_id; //retrieve latest dokumen_permohonan_id from permohonan has many dokumen permohonans
+            $laporan->id_penghantar= auth()->user()->id;
+            $laporan ->komen =$request -> input('summary-ckeditor');
+            $laporan->tajuk_fail=$fileNameWithExt;
+            $laporan->tajuk_fail_link= $fileNameToStore;
+            $laporan->versi_laporan= 1;
+            $laporan->save();
+        }
+
+        else{
+
+            $laporan = new Laporan();
+            $laporan->dokumen_permohonan_id= $permohonan->dokumen_permohonan()->dokumen_permohonan_id; //retrieve latest dokumen_permohonan_id from permohonan has many dokumen permohonans
+            $laporan->id_penghantar= auth()->user()->id;
+            $laporan ->komen =$request -> input('summary-ckeditor');
+            $laporan->tajuk_fail=$fileNameWithExt;
+            $laporan->tajuk_fail_link= $fileNameToStore;
+            $laporan->versi_laporan= count($laporan_count)+1;
+            $laporan->save();
+
+
+        }
+        
+
+
+
+       
+        
+       
        
       
     }
-   
 
-    public function uploadLaporan(Request $request,$attached,$laporan_id)
-    {
 
-    }
+    // public function getFileNameToStore($role)
+    // {
 
-    public function getFileNameToStore($role)
-    {
-
-        switch ($role) {
-            case 'pjk':
-                    return 'public/laporan_pjk';
-                break; 
-            case 'senat':
-                return 'public/perakuan_senat';
-            break; 
-            case 'penilai':
-                    return 'public/laporan_panel_penilai';
-                break; 
-            case 'jppa':
-                    return 'public/perakuan_jppa';
-                break; 
-            default:
-                    return 'public/pdf_error';
-                break;
-        }
-    }
+    //     switch ($role) {
+    //         case 'pjk':
+    //                 return 'public/laporan_pjk';
+    //             break; 
+    //         case 'senat':
+    //             return 'public/perakuan_senat';
+    //         break; 
+    //         case 'penilai':
+    //                 return 'public/laporan_panel_penilai';
+    //             break; 
+    //         case 'jppa':
+    //                 return 'public/perakuan_jppa';
+    //             break; 
+    //         default:
+    //                 return 'public/pdf_error';
+    //             break;
+    //     }
+    // }
 
    
     

@@ -34,26 +34,25 @@ class ShowPermohonan
 
     public function fakulti($permohonans_id,$permohonan){
 
+        $permohonan= Permohonan::find($permohonan->permohonan_id);
+
+
         if($permohonan==null){
            abort(403,'Tidak dibenarkan');
         }
 
         if(count($permohonans_id)==0) //check whether fakulti does have permohonans
-        {
+        { 
             abort(403, 'Tidak dibenarkan');
-            
         }
 
         for($i=0;$i<count($permohonans_id);$i++){ // fixed bug where the loop was i<count instead of i<=count // basic first year error
             
             if($permohonan->permohonan_id == $permohonans_id[$i]) {
-            
                             $rp = new RedirectPermohonan();
-                            return $rp->redirect($permohonan);
-            }
+                            return $rp->redirect($permohonan);}
                 } 
                 abort(403, 'Tidak dibenarkan');
-                
     }
 
     public function getBoolPermohonan($permohonan){

@@ -118,7 +118,7 @@
                                     
                             </a>
                             
-                            <a href="{{ route('laporan.permohonanTidakDilulus', ['permohonan' => $permohonan->id])  }}">
+                            <a href="{{route('laporan.permohonanTidakDilulus',$permohonan->permohonan_id)}}">
                                     <input type="button" class="btn btn-danger" value="Penambahbaikan" />
                                     
                             </a>
@@ -147,9 +147,10 @@
 @foreach($laporans as $laporan)
 <tr>
 <th scope="row">{{ $loop->iteration}}</th>
-<td><a href ="<?php echo asset("storage/cadangan_permohonan_baharu/$laporan->tajuk_fail_link")?>">{{ basename($laporan->tajuk_fail_link) }}</td> </a>
+<td><a href ="<?php echo asset("storage/laporan/$laporan->tajuk_fail_link")?>">{{ basename($laporan->tajuk_fail_link) }}</td> </a>
 <td> {{$laporan->id_penghantar_nama->name}}</td>
 <td> {{$laporan->id_penghantar_nama->role}}</td>
+<td> {{$laporan->komen}}</td>
 <td> {{$laporan->versi_laporan}}</td>
 <td> {{$laporan->created_at}}</td>
 

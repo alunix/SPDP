@@ -142,9 +142,6 @@
                                     <input type="button" class="btn btn-success" value="Lulus permohonan" />
                                     
                             </a>
-                                
-                                
-                            
                             <!-- <button type="submit" class="btn btn-danger" value="reject-permohonan" name="submitbutton" >
                                 {{ __('Penambahbaikan') }}
                             </button> -->
@@ -153,17 +150,7 @@
                                     <input type="button" class="btn btn-danger" value="Penambahbaikan" />
                                     
                             </a>
-
-
-                            
-                            
-                            @endif    
-
-                            
-
-                              
-                             
-
+                            @endif
                             </div>
                         </div>
 
@@ -176,6 +163,7 @@
     <th scope="col">Laporan</th>
     <th scope="col">Dihantar</th>
     <th scope="col">Pihak</th>
+    <th scope="col">Komen</th>
     <th scope="col">Versi</th>
     <th scope="col">Tarikh/Masa Laporan</th> 
     
@@ -186,9 +174,10 @@
 @foreach($laporans as $laporan)
 <tr>
 <th scope="row">{{ $loop->iteration}}</th>
-<td><a href ="<?php echo asset("storage/cadangan_permohonan_baharu/$laporan->tajuk_fail_link")?>">{{ basename($laporan->tajuk_fail_link) }}</td> </a>
+<td><a href ="<?php echo asset("storage/laporan/$laporan->tajuk_fail_link")?>">{{ basename($laporan->tajuk_fail_link) }}</td> </a>
 <td> {{$laporan->id_penghantar_nama->name}}</td>
 <td> {{$laporan->id_penghantar_nama->role}}</td>
+<td> {{$laporan->komen}}</td>
 <td> {{$laporan->versi_laporan}}</td>
 <td> {{$laporan->created_at}}</td>
 

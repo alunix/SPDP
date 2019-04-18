@@ -21,11 +21,7 @@ class RedirectPermohonan
         if($permohonan==null){
             abort(404);
         }
-        $jp =$permohonan->jenis_permohonan->jenis_permohonan_kod;
-
-       
-
-  
+        $jp =$permohonan->jenis_permohonan->jenis_permohonan_kod;  
         
         $dp = $permohonan->dokumen_permohonans->pluck('dokumen_permohonan_id');
         $laporans= Laporan::whereIn('dokumen_permohonan_id',$dp)->get();

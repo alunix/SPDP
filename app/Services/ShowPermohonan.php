@@ -6,23 +6,24 @@ namespace SPDP\Services;
 use SPDP\User;
 use SPDP\Services\RedirectPermohonan;
 use SPDP\Permohonan;
+use SPDP\Penilaian;
 
 
 class ShowPermohonan
 {
    public function show($permohonan)
     {
-        $user_id = auth()->user()->id;
-        $user = User::find($user_id);
-
-        $permohonans_id= $user->permohonans->pluck('permohonan_id');
-        
         $role = auth()->user()->role;
         
         switch ($role) {
             case 'fakulti':
-            return $this->fakulti($permohonans_id,$permohonan);
+            return $this->fakulti($permohonan);
             
+            break;
+
+            case 'penilai':
+            return $this->penilai($permohonan);
+
             break;
            
             default:
@@ -33,8 +34,13 @@ class ShowPermohonan
 
     }
 
-    public function fakulti($permohonans_id,$permohonan){
+    public function fakulti($permohonan){
+        
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
 
+        $permohonans_id= $user->permohonans->pluck('permohonan_id');
+        
         if($permohonan==null){
             abort(403,'Tidak dibenarkan');
          }
@@ -52,6 +58,52 @@ class ShowPermohonan
                 } 
                 abort(403, 'Tidak dibenarkan');
     }
+
+    public function penilai($permohonan){
+        
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
+
+        if($permohonan==null){
+            abort(403,'Tidak dibenarkan');
+         }
+        
+        $penilaian= $permohonan->penilaian;
+
+        if ($penilaian==null){
+            abort(404);
+        }
+
+        $panel_id= $penilaian->penilaian_panel_1;
+
+        if($panel_id==$user_id){
+            $rp = new RedirectPermohonan();
+            return $rp->redirect($permohonan);
+        }
+        else{
+            abort(404);
+        }
+
+        // if($panel_id==null){
+        //     abort(404);
+        // }
+
+        // $permohonans_id =Penilaian::where('penilaian_panel_1',$panel_id)->pluck('permohonan_id_penilaian');
+       
+        // if(count($permohonans_id)==0) //check whether panel have access to permohonans
+        // { 
+        //     abort(403, 'Tidak dibenarkan');
+        // }
+
+        // for($i=0;$i<count($permohonans_id);$i++){ // fixed bug where the loop was i<count instead of i<=count // basic first year error
+            
+        //     if($permohonan->permohonan_id == $permohonans_id[$i]) {
+        //                     $rp = new RedirectPermohonan();
+        //                     return $rp->redirect($permohonan);}
+        //         } 
+        //         abort(403, 'Tidak dibenarkan');
+    }
+
 
     public function getBoolPermohonan($permohonan){
 

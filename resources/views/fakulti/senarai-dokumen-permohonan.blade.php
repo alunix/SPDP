@@ -22,6 +22,7 @@
     <th scope="col">Dokumen</th>
     <th scope="col">Saiz</th>
     <th scope="col">Komen</th>
+    <th scope ="col">Jumlah laporan</th>
     <th scope="col">Tarikh/Masa Penghantaran</th>
  
     
@@ -40,6 +41,9 @@
 <td> {{$dk->komen}}</td>   
 
 <td> {{$dk->created_at->format('d/m/Y h:i a')}}</td>
+<td> {{$dk->laporans->count()}}</td>
+
+
 
 <td><a href="{{ route('senaraiLaporan.show',$dk->dokumen_permohonan_id) }}" class="btn btn-primary">Senarai laporan</a></td>
 

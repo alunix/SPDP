@@ -19,8 +19,6 @@ Auth::routes();
 Route::get('/dashboard', 'HomeController@index')->name('/dashboard')->middleware('auth'); // Redirect to dashboard/home(Same page)
 Route::get('/', 'HomeController@index')->middleware('auth')->name('home'); //Redirect index page to login if not authenticated and will return homepage if authenticated.
 
-
-
 /*........................................Start middleware.............................*/
 
 /* Pages that are shared across multiplse users */
@@ -37,15 +35,6 @@ Route::get('/', 'HomeController@index')->middleware('auth')->name('home'); //Red
 // Route::get('programs/{program}', ['middleware' => 'type:pjk,penilai', 'uses' => 'ProgramController@show'],function($id){
 
 // });
-
-
-
-
-
-
-
-
-
 
 /*----------------------- Bahagian pihak fakulti ------------- */	
 Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware','middleware' => 'auth'], function() {
@@ -99,9 +88,9 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware','middlewa
 	Route::get('/pendaftaran-panel-penilai', 'PenilaianController@create_panel_penilai')->name('register.panel_penilai.show');
 	Route::post('/pendaftaran-panel-penilai', 'PenilaianController@store_panel_penilai')->name('register.panel_penilai.submit');
 
-	/*-----------------------PJK Lulus permohonan dan ingin memuat naik perakuan tanpa panel penilai---------------------------------------------*/
-	Route::get( '/permohonan/{permohonan}/perakuan-pjk', 'PenilaianController@showPerakuanPjk')-> name('pjk.perakuanLulus.show');
-	Route::patch('/permohonan/{permohonan}/perakuan-pjk','PenilaianController@uploadPerakuanPjk')->name('pjk.perakuanLulus.submit');
+	// /*-----------------------PJK Lulus permohonan dan ingin memuat naik perakuan tanpa panel penilai---------------------------------------------*/
+	// Route::get( '/permohonan/{permohonan}/perakuan-pjk', 'PenilaianController@showPerakuanPjk')-> name('pjk.perakuanLulus.show');
+	// Route::patch('/permohonan/{permohonan}/perakuan-pjk','PenilaianController@uploadPerakuanPjk')->name('pjk.perakuanLulus.submit');
 
 	/*-----------------------Lampiran perakuan PJK ---------------------------------------------*/
 	Route::patch('/penilaian/{permohonan}','PenilaianController@uploadPerakuanPjk')->name('pjk.perakuan.submit');
@@ -116,8 +105,6 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware','middlewa
 
 	 Route::patch('permohonan/{permohonan}/penambahbaikkan', 'PermohonanController@storePermohonanTidakDilulus')->name('laporan.permohonanTidakDilulus');	
 	 Route::get('permohonan/{permohonan}/penambahbaikkan', 'PermohonanController@permohonanTidakDilulus')->name('laporan.permohonanTidakDilulus.submit');	
-	
-	
 	
 	/*-----------------------Senarai penilaian yang ongoing---------------------------------------------*/
 	Route::get('senarai-penilaian-perakuan','PermohonanController@senaraiPerakuanPjk')->name('pjk.senarai_perakuan.show');
@@ -136,24 +123,17 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware','middlewa
 	Route::patch('/permohonans/{permohonan}/kelulusan-permohonan/','PenilaianController@uploadLaporanPenilai')->name('penilai.laporan.submit');
 	Route::get('/permohonans/{permohonan}/kelulusan-permohonan/','PenilaianController@showLaporanPenilai')->name('penilai.laporan.show');
 
-	
-	
-
 // });
 
 // Route::group(['middleware' => 'SPDP\Http\Middleware\jppaMiddleware'], function(){
-
-	
 
 	/*-----------------------Lampiran perakuan JPPA ---------------------------------------------*/
 	Route::patch('/jppa/permohonan/{permohonan}/lampiran-perakuan','PenilaianController@uploadPerakuanJppa')->name('jppa.perakuan.submit');
 	Route::get('/jppa/permohonan/{permohonan}/lampiran-perakuan','PenilaianController@showPerakuanJppa')->name('jppa.perakuan.show');
 
-	
-
-
-	
-
+	/*-----------------------Lampiran perakuan Senat---------------------------------------------*/
+	Route::patch('/permohonan/{permohonan}/lampiran-perakuan-senat','PenilaianController@uploadPerakuanJppa')->name('senat.perakuan.submit');
+	Route::get('/permohonan/{permohonan}/lampiran-perakuan-senat','PenilaianController@showPerakuanJppa')->name('senat.perakuan.show');
 
 // });
 

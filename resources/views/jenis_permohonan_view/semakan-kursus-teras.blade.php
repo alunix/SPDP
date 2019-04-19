@@ -91,66 +91,42 @@
                        
                             @if(Auth::user()->role == "pjk")
 
-                             <a href="{{ route('pjk.perakuanLulus.show', ['permohonan' => $permohonan->id])  }}">
+                             <a href="{{ route('pjk.perakuanLulus.show', ['permohonan' => $permohonan->permohonan_id])  }}">
                                     <input type="button" class="btn btn-success" value="Lulus permohonan" />
                                     
                             </a> 
                                  
-                            <a href="{{ route('pelantikan_penilai.show', ['permohonan' => $permohonan->id])  }}">
+                            <a href="{{ route('pelantikan_penilai.show', ['permohonan' => $permohonan->permohonan_id])  }}">
                                     <input type="button" class="btn btn-success" value="Lantik penilai" />
-                                    
-                            </a>
-                                
-                                
-                            
-                            <a href="{{ route('pjk.permohonanTidakDilulus', ['permohonan' => $permohonan->id])  }}">
-                                    <input type="button" class="btn btn-danger" value="Penambahbaikan" />
-                                    
                             </a>
                             
                             @elseif(Auth::user()->role=="penilai")
                             
-                            <a href="/permohonans/{{$permohonan->id}}/kelulusan-permohonan">
+                            <a href="{{ route('penilai.laporan.show', ['permohonan' => $permohonan->permohonan_id])  }}">
                                     <input `type`="button" class="btn btn-success" value="Lulus permohonan" />
                                     
-                            </a>
-                                
-                                
-                            
-                            
-                            
-                            <a href="/permohonans/{{@$permohonan[id]}}/pelantikan-penilai">
-                                    <input type="button" class="btn btn-danger" value="Penambahbaikan" />
-                                    
-                            </a>
+                            </a>                          
+                          
 
                             @elseif(Auth::user()->role=="jppa")
                             
-                            <a href="{{ route('jppa.perakuan.show', ['permohonan' => $permohonan->id])  }}">
+                            <a href="{{ route('jppa.perakuan.show', ['permohonan' => $permohonan->permohonan_id])  }}">
                                     <input type="button" class="btn btn-success" value="Lulus permohonan" />
-                                    
-                            </a>
-                            
-                            <a href="/permohonans/{{$permohonan->id}}/pelantikan-penilai">
-                                    <input type="button" class="btn btn-danger" value="Penambahbaikan" />
                                     
                             </a>
 
                             @elseif(Auth::user()->role=="senat")
                             
-                            <a href="/permohonans/{{@$permohonan[id]}}/kelulusan-permohonan/{{$penilaian->id}}">
+                            <a href="{{route('senat.perakuan.show',$permohonan->permohonan_id)}}">
                                     <input type="button" class="btn btn-success" value="Lulus permohonan" />
                                     
                             </a>
-                            <!-- <button type="submit" class="btn btn-danger" value="reject-permohonan" name="submitbutton" >
-                                {{ __('Penambahbaikan') }}
-                            </button> -->
-                            
-                            <a href="/permohonans/{{@$permohonan[id]}}/pelantikan-penilai">
-                                    <input type="button" class="btn btn-danger" value="Penambahbaikan" />
-                                    
-                            </a>
                             @endif
+
+                            <a href="{{ route('laporan.permohonanTidakDilulus', ['permohonan' => $permohonan->permohonan_id])  }}">
+                                    <input type="button" class="btn btn-danger" value="Penambahbaikan" />
+                            </a>
+
                             </div>
                         </div>
 

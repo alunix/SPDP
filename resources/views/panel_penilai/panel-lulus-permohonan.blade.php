@@ -91,6 +91,15 @@
                             </div>
                         </div> 
 
+                        <div class="form-group row">
+                        <label for="summary-ckeditor" class="col-md-4 col-form-label text-md-right">{{ __('Komen(Tidak diwajibkan)') }}</label>
+
+                        <div class="col-md-6">
+                        <textarea class="form-control" id="summary-ckeditor" name="summary-ckeditor"></textarea>
+                        </div>
+                        
+                        </div>
+
                   
 
 

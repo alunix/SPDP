@@ -79,10 +79,6 @@
                                 </div>
                                 
                         </div>
-                              
-                             
-                     
-                                
               
                         <div class="form-group row mb-0">
 
@@ -94,12 +90,12 @@
                             </a>
                        
                                  
-                            <a href="{{ route('pjk.perakuanLulus.show', ['permohonan' => $permohonan->id])  }}">
+                            <a href="{{ route('pjk.perakuanLulus.show', ['permohonan' => $permohonan->permohonan_id])  }}">
                                     <input type="button" class="btn btn-success" value="Lulus permohonan" />
                                     
                             </a>
                             
-                            <a href="{{ route('laporan.permohonanTidakDilulus', ['permohonan' => $permohonan->id])  }}">
+                            <a href="{{ route('laporan.permohonanTidakDilulus', ['permohonan' => $permohonan->permohonan_id])  }}">
                                     <input type="button" class="btn btn-danger" value="Penambahbaikan" />
                                     
                             </a>

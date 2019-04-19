@@ -70,13 +70,40 @@ class SenaraiPermohonan
                }
     
     public function penilai(){
-        $permohonans = Permohonan::where('status_permohonan_id','=','2')->get();
+
+        $user_id = auth()->user()->id;
+       
+        $penilaians= Penilaian::where('penilaian_panel_1',$user_id)->get();
+
+        if (empty((array) $penilaians)) { //check if array object is empty
+            $permohonans= new Permohonan();
+        }
+
+        else{
+            $permohonans_id= $penilaians->pluck('permohonan_id_penilaian');
+            $permohonans= Permohonan::whereIn('permohonan_id',$permohonans_id)->where('status_permohonan_id','=','2')->get();
+        }
 
         return $permohonans;
                 
         }
     public function jppa(){
-        $permohonans = Permohonan::where('jenis_permohonan_id','=','8')->where('status_permohonan_id','=','1')->orWhere('status_permohonan_id','=','4')->get();
+
+        $user_id = auth()->user()->id;
+        $penilaians= Penilaian::where('penilaian_panel_1',$user_id)->get();
+
+        if (empty((array) $penilaians)) { //check if array object is empty
+            $permohonans= new Permohonan();
+        }
+
+        else{
+            $permohonans_id= $penilaians->pluck('permohonan_id_penilaian');
+            $permohonans= Permohonan::whereIn('permohonan_id',$permohonans_id)->where('jenis_permohonan_id','=','8')->where('status_permohonan_id','=','1')->orWhere('status_permohonan_id','=','4')->get();
+            // $permohonans = Permohonan::where('jenis_permohonan_id','=','8')->where('status_permohonan_id','=','1')->orWhere('status_permohonan_id','=','4')->get();
+
+        }
+
+       
         return $permohonans;
                 
         }

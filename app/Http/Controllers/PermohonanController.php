@@ -75,6 +75,11 @@ class PermohonanController extends Controller
         /* Main function but mcm tak betul , testing other possibilities */
         $permohonan= Permohonan::find($id);
         
+          
+        if($permohonan==null){
+            abort(403,'Tidak dibenarkan');
+         }
+
         $show = new ShowPermohonan();
         return $show->show($permohonan);
     }

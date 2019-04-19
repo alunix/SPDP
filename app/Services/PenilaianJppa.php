@@ -21,17 +21,16 @@ class PenilaianJppa
         if($jp!=8){
 
         /* Cari permohonan since penilaian belongs to permohonan then baru boleh cari penilaian through eloquent relationship */
-        $penilaian = $permohonan->penilaian;
         $attached = 'perakuan_jppa';
         $laporan = new LaporanClass();
-        $laporan_id= $penilaian->laporan->laporan_id;
-        $laporan->uploadLaporan( $request,$penilaian,$attached,$laporan_id);
+       
+        $laporan->createLaporan( $request,$permohonan,$attached);
     
     
         /* Status semakan permohonan telah dikemaskini berdasarkan progress */
         $permohonan -> status_permohonan_id = 5;       
         $permohonan ->save();
-        $penilaian -> save();
+      
 
         $kj= new KemajuanPermohonanClass();
         $kj->create($permohonan);

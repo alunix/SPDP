@@ -171,11 +171,10 @@ class PenilaianPJK
         if($penilaian==null)
             abort(403);
 
-        $id_penilai = $penilaian->penilaian_panel_1;
-        $laporan_panel= Laporan::where('id_penghantar',$id_penilai)->where('dokumen_permohonan_id',$permohonan->permohonan_id)->orderBy('created_at', 'DESC')->first();
-
-        //$laporan= $penilaian->laporan;
-        return view('pjk.lampiran-pjk')->with('permohonan',$penilaian->permohonan)->with('penilaian',$penilaian)->with('laporan',$laporan_panel);
+        $dp = $permohonan->dokumen_permohonans->pluck('dokumen_permohonan_id');
+        $laporans= Laporan::whereIn('dokumen_permohonan_id',$dp)->get();
+        
+        return view('pjk.lampiran-pjk')->with('permohonan',$penilaian->permohonan)->with('penilaian',$penilaian)->with('laporans',$laporans);
     }
 
     public function viewKursusTerasElektifBaharu($id)

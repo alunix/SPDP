@@ -20,14 +20,13 @@ class PenilaianSenat
 
         $attached = 'perakuan_senat';
         $laporan = new LaporanClass();
-        $laporan_id= $penilaian->laporan->laporan_id;
         $laporan->uploadLaporan( $request,$penilaian,$attached,$laporan_id);
        
         $permohonan = $penilaian->permohonan;
         /* Status semakan permohonan telah dikemaskini berdasarkan progress */
         $permohonan -> status_permohonan_id = 6;       
         $permohonan ->save();
-        $penilaian -> save();
+       
 
         $kj= new KemajuanPermohonanClass();
         $kj->create($permohonan);
@@ -37,6 +36,14 @@ class PenilaianSenat
            ];  
 
         return redirect()->route('home')->with($msg);
+
+    }
+
+    public function showPerakuanSenat($permohonan){
+
+        return view ('senat.lampiran-perakuan-senat')->with('permohonan',$permohonan);
+
+
 
     }
     

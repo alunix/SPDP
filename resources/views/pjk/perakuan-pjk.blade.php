@@ -10,7 +10,7 @@
             <div class="card-body">
                  
                     
-                     <form method="POST" action="{{ route('pjk.perakuanLulus.submit',['permohonan'=>$permohonan->id])}}" enctype="multipart/form-data" >
+                     <form method="POST" action="{{ route('pjk.perakuan.submit',['permohonan'=>$permohonan->permohonan_id])}}" enctype="multipart/form-data" >
                      {!! method_field('patch') !!}          
 
                         @csrf
@@ -61,16 +61,6 @@
                         </div>
                   
 
-                        @if( ! empty($penilaian['perakuan_pjk']))
-                            <div class="form-group row">
-                            <label for="perakuan_pjk" class="col-md-4 col-form-label text-md-right">{{ __('Lampiran perakuan PJK') }}</label>
-
-                            <div class="col-md-6">
-                                <a href ="<?php echo asset("storage/perakuan_pjk/$penilaian->perakuan_pjk_link")?>">{{ basename($penilaian->perakuan_pjk) }} </a>
-                            </div>
-                        </div> 
-                        
-                        @else
                          <div class="form-group row">
                             <label for="perakuan_pjk" class="col-md-4 col-form-label text-md-right">{{ __('Lampiran perakuan PJK') }}</label>
                             <div class="col-md-6">
@@ -90,14 +80,48 @@
         <button type="submit" class="btn btn-success" value="accept-program" name="submitbutton">
         {{ __('Hantar') }}
         </button>
-        
-       
-     
 
-    </div>
-</div>
+        <table class="table table-striped">
 
+<thead>
+    <tr>
+    <th scope="col">No</th>
+    <th scope="col">Laporan</th>
+    <th scope="col">Dihantar</th>
+    <th scope="col">Pihak</th>
+    <th scope="col">Komen</th>
+    <th scope="col">Versi</th>
+    <th scope="col">Tarikh/Masa Laporan</th> 
     
+    </tr>
+</thead>
+<tbody>
+@if( ! $laporans->isEmpty() )
+@foreach($laporans as $laporan)
+<tr>
+<th scope="row">{{ $loop->iteration}}</th>
+<td><a href ="<?php echo asset("storage/laporan/$laporan->tajuk_fail_link")?>">{{ basename($laporan->tajuk_fail_link) }}</td> </a>
+<td> {{$laporan->id_penghantar_nama->name}}</td>
+<td> {{$laporan->id_penghantar_nama->role}}</td>
+<td> {{$laporan->komen}}</td>
+<td> {{$laporan->versi_laporan}}</td>
+<td> {{$laporan->created_at}}</td>
+
+
+</tr>
+@endforeach
+
+
+
+</tbody>
+</table>
+
+
+
+@else
+
+<p> Tiada laporan telah dikeluarkan</p>
+
 @endif
                         
 
@@ -110,10 +134,12 @@
 
 
 
+        
+       
+     
 
-
-
-
+    </div>
+</div>
 
  <hr style="border-color:white;">
 

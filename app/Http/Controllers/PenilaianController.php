@@ -80,16 +80,14 @@ class PenilaianController extends Controller
         ]);
         
         $permohonan =Permohonan::find($id);
-      
-
         return $pp->uploadLaporanPenilai($request,$permohonan);
-       
     }  
 
     public function showPerakuanSenat($id)
     {
         $pp = new PenilaianSenat();
-        return $pp->showPerakuanPjk($id);
+        $permohonan =Permohonan::find($id);
+        return $pp->showPerakuanSenat($permohonan);
     }
 
     public function uploadPerakuanSenat(Request $request, $id){
@@ -97,9 +95,10 @@ class PenilaianController extends Controller
         $this->validate($request,[
             'perakuan_senat' => 'required|file|max:1999',
         ]);
-        
+       
+        $permohonan =Permohonan::find($id);
         $pc = new PenilaianSenat();
-        return $pc->uploadPerakuanSenat($request,$id);
+        return $pc->uploadPerakuanSenat($request,$permohonan);
 
        
     }

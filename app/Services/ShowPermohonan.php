@@ -12,7 +12,7 @@ use SPDP\Penilaian;
 class ShowPermohonan
 {
    public function show($permohonan)
-    {
+    { 
         $role = auth()->user()->role;
         
         switch ($role) {
@@ -41,9 +41,7 @@ class ShowPermohonan
 
         $permohonans_id= $user->permohonans->pluck('permohonan_id');
         
-        if($permohonan==null){
-            abort(403,'Tidak dibenarkan');
-         }
+       
 
         if(count($permohonans_id)==0) //check whether fakulti does have permohonans
         { 
@@ -84,24 +82,7 @@ class ShowPermohonan
             abort(404);
         }
 
-        // if($panel_id==null){
-        //     abort(404);
-        // }
-
-        // $permohonans_id =Penilaian::where('penilaian_panel_1',$panel_id)->pluck('permohonan_id_penilaian');
-       
-        // if(count($permohonans_id)==0) //check whether panel have access to permohonans
-        // { 
-        //     abort(403, 'Tidak dibenarkan');
-        // }
-
-        // for($i=0;$i<count($permohonans_id);$i++){ // fixed bug where the loop was i<count instead of i<=count // basic first year error
-            
-        //     if($permohonan->permohonan_id == $permohonans_id[$i]) {
-        //                     $rp = new RedirectPermohonan();
-        //                     return $rp->redirect($permohonan);}
-        //         } 
-        //         abort(403, 'Tidak dibenarkan');
+        
     }
 
 

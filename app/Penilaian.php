@@ -12,7 +12,7 @@ class Penilaian extends Model
     //
 
     protected $fillable = [
-       'laporan_panel_penilai','laporan_panel_penilai_link',
+       'permohonan_id_penilaian'
  
  
     ];

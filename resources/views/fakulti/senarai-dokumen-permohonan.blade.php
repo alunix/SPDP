@@ -39,9 +39,9 @@
 <td><a href ="<?php echo asset("storage/cadangan_permohonan_baharu/$dk->file_link")?>">{{ basename($dk->file_name) }}</td> </a>
 <td> {{$dk->file_size}} KB</td>
 <td> {{$dk->komen}}</td>   
-
-<td> {{$dk->created_at->format('d/m/Y h:i a')}}</td>
 <td> {{$dk->laporans->count()}}</td>
+<td> {{$dk->created_at->format('d/m/Y h:i a')}}</td>
+
 
 
 

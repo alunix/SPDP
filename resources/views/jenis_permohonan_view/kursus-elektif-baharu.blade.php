@@ -90,7 +90,7 @@
                             </a>
                        
                                  
-                            <a href="{{ route('pjk.perakuanLulus.show', ['permohonan' => $permohonan->permohonan_id])  }}">
+                            <a href="{{ route('pjk.perakuan.show', ['permohonan' => $permohonan->permohonan_id])  }}">
                                     <input type="button" class="btn btn-success" value="Lulus permohonan" />
                                     
                             </a>

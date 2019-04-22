@@ -173,14 +173,19 @@ class PenilaianPJK
 
         $dp = $permohonan->dokumen_permohonans->pluck('dokumen_permohonan_id');
         $laporans= Laporan::whereIn('dokumen_permohonan_id',$dp)->get();
-        
         return view('pjk.lampiran-pjk')->with('permohonan',$penilaian->permohonan)->with('penilaian',$penilaian)->with('laporans',$laporans);
     }
 
     public function viewKursusTerasElektifBaharu($id)
     {
         $permohonan = Permohonan::find($id);
-        return view ('pjk.perakuan-pjk')->with('permohonan',$permohonan);
+
+        if($permohonan==null)
+        abort(403);
+
+        $dp = $permohonan->dokumen_permohonans->pluck('dokumen_permohonan_id');
+        $laporans= Laporan::whereIn('dokumen_permohonan_id',$dp)->get();
+        return view ('pjk.perakuan-pjk')->with('permohonan',$permohonan)->with('laporans',$laporans);;
     }
     
     public function updateLaporanPanel(Request $request, $permohonan){

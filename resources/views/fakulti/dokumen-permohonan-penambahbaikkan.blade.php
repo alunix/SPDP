@@ -10,7 +10,7 @@
             <div class="card-body">
                  
                     
-                     <form method="POST" action="{{ route('dokumenPermohonan.penambahbaikkan.submit',['permohonan'=>$permohonan->permohonan_id])}}" enctype="multipart/form-data" >
+                     <form class="form-prevent-double-submits" method="POST" action="{{ route('dokumenPermohonan.penambahbaikkan.submit',['permohonan'=>$permohonan->permohonan_id])}}" enctype="multipart/form-data" >
                      
                         @csrf
                             <div class="form-group row">
@@ -72,7 +72,7 @@
                         <div class="form-group row mb-0">
     <div class="col-md-6 offset-md-5">
 
-        <button type="submit" class="btn btn-success" value="accept-program" name="submitbutton">
+        <button type="submit" class="btn btn-success double-submit-prevent" value="accept-program" name="submitbutton">
         {{ __('Hantar') }}
         </button>
 

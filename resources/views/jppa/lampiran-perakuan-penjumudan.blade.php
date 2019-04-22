@@ -10,7 +10,7 @@
             <div class="card-body">
                  
                     
-                     <form method="POST" action="{{ route('jppa.perakuan.submit',['permohonan'=>$permohonan->id])}}" enctype="multipart/form-data" >
+                     <form method="POST" action="{{ route('jppa.perakuan.submit',['permohonan'=>$permohonan->permohonan_id])}}" enctype="multipart/form-data" >
                      {!! method_field('patch') !!}                 
                 
 
@@ -57,13 +57,8 @@
 
                             <div class="col-md-6">
                                 <input id="created_at" type="text" value="{{ $permohonan->created_at}}" class="form-control" name="created_at"  required autofocus readonly>
-
-                               
                             </div>
                         </div> 
-
-
-
                               
 
                         <div class="form-group row">
@@ -71,12 +66,7 @@
                              <label for="file_link" class="col-md-4 col-form-label text-md-right">{{ __('Lampiran permohonan') }}</label>
 
                                 <div class="col-md-6">
-
-                                
-                                <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/{$permohonan->file_link}")?>">{{ basename($permohonan->file_name) }} </a> 
-
-                                
-                                
+                                <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/{$permohonan->dokumen_permohonan()->file_link}")?>">{{ basename($permohonan->dokumen_permohonan()->file_name) }} </a> 
 
                                 </div>
 
@@ -99,16 +89,12 @@
 
 <div class="form-group row mb-0">
     <div class="col-md-6 offset-md-5">
-        <button type="submit" class="btn btn-success" value="accept-program" name="submitbutton">
+        <button type="submit" class="btn btn-success double-submit-prevent" value="accept-program" name="submitbutton">
         {{ __('Hantar') }}
         </button>
     </div>
 
-      <div class="col-md-6 offset-md-5">
-            <button type="submit" class="btn btn-danger" value="accept-program" name="submitbutton">
-            {{ __('Tidak lulus') }}
-            </button>
-    </div>
+
     
 </div>
 

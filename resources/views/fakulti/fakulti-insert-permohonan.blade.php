@@ -13,23 +13,16 @@
             <div class="card">
                 <div class="card-header">Permohonan Baharu</div>
             <div class="card-body">
-                    <form method="POST" action="{{ route('permohonan.index.submit') }}" enctype="multipart/form-data">
+                    <form  class="form-prevent-double-submits" method="POST" action="{{ route('permohonan.index.submit') }}" enctype="multipart/form-data">
                         @csrf
-                        
-
 
                         <div class="form-group row">
                             <label for="nama_penghantar" class="col-md-4 col-form-label text-md-right">{{ __('Penghantar') }}</label>
 
                             <div class="col-md-6">
                                 <input id="nama_penghantar" type="text" class="form-control" name="nama_penghantar" value="{{ Auth::user()->name }}" required autofocus readonly>
-
-                               
                             </div>
                         </div>
-
-                    
-                  
 
                           <div class="form-group row">
                             <label for="jenis_permohonan_id" class="col-md-4 col-form-label text-md-right">{{ __('Jenis permohonan') }}</label>
@@ -91,14 +84,13 @@
 
                          <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary double-submit-prevent">
                                     {{ __('Hantar') }}
                                 </button>
                             </div>
                         </div>
 
                          <hr>
-                       
                 
             </div>
             

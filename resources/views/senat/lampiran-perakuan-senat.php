@@ -5,12 +5,12 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Lampiran Perakuan JPPA </div>
+                <div class="card-header">Lampiran Perakuan Senat </div>
 
             <div class="card-body">
                  
                     
-                     <form method="POST" action="{{ route('jppa.perakuan.submit',['permohonan'=>$permohonan->permohonan_id])}}" enctype="multipart/form-data" >
+                     <form class="form-prevent-double-submits"  method="POST" action="{{ route('jppa.perakuan.submit',['permohonan'=>$permohonan->permohonan_id])}}" enctype="multipart/form-data" >
                      {!! method_field('patch') !!}                 
                 
 
@@ -72,7 +72,7 @@
                         
 
                          <div class="form-group row">
-                            <label for="perakuan_senat" class="col-md-4 col-form-label text-md-right">{{ __('Lampiran perakuan JPPA') }}</label>
+                            <label for="perakuan_senat" class="col-md-4 col-form-label text-md-right">{{ __('Lampiran perakuan Senat') }}</label>
                             <div class="col-md-6">
                                 <input id="perakuan_senat" type="file" class="form-control{{ $errors->has('perakuan_senat') ? ' is-invalid' : '' }}" name="perakuan_senat" value="{{ old('perakuan_senat') }}" required autofocus>
                         @if ($errors->has('perakuan_senat'))
@@ -85,7 +85,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-5">
-                                <button type="submit" class="btn btn-success" value="accept-permohonan" name="submitbutton">
+                                <button type="submit" class="btn btn-success double-submit-prevent" value="accept-permohonan" name="submitbutton">
                                 {{ __('Hantar') }}
                                 </button>
                         </div>

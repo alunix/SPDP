@@ -12,7 +12,7 @@
             <div class="card-body">
                  
                     
-                     <form method="POST" action="{{ route('penilai.laporan.submit',['permohonan' => $permohonan->permohonan_id,'penilaian'=>$penilaian->id])}}" enctype="multipart/form-data" >
+                     <form  class="form-prevent-double-submits"  method="POST" action="{{ route('penilai.laporan.submit',['permohonan' => $permohonan->permohonan_id,'penilaian'=>$penilaian->id])}}" enctype="multipart/form-data" >
                      {!! method_field('patch') !!}                 
                 
 
@@ -100,17 +100,12 @@
                         
                         </div>
 
-                  
-
-
-
-
  
 
 <div class="form-group row mb-0">
     <div class="col-md-6 offset-md-5">
 
-        <button type="submit" class="btn btn-success" value="accept-permohonan" name="submitbutton">
+        <button type="submit" class="btn btn-success double-submit-prevent" value="accept-permohonan" name="submitbutton">
         {{ __('Hantar') }}
         </button>
         

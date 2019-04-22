@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Pendafataran SPDP') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form class="form-prevent-double-submits" method="POST" action="{{ route('register') }}">
                         @csrf
 
                         <div class="form-group row">
@@ -80,7 +80,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary double-submit-prevent">
                                     {{ __('Daftar') }}
                                 </button>
                             </div>

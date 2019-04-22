@@ -8,26 +8,14 @@
                 <div class="card-header">Tetapan profil</div>
 
             <div class="card-body">
-            <form method="POST" action="{{ route('settings.submit') }}">
-                        
-                     
-                     
-
+            <form class="form-prevent-double-submits" method="POST" action="{{ route('settings.submit') }}">
                         @csrf
-                    
-
-                        
-
-                      
-                            
 
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nama') }}</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text"  value="{{ @$user->name}}" class="form-control" name="name"  required autofocus readonly>
-
-                               
                             </div>
                         </div>
 
@@ -36,13 +24,8 @@
 
                             <div class="col-md-6">
                                 <input id="email" type="text"  value="{{$user->email}}" class="form-control" name="email"  required autofocus >
-
-                               
                             </div>
                         </div>
-                  
-
-                 
 
                         <div class="form-group row">
                             <label for="fakulti" class="col-md-4 col-form-label text-md-right">{{ __('Fakulti') }}</label>
@@ -63,7 +46,6 @@
                                     <option value="PPUKM">FPER-Fakulti Perubatan</option>
                                     <option value="FTSM">FTSM-Fakulti Teknologi dan Sains Maklumat</option>
                                     <option value="GSB">GSB-UKM-GSB Pusat Pengajian Siswazah Perniagaan</option>
-
                             </select>
                             </div>
                         </div>
@@ -71,27 +53,11 @@
                         
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary double-submit-prevent">
                                     {{ __('Kemaskini') }}
                                 </button>
                             </div>
                         </div>
-
-
-
-
-                              
-                             
-                      
-                                
-              
-                       
-
-                        
-                        
-
-                     
-                      
 
                          <hr style="border-color:white;">
                         

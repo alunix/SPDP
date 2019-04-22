@@ -109,10 +109,7 @@
                             </a>
                             @endif   
                             
-                            <a href="{{route('laporan.permohonanTidakDilulus',$permohonan->permohonan_id)}}">
-                                    <input type="button" class="btn btn-danger" value="Penambahbaikan" />
-                                    
-                            </a>
+                           
 
                             </div>
                         </div>

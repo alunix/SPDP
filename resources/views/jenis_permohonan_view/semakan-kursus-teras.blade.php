@@ -7,15 +7,8 @@
             <div class="card">
                 <div class="card-header">{{$permohonan->jenis_permohonan->jenis_permohonan_huraian}}</div>
 
-            <div class="card-body">
-                     
-                     
-
+            <div class="card-body form-prevent-dobule-submits">
                         @csrf
-                    
-
-                        
-
                          <div class="form-group row">
                             <label for="doc_title" class="col-md-4 col-form-label text-md-right">{{ __('Tajuk Semakan') }}</label>
 
@@ -79,8 +72,17 @@
                                 
                         </div>
               
-                        <div class="form-group row mb-0">
-
+                          
+                            
+                            <div class="form-group row mb-0">
+                            
+                            <form action="">
+                            <input type="radio" name="gender" value="male">Perubahan major<br>
+                            <input type="radio" name="gender" value="female">Perubahan minor<br>
+                            <input type="radio" name="gender" value="other"> Other
+                            </form>
+                            
+                            
                             <div class="col-md-6 offset-md-5">
 
                             <a href="{{ route('dokumenPermohonan.dihantar', ['permohonan' => $permohonan->permohonan_id])  }}">

@@ -109,6 +109,10 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware','middlewa
 	/*-----------------------Senarai penilaian yang ongoing---------------------------------------------*/
 	Route::get('senarai-penilaian-perakuan','PermohonanController@senaraiPerakuanPjk')->name('pjk.senarai_perakuan.show');
 
+	//Analitik permohonan
+	Route::get('/analitik-permohonan','PermohonanChartController@index')->name('analitik.permohonan');
+
+
 
 // });
 

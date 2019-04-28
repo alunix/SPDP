@@ -15,6 +15,9 @@ class LaporanClass
     
     public function createLaporan(Request $request,$permohonan,$attached)
     {   
+
+
+    // $laporan_kelulusan = $this->getKelulusanLaporan($permohonan);
        
     //get filenametoStore directory from a function in the class
     $attachedLocation = 'public/laporan';
@@ -40,14 +43,12 @@ class LaporanClass
             $fileNameToStore = 'noPDF.pdf';
         }
 
-        //get the role of the current user
+        
+          //get the role of the current user
         $user_id = auth()->user()->id;
-
         // $laporans_id = $permohonan->dokumen_permohonans->where('id_penghantar',$user_id);
         $laporans_id = $permohonan->dokumen_permohonans->pluck('dokumen_permohonan_id');
-        $laporan_count = Laporan::where('id_penghantar',$user_id)->where('dokumen_permohonan_id',$laporans_id)->get();
-
-        
+        $laporan_count = Laporan::where('id_penghantar',$user_id)->where('dokumen_permohonan_id',$laporans_id)->get();        
 
         if($laporans_id==null){
             $laporan = new Laporan();
@@ -73,17 +74,36 @@ class LaporanClass
 
 
         }
-        
-
-
-
-       
-        
-       
-       
       
     }
 
+    // public function getKelulusanLaporan($permohonan){
+
+
+    //     $role = auth()->user()->role;
+    //     $status= $permohonan->status_permohonan_id;
+        
+    //     switch ($status) {
+    //         case 'pjk':{
+    //                 if($permohonan->status_permohonan_id==)
+
+    //         }
+                   
+    //             break; 
+    //         case 'senat':
+    //             return view('dashboard/senat-dashboard');
+    //         break; 
+    //         case 'penilai':
+    //                 return view('dashboard/penilai-dashboard');
+    //             break; 
+    //         case 'jppa':
+    //                 return view('dashboard/jppa-dashboard');
+    //             break; 
+    //         default:
+    //                 return view ('/login'); 
+    //             break;
+    //     }            
+    // }
 
  
    

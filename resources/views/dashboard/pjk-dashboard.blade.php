@@ -35,6 +35,10 @@
     <input type="submit" value="Senarai penilaian" />
 </form>
 
+<form action="{{ route('analitik.permohonan') }}">
+    <input type="submit" value="Analitik permohonan" />
+</form>
+
 
 
 

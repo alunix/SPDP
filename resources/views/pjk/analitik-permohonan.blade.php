@@ -10,11 +10,10 @@
                 </div>
 
                 <div class="card-body">
-                <h5>Jumlah permohonan {{$permohonans_count}}</h5>
-                <h5>Total tickets sold : {{$total_seat_sold}}  </h5>
-                <h5>Total trips : {{$total_trips}}  </h5>
-                <h5>Total unsold tickets : {{$unsold_ticket_year}}  </h5>
-
+                <h5>Jumlah permohonan {{$total_permohonan}}</h5>
+                <h5>Jumlah permohonan yang diluluskan {{$permohonans_count}}</h5>
+                <h5>Purate masa yang diperlukan untuk meluluskan satu permohonan : {{$average}} jam  </h5>
+               
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}

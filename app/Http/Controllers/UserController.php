@@ -3,13 +3,15 @@
 namespace SPDP\Http\Controllers;
 use SPDP\User;
 use Illuminate\Http\Request;
+use SPDP\Fakulti;
 
 class UserController extends Controller
 {
     public function edit()
     {   
         $user = auth()->user();
-        return view('auth.settings')->with('user',$user);
+        $fakultis= Fakulti::all();
+        return view('auth.settings')->with('user',$user)->with('fakultis',$fakultis);
     }
 
     /**
@@ -34,7 +36,7 @@ class UserController extends Controller
             $user = User::find($user->id);  
             $user->name = $request->get('name');
             $user->email = $request->get('email');
-            $user->fakulti = $request->get('fakulti');
+            $user->fakulti_id = $request->get('fakulti');
     
             
             $user->save();
@@ -51,12 +53,7 @@ class UserController extends Controller
             }
 
     }
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy($id)
     {
         //

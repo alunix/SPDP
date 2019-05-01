@@ -18,11 +18,11 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('role');
             $table->string('email')->unique();
-            $table->integer('fakulti_id')->unsigned()->nullable();
+            // $table->integer('fakulti_id')->unsigned()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
 
-            $table->foreign('fakulti_id')->references('fakulti_id')->on('fakulti');
+            // $table->foreign('fakulti_id')->references('fakulti_id')->on('fakultis');
 
             $table->rememberToken();
             $table->timestamps();

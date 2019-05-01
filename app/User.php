@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role','fakulti',
+        'name', 'email', 'password', 'role','fakulti_id',
     ];
 
     /**
@@ -37,6 +37,11 @@ class User extends Authenticatable
 public function permohonans(){
 
     return $this->hasMany('SPDP\Permohonan','id_penghantar');
+}
+
+public function fakulti(){
+
+    return $this->belongsTo('SPDP\Fakulti','fakulti_id');
 }
 
 

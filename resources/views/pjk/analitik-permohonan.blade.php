@@ -14,63 +14,7 @@
                 <h5>Jumlah permohonan yang diluluskan : {{$permohonans_count}}</h5>
                 <h5>Purata masa yang diperlukan untuk meluluskan satu permohonan : {{$average}} jam / {{$average/24}} hari  </h5>
                
-                @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                  
-                    <br>
-                    <div align="center">
-                    </div>
-
-                    <div id="app">
-            {!! $chart->container() !!}
-        </div>
-       
-        {!! $chart->script() !!}
-
-        <table class="table table-striped">
-
-            <thead>
-                <tr>
-                <th scope="col">Months</th>
-                <th scope="col">Revenue generated(RM)</th>
-                <th scope="col">Tickets sold</th>
-                <th scope="col">Total trips</th>
-                <th scope="col">Unsold tickets</th>
-                
-                
-
-
-                
-                </tr>
-            </thead>
-            <tbody>
-            @foreach($sort_sum_months as $ticket)
-            <tr>
-            
-            <td> {{$ticket->months}}</td> 
-            <td> {{number_format($ticket->sums)}}</td>    
-            <td> {{$ticket->pax_num_total}}</td> 
-            <td> {{$ticket->total_trip}}</td> 
-            <td> {{$ticket->unsold_ticket_month}}</td> 
-
-            </tr>
-            @endforeach
-
-            
-
-
-            
-
-        
-           
-
-
-            </tbody>
-            </table>
+               
 
                    
                 </div>

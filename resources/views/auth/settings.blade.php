@@ -32,20 +32,10 @@
 
                             <div class="col-md-6">
                             <select class=”form-control” name='fakulti' style="width:330px;" id='fakulti'>
-                                
-                            <option value="FSSK">FSSK-Fakulti Sains Sosial dan Kemanusiaan</option>
-                                    <option value="FST">FST-Fakulti Sains dan Teknologi</option>
-                                    <option value="FEP">FEP-Fakulti Ekonomi dan Pengurusan</option>
-                                    <option value="FARMASI">Farmasi-Fakulti Farmasi</option>
-                                    <option value="FPI">FPI-Fakulti Pengajian Islam</option>
-                                    <option value="FSK">FSK-Fakulti Sains Kesihatan</option>
-                                    <option value="JURUTERA">FKAB-Fakulti Kejuruteraan dan Alam Bina</option>
-                                    <option value="FUU">FUU-Fakulti Undang-Undang</option>
-                                    <option value="FPERG">FPERG-Fakulti Pergigian</option>
-                                    <option value="FPENDIDIKAN">FPEND-Fakulti Pendidikan</option>
-                                    <option value="PPUKM">FPER-Fakulti Perubatan</option>
-                                    <option value="FTSM">FTSM-Fakulti Teknologi dan Sains Maklumat</option>
-                                    <option value="GSB">GSB-UKM-GSB Pusat Pengajian Siswazah Perniagaan</option>
+                            @foreach ($fakultis as $fakulti)
+                            <option value="{{ $fakulti->fakulti_id }}">{{ $fakulti->f_nama }}</option>
+                            @endforeach 
+                            
                             </select>
                             </div>
                         </div>

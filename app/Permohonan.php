@@ -28,10 +28,14 @@ class Permohonan extends Model
 }
    
  public function user(){
-
     return $this->belongsTo('SPDP\User','id_penghantar');
-
  }
+
+ public function fakulti(){
+
+   return $this->belongsTo('SPDP\Fakulti','');
+
+}
 
  public function laporans(){
 
@@ -40,17 +44,17 @@ class Permohonan extends Model
  }
 
  public function penilaian(){
-    // return $this->hasOne('SPDP\Penilaian','penilaianID');
+    
      return $this->hasOne('SPDP\Penilaian','permohonan_id_penilaian');
  }
 
  public function status_permohonan(){
-   // return $this->hasOne('SPDP\Penilaian','penilaianID');
+   
     return $this->belongsTo('SPDP\StatusPermohonan','status_permohonan_id');
 }
 
 public function kemajuan_permohonans(){
-   // return $this->hasOne('SPDP\Penilaian','penilaianID');
+  
     return $this->hasMany('SPDP\KemajuanPermohonan','permohonan_id');
 }
 

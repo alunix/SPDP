@@ -47,7 +47,7 @@
 <td>{{$permohonan->version_counts()}}</td>   
 <td>{{$permohonan->doc_title}}</td>   
 <td>{{$permohonan->user->name}} </td>
-<td>{{$permohonan->user->fakulti}} </td> 
+<td>{{$permohonan->user->fakulti->fnama_kod}} </td> 
 <td>{{$permohonan->created_at->format('h:i a d/m/Y')}}  </td> 
 
 <td><a href="{{ route('view-permohonan-baharu',$permohonan->permohonan_id) }}" class="btn btn-primary">SELECT</a></td>

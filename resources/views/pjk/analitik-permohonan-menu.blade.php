@@ -11,7 +11,8 @@
 
                 <div class="card-body">
                 <form method="POST" action="{{ route('analitik.permohonan.submit') }}">
-                
+                <h5>Jenis permohonan tertinggi: {{$highest_jp_id->jenis_permohonan->jenis_permohonan_huraian}} dengan {{$highest_count_jp}} kali</h5>
+
                 @csrf
 
                     @if (session('status'))
@@ -50,11 +51,22 @@
                             </div>
                         </div>
 
-                    <div id="app">
+                   
+
+        <div class="row">
+            
+            <div class="col-md-6"> 
             {!! $chart->container() !!}
-        </div>
-       
-        {!! $chart->script() !!}
+            {!! $chart->script() !!}
+            </div>
+
+            <br/><br/>
+            
+            <div class="col-md-6"> 
+               {!! $pie_chart->container() !!}
+               {!! $pie_chart->script() !!}
+            </div>
+
 
         <table class="table table-striped">
 

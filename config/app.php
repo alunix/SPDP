@@ -216,6 +216,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class, //laravel collective
         'role' => SPDP\Http\Middleware\Role::class,
+        'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
         
         
 

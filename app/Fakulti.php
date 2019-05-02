@@ -12,7 +12,13 @@ class Fakulti extends Model
 
 public function permohonans(){
 
-    return $this->users()->permohonans;
+    return $this->hasManyThrough(
+                'SPDP\Permohonan', 
+                'SPDP\User', 
+                'fakulti_id', // Foreign key on users table...
+                'id_penghantar', // Foreign key on permohonan table...
+                'fakulti_id', //Local key on permohonan table
+                'id'); //Local key on users table
 }
 
 public function users(){

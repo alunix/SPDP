@@ -13,10 +13,26 @@
 
                 <div class="card-body">
 
-               
+                <div class="row">
+            
+            <div class="col-md-6"> 
+            {!! $chart->container() !!}
+            {!! $chart->script() !!}
+            </div>
 
-                {!! $chart->container() !!}
-                {!! $chart->script() !!}
+            
+            
+            <div class="col-md-6"> 
+               {!! $pie_chart->container() !!}
+               {!! $pie_chart->script() !!}
+            </div>
+
+
+            
+            
+           
+
+            
                 </div>
             </div>
         </div>

@@ -83,17 +83,32 @@ public function index(Request $request)
             $query->whereYear('permohonans.created_at', $year_report); //specify which table created at to query
           }])->get()->sortBy('fakulti_id');
         
+        
         $count_permohonan= $permohonans->pluck('permohonans');
 
         for($i=0;$i<$count_permohonan->count();$i++){
             $A[$i]= count($count_permohonan[$i]);  //calculate count of permohoann in each fakulti
         } 
-
-        $chart = new PermohonanChart();       
+       
+        $chart = new JenisPermohonanChart();       
         $chart->labels( $permohonans->pluck('fnama_kod')); 
-        $chart->dataset('Permohonan sepanjang beberapa tahun', 'bar',$A);
+        $chart->dataset('Permohonan sepanjang tahun '.$year_report, 'bar',$A);
 
-        return view ('pjk.analitik-permohonan')->with('chart',$chart)->with('year_report',$year_report)->with('avg_duration',$avg_duration);
+        $jenis=  DB::table("permohonans") 
+        ->join('jenis_permohonans','jenis_permohonans.id','=','permohonans.jenis_permohonan_id')
+        ->whereYear('permohonans.created_at', $year_report)
+        ->selectRaw("jenis_permohonans.jenis_permohonan_huraian as huraian,count(permohonan_id) as count") 
+        ->groupBy('jenis_permohonan_huraian') 
+        ->get();
+
+        $pie_chart = new PermohonanChart();
+        $pie_chart->labels($jenis->pluck('huraian'));
+        $pie_chart->dataset('Permohonan sepanjang beberapa tahun', 'pie',$jenis->pluck('count'))->options([
+            'backgroundColor'=> ['#C5CAE9', '#283593'],'dimensions'=>[1000,800]
+        ]);;
+
+       
+        return view ('pjk.analitik-permohonan')->with('chart',$chart)->with('year_report',$year_report)->with('avg_duration',$avg_duration)->with('pie_chart',$pie_chart);
             
         //----------------------------------------------------------------------------------------------------------------------------------------------------
         

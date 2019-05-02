@@ -4,6 +4,7 @@ namespace SPDP\Http\Controllers;
 
 use Illuminate\Http\Request;
 use SPDP\Charts\PermohonanChart;
+use SPDP\Charts\JenisPermohonanChart;
 use SPDP\Permohonan;
 use SPDP\Fakulti;
 use Charts;
@@ -25,50 +26,36 @@ public function dashboard(){
             )->orderBy('count_jenis_permohonan','desc')->groupBy('jenis_permohonan_id')->first(); 
         
  
-    $A=  DB::table("permohonans") 
-      ->join('jenis_permohonans','jenis_permohonans.id','=','permohonans.jenis_permohonan_id')
+        $A=  DB::table("permohonans") 
+        ->join('jenis_permohonans','jenis_permohonans.id','=','permohonans.jenis_permohonan_id')
         ->selectRaw("year(permohonans.created_at) as years, jenis_permohonans.jenis_permohonan_huraian as huraian,count(permohonan_id) as count") 
         ->groupBy('jenis_permohonan_huraian') 
         ->get();
        
 
-        $pie_chart = Charts::create('pie', 'highcharts')
-        ->title('Jenis permohonan')
-        ->labels(labels($A->pluck('huraian')))
-        ->values($A->pluck('count'))
-        ->dimensions(1000,500)
-        ->responsive(true);
-
-     
-      
+        $pie_chart = new PermohonanChart();
+        $pie_chart->labels($A->pluck('huraian'));
+        $pie_chart->dataset('Permohonan sepanjang beberapa tahun', 'pie',$A->pluck('count'))->options([
+            'backgroundColor'=> ['#C5CAE9', '#283593'],
+        ]);;
 
         $chart = new PermohonanChart();       
         $chart->labels($sort_sums_years->pluck('years')); 
-        $chart->dataset('Permohonan sepanjang beberapa tahun', 'bar',$sort_sums_years->pluck('total_permohonans'));
-        $chart->color('blue');
+        $chart->dataset('Permohonan sepanjang beberapa tahun', 'bar',$sort_sums_years->pluck('total_permohonans'))->options([
+            'backgroundColor'=> ['#C5CAE9', '#283593'],  'dimensions'=> [600,500],
+            
+            
+        ]);
+
+        
+       
 
         $highest_jp_id =$jenis_permohonan->id;
         $highest_jp_id = Permohonan::find($highest_jp_id); // find jenis permohonan huraian through eloquent
         $highest_count_jp = $jenis_permohonan->count_jenis_permohonan;
 
         return view('pjk.analitik-permohonan-menu')->with('chart',$chart)->with('pie_chart',$pie_chart)->with('sort_sum_years',$sort_sums_years)->with('highest_jp_id',$highest_jp_id)->with('highest_count_jp',$highest_count_jp);
-    //-----------------------------------------------------------------------------------------------------------------------------------------------
         
-
-        
-       
-        // return view('pjk.analitik-permohonan-menu')->with('chart',$chart)->with('sort_sum_years',$sort_sums_years)->with('highest_jp_id',$highest_jp_id)->with('highest_count_jp',$highest_count_jp);
-
-        //--------------------------------------------------------------------------------------------------
-        
-      
-      
-
-  
-
-        
-        
-
 }
 
 

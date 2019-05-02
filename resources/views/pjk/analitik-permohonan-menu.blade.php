@@ -60,7 +60,7 @@
             {!! $chart->script() !!}
             </div>
 
-            <br/><br/>
+            
             
             <div class="col-md-6"> 
                {!! $pie_chart->container() !!}

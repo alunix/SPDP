@@ -31,7 +31,6 @@ public function dashboard(){
         ->selectRaw("year(permohonans.created_at) as years, jenis_permohonans.jenis_permohonan_huraian as huraian,count(permohonan_id) as count") 
         ->groupBy('jenis_permohonan_huraian') 
         ->get();
-       
 
         $pie_chart = new PermohonanChart();
         $pie_chart->labels($A->pluck('huraian'));
@@ -43,12 +42,7 @@ public function dashboard(){
         $chart->labels($sort_sums_years->pluck('years')); 
         $chart->dataset('Permohonan sepanjang beberapa tahun', 'bar',$sort_sums_years->pluck('total_permohonans'))->options([
             'backgroundColor'=> ['#C5CAE9', '#283593'],  'dimensions'=> [600,500],
-            
-            
         ]);
-
-        
-       
 
         $highest_jp_id =$jenis_permohonan->id;
         $highest_jp_id = Permohonan::find($highest_jp_id); // find jenis permohonan huraian through eloquent
@@ -107,6 +101,8 @@ public function index(Request $request)
             'backgroundColor'=> ['#C5CAE9', '#283593'],'dimensions'=>[1000,800]
         ]);;
 
+
+
        
         return view ('pjk.analitik-permohonan')->with('chart',$chart)->with('year_report',$year_report)->with('avg_duration',$avg_duration)->with('pie_chart',$pie_chart);
             
@@ -130,6 +126,23 @@ public function index(Request $request)
        
        
         
+    }
+
+    public function testing(){
+        $year_report=2018;
+
+        $permohonans = Fakulti::with(['permohonans' => function($query) use ($year_report) {
+            $query->whereYear('permohonans.created_at', $year_report); //specify which table created at to query
+          }])->get()->sortBy('fakulti_id');
+
+        $count_permohonan= $permohonans->pluck('permohonans');
+
+        for($i=0;$i<$count_permohonan->count();$i++){
+            $A[$i]= count($count_permohonan[$i]);  //calculate count of permohoann in each fakulti
+        } 
+
+        return $A;
+
     }
    
 }

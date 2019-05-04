@@ -6,10 +6,12 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header" style="clear: both">
-                    <h6 style="float: left; margin:5px;">Analitik permohonan tahun {{$year_report}}</h6> 
+                    <h6 style="float: left; margin:5px;">{{$fakulti_nama}}</h6> 
                 </div>
 
-                <h5>Purata masa diperlukan untuk meluluskan satu permohonan = {{$avg_duration}} jam</h5>
+                <h5>Jumlah permohonan dihantar = {{$permohonans->count()}} jam</h5>
+                <h5>Pengguna tertinggi menghantar permohonan = {{$nama_penghantar}} jam</h5>
+
 
                 <div class="card-body">
 
@@ -19,8 +21,6 @@
             {!! $chart->container() !!}
             {!! $chart->script() !!}
             </div>
-
-            
             
             <div class="col-md-6"> 
                {!! $pie_chart->container() !!}
@@ -45,7 +45,7 @@
 <td> {{$permohonan["jumlah_permohonan"]}}</td> 
 <td> {{$permohonan["jumlah_diluluskan"]}}</td> 
 <td> {{$permohonan["jumlah_penambahbaikkan"]}}</td> 
-<td><a href="{{ route('analitik.fakulti',$permohonan['fakulti_id']) }}" class="btn btn-primary">SELECT</a></td>
+
 
 
 </tr>

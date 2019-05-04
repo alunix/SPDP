@@ -115,9 +115,7 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware','middlewa
 	Route::get('/analitik-permohonan-dashboard','PermohonanChartController@dashboard')->name('analitik.permohonan.dashboard');
 
 	Route::get('/analitik-testing','PermohonanChartController@testing')->name('analitik.permohonan.testing');
-	
-
-
+	Route::get('/analitik/fakulti/{fakulti_id}','FakultiController@analitik')->name('analitik.fakulti');
 
 
 // });

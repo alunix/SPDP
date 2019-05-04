@@ -12,8 +12,9 @@ class KemajuanPermohonan extends Model
  
     ];
 
+    protected $table = 'kemajuan_permohonans';
+
     public function statusPermohonan(){
-        // return $this->hasOne('SPDP\Penilaian','penilaianID');
          return $this->belongsTo('SPDP\StatusPermohonan','status_permohonan');
      }
  

@@ -48,6 +48,25 @@ public function kemajuan_permohonans(){
     );
 }
 
+public function dokumen_permohonans(){
+    
+    return $this->hasManyDeep(
+        
+        'SPDP\DokumenPermohonan',
+        ['SPDP\User', 'SPDP\Permohonan'], // Intermediate models, beginning at the far parent (Country).
+        [
+           'fakulti_id', // Foreign key on the "users" table.
+           'id_penghantar',    // Foreign key on the "posts" table.
+           'permohonan_id'     // Foreign key on the "comments" table.
+        ],
+        [
+          'fakulti_id', // Local key on the "countries" table.
+          'id', // Local key on the "users" table.
+          'permohonan_id'  // Local key on the "posts" table.
+        ]
+    );
+}
+
 
 
     

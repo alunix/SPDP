@@ -139,14 +139,25 @@ public function annual(Request $request)
 
         $fakulti_nama = $permohonans->pluck('f_nama');
         $fakulti_id = $permohonans->pluck('fakulti_id');
+
+         //Dokumen permohonans for each fakulti
+         $dokumens = Fakulti::with('dokumen_permohonans')->get()->sortBy('fakulti_id')->pluck('dokumen_permohonans');
+        
+         for($i=0;$i<$dokumens->count();$i++){
+             $doc[$i]= count($dokumens[$i]);  //calculate count of kemajuan permohoann in each fakulti
+         } 
         
         for($i=0;$i<$permohonans->count();$i++){
             $D[$i]= array('fakulti_nama'=>$fakulti_nama[$i],
                                 'jumlah_permohonan'=>$Z[$i],
                                 'jumlah_diluluskan'=>$C[$i],
                                 'jumlah_penambahbaikkan'=>$B[$i],
+                                'jumlah_dokumen_permohonan'=>$doc[$i],
                                 'fakulti_id'=>$fakulti_id[$i]);  //calculate count of permohoann in each fakulti
               }
+
+        
+ 
 
         return view ('pjk.analitik-permohonan')->with('chart',$chart)->with('year_report',$year_report)->with('avg_duration',$avg_duration)->with('pie_chart',$pie_chart)->with('permohonans',$D);
             
@@ -210,17 +221,11 @@ public function annual(Request $request)
             $C[$i]= count($kp_6_list[$i]);  //calculate count of kemajuan permohoann in each fakulti
         } 
 
-        $fakulti_nama = $permohonans->pluck('f_nama');
+        $fakulti_nama = $permohonans->pluck('f_nama'); 
+        
+       
 
-
-        for($i=0;$i<$permohonans->count();$i++){
-            $D[$i]= array('fakulti_nama'=>$fakulti_nama[$i],
-                                'jumlah_permohonan'=>$Z[$i],
-                                'jumlah_diluluskan'=>$C[$i],
-                                'jumlah_penambahbaikkan'=>$B[$i]);  //calculate count of permohoann in each fakulti
-              }
-
-        return $D;
+        
 
 
     }

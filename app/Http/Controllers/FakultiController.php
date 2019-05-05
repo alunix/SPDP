@@ -2,6 +2,7 @@
 
 namespace SPDP\Http\Controllers;
 use SPDP\Fakulti;
+use SPDP\KemajuanPermohonan;
 use SPDP\User;
 use SPDP\Penilain;
 use SPDP\Penilaian;
@@ -32,9 +33,21 @@ class FakultiController extends Controller
         //         $query->where('permohonans.status_permohonan_id', 6)->orWhere('permohonans.status_permohonan_id',7); //specify which table created at to query
         //       }])->get()->sortBy('fakulti_id');
 
-        $permohonans = Fakulti::find($id)->permohonans->groupBy('id_penghantar');
+        $permohonans_id = Fakulti::find($id)->permohonans->sortBy('permohonan_id')->pluck('permohonan_id');
 
-        return $permohonans;
+        $kemajuan_permohonan=KemajuanPermohonan::whereIn('permohonan_id',$permohonans_id)->groupBy('permohonan_id')->get();
+
+        // $kp_6_7 = Fakulti::with(['dokumen_permohonans' => function($query) {
+        //     $query->where('permohonans.status_permohonan_id', 6)->orWhere('permohonans.status_permohonan_id',7); //specify which table created at to query
+        //   }])->get()->sortBy('fakulti_id');
+
+      
+
+  
+     
+
+
+     
       
 
         

@@ -8,49 +8,50 @@ use SPDP\Penilain;
 use SPDP\Penilaian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
+use SPDP\Charts\PermohonanChart;
+use SPDP\Charts\JenisPermohonanChart;
 
 class FakultiController extends Controller
 {
     public function index()
     {
-      
         return view ('fakulti.permohonan-baharu.blade.php');
     }
 
     public function permohonanBaru()
     {
-      
-        return view ('fakulti.permohonan-baharu');
+      return view ('fakulti.permohonan-baharu');
     }
    
     public function analitik($id)
     {
-        $permohonans = Fakulti::find($id)->permohonans;
+        $fakulti = Fakulti::find($id);
+        $fakulti_id = $fakulti->fakulti_id;
+        $permohonans = $fakulti->permohonans;
 
-        $fakulti_id = Fakulti::find($id)->fakulti_id;
+        $permohonans_id = $permohonans->sortBy('permohonan_id')->pluck('permohonan_id');
+        $kemajuan_permohonan= $fakulti->kemajuan_permohonans->groupBy('permohonan_id');
         
-        // $permohonans = Fakulti::find($fakulti_id)->with(['permohonans' => function($query)  {
-        //         $query->where('permohonans.status_permohonan_id', 6)->orWhere('permohonans.status_permohonan_id',7); //specify which table created at to query
-        //       }])->get()->sortBy('fakulti_id');
+        $jenis=  DB::table("permohonans") 
+        ->join('jenis_permohonans','jenis_permohonans.id','=','permohonans.jenis_permohonan_id')
+        ->join('users','users.id','=','permohonans.id_penghantar')
+        ->where('users.fakulti_id', $fakulti_id)
+        ->selectRaw("jenis_permohonans.jenis_permohonan_huraian as huraian,count(permohonan_id) as count") 
+        ->groupBy('jenis_permohonan_huraian') 
+        ->get();
 
-        $permohonans_id = Fakulti::find($id)->permohonans->sortBy('permohonan_id')->pluck('permohonan_id');
+        $pie_chart = new PermohonanChart();
+        $pie_chart->labels($jenis->pluck('huraian'));
+        $pie_chart->dataset('Permohonan fakulti'.$fakulti->fnama_kod, 'pie',$jenis->pluck('count'))->options([
+            'backgroundColor'=> ['#C5CAE9', '#283593'],
+        ]);
 
-        $kemajuan_permohonan=KemajuanPermohonan::whereIn('permohonan_id',$permohonans_id)->groupBy('permohonan_id')->get();
+    
 
-        // $kp_6_7 = Fakulti::with(['dokumen_permohonans' => function($query) {
-        //     $query->where('permohonans.status_permohonan_id', 6)->orWhere('permohonans.status_permohonan_id',7); //specify which table created at to query
-        //   }])->get()->sortBy('fakulti_id');
+        $dokumen_permohonans = $fakulti->dokumen_permohonans;
 
-      
-
-  
-     
-
-
-     
-      
-
-        
+        return view ('pjk.fakulti-analitik')->with('pie_chart',$pie_chart)->with('fakulti',$fakulti)->with('dokumen_permohonans',$dokumen_permohonans)->with('permohonans',$permohonans);
         
         
     }

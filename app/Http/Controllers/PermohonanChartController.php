@@ -36,7 +36,7 @@ public function dashboard(){
         $pie_chart->labels($A->pluck('huraian'));
         $pie_chart->dataset('Permohonan sepanjang beberapa tahun', 'pie',$A->pluck('count'))->options([
             'backgroundColor'=> ['#C5CAE9', '#283593'],
-        ]);;
+        ]);
 
         $chart = new PermohonanChart();       
         $chart->labels($sort_sums_years->pluck('years')); 

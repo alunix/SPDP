@@ -26,6 +26,11 @@
                {!! $pie_chart->container() !!}
                {!! $pie_chart->script() !!}
             </div>
+
+            <div class="col-md-6"> 
+               {!! $line_chart->container() !!}
+               {!! $line_chart->script() !!}
+            </div>
                 </div>
                 <table class="table table-striped">
 

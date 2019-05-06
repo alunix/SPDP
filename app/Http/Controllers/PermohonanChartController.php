@@ -47,6 +47,11 @@ public function dashboard(){
         $highest_jp_id =$jenis_permohonan->id;
         $highest_jp_id = Permohonan::find($highest_jp_id); // find jenis permohonan huraian through eloquent
         $highest_count_jp = $jenis_permohonan->count_jenis_permohonan;
+        
+
+
+        
+        
 
         return view('pjk.analitik-permohonan-menu')->with('chart',$chart)->with('pie_chart',$pie_chart)->with('sort_sum_years',$sort_sums_years)->with('highest_jp_id',$highest_jp_id)->with('highest_count_jp',$highest_count_jp);
         
@@ -102,6 +107,20 @@ public function annual(Request $request)
         $pie_chart->dataset('Permohonan sepanjang beberapa tahun', 'pie',$jenis->pluck('count'))->options([
             'backgroundColor'=> ['#C5CAE9', '#283593'],'dimensions'=>[1000,800]
         ]);
+
+        /*------------------ Line chart for jumlah dokumen permohonan in a year--------------*/
+        $Z=  DB::table("dokumen_permohonans") 
+        //->join('jenis_permohonans','jenis_permohonans.id','=','permohonans.jenis_permohonan_id')
+        ->selectRaw("DATE_FORMAT(dokumen_permohonans.created_at,'%M') as months, count(dokumen_permohonan_id) as count") 
+        ->groupBy('months') 
+        ->get();
+
+        $line_chart = new JenisPermohonanChart();
+        $line_chart->labels($Z->pluck('months'));
+        $line_chart->dataset('Jumlah permohonan', 'line',$Z->pluck('count'))->options([
+            'backgroundColor'=> ['#C5CAE9', '#283593'],'dimensions'=>[1000,800]
+        ]);
+
 
         /*--------------------------------- Table------------------------------------ */
         $permohonans = Fakulti::with(['permohonans' => function($query) use ($year_report) {
@@ -159,7 +178,7 @@ public function annual(Request $request)
         
  
 
-        return view ('pjk.analitik-permohonan')->with('chart',$chart)->with('year_report',$year_report)->with('avg_duration',$avg_duration)->with('pie_chart',$pie_chart)->with('permohonans',$D);
+        return view ('pjk.analitik-permohonan')->with('chart',$chart)->with('year_report',$year_report)->with('avg_duration',$avg_duration)->with('pie_chart',$pie_chart)->with('permohonans',$D)->with('line_chart',$line_chart);
             
         //----------------------------------------------------------------------------------------------------------------------------------------------------
         

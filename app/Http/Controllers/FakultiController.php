@@ -37,9 +37,7 @@ class FakultiController extends Controller
         //     $query->where('kemajuan_permohonans.status_permohonan', 8)->orWhere('kemajuan_permohonans.status_permohonan', 9)->orWhere('kemajuan_permohonans.status_permohonan', 10)->orWhere('kemajuan_permohonans.status_permohonan',11); //specify which table created at to query
         //   }])->get()->sortBy('permohonan_id');
 
-        $kp = $fakulti->kemajuan_permohonans->sortBy('permohonan_id','DESC');
-
-        return $permohonans->orderBy('permohonan_id','DESC');
+        $kp = $fakulti->kemajuan_permohonans->sortBy('permohonan_id');
 
         $jenis=  DB::table("permohonans") 
         ->join('jenis_permohonans','jenis_permohonans.id','=','permohonans.jenis_permohonan_id')
@@ -51,22 +49,38 @@ class FakultiController extends Controller
 
         $pie_chart = new PermohonanChart();
         $pie_chart->labels($jenis->pluck('huraian'));
-        $pie_chart->dataset('Permohonan fakulti'.$fakulti->fnama_kod, 'pie',$jenis->pluck('count'))->options([
+        $pie_chart->dataset('Permohonan fakulti '.$fakulti->fnama_kod, 'pie',$jenis->pluck('count'))->options([
             'backgroundColor'=> ['#C5CAE9', '#283593'],
         ]);
         
         //----------------- Chart for dokumen permohonan-------------------------
-        // $dokumen_permohonans = $fakulti->dokumen_permohonans;
+        $dokumen_permohonans = $fakulti->dokumen_permohonans;
 
-        // $pie_chart = new PermohonanChart();
-        // $pie_chart->labels($jenis->pluck('huraian'));
-        // $pie_chart->dataset('Permohonan fakulti'.$fakulti->fnama_kod, 'line',$jenis->pluck('count'))->options([
-        //     'backgroundColor'=> ['#C5CAE9', '#283593'],
-        // ]);
+        $pie_chart = new JenisPermohonanChart();
+        $pie_chart->labels($jenis->pluck('huraian'));
+        $pie_chart->dataset('Permohonan fakulti '.$fakulti->fnama_kod, 'line',$jenis->pluck('count'))->options([
+            'backgroundColor'=> ['#C5CAE9', '#283593'],
+        ]);
+        /*---------------- Jumlah penambahbaikkan ---------------------*/
+        $jumlah_penambahbaikkan=0;
+        
+        for($i=0;$i<$permohonans->count();++$i){
+            if($permohonans[$i]->status_permohonan_id==8||$permohonans[$i]->status_permohonan_id==9||$permohonans[$i]->status_permohonan_id==10||$permohonans[$i]->status_permohonan_id==11){
+                $jumlah_penambahbaikkan=$jumlah_penambahbaikkan+1;
+            }
+        }
 
-      
+        /*------------------------ Permohonans perlu penambahbaikkan --------------*/
 
-        return view ('pjk.fakulti-analitik')->with('pie_chart',$pie_chart)->with('fakulti',$fakulti)->with('dokumen_permohonans',$dokumen_permohonans)->with('permohonans',$permohonans);
+        for($i=0;$i<$permohonans->count();++$i){
+            if($permohonans[$i]->status_permohonan_id==8||$permohonans[$i]->status_permohonan_id==9||$permohonans[$i]->status_permohonan_id==10||$permohonans[$i]->status_permohonan_id==11){
+                $permohonans_8= $permohonans[$i];
+
+            }
+        }
+
+    
+      return view ('pjk.fakulti-analitik')->with('pie_chart',$pie_chart)->with('fakulti',$fakulti)->with('dokumen_permohonans',$dokumen_permohonans)->with('permohonans',$permohonans)->with('jumlah_penambahbaikkan',$jumlah_penambahbaikkan)->with('permohonans_8',$permohonans_8);
         
         
     }

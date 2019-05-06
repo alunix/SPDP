@@ -8,8 +8,9 @@
                 <div class="card-header" style="clear: both">
                     <h6 style="float: left; margin:5px;">{{$fakulti->f_nama}}</h6> 
                 </div>
-                <h5>Jumlah dokumen permohonan dihantar : {{$dokumen_permohonans->count()}}</h5>
-                <h5>Jumlah permohonan dihantar : {{$permohonans->count()}}</h5>
+                <h5>Dokumen permohonan dihantar : {{$dokumen_permohonans->count()}}</h5>
+                <h5>Permohonan dihantar : {{$permohonans->count()}}</h5>
+                <h5>J = {{$avg_duration}} jam</h5>
                 <div class="card-body">
                 <div class="row">
             

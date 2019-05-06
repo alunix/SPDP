@@ -31,8 +31,16 @@ class FakultiController extends Controller
         $permohonans = $fakulti->permohonans;
 
         $permohonans_id = $permohonans->sortBy('permohonan_id')->pluck('permohonan_id');
-        $kemajuan_permohonan= $fakulti->kemajuan_permohonans->groupBy('permohonan_id');
+        //$kemajuan_permohonan= Fakulti::find($fakulti_id)->where('status_permohonan', 8)->orWhere('status_permohonan', 9)->orWhere('status_permohonan', 10)->orWhere('status_permohonan',11)->groupBy('permohonan_id');
         
+        // $kemajuan_permohonan = Fakulti::find($fakulti_id)->with(['kemajuan_permohonans' => function($query){
+        //     $query->where('kemajuan_permohonans.status_permohonan', 8)->orWhere('kemajuan_permohonans.status_permohonan', 9)->orWhere('kemajuan_permohonans.status_permohonan', 10)->orWhere('kemajuan_permohonans.status_permohonan',11); //specify which table created at to query
+        //   }])->get()->sortBy('permohonan_id');
+
+        $kp = $fakulti->kemajuan_permohonans->sortBy('permohonan_id','DESC');
+
+        return $permohonans->orderBy('permohonan_id','DESC');
+
         $jenis=  DB::table("permohonans") 
         ->join('jenis_permohonans','jenis_permohonans.id','=','permohonans.jenis_permohonan_id')
         ->join('users','users.id','=','permohonans.id_penghantar')
@@ -46,10 +54,17 @@ class FakultiController extends Controller
         $pie_chart->dataset('Permohonan fakulti'.$fakulti->fnama_kod, 'pie',$jenis->pluck('count'))->options([
             'backgroundColor'=> ['#C5CAE9', '#283593'],
         ]);
+        
+        //----------------- Chart for dokumen permohonan-------------------------
+        // $dokumen_permohonans = $fakulti->dokumen_permohonans;
 
-    
+        // $pie_chart = new PermohonanChart();
+        // $pie_chart->labels($jenis->pluck('huraian'));
+        // $pie_chart->dataset('Permohonan fakulti'.$fakulti->fnama_kod, 'line',$jenis->pluck('count'))->options([
+        //     'backgroundColor'=> ['#C5CAE9', '#283593'],
+        // ]);
 
-        $dokumen_permohonans = $fakulti->dokumen_permohonans;
+      
 
         return view ('pjk.fakulti-analitik')->with('pie_chart',$pie_chart)->with('fakulti',$fakulti)->with('dokumen_permohonans',$dokumen_permohonans)->with('permohonans',$permohonans);
         

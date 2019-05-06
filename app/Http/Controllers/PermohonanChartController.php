@@ -72,7 +72,8 @@ public function annual(Request $request)
                 }
         
         $avg_duration =  array_sum($permohonan_duration)/$lulus->count();
-
+            
+         /*--------------------------------- Fakulti permohonan chart----------------------------------- */
         $permohonans = Fakulti::with(['permohonans' => function($query) use ($year_report) {
             $query->whereYear('permohonans.created_at', $year_report); //specify which table created at to query
           }])->get()->sortBy('fakulti_id');
@@ -88,7 +89,8 @@ public function annual(Request $request)
         $chart->labels( $permohonans->pluck('fnama_kod')); 
         $chart->dataset('Permohonan sepanjang tahun '.$year_report, 'bar',$A);
 
-        $jenis=  DB::table("permohonans") 
+         /*--------------------------------- Jenis permohonan pie chart----------------------------------- */
+         $jenis=  DB::table("permohonans") 
         ->join('jenis_permohonans','jenis_permohonans.id','=','permohonans.jenis_permohonan_id')
         ->whereYear('permohonans.created_at', $year_report)
         ->selectRaw("jenis_permohonans.jenis_permohonan_huraian as huraian,count(permohonan_id) as count") 
@@ -111,8 +113,6 @@ public function annual(Request $request)
         for($i=0;$i<$count_permohonan->count();$i++){
             $Z[$i]= count($count_permohonan[$i]);  //calculate count of permohoann in each fakulti
         } 
-
-      
         
         //Kemajuan permohonan perlu penambahbaikkan
         $kp_8 = Fakulti::with(['kemajuan_permohonans' => function($query)use($year_report){

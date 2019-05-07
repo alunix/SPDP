@@ -49,10 +49,6 @@ public function dashboard(){
         $highest_count_jp = $jenis_permohonan->count_jenis_permohonan;
         
 
-
-        
-        
-
         return view('pjk.analitik-permohonan-menu')->with('chart',$chart)->with('pie_chart',$pie_chart)->with('sort_sum_years',$sort_sums_years)->with('highest_jp_id',$highest_jp_id)->with('highest_count_jp',$highest_count_jp);
         
 }
@@ -69,14 +65,20 @@ public function annual(Request $request)
         $year_report= $request -> input('year_report');
        
         $lulus = Permohonan::where('status_permohonan_id',6)->orWhere('status_permohonan_id',7)->whereYear('created_at',$year_report)->get(); //find permohonan yang sudah dilulus
-
-        for($i=0;$i<$lulus->count();++$i){
-                    $start_time = $lulus[$i]->created_at;
-                    $end_time = $lulus[$i]->updated_at;
-                    $permohonan_duration[$i] = $start_time->diffInHours($end_time);
-                }
         
-        $avg_duration =  array_sum($permohonan_duration)/$lulus->count();
+        if($lulus->count()!=0){
+            for($i=0;$i<$lulus->count();++$i){
+                $start_time = $lulus[$i]->created_at;
+                $end_time = $lulus[$i]->updated_at;
+                $permohonan_duration[$i] = $start_time->diffInHours($end_time);
+            }
+    
+            $avg_duration =  array_sum($permohonan_duration)/$lulus->count();   
+        }
+
+        else
+            $avg_duration=0;
+        
             
          /*--------------------------------- Fakulti permohonan chart----------------------------------- */
         $permohonans = Fakulti::with(['permohonans' => function($query) use ($year_report) {

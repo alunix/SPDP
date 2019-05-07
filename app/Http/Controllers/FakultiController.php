@@ -25,10 +25,11 @@ class FakultiController extends Controller
     }
    
     public function analitik($id)
-    {
+    {   
         $fakulti = Fakulti::find($id);
         $fakulti_id = $fakulti->fakulti_id;
         $permohonans = $fakulti->permohonans;
+        
 
         $permohonans_id = $permohonans->sortBy('permohonan_id')->pluck('permohonan_id');
         //$kemajuan_permohonan= Fakulti::find($fakulti_id)->where('status_permohonan', 8)->orWhere('status_permohonan', 9)->orWhere('status_permohonan', 10)->orWhere('status_permohonan',11)->groupBy('permohonan_id');
@@ -70,17 +71,31 @@ class FakultiController extends Controller
             }
         }
 
-        /*------------------------ Permohonans perlu penambahbaikkan --------------*/
+        
+        $improvements=  DB::table("permohonans") 
+        ->join('users','users.id','=','permohonans.id_penghantar')
+        ->where('users.fakulti_id', $fakulti_id)
+        ->where('permohonans.permohonan_id', 8)->orWhere('permohonans.permohonan_id', 9)->orWhere('permohonans.permohonan_id', 10)->orWhere('permohonans.permohonan_id',11)
+        // ->selectRaw("jenis_permohonans.jenis_permohonan_huraian as huraian,count(permohonan_id) as count") 
+        ->get();
 
+        return $improvements;
+
+        
+
+        /*------------------------ Permohonans perlu penambahbaikkan --------------*/
         for($i=0;$i<$permohonans->count();++$i){
             if($permohonans[$i]->status_permohonan_id==8||$permohonans[$i]->status_permohonan_id==9||$permohonans[$i]->status_permohonan_id==10||$permohonans[$i]->status_permohonan_id==11){
-                $permohonans_8= $permohonans[$i];
+                $improvements= $permohonans[$i];
 
             }
         }
 
+        
     
-      return view ('pjk.fakulti-analitik')->with('pie_chart',$pie_chart)->with('fakulti',$fakulti)->with('dokumen_permohonans',$dokumen_permohonans)->with('permohonans',$permohonans)->with('jumlah_penambahbaikkan',$jumlah_penambahbaikkan)->with('permohonans_8',$permohonans_8);
+
+    
+      return view ('pjk.fakulti-analitik')->with('pie_chart',$pie_chart)->with('fakulti',$fakulti)->with('dokumen_permohonans',$dokumen_permohonans)->with('permohonans',$permohonans)->with('jumlah_penambahbaikkan',$jumlah_penambahbaikkan)->with('improvements',$improvements);
         
         
     }

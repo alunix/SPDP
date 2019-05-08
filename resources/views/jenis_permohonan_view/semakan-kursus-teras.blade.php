@@ -73,14 +73,18 @@
                                 </div>
                                 
                         </div>
-                            
-                            <div class="form-group row">
-                            <div class="col-md-8"> 
+                        
+                            <div class="col-md-6"  style = "vertical-align: top;padding: 20px;margin: 10px;"> 
                             <form action="">   
                             <input type="radio" onclick="myFunction()" name="butang" id="minor" >Perubahan minor<br>
                             <input type="radio" onclick="myFunction()" name="butang" id="major" >Perubahan major<br>
-                            </div>
                             </form>
+                            </div>
+                            
+                            
+                            <div class="form-group row">
+                            
+                            
                             
                             <div class="col-md-6 offset-md-5">
 

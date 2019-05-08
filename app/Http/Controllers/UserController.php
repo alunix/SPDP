@@ -9,7 +9,9 @@ class UserController extends Controller
 {
     public function edit()
     {   
-        $user = auth()->user();
+        $user_id = auth()->user()->id;
+        $user= User::find($user_id);
+
         $fakultis= Fakulti::all();
         return view('auth.settings')->with('user',$user)->with('fakultis',$fakultis);
     }

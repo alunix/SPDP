@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Permohonan Tidak Dilulus </div>
+                <div class="card-header">Permohonan perlu penambahbaikkan </div>
 
             <div class="card-body">
                     

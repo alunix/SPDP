@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -7,7 +9,7 @@
             <div class="card">
                 <div class="card-header">{{$permohonan->jenis_permohonan->jenis_permohonan_huraian}}</div>
 
-            <div class="card-body form-prevent-dobule-submits">
+                        <div class="card-body form-prevent-dobule-submits">
                         @csrf
                          <div class="form-group row">
                             <label for="doc_title" class="col-md-4 col-form-label text-md-right">{{ __('Tajuk Semakan') }}</label>
@@ -34,7 +36,7 @@
                             <label for="fakulti" class="col-md-4 col-form-label text-md-right">{{ __('Fakulti') }}</label>
 
                             <div class="col-md-6">
-                                <input id="fakulti" type="text"  value="{{ $permohonan->user->fakulti}}" class="form-control" name="fakulti"  required autofocus readonly>
+                                <input id="fakulti" type="text"  value="{{ $permohonan->user->fakulti->fnama_kod}}" class="form-control" name="fakulti"  required autofocus readonly>
 
                                
                             </div>
@@ -71,17 +73,14 @@
                                 </div>
                                 
                         </div>
-              
-                          
                             
-                            <div class="form-group row mb-0">
-                            
-                            <form action="">
-                            <input type="radio" name="gender" value="male">Perubahan major<br>
-                            <input type="radio" name="gender" value="female">Perubahan minor<br>
-                            <input type="radio" name="gender" value="other"> Other
+                            <div class="form-group row">
+                            <div class="col-md-8"> 
+                            <form action="">   
+                            <input type="radio" onclick="myFunction()" name="butang" id="minor" >Perubahan minor<br>
+                            <input type="radio" onclick="myFunction()" name="butang" id="major" >Perubahan major<br>
+                            </div>
                             </form>
-                            
                             
                             <div class="col-md-6 offset-md-5">
 
@@ -92,20 +91,25 @@
                        
                        
                             @if(Auth::user()->role == "pjk")
+                            
+                            <div id ="ifMinor" style = "display:none">
 
                              <a href="{{ route('pjk.perakuan.show', ['permohonan' => $permohonan->permohonan_id])  }}">
                                     <input type="button" class="btn btn-success" value="Lulus permohonan" />
-                                    
                             </a> 
-                                 
+
+                            </div>
+
+                            <div id ="ifMajor" style = "display:none">
                             <a href="{{ route('pelantikan_penilai.show', ['permohonan' => $permohonan->permohonan_id])  }}">
                                     <input type="button" class="btn btn-success" value="Lantik penilai" />
                             </a>
-                            
+                            </div>
+
                             @elseif(Auth::user()->role=="penilai")
                             
                             <a href="{{ route('penilai.laporan.show', ['permohonan' => $permohonan->permohonan_id])  }}">
-                                    <input `type`="button" class="btn btn-success" value="Lulus permohonan" />
+                                    <input type="button" class="btn btn-success" value="Lulus permohonan" />
                                     
                             </a>                          
                           
@@ -176,12 +180,6 @@
 
 @endif
 
-                        
-                        
-
-                     
-                      
-
                          <hr style="border-color:white;">
                         
 
@@ -192,14 +190,29 @@
     </div>
 </div>
 
+
+
 @endsection
 
-<!-- @if($errors->any())
-        <div class="row collapse">
-            <ul class="alert-box warning radius">
-                @foreach($errors->all() as $error)
-                    <li> {{ $error }} </li>
-                @endforeach
-            </ul>
-        </div>
-        @endif -->
+<script>
+function myFunction() {
+   var minor = document.getElementById("minor");
+   var major = document.getElementById("major");
+   var showMinor = document.getElementById('ifMinor');
+   var showMajor= document.getElementById('ifMajor');
+  
+  if (minor.checked == true){
+    showMinor.style.display = "block";
+    showMajor.style.display = "none";
+  } else if (major.checked == true){
+    showMajor.style.display = "block";
+    showMinor.style.display = "none";
+  }
+  else{
+
+  }
+}
+</script>
+
+
+

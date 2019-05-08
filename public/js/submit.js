@@ -10,4 +10,8 @@ $cbs = $('input[name="checkrecc"]').click(function () {
     $('[name=indsubmit]').toggle(!$cbs.is(":checked"));
 });
 
-})();
+}
+)();
+
+
+  

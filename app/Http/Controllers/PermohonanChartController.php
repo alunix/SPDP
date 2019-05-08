@@ -119,7 +119,7 @@ public function annual(Request $request)
 
         $line_chart = new JenisPermohonanChart();
         $line_chart->labels($Z->pluck('months'));
-        $line_chart->dataset('Jumlah permohonan', 'line',$Z->pluck('count'))->options([
+        $line_chart->dataset('Dokumen permohonan', 'line',$Z->pluck('count'))->options([
             'backgroundColor'=> ['#C5CAE9', '#283593'],'dimensions'=>[1000,800]
         ]);
 
@@ -180,7 +180,7 @@ public function annual(Request $request)
         
  
 
-        return view ('pjk.analitik-permohonan')->with('chart',$chart)->with('year_report',$year_report)->with('avg_duration',$avg_duration)->with('pie_chart',$pie_chart)->with('permohonans',$D)->with('line_chart',$line_chart);
+        return view ('pjk.analitik-permohonan')->with('chart',$chart)->with('year_report',$year_report)->with('avg_duration',$avg_duration)->with('pie_chart',$pie_chart)->with('permohonans',$D)->with('line_chart',$line_chart)->with('lulus',$lulus);
             
         //----------------------------------------------------------------------------------------------------------------------------------------------------
         

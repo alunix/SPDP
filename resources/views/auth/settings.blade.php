@@ -28,6 +28,16 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="fakulti_current" class="col-md-4 col-form-label text-md-right">{{ __('Fakulti') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="fakulti_current" type="text"  value="{{$user->fakulti_id}}" class="form-control" name="fakulti_current"  required autofocus readonly >
+                            </div>
+                        </div>
+
+                       
+
+                        <div class="form-group row">
                             <label for="fakulti" class="col-md-4 col-form-label text-md-right">{{ __('Fakulti') }}</label>
 
                             <div class="col-md-6">

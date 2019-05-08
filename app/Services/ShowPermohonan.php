@@ -40,8 +40,6 @@ class ShowPermohonan
         $user = User::find($user_id);
 
         $permohonans_id= $user->permohonans->pluck('permohonan_id');
-        
-       
 
         if(count($permohonans_id)==0) //check whether fakulti does have permohonans
         { 

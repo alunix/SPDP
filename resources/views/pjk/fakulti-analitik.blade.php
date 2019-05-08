@@ -37,7 +37,7 @@
     </tr>
 </thead>
 <tbody>
-@if( ! $permohonans_8->isEmpty() )
+@if( ! $improvements->isEmpty() )
 @foreach($permohonans_8 as $permohonan)
 <tr>
 <th scope="row">{{$loop->iteration}}</th>

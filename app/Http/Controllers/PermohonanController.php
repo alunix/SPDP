@@ -12,7 +12,11 @@ use SPDP\Services\ShowPermohonan;
 
 class PermohonanController extends Controller
 {
-  
+    public function testing_show()
+    {
+       
+        return view ('panel_penilai.senarai-testing');
+    }
     public function index()
     {
         $permohonans = Permohonan::all();

@@ -10,6 +10,8 @@ use SPDP\Penilaian;
 use SPDP\Services\KemajuanPermohonanClass;
 use SPDP\Services\MuatNaikLaporan;
 use SPDP\DokumenPermohonan;
+use SPDP\Notifications\DokumenPenambahbaikkan;
+use Notification;
 
 
 class DokumenPermohonanClass 
@@ -17,8 +19,6 @@ class DokumenPermohonanClass
 
     public function create($permohonan,$fileNameWithExt,$fileNameToStore,$request,$fileSize)
     {   
-
-      
         $dp = new DokumenPermohonan();
         $dp->permohonan_id= $permohonan->permohonan_id;
         $dp->file_name = $fileNameWithExt;
@@ -28,16 +28,11 @@ class DokumenPermohonanClass
         $dp->versi = 1;
         $dp->save();
 
-        // return redirect('/senarai-permohonan-dihantar')->with($msg);
     }
 
     
     public function update($permohonan,Request $request,$attached)
     {    
-        
-       
-
-        
         //Handle file upload
         if($request->hasFile($attached))
         {
@@ -65,12 +60,17 @@ class DokumenPermohonanClass
         $dp ->komen =$request -> input('summary-ckeditor');
         $dp->versi =((int)$permohonan->version_counts())+1;
         $dp->save();
-
-        $permohonan->status_permohonan_id= $this->getStatusPermohonan($permohonan->status_permohonan_id);
+        
+        $status_permohonan= $permohonan->status_permohonan_id;
+        $permohonan->status_permohonan_id= $this->getStatusPermohonan($status_permohonan);
         $permohonan->save();
 
         $kp= new KemajuanPermohonanClass();
         $kp->create($permohonan);
+
+        //Hantar email kepada penghantar
+        Notification::route('mail','dalbir@gmail.com')->notify(new DokumenPenambahbaikkan($dp)); //hantar email kepada penghantar
+
         
         
 

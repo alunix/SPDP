@@ -41,7 +41,7 @@ class PerluPenambahbaikkan extends Notification
                     return 'Jawatankuasa Perancangan dan Perkembangan Akademik (JPPA)';
                 break; 
             default:
-                    return view ('/login'); 
+                    return (''); 
                 break;
         }
         

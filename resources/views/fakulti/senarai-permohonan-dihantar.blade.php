@@ -2,21 +2,16 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row justify-content-left">
         <div class="col-md-8">
-            <div class="card" style="width:65rem;">
+            <div class="card" style="width:75rem;">
                 <div class="card-header" >Permohonan yang dihantar</div>
-
                 <div class="card-body">
+                
                
-    <div class="container">
- 
-   
+    <div class="container-fluid">
 <h5>Jumlah permohonan yang dihantar : {{$permohonans->count()}}</h5>
 <hr>
-
-
-
          <table class="table table-striped">
 
 <thead>
@@ -29,12 +24,7 @@
     <th scope="col">Penghantar</th>
     <th scope="col">Tarikh/Masa Penghantaran</th>    
     <th scope="col">Status</th>
-    <th scope="col">Tarikh/Masa Status</th>    
-
-    
-
-
-    
+    <th scope="col">Tarikh/Masa Status</th>  
     </tr>
 </thead>
 <tbody>
@@ -52,35 +42,21 @@
 <td> {{$permohonan->updated_at->format('h:i a d/m/Y') }}</td>
 <td><a href="{{ route('fakulti.kemajuanPermohonan',$permohonan->permohonan_id) }}" class="btn btn-primary">Kemajuan</a></td>
 <td><a href="{{ route('dokumenPermohonan.dihantar',$permohonan->permohonan_id) }}" class="btn btn-primary">Dokumen</a></td>
-
-
-
 </tr>
 @endforeach
 
 </tbody>
 </table>
-
-
-
 @else
 
 <p> Tiada permohonan telah dijumpai </p>
 
 @endif
-
-
-
-                
-                    
-    
-                            
-                           
-
                     
                 </div>
-            </div>
+            
         </div>
+</div>
     </div>
 </div>
 @endsection

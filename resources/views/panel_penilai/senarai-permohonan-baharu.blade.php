@@ -1,24 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid">
-    <div class="row justify-content-center">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-header"><h4>Senarai permohonanan untuk dinilai</h4></div>
-
-            <div class="card-body">
-           
-
-                     
-
-                                             
-
-      <a href="{{ url()->previous() }}" class="btn btn-default">Back</a>
-                      
-
-<div class = "container-fluid">
-<table class='responsive'>
+<div class="container">
+    <div class="row justify-content-left">
+        <div class="col-md-8">
+            <div class="card" style="width:75rem;">
+                <div class="card-header" >Permohonan yang dihantar</div>
+                <div class="card-body">
+                
+               
+    <div class="container-fluid">
+<h5>Jumlah permohonan yang dihantar : {{$permohonans->count()}}</h5>
+<hr>
 <table class="table table-striped">
 
 <thead>
@@ -29,21 +22,15 @@
     <th scope="col">Nama penghantar</th>
     <th scope="col">Fakulti</th>
     <th scope="col">Tarikh dihantar</th>
-
-
-    
     </tr>
 </thead>
 <tbody>
-
- <!-- <table class="table  table-striped"> -->
 
 @if( ! $permohonans->isEmpty() )
 @foreach($permohonans as $permohonan)
 <tr>
 <th scope="row">{{$permohonan->id}}</th>
 <td>{{$permohonan->jenis_permohonan->jenis_permohonan_huraian}} </td>
-<!-- <td><a href="/permohonan/{{$permohonan->id}}">{{$permohonan->doc_title}}</td>                -->
 <td>{{$permohonan->doc_title}}</td>   
 <td>{{$permohonan->user->name}} </td>
 <td>{{$permohonan->fakulti}} </td> 
@@ -54,20 +41,16 @@
 @endif
 </tbody>
 </table>
-</table>
-</div>
+@else
 
+<p> Tiada permohonan telah dijumpai </p>
 
-                        
-
-                         
-
-                        
-
-                       
-                
-            </div>
+@endif
+                    
+                </div>
+            
         </div>
+</div>
     </div>
 </div>
 @endsection

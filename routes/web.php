@@ -15,6 +15,7 @@
 
 
 Auth::routes();
+Route::get('/show-testing', 'PermohonanController@testing_show'); // Redirect to dashboard/home(Same page)
 
 Route::get('/dashboard', 'HomeController@index')->name('/dashboard')->middleware('auth'); // Redirect to dashboard/home(Same page)
 Route::get('/', 'HomeController@index')->middleware('auth')->name('home'); //Redirect index page to login if not authenticated and will return homepage if authenticated.

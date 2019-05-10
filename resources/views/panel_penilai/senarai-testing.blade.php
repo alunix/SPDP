@@ -8,8 +8,7 @@
                             <div class="col-md-12">
                                 <div class="overview-wrap">
                                     <h2 class="title-1">gambaran keseluruhan</h2>
-                                    <button class="au-btn au-btn-icon au-btn--blue">
-                                        <i class="zmdi zmdi-plus"></i>add item</button>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -37,11 +36,11 @@
                                     <div class="overview__inner">
                                         <div class="overview-box clearfix">
                                             <div class="icon">
-                                                <i class="zmdi zmdi-check"></i>
+                                                <i class="zmdi zmdi-comment"></i>
                                             </div>
                                             <div class="text">
-                                                <h2>388,688</h2>
-                                                <span>items solid</span>
+                                                <h2>31</h2>
+                                                <span>permohonan untuk diperakui</span>
                                             </div>
                                         </div>
                                         <div class="overview-chart">
@@ -55,11 +54,11 @@
                                     <div class="overview__inner">
                                         <div class="overview-box clearfix">
                                             <div class="icon">
-                                                <i class="zmdi zmdi-calendar-note"></i>
+                                                <i class="zmdi zmdi-spinner"></i>
                                             </div>
                                             <div class="text">
-                                                <h2>1,086</h2>
-                                                <span>this week</span>
+                                                <h2>{{$permohonan_in_progress}}</h2>
+                                                <span>permohonan sedang dinilai</span>
                                             </div>
                                         </div>
                                         <div class="overview-chart">
@@ -73,11 +72,11 @@
                                     <div class="overview__inner">
                                         <div class="overview-box clearfix">
                                             <div class="icon">
-                                                <i class="zmdi zmdi-money"></i>
+                                                <i class="zmdi zmdi-check"></i>
                                             </div>
                                             <div class="text">
-                                                <h2>$1,060,386</h2>
-                                                <span>total earnings</span>
+                                                <h2>{{$permohonan_diluluskan}}</h2>
+                                                <span>permohonan diluluskan</span>
                                             </div>
                                         </div>
                                         <div class="overview-chart">
@@ -110,6 +109,20 @@
                                           
                                         {!! $line_chart->container() !!}
                                       {!! $line_chart->script() !!}
+                                    
+                                        </div>
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="au-card recent-report">
+                                    <div class="au-card-inner">
+                                        <h3 class="title-2">jenis permohonan</h3>
+                                        <div class="chart-info">
+                                          
+                                        {!! $pie_chart->container() !!}
+                                      {!! $pie_chart->script() !!}
                                     
                                         </div>
                                       

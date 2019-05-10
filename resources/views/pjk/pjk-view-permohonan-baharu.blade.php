@@ -11,6 +11,7 @@
                                             <i class="zmdi zmdi-plus"></i>permohonan baharu</button>
                                     </div>
                                 </div>
+                                <h4>Jumlah permohonan baharu : {{$permohonans->count()}}</h4>
                                 <div class="table-responsive table-responsive-data2">
                                     <table class="table table-data2">
                                         <thead>

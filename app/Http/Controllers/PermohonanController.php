@@ -21,7 +21,7 @@ class PermohonanController extends Controller
     public function testing_show()
     {
         $year_report = date('Y');
-       $permohonans = Permohonan::where('status_permohonan_id',1);
+       $permohonan_baharu = Permohonan::where('status_permohonan_id',1);
        $permohonans = Fakulti::with(['permohonans' => function($query) use ($year_report) {
         $query->whereYear('permohonans.created_at', $year_report); //specify which table created at to query
       }])->get()->sortBy('fakulti_id');
@@ -51,8 +51,25 @@ class PermohonanController extends Controller
         'backgroundColor'=> ['#C5CAE9', '#283593'],'dimensions'=>[1000,800]
     ]);
 
+    $A=  DB::table("permohonans") 
+        ->join('jenis_permohonans','jenis_permohonans.id','=','permohonans.jenis_permohonan_id')
+        ->selectRaw("year(permohonans.created_at) as years, jenis_permohonans.jenis_permohonan_huraian as huraian,count(permohonan_id) as count") 
+        ->groupBy('jenis_permohonan_huraian') 
+        ->get();
 
-        return view ('panel_penilai.senarai-testing')->with('permohonans',$permohonans)->with('chart',$chart)->with('line_chart',$line_chart);
+    $pie_chart = new PermohonanChart();
+    $pie_chart->labels($A->pluck('huraian'));
+    $pie_chart->dataset('Permohonan sepanjang beberapa tahun', 'pie',$A->pluck('count'))->options([
+        'backgroundColor'=> ['#C5CAE9', '#283593'],
+    ]);
+    
+    $permohonan_in_progress = Permohonan::where('status_permohonan_id','!=',1)->orWhere('status_permohonan_id','!=',6)->orWhere('status_permohonan_id','!=',7)->get()->count();
+    $permohonan_diluluskan = Permohonan::where('status_permohonan_id','=',6)->orWhere('status_permohonan_id','=',7)->get()->count();
+
+   
+
+
+        return view ('panel_penilai.senarai-testing')->with('permohonans',$permohonan_baharu)->with('chart',$chart)->with('line_chart',$line_chart)->with('pie_chart',$pie_chart)->with('permohonan_in_progress', $permohonan_in_progress)->with('permohonan_diluluskan',$permohonan_diluluskan);
     }
     public function index()
     {

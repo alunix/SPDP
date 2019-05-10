@@ -1,69 +1,140 @@
 @extends('layouts.app')
+
 @section('content')
-
-<h3 class="title-5 m-b-35">Senarai permohonan baharu</h3>
-                                <div class="table-data__tool">
-                                    <div class="table-data__tool-left">
-                                       
-                                    </div>
-                                    <div class="table-data__tool-right">
-                                        <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                            <i class="zmdi zmdi-plus"></i>permohonan baharu</button>
+<div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="overview-wrap">
+                                    <h2 class="title-1">gambaran keseluruhan</h2>
+                                    <button class="au-btn au-btn-icon au-btn--blue">
+                                        <i class="zmdi zmdi-plus"></i>add item</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-t-25">
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="overview-item overview-item--c1">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class="zmdi zmdi-file"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2>{{$permohonans->count()}}</h2>
+                                                <span>permohonan baharu</span>
+                                            </div>
+                                        </div>
+                                        <div class="overview-chart">
+                                            <canvas id="widgetChart1"></canvas>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="table-responsive table-responsive-data2">
-                                    <table class="table table-data2">
-                                        <thead>
-                                            <tr>
-                                                
-                                                <th>id</th>
-                                                <th>jenis</th>
-                                                <th>bil penghantaran</th>
-                                                <th>nama program/kursus</th>
-                                                <th>penghantar</th>
-                                                <th>fakulti</th>
-                                                <th>tarikh</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                        @if( ! $permohonans->isEmpty() )
-                                        @foreach($permohonans as $permohonan)
-                                            <tr class="tr-shadow">
-                                           
-                                                <td>{{$permohonan->permohonan_id}}</td>
-                                                <td>{{$permohonan->jenis_permohonan->jenis_permohonan_huraian}}</td>
-                                                <td>{{$permohonan->version_counts()}}</td>
-                                                <td>{{$permohonan->doc_title}}</td>   
-                                                <td>{{$permohonan->user->name}} </td>
-                                                <td>{{$permohonan->user->fakulti->fnama_kod}} </td> 
-                                                <td>{{$permohonan->created_at->format('h:i a d/m/Y')}}  </td> 
-                                                <td>
-                                                    <div class="table-data-feature">
-                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
-                                                            <i class="zmdi zmdi-mail-send"></i>
-                                                        </button>
-                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
-                                                            <i class="zmdi zmdi-edit"></i>
-                                                        </button>
-                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
-                                                            <i class="zmdi zmdi-delete"></i>
-                                                        </button>
-                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="More">
-                                                            <i class="zmdi zmdi-more"></i>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                            @endif
-                                            <tr class="spacer"></tr>
-                                        </tbody>
-                                    </table>
-
-                                    @else
-                                    <p> Tiada permohonan telah dijumpai </p>
-                                    @endif
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="overview-item overview-item--c2">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class="zmdi zmdi-check"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2>388,688</h2>
+                                                <span>items solid</span>
+                                            </div>
+                                        </div>
+                                        <div class="overview-chart">
+                                            <canvas id="widgetChart2"></canvas>
+                                        </div>
+                                    </div>
                                 </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="overview-item overview-item--c3">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class="zmdi zmdi-calendar-note"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2>1,086</h2>
+                                                <span>this week</span>
+                                            </div>
+                                        </div>
+                                        <div class="overview-chart">
+                                            <canvas id="widgetChart3"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="overview-item overview-item--c4">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class="zmdi zmdi-money"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2>$1,060,386</h2>
+                                                <span>total earnings</span>
+                                            </div>
+                                        </div>
+                                        <div class="overview-chart">
+                                            <canvas id="widgetChart4"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="au-card recent-report">
+                                    <div class="au-card-inner">
+                                        <h3 class="title-2">jumlah permohonan</h3>
+                                        <div class="chart-info">
+                                          
+                                        {!! $chart->container() !!}
+                                      {!! $chart->script() !!}
+                                    
+                                        </div>
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="au-card recent-report">
+                                    <div class="au-card-inner">
+                                        <h3 class="title-2">dokumen permohonan</h3>
+                                        <div class="chart-info">
+                                          
+                                        {!! $line_chart->container() !!}
+                                      {!! $line_chart->script() !!}
+                                    
+                                        </div>
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      
+                        </div>
+                      
+                    </div>
+                </div>
+            
+
+      
+
+
 @endsection
+
+@section('myjsfile')
+
+
+@endsection
+
+
+
+
+

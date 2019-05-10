@@ -44,7 +44,7 @@
                             <label for="fakulti" class="col-md-4 col-form-label text-md-right">{{ __('Fakulti') }}</label>
 
                             <div class="col-md-6">
-                                <input id="fakulti" type="text"  value="{{ $permohonan->user->fakulti}}" class="form-control" name="fakulti"  required autofocus readonly>
+                                <input id="fakulti" type="text"  value="{{  $permohonan->user->fakulti->fnama_kod}}" class="form-control" name="fakulti"  required autofocus readonly>
 
                                
                             </div>
@@ -55,7 +55,7 @@
                             <label for="created_at" class="col-md-4 col-form-label text-md-right">{{ __('Tarikh dihantar') }}</label>
 
                             <div class="col-md-6">
-                                <input id="created_at" type="text" value="{{ @$permohonan['created_at']}}" class="form-control" name="created_at"  required autofocus readonly>
+                                <input id="created_at" type="text" value="{{$permohonan->created_at}}" class="form-control" name="created_at"  required autofocus readonly>
 
                                
                             </div>
@@ -103,6 +103,7 @@
 </tbody>
 </table>
 
+<br>
 
 
  

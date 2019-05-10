@@ -74,22 +74,26 @@
                                 
                         </div>
                         
+                        <div class="form-group row">
+                        <label for="radio" class="col-md-4 col-form-label text-md-right">{{ __('Jenis perubahan') }}</label>
                             <div class="col-md-6"  style = "vertical-align: top;padding: 20px;margin: 10px;"> 
                             <form action="">   
-                            <input type="radio" onclick="myFunction()" name="butang" id="minor" >Perubahan minor<br>
-                            <input type="radio" onclick="myFunction()" name="butang" id="major" >Perubahan major<br>
+                            <input type="radio" onclick="myFunction()" name="butang" id="minor" > Perubahan minor<br>
+                            <input type="radio" onclick="myFunction()" name="butang" id="major" > Perubahan major<br>
                             </form>
+                            </div>
                             </div>
                             
                             
-                            <div class="form-group row">
-                            
-                            
-                            
+                            <div class="form-group row center">
                             <div class="col-md-6 offset-md-5">
 
+                            <a href="{{ route('laporan.permohonanTidakDilulus', ['permohonan' => $permohonan->permohonan_id])  }}">
+                                    <input type="button" class="btn btn-danger" value="Penambahbaikan" />
+                            </a>
+
                             <a href="{{ route('dokumenPermohonan.dihantar', ['permohonan' => $permohonan->permohonan_id])  }}">
-                                    <input type="button" class="btn btn-info" value="Lihat versi sejarah" />
+                                    <input type="button" class="btn btn-info" value="Versi" />
                                     
                             </a>
                        
@@ -99,7 +103,7 @@
                             <div id ="ifMinor" style = "display:none">
 
                              <a href="{{ route('pjk.perakuan.show', ['permohonan' => $permohonan->permohonan_id])  }}">
-                                    <input type="button" class="btn btn-success" value="Lulus permohonan" />
+                                    <input type="button" class="btn btn-success" value="Lulus" />
                             </a> 
 
                             </div>
@@ -133,9 +137,7 @@
                             </a>
                             @endif
 
-                            <a href="{{ route('laporan.permohonanTidakDilulus', ['permohonan' => $permohonan->permohonan_id])  }}">
-                                    <input type="button" class="btn btn-danger" value="Penambahbaikan" />
-                            </a>
+                          
 
                             </div>
                         </div>

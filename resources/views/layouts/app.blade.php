@@ -4,6 +4,8 @@
 
 <head>
 
+
+
     <!-- Fav Icon Testing -->
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -63,6 +65,19 @@
 <link href="{{ asset('vendor/select2/select2.min.css')}}" rel="stylesheet">
 <link href="{{ asset('/vendor/perfect-scrollbar/perfect-scrollbar.css')}}" rel="stylesheet">
 <link href="{{ asset('css/theme.css')}}" rel="stylesheet">
+
+<!--CoolAdmin script-->
+
+
+
+
+
+
+
+
+
+
+
 
 
     <style>
@@ -194,5 +209,13 @@
   <!-- End message -->
             @yield('content')
         </main>
+        @yield('myjsfile')
     </div>
+  
+</body>
+</html>
+    
+
+
+    
 

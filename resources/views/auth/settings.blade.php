@@ -26,7 +26,9 @@
                                 <input id="email" type="text"  value="{{$user->email}}" class="form-control" name="email"  required autofocus >
                             </div>
                         </div>
-
+                        
+                        @if(Auth::user()->role != "pjk")
+                               
                         <div class="form-group row">
                             <label for="fakulti_current" class="col-md-4 col-form-label text-md-right">{{ __('Fakulti') }}</label>
 
@@ -34,8 +36,6 @@
                                 <input id="fakulti_current" type="text"  value="{{$user->fakulti->f_nama}}" class="form-control" name="fakulti_current"  required autofocus readonly >
                             </div>
                         </div>
-
-                       
 
                         <div class="form-group row">
                             <label for="fakulti" class="col-md-4 col-form-label text-md-right">{{ __('Fakulti') }}</label>
@@ -49,6 +49,7 @@
                             </select>
                             </div>
                         </div>
+                        @endif
 
                         
                         <div class="form-group row mb-0">

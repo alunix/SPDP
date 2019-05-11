@@ -4,12 +4,12 @@
 <div class="container">
     <div class="row justify-content-left">
         <div class="col-md-8">
-            <div class="card" style="width:75rem;">
+            <div class="card" style="width:60rem;">
                 <div class="card-header" >Permohonan yang dihantar</div>
                 <div class="card-body">
                 
                
-    <div class="container-fluid">
+    <div class="container">
 <h5>Jumlah permohonan yang dihantar : {{$permohonans->count()}}</h5>
 <hr>
 <table class="table table-striped">

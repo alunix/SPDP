@@ -21,7 +21,7 @@
                                                 <i class="zmdi zmdi-file"></i>
                                             </div>
                                             <div class="text">
-                                                <h2>{{$permohonans->count()}}</h2>
+                                                <h2>{{$permohonans}}</h2>
                                                 <span>permohonan baharu</span>
                                             </div>
                                         </div>
@@ -39,7 +39,7 @@
                                                 <i class="zmdi zmdi-comment"></i>
                                             </div>
                                             <div class="text">
-                                                <h2>31</h2>
+                                                <h2>3</h2>
                                                 <span>permohonan untuk diperakui</span>
                                             </div>
                                         </div>

@@ -102,6 +102,55 @@ class HomeController extends Controller
      return view ('panel_penilai.senarai-testing')->with('permohonans',$permohonan_baharu)->with('chart',$chart)->with('line_chart',$line_chart)->with('pie_chart',$pie_chart)->with('permohonan_in_progress', $permohonan_in_progress)->with('permohonan_diluluskan',$permohonan_diluluskan);
     }
 
+    public function fakulti(){
+        
+    $year_report = date('Y');
+    $user_id =auth()->user()->id;
+    $user= User::find($user_id);
+    $permohonans= $user->permohonans;
+    $count_permohonan= $permohonans->pluck('permohonans');
+
+    //12/5/2019
+    //Figuring out to show dokumen permohonans from each users
+    
+ 
+     /*------------------ Line chart for jumlah dokumen permohonan in a year--------------*/
+    
+     $fakulti_id = $user->fakulti_id;
+     $dokumen_permohonans = Fakulti::find($fakulti_id)->dokumen_permohonans->groupBy('');
+
+     $Z=  DB::table("dokumen_permohonans") 
+     //->join('jenis_permohonans','jenis_permohonans.id','=','permohonans.jenis_permohonan_id')
+     ->selectRaw("DATE_FORMAT(dokumen_permohonans.created_at,'%M') as months, count(dokumen_permohonan_id) as count") 
+     ->groupBy('months') 
+     ->get();
+ 
+     $line_chart = new JenisPermohonanChart();
+     $line_chart->labels($Z->pluck('months'));
+     $line_chart->dataset('Dokumen permohonan', 'line',$Z->pluck('count'))->options([
+         'backgroundColor'=> ['#C5CAE9', '#283593']
+         ,'dimensions'=>[500,500]
+     ]);
+ 
+     $A=  DB::table("permohonans") 
+         ->join('jenis_permohonans','jenis_permohonans.id','=','permohonans.jenis_permohonan_id')
+         ->selectRaw("year(permohonans.created_at) as years, jenis_permohonans.jenis_permohonan_huraian as huraian,count(permohonan_id) as count") 
+         ->groupBy('jenis_permohonan_huraian') 
+         ->get();
+ 
+     $pie_chart = new JenisPermohonanChart();
+     $pie_chart->labels($A->pluck('huraian'));
+     $pie_chart->dataset('Jenis permohonan tahun '.$year_report, 'pie',$A->pluck('count'))->color(['#3366CC','#DC3912','#FF9900','#109618','#990099','#3B3EAC','#0099C6','#DD4477'])->options([
+        'colorCount'=>10,'dimensions'=>[800,800]
+     ]);
+     
+     $permohonan_in_progress = Permohonan::where('status_permohonan_id','!=',1)->orWhere('status_permohonan_id','!=',6)->orWhere('status_permohonan_id','!=',7)->get()->count();
+     $permohonan_diluluskan = Permohonan::where('status_permohonan_id','=',6)->orWhere('status_permohonan_id','=',7)->get()->count();
+     
+
+     return view ('dashboard.fakulti-dashboard')->with('permohonans',$permohonans)->with('chart',$chart)->with('line_chart',$line_chart)->with('pie_chart',$pie_chart)->with('permohonan_in_progress', $permohonan_in_progress)->with('permohonan_diluluskan',$permohonan_diluluskan);
+    }
+
     public function senaraiPermohonan($sp){
         $role = auth()->user()->role;
         switch ($role) {
@@ -153,10 +202,7 @@ class HomeController extends Controller
     
     
 
-    public function fakulti(Request $req){
-        return view('dashboard/fakulti-dashboard');
-        
-        }
+   
     public function pjk(Request $req){
         return view('dashboard/pjk-dashboard');
             

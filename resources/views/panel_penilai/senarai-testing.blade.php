@@ -12,6 +12,9 @@
                                 </div>
                             </div>
                         </div>
+                        <br>
+                        <button class="au-btn au-btn-icon au-btn--green">
+                                        <i class="zmdi zmdi-plus"></i>permohonan baharu<button>
                         <div class="row m-t-25">
                             <div class="col-sm-6 col-lg-3">
                                 <div class="overview-item overview-item--c1">

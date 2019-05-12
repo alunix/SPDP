@@ -65,18 +65,33 @@
 <link href="{{ asset('vendor/select2/select2.min.css')}}" rel="stylesheet">
 <link href="{{ asset('/vendor/perfect-scrollbar/perfect-scrollbar.css')}}" rel="stylesheet">
 <link href="{{ asset('css/theme.css')}}" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
 <!--CoolAdmin script-->
+<!-- Jquery JS-->
 
+    <script src="{{asset('vendor/jquery-3.2.1.min.js') }}"defer></script>
+    <!-- Bootstrap JS-->
+    <script src="{{asset('vendor/bootstrap-4.1/popper.min.js') }}"defer></script>
+    <script src="{{asset('vendor/bootstrap-4.1/bootstrap.min.js') }}"defer></script>
+    <!-- Vendor JS       -->
+    <script src="{{asset('vendor/slick/slick.min.js')}}"defer>
+    </script>
+    <script src="{{asset('vendor/wow/wow.min.js') }}"defer></script>
+    <script src="{{asset('vendor/animsition/animsition.min.js') }}"defer></script>
+    <script src="{{asset('vendor/bootstrap-progressbar/bootstrap-progressbar.min.js')}}"defer>
+    </script>
+    <script src="{{asset('vendor/counter-up/jquery.waypoints.min.js') }}"defer></script>
+    <script src="{{asset('vendor/counter-up/jquery.counterup.min.js')}}"defer>
+    </script>
+    <script src="{{asset('vendor/circle-progress/circle-progress.min.js') }}"defer></script>
+    <script src="{{asset('vendor/perfect-scrollbar/perfect-scrollbar.js') }}"defer></script>
+    <script src="{{asset('vendor/chartjs/Chart.bundle.min.js') }}"defer></script>
+    <script src="{{asset('vendor/select2/select2.min.js')}}"defer>
+    </script>
 
-
-
-
-
-
-
-
-
+    <!-- Main JS-->
+    <script src="{{asset('js/main.js')}}"defer></script>
 
 
 
@@ -131,69 +146,159 @@
 <body>
 
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-            <div class="container">
-                <ul class="nav navbar-nav">
-                    <li class="links"><a href="{{ url('/') }}">SPDP</a></li>
-                </ul>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                            
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            <li class="nav-item">
-                                @if (Route::has('register'))
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                @endif
-                            </li>
-                        @else
-                       
+        @guest
+        <header class="header-desktop3 d-none d-lg-block">
+            <div class="section__content section__content--p35">
+                <div class="header3-wrap">
+                    <div class="header__logo">
+                        <a href="#">
+                            <img src="img/logo.png" alt="SPDP" style="height:20px" />
+                        </a>
+                    </div>
+                    <div class="header__navbar">
                         
+                    </div>
+                    <div class="header__tool">
+       
+                        
+                
+                    </div>
+                </div>
+            </div>
+        </header>
 
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+
+        @else
+         <header class="header-desktop3 d-none d-lg-block">
+            <div class="section__content section__content--p35">
+                <div class="header3-wrap">
+                    <div class="header__logo">
+                        <a href="#">
+                            <img src="img/logo.png" alt="SPDP" style="height:20px" />
+                        </a>
+                    </div>
+                    <div class="header__navbar">
+                        <ul class="list-unstyled">
+                            <li class="has-sub">
+                                <a href="{{route('home')}}">
+                                    <i class="fas fa-tachometer-alt"></i>Papan pemuka
+                                    <span class="bot-line"></span>
                                 </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-
-                                <a class="dropdown-item" href="{{ route('settings') }}"
-                                       >
-                                        {{ __('Settings') }}
-                                    </a>
-
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
+                               
+                            </li>
+                            <li>
+                            @if(Auth::user()->role == "fakulti")
+                                <a href="{{route('permohonan.dihantar')}}">
+                            @else
+                                <a href="{{route('senaraiPermohonanBaharu')}}">
+                            @endif
+                                    <i class="fas fa-file-upload"></i>
+                                    <span class="bot-line"></span>Permohonan</a>
+                            </li>
+                            <li>
+                                <a href="{{route('analitik.permohonan.dashboard')}}">
+                                    <i class="fas fa-chart-bar"></i>
+                                    <span class="bot-line"></span>Analitik</a>
+                            </li>
+                            <li>
+                                <a href="{{route('analitik.permohonan.dashboard')}}">
+                                    <i class="fas fa-bell"></i>
+                                    <span class="bot-line"></span>Notifikasi</a>
+                            </li>
+                            <li class="has-sub">
+                                <a href="#">
+                                    <i class="fas fa-copy"></i>
+                                    <span class="bot-line"></span>Pages</a>
+                                <ul class="header3-sub-list list-unstyled">
+                                    <li>
+                                        <a href="login.html">Login</a>
+                                    </li>
+                                    <li>
+                                        <a href="register.html">Register</a>
+                                    </li>
+                                    <li>
+                                        <a href="forget-pass.html">Forget Password</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a href="#">
+                                    <i class="fas fa-desktop"></i>
+                                    <span class="bot-line"></span>UI Elements</a>
+                                <ul class="header3-sub-list list-unstyled">
+                                    <li>
+                                        <a href="button.html">Button</a>
+                                    </li>
+                                    <li>
+                                        <a href="badge.html">Badges</a>
+                                    </li>
+                                    <li>
+                                        <a href="tab.html">Tabs</a>
+                                    </li>
+                                    <li>
+                                        <a href="card.html">Cards</a>
+                                    </li>
+                                    <li>
+                                        <a href="alert.html">Alerts</a>
+                                    </li>
+                                    <li>
+                                        <a href="progress-bar.html">Progress Bars</a>
+                                    </li>
+                                    <li>
+                                        <a href="modal.html">Modals</a>
+                                    </li>
+                                    <li>
+                                        <a href="switch.html">Switchs</a>
+                                    </li>
+                                    <li>
+                                        <a href="grid.html">Grids</a>
+                                    </li>
+                                    <li>
+                                        <a href="fontawesome.html">FontAwesome</a>
+                                    </li>
+                                    <li>
+                                        <a href="typo.html">Typography</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="header__tool">
+       
+                        
+                        <div class="account-wrap">
+                            <div class="account-item account-item--style2 clearfix js-item-menu">
+                             
+                                <div class="content">
+                                    <a class="js-acc-btn" href="#"> {{ Auth::user()->name }}</a>
+                                </div>
+                                <div class="account-dropdown js-dropdown">
+                                
+                                    <div class="account-dropdown__body">
+                                        
+                                        <div class="account-dropdown__item">
+                                            <a href="{{route('settings')}}">
+                                                <i class="zmdi zmdi-settings"></i>Setting</a>
+                                        </div>
+                                       
+                                    </div>
+                                    <div class="account-dropdown__footer">
+                                        <a href="{{route('logout')}}"   onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                   
-
+                                            <i class="zmdi zmdi-power"></i>Logout</a>
+                                    </div>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
                                 </div>
-                            </li>
-                        @endguest
-                    </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </nav>
+        </header>
+        @endguest
+        
 
         <main class="py-4">
          <!-- Message in blade testing on 27/1/2019 by Bezane -->

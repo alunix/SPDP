@@ -31,15 +31,19 @@ class UserController extends Controller
             $this->validate($request, [
                 'name' => 'required',
                 'email' => 'required',
-                'fakulti'=>'required',
+               
             ]);
             
+            
             $user = auth()->user();
+            $role = $user->role;
             $user = User::find($user->id);  
             $user->name = $request->get('name');
             $user->email = $request->get('email');
+
+            if($role=='fakulti')
             $user->fakulti_id = $request->get('fakulti');
-    
+            else
             
             $user->save();
             

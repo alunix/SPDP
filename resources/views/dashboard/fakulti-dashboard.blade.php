@@ -24,7 +24,7 @@
                                                 <i class="zmdi zmdi-file"></i>
                                             </div>
                                             <div class="text">
-                                                <h2>{{$permohonans}}</h2>
+                                                <h2>{{$permohonans->count()}}</h2>
                                                 <span>permohonan dihantar</span>
                                             </div>
                                         </div>
@@ -34,26 +34,7 @@
                                     </div>
                                 </div>
                             </div>
-                            @if(Auth::user()->role == "pjk"||Auth::user()->role=="jppa")
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c2">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-comment"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>3</h2>
-                                                <span>permohonan untuk diperakui</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart2"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            @endif
+                           
                             <div class="col-sm-6 col-lg-3">
                                 <div class="overview-item overview-item--c3">
                                     <div class="overview__inner">

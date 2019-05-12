@@ -29,7 +29,7 @@
                                             </div>
                                         </div>
                                         <div class="overview-chart">
-                                            <canvas id="widgetChart1"></canvas>
+                                           
                                         </div>
                                     </div>
                                 </div>
@@ -48,7 +48,7 @@
                                             </div>
                                         </div>
                                         <div class="overview-chart">
-                                            <canvas id="widgetChart2"></canvas>
+                                          
                                         </div>
                                     </div>
                                 </div>
@@ -67,7 +67,7 @@
                                             </div>
                                         </div>
                                         <div class="overview-chart">
-                                            <canvas id="widgetChart3"></canvas>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -85,49 +85,41 @@
                                             </div>
                                         </div>
                                         <div class="overview-chart">
-                                            <canvas id="widgetChart4"></canvas>
+                                            
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c5">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-check"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>{{$permohonan_diluluskan}}</h2>
-                                                <span>permohonan diluluskan</span>
-                                            </div>
+                        
+                            <div class="col-lg-6">
+                                <div class="au-card recent-report">
+                                    <div class="au-card-inner">
+                                        <h3 class="title-2">Jumlah permohonan</h3>
+                                        <div class="chart-info">
                                         </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart4"></canvas>
+                                        <div class="recent-report__chart">
+                                        {!! $chart->container() !!}
+                                        {!! $chart->script() !!}
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                        <div class="col-md-4"> 
-            {!! $chart->container() !!}
-            {!! $chart->script() !!}
-            </div>
-
-            
-            
-            <div class="col-md-4"> 
-               {!! $pie_chart->container() !!}
-               {!! $pie_chart->script() !!}
-            </div>
-
-            <div class="col-md-4"> 
-               {!! $line_chart->container() !!}
-               {!! $line_chart->script() !!}
-            </div>
+                            <div class="col-lg-6">
+                                <div class="au-card recent-report">
+                                    <div class="au-card-inner">
+                                        <h3 class="title-2">Jenis permohonan</h3>
+                                       
+                                        <div class="recent-report__chart">
+                                        {!! $pie_chart->container() !!}
+                                        {!! $pie_chart->script() !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                  
                        
                         </div>
+         
                       
                         </div>
                       

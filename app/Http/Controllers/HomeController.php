@@ -80,7 +80,8 @@ class HomeController extends Controller
      $line_chart = new JenisPermohonanChart();
      $line_chart->labels($Z->pluck('months'));
      $line_chart->dataset('Dokumen permohonan', 'line',$Z->pluck('count'))->options([
-         'backgroundColor'=> ['#C5CAE9', '#283593'],'dimensions'=>[1000,800]
+         'backgroundColor'=> ['#C5CAE9', '#283593']
+         ,'dimensions'=>[300,300]
      ]);
  
      $A=  DB::table("permohonans") 
@@ -92,16 +93,14 @@ class HomeController extends Controller
      $pie_chart = new PermohonanChart();
      $pie_chart->labels($A->pluck('huraian'));
      $pie_chart->dataset('Permohonan sepanjang beberapa tahun', 'pie',$A->pluck('count'))->options([
-         'backgroundColor'=> ['blue','orange','green','pink','gray'],
+         'backgroundColor'=> ['blue','orange','green','pink','gray'],'dimensions'=>[300,300]
      ]);
      
      $permohonan_in_progress = Permohonan::where('status_permohonan_id','!=',1)->orWhere('status_permohonan_id','!=',6)->orWhere('status_permohonan_id','!=',7)->get()->count();
      $permohonan_diluluskan = Permohonan::where('status_permohonan_id','=',6)->orWhere('status_permohonan_id','=',7)->get()->count();
- 
-    
- 
- 
-         return view ('panel_penilai.senarai-testing')->with('permohonans',$permohonan_baharu)->with('chart',$chart)->with('line_chart',$line_chart)->with('pie_chart',$pie_chart)->with('permohonan_in_progress', $permohonan_in_progress)->with('permohonan_diluluskan',$permohonan_diluluskan);
+     
+
+     return view ('panel_penilai.senarai-testing')->with('permohonans',$permohonan_baharu)->with('chart',$chart)->with('line_chart',$line_chart)->with('pie_chart',$pie_chart)->with('permohonan_in_progress', $permohonan_in_progress)->with('permohonan_diluluskan',$permohonan_diluluskan);
     }
 
     public function senaraiPermohonan($sp){
@@ -125,6 +124,31 @@ class HomeController extends Controller
         }
         
         }
+    
+    public function permohonanDiperakukan(){
+        
+        $role = auth()->user()->role;
+        switch ($role) {
+            case 'pjk':
+            $permohonans = Permohonan::where('jenis_permohonan_id','!=','8')->where('status_permohonan_id','=',3)->get();
+            return $permohonans;
+                break; 
+            case 'senat':
+            return $sp->senat();
+            break; 
+            case 'penilai':
+            return $sp->penilai();
+                break; 
+            case 'jppa':
+            return $sp->jppa();
+                break; 
+            default:
+                   return;
+                break;
+        }
+    }
+
+    
     
 
     public function fakulti(Request $req){

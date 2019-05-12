@@ -31,6 +31,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @if(Auth::user()->role == "pjk"||Auth::user()->role=="jppa")
                             <div class="col-sm-6 col-lg-3">
                                 <div class="overview-item overview-item--c2">
                                     <div class="overview__inner">
@@ -49,6 +50,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @endif
                             <div class="col-sm-6 col-lg-3">
                                 <div class="overview-item overview-item--c3">
                                     <div class="overview__inner">
@@ -115,20 +117,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4">
-                                <div class="au-card recent-report">
-                                    <div class="au-card-inner">
-                                        <h3 class="title-2">jenis permohonan</h3>
-                                        <div class="chart-info">
-                                          
-                                        {!! $pie_chart->container() !!}
-                                      {!! $pie_chart->script() !!}
-                                    
-                                        </div>
-                                      
-                                    </div>
-                                </div>
-                            </div>
+                       
                         </div>
                       
                         </div>

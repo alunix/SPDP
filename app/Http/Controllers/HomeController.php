@@ -24,7 +24,6 @@ class HomeController extends Controller
   
     // This is for after authenticated, which homepage the system will redirect.
     public function index(){
-
         $role = auth()->user()->role;
         switch ($role) {
             case 'fakulti':
@@ -81,7 +80,7 @@ class HomeController extends Controller
      $line_chart->labels($Z->pluck('months'));
      $line_chart->dataset('Dokumen permohonan', 'line',$Z->pluck('count'))->options([
          'backgroundColor'=> ['#C5CAE9', '#283593']
-         ,'dimensions'=>[300,300]
+         ,'dimensions'=>[500,500]
      ]);
  
      $A=  DB::table("permohonans") 
@@ -90,10 +89,10 @@ class HomeController extends Controller
          ->groupBy('jenis_permohonan_huraian') 
          ->get();
  
-     $pie_chart = new PermohonanChart();
+     $pie_chart = new JenisPermohonanChart();
      $pie_chart->labels($A->pluck('huraian'));
-     $pie_chart->dataset('Permohonan sepanjang beberapa tahun', 'pie',$A->pluck('count'))->options([
-         'backgroundColor'=> ['blue','orange','green','pink','gray'],'dimensions'=>[300,300]
+     $pie_chart->dataset('Jenis permohonan tahun '.$year_report, 'pie',$A->pluck('count'))->color(['#3366CC','#DC3912','#FF9900','#109618','#990099','#3B3EAC','#0099C6','#DD4477'])->options([
+        'colorCount'=>10,'dimensions'=>[800,800]
      ]);
      
      $permohonan_in_progress = Permohonan::where('status_permohonan_id','!=',1)->orWhere('status_permohonan_id','!=',6)->orWhere('status_permohonan_id','!=',7)->get()->count();
@@ -140,9 +139,12 @@ class HomeController extends Controller
             return $sp->penilai();
                 break; 
             case 'jppa':
-            return $sp->jppa();
+            $permohonans= Permohonan::where('jenis_permohonan_id','=','8')->where('status_permohonan_id','=','1')->orWhere('status_permohonan_id','=','4')->get();
+            return $permohonans;
                 break; 
             default:
+            $permohonans = new Permohonan();
+            return $permohonans;
                    return;
                 break;
         }

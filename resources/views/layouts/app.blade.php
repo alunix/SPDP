@@ -192,8 +192,8 @@
                             @else
                                 <a href="{{route('senaraiPermohonanBaharu')}}">
                             @endif
-                                    <i class="fas fa-file-upload"></i>
-                                    <span class="bot-line"></span>Permohonan</a>
+                                    <i class="fas fa-list"></i>
+                                    <span class="bot-line"></span>Senarai permohonan</a>
                             </li>
                             <li>
                                 <a href="{{route('analitik.permohonan.dashboard')}}">

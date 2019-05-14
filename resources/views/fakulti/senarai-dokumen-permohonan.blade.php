@@ -22,6 +22,7 @@
     <th scope="col">Dokumen</th>
     <th scope="col">Saiz</th>
     <th scope="col">Komen</th>
+    <th scope="col">Versi</th>
     <th scope ="col">Jumlah laporan</th>
     <th scope="col">Tarikh/Masa Penghantaran</th>
  
@@ -38,7 +39,8 @@
 
 <td><a href ="<?php echo asset("storage/cadangan_permohonan_baharu/$dk->file_link")?>">{{ basename($dk->file_name) }}</td> </a>
 <td> {{$dk->file_size}} KB</td>
-<td> {{$dk->komen}}</td>   
+<td> {{$dk->komen}}</td> 
+<td> {{$dk->versi}}</td>     
 <td> {{$dk->laporans->count()}}</td>
 <td> {{$dk->created_at->format('d/m/Y h:i a')}}</td>
 

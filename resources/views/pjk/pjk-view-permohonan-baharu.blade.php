@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
+<div class="container">
 <h3 class="title-5 m-b-35">Senarai permohonan baharu</h3>
                                 <div class="table-data__tool">
                                     <div class="table-data__tool-left">
@@ -17,7 +18,7 @@
                                         <thead>
                                             <tr>
                                                 
-                                                <th>id</th>
+                                                <th>no</th>
                                                 <th>jenis</th>
                                                 <th>bil penghantaran</th>
                                                 <th>nama program/kursus</th>
@@ -33,7 +34,7 @@
                                         @foreach($permohonans as $permohonan)
                                             <tr class="tr-shadow">
                                            
-                                                <td>{{$permohonan->permohonan_id}}</td>
+                                                <td>{{$loop->iteration}}</td>
                                                 <td>{{$permohonan->jenis_permohonan->jenis_permohonan_huraian}}</td>
                                                 <td>{{$permohonan->version_counts()}}</td>
                                                 <td>{{$permohonan->doc_title}}</td>   
@@ -58,4 +59,5 @@
                                     <p> Tiada permohonan telah dijumpai </p>
                                     @endif
                                 </div>
+</div>
 @endsection

@@ -143,9 +143,9 @@
 
 
 </head>
-<body>
+<body class = "animsition">
 
-    <div id="app">
+    <div  id="app">
         @guest
         <header class="header-desktop3 d-none d-lg-block">
             <div class="section__content section__content--p35">

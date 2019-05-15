@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="main-content">
+<div >
             
             <section class="au-breadcrumb2">
                 <div class="container">

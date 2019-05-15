@@ -217,8 +217,8 @@ return [
         'Html' => Collective\Html\HtmlFacade::class, //laravel collective
         'role' => SPDP\Http\Middleware\Role::class,
         'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
-        'Input' => Illuminate\Support\Facades\Input::class,
-        'User'=> SPDP\User::class,
+      
+        
         
         
 

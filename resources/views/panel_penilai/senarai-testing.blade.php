@@ -2,6 +2,36 @@
 
 @section('content')
 <div class="main-content">
+            
+            <section class="au-breadcrumb2">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="au-breadcrumb-content">
+                                <div class="au-breadcrumb-left">
+                                    <span class="au-breadcrumb-span">Anda sekarang berada di:</span>
+                                    <ul class="list-unstyled list-inline au-breadcrumb__list">
+                                        <li class="list-inline-item active">
+                                            <a href="#">Rumah</a>
+                                        </li>
+                                        <li class="list-inline-item seprate">
+                                            <span>/</span>
+                                        </li>
+                                        <li class="list-inline-item">Papan pemuka</li>
+                                    </ul>
+                                </div>
+                                <form class="au-form-icon--sm" action="" method="post">
+                                    <input class="au-input--w300 au-input--style2" type="text" placeholder="Cari permohonan & laporan">
+                                    <button class="au-btn--submit2" type="submit">
+                                        <i class="zmdi zmdi-search"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
                 <div class="section__content section__content--p30">
                     <div class="container">
                         <div class="row">
@@ -13,8 +43,7 @@
                             </div>
                         </div>
                         <hr>
-                        <button class="au-btn au-btn-icon au-btn--green">
-                                        <i class="zmdi zmdi-plus"></i>permohonan baharu<button>
+                   
                         <div class="row m-t-25">
                         <div class="col-md-6 col-lg-3">
                             <div class="statistic__item statistic__item--green">
@@ -25,10 +54,10 @@
                                 </div>
                             </div>
                         </div>
-                        @if(Auth::user()->role == "pjk"||Auth::user()->role=="jppa")
+                        @if(Auth::user()->role == "pjk")
                         <div class="col-md-6 col-lg-3">
                             <div class="statistic__item statistic__item--orange">
-                                <h2 class="number" style="color:white">3</h2>
+                                <h2 class="number" style="color:white">{{$permohonan_diperakui->count()}}</h2>
                                 <span class="desc" style="color:white">permohonan untuk diperakui</span>
                                 <div class="icon">
                                     <i class="zmdi zmdi-alert-circle-o"></i>

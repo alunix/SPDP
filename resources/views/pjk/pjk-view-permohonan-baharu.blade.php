@@ -7,10 +7,7 @@
                                     <div class="table-data__tool-left">
                                        
                                     </div>
-                                    <div class="table-data__tool-right">
-                                        <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                            <i class="zmdi zmdi-plus"></i>permohonan baharu</button>
-                                    </div>
+                              
                                 </div>
                                 <h4>Jumlah permohonan baharu : {{$permohonans->count()}}</h4>
                                 <div class="table-responsive table-responsive-data2">

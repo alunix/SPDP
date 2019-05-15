@@ -98,9 +98,10 @@ class HomeController extends Controller
      
      $permohonan_in_progress = Permohonan::where('status_permohonan_id','!=',1)->orWhere('status_permohonan_id','!=',6)->orWhere('status_permohonan_id','!=',7)->get()->count();
      $permohonan_diluluskan = Permohonan::where('status_permohonan_id','=',6)->orWhere('status_permohonan_id','=',7)->get()->count();
+     $permohonan_diperakui = $this->permohonanDiperakukan();
      
 
-     return view ('panel_penilai.senarai-testing')->with('permohonans',$permohonan_baharu)->with('chart',$chart)->with('line_chart',$line_chart)->with('pie_chart',$pie_chart)->with('permohonan_in_progress', $permohonan_in_progress)->with('permohonan_diluluskan',$permohonan_diluluskan);
+     return view ('panel_penilai.senarai-testing')->with('permohonans',$permohonan_baharu)->with('chart',$chart)->with('line_chart',$line_chart)->with('pie_chart',$pie_chart)->with('permohonan_in_progress', $permohonan_in_progress)->with('permohonan_diluluskan',$permohonan_diluluskan)->with('permohonan_diperakui',$permohonan_diperakui);
     }
 
     public function fakulti(){
@@ -192,17 +193,7 @@ class HomeController extends Controller
             case 'pjk':
             $permohonans = Permohonan::where('jenis_permohonan_id','!=','8')->where('status_permohonan_id','=',3)->get();
             return $permohonans;
-                break; 
-            case 'senat':
-            return $sp->senat();
-            break; 
-            case 'penilai':
-            return $sp->penilai();
-                break; 
-            case 'jppa':
-            $permohonans= Permohonan::where('jenis_permohonan_id','=','8')->where('status_permohonan_id','=','1')->orWhere('status_permohonan_id','=','4')->get();
-            return $permohonans;
-                break; 
+                break;             
             default:
             $permohonans = new Permohonan();
             return $permohonans;

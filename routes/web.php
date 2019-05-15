@@ -17,6 +17,14 @@
 Auth::routes();
 Route::get('/show-testing', 'PermohonanController@testing_show'); // Redirect to dashboard/home(Same page)
 
+Route::any('/search',function(){
+    $q = Input::get ( 'input-search' );
+    $user = User::where('name','LIKE','%'.$q.'%')->orWhere('email','LIKE','%'.$q.'%')->get();
+    if(count($user) > 0)
+        return view('search-result')->withDetails($user)->withQuery ( $q );
+    else return view ('search-result')->withMessage('No Details found. Try to search again !');
+});
+
 Route::get('/dashboard', 'HomeController@index')->name('/dashboard')->middleware('auth'); // Redirect to dashboard/home(Same page)
 Route::get('/', 'HomeController@index')->middleware('auth')->name('home'); //Redirect index page to login if not authenticated and will return homepage if authenticated.
 

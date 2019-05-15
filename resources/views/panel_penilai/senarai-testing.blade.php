@@ -20,8 +20,9 @@
                                         <li class="list-inline-item">Papan pemuka</li>
                                     </ul>
                                 </div>
-                                <form class="au-form-icon--sm" action="" method="post">
-                                    <input class="au-input--w300 au-input--style2" type="text" placeholder="Cari permohonan & laporan">
+                                <form class="au-form-icon--sm" action="/search" method="post">
+                                @csrf    
+                                <input class="au-input--w300 au-input--style2" type="text" name="input-search" placeholder="Cari permohonan & laporan">
                                     <button class="au-btn--submit2" type="submit">
                                         <i class="zmdi zmdi-search"></i>
                                     </button>

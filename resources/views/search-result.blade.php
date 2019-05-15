@@ -13,7 +13,8 @@
     <h2>Maklumat pengguna</h2>
     <table class="table table-striped">
         <thead>
-            <tr>
+            <tr>   
+                <th>No</th>
                 <th>Nama</th>
                 <th>E-mel</th>
             </tr>
@@ -36,7 +37,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
-            <th>No</th>
+                <th>No</th>
                 <th>Permohonan ID</th>
                 <th>Nama program/kursus</th>
             </tr>
@@ -61,6 +62,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
+                <th>No</th>
                 <th>Dokumen permohonan</th>
                 <th>Nama program/kursus</th>
             </tr>
@@ -86,6 +88,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
+                <th>No</th>
                 <th>Laporan ID</th>
                 <th>Nama fail</th>
             </tr>

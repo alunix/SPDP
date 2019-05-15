@@ -30,8 +30,10 @@ class User extends Authenticatable
     ];
 
     public function hasRole($role)
-{
+{   
+    
     return User::where('role', $role)->get();
+
 }
 
 public function permohonans(){

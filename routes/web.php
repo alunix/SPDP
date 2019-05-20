@@ -97,7 +97,7 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware','middlewa
 	
 	/*----------------------- First penilaian program pengajian  ------------- */	
 
-	Route::get('/senarai-penilaian','PenilaianController@index')->middleware('role:pjk','auth')->name('penilaian.show');
+	Route::get('/senarai-penilaian','PenilaianController@index')->name('penilaian.show');
 	
 	/*-----------------------Daftar penilai---------------------------------------------*/
 	Route::get('/pendaftaran-panel-penilai', 'PenilaianController@create_panel_penilai')->name('register.panel_penilai.show');
@@ -114,7 +114,7 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware','middlewa
 	/*-----------------------Pelantikan penilai---------------------------------------------*/
 	
 	 Route::patch( '/permohonan/{permohonan}/pelantikan-penilai', 'PermohonanController@pelantikanPenilaiSubmit')-> name('pelantikan_penilai.submit');
-	 Route::get('/permohonan/{permohonan}/pelantikan-penilai','PermohonanController@showPelantikanPenilai')->name('pelantikan_penilai.show');
+	 Route::get('/permohonan/{permohonan}/pelantikan-penilai','PermohonanController@showPelantikanPenilai')->middleware('auth')->name('pelantikan_penilai.show');
 
 	 Route::get('permohonan/{permohonan}', 'PermohonanController@show')->middleware('auth')->name('view-permohonan-baharu');
 
@@ -127,7 +127,7 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware','middlewa
 	//Analitik permohonan
 	Route::get('/analitik-permohonan','PermohonanChartController@annual')->name('analitik.permohonan');
 	Route::post('/analitik-permohonan','PermohonanChartController@annual')->name('analitik.permohonan.submit');
-	Route::get('/analitik-permohonan-dashboard','PermohonanChartController@dashboard')->name('analitik.permohonan.dashboard')->middleware('role:pjk');;
+	Route::get('/analitik-permohonan-dashboard','PermohonanChartController@dashboard')->name('analitik.permohonan.dashboard');
 
 	Route::get('/analitik-testing','PermohonanChartController@testing')->name('analitik.permohonan.testing');
 	Route::get('/analitik/fakulti/{fakulti_id}','FakultiController@analitik')->name('analitik.fakulti');

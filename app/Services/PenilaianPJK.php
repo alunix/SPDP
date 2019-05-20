@@ -67,8 +67,13 @@ class PenilaianPJK
         $penilaian =  $penilaian->create($permohonan);
         $penilaian -> penilaian_panel_1= $selectedPenilai[0];
         $penilaian -> save();
+
+        $msg = [
+            'message' => 'Panel penilai dipilih dan emel telah dihantar',
+           ];
          
-        return redirect(url('/senarai-penilaian'));
+        return redirect()->route('penilaian.show')->with($msg);
+
           } catch (\Illuminate\Database\QueryException $e){
             $errorCode = $e->errorInfo[1];
             if($errorCode == 1062){
@@ -251,7 +256,12 @@ public function semakanKursusElektif(Request $request, $permohonan){
         $user->role = 'penilai';
         $user->password= Hash::make('abcd123');
         $user->save();
-        return redirect()->route('register.panel_penilai.show');
+
+        $msg = [
+        'message' => 'Pengguna berjaya didaftarkan',
+       ];
+
+        return redirect()->route('register.panel_penilai.show')->with($msg);
     }
 
 

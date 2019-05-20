@@ -152,7 +152,7 @@
                 <div class="header3-wrap">
                     <div class="header__logo">
                         <a href="#">
-                            <img src="img/logo.png" alt="SPDP" style="height:20px" />
+                            <img src="img/logo.png" alt="Persona" style="height:20px" />
                         </a>
                     </div>
                     <div class="header__navbar">
@@ -174,7 +174,7 @@
                 <div class="header3-wrap">
                     <div class="header__logo">
                         <a href="#">
-                            <img src="img/logo.png" alt="SPDP" style="height:20px" />
+                            <img src="img/logo.png" alt="Persona" style="height:20px" />
                         </a>
                     </div>
                     <div class="header__navbar">
@@ -199,6 +199,11 @@
                                 <a href="{{route('analitik.permohonan.dashboard')}}">
                                     <i class="fas fa-chart-bar"></i>
                                     <span class="bot-line"></span>Analitik</a>
+                            </li>
+                            <li>
+                                <a href="{{route('analitik.permohonan.dashboard')}}">
+                                    <i class="fas fa-envelope"></i>
+                                    <span class="bot-line"></span>Mesej</a>
                             </li>
                             <li>
                                 <a href="{{route('analitik.permohonan.dashboard')}}">

@@ -34,11 +34,11 @@ public function dashboard(){
 
         $pie_chart = new PermohonanChart();
         $pie_chart->labels($A->pluck('huraian'));
-        $pie_chart->dataset('Permohonan sepanjang beberapa tahun', 'pie',$A->pluck('count'))->options([
+        $pie_chart->dataset('Permohonan sepanjang beberapa tahun', 'pie',$A->pluck('count'))->backgroundColor(['#3366CC','#DC3912','#FF9900','#109618','#990099','#3B3EAC','#0099C6','#DD4477'])->options([
             'backgroundColor'=> ['#C5CAE9', '#283593'],
         ]);
 
-        $chart = new PermohonanChart();       
+        $chart = new JenisPermohonanChart();       
         $chart->labels($sort_sums_years->pluck('years')); 
         $chart->dataset('Permohonan sepanjang beberapa tahun', 'bar',$sort_sums_years->pluck('total_permohonans'))->options([
             'backgroundColor'=> ['#C5CAE9', '#283593'],  'dimensions'=> [600,500],
@@ -106,14 +106,15 @@ public function annual(Request $request)
 
         $pie_chart = new PermohonanChart();
         $pie_chart->labels($jenis->pluck('huraian'));
-        $pie_chart->dataset('Permohonan sepanjang beberapa tahun', 'pie',$jenis->pluck('count'))->options([
+        $pie_chart->dataset('Permohonan sepanjang beberapa tahun', 'pie',$jenis->pluck('count'))->backgroundColor(['#3366CC','#DC3912','#FF9900','#109618','#990099','#3B3EAC','#0099C6','#DD4477'])->options([
             'backgroundColor'=> ['#C5CAE9', '#283593'],'dimensions'=>[1000,800]
         ]);
 
         /*------------------ Line chart for jumlah dokumen permohonan in a year--------------*/
         $Z=  DB::table("dokumen_permohonans") 
         //->join('jenis_permohonans','jenis_permohonans.id','=','permohonans.jenis_permohonan_id')
-        ->selectRaw("DATE_FORMAT(dokumen_permohonans.created_at,'%M') as months, count(dokumen_permohonan_id) as count") 
+        ->selectRaw("DATE_FORMAT(dokumen_permohonans.created_at,'%M') as months, month(dokumen_permohonans.created_at) as month,count(dokumen_permohonan_id) as count")
+        ->orderBy('month','asc') 
         ->groupBy('months') 
         ->get();
 

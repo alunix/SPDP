@@ -113,6 +113,7 @@ public function annual(Request $request)
         /*------------------ Line chart for jumlah dokumen permohonan in a year--------------*/
         $Z=  DB::table("dokumen_permohonans") 
         //->join('jenis_permohonans','jenis_permohonans.id','=','permohonans.jenis_permohonan_id')
+        ->whereYear('dokumen_permohonans.created_at',$year_report)
         ->selectRaw("DATE_FORMAT(dokumen_permohonans.created_at,'%M') as months, month(dokumen_permohonans.created_at) as month,count(dokumen_permohonan_id) as count")
         ->orderBy('month','asc') 
         ->groupBy('months') 

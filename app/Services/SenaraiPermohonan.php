@@ -20,11 +20,8 @@ class SenaraiPermohonan
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        
+    {           
         $role = auth()->user()->role;
-        
-
         switch ($role) {
             case 'pjk':
             $permohonans= $this->pjk();
@@ -41,12 +38,8 @@ class SenaraiPermohonan
             default:
                     return null;
                 break;
-        }
-
-        
+        }        
         return view ('pjk.pjk-view-permohonan-baharu')->with('permohonans',$permohonans);
-
-        
        
     }
 
@@ -99,8 +92,7 @@ class SenaraiPermohonan
         else{
             $permohonans_id= $penilaians->pluck('permohonan_id_penilaian');
             $permohonans= Permohonan::whereIn('permohonan_id',$permohonans_id)->where('jenis_permohonan_id','=','8')->where('status_permohonan_id','=','1')->orWhere('status_permohonan_id','=','4')->get();
-            // $permohonans = Permohonan::where('jenis_permohonan_id','=','8')->where('status_permohonan_id','=','1')->orWhere('status_permohonan_id','=','4')->get();
-
+            
         }
 
        

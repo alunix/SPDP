@@ -200,7 +200,7 @@
                                     <i class="fas fa-chart-bar"></i>
                                     <span class="bot-line"></span>Analitik</a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a href="{{route('analitik.permohonan.dashboard')}}">
                                     <i class="fas fa-envelope"></i>
                                     <span class="bot-line"></span>Mesej</a>
@@ -225,12 +225,11 @@
                                         <a href="forget-pass.html">Forget Password</a>
                                     </li>
                                 </ul>
-                            </li>
+                            </li> -->
                             
                         </ul>
                     </div>
                     <div class="header__tool">
-       
                         
                         <div class="account-wrap">
                             <div class="account-item account-item--style2 clearfix js-item-menu">

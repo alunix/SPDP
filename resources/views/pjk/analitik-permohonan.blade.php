@@ -12,7 +12,7 @@
                 <h5>Purata masa diperlukan untuk meluluskan satu permohonan = {{$avg_duration}} jam</h5>
                 <h5>Jumlah permohonan diluluskan : {{$lulus->count()}}</h5>
 
-                <div class="card-body">
+                <div class="container">
 
                 <div class="row">
             

@@ -182,7 +182,7 @@ public function annual(Request $request)
         
  
 
-        return view ('pjk.analitik-permohonan')->with('chart',$chart)->with('year_report',$year_report)->with('avg_duration',$avg_duration)->with('pie_chart',$pie_chart)->with('permohonans',$D)->with('line_chart',$line_chart)->with('lulus',$lulus);
+        return view ('pjk.analitik')->with('chart',$chart)->with('year_report',$year_report)->with('avg_duration',$avg_duration)->with('pie_chart',$pie_chart)->with('permohonans',$D)->with('line_chart',$line_chart)->with('lulus',$lulus);
             
         //----------------------------------------------------------------------------------------------------------------------------------------------------
         

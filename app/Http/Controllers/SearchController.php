@@ -24,11 +24,7 @@ class SearchController extends Controller
 		'message' => 'Carian tidak dapat mencari ',
 	   ];
 
-    if(count($users) > 0||count($permohonan)>0||count($dokumens)>0||count($laporan)>0){
-       $total_count = count($users) +count($permohonan)+count($dokumens)+count($laporan);
-        return view('search-result')->with('permohonans',$permohonan)->with('dokumens',$dokumens)->with('laporans',$laporan)->with('users',$users)->with('total_count',$total_count)->withQuery ( $q );
-    }
-    else 
-        return view ('search-result')->with($msg); 
+    $total_count = count($users) +count($permohonan)+count($dokumens)+count($laporan);
+    return view('search-result')->with('permohonans',$permohonan)->with('dokumens',$dokumens)->with('laporans',$laporan)->with('users',$users)->with('total_count',$total_count)->withQuery ( $q );
     }
 }

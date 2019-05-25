@@ -243,7 +243,12 @@
                                         
                                         <div class="account-dropdown__item">
                                             <a href="{{route('settings')}}">
-                                                <i class="zmdi zmdi-settings"></i>Setting</a>
+                                                <i class="zmdi zmdi-settings"></i>Settings</a>
+                                        </div>
+
+                                        <div class="account-dropdown__item">
+                                            <a href="{{route('settings')}}">
+                                                <i class="fas fa-tachometer-alt"></i>Dashboard Settings</a>
                                         </div>
                                        
                                     </div>

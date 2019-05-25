@@ -6,7 +6,18 @@
     
 <p> Jumlah carian : {{$total_count}}</p>
     <p> Carian <b> {{ $query }} </b> adalah :</p>
-    
+
+    <div class="row">
+    <div class="col-md-12">
+    <form class="au-form-icon--sm" action="/search" method="post">
+                                @csrf    
+                                <input class="au-input--w300 au-input--style2" type="text" name="input-search" placeholder="Cari permohonan & laporan">
+                                    <button class="au-btn--submit2" type="submit">
+                                        <i class="zmdi zmdi-search"></i>
+                                    </button>
+    </form>
+    </div>
+    </div>
 
     @if(! $users->isEmpty())
       

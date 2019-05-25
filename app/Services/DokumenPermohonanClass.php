@@ -70,11 +70,6 @@ class DokumenPermohonanClass
 
         //Hantar email kepada penghantar
         Notification::route('mail','dalbir@gmail.com')->notify(new DokumenPenambahbaikkan($dp)); //hantar email kepada penghantar
-
-        
-        
-
-      
     }
 
     public function getStatusPermohonan($status_permohonan_id)

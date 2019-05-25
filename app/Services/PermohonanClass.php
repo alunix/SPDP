@@ -60,12 +60,8 @@ class PermohonanClass
 
     public function storePermohonanTidakDilulus(Request $request,$id)
      {    
-        
         $attached='dokumen';
         $permohonan= Permohonan::find($id);
-
-        
-        
 
         $laporan = new LaporanClass();
         $laporan->createLaporan($request,$permohonan,$attached);
@@ -86,8 +82,6 @@ class PermohonanClass
            ];  
 
         return redirect()->route('home')->with($msg);
-        
-     
      }
 
      public function getStatusPenambahbaikkan()

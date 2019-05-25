@@ -61,7 +61,7 @@ class PenilaianPJK
         //Create a new penilaian in penilaian table
         $selectedPenilai = $request->input('checked'); //retrieve id of panel penilai
         $user= User::find($selectedPenilai[0]); 
-        Notification::route('mail',$user->email)->notify(new PermohonanBaharu($permohonan,$user)); //hantar email kepada panel penilai
+        Notification::route('mail',$user->email)->notikkfy(new PermohonanBaharu($permohonan,$user)); //hantar email kepada panel penilai
 
         $penilaian = new PenilaianClass();
         $penilaian =  $penilaian->create($permohonan);

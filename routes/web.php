@@ -125,9 +125,9 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware','middlewa
 	Route::get('senarai-penilaian-perakuan','PermohonanController@senaraiPerakuanPjk')->name('pjk.senarai_perakuan.show');
 
 	//Analitik permohonan
-	Route::get('/analitik-permohonan','PermohonanChartController@annual')->name('analitik.permohonan');
-	Route::post('/analitik-permohonan','PermohonanChartController@annual')->name('analitik.permohonan.submit');
-	Route::get('/analitik-permohonan-dashboard','PermohonanChartController@dashboard')->name('analitik.permohonan.dashboard');
+	Route::get('/analitik-permohonan','PermohonanChartController@annual')->middleware('auth')->name('analitik.permohonan');
+	Route::post('/analitik-permohonan','PermohonanChartController@annual')->middleware('auth')->name('analitik.permohonan.submit');
+	Route::get('/analitik-permohonan-dashboard','PermohonanChartController@dashboard')->middleware('auth')->name('analitik.permohonan.dashboard');
 
 	Route::get('/analitik-testing','PermohonanChartController@testing')->name('analitik.permohonan.testing');
 	Route::get('/analitik/fakulti/{fakulti_id}','FakultiController@analitik')->name('analitik.fakulti');

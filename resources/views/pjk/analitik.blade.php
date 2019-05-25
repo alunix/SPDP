@@ -3,41 +3,34 @@
 @section('content')
 <div >
             
-            <section class="au-breadcrumb2">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="au-breadcrumb-content">
-                                <div class="au-breadcrumb-left">
-                                    <span class="au-breadcrumb-span">Analitik permohonan tahun {{$year_report}}</span>
-									  <h5>Purata masa diperlukan untuk meluluskan satu permohonan = {{$avg_duration}} jam</h5>
-									  <h5>Jumlah permohonan diluluskan : {{$lulus->count()}}</h5>
-                                    
-                                </div>
-                                <form class="au-form-icon--sm" action="/search" method="post">
-                                @csrf    
-                                <input class="au-input--w300 au-input--style2" type="text" name="input-search" placeholder="Cari permohonan & laporan">
-                                    <button class="au-btn--submit2" type="submit">
-                                        <i class="zmdi zmdi-search"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+           
 
                 <div class="section__content section__content--p30">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="overview-wrap">
-                                    <h2 class="title-1">Analitik</h2>
-                                    
+                                    <h2 class="title-1">Analitik tahun {{$year_report}}</h2>
                                 </div>
                             </div>
                         </div>
                         <hr>
+
+                        <!-- <div class = "row">
+
+                        <div class="col-lg-6">
+                        <h5>Purata masa diperlukan untuk meluluskan satu permohonan = {{$avg_duration}} jam</h5>
+                        </div>
+                        
+                        <div class="col-lg-6">
+                        <h5>Jumlah permohonan diluluskan : {{$lulus->count()}}</h5>
+                        </div>
+                        
+                        </div> -->
+
+                        <h4>Purata masa diperlukan untuk meluluskan satu permohonan = {{$avg_duration}} jam</h4>
+                        <h4>Jumlah permohonan diluluskan : {{$lulus->count()}}</h4>
+
                    
                         <div class="row m-t-25">
                         

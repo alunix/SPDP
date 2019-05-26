@@ -160,7 +160,7 @@ return [
          */
         SPDP\Providers\AppServiceProvider::class,
         SPDP\Providers\AuthServiceProvider::class,
-        // SPDP\Providers\BroadcastServiceProvider::class,
+        SPDP\Providers\BroadcastServiceProvider::class,
         SPDP\Providers\EventServiceProvider::class,
         SPDP\Providers\RouteServiceProvider::class,
         Unisharp\Ckeditor\ServiceProvider::class, //TextArea ckEditor

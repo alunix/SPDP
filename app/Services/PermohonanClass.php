@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 use SPDP\Services\KemajuanPermohonanClass;
 use SPDP\Services\DokumenPermohonanClass;
 use SPDP\Services\LaporanClass;
+use SPDP\Services\NotificationClass;
 use SPDP\Notifications\PerluPenambahbaikkan;
 use Notification;
-use SPDP\NotificationClass;
 use SPDP\Events\PermohonanBaharu;
 
 class PermohonanClass 
@@ -52,13 +52,22 @@ class PermohonanClass
         //Create a new kemajuan permohonan for each progress
         $kp = new KemajuanPermohonanClass();
         $kp->create($permohonan);
+        
+        //Create notification
+        $status = 16; // status = permohonan baharu
+        $location = "senaraiPermohonanBaharu"; //named route in Persona
+        $userFired= auth()->user()->id; //id penghantar
+        $userToNotify =2; //hantar kepada Dr Dalbir from PJK
+
+        $nc = new NotificationClass();
+        $nc->create($request,$status,$location,$userFired,$userToNotify,$permohonan);
                   
         $msg = [
             'message' => 'Permohonan berjaya dihantar',
            ];
         
+        //Pusher notification
         $message ='Permohonan baharu untuk disemak. Permohonan id :'.$permohonan->permohonan_id;
-           
         event(new PermohonanBaharu($message));
 
         return redirect()->route('permohonan.dihantar')->with($msg);

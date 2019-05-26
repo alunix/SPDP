@@ -10,7 +10,7 @@ use SPDP\Services\DokumenPermohonanClass;
 use SPDP\Services\LaporanClass;
 use SPDP\Notifications\PerluPenambahbaikkan;
 use Notification;
-use SPDP\NotificationClass;
+use SPDP\Services\NotificationClass;
 use SPDP\Events\PermohonanBaharu;
 
 class PermohonanClass 
@@ -78,6 +78,14 @@ class PermohonanClass
         //Create a new kemajuan permohonan for each progress
         $kp = new KemajuanPermohonanClass();
         $kp->create($permohonan);
+
+        //Create notification
+        $status = 16; // status = permohonan baharu
+        $location = "senaraiPermohonanBaharu"; //named route in Persona
+        $userFired= auth()->user()->id; //id penghantar
+        $userToNotify =2; //hantar kepada Dr Dalbir from PJK
+        $nc = new NotificationClass();
+        $nc->create($request,$status,$location,$userFired,$userToNotify,$permohonan);
 
         //Hantar email kepada penghantar
         $penghantar = User::find($permohonan->id_penghantar);

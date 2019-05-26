@@ -14,8 +14,8 @@ class NotificationController extends Controller
      */
     public function index()
     {
-      
-        return view ('notifications');
+        $notifications = Notification::where('userToNotify',auth()->user()->id)->orderBy('created_at','asc')->get();
+        return view ('notifications')->with('notifications',$notifications);
     }
 
     /**

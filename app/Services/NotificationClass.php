@@ -18,7 +18,11 @@ class NotificationClass
     public function create(Request $request,$status,$location,$userFired,$userToNotify)
     {   
         $notification = new Notification();
-        $notification->notificationDetails=$request->input('djkas');
+        $notification->notificationDetails= $status;
+        $notification->notificationLocation = $location;
+        $notification->userFired = $userFired;
+        $notification->userToNotify = $userToNotify;
+        $notification->save();
     }
 
 

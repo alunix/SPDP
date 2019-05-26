@@ -7,6 +7,7 @@
 
                 <div class="section__content section__content--p30">
                     <div class="container">
+                    <form method="POST" action="{{ route('analitik.permohonan.submit') }}">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="overview-wrap">
@@ -16,21 +17,34 @@
                         </div>
                         <hr>
 
-                        <!-- <div class = "row">
-
-                        <div class="col-lg-6">
-                        <h5>Purata masa diperlukan untuk meluluskan satu permohonan = {{$avg_duration}} jam</h5>
-                        </div>
-                        
-                        <div class="col-lg-6">
-                        <h5>Jumlah permohonan diluluskan : {{$lulus->count()}}</h5>
-                        </div>
-                        
-                        </div> -->
-
+                     
                         <h4>Purata masa diperlukan untuk meluluskan satu permohonan = {{$avg_duration}} jam</h4>
                         <h4>Jumlah permohonan diluluskan : {{$lulus->count()}}</h4>
 
+                        <div class="form-group row">
+                            <label for="year-report" class="col-md-4 col-form-label text-md-right">{{ __('Sila pilih tahun laporan') }}</label>
+
+                            <div class="col-md-6">
+                            <select class=”form-control” name='year_report' style="width:150px;" id='type' onchange="this.form.submit()">
+                                
+                                <option value=#>Please choose</option>
+                                <option value=2019>1 hari lalu</option>
+                                <option value=2018>7 hari lalu</option>
+                                <option value=2017>30 haru lalu</option>
+                                <option value=2016>90 hari lalu</option>
+                                <option value=2015>12 bulan lalu</option>
+                               
+                            </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Submit') }}
+                                </button>
+                            </div>
+                        </div>
                    
                         <div class="row m-t-25">
                         
@@ -60,7 +74,7 @@
                                 </div>
                             </div>
 							
-							    <div class="col-lg-6">
+							<div class="col-lg-6">
                                 <div class="au-card recent-report">
                                     <div class="au-card-inner">
                                         <h3 class="title-2">Dokumen permohonan</h3>

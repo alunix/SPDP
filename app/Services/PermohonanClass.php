@@ -10,6 +10,8 @@ use SPDP\Services\DokumenPermohonanClass;
 use SPDP\Services\LaporanClass;
 use SPDP\Notifications\PerluPenambahbaikkan;
 use Notification;
+use SPDP\NotificationClass;
+use SPDP\Events\PermohonanBaharu;
 
 class PermohonanClass 
 {
@@ -53,7 +55,11 @@ class PermohonanClass
                   
         $msg = [
             'message' => 'Permohonan berjaya dihantar',
-           ];  
+           ];
+        
+        $message ='Permohonan baharu untuk disemak. Permohonan id :'.$permohonan->permohonan_id;
+           
+        event(new PermohonanBaharu($message));
 
         return redirect()->route('permohonan.dihantar')->with($msg);
     }

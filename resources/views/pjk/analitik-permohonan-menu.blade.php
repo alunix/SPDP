@@ -28,7 +28,7 @@
                             <label for="year-report" class="col-md-4 col-form-label text-md-right">{{ __('Sila pilih tahun laporan') }}</label>
 
                             <div class="col-md-6">
-                            <select class=”form-control” name='year_report' style="width:150px;" id='type'>
+                            <select class=”form-control” name='year_report' style="width:150px;" id='type' onchange="this.form.submit()">
                                 
                                 <option value=#>Please choose</option>
                                 <option value=2019>2019</option>
@@ -43,13 +43,6 @@
                     
 
                     
-                    <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Submit') }}
-                                </button>
-                            </div>
-                        </div>
 
                    
 

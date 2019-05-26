@@ -17,6 +17,10 @@
 Auth::routes();
 Route::get('/show-testing', 'PermohonanController@testing_show'); // Redirect to dashboard/home(Same page)
 
+Route::get('/pusher', function(){
+	return view('pusher');
+});
+
 // Route::post('/search',function(){
 //     $q = Input::get ( 'input-search' );
 // 	$user = User::where('name','LIKE','%'.$q.'%')->orWhere('email','LIKE','%'.$q.'%')->get();
@@ -33,6 +37,7 @@ Route::get('/show-testing', 'PermohonanController@testing_show'); // Redirect to
 Route::post('/search','SearchController@search')->name('search');
 Route::get('/dashboard', 'HomeController@index')->name('/dashboard')->middleware('auth'); // Redirect to dashboard/home(Same page)
 Route::get('/', 'HomeController@index')->middleware('auth')->name('home'); //Redirect index page to login if not authenticated and will return homepage if authenticated.
+Route::get('/notifikasi', 'NotificationController@index')->middleware('auth')->name('notifications.index'); //Redirect index page to login if not authenticated and will return homepage if authenticated.
 
 /*........................................Start middleware.............................*/
 

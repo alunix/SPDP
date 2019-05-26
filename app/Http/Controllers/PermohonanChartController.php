@@ -187,70 +187,14 @@ public function annual(Request $request)
         //----------------------------------------------------------------------------------------------------------------------------------------------------
         
 
-        // if($permohonan->count()!=0){
-        //     for($i=0;$i<$permohonan->count();++$i){
-        //         $start_time = $permohonan[$i]->created_at;
-        //         $end_time = $permohonan[$i]->updated_at;
-        //         $permohonan_duration[$i] = $start_time->diffInHours($end_time);
-        //     }
-    
-        //     $average_permohonan_duration =  array_sum($permohonan_duration)/$permohonan->count();
-    
-        //     return view ('pjk.analitik-permohonan')->with('total_permohonan',$total_permohonans_count)->with('average',$average_permohonan_duration)->with('permohonans_count',$permohonan->count());
-        // }
 
-        // else    
-        //     abort(404);
        
        
         
     }
 
-    public function testing(){
-        $year_report=2019;
-
-        $permohonans = Fakulti::with(['permohonans' => function($query) use ($year_report) {
-            $query->whereYear('permohonans.created_at', $year_report); //specify which table created at to query
-          }])->get()->sortBy('fakulti_id');
-
-        $count_permohonan= $permohonans->pluck('permohonans');
-
-        for($i=0;$i<$count_permohonan->count();$i++){
-            $Z[$i]= count($count_permohonan[$i]);  //calculate count of permohoann in each fakulti
-        } 
-
-      
+    public function exploreTimePicker(){
         
-        //Kemajuan permohonan perlu penambahbaikkan
-        $kp_8 = Fakulti::with(['kemajuan_permohonans' => function($query)use($year_report){
-            $query->whereYear('permohonans.created_at', $year_report)->where('kemajuan_permohonans.status_permohonan', 8)->orWhere('kemajuan_permohonans.status_permohonan', 9)->orWhere('kemajuan_permohonans.status_permohonan', 10)->orWhere('kemajuan_permohonans.status_permohonan',11); //specify which table created at to query
-          }])->get()->sortBy('fakulti_id');
-
-        $kp_list = $kp_8->pluck('kemajuan_permohonans');
-
-        for($i=0;$i<$kp_list->count();$i++){
-            $B[$i]= count($kp_list[$i]);  //calculate count of kemajuan permohoann in each fakulti
-        } 
-
-        //Kemajuan permohonan yang diluluskan
-        $kp_6_7 = Fakulti::with(['permohonans' => function($query) use ($year_report) {
-            $query->where('permohonans.status_permohonan_id', 6)->orWhere('permohonans.status_permohonan_id',7); //specify which table created at to query
-          }])->get()->sortBy('fakulti_id');
-
-
-        $kp_6_list =  $kp_6_7->pluck('permohonans');
-
-        for($i=0;$i<$kp_6_list->count();$i++){
-            $C[$i]= count($kp_6_list[$i]);  //calculate count of kemajuan permohoann in each fakulti
-        } 
-
-        $fakulti_nama = $permohonans->pluck('f_nama'); 
-        
-       
-
-        
-
-
     }
    
 }

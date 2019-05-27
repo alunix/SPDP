@@ -8,13 +8,8 @@ use Illuminate\Http\Request;
 use SPDP\Services\PermohonanClass;
 use SPDP\Services\PenilaianPJK;
 use SPDP\Services\SenaraiPermohonan;
+use SPDP\Services\SenaraiPerakuan;
 use SPDP\Services\ShowPermohonan;
-use SPDP\Charts\PermohonanChart;
-use SPDP\Charts\JenisPermohonanChart;
-use Charts;
-use SPDP\Fakulti;
-use Illuminate\Support\Facades\DB;
-
 
 class PermohonanController extends Controller
 {
@@ -38,10 +33,10 @@ class PermohonanController extends Controller
         return  $sp->index();
     }
 
-    public function senaraiPerakuanPjk()
+    public function senaraiPerakuan()
     {
-        $sp = new SenaraiPermohonan();
-        return  $sp->perakuanPjk();
+        $sp = new SenaraiPerakuan();
+        return  $sp->senaraiPerakuan();
     }
 
     public function permohonanTidakDilulus(Request $request,$id)

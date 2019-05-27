@@ -2,14 +2,11 @@
 
 namespace SPDP\Services;
 
-use SPDP\Penilaian;
-use SPDP\Permohonan;
+
 use SPDP\User;
-use SPDP\Laporan;
 use SPDP\Services\LaporanClass;
 use SPDP\Services\KemajuanPermohonanClass;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Notification;
 use SPDP\Notifications\PermohonanDiluluskan;
 

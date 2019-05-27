@@ -108,8 +108,8 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware','middlewa
 	Route::get('/senarai-penilaian','PenilaianController@index')->name('penilaian.show');
 	
 	/*-----------------------Daftar penilai---------------------------------------------*/
-	Route::get('/pendaftaran-panel-penilai', 'PenilaianController@create_panel_penilai')->name('register.panel_penilai.show');
-	Route::post('/pendaftaran-panel-penilai', 'PenilaianController@store_panel_penilai')->name('register.panel_penilai.submit');
+	Route::get('/pendaftaran-pengguna', 'PenilaianController@create_panel_penilai')->name('register.panel_penilai.show');
+	Route::post('/pendaftaran-pengguna', 'PenilaianController@store_panel_penilai')->name('register.panel_penilai.submit');
 
 	// /*-----------------------PJK Lulus permohonan dan ingin memuat naik perakuan tanpa panel penilai---------------------------------------------*/
 	// Route::get( '/permohonan/{permohonan}/perakuan-pjk', 'PenilaianController@showPerakuanPjk')-> name('pjk.perakuanLulus.show');
@@ -130,7 +130,7 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware','middlewa
 	 Route::get('permohonan/{permohonan}/penambahbaikkan', 'PermohonanController@permohonanTidakDilulus')->name('laporan.permohonanTidakDilulus.submit');	
 	
 	/*-----------------------Senarai penilaian yang ongoing---------------------------------------------*/
-	Route::get('senarai-penilaian-perakuan','PermohonanController@senaraiPerakuanPjk')->name('pjk.senarai_perakuan.show');
+	Route::get('senarai-perakuan-permohonan','PermohonanController@senaraiPerakuan')->name('senarai_perakuan.show');
 
 	//Analitik permohonan
 	Route::get('/analitik-permohonan','PermohonanChartController@annual')->middleware('auth')->name('analitik.permohonan');

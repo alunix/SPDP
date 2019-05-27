@@ -105,7 +105,7 @@ class PenilaianController extends Controller
 
     public function create_panel_penilai()
     {  
-        $users = User::all();
+        $users = User::orderBy('created_at','desc')->get();
        return view ('pjk.daftar-panel-penilai')->with('users',$users);
     }
 

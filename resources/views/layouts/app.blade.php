@@ -18,7 +18,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title> SPDP</title>
+    <title> Persona</title>
 
      <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script> 
@@ -152,16 +152,12 @@
                 <div class="header3-wrap">
                     <div class="header__logo">
                         <a href="#">
-                            <img src="img/logo.png" alt="Persona" style="height:20px" />
+                            <img src="img/latest.png" alt="Persona" style="height:50px" />
                         </a>
                     </div>
                     <div class="header__navbar">
-                        
                     </div>
                     <div class="header__tool">
-       
-                        
-                
                     </div>
                 </div>
             </div>
@@ -174,7 +170,7 @@
                 <div class="header3-wrap">
                     <div class="header__logo">
                         <a href="#">
-                            <img src="img/logo.png" alt="Persona" style="height:20px" />
+                            <img src="img/latest.png" alt="Persona" style="height:50px" />
                         </a>
                     </div>
                     <div class="header__navbar">

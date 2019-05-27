@@ -116,19 +116,23 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary double-submit-prevent">
                                     {{ __('Daftar pengguna') }}
                                 </button>
                             </div>
                         </div>
+                        <br>
+
+                        <input  class="au-input--w300 au-input--style2 col-md-6 offset-md-4" type="text" id="myInput" onkeyup="searchFunction()" placeholder="Search for names..">
 
                         <br>
 
-                        <table class="table table-striped">
+                        <table class="table table-striped" id="myTable">
 
 <thead>
     <tr>
     <th scope="col">No</th>
+    <th scope="col">ID</th>
     <th scope="col">Nama</th>
     <th scope="col">Peranan</th>
     <th scope="col">Email</th>
@@ -143,7 +147,8 @@
 @if( ! $users->isEmpty() )
 @foreach($users as $user)
 <tr>
-<th scope="row">{{ $user->id }}</th>
+<th scope="row">{{ $loop->iteration }}</th>
+<td>{{ $user->id }}</td>  
 <td>{{ $user->name }}</td>    
 <td>{{ $user->role }}</td>                  
 <td>{{ $user->email }}</td>
@@ -193,6 +198,28 @@ function myFunction() {
   }
   else{
 
+  }
+}
+
+function searchFunction() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
   }
 }
 

@@ -9,6 +9,8 @@ use SPDP\Services\KemajuanPermohonanClass;
 use Illuminate\Http\Request;
 use Notification;
 use SPDP\Notifications\PermohonanDiluluskan;
+use SPDP\Notifications\LaporanDikeluarkan;
+use SPDP\TetapanAliranKerja;
 
 
 class PenilaianPenilai

@@ -16,6 +16,7 @@
                                             <tr>
                                                 
                                                 <th>no</th>
+                                                <th>id</th>
                                                 <th>jenis</th>
                                                 <th>bil penghantaran</th>
                                                 <th>nama program/kursus</th>
@@ -32,6 +33,7 @@
                                             <tr class="tr-shadow">
                                            
                                                 <td>{{$loop->iteration}}</td>
+                                                <td>{{$permohonan->permohonan_id}}</td>
                                                 <td>{{$permohonan->jenis_permohonan->jenis_permohonan_huraian}}</td>
                                                 <td>{{$permohonan->version_counts()}}</td>
                                                 <td>{{$permohonan->doc_title}}</td>   

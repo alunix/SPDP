@@ -86,13 +86,13 @@ class PermohonanClass
         $kp = new KemajuanPermohonanClass();
         $kp->create($permohonan);
 
-        //Create notification
-        $status = 16; // status = permohonan baharu
-        $location = "senaraiPermohonanBaharu"; //named route in Persona
-        $userFired= auth()->user()->id; //id penghantar
-        $userToNotify =2; //hantar kepada Dr Dalbir from PJK
-        $nc = new NotificationClass();
-        $nc->create($request,$status,$location,$userFired,$userToNotify,$permohonan);
+        // //Create notification
+        // $status = 16; // status = permohonan baharu
+        // $location = "senaraiPermohonanBaharu"; //named route in Persona
+        // $userFired= auth()->user()->id; //id penghantar
+        // $userToNotify =2; //hantar kepada Dr Dalbir from PJK
+        // $nc = new NotificationClass();
+        // $nc->create($request,$status,$location,$userFired,$userToNotify,$permohonan);
 
         //Hantar email kepada penghantar
         $penghantar = User::find($permohonan->id_penghantar);

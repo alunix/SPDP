@@ -31,7 +31,7 @@
                         <div class="form-group row">
                             <label for="fakulti" class="col-md-4 col-form-label text-md-right">{{ __('Fakulti') }}</label>
                             <div class="col-md-6">
-                                <input id="fakulti" type="text"  value="{{$permohonan->user->fakulti}}" class="form-control" name="fakulti"  required autofocus readonly>
+                                <input id="fakulti" type="text"  value="{{ $permohonan->user->fakulti->f_nama}}" class="form-control" name="fakulti"  required autofocus readonly>
                             </div>
                         </div>
                   
@@ -71,6 +71,11 @@
         <button type="submit" class="btn btn-success double-submit-prevent" value="accept-permohonan" name="submitbutton">
         {{ __('Hantar') }}
         </button>
+
+        <a href="{{route('laporan.permohonanTidakDilulus',$permohonan->permohonan_id)}}">
+                                    <input type="button" class="btn btn-danger" value="Penambahbaikan" />
+                                    
+                            </a>
 
         <br><br>
         

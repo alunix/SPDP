@@ -15,6 +15,7 @@ use Notification;
 use SPDP\Laporan;
 use SPDP\Notifications\PermohonanBaharu;
 use SPDP\Notifications\PermohonanDiluluskan;
+use SPDP\TetapanAliranKerja;
 
 
 class PenilaianPJK
@@ -40,7 +41,7 @@ class PenilaianPJK
      //If permohonan perlu diluluskan oleh JPPA
      if($permohonan->status_permohonan_id == 4){
         $email = TetapanAliranKerja::all()->first()->email_jppa;
-        $pemeriksa = User::where('emel',$email)->first();
+        $pemeriksa = User::where('email',$email)->first();
         Notification::route('mail',$pemeriksa->email)->notify(new PermohonanBaharu($permohonan,$pemeriksa)); 
     }
 
@@ -224,7 +225,7 @@ class PenilaianPJK
         //If permohonan perlu diluluskan oleh JPPA
         if($permohonan->status_permohonan_id == 4){
         $email = TetapanAliranKerja::all()->first()->email_jppa;
-        $pemeriksa = User::where('emel',$email)->first();
+        $pemeriksa = User::where('email',$email)->first();
         Notification::route('mail',$pemeriksa->email)->notify(new PermohonanBaharu($permohonan,$pemeriksa)); 
         }
 
@@ -264,21 +265,7 @@ public function semakanKursusElektif(Request $request, $permohonan){
         return;
 }    
 
-    public function store_panel_penilai(Request $request)
-    {
-        $user= new User();
-        $user->name = $request -> input('name');
-        $user->email = $request -> input('email');
-        $user->role = 'penilai';
-        $user->password= Hash::make('abcd123');
-        $user->save();
-
-        $msg = [
-        'message' => 'Pengguna berjaya didaftarkan',
-       ];
-
-        return redirect()->route('register.panel_penilai.show')->with($msg);
-    }
+   
 
     
 

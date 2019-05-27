@@ -130,7 +130,7 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware','middlewa
 	 Route::get('permohonan/{permohonan}/penambahbaikkan', 'PermohonanController@permohonanTidakDilulus')->name('laporan.permohonanTidakDilulus.submit');	
 	
 	/*-----------------------Senarai penilaian yang ongoing---------------------------------------------*/
-	Route::get('senarai-perakuan-permohonan','PermohonanController@senaraiPerakuan')->name('senarai_perakuan.show');
+	Route::get('senarai-perakuan-permohonan','PermohonanController@senaraiPerakuan')->name('senaraiPerakuan.show');
 
 	//Analitik permohonan
 	Route::get('/analitik-permohonan','PermohonanChartController@annual')->middleware('auth')->name('analitik.permohonan');

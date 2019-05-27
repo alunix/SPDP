@@ -6,7 +6,11 @@ namespace SPDP\Services;
 use SPDP\Permohonan;
 use SPDP\Services\LaporanClass;
 use Illuminate\Http\Request;
-
+use SPDP\TetapanAliranKerja;
+use SPDP\Notifications\PermohonanBaharu;
+use SPDP\Notifications\PermohonanDiluluskan;
+use SPDP\User;
+use Notification;
 
 
 class PenilaianJppa
@@ -28,6 +32,14 @@ class PenilaianJppa
         /* Status semakan permohonan telah dikemaskini berdasarkan progress */
         $permohonan -> status_permohonan_id = 5;       
         $permohonan ->save();
+
+        $email = TetapanAliranKerja::all()->first()->email_senat;
+        $pemeriksa = User::where('email',$email)->first();
+        Notification::route('mail',$pemeriksa->email)->notify(new PermohonanBaharu($permohonan,$pemeriksa)); 
+
+        //Hantar email kepada penghantar
+        $penghantar = User::find($permohonan->id_penghantar);
+        Notification::route('mail',$penghantar->email)->notify(new PermohonanDiluluskan($permohonan,$penghantar)); //hantar email kepada penghantar
       
 
         $kj= new KemajuanPermohonanClass();
@@ -60,6 +72,12 @@ class PenilaianJppa
 
     $kj = new KemajuanPermohonanClass();
     $kj->create($permohonan);
+
+    $email = TetapanAliranKerja::all()->first()->email_senat;
+
+    return $email;
+    $pemeriksa = User::where('email',$email)->first();
+    Notification::route('mail',$pemeriksa->email)->notify(new PermohonanBaharu($permohonan,$pemeriksa)); 
 
     $msg = [
         'message' => 'Laporan berjaya dimuat naik',

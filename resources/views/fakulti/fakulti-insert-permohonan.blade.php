@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 
-
+@section('pageTitle', 'Permohonan Baharu')
 
 @section('content')
 

@@ -61,7 +61,7 @@ class ShowPermohonan
         $user = User::find($user_id);
 
         if($permohonan==null){
-            abort(403,'Tidak dibenarkan');
+            abort(404);
          }
         
         $penilaian= $permohonan->penilaian;

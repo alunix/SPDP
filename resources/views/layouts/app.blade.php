@@ -18,7 +18,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title> Persona</title>
+    <title>@yield('pageTitle') | Persona</title>
 
      <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script> 
@@ -200,21 +200,21 @@
                                         <a href="{{route('senaraiPermohonanBaharu')}}">Senarai permohonan baharu</a>
                                     </li>
                                     <li>
-                                        <a href="register.html">Permohonan untuk diperakui</a>
+                                        <a href="{{route('senaraiPerakuan.show')}}">Permohonan untuk diperakui</a>
                                     </li>
-                                    <li>
-                                        <a href="forget-pass.html">Forget Password</a>
-                                    </li>
+                                 
                                 </ul>
                             </li>
                             @endif
 
-
+                            @if(Auth::user()->role != "fakulti")
                             <li>
                                 <a href="{{route('analitik.permohonan.dashboard')}}">
                                     <i class="fas fa-chart-bar"></i>
                                     <span class="bot-line"></span>Analitik</a>
                             </li>
+                            @else
+                            @endif
                            
                         </ul>
                     </div>
@@ -234,12 +234,7 @@
                                         <div class="account-dropdown__item">
                                             <a href="{{route('settings')}}">
                                                 <i class="zmdi zmdi-settings"></i>Settings</a>
-                                        </div>
-
-                                        <div class="account-dropdown__item">
-                                            <a href="{{route('settings')}}">
-                                                <i class="fas fa-tachometer-alt"></i>Dashboard Settings</a>
-                                        </div>
+                                        </div>                                      
 
                                         <div class="account-dropdown__item">
                                             <a href="{{route('aliranKerja.settings.show')}}">

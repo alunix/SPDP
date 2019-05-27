@@ -16,6 +16,7 @@
                                             <tr>
                                                 
                                                 <th>no</th>
+                                                <th>id</th>
                                                 <th>jenis</th>
                                                 <th>bil penghantaran</th>
                                                 <th>nama program/kursus</th>
@@ -32,6 +33,7 @@
                                             <tr class="tr-shadow">
                                            
                                                 <td>{{$loop->iteration}}</td>
+                                                <td>{{$permohonan->permohonan_id}}</td>
                                                 <td>{{$permohonan->jenis_permohonan->jenis_permohonan_huraian}}</td>
                                                 <td>{{$permohonan->version_counts()}}</td>
                                                 <td>{{$permohonan->doc_title}}</td>   
@@ -40,7 +42,7 @@
                                                 <td>{{$permohonan->created_at->format('h:i a d/m/Y')}}  </td> 
                                                 <td>
                                                     <div class="table-data-feature">
-                                                        <button onclick="location.href='{{ route('view-permohonan-baharu',$permohonan->permohonan_id) }}'" class="item" data-toggle="tooltip" data-placement="top" title="Lihat permohonan">
+                                                        <button onclick="location.href='{{ route('pjk.perakuan.show',$permohonan->permohonan_id) }}'" class="item" data-toggle="tooltip" data-placement="top" title="Lihat permohonan">
                                                             <i  class="zmdi zmdi-zoom-in"></i>
                                                         </button>
                                                     </div>

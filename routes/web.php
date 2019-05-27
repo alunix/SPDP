@@ -95,6 +95,9 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware','middlewa
 // Route::group(['middleware' => 'SPDP\Http\Middleware\pjkMiddleware'], function() {
 
 	Route::match(['get', 'post'], '/pjk-dashboard/', 'HomeController@pjk');
+
+	Route::get('/tetapan-aliran-kerja','TetapanAliranKerjaController@index')->name('aliranKerja.settings.show');
+	Route::post('/tetapan-aliran-kerja','TetapanAliranKerjaController@update')->name('aliranKerja.settings.submit');
 	
 	/*----------------------- PJK menerima program pengajian daripada fakulti ------------- */	
 	Route::match(['get', 'post'], '/senarai-permohonan-baharu', 'PermohonanController@showListPermohonanBaharu')->middleware('auth')->name('senaraiPermohonanBaharu');

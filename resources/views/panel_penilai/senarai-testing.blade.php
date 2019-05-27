@@ -44,6 +44,11 @@
                             </div>
                         </div>
                         <hr>
+
+                        <button onclick="location.href='{{ route('register.panel_penilai.show') }}'" class="au-btn au-btn-icon au-btn--green">
+                                        <i class="zmdi zmdi-plus"></i>
+                                        daftar pengguna
+                        </button>
                    
                         <div class="row m-t-25">
                         <div class="col-md-6 col-lg-3">

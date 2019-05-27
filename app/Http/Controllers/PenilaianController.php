@@ -111,7 +111,13 @@ class PenilaianController extends Controller
 
 
     public function store_panel_penilai(PenilaianClass $pc,Request $request)
-    {   
+    {    
+        $this->validate($request,[
+            'nama' => 'required|string|min:1',
+            'email' => 'required|email|max:255|unique:users',
+            'peranan' => 'required|string',
+        ]);
+
         return $pc->store_panel_penilai($request);
         
     }

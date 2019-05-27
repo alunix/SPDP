@@ -4,14 +4,17 @@ namespace SPDP\Services;
 
 use SPDP\Permohonan;
 use SPDP\User;
+use SPDP\TetapanAliranKerja;
 use Illuminate\Http\Request;
 use SPDP\Services\KemajuanPermohonanClass;
 use SPDP\Services\DokumenPermohonanClass;
 use SPDP\Services\LaporanClass;
 use SPDP\Notifications\PerluPenambahbaikkan;
+
 use Notification;
+
 use SPDP\Services\NotificationClass;
-use SPDP\Events\PermohonanBaharu;
+use SPDP\Notifications\PermohonanBaharu;
 
 class PermohonanClass 
 {
@@ -55,11 +58,17 @@ class PermohonanClass
                   
         $msg = [
             'message' => 'Permohonan berjaya dihantar',
-           ];
+           ];        
         
-        $message ='Permohonan baharu untuk disemak. Permohonan id :'.$permohonan->permohonan_id;
-           
-        event(new PermohonanBaharu($message));
+
+        //Hantar email kepada pemeriksa        
+        if($permohonan->jenis_permohonan_id == 8)
+           $email = TetapanAliranKerja::all()->first()->email_jppa;
+        else    
+            $email = TetapanAliranKerja::all()->first()->email_pjk;
+
+        $pemeriksa = User::where('email',$email)->first();
+        Notification::route('mail',$pemeriksa->email)->notify(new PermohonanBaharu($permohonan,$pemeriksa)); //hantar email kepada penghantar
 
         return redirect()->route('permohonan.dihantar')->with($msg);
     }

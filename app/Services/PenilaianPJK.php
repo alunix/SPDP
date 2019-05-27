@@ -37,6 +37,13 @@ class PenilaianPJK
     $penghantar = User::find($permohonan->id_penghantar);
     Notification::route('mail',$penghantar->email)->notify(new PermohonanDiluluskan($permohonan,$penghantar)); //hantar email kepada penghantar
 
+     //If permohonan perlu diluluskan oleh JPPA
+     if($permohonan->status_permohonan_id == 4){
+        $email = TetapanAliranKerja::all()->first()->email_jppa;
+        $pemeriksa = User::where('emel',$email)->first();
+        Notification::route('mail',$pemeriksa->email)->notify(new PermohonanBaharu($permohonan,$pemeriksa)); 
+    }
+
     $kj = new KemajuanPermohonanClass();
     $kj->create($permohonan);
 
@@ -60,8 +67,10 @@ class PenilaianPJK
 
         //Create a new penilaian in penilaian table
         $selectedPenilai = $request->input('checked'); //retrieve id of panel penilai
-        $user= User::find($selectedPenilai[0]); 
-        Notification::route('mail',$user->email)->notikkfy(new PermohonanBaharu($permohonan,$user)); //hantar email kepada panel penilai
+        $penilai= User::find($selectedPenilai[0]); 
+        Notification::route('mail',$penilai->email)->notify(new PermohonanBaharu($permohonan,$penilai)); //hantar email kepada panel penilai
+
+        
 
         $penilaian = new PenilaianClass();
         $penilaian =  $penilaian->create($permohonan);
@@ -208,9 +217,16 @@ class PenilaianPJK
         $permohonan->status_permohonan_id=$sp->getStatusPermohonan($permohonan);
         $permohonan ->save();
 
-        //Hantar email kepada penghantar
+        //Hantar email kepada penghantar dan next pemeriksa
         $penghantar = User::find($permohonan->id_penghantar);
         Notification::route('mail',$penghantar->email)->notify(new PermohonanDiluluskan($permohonan,$penghantar)); 
+
+        //If permohonan perlu diluluskan oleh JPPA
+        if($permohonan->status_permohonan_id == 4){
+        $email = TetapanAliranKerja::all()->first()->email_jppa;
+        $pemeriksa = User::where('emel',$email)->first();
+        Notification::route('mail',$pemeriksa->email)->notify(new PermohonanBaharu($permohonan,$pemeriksa)); 
+        }
 
         //Kemajuan permohonan baharu
         $kj= new KemajuanPermohonanClass();
@@ -263,6 +279,8 @@ public function semakanKursusElektif(Request $request, $permohonan){
 
         return redirect()->route('register.panel_penilai.show')->with($msg);
     }
+
+    
 
 
    

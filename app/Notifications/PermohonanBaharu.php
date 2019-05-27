@@ -20,6 +20,7 @@ class PermohonanBaharu extends Notification
     {
         $this->permohonan= $permohonan;
         $this->penilai= $penilai;
+    
     }
 
     /**
@@ -55,6 +56,16 @@ class PermohonanBaharu extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
+    public function toDatabase($notifiable)
+    {
+        return (new MailMessage)
+                    ->greeting('Salam sejahtera ' . $this->penilai->name)
+                    ->line('Anda telah menerima permohonan baharu')
+                    ->line('Jenis permohonan: '. $this->permohonan->jenis_permohonan->jenis_permohonan_huraian)
+                    ->action('Lihat permohonan baharu', route('view-permohonan-baharu',$this->permohonan->permohonan_id))
+                    ->line('Terima kasih');
+    }
+
     public function toArray($notifiable)
     {
         return [

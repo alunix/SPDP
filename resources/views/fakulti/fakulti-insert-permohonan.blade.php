@@ -36,8 +36,7 @@
                                 <option value=3>Kursus Teras Baru</option>
                                 <option value=4>Kursus Elektif Baru</option>
                                 <option value=5>Semakan Kursus Teras</option>
-                                <option value=6>Semakan Kursus Elektif</option>
-                                <option value=7>Akreditasi Penuh/Audit Pemantauan</option>
+                                <option value=6>Semakan Kursus Elektif</option>                                
                                 <option value=8>Penjumudan Program Pengajian</option>
                             </select>
                             </div>

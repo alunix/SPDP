@@ -20,7 +20,7 @@
                             <th scope="col">Jenis permohonan</th>
                             <th scope="col">Tajuk Dokumen</th>
                             <th scope="col">PJK</th>
-                            <th scope="col">Panel Penilai Pertama</th>                          
+                            <th scope="col">Panel Penilai</th>                          
                             <th scope="col">JPPA</th>
                             <th scope="col">Senat</th>
 
@@ -47,7 +47,7 @@
                 <th scope="row>">{{$penilaian->permohonan->jenis_permohonan->jenis_permohonan_huraian}}</th>
                 <th scope="row>">{{$penilaian->permohonan->doc_title}}</th>
                 <th scope="row">{{ $penilaian->pjk->name }}</th>
-               {{-- <th scope="row">{{ $penilaian->panel_penilai->name}}</th>--}}               
+               <th scope="row">{{ $penilaian->panel_penilai->name}}</th>           
                 <th scope="row">{{ $penilaian->jppa }}</th>
                 <th scope="row">{{ $penilaian->senat}}</th>
             </tr>

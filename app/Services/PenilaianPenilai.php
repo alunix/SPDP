@@ -32,6 +32,12 @@ class PenilaianPenilai
         $penghantar = User::find($permohonan->id_penghantar);
         Notification::route('mail',$penghantar->email)->notify(new PermohonanDiluluskan($permohonan,$penghantar)); //hantar email kepada penghantar
 
+        $panel = auth()->user();
+        $email = TetapanAliranKerja::all()->first()->email_pjk;
+        $pjk= User::where('email',$email)->first();
+        Notification::route('mail',$pjk->email)->notify(new LaporanDikeluarkan($permohonan,$pjk,$panel)); 
+        
+
         $kj= new KemajuanPermohonanClass();
         $kj->create($permohonan);
 

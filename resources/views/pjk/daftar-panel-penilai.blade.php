@@ -147,7 +147,7 @@
 <td>{{ $user->name }}</td>    
 <td>{{ $user->role }}</td>                  
 <td>{{ $user->email }}</td>
-<td>{{ $user->created_at }}</td>
+<td>{{ $user->created_at->format('h:i a d/m/Y') }}</td>
 
 </tr>
 @endforeach

@@ -112,11 +112,29 @@ class PenilaianController extends Controller
 
     public function store_panel_penilai(PenilaianClass $pc,Request $request)
     {    
-        $this->validate($request,[
-            'nama' => 'required|string|min:1',
-            'email' => 'required|email|max:255|unique:users',
-            'peranan' => 'required|string',
-        ]);
+        $radio= $request->input('radios');
+
+        switch ($radio) {
+            case 'autoGenerate':
+            $this->validate($request,[
+                'nama' => 'required|string|min:1',
+                'email' => 'required|email|max:255|unique:users',
+                'peranan' => 'required|string',
+                
+            ]);
+                 break;
+            case 'manualGenerate':
+            $this->validate($request,[
+                'nama' => 'required|string|min:1',
+                'email' => 'required|email|max:255|unique:users',
+                'peranan' => 'required|string',
+                'password' => 'min:6|required_with:password-confirm|same:password-confirm',
+                'password_confirmation' => 'min:6'
+                
+            ]);
+        }
+
+       
 
         return $pc->store_panel_penilai($request);
         

@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('pageTitle', 'Daftar Pengguna')
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -47,24 +49,25 @@
                                                     <div class="form-check">
                                                         <div class="radio">
                                                             <label for="radio1" class="form-check-label ">
-                                                                <input type="radio" id="radio1" name="peranan" value="penilai" class="form-check-input">Panel Penilai
+                                                                <input type="radio"  id="radio1" name="peranan" value="penilai" class="form-check-input">Panel Penilai
                                                             </label>
                                                         </div>
                                                         <div class="radio">
                                                             <label for="radio2" class="form-check-label ">
-                                                                <input type="radio" id="radio2" name="peranan" value="pjk" class="form-check-input">PJK
+                                                                <input type="radio"  id="radio2" name="peranan"value="pjk" class="form-check-input">PJK
                                                             </label>
                                                         </div>
                                                         <div class="radio">
                                                             <label for="radio3" class="form-check-label ">
-                                                                <input type="radio" id="radio3" name="peranan" value="jppa" class="form-check-input">JPPA
+                                                                <input type="radio"  id="radio3" name="peranan" value="jppa" class="form-check-input">JPPA
                                                             </label>
                                                         </div>
                                                         <div class="radio">
                                                             <label for="radio4" class="form-check-label ">
-                                                                <input type="radio" id="radio4" name="peranan" value="senat" class="form-check-input">Senat
+                                                                <input type="radio"  id="radio4" name="peranan" value="senat" class="form-check-input">Senat
                                                             </label>
                                                         </div>
+                                                      
                                                     </div>
                                                 </div>
                         </div>
@@ -76,19 +79,20 @@
                                                     <div class="form-check">
                                                         <div class="radio">
                                                             <label for="autoGenerate" class="form-check-label ">
-                                                                <input type="radio" onclick="myFunction()" id="autoGenerate" name="radios" value="autoGenerate"  class="form-check-input">Auto jana kata laluan
+                                                                <input type="radio"  onclick="myFunction()" id="autoGenerate" name="radios" value="autoGenerate"  class="form-check-input">Auto jana kata laluan
                                                             </label>
                                                         </div>
                                                         <div class="radio">
                                                             <label for="manualGenerate" class="form-check-label ">
                                                                 <input type="radio" onclick="myFunction()" id="manualGenerate" name="radios" value="manualGenerate" class="form-check-input">Biar saya tetapkan kata laluan
+                                                                
                                                             </label>
                                                         </div>  
                                                         
                             <div id ='showPassword' style='display:none' class="form-group row" >
 
                             <br>
-                            <label for="password" style="font-size:12px" >{{ __('Kata laluan') }}</label>
+                            <label for="password" style="font-size:12px" >{{ __('Kata laluan(6 karakter minimum)') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" onkeyup='check();'  name="password" value="{{ old('password') }}" required >
@@ -102,9 +106,13 @@
                             <label for="password-confirm" style="font-size:12px"  >{{ __('Taip semula kata laluan') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control{{ $errors->has('password-confirm') ? ' is-invalid' : '' }}" onkeyup='check();' name="password_confirmation" value="{{ old('password-confirm') }}" required >
+                                <input id="password-confirm" type="password" class="form-control{{ $errors->has('password-confirm') ? ' is-invalid' : '' }}" onkeyup='check();' name="password-confirm" value="{{ old('password-confirm') }}" required >
+                                @if ($errors->has('password-confirm'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('password-confirm') }}</strong>
+                                    </span>
+                                @endif
                             </div>
-                            <span class="col-md-6" id='message'></span>
                             
                             </div>                                                      
                                                     </div>
@@ -114,14 +122,14 @@
                             
                         </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary double-submit-prevent">
-                                    {{ __('Daftar pengguna') }}
-                                </button>
-                            </div>
-                        </div>
-                        <br>
+                                            <div class="form-group row mb-0">
+                                                <div class="col-md-6 offset-md-4">
+                                                    <button type="submit" class="btn btn-primary double-submit-prevent">
+                                                        {{ __('Daftar pengguna') }}
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <br>
 
                         <input  class="au-input--w300 au-input--style2 col-md-6 offset-md-4" type="text" id="myInput" onkeyup="searchFunction()" placeholder="Search for names..">
 
@@ -201,6 +209,7 @@ function myFunction() {
   }
 }
 
+
 function searchFunction() {
   // Declare variables
   var input, filter, table, tr, td, i, txtValue;
@@ -211,7 +220,7 @@ function searchFunction() {
 
   // Loop through all table rows, and hide those who don't match the search query
   for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
+    td = tr[i].getElementsByTagName("td")[1];
     if (td) {
       txtValue = td.textContent || td.innerText;
       if (txtValue.toUpperCase().indexOf(filter) > -1) {

@@ -4,9 +4,43 @@ namespace SPDP\Http\Controllers;
 use SPDP\User;
 use Illuminate\Http\Request;
 use SPDP\Fakulti;
+use SPDP\Services\CreateUser;
 
 class UserController extends Controller
-{
+{   
+    public function create_pengguna()
+    {  
+        $users = User::orderBy('created_at','desc')->get();
+        return view ('pjk.daftar-panel-penilai')->with('users',$users);
+    }
+
+    public function store_pengguna(Request $request)
+    {    
+        $radio= $request->input('radios');
+
+        switch ($radio) {
+            case 'autoGenerate':
+            $this->validate($request,[
+                'nama' => 'required|string|min:1',
+                'email' => 'required|email|max:255|unique:users',
+                'peranan' => 'required|string',
+                
+            ]);
+                 break;
+            case 'manualGenerate':
+            $this->validate($request,[
+                'nama' => 'required|string|min:1',
+                'email' => 'required|email|max:255|unique:users',
+                'peranan' => 'required|string',
+                'password' => 'min:6|required_with:password-confirm|same:password-confirm',
+                'password_confirmation' => 'min:6'
+                
+            ]);
+        }
+
+        $user = new CreateUser;
+        return $user->store_pengguna($request);
+    }
     public function edit()
     {   
         $user_id = auth()->user()->id;
@@ -23,17 +57,14 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)    {      
-        
-        
-
+    public function update(Request $request)    
+    {
         try{
             $this->validate($request, [
                 'name' => 'required',
                 'email' => 'required',
                
             ]);
-            
             
             $user = auth()->user();
             $role = $user->role;

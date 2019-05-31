@@ -23,19 +23,6 @@
 
                         <div class="form-group row">
                             <label for="year-report" class="col-md-4 col-form-label text-md-right">{{ __('Sila pilih tahun laporan') }}</label>
-
-                            <div class="col-md-6">
-                            <select class=”form-control” name='year_report' style="width:150px;" id='type' onchange="this.form.submit()">
-                                
-                                <option value=#>Please choose</option>
-                                <option value=2019>1 hari lalu</option>
-                                <option value=2018>7 hari lalu</option>
-                                <option value=2017>30 haru lalu</option>
-                                <option value=2016>90 hari lalu</option>
-                                <option value=2015>12 bulan lalu</option>
-                               
-                            </select>
-                            </div>
                         </div>
 
                         <div class="form-group row mb-0">

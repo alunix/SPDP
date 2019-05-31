@@ -3,18 +3,29 @@
 @section('pageTitle', 'Home')
 
 @section('content')
-<div class="main-content">
-                <div class="section__content section__content--p30">
-                    <div class="container">
+
+                 <!-- Top  -->
                         <div class="row">
                             <div class="col-md-12">
+                            <div class="au-breadcrumb-content">
+                                <div class="au-breadcrumb-left">
                                 <div class="overview-wrap">
                                     <h2 class="title-1">gambaran keseluruhan</h2>
-                                    
                                 </div>
+                                </div>
+                                <form class="au-form-icon--sm" action="/search" method="post">
+                                @csrf    
+                                <input class="au-input--w300 au-input--style2" type="text" name="input-search" placeholder="Cari permohonan & laporan">
+                                    <button class="au-btn--submit2" type="submit">
+                                        <i class="zmdi zmdi-search"></i>
+                                    </button>
+                                </form>
                             </div>
+                            </div>                           
                         </div>
-                        <br>
+                <!-- End Top -->
+               
+                        <hr>
                         <button onclick="location.href='{{ route('permohonan.index') }}'" class="au-btn au-btn-icon au-btn--green">
                                         <i class="zmdi zmdi-plus"></i>
                                         permohonan baharu
@@ -47,7 +58,6 @@
                                 </div>
                             </div>
                         </div>
-                        
                             <div class="col-lg-6">
                                 <div class="au-card recent-report">
                                     <div class="au-card-inner">
@@ -65,7 +75,6 @@
                                 <div class="au-card recent-report">
                                     <div class="au-card-inner">
                                         <h3 class="title-2">Jenis permohonan</h3>
-                                       
                                         <div class="recent-report__chart">
                                         {!! $pie_chart->container() !!}
                                         {!! $pie_chart->script() !!}
@@ -73,25 +82,12 @@
                                     </div>
                                 </div>
                             </div>
-                  
-                       
                         </div>
-         
-                      
-                        </div>
-                      
-                    </div>
-                </div>
-            
-
-      
-
-
+                        
+                    
+                
 @endsection
-
 @section('myjsfile')
-
-
 @endsection
 
 

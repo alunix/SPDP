@@ -4,7 +4,18 @@
 @section('content')
 
 <div class="container">
-<h3 class="title-5 m-b-35">Senarai permohonan dihantar</h3>
+<div class="row">
+                            <div class="col-md-12">
+                            <div class="au-breadcrumb-content">
+                                <div class="au-breadcrumb-left">
+                                <div class="overview-wrap">
+                                    <h2 class="title-1">Senarai permohonan dihantar</h2>
+                                </div>
+                                </div>
+                            </div>
+                            </div>                           
+                    </div>
+<hr>
                     
                                 <h4>Jumlah permohonan dihantar : {{$permohonans->count()}}</h4>
                                 <br>

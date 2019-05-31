@@ -3,26 +3,15 @@
 @section('pageTitle', 'Home')
 
 @section('content')
-<div >
-            
-            <section class="au-breadcrumb2">
-                <div class="container">
                     <div class="row">
-                        <div class="col-md-12">
+                            <div class="col-md-12">
                             <div class="au-breadcrumb-content">
                                 <div class="au-breadcrumb-left">
-                                    <span class="au-breadcrumb-span">Anda sekarang berada di:</span>
-                                    <ul class="list-unstyled list-inline au-breadcrumb__list">
-                                        <li class="list-inline-item active">
-                                            <a href="#">Rumah</a>
-                                        </li>
-                                        <li class="list-inline-item seprate">
-                                            <span>/</span>
-                                        </li>
-                                        <li class="list-inline-item">Papan pemuka</li>
-                                    </ul>
+                                <div class="overview-wrap">
+                                    <h2 class="title-1">gambaran keseluruhan</h2>
                                 </div>
-                                <form class="au-form-icon--sm" action="/search" method="post">
+                                </div>
+                               <form class="au-form-icon--sm" action="/search" method="post">
                                 @csrf    
                                 <input class="au-input--w300 au-input--style2" type="text" name="input-search" placeholder="Cari permohonan & laporan">
                                     <button class="au-btn--submit2" type="submit">
@@ -30,32 +19,16 @@
                                     </button>
                                 </form>
                             </div>
-                        </div>
+                            </div>                           
                     </div>
-                </div>
-            </section>
-
-                <div class="section__content section__content--p30">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="overview-wrap">
-                                    <h2 class="title-1">gambaran keseluruhan</h2>
-                                    
-                                </div>
-                            </div>
-                        </div>
                         <hr>
-
                         @if(Auth::user()->role == "pjk")
-
                         <button onclick="location.href='{{ route('register.panel_penilai.show') }}'" class="au-btn au-btn-icon au-btn--green">
                                         <i class="zmdi zmdi-plus"></i>
                                         daftar pengguna
                         </button>
                         @else
                         @endif
-                   
                         <div class="row m-t-25">
                         <div class="col-md-6 col-lg-3">
                             <div class="statistic__item statistic__item--green">
@@ -95,13 +68,7 @@
                                 </div>
                             </div>
                         </div>
-
-                        
-                    
-                       
-                    
-                        
-                            <div class="col-lg-6">
+                        <div class="col-lg-6">
                                 <div class="au-card recent-report">
                                     <div class="au-card-inner">
                                         <h3 class="title-2">Jumlah permohonan</h3>
@@ -113,8 +80,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6">
+                        </div>
+                        <div class="col-lg-6">
                                 <div class="au-card recent-report">
                                     <div class="au-card-inner">
                                         <h3 class="title-2">Jenis permohonan</h3>
@@ -125,16 +92,15 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                        </div>
                   
                        
                         </div>
          
                       
-                        </div>
+                        
                       
-                    </div>
-                </div>
+           
             
 
       

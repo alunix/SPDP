@@ -108,8 +108,8 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware','middlewa
 	Route::get('/senarai-penilaian','PenilaianController@index')->name('penilaian.show');
 	
 	/*-----------------------Daftar penilai---------------------------------------------*/
-	Route::get('/pendaftaran-pengguna', 'PenilaianController@create_panel_penilai')->name('register.panel_penilai.show');
-	Route::post('/pendaftaran-pengguna', 'PenilaianController@store_panel_penilai')->name('register.panel_penilai.submit');
+	Route::get('/pendaftaran-pengguna', 'UserController@create_pengguna')->name('register.panel_penilai.show');
+	Route::post('/pendaftaran-pengguna', 'UserController@store_pengguna')->name('register.panel_penilai.submit');
 
 	// /*-----------------------PJK Lulus permohonan dan ingin memuat naik perakuan tanpa panel penilai---------------------------------------------*/
 	// Route::get( '/permohonan/{permohonan}/perakuan-pjk', 'PenilaianController@showPerakuanPjk')-> name('pjk.perakuanLulus.show');

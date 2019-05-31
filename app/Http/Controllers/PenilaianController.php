@@ -4,10 +4,7 @@ namespace SPDP\Http\Controllers;
 
 use SPDP\Penilaian;
 use SPDP\Permohonan;
-use SPDP\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use SPDP\Services\PenilaianClass;
 use SPDP\Services\PenilaianPJK;
 use SPDP\Services\PenilaianJppa;
 use SPDP\Services\PenilaianSenat;
@@ -15,7 +12,6 @@ use SPDP\Services\PenilaianPenilai;
 
 class PenilaianController extends Controller
 {
-  
     public function index()
     {
        $penilaians = Penilaian::all();
@@ -28,8 +24,6 @@ class PenilaianController extends Controller
         $pp = new PenilaianPJK();
         return $pp->showPerakuanPjk($id);
     }
-
-   
 
     public function uploadPerakuanPjk(Request $request,$id)
     {
@@ -50,8 +44,6 @@ class PenilaianController extends Controller
         return view('jppa.lampiran-perakuan-jppa')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
         else
         return view('jppa.lampiran-perakuan-penjumudan')->with('permohonan',$permohonan);
-
-        
      }
 
      public function uploadPerakuanJppa(Request $request, $id){
@@ -99,45 +91,8 @@ class PenilaianController extends Controller
         $permohonan =Permohonan::find($id);
         $pc = new PenilaianSenat();
         return $pc->uploadPerakuanSenat($request,$permohonan);
-
-       
     }
 
-    public function create_panel_penilai()
-    {  
-        $users = User::orderBy('created_at','desc')->get();
-       return view ('pjk.daftar-panel-penilai')->with('users',$users);
-    }
-
-
-    public function store_panel_penilai(PenilaianClass $pc,Request $request)
-    {    
-        $radio= $request->input('radios');
-
-        switch ($radio) {
-            case 'autoGenerate':
-            $this->validate($request,[
-                'nama' => 'required|string|min:1',
-                'email' => 'required|email|max:255|unique:users',
-                'peranan' => 'required|string',
-                
-            ]);
-                 break;
-            case 'manualGenerate':
-            $this->validate($request,[
-                'nama' => 'required|string|min:1',
-                'email' => 'required|email|max:255|unique:users',
-                'peranan' => 'required|string',
-                'password' => 'min:6|required_with:password-confirm|same:password-confirm',
-                'password_confirmation' => 'min:6'
-                
-            ]);
-        }
-
-       
-
-        return $pc->store_panel_penilai($request);
-        
-    }
+   
 
 }

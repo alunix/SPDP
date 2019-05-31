@@ -4,31 +4,50 @@
 @section('pageTitle', 'Kemajuan permohonan')
 
 @section('content')
-<div class="container">
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="au-breadcrumb-content">
+            <div class="au-breadcrumb-left">
+                <div class="overview-wrap">
+                <h2 class="title-1">kemajuan permohonan</h2>
+                </div>
+            </div>
+            <div class="row">
+            <form class="au-form-icon--sm" action="/search" method="post">
+                @csrf    
+                <input class="au-input--w300 au-input--style2" type="text" name="input-search" placeholder="Cari kemajuan permohonan">
+                    <button class="au-btn--submit2" type="submit">
+                        <i class="zmdi zmdi-search"></i>
+                    </button>
+                </form>
+                &nbsp;
+            @if(($permohonan->status_permohonan_id == 8 or $permohonan->status_permohonan_id == 9 or $permohonan->status_permohonan_id == 10 or $permohonan->status_permohonan_id == 11  ) and (Auth::user()->role == "fakulti"))
+            <a class="btn icon-btn btn-info" style="font-size:14px" href="{{ route('dokumenPermohonan.penambahbaikkan.show',$permohonan->permohonan_id) }}">
+            Muat naik penambahbaikkan
+            </a>
+            <br><br>
+            @else
+            @endif
+         
+               
+            </div>
+        </div>
+    </div>                           
+</div>
+<hr>
+
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card" style="width:65rem;">
-                <div class="card-header" >Kemajuan Permohonan</div>
+        <div class="card-header" >Kemajuan Permohonan</div>
 
-                <div class="card-body">
-               
-    <div class="container">
- 
-   <h5>Permohonan ID :{{$permohonan->id}}</h5>
+        <div class="card-body">
+        
+<div class="container">
 
-   @if(($permohonan->status_permohonan_id == 8 or $permohonan->status_permohonan_id == 9 or $permohonan->status_permohonan_id == 10 or $permohonan->status_permohonan_id == 11  ) and (Auth::user()->role == "fakulti"))
-   <a class="btn icon-btn btn-info" href="{{ route('dokumenPermohonan.penambahbaikkan.show',$permohonan->permohonan_id) }}">
-Muat naik penambahbaikkan
-</a>
-<br><br>
-    @else
-    @endif
-
-
-<h5>Kemajuan permohonan</h5>
-
-         <table class="table table-striped">
-
+<h5>Permohonan ID :{{$permohonan->id}}</h5>
+    <table class="table table-striped">
 <thead>
     <tr>
     <th scope="col">No</th>
@@ -48,14 +67,8 @@ Muat naik penambahbaikkan
 
 </tr>
 @endforeach
-
-
-
 </tbody>
 </table>
-
-
-
 @else
 
 <p> Tiada kemajuan permohonan </p>
@@ -108,16 +121,6 @@ Muat naik penambahbaikkan
 <p> Tiada laporan telah dikeluarkan</p>
 
 @endif
-
-
-
-                
-                    
-    
-                            
-                           
-
-                    
                 </div>
             </div>
         </div>

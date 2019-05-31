@@ -67,28 +67,23 @@
 <link href="{{ asset('css/theme.css')}}" rel="stylesheet">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
-<!--CoolAdmin script-->
-<!-- Jquery JS-->
-
+    <!--CoolAdmin script-->
+    <!-- Jquery JS-->
     <script src="{{asset('vendor/jquery-3.2.1.min.js') }}"defer></script>
     <!-- Bootstrap JS-->
     <script src="{{asset('vendor/bootstrap-4.1/popper.min.js') }}"defer></script>
     <script src="{{asset('vendor/bootstrap-4.1/bootstrap.min.js') }}"defer></script>
     <!-- Vendor JS       -->
-    <script src="{{asset('vendor/slick/slick.min.js')}}"defer>
-    </script>
+    <script src="{{asset('vendor/slick/slick.min.js')}}"defer></script>
     <script src="{{asset('vendor/wow/wow.min.js') }}"defer></script>
     <script src="{{asset('vendor/animsition/animsition.min.js') }}"defer></script>
-    <script src="{{asset('vendor/bootstrap-progressbar/bootstrap-progressbar.min.js')}}"defer>
-    </script>
+    <script src="{{asset('vendor/bootstrap-progressbar/bootstrap-progressbar.min.js')}}"defer></script>
     <script src="{{asset('vendor/counter-up/jquery.waypoints.min.js') }}"defer></script>
-    <script src="{{asset('vendor/counter-up/jquery.counterup.min.js')}}"defer>
-    </script>
+    <script src="{{asset('vendor/counter-up/jquery.counterup.min.js')}}"defer></script>
     <script src="{{asset('vendor/circle-progress/circle-progress.min.js') }}"defer></script>
     <script src="{{asset('vendor/perfect-scrollbar/perfect-scrollbar.js') }}"defer></script>
     <script src="{{asset('vendor/chartjs/Chart.bundle.min.js') }}"defer></script>
-    <script src="{{asset('vendor/select2/select2.min.js')}}"defer>
-    </script>
+    <script src="{{asset('vendor/select2/select2.min.js')}}"defer></script>
 
     <!-- Main JS-->
     <script src="{{asset('js/main.js')}}"defer></script>
@@ -143,7 +138,7 @@
 
 
 </head>
-<body class = "animsition">
+<body>
 
     <div  id="app">
         @guest
@@ -173,7 +168,7 @@
                             <img src="img/latest.png" alt="Persona" style="height:50px" />
                         </a>
                     </div>
-                    <div class="header__navbar">
+                    <div class="header__navbar nav-item">
                         <ul class="list-unstyled">
                             <li class="has-sub">
                                 <a href="{{route('home')}}">
@@ -272,14 +267,30 @@
        </div>
   @endif
   <!-- End message -->
+    <div class="section__content section__content--p30">
+        <div class="container">   
             @yield('content')
+        </div>
+    </div>
         </main>
         @yield('myjsfile')
     </div>
   
 </body>
 </html>
-    
+
+
+<script>
+
+$('.item-nav').click(function (event) {
+    // Avoid the link click from loading a new page
+    event.preventDefault();
+
+    // Load the content from the link's href attribute
+    $('.content').load($(this).attr('href'));
+});
+
+</script>
 
 
     

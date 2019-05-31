@@ -46,7 +46,6 @@ class HomeController extends Controller
                    return $this->dashboard($role);
                 break;
         }
-        
     
     }
 
@@ -64,7 +63,6 @@ class HomeController extends Controller
      for($i=0;$i<$count_permohonan->count();$i++){
          $A[$i]= count($count_permohonan[$i]);  //calculate count of permohoann in each fakulti
      } 
-     
      
      $chart = new JenisPermohonanChart();       
      $chart->labels( $permohonans->pluck('fnama_kod')); 
@@ -99,30 +97,26 @@ class HomeController extends Controller
      $permohonan_in_progress = Permohonan::where('status_permohonan_id','!=',1)->orWhere('status_permohonan_id','!=',6)->orWhere('status_permohonan_id','!=',7)->get()->count();
      $permohonan_diluluskan = Permohonan::where('status_permohonan_id','=',6)->orWhere('status_permohonan_id','=',7)->get()->count();
      $permohonan_diperakui = $this->permohonanDiperakukan();
-     
 
      return view ('panel_penilai.senarai-testing')->with('permohonans',$permohonan_baharu)->with('chart',$chart)->with('line_chart',$line_chart)->with('pie_chart',$pie_chart)->with('permohonan_in_progress', $permohonan_in_progress)->with('permohonan_diluluskan',$permohonan_diluluskan)->with('permohonan_diperakui',$permohonan_diperakui);
     }
 
     public function fakulti(){
-
+    
     $fakulti_id=auth()->user()->fakulti_id;
     $year_report = date('Y');
- 
     /*------------------ Line chart for jumlah dokumen permohonan in a year--------------*/
-    
     $dokumen_permohonans=  DB::table("dokumen_permohonans") 
     ->join('permohonans','dokumen_permohonans.permohonan_id','=','permohonans.permohonan_id')
     ->join('users','permohonans.id_penghantar','=','users.id')
     ->join('fakultis','users.fakulti_id','=','fakultis.fakulti_id')
+    ->whereYear('dokumen_permohonans.created_at',$year_report)
     ->where('fakultis.fakulti_id','=',$fakulti_id)
     ->selectRaw("DATE_FORMAT(dokumen_permohonans.created_at,'%M') as months,month(dokumen_permohonans.created_at) as month,count(dokumen_permohonans.dokumen_permohonan_id) as count") 
     // ->orderBy('dokumen_permohonans.created_at','asc') 
     ->orderBy('month','asc') 
     ->groupBy('months')
     ->get();
-
-   
   
      $line_chart = new JenisPermohonanChart();
      $line_chart->labels($dokumen_permohonans->pluck('months'));
@@ -131,26 +125,16 @@ class HomeController extends Controller
          ,'dimensions'=>[500,500]
      ]);
     /*----------Permohonans-----------*/
-     
-    // $permohonans=  DB::table("permohonans") 
-    //  ->join('permohonans','dokumen_permohonans.permohonan_id','=','permohonans.permohonan_id')
-    //  ->join('users','permohonans.id_penghantar','=','users.id')
-    //  ->join('fakultis','users.fakulti_id','=','fakultis.fakulti_id')
-    //  ->where('fakultis.fakulti_id','=',$fakulti_id)
-    //  ->selectRaw("month(dokumen_permohonans.created_at) as months,count(dokumen_permohonans.permohonan_id) as count") 
-    //  ->groupBy('months') 
-    //  ->get();
- 
     $permohonans=  DB::table("permohonans") 
         ->join('jenis_permohonans','jenis_permohonans.id','=','permohonans.jenis_permohonan_id')
         ->join('users','permohonans.id_penghantar','=','users.id')
         ->join('fakultis','users.fakulti_id','=','fakultis.fakulti_id')
+        ->whereYear('permohonans.created_at',$year_report)
         ->where('fakultis.fakulti_id','=',$fakulti_id)
         ->selectRaw("month(permohonans.created_at) as month, jenis_permohonans.jenis_permohonan_huraian as huraian,count(permohonan_id) as count") 
         ->groupBy('jenis_permohonan_huraian') 
         ->get();
-    
- 
+
      $pie_chart = new JenisPermohonanChart();
      $pie_chart->labels($permohonans->pluck('huraian'));
      $pie_chart->dataset('Jenis permohonan tahun '.$year_report, 'pie',$permohonans->pluck('count'))->color(['#3366CC','#DC3912','#FF9900','#109618','#990099','#3B3EAC','#0099C6','#DD4477'])->options([
@@ -160,7 +144,6 @@ class HomeController extends Controller
      $permohonan_in_progress = Permohonan::where('status_permohonan_id','!=',1)->orWhere('status_permohonan_id','!=',6)->orWhere('status_permohonan_id','!=',7)->get()->count();
      $permohonan_diluluskan = Permohonan::where('status_permohonan_id','=',6)->orWhere('status_permohonan_id','=',7)->get()->count();
      
-
      return view ('dashboard.fakulti-dashboard')->with('dokumen_permohonans',$dokumen_permohonans)->with('permohonans',$permohonans)->with('line_chart',$line_chart)->with('pie_chart',$pie_chart)->with('permohonan_in_progress', $permohonan_in_progress)->with('permohonan_diluluskan',$permohonan_diluluskan);
     }
 

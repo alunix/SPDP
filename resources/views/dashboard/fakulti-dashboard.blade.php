@@ -26,10 +26,7 @@
                 <!-- End Top -->
                
                         <hr>
-                        <button onclick="location.href='{{ route('permohonan.index') }}'" class="au-btn au-btn-icon au-btn--green">
-                                        <i class="zmdi zmdi-plus"></i>
-                                        permohonan baharu
-                        </button>
+                        
                         <div class="row m-t-25">
                         <div class="col-md-6 col-lg-3">
                             <div class="statistic__item statistic__item--green">

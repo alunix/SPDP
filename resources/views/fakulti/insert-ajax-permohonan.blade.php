@@ -1,21 +1,11 @@
-@extends('layouts.app')
+<div class="modal-header">
+    <h5 class="modal-title">Permohonan Baharu</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
 
-
-@section('pageTitle', 'Permohonan Baharu')
-
-@section('content')
-
-
-<div class="container">
-  
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Permohonan Baharu</div>
-            <div class="card-body">
-                    <form  class="form-prevent-double-submits" method="POST" action="{{ route('permohonan.index.submit') }}" enctype="multipart/form-data">
-                        @csrf
-
+<div class="modal-body">
                         <div class="form-group row">
                             <label for="nama_penghantar" class="col-md-4 col-form-label text-md-right">{{ __('Penghantar') }}</label>
 
@@ -28,7 +18,7 @@
                             <label for="jenis_permohonan_id" class="col-md-4 col-form-label text-md-right">{{ __('Jenis permohonan') }}</label>
 
                             <div class="col-md-6">
-                            <select class=”form-control” name='jenis_permohonan_id' style="width:330px;" id='jenis_permohonan_id' required>
+                            <select class=”form-control” name='jenis_permohonan_id' style="width:330px;" id='jenis_permohonan_id'>
                                 
                                 <option value=#>Sila pilih</option>
                                 <option value=1>Program Pengajian Baru</option>
@@ -81,36 +71,15 @@
                         
                         </div>
 
-                         <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary double-submit-prevent">
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"> Close</button>
+                        <button type="submit" class="btn btn-primary double-submit-prevent">
                                     {{ __('Hantar') }}
-                                </button>
-                            </div>
+                        </button>
                         </div>
+
+                        
 
                          <hr>
                 
             </div>
-            
-        </div>
-        
-    </div>
-    
-    
-</div>
-
-
-@endsection
-
-
-
-
-
-
-
-
-
-
-
-

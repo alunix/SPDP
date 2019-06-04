@@ -77,10 +77,10 @@
   <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">
-            <h4 class="modal-title" id="userCrudModal"></h4>
+            <h4 class="modal-title" id="permohonanModal"></h4>
         </div>
         <div class="modal-body">
-            <form id="userForm" name="userForm" class="form-horizontal">
+            <form id="permohonanForm" name="permohonanForm" class="form-horizontal">
                <input type="hidden" name="user_id" id="user_id">
                 <div class="form-group">
                     <label for="name" class="col-sm-2 control-label">Penghantar</label>
@@ -125,7 +125,7 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label"  style="white-space: nowrap;">Komen(Tidak diwajibkan)</label>
                     <div class="col-sm-12">
-                        <input type="text" class="form-control" id="komen" name="komen" >
+                    <textarea class="form-control" id="summary-ckeditor" name="summary-ckeditor"></textarea>
                     </div>
                 </div>
 
@@ -153,8 +153,8 @@
     /*  When user click add user button */
     $('#create-new-user').click(function () {
         $('#btn-save').val("create-user");
-        $('#userForm').trigger("reset");
-        $('#userCrudModal').html("Permohonan Baharu");
+        $('#permohonanForm').trigger("reset");
+        $('#permohonanModal').html("Permohonan Baharu");
         $('#permohonan-modal').modal('show');
     });
  
@@ -162,7 +162,7 @@
     $('body').on('click', '#edit-user', function () {
       var user_id = $(this).data('id');
       $.get('ajax-crud/' + user_id +'/edit', function (data) {
-         $('#userCrudModal').html("Edit User");
+         $('#permohonanModal').html("Edit User");
           $('#btn-save').val("edit-user");
           $('#permohonan-modal').modal('show');
           $('#user_id').val(data.id);
@@ -188,8 +188,8 @@
     });   
   });
  
- if ($("#userForm").length > 0) {
-      $("#userForm").validate({
+ if ($("#permohonanForm").length > 0) {
+      $("#permohonanForm").validate({
  
      submitHandler: function(form) {
  
@@ -198,13 +198,13 @@
       $('#btn-save').html('Sending..');
       
       $.ajax({
-          data: $('#userForm').serialize(),
+          data: $('#permohonanForm').serialize(),
           url: '/senarai-permohonan-dihantar/create',
           type: "POST",
           dataType: 'json',
           success: function (data) {
-              var user = '<tr id="user_id_' + data.id + '"><td>' + data.id + '</td><td>' + data.name + '</td><td>' + data.email + '</td>';
-              user += '<td><a href="javascript:void(0)" id="edit-user" data-id="' + data.id + '" class="btn btn-info">Edit</a></td>';
+              var permohonan = '<tr id="user_id_' + data.id + '"><td>' + data.id + '</td><td>' + data.name + '</td><td>' + data.email + '</td>';
+              permohonan += '<td><a href="javascript:void(0)" id="edit-user" data-id="' + data.id + '" class="btn btn-info">Edit</a></td>';
               user += '<td><a href="javascript:void(0)" id="delete-user" data-id="' + data.id + '" class="btn btn-danger delete-user">Delete</a></td></tr>';
                
               
@@ -214,7 +214,7 @@
                   $("#user_id_" + data.id).replaceWith(user);
               }
  
-              $('#userForm').trigger("reset");
+              $('#permohonanForm').trigger("reset");
               $('#permohonan-modal').modal('hide');
               $('#btn-save').html('Save Changes');
               

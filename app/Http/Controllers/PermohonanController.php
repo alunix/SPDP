@@ -68,6 +68,8 @@ class PermohonanController extends Controller
       
         $pc = new PermohonanClass();       
         return $pc->create($request);
+
+        
     }  
     public function show($id)  {
         

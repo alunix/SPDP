@@ -50,7 +50,7 @@ class ShowPermohonan
             
             if($permohonan->permohonan_id == $permohonans_id[$i]) {
                             $rp = new RedirectPermohonan();
-                            return $rp->redirect($permohonan);}
+                            return $rp->redirectPermohonan($permohonan);}
                 } 
                 abort(403, 'Tidak dibenarkan');
     }
@@ -74,7 +74,7 @@ class ShowPermohonan
 
         if($panel_id==$user_id){
             $rp = new RedirectPermohonan();
-            return $rp->redirect($permohonan);
+            return $rp->redirectPermohonan($permohonan);
         }
         else{
             abort(404);

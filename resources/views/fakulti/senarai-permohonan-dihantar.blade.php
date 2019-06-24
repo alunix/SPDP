@@ -12,7 +12,7 @@
                                     <h2 class="title-1">Senarai permohonan dihantar</h2>
                                 </div>
                                 </div>
-                                <a href="javascript:void(0)" class="btn btn-success mb-2" id="create-new-user"> <i class="zmdi zmdi-plus"></i>
+                                <a href="javascript:void(0)" class="btn btn-success mb-2" id="create-permohonan"> <i class="zmdi zmdi-plus"></i>
                                         Permohonan Baharu</a> 
                             </div>
                             </div>                           
@@ -54,13 +54,13 @@
                                         <button onclick="location.href='{{ route('fakulti.kemajuanPermohonan',$permohonan->permohonan_id) }}'" class="item" data-toggle="tooltip" data-placement="top" title="Kemajuan Permohonan">
                                             <i  class="fas fa-spinner"></i>
                                         </button>
-                                            <button onclick="location.href='{{ route('dokumenPermohonan.dihantar',$permohonan->permohonan_id) }}'" class="item" data-toggle="tooltip" data-placement="top" title="Dokumen dihantar">
+                                        <button onclick="location.href='{{ route('dokumenPermohonan.dihantar',$permohonan->permohonan_id) }}'" class="item" data-toggle="tooltip" data-placement="top" title="Dokumen dihantar">
                                             <i class="fas fa-file-upload"></i>
                                         </button>
                                     </div>
                                 </td>
                             </tr>
-                            @endforeach
+                        @endforeach
                             
                             <tr class="spacer"></tr>
                         </tbody>
@@ -111,14 +111,14 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label"  style="white-space: nowrap;">Nama program/kursus</label>
                     <div class="col-sm-12">
-                        <input type="text" class="form-control" id="doc_title" name="doc_title" placeholder="Contoh : Sarjana Muda Sains Komputer" value="" required>
+                        <input type="text" class="form-control" id="doc_title" name="doc_title" placeholder="Contoh : Sarjana Muda Sains Komputer"  required>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label"  style="white-space: nowrap;">Muat naik dokumen(fail pdf)</label>
                     <div class="col-sm-12">
-                        <input type="file" class="form-control" id="file_link" name="file_link" placeholder="Contoh : Sarjana Muda Sains Komputer" value="" required>
+                        <input type="file" class="form-control" id="file_link" name="file_link"  required>
                     </div>
                 </div>
 
@@ -151,42 +151,12 @@
         }
     });
     /*  When user click add user button */
-    $('#create-new-user').click(function () {
-        $('#btn-save').val("create-user");
+    $('#create-permohonan').click(function () {
+        $('#btn-save').val("create-permohonan");
         $('#permohonanForm').trigger("reset");
         $('#permohonanModal').html("Permohonan Baharu");
         $('#permohonan-modal').modal('show');
     });
- 
-   /* When click edit user */
-    $('body').on('click', '#edit-user', function () {
-      var user_id = $(this).data('id');
-      $.get('ajax-crud/' + user_id +'/edit', function (data) {
-         $('#permohonanModal').html("Edit User");
-          $('#btn-save').val("edit-user");
-          $('#permohonan-modal').modal('show');
-          $('#user_id').val(data.id);
-          $('#name').val(data.name);
-          $('#email').val(data.email);
-      })
-   });
-   //delete user login
-    $('body').on('click', '.delete-user', function () {
-        var user_id = $(this).data("id");
-        confirm("Are You sure want to delete !");
- 
-        $.ajax({
-            type: "DELETE",
-            url: "{{ url('ajax-crud')}}"+'/'+user_id,
-            success: function (data) {
-                $("#user_id_" + user_id).remove();
-            },
-            error: function (data) {
-                console.log('Error:', data);
-            }
-        });
-    });   
-  });
  
  if ($("#permohonanForm").length > 0) {
       $("#permohonanForm").validate({
@@ -205,10 +175,10 @@
           success: function (data) {
               var permohonan = '<tr id="user_id_' + data.id + '"><td>' + data.id + '</td><td>' + data.name + '</td><td>' + data.email + '</td>';
               permohonan += '<td><a href="javascript:void(0)" id="edit-user" data-id="' + data.id + '" class="btn btn-info">Edit</a></td>';
-              user += '<td><a href="javascript:void(0)" id="delete-user" data-id="' + data.id + '" class="btn btn-danger delete-user">Delete</a></td></tr>';
+              permohonan += '<td><a href="javascript:void(0)" id="delete-user" data-id="' + data.id + '" class="btn btn-danger delete-user">Delete</a></td></tr>';
                
               
-              if (actionType == "create-user") {
+              if (actionType == "create-permohonan") {
                   $('#permohonans-add').prepend(user);
               } else {
                   $("#user_id_" + data.id).replaceWith(user);

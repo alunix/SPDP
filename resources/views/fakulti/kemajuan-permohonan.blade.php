@@ -98,7 +98,7 @@
 @foreach($laporans as $laporan)
 <tr>
 <th scope="row">{{ $loop->iteration}}</th>
-<td><a href ="<?php echo asset("storage/cadangan_permohonan_baharu/$laporan->tajuk_fail_link")?>">{{ basename($laporan->tajuk_fail_link) }}</td> </a>
+<td><a href ="<?php echo asset("storage/laporan/$laporan->tajuk_fail_link")?>">{{ basename($laporan->tajuk_fail_link) }}</a></td>
 <td> {{$laporan->id_penghantar_nama->name}}</td>
 <td> {{$laporan->id_penghantar_nama->role}}</td>
 <td> {{$laporan->komen}}</td>

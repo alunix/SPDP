@@ -67,8 +67,10 @@ class PermohonanClass
 
         $pemeriksa = User::where('email',$email)->first();
         Notification::route('mail',$pemeriksa->email)->notify(new PermohonanBaharu($permohonan,$pemeriksa)); //hantar email kepada penghantar
+           
+        return $permohonan;
 
-        return redirect()->route('permohonan.dihantar')->with($msg);
+        //return redirect()->route('permohonan.dihantar')->with($msg);
     }
 
     public function storePermohonanTidakDilulus(Request $request,$id)

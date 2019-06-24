@@ -51,14 +51,16 @@
                 <th>No</th>
                 <th>Permohonan ID</th>
                 <th>Nama program/kursus</th>
+                <th>Permohonan</th>
             </tr>
         </thead>
         <tbody>
             @foreach($permohonans as $permohonan)
             <tr>
-            <td>{{$loop->iteration}}</td>
+                <td>{{$loop->iteration}}</td>
                 <td>{{$permohonan->permohonan_id}}</td>
                 <td>{{$permohonan->doc_title}}</td>
+                <td><a href="{{ route('view-permohonan-baharu',$permohonan->permohonan_id) }}" class="btn btn-primary">SELECT</a></td>
             </tr>
             @endforeach
         </tbody>
@@ -75,7 +77,8 @@
             <tr>
                 <th>No</th>
                 <th>Dokumen permohonan</th>
-                <th>Nama program/kursus</th>
+                <th>Tajuk dokumen</th>
+                <th>Dokumen</th>
             </tr>
         </thead>
         <tbody>
@@ -84,17 +87,14 @@
             <td>{{$loop->iteration}}</td>
             <td>{{$dokumen->permohonan_id}}</td>
             <td>{{$dokumen->file_name}}</td>
+            <td><a href ="<?php echo asset("storage/cadangan_permohonan_baharu/$dokumen->file_link")?>">{{ basename($dokumen->file_name) }}</td></a>
             </tr>
             @endforeach
         </tbody>
     </table>
     @endif
-
     <br>
-
-    
     @if(! $laporans->isEmpty())
-       
     <h2>Maklumat laporan</h2>
     <table class="table table-striped">
         <thead>
@@ -102,13 +102,16 @@
                 <th>No</th>
                 <th>Laporan ID</th>
                 <th>Nama fail</th>
+                <th>Fail</th>
             </tr>
         </thead>
         <tbody>
             @foreach($laporans as $laporan)
             <tr>
             <td>{{$laporan->laporan_id}}</td>
-                <td>{{$laporan->tajuk_fail}}</td>
+            <td>{{$laporan->tajuk_fail}}</td>
+            <td><a href ="<?php echo asset("storage/laporan/$laporan->tajuk_fail_link")?>">{{ basename($laporan->tajuk_fail_link) }}</a></td>
+
               
             </tr>
             @endforeach

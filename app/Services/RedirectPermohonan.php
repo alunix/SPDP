@@ -11,10 +11,41 @@ class RedirectPermohonan
  
     public function redirect($permohonan)
     
-    {   
+    {     
         if($permohonan==null){
             abort(404);
         }
+
+        $dp = $permohonan->dokumen_permohonans->pluck('dokumen_permohonan_id');
+        $laporans= Laporan::whereIn('dokumen_permohonan_id',$dp)->get();
+        $role = auth()->user()->role;
+
+        if($role == 'pjk'){
+
+            if(($permohonan->status_permohonan_id==1 && $permohonan->jenis_permohonan_id!=8)||$permohonan->status_permohonan_id==3||$permohonan->status_permohonan_id==13)
+                return $this->redirectPermohonan($permohonan);
+            else
+                return view ('jenis_permohonan_view.default_permohonan')->with('permohonan',$permohonan)->with('laporans',$laporans);
+        }
+
+        else if($role == 'jppa'){
+
+            if(($permohonan->status_permohonan_id==1 && $permohonan->jenis_permohonan_id==8)||$permohonan->status_permohonan_id==4||$permohonan->status_permohonan_id==14)
+                return $this->redirectPermohonan($permohonan);
+            else
+                return view ('jenis_permohonan_view.default_permohonan')->with('permohonan',$permohonan)->with('laporans',$laporans);
+        }
+        else if($role == 'senat'){
+
+            if($permohonan->status_permohonan_id==5||$permohonan->status_permohonan_id==15)
+                return $this->redirectPermohonan($permohonan);
+            else
+                return view ('jenis_permohonan_view.default_permohonan')->with('permohonan',$permohonan)->with('laporans',$laporans);
+        }
+    }
+
+    public function redirectPermohonan($permohonan){
+
         $jp =$permohonan->jenis_permohonan->jenis_permohonan_kod;  
         
         $dp = $permohonan->dokumen_permohonans->pluck('dokumen_permohonan_id');

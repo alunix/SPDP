@@ -51,7 +51,7 @@ class DokumenPermohonanClass
             }
         
         $fileSize = $request->file($attached)->getSize();
-                
+
         $dp = new DokumenPermohonan();
         $dp->permohonan_id= $permohonan->permohonan_id;
         $dp->file_name = $fileNameWithExt;
@@ -70,6 +70,10 @@ class DokumenPermohonanClass
 
         //Hantar email kepada penghantar
         Notification::route('mail','dalbir@gmail.com')->notify(new DokumenPenambahbaikkan($dp)); //hantar email kepada penghantar
+
+        //$email = $this->getEmailPenambahbaikkan($permohonan,$status_permohonan);
+
+
     }
 
     public function getStatusPermohonan($status_permohonan_id)
@@ -92,6 +96,40 @@ class DokumenPermohonanClass
                 return;
                 break;
         }
+
+    }
+
+    public function getEmailPenambahbaikkan($permohonan,$status_permohonan_id)
+    {   
+
+        $penilaian = $permohonan->penilaian;
+        
+        if($penilaian==null){
+            // get email from database email settings workflow
+        }
+
+
+
+        switch ($status_permohonan_id) {
+            case 8:
+                $email = $penilaian->penilaian_panel_1->email;
+            break;
+            case 9:
+            $email = $penilaian->penilaian_pjk->email;
+            break; 
+            case 10:
+            $email = $penilaian->penilaian_jppa->email;
+            break; 
+            case 11:
+            $email = $penilaian->penilaian_senat->email;
+            break; 
+            
+            default:
+                return;
+                break;
+        }
+
+        return $email;
 
     }
 

@@ -19,6 +19,7 @@
     </div>
     </div>
 
+    @if(Auth::user()->role!="fakulti")
     @if(! $users->isEmpty())
       
     <h2>Maklumat pengguna</h2>
@@ -40,6 +41,7 @@
             @endforeach
         </tbody>
     </table>
+    @endif
     @endif
 
     @if(! $permohonans->isEmpty())
@@ -108,6 +110,7 @@
         <tbody>
             @foreach($laporans as $laporan)
             <tr>
+            <td>{{$loop->iteration}}</td>
             <td>{{$laporan->laporan_id}}</td>
             <td>{{$laporan->tajuk_fail}}</td>
             <td><a href ="<?php echo asset("storage/laporan/$laporan->tajuk_fail_link")?>">{{ basename($laporan->tajuk_fail_link) }}</a></td>

@@ -29,24 +29,23 @@
                         
                         @if(Auth::user()->role != "pjk")
                                
-                        <div class="form-group row">
-                            <label for="fakulti_current" class="col-md-4 col-form-label text-md-right">{{ __('Fakulti') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="fakulti_current" type="text"  value="{{$user->fakulti->f_nama}}" class="form-control" name="fakulti_current"  required autofocus readonly >
-                            </div>
-                        </div>
+                    
 
                         <div class="form-group row">
                             <label for="fakulti" class="col-md-4 col-form-label text-md-right">{{ __('Fakulti') }}</label>
 
                             <div class="col-md-6">
-                            <select class=”form-control” name='fakulti' style="width:330px;" id='fakulti'>
-                            @foreach ($fakultis as $fakulti)
-                            <option value="{{ $fakulti->fakulti_id }}">{{ $fakulti->f_nama }}</option>
-                            @endforeach 
-                            
+
+                            <select class=”form-control” name='fakulti' style="width:330px;" id='fakulti' required>
+                                
+                                @if ($fakultis->count())
+                                @foreach($fakultis as $fakulti)
+                                <option value="{{ $fakulti->fakulti_id }}" {{ $selectedFakulti == $fakulti->fakulti_id ? 'selected="selected"' : '' }}>{{ $fakulti->f_nama}}</option>   
+                                @endforeach
+                                @endif
+                                
                             </select>
+
                             </div>
                         </div>
                         @endif

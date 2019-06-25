@@ -30,18 +30,6 @@ class HomeController extends Controller
             case 'fakulti':
                     return $this->fakulti();
                 break;
-            // case 'pjk':
-            //         return view('dashboard/pjk-dashboard');
-            //     break; 
-            // case 'senat':
-            //     return view('dashboard/senat-dashboard');
-            // break; 
-            // case 'penilai':
-            //         return view('dashboard/penilai-dashboard');
-            //     break; 
-            // case 'jppa':
-            //         return view('dashboard/jppa-dashboard');
-            //     break; 
             default:
                    return $this->dashboard($role);
                 break;

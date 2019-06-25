@@ -13,10 +13,9 @@
                             <label for="doc_title" class="col-md-4 col-form-label text-md-right">{{ __('Tajuk Program') }}</label>
 
                             <div class="col-md-6">
-                               
                                 <input id="doc_title" type="text" value="{{ $permohonan->doc_title }}"  class="form-control" name="doc_title"  required autofocus readonly>
-                               
                             </div>
+
                         </div>
                             
 
@@ -25,8 +24,8 @@
 
                             <div class="col-md-6">
                                 <input id="nama_penghantar" type="text"  value="{{ $permohonan->user->name}}" class="form-control" name="nama_penghantar"  required autofocus readonly>
-                               
                             </div>
+
                         </div>
 
                         <div class="form-group row">
@@ -34,9 +33,8 @@
 
                             <div class="col-md-6">
                                 <input id="fakulti" type="text"  value="{{ $permohonan->user->fakulti->fnama_kod}}" class="form-control" name="fakulti"  required autofocus readonly>
-
-                               
                             </div>
+
                         </div>
                   
 
@@ -45,8 +43,8 @@
 
                             <div class="col-md-6">
                                 <input id="created_at" type="text" value="{{ $permohonan->created_at}}" class="form-control" name="created_at"  required autofocus readonly>
-                               
                             </div>
+                        
                         </div>
 
                         <div class="form-group row">
@@ -54,9 +52,8 @@
 
                             <div class="col-md-6">
                                 <input id="versi" type="text" value="{{ $permohonan->dokumen_permohonan()->versi}}" class="form-control" name="versi"  required autofocus readonly>
-
-                               
                             </div>
+
                         </div>
                              
                         <div class="form-group row">
@@ -76,8 +73,6 @@
                             <a href="{{ route('dokumenPermohonan.dihantar', ['permohonan' => $permohonan->permohonan_id])  }}">
                                     <input type="button" class="btn btn-info" value="Lihat versi sejarah" />
                             </a>
-
-
                        
                             @if(Auth::user()->role == "pjk")
                                  
@@ -92,8 +87,7 @@
                             <a href="{{ route('penilai.laporan.show', ['permohonan' => $permohonan->permohonan_id])  }}">
                                     <input `type`="button" class="btn btn-success" value="Lulus permohonan" />
                             </a>
-                            
-                          
+
 
                             @elseif(Auth::user()->role=="jppa")
                             
@@ -108,12 +102,13 @@
                                     <input type="button" class="btn btn-success" value="Lulus permohonan" />
                                     
                             </a>
-                            @endif
+                            
+                            @elseif(Auth::user()->role!="fakulti")
                             
                             <a href="{{route('laporan.permohonanTidakDilulus',$permohonan->permohonan_id)}}">
                                     <input type="button" class="btn btn-danger" value="Penambahbaikan" />
-                                    
                             </a>
+                            @endif
                             
                             </div>
                         </div>

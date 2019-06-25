@@ -15,9 +15,14 @@ class CreateTetapanAliranKerjasTable extends Migration
     {
         Schema::create('tetapan_aliran_kerjas', function (Blueprint $table) {
             $table->increments('tetapan_id');
-            $table->string('email_pjk');
-            $table->string('email_jppa');
-            $table->string('email_senat');
+            $table->integer('id_pjk')->unsigned();
+            $table->integer('id_jppa')->unsigned();
+            $table->integer('id_senat')->unsigned();
+
+            $table->foreign('id_pjk')->references('id')->on('users');
+            $table->foreign('id_jppa')->references('id')->on('users');
+            $table->foreign('id_senat')->references('id')->on('users');
+
             $table->timestamps();
         });
     }

@@ -45,9 +45,10 @@ class UserController extends Controller
     {   
         $user_id = auth()->user()->id;
         $user= User::find($user_id);
+       $fakultiSelected = auth()->user()->fakulti_id;
 
         $fakultis= Fakulti::all();
-        return view('auth.settings')->with('user',$user)->with('fakultis',$fakultis);
+        return view('auth.settings')->with('user',$user)->with('fakultis',$fakultis)->with('selectedFakulti',$fakultiSelected);
     }
 
     /**
@@ -72,10 +73,11 @@ class UserController extends Controller
             $user->name = $request->get('name');
             $user->email = $request->get('email');
 
-            if($role=='fakulti')
+            if($role=='fakulti'){
             $user->fakulti_id = $request->get('fakulti');
+            $user->save();
+            }
             else
-            
             $user->save();
             
             $msg = [

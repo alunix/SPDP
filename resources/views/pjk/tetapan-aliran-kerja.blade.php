@@ -14,26 +14,52 @@
                     
 
                         <div class="form-group row">
-                            <label for="email_pjk" class="col-md-4 col-form-label text-md-right">{{ __('Email PJK') }}</label>
+                            <label for="id_pjk" class="col-md-4 col-form-label text-md-right">{{ __('Pusat Jaminan Kualiti') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email_pjk" type="text"  value="{{$setting->email_pjk}}" class="form-control" name="email_pjk"  required autofocus >
+                            <select class=”form-control” name="id_pjk" style="width:330px;" id='id_pjk' required>
+                                
+                            @if ($pjks->count())
+                            @foreach($pjks as $pjk)
+                            <option value="{{ $pjk->id }}" {{ $selectedPjk == $pjk->id ? 'selected="selected"' : '' }}>{{ $pjk->name }}</option>    
+                            @endforeach
+                            @endif
+                            
+                            </select>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="email_jppa" class="col-md-4 col-form-label text-md-right">{{ __('Email JPPA') }}</label>
+                            <label for="id_jppa" class="col-md-4 col-form-label text-md-right">{{ __('JPPA') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email_jppa" type="text"  value="{{$setting->email_jppa}}" class="form-control" name="email_jppa"  required autofocus >
+                            <select class=”form-control” name="id_jppa" style="width:330px;" id="id_jppa" required>
+                                
+                            @if ($jppas->count())
+                            @foreach($jppas as $jppa)
+                            <option value="{{ $jppa->id }}" {{ $selectedJppa == $jppa->id ? 'selected="selected"' : '' }}>{{ $jppa->name }}</option> 
+                            @endforeach   
+                            @endif
+                            
+                            </select>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="email_senat" class="col-md-4 col-form-label text-md-right">{{ __('Email Senat') }}</label>
+                            <label for="id_senat" class="col-md-4 col-form-label text-md-right">{{ __('Senat') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email_senat" type="text"  value="{{$setting->email_senat}}" class="form-control" name="email_senat"  required autofocus >
+                            
+                            <select class=”form-control” name='id_senat' style="width:330px;" id='id_senat' required>
+                                
+                                @if ($senats->count())
+                                @foreach($senats as $senat)
+                                <option value="{{ $senat->id }}" {{ $selectedSenat == $senat->id ? 'selected="selected"' : '' }}>{{ $senat->name }}</option>   
+                                @endforeach
+                                @endif
+                                
+                            </select>
+
                             </div>
                         </div>
 

@@ -51,6 +51,7 @@ class PenilaianPJK
     $msg = [
         'message' => 'Laporan berjaya dimuat naik',
        ];
+
     return redirect()->route('home')->with($msg);
     }
 
@@ -72,7 +73,7 @@ class PenilaianPJK
         Notification::route('mail',$penilai->email)->notify(new PermohonanBaharu($permohonan,$penilai)); //hantar email kepada panel penilai
         
         $penilaian = new PenilaianPanelClass();
-        return $penilaian->create($permohonan,$selectedPenilai[0],$request);
+        $penilaian->create($permohonan,$selectedPenilai[0],$request);
         
         $msg = [
             'message' => 'Panel penilai dipilih dan emel telah dihantar',

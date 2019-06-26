@@ -12,7 +12,7 @@ class PenilaianPanel extends Model
   
      ];
 
-     protected $table = 'penilaian_panels';
+    protected $table = 'penilaian_panels';
 
 public function permohonan(){
     return $this->belongsTo('SPDP\Permohonan','permohonanID');// set the foreign key (second parameter)

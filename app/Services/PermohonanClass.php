@@ -57,20 +57,17 @@ class PermohonanClass
         $msg = [
             'message' => 'Permohonan berjaya dihantar',
            ];        
-        
 
         //Hantar email kepada pemeriksa        
         if($permohonan->jenis_permohonan_id == 8)
-           $email = TetapanAliranKerja::all()->first()->email_jppa;
+           $email = TetapanAliranKerja::all()->first()->jppa->email;
         else    
-            $email = TetapanAliranKerja::all()->first()->email_pjk;
+            $email = TetapanAliranKerja::all()->first()->pjk->email;
 
         $pemeriksa = User::where('email',$email)->first();
         Notification::route('mail',$pemeriksa->email)->notify(new PermohonanBaharu($permohonan,$pemeriksa)); //hantar email kepada penghantar
-           
-        return $permohonan;
 
-        //return redirect()->route('permohonan.dihantar')->with($msg);
+        return redirect()->route('permohonan.dihantar')->with($msg);
     }
 
     public function storePermohonanTidakDilulus(Request $request,$id)
@@ -87,15 +84,7 @@ class PermohonanClass
         //Create a new kemajuan permohonan for each progress
         $kp = new KemajuanPermohonanClass();
         $kp->create($permohonan);
-
-        // //Create notification
-        // $status = 16; // status = permohonan baharu
-        // $location = "senaraiPermohonanBaharu"; //named route in Persona
-        // $userFired= auth()->user()->id; //id penghantar
-        // $userToNotify =2; //hantar kepada Dr Dalbir from PJK
-        // $nc = new NotificationClass();
-        // $nc->create($request,$status,$location,$userFired,$userToNotify,$permohonan);
-
+        
         //Hantar email kepada penghantar
         $penghantar = User::find($permohonan->id_penghantar);
         Notification::route('mail',$penghantar->email)->notify(new PerluPenambahbaikkan($permohonan,$penghantar)); //hantar email kepada penghantar

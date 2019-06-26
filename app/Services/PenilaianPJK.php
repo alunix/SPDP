@@ -6,7 +6,7 @@ namespace SPDP\Services;
 use SPDP\Permohonan;
 use SPDP\User;
 use SPDP\Services\LaporanClass;
-use SPDP\Services\PenilaianClass;
+use SPDP\Services\PenilaianPanelClass;
 use SPDP\Services\KemajuanPermohonanClass;
 use SPDP\Services\StatusPermohonanClass;
 use Illuminate\Http\Request;
@@ -70,13 +70,11 @@ class PenilaianPJK
         $selectedPenilai = $request->input('checked'); //retrieve id of panel penilai
         $penilai= User::find($selectedPenilai[0]); 
         Notification::route('mail',$penilai->email)->notify(new PermohonanBaharu($permohonan,$penilai)); //hantar email kepada panel penilai
-
         
-
-        $penilaian = new PenilaianClass();
-        $penilaian =  $penilaian->create($permohonan);
-        $penilaian -> penilaian_panel_1= $selectedPenilai[0];
-        $penilaian -> save();
+        $penilaian = new PenilaianPanelClass();
+        $penilaian =  $penilaian->create($permohonan,$selectedPenilai[0],$request);
+        // $penilaian -> penilaian_panel_1= $selectedPenilai[0];
+        // $penilaian -> save();
 
         $msg = [
             'message' => 'Panel penilai dipilih dan emel telah dihantar',

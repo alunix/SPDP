@@ -35,8 +35,6 @@
 
                             <div class="col-md-6">
                                 <input id="nama_penghantar" type="text"  value="{{ $permohonan->user->name}}" class="form-control" name="nama_penghantar"  required autofocus readonly>
-
-                               
                             </div>
                         </div>
 
@@ -61,10 +59,6 @@
                             </div>
                         </div> 
 
-
-
-                              
-
                          <div class="form-group row">
                              <label for="file_link" class="col-md-4 col-form-label text-md-right">{{ __('Link Kepada File') }}</label>
 
@@ -73,6 +67,14 @@
                                 </div>
 
                         </div>   
+
+                        <div class="form-group row">
+                            <label for="deadline" class="col-md-4 col-form-label text-md-right">{{ __('Tarikh akhir/Deadline') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="deadline" type="datetime-local"   class="form-control" name="deadline"  required>
+                            </div>
+                        </div>
 
                         
 

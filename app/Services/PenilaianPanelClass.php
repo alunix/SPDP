@@ -10,8 +10,6 @@ use SPDP\Notifications\PendaftaranPengguna;
 use Notification;
 use Carbon\Carbon;
 
-
-
 class PenilaianPanelClass 
 {
     
@@ -29,10 +27,7 @@ class PenilaianPanelClass
         $penilaian->id_penilai=$selectedPenilai;
         $penilaian->tarikhAkhir= $request->input('deadline');
         $penilaian->tempoh=$duration;
-        $penilaian->save;
-    }   
-
-
-
-
+        $penilaian->save();
+        
+    }
 }

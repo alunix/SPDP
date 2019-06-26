@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class PenilaianPanel extends Model
 {
-    protected $fillable = [
-        'permohonan_id'
+protected $fillable = [
+        'permohonanID'
   
   
      ];
 
-    protected $table = 'penilaian_panels';
+protected $table = 'penilaian_panels';
 
 public function permohonan(){
     return $this->belongsTo('SPDP\Permohonan','permohonanID');// set the foreign key (second parameter)

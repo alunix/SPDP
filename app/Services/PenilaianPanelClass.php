@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use SPDP\Notifications\PendaftaranPengguna;
 use Notification;
-use Carbon;
+use Carbon\Carbon;
+
+
 
 class PenilaianPanelClass 
 {
@@ -20,19 +22,14 @@ class PenilaianPanelClass
         $datetTimeEnd=Carbon::parse( $request -> input('deadline')); 
         $to = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i',$currentDayTime);
         $from = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i',$datetTimeEnd);
-        // $to = $currentDayTime;
-        // $from =$datetTimeEnd;
-        $duration = $to->diffInDays($from);
+        $duration = $to->diffInDays($from); 
 
-        return $duration;
-
-                
         $penilaian = new PenilaianPanel();
         $penilaian->permohonanID= $permohonan->permohonan_id;
         $penilaian->id_pelantik= auth()->user()->id;
         $penilaian->id_penilai=$selectedPenilai;
         $penilaian->tarikhAkhir= $request->input('deadline');
-        $penilaian->tempoh=12;
+        $penilaian->tempoh=$duration;
         $penilaian->save;
 
        

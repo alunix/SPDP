@@ -8,7 +8,8 @@ use SPDP\Penilaian;
 use SPDP\KemajuanPermohonan;
 
 class Permohonan extends Model
-{
+{   
+    use \Staudenmeir\EloquentHasManyDeep\HasRelationships; //hasManyDeep package that is used to connect more than 3 tables
     protected $fillable = [
        'nama_penghantar', 'fakulti' , 'file_link' ,'status_program','file_name','doc_title','jenis_permohonan', 'status_permohonan_id','id',
 
@@ -37,9 +38,28 @@ class Permohonan extends Model
 
 }
 
- public function laporans(){
+//  public function laporans(){
 
-    return $this->dokumen_permohonans()->laporans();
+//     return $this->dokumen_permohonans()->laporans();
+
+//  }
+
+ public function laporans(){
+    
+    return $this->hasManyThrough(
+        'SPDP\Laporan', 
+        'SPDP\DokumenPermohonan', 
+        'permohonan_id', // Foreign key on users table...
+        'dokumen_permohonan_id', // Foreign key on permohonan table...
+        'permohonan_id', //Local key on permohonan table
+        'dokumen_permohonan_id'); //Local key on users table
+}
+
+
+
+ public function laporans_count(){
+
+    return $this->laporans()->count();
 
  }
 

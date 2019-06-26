@@ -178,14 +178,9 @@ class PenilaianPJK
         if($permohonan==null)
             abort(403);
 
-        $penilaian= $permohonan->penilaian;
-
-        if($penilaian==null)
-            abort(403);
-
         $dp = $permohonan->dokumen_permohonans->pluck('dokumen_permohonan_id');
         $laporans= Laporan::whereIn('dokumen_permohonan_id',$dp)->get();
-        return view('pjk.lampiran-pjk')->with('permohonan',$penilaian->permohonan)->with('penilaian',$penilaian)->with('laporans',$laporans);
+        return view('pjk.lampiran-pjk')->with('permohonan',$permohonan)->with('laporans',$laporans);
     }
 
     public function viewKursusTerasElektifBaharu($id)
@@ -202,9 +197,6 @@ class PenilaianPJK
     
     public function updateLaporanPanel(Request $request, $permohonan){
            
-        /*Cari permohonan since penilaian belongs to permohonan then baru boleh cari penilaian through eloquent relationship */
-        $penilaian= $permohonan->penilaian;
-        
         //Upload perakuan
         $attached = 'perakuan_pjk';
         $laporan = new LaporanClass();
@@ -221,8 +213,8 @@ class PenilaianPJK
 
         //If permohonan perlu diluluskan oleh JPPA
         if($permohonan->status_permohonan_id == 4){
-        $email = TetapanAliranKerja::all()->first()->email_jppa;
-        $pemeriksa = User::where('email',$email)->first();
+        $id_jppa = TetapanAliranKerja::all()->first()->id_jppa;
+        $pemeriksa = User::find($id_jppa);
         Notification::route('mail',$pemeriksa->email)->notify(new PermohonanBaharu($permohonan,$pemeriksa)); 
         }
 

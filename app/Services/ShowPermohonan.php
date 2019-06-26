@@ -8,6 +8,7 @@ use SPDP\Services\RedirectPermohonan;
 use SPDP\Permohonan;
 use SPDP\Penilaian;
 use SPDP\Services\KemajuanPermohonanClass;
+use SPDP\Services\SenaraiPermohonan;
 
 
 class ShowPermohonan
@@ -48,27 +49,25 @@ class ShowPermohonan
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
 
-        if($permohonan==null){
-            abort(404);
-         }
-        
-        $penilaian= $permohonan->penilaian;
+        $permohonans = new SenaraiPermohonan();
+        $permohonans = $permohonans->penilai();
 
-        if ($penilaian==null){
+        if ($permohonans==null){
             abort(404);
         }
 
-        $panel_id= $penilaian->penilaian_panel_1;
+        $permohonans_id = $permohonans->pluck('permohonan_id');
+       
 
-        if($panel_id==$user_id){
-            $rp = new RedirectPermohonan();
-            return $rp->redirectPermohonan($permohonan);
-        }
-        else{
-            abort(404);
-        }
-
-        
+        for($i=0;$i<count($permohonans_id);$i++){ 
+           
+            if($permohonan->permohonan_id == $permohonans_id[$i]) {
+                $rp = new RedirectPermohonan();
+                return $rp->redirectPermohonan($permohonan);
+            }
+       }
+       
+       abort(404);
     }
 
 

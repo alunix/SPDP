@@ -32,8 +32,8 @@ class PenilaianPenilai
         Notification::route('mail',$penghantar->email)->notify(new PermohonanDiluluskan($permohonan,$penghantar)); //hantar email kepada penghantar
 
         $panel = auth()->user();
-        $email = TetapanAliranKerja::all()->first()->email_pjk;
-        $pjk= User::where('email',$email)->first();
+        $id_pjk = TetapanAliranKerja::all()->first()->id_pjk;
+        $pjk= User::find($id_pjk);
         Notification::route('mail',$pjk->email)->notify(new LaporanDikeluarkan($permohonan,$pjk,$panel)); 
         
 

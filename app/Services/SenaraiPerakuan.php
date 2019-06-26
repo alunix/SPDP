@@ -4,6 +4,7 @@ namespace SPDP\Services;
 
 use SPDP\Permohonan;
 use SPDP\Penilaian;
+use SPDP\PenilaianPanel;
 
 
 
@@ -48,16 +49,15 @@ class SenaraiPerakuan
     public function penilai(){
 
         $user_id = auth()->user()->id;
-       
-        $penilaians= Penilaian::where('penilaian_panel_1',$user_id)->get();
+        $pp = PenilaianPanel::where('id_penilai',$user_id)->get();
+        $permohonans_id = $pp->pluck('permohonanID');
 
-        if (empty((array) $penilaians)) { //check if array object is empty
+        if (empty((array) $permohonans_id)) { //check if array object is empty
             $permohonans= new Permohonan();
         }
 
         else{
-            $permohonans_id= $penilaians->pluck('permohonan_id_penilaian');
-            $permohonans= Permohonan::whereIn('permohonan_id',$permohonans_id)->where('status_permohonan_id','=','2')->orWhere('status_permohonan_id','=','12')->get();
+            $permohonans= Permohonan::whereIn('permohonan_id',$permohonans_id)->where('status_permohonan_id','=','12')->get();
         }
 
         return $permohonans;

@@ -21,17 +21,8 @@
                         <h4>Purata masa diperlukan untuk meluluskan satu permohonan = {{$avg_duration}} jam</h4>
                         <h4>Jumlah permohonan diluluskan : {{$lulus->count()}}</h4>
 
-                        <div class="form-group row">
-                            <label for="year-report" class="col-md-4 col-form-label text-md-right">{{ __('Sila pilih tahun laporan') }}</label>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Submit') }}
-                                </button>
-                            </div>
-                        </div>
+                       
+                       
                    
                         <div class="row m-t-25">
                         

@@ -103,12 +103,12 @@
                                     
                             </a>
                             
-                            @elseif(Auth::user()->role!="fakulti")
+                            @endif
                             
                             <a href="{{route('laporan.permohonanTidakDilulus',$permohonan->permohonan_id)}}">
                                     <input type="button" class="btn btn-danger" value="Penambahbaikan" />
                             </a>
-                            @endif
+                            
                             
                             </div>
                         </div>

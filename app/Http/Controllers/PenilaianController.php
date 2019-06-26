@@ -61,7 +61,7 @@ class PenilaianController extends Controller
     public function showLaporanPenilai($id)
     {
         $permohonan = Permohonan::find($id);
-        return view('panel_penilai.panel-lulus-permohonan')->with('penilaian',$permohonan->penilaian)->with('permohonan',$permohonan);
+        return view('panel_penilai.panel-lulus-permohonan')->with('permohonan',$permohonan);
     }
 
   

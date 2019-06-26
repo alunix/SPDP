@@ -4,6 +4,8 @@ namespace SPDP\Services;
 
 use SPDP\Permohonan;
 use SPDP\Penilaian;
+use SPDP\PenilaianPanel;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -59,15 +61,20 @@ class SenaraiPermohonan
 
         $user_id = auth()->user()->id;
        
-        $penilaians= Penilaian::where('penilaian_panel_1',$user_id)->get();
-
-        if (empty((array) $penilaians)) { //check if array object is empty
+        $permohonans=  DB::table("permohonans") 
+        ->join('penilaian_panels','penilaian_panels.permohonanID','=','permohonans.permohonan_id')
+        ->join('users','users.id','=','penilaian_panels.id_penilai')
+        ->where('permohonans.status_permohonan_id',2)
+        ->where('penilaian_panels.id_penilai',$user_id)       
+        ->get();
+        
+         if (empty((array) $permohonans)) { //check if array object is empty
             $permohonans= new Permohonan();
         }
 
         else{
-            $permohonans_id= $penilaians->pluck('permohonan_id_penilaian');
-            $permohonans= Permohonan::whereIn('permohonan_id',$permohonans_id)->where('status_permohonan_id','=','2')->get();
+            $id = $permohonans->pluck('permohonan_id');
+            $permohonans = Permohonan::whereIn('permohonan_id',$id)->get();
         }
 
         return $permohonans;
@@ -75,22 +82,10 @@ class SenaraiPermohonan
         }
     public function jppa(){
 
-        $user_id = auth()->user()->id;
-        $penilaians= Penilaian::where('penilaian_panel_1',$user_id)->get();
+        $permohonans = Permohonan::where('jenis_permohonan_id',8)->where('status_permohonan_id',1)->orWhere('status_permohonan_id',4)->get();
 
-        if (empty((array) $penilaians)) { //check if array object is empty
-            $permohonans= new Permohonan();
-        }
-
-        else{
-            $permohonans_id= $penilaians->pluck('permohonan_id_penilaian');
-            $permohonans= Permohonan::whereIn('permohonan_id',$permohonans_id)->where('jenis_permohonan_id','=','8')->where('status_permohonan_id','=','1')->orWhere('status_permohonan_id','=','4')->get();
-            
-        }
-
-       
         return $permohonans;
-                
+      
         }
     public function senat(){        
         $permohonans = Permohonan::where('status_permohonan_id','=','5')->get();

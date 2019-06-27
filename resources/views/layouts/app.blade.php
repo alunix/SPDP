@@ -216,6 +216,13 @@
                                     <span class="bot-line"></span>Analitik</a>
                             </li>
                             @else
+
+                            <li>
+                                <a href="{{route('analitik.fakulti',[Auth::user()->fakulti_id])}}">
+                                    <i class="fas fa-chart-bar"></i>
+                                    <span class="bot-line"></span>Analitik</a>
+                            </li>
+
                             @endif
                            
                         </ul>

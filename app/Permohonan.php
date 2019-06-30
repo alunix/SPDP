@@ -71,7 +71,7 @@ class Permohonan extends Model
  
 public function penilaian_panels(){
     
-    return $this->hasMany('SPDP\PenilaianPanel','permohonan_id_penilaian');
+    return $this->hasMany('SPDP\PenilaianPanel','permohonanID');
 }
  public function status_permohonan(){
    

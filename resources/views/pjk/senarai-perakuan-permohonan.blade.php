@@ -39,7 +39,7 @@
                                                 <td>{{$permohonan->doc_title}}</td>   
                                                 <td>{{$permohonan->user->name}} </td>
                                                 <td>{{$permohonan->user->fakulti->fnama_kod}} </td> 
-                                                <td>{{$permohonan->created_at->format('h:i a d/m/Y')}}  </td> 
+                                                <td>{{$permohonan->updated_at->format('h:i a d/m/Y')}}  </td> 
                                                 <td>
                                                     <div class="table-data-feature">
                                                         <button onclick="location.href='{{ route('pjk.perakuan.show',$permohonan->permohonan_id) }}'" class="item" data-toggle="tooltip" data-placement="top" title="Lihat permohonan">

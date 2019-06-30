@@ -12,6 +12,7 @@ protected $fillable = [
   
      ];
 
+     protected $primaryKey = 'penilaian_id';
 protected $table = 'penilaian_panels';
 
 public function permohonan(){

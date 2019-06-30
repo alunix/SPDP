@@ -4,14 +4,12 @@ namespace SPDP\Services;
 
 use SPDP\Permohonan;
 use Illuminate\Http\Request;
-use SPDP\KemajuanPermohonan;
-use SPDP\Laporan;
-use SPDP\Penilaian;
 use SPDP\Services\KemajuanPermohonanClass;
-use SPDP\Services\MuatNaikLaporan;
 use SPDP\DokumenPermohonan;
 use SPDP\Notifications\DokumenPenambahbaikkan;
 use Notification;
+use SPDP\TetapanAliranKerja;
+use SPDP\User;
 
 
 class DokumenPermohonanClass 
@@ -67,9 +65,10 @@ class DokumenPermohonanClass
 
         $kp= new KemajuanPermohonanClass();
         $kp->create($permohonan);
-
+        
+         $user = $this->getEmailPenambahbaikkan($permohonan,$status_permohonan);
         //Hantar email kepada penghantar
-        Notification::route('mail','dalbir@gmail.com')->notify(new DokumenPenambahbaikkan($dp)); //hantar email kepada penghantar
+        Notification::route('mail',$user->email)->notify(new DokumenPenambahbaikkan($dp)); //hantar email kepada penghantar
 
         //$email = $this->getEmailPenambahbaikkan($permohonan,$status_permohonan);
 
@@ -101,35 +100,33 @@ class DokumenPermohonanClass
 
     public function getEmailPenambahbaikkan($permohonan,$status_permohonan_id)
     {   
-
-        $penilaian = $permohonan->penilaian;
-        
-        if($penilaian==null){
-            // get email from database email settings workflow
-        }
-
-
-
         switch ($status_permohonan_id) {
             case 8:
-                $email = $penilaian->penilaian_panel_1->email;
+            $panel = $permohonan->penilaian_panels->pluck('id_penilai');
+            $user = User::find($panel);
             break;
             case 9:
-            $email = $penilaian->penilaian_pjk->email;
+            $tetapan = TetapanAliranKerja::all()->first();
+            $id_user= $tetapan->value('id_pjk');
+            $user= User::find($id_user);
             break; 
             case 10:
-            $email = $penilaian->penilaian_jppa->email;
+            $tetapan = TetapanAliranKerja::all()->first();
+            $id_user= $tetapan->value('id_jppa');
+            $user= User::find($id_user);
             break; 
             case 11:
-            $email = $penilaian->penilaian_senat->email;
-            break; 
-            
+            $tetapan = TetapanAliranKerja::all()->first();
+            $id_user= $tetapan->value('id_senat');
+            $user= User::find($id_user);
+            break;
+
             default:
                 return;
                 break;
         }
 
-        return $email;
+        return $user;
 
     }
 

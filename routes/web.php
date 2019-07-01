@@ -11,9 +11,6 @@
 |
 */
 
-
-
-
 Auth::routes();
 Route::get('/show-testing', 'PermohonanController@testing_show'); // Redirect to dashboard/home(Same page)
 
@@ -21,17 +18,12 @@ Route::get('/pusher', function(){
 	return view('pusher');
 });
 
-
-
 Route::post('/search','SearchController@search')->name('search');
 Route::get('/dashboard', 'HomeController@index')->name('/dashboard')->middleware('auth'); // Redirect to dashboard/home(Same page)
 Route::get('/', 'HomeController@index')->middleware('auth')->name('home'); //Redirect index page to login if not authenticated and will return homepage if authenticated.
 Route::get('/notifikasi', 'NotificationController@index')->middleware('auth')->name('notifications.index'); //Redirect index page to login if not authenticated and will return homepage if authenticated.
 
 /*........................................Start middleware.............................*/
-
-
-
 /*----------------------- Bahagian pihak fakulti ------------- */	
 Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware','middleware' => 'auth'], function() {
 	
@@ -75,8 +67,7 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware','middlewa
 	
 	
 	/*----------------------- First penilaian program pengajian  ------------- */	
-
-	Route::get('/senarai-penilaian','PenilaianController@index')->name('penilaian.show');
+	Route::get('/senarai-penilaian','PenilaianPanelController@index')->name('penilaian.show');
 	
 	/*-----------------------Daftar penilai---------------------------------------------*/
 	Route::get('/pendaftaran-pengguna', 'UserController@create_pengguna')->name('register.panel_penilai.show');

@@ -16,16 +16,16 @@ class PenilaianPanelClass
     public function create($permohonan,$selectedPenilai,$request)
     {   
         $currentDayTime = Carbon::now('Asia/Kuala_Lumpur');
-        $datetTimeEnd=Carbon::parse( $request -> input('deadline')); 
-        $to = Carbon::createFromFormat('Y-m-d H:s:i',$currentDayTime);
-        $from = Carbon::createFromFormat('Y-m-d H:s:i',$datetTimeEnd);
-        $duration = $to->diffInDays($from); 
+        $dateTimeEnd=Carbon::parse( $request -> input('deadline')); 
+        $from = Carbon::createFromFormat('Y-m-d H:s:i',$currentDayTime);
+        $to = Carbon::createFromFormat('Y-m-d H:s:i',$dateTimeEnd);       
+        $duration = $from->diffInDays($to); 
 
         $penilaian = new PenilaianPanel();
         $penilaian->permohonanID= $permohonan->permohonan_id;
         $penilaian->id_pelantik= auth()->user()->id;
         $penilaian->id_penilai=$selectedPenilai;
-        $penilaian->tarikhAkhir= $request->input('deadline');
+        $penilaian->tarikhAkhir=$to;
         $penilaian->tempoh=$duration;
         $penilaian->save();
         

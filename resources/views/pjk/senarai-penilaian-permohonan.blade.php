@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">Senarai Penilaian Panel Penilai</div>
 
-            <div class="card-body" style="width:500px;">
+            <div class="card-body" style="width:700px;">
     
                   
             
@@ -16,16 +16,15 @@
 
                         <thead>
                             <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Jenis permohonan</th>
-                            <th scope="col">Tajuk Dokumen</th>
-                            <th scope="col">PJK</th>
-                            <th scope="col">Panel Penilai</th>                          
-                            <th scope="col">JPPA</th>
-                            <th scope="col">Senat</th>
+                            <th scope="col">Penilaain ID</th>
+                            <th scope="col">Permohonan ID</th>
+                            <th scope="col">Pelantik(PJK)</th>
+                            <th scope="col">Penilai</th>
+                            <th scope="col">Tarikh penilaian bermula</th>
+                            <th scope="col">Tarikh Akhir/Deadline</th>                          
+                            <th scope="col">Tempoh(Hari)</th>
+                            <th scope="col"></th>
 
-
-                            
                             </tr>
                         </thead>
                         <tbody>
@@ -35,21 +34,14 @@
                        
         @foreach($penilaians as $penilaian)
             <tr>
-                 {{--<th scope="row"><a href="/permohonans/{permohonan}/lampiran-pusat-jaminan-kualiti/{penilaian}">{{ $penilaian->id }}</th>--}}
-                 
-                 @if(Auth::user()->role == "pjk")
-                <th scope="row"><a href="/penilaian/{{$penilaian->id}}">{{ $penilaian->id }}</th>
-                
-                @elseif(Auth::user()->role=="jppa")
-                <th scope="row"><a href="/jppa/penilaian/{{$penilaian->id}}">{{ $penilaian->id }}</th>
-                @endif
-                
-                <th scope="row>">{{$penilaian->permohonan->jenis_permohonan->jenis_permohonan_huraian}}</th>
-                <th scope="row>">{{$penilaian->permohonan->doc_title}}</th>
-                <th scope="row">{{ $penilaian->pjk->name }}</th>
-               <th scope="row">{{ $penilaian->panel_penilai->name}}</th>           
-                <th scope="row">{{ $penilaian->jppa }}</th>
-                <th scope="row">{{ $penilaian->senat}}</th>
+                <th scope="row>">{{$penilaian->penilaian_id}}</th>
+                <th scope="row>">{{$penilaian->permohonanID}}</th>
+                <th scope="row">{{ $penilaian->id_pelantik }}</th>
+               <th scope="row">{{ $penilaian->id_penilai}}</th>   
+               <th scope="row">{{ $penilaian->created_at}}</th>                
+                <th scope="row">{{ $penilaian->tarikhAkhir }}</th>
+                <th scope="row">{{ $penilaian->tempoh}}</th>
+                <td><a href="{{ route('view-permohonan-baharu',$penilaian->permohonanID) }}" class="btn btn-primary">SELECT</a></td>
             </tr>
         @endforeach
         @else

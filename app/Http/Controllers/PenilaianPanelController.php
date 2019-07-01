@@ -14,7 +14,8 @@ class PenilaianPanelController extends Controller
      */
     public function index()
     {
-        //
+        $penilaians = PenilaianPanel::all();
+        return view('pjk.senarai-penilaian-permohonan')->with('penilaians',$penilaians);
     }
 
     /**

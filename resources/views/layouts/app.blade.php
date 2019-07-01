@@ -204,6 +204,10 @@
                                     <li>
                                         <a href="{{route('senaraiPerakuan.show')}}">Permohonan untuk diperakui</a>
                                     </li>
+
+                                    <li>
+                                        <a href="{{route('penilaian.show')}}">Senaria penilaian panel</a>
+                                    </li>
                                  
                                 </ul>
                             </li>

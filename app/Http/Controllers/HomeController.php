@@ -31,7 +31,7 @@ class HomeController extends Controller
                     return $this->fakulti();
                 break;
             default:
-                   return $this->dashboard($role);
+            return $this->dashboard($role);
                 break;
         }
     

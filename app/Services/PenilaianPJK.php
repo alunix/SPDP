@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Hash;
 use Notification;
 use SPDP\Laporan;
 use SPDP\Notifications\PermohonanBaharu;
+use SPDP\Notifications\PelantikanPanelPenilai;
 use SPDP\Notifications\PermohonanDiluluskan;
 use SPDP\TetapanAliranKerja;
 
@@ -66,14 +67,14 @@ class PenilaianPJK
         //Create a new kemajuan permohonan for each progress
         $kp = new KemajuanPermohonanClass();
         $kp->create($permohonan);
-
-        //Create a new penilaian in penilaian table
-        $selectedPenilai = $request->input('checked'); //retrieve id of panel penilai
-        $penilai= User::find($selectedPenilai[0]); 
-        Notification::route('mail',$penilai->email)->notify(new PermohonanBaharu($permohonan,$penilai)); //hantar email kepada panel penilai
-        
+        //retrieve id of panel penilai
+        $selectedPenilai = $request->input('checked');
+        //Create a new penilaian in penilaian panel table
         $penilaian = new PenilaianPanelClass();
-        $penilaian->create($permohonan,$selectedPenilai[0],$request);
+        $penilaian = $penilaian->create($permohonan,$selectedPenilai[0],$request);
+        //Send email to panel penilai
+        $penilai= User::find($selectedPenilai[0]); 
+        Notification::route('mail',$penilai->email)->notify(new PelantikanPanelPenilai($permohonan,$penilaian,$penilai)); //hantar email kepada panel penilai
         
         $msg = [
             'message' => 'Panel penilai dipilih dan emel telah dihantar',

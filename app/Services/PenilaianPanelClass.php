@@ -28,6 +28,8 @@ class PenilaianPanelClass
         $penilaian->tarikhAkhir=$to;
         $penilaian->tempoh=$duration;
         $penilaian->save();
+
+        return $penilaian;
         
     }
 }

@@ -206,7 +206,7 @@
                                     </li>
 
                                     <li>
-                                        <a href="{{route('penilaian.show')}}">Senaria penilaian panel</a>
+                                        <a href="{{route('penilaian.show')}}">Senarai penilaian panel</a>
                                     </li>
                                  
                                 </ul>

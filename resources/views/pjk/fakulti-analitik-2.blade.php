@@ -11,7 +11,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="overview-wrap">
-                                    <h2 class="title-1">{{$fakulti->f_nama}}</h2>
+                                    <h2 class="title-1"> Analitik {{$fakulti->fnama_kod}} tahun {{$year_report}}</h2>
                                 </div>
                             </div>
                         </div>

@@ -16,7 +16,7 @@
                             </div>
                         </div>
                         <hr>
-
+                        <form method="POST" action="{{ route('analitik.permohonan.submit') }}">
                      
                         <h4>Purata masa diperlukan untuk meluluskan satu permohonan = {{$avg_duration}} jam</h4>
                         <h4>Jumlah permohonan diluluskan : {{$lulus->count()}}</h4>
@@ -88,7 +88,8 @@
 						<td> {{$permohonan["jumlah_diluluskan"]}}</td> 
 						<td> {{$permohonan["jumlah_penambahbaikkan"]}}</td> 
 						<td> {{$permohonan["jumlah_dokumen_permohonan"]}}</td> 
-						<td><a href="{{ route('analitik.fakulti',$permohonan['fakulti_id'],$year_report) }}" class="btn btn-primary">SELECT</a></td>
+						--{{<td><a href="{{ route('analitik.fakulti',$permohonan['fakulti_id'],$year_report) }}" class="btn btn-primary">SELECT</a></td>}}--
+                        <td><a href="{{ route('analitik.fakulti',[$permohonan['fakulti_id'],$year_report]) }}" onclick="$(this).closest('form').submit()">Submit Link</a></td>
 
 
                         </tr>

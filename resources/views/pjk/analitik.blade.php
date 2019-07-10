@@ -88,7 +88,7 @@
 						<td> {{$permohonan["jumlah_diluluskan"]}}</td> 
 						<td> {{$permohonan["jumlah_penambahbaikkan"]}}</td> 
 						<td> {{$permohonan["jumlah_dokumen_permohonan"]}}</td> 
-						<td><a href="{{ route('analitik.fakulti',$permohonan['fakulti_id']) }}" class="btn btn-primary">SELECT</a></td>
+						<td><a href="{{ route('analitik.fakulti',$permohonan['fakulti_id'],$year_report) }}" class="btn btn-primary">SELECT</a></td>
 
 
                         </tr>

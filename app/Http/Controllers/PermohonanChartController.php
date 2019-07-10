@@ -8,7 +8,6 @@ use SPDP\Charts\JenisPermohonanChart;
 use SPDP\Permohonan;
 use SPDP\Fakulti;
 use Charts;
-use Illuminate\Support\Facades\DB;
 use SPDP\Services\AnalitikFakulti;
 use SPDP\Services\Analitik;
 

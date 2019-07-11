@@ -36,8 +36,8 @@
             <tr>
                 <th scope="row>">{{$penilaian->penilaian_id}}</th>
                 <th scope="row>">{{$penilaian->permohonanID}}</th>
-                <th scope="row">{{ $penilaian->id_pelantik }}</th>
-               <th scope="row">{{ $penilaian->id_penilai}}</th>   
+                <th scope="row">{{ $penilaian->pelantik->name }}</th>
+               <th scope="row">{{ $penilaian->penilai->name}}</th>   
                <th scope="row">{{ $penilaian->created_at}}</th>                
                 <th scope="row">{{ $penilaian->tarikhAkhir }}</th>
                 <th scope="row">{{ $penilaian->tempoh}}</th>

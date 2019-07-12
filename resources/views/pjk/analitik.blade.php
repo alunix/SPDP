@@ -88,8 +88,8 @@
 						<td> {{$permohonan["jumlah_diluluskan"]}}</td> 
 						<td> {{$permohonan["jumlah_penambahbaikkan"]}}</td> 
 						<td> {{$permohonan["jumlah_dokumen_permohonan"]}}</td> 
-						--{{<td><a href="{{ route('analitik.fakulti',$permohonan['fakulti_id'],$year_report) }}" class="btn btn-primary">SELECT</a></td>}}--
-                        <td><a href="{{ route('analitik.fakulti',[$permohonan['fakulti_id'],$year_report]) }}" onclick="$(this).closest('form').submit()">Submit Link</a></td>
+						<td><a href="{{ route('analitik.fakulti',['fakulti_id'=>$permohonan['fakulti_id'],'year_report'=>$year_report]) }}" class="btn btn-primary">SELECT</a></td>
+                        <td><a href="{{ route('analitik.fakulti',['fakulti_id'=>$permohonan['fakulti_id'],'year_report'=>$year_report]) }}" onclick="$(this).closest('form').submit()">Submit Link</a></td>
 
 
                         </tr>

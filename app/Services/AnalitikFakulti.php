@@ -9,6 +9,7 @@ use SPDP\Permohonan;
 use SPDP\Fakulti;
 use Charts;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 
 class AnalitikFakulti
 {
@@ -31,7 +32,6 @@ class AnalitikFakulti
         ->orderBy('count_jenis_permohonan','desc') 
         ->groupBy('jenis_permohonan_id') 
         ->first();
-
         
         $A=  DB::table("permohonans") 
         ->join('users','users.id','=','permohonans.id_penghantar')
@@ -56,18 +56,24 @@ class AnalitikFakulti
         $highest_jp_id =$jenis_permohonan->id;
         $highest_jp_id = Permohonan::find($highest_jp_id); // find jenis permohonan huraian through eloquent
         $highest_count_jp = $jenis_permohonan->count_jenis_permohonan;
-        
 
         return view('pjk.analitik-permohonan-menu')->with('chart',$chart)->with('pie_chart',$pie_chart)->with('sort_sum_years',$sort_sums_years)->with('highest_jp_id',$highest_jp_id)->with('highest_count_jp',$highest_count_jp);
     }
 
 
 
-    public function annual($year_report)
+    public function annual($request,$year_report)
     {   
-        $fakulti_id = auth()->user()->fakulti_id;
+        if ($request->isMethod('post'))
+        {   
+            $fakulti_id = auth()->user()->fakulti_id;
+        }
+    
+        else{
+            $fakulti_id = $request->fakulti_id;
+        }
+        
         $fakulti = Fakulti::find($fakulti_id);
-       
         $permohonans = $fakulti->permohonans;
         $permohonans_id = $permohonans->sortBy('permohonan_id')->pluck('permohonan_id');
         $kp = $fakulti->kemajuan_permohonans->sortBy('permohonan_id');
@@ -129,16 +135,10 @@ class AnalitikFakulti
         ->where('users.fakulti_id', $fakulti_id)
         ->get();
 
-        return $lulus;
-
-       
-
         $permohonans_id = Permohonan::whereIn('permohonan_id',$lulus->pluck('permohonan_id'))->get();
         $improvements_list =  Permohonan::whereIn('permohonan_id',$improvements->pluck('permohonan_id'))->get();
 
-       return view ('pjk.fakulti-analitik-2')->with('improvements_list',$improvements_list)->with('permohonan_lulus',$permohonans_id)->with('pie_chart',$pie_chart)->with('bar_chart',$bar_chart)->with('line_chart',$line_chart)->with('fakulti',$fakulti)->with('dokumen_permohonans',$dokumen_permohonans)->with('permohonans',$permohonans)->with('jumlah_penambahbaikkan',$improvements)->with('improvements',$improvements)->with('year_report',$year_report);
-        
-        
+        return view ('pjk.fakulti-analitik-2')->with('improvements_list',$improvements_list)->with('permohonan_lulus',$permohonans_id)->with('pie_chart',$pie_chart)->with('bar_chart',$bar_chart)->with('line_chart',$line_chart)->with('fakulti',$fakulti)->with('dokumen_permohonans',$dokumen_permohonans)->with('permohonans',$permohonans)->with('jumlah_penambahbaikkan',$improvements)->with('improvements',$improvements)->with('year_report',$year_report);
     }
 }
 

@@ -78,8 +78,8 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware','middlewa
 	// Route::patch('/permohonan/{permohonan}/perakuan-pjk','PenilaianController@uploadPerakuanPjk')->name('pjk.perakuanLulus.submit');
 
 	/*-----------------------Lampiran perakuan PJK ---------------------------------------------*/
-	Route::patch('/penilaian/{permohonan}','PenilaianController@uploadPerakuanPjk')->name('pjk.perakuan.submit');
-	Route::get('/penilaian/{permohonan}','PenilaianController@showPerakuanPjk')->name('pjk.perakuan.show');
+	Route::patch('/lampiran-perakuan-pjk/{permohonan}','PenilaianController@uploadPerakuanPjk')->name('pjk.perakuan.submit');
+	Route::get('/lampiran-perakuan-pjk/{permohonan}','PenilaianController@showPerakuanPjk')->name('pjk.perakuan.show');
 
 	/*-----------------------Pelantikan penilai---------------------------------------------*/
 	

@@ -17,5 +17,7 @@ $uri = urldecode(
 if ($uri !== '/' && file_exists(__DIR__.'/public'.$uri)) {
     return false;
 }
-
-require_once __DIR__.'/public_html/index.php';
+//Production
+//require_once __DIR__.'/public_html/index.php';
+//Local
+require_once __DIR__.'/public/index.php';

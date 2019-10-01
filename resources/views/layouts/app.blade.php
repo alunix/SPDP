@@ -217,6 +217,7 @@
     <div class="section__content section__content--p30">
         <div class="container">   
             @yield('content')
+          
         </div>
     </div>
         </main>

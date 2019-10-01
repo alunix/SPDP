@@ -8,8 +8,13 @@
               <h2 class="title-1">Senarai permohonan dihantar</h2>
             </div>
           </div>
+          <modal name="permohonan_baharu">hello, world!</modal>
 
-          <a v-bind:href="'/permohonan-baharu'" class="btn btn-success mb-2" id="create-permohonan">
+          <!-- <a v-bind:href="'/permohonan-baharu'" class="btn btn-success mb-2" id="create-permohonan">
+            <i class="zmdi zmdi-plus"></i>
+            Permohonan Baharu
+          </a>-->
+          <a v-on:click="show_model()" class="btn btn-success mb-2" id="create-permohonan">
             <i class="zmdi zmdi-plus"></i>
             Permohonan Baharu
           </a>
@@ -112,6 +117,14 @@ export default {
         .then(res => {
           this.permohonans = res;
         });
+    },
+    show_model() {
+      //   var vm = this;
+      //   var URL = "resources\views\fakultimodal\fakulti_insert_permohonan.html";
+      //   axios.get(URL).then(response => {
+      //     vm.$modal.show(response);
+      //   });
+      this.$modal.show("permohonan_baharu");
     }
   }
 };

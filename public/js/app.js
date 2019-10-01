@@ -49132,10 +49132,34 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "au-breadcrumb-content" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-success mb-2",
+              attrs: { href: "/permohonan-baharu", id: "create-permohonan" }
+            },
+            [
+              _c("i", { staticClass: "zmdi zmdi-plus" }),
+              _vm._v("\n            Permohonan Baharu\n          ")
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("hr")
+    ]),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
     _c("div", { staticClass: "table-responsive table-responsive-data2" }, [
       _c("table", { staticClass: "table table-data2" }, [
-        _vm._m(0),
+        _vm._m(1),
         _vm._v(" "),
         _c(
           "tbody",
@@ -49150,21 +49174,21 @@ var render = function() {
                     _vm._v(_vm._s(permohonan.permohonan_id))
                   ]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" " + _vm._s(permohonan.permohonan_id))]),
+                  _c("td", [_vm._v(_vm._s(permohonan.permohonan_id))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" " + _vm._s(permohonan.jenis))]),
+                  _c("td", [_vm._v(_vm._s(permohonan.jenis))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" " + _vm._s(permohonan.bil_hantar))]),
+                  _c("td", [_vm._v(_vm._s(permohonan.bil_hantar))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" " + _vm._s(permohonan.jenis))]),
+                  _c("td", [_vm._v(_vm._s(permohonan.jenis))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" " + _vm._s(permohonan.nama))]),
+                  _c("td", [_vm._v(_vm._s(permohonan.nama))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" " + _vm._s(permohonan.created_at))]),
+                  _c("td", [_vm._v(_vm._s(permohonan.created_at))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" " + _vm._s(permohonan.status))]),
+                  _c("td", [_vm._v(_vm._s(permohonan.status))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" " + _vm._s(permohonan.updated_at))]),
+                  _c("td", [_vm._v(_vm._s(permohonan.updated_at))]),
                   _vm._v(" "),
                   _c("td", [
                     _c("div", { staticClass: "table-data-feature" }, [
@@ -49193,17 +49217,12 @@ var render = function() {
                         {
                           staticClass: "item",
                           attrs: {
+                            href:
+                              "/senarai-dokumen-permohonan" +
+                              permohonan.permohonan_id,
                             "data-toggle": "tooltip",
                             "data-placement": "top",
                             title: "Dokumen dihantar"
-                          },
-                          on: {
-                            click: function($event) {
-                              _vm.location.href ==
-                                _vm.url(
-                                  "/senarai-dokumen-permohonan/{{permohonan.permohonan_id}}"
-                                )
-                            }
                           }
                         },
                         [_c("i", { staticClass: "fas fa-file-upload" })]
@@ -49223,6 +49242,18 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "au-breadcrumb-left" }, [
+      _c("div", { staticClass: "overview-wrap" }, [
+        _c("h2", { staticClass: "title-1" }, [
+          _vm._v("Senarai permohonan dihantar")
+        ])
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -49334,40 +49365,70 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return _defineProperty({
-            permohonans: []
-        }, 'permohonans', {
-            permohonan_id: '',
-            jenis: '',
-            bil_hantar: '',
-            doc_title: '',
-            nama: '',
-            created_at: '',
-            status_permohonan_id: '',
-            updated_at: ''
-        });
-    },
-    created: function created() {
-        this.fetchPermohonans();
-    },
+  data: function data() {
+    return _defineProperty({
+      permohonans: []
+    }, "permohonans", {
+      permohonan_id: "",
+      jenis: "",
+      bil_hantar: "",
+      doc_title: "",
+      nama: "",
+      created_at: "",
+      status_permohonan_id: "",
+      updated_at: ""
+    });
+  },
+  created: function created() {
+    this.fetchPermohonans();
+  },
 
 
-    methods: {
-        fetchPermohonans: function fetchPermohonans() {
-            var _this = this;
+  methods: {
+    fetchPermohonans: function fetchPermohonans(page_url) {
+      var _this = this;
 
-            fetch('api/permohonan_dihantar').then(function (res) {
-                return res.json();
-            }).then(function (res) {
-                _this.permohonans = res;
-                // console.log(res);
-            });
-        }
+      fetch("api/permohonan_dihantar").then(function (res) {
+        return res.json();
+      }).then(function (res) {
+        _this.permohonans = res;
+      });
     }
-
+  }
 });
 
 /***/ })

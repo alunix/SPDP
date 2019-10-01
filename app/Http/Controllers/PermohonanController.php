@@ -13,8 +13,7 @@ use SPDP\Services\ShowPermohonan;
 use Redirect,Response;
 
 class PermohonanController extends Controller
-{
-   
+{   
     public function index()
     {
         $permohonans = Permohonan::all();
@@ -70,22 +69,18 @@ class PermohonanController extends Controller
         $pc = new PermohonanClass();       
         return $permohonan = $pc->create($request);
     }  
-    public function show($id)  {
-        
-        /* Main function but mcm tak betul , testing other possibilities */
+    public function show($id)
+    {   
         $permohonan= Permohonan::find($id);
-        
-          
         if($permohonan==null){
             abort(403,'Tidak dibenarkan');
          }
-
         $show = new ShowPermohonan();
         return $show->show($permohonan);
     }
    
-    public function  showPelantikanPenilai($id) {
-
+    public function  showPelantikanPenilai($id)
+    {
         $permohonan = Permohonan::find($id);
         $users = User::where('role','penilai')->get();
         $dp = DokumenPermohonan::where('permohonan_id',$permohonan->permohonan_id)->orderBy('versi', 'DESC')->first();
@@ -93,12 +88,22 @@ class PermohonanController extends Controller
     }
 
   
-    public function pelantikanPenilaiSubmit(PenilaianPJK $pp,Request $request, $id)    {      
-        
+    public function pelantikanPenilaiSubmit(PenilaianPJK $pp,Request $request, $id)
+    {      
         $this->validate($request,[
             'checked' => 'required',
         ]);
-            return $pp->pelantikanPenilaiSubmit($request,$id);
+        return $pp->pelantikanPenilaiSubmit($request,$id);
     }
+
+    /*API START  */
+    public function api_permohonanDihantar()
+    {
+        // $user_id = auth()->user()->id;
+        $user= User::find(1);
+        $permohonans = $user->permohonans;
+        return response()->json($permohonans);
+    }
+   
 
 }

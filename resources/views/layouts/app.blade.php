@@ -8,23 +8,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <script> window.Laravel = { csrfToken: '{{ csrf_token()}}' } </script>
     <title>@yield('pageTitle') | Persona</title>
      <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script> 
+   
     <script src="{{ asset('js/submit.js') }}" defer></script> 
     <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
-    <script>
-        CKEDITOR.replace( 'summary-ckeditor' );
-    </script>
     <!-- Script for chart-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
     <script src="https://unpkg.com/vue"></script>
-    <script>
+    <!-- <script>
             var app = new Vue({
                 el: '#app',
             });
-        </script>
+        </script> -->
           <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.0.2/echarts-en.min.js" charset="utf-8"></script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/6.0.6/highcharts.js" charset="utf-8"></script> 
 
@@ -85,7 +81,7 @@
  
 </head>
 <body>
-    <div  id="app">
+    <div id="app">
         @guest
         <header class="header-desktop3 d-none d-lg-block">
             <div class="section__content section__content--p35">
@@ -244,8 +240,8 @@ $('.item-nav').click(function (event) {
     // Load the content from the link's href attribute
     $('.content').load($(this).attr('href'));
 });
-
 </script>
+ <script src="{{ asset('js/app.js') }}"></script> 
 
 
     

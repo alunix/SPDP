@@ -173,14 +173,10 @@ class HomeController extends Controller
         }
     }
 
-    
-    
-
-   
     public function pjk(Request $req){
         return view('dashboard/pjk-dashboard');
             
-        }
+    }
     public function penilai(Request $req){
         return view('dashboard/penilai-dashboard');
                 

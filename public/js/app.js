@@ -49132,14 +49132,126 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("div", { staticClass: "table-responsive table-responsive-data2" }, [
+      _c("table", { staticClass: "table table-data2" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          { attrs: { id: "permohonans-add" } },
+          [
+            _vm._l(_vm.permohonans, function(permohonan) {
+              return _c(
+                "tr",
+                { key: permohonan.permohonan_id, staticClass: "tr-shadow" },
+                [
+                  _c("th", { attrs: { scope: "row" } }, [
+                    _vm._v(_vm._s(permohonan.permohonan_id))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" " + _vm._s(permohonan.permohonan_id))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" " + _vm._s(permohonan.jenis))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" " + _vm._s(permohonan.bil_hantar))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" " + _vm._s(permohonan.jenis))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" " + _vm._s(permohonan.nama))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" " + _vm._s(permohonan.created_at))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" " + _vm._s(permohonan.status))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" " + _vm._s(permohonan.updated_at))]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c("div", { staticClass: "table-data-feature" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "item",
+                          attrs: {
+                            "data-toggle": "tooltip",
+                            "data-placement": "top",
+                            title: "Kemajuan Permohonan"
+                          },
+                          on: {
+                            click: function($event) {
+                              _vm.location.href = _vm.url(
+                                "/kemajuan-permohonan/{{permohonan.permohonan_id}}"
+                              )
+                            }
+                          }
+                        },
+                        [_c("i", { staticClass: "fas fa-spinner" })]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "item",
+                          attrs: {
+                            "data-toggle": "tooltip",
+                            "data-placement": "top",
+                            title: "Dokumen dihantar"
+                          },
+                          on: {
+                            click: function($event) {
+                              _vm.location.href ==
+                                _vm.url(
+                                  "/senarai-dokumen-permohonan/{{permohonan.permohonan_id}}"
+                                )
+                            }
+                          }
+                        },
+                        [_c("i", { staticClass: "fas fa-file-upload" })]
+                      )
+                    ])
+                  ])
+                ]
+              )
+            }),
+            _vm._v(" "),
+            _c("tr", { staticClass: "spacer" })
+          ],
+          2
+        )
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h2", [_vm._v("Permohonans work")])])
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("No")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Jenis")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [
+          _vm._v("Bilangan penghantaran")
+        ]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nama program/semakan")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Penghantar")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [
+          _vm._v("Tarikh/Masa Penghantaran")
+        ]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tarikh/Masa Status")])
+      ])
+    ])
   }
 ]
 render._withStripped = true
@@ -49175,6 +49287,53 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -49182,11 +49341,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             permohonans: []
         }, 'permohonans', {
             permohonan_id: '',
+            jenis: '',
+            bil_hantar: '',
             doc_title: '',
-            jenis_permohonan_id: '',
-            id_penghantar: '',
-            status_permohonan_id: '',
+            nama: '',
             created_at: '',
+            status_permohonan_id: '',
             updated_at: ''
         });
     },
@@ -49197,10 +49357,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     methods: {
         fetchPermohonans: function fetchPermohonans() {
+            var _this = this;
+
             fetch('api/permohonan_dihantar').then(function (res) {
                 return res.json();
             }).then(function (res) {
-                console.log(res);
+                _this.permohonans = res;
+                // console.log(res);
             });
         }
     }

@@ -25,7 +25,8 @@ class PermohonanController extends Controller
     {   
         $user_id =auth()->user()->id;
         $user= User::find($user_id);
-        return view ('fakulti.senarai-permohonan-dihantar')->with('permohonans',$user->permohonans);
+        return view ('fakulti.senarai_permohonan_dihantar')->with('permohonans',$user->permohonans);
+        // return response()->json($user->permohonans);
     }
 
     public function showListPermohonanBaharu()

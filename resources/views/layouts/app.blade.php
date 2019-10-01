@@ -1,25 +1,15 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
-
 <head>
-
-
-
     <!-- Fav Icon Testing -->
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
-
-
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <script> window.Laravel = { csrfToken: '{{ csrf_token()}}' } </script>
     <title>@yield('pageTitle') | Persona</title>
-
      <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script> 
     <script src="{{ asset('js/submit.js') }}" defer></script> 
@@ -27,7 +17,6 @@
     <script>
         CKEDITOR.replace( 'summary-ckeditor' );
     </script>
-    
     <!-- Script for chart-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
     <script src="https://unpkg.com/vue"></script>
@@ -36,7 +25,7 @@
                 el: '#app',
             });
         </script>
-          <script src=https://cdnjs.cloudflare.com/ajax/libs/echarts/4.0.2/echarts-en.min.js charset=utf-8></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.0.2/echarts-en.min.js" charset="utf-8"></script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/6.0.6/highcharts.js" charset="utf-8"></script> 
 
 
@@ -94,59 +83,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
  
-
-
-
-    <style>
-        .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-        /* For Bottom Navigation Bar */
-            .navbar_bottom {
-                overflow: hidden;
-                background-color: #00FF00;
-                position: fixed;
-                bottom: 0;
-                width: 100%;
-            }
-
-            .navbar_bottom a {
-                float: left;
-                display: block;
-                color: #f2f2f2;
-                text-align: center;
-                padding: 5px 16px;
-                text-decoration: none;
-                font-size: 17px;
-            }
-
-            .navbar_bottom a:hover {
-                background: #f1f1f1;
-                color: black;
-            }
-
-            .navbar_bottom a.active {
-                background-color: #4CAF50;
-                color: white;
-            }
-            
-            @import "@material/button/mdc-button";
-
-             /* @stack('styles.scss');
-             */
-    </style>
-
-
 </head>
 <body>
-
     <div  id="app">
         @guest
         <header class="header-desktop3 d-none d-lg-block">

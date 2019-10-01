@@ -23,6 +23,11 @@ Route::get('/dashboard', 'HomeController@index')->name('/dashboard')->middleware
 Route::get('/', 'HomeController@index')->middleware('auth')->name('home'); //Redirect index page to login if not authenticated and will return homepage if authenticated.
 Route::get('/notifikasi', 'NotificationController@index')->middleware('auth')->name('notifications.index'); //Redirect index page to login if not authenticated and will return homepage if authenticated.
 
+
+/*----------------------- API REST VUE ------------- */
+Route::group(['prefix' => 'api'], function() {
+Route::get('/senarai-permohonan-dihantar', 'PermohonanController@permohonanDihantar')->name('permohonan.dihantar');
+});
 /*........................................Start middleware.............................*/
 /*----------------------- Bahagian pihak fakulti ------------- */	
 Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware','middleware' => 'auth'], function() {

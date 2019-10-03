@@ -8,7 +8,7 @@
               <h2 class="title-1">Senarai permohonan dihantar</h2>
             </div>
           </div>
-          <modal name="permohonan_baharu">hello, world!</modal>
+          <modal name="permohonan_baharu"></modal>
 
           <!-- <a v-bind:href="'/permohonan-baharu'" class="btn btn-success mb-2" id="create-permohonan">
             <i class="zmdi zmdi-plus"></i>

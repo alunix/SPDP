@@ -12,6 +12,25 @@ window.Vue = require("vue");
 Vue.use(VModal);
 Vue.use(VueRouter);
 
+const routes = [
+    {
+        path: "/modal_permohonan_baharu",
+        component: require("./components/PermohonanModal.vue")
+    },
+    {
+        path: "/modal_kemajuan_permohonan",
+        component: require("./components/KemajuanPermohonan.vue")
+    },
+    {
+        path: "/modal_dokumen_permohonan",
+        component: require("./components/DokumenPermohonan.vue")
+    },
+    {
+        path: "/modal_pengguna_baharu",
+        component: require("./components/Pengguna.vue")
+    }
+];
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -19,7 +38,13 @@ Vue.use(VueRouter);
  */
 
 Vue.component("permohonans", require("./components/Permohonans.vue"));
+Vue.component("modalPermohonan", require("./components/ModalPermohonan.vue"));
+
+const router = new VueRouter({
+    routes // short for `routes: routes`
+});
 
 const app = new Vue({
-    el: "#app"
+    el: "#app",
+    router
 });

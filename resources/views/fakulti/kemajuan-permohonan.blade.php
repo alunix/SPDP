@@ -88,7 +88,7 @@
 </tbody>
 </table>
 @else
-<p> Tiada laporan telah dikeluarkan</p>
+<p> Tiada laporan telah dikeluarkan</p> 
 @endif
                 </div>
             </div>

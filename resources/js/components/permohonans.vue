@@ -8,7 +8,11 @@
               <h2 class="title-1">Senarai permohonan dihantar</h2>
             </div>
           </div>
-          <modal name="permohonan_baharu"></modal>
+          <modal  height="auto" :scrollable="true" name="permohonan_baharu">
+
+            <permohonanModal></permohonanModal>
+
+          </modal>
 
           <!-- <a v-bind:href="'/permohonan-baharu'" class="btn btn-success mb-2" id="create-permohonan">
             <i class="zmdi zmdi-plus"></i>
@@ -119,11 +123,6 @@ export default {
         });
     },
     show_model() {
-      //   var vm = this;
-      //   var URL = "resources\views\fakultimodal\fakulti_insert_permohonan.html";
-      //   axios.get(URL).then(response => {
-      //     vm.$modal.show(response);
-      //   });
       this.$modal.show("permohonan_baharu");
     }
   }

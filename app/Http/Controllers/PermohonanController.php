@@ -61,14 +61,15 @@ class PermohonanController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'nama_penghantar' => 'required|string|max:20',
-            'jenis_permohonan_id' => 'required|integer|max:255',
-            // 'file_link' => 'required|mimes:pdf|max:1999',
-        ]);
+        // $this->validate($request, [
+        //     'jenis_permohonan_id' => 'required|integer|max:255',
+        //     'doc_title' => 'required|string',
+        //     // 'file_link' => 'required|mimes:pdf|max:1999',
+        // ]);
 
-        $string = "Store";
-        return $store;
+        return $request->all();
+
+        // return response()->json('Suceess : Message has been sent');
 
         // $pc = new PermohonanClass();
         // $permohonan = $pc->create($request);

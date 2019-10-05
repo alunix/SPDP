@@ -52130,38 +52130,61 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      fields: {},
+      jenis_permohonan_id: "",
+      doc_title: "",
+      komen: "",
       errors: {},
-      file_link: {},
+      // file_link: {},
       success: false,
       loaded: true
     };
   },
 
   methods: {
+    filePreview: function filePreview(event) {
+      var selectedFile = event.target.files[0];
+    },
     submit: function submit() {
       var _this = this;
 
+      var formData = new FormData();
+      formData.append("file_link", formData);
+      // this.jenis_permohonan_id = {};
+      // this.doc_title = {};
+      // this.komen = {};
+      // this.errors = {};
       this.loaded = false;
       this.success = false;
       this.errors = {};
-
-      var formData = new FormData();
-      formData.append("file_link", this.file_link);
       axios
-      // .post("api/permohonan-submit", this.fields, {
-      //   headers: {
-      //     "Content-Type": "multipart/form-data"
+      // .post(
+      //   "api/permohonan_submit",
+      //   {
+      //     jenis_permohonan_id: this.jenis_permohonan_id,
+      //     doc_title: this.doc_title,
+      //     komen: this.komen,
+      //     file_link: pdf_file
+      //   },
+      //   {
+      //     // headers: { "Content-Type": "multipart/form-data" }
+      //     // headers: {}
       //   }
-      // })
-      .post("api/permohonan-submit", this.fields).then(function (response) {
-        _this.fields = {};
-        _this.loaded = true;
-        _this.success = true;
+      // )
+      .post("api/permohonan_submit", jenis_permohonan_id, doc_title, komen, formData, {
+        // headers: { "Content-Type": "multipart/form-data" }
+        // headers: {}
+      }).then(function (res) {
+        console.log(res);
       }).catch(function (error) {
         if (error.response.status === 422) {
           _this.errors = error.response.data.errors || {};
@@ -52213,8 +52236,8 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.fields.jenis_permohonan_id,
-                    expression: "fields.jenis_permohonan_id"
+                    value: _vm.jenis_permohonan_id,
+                    expression: "jenis_permohonan_id"
                   }
                 ],
                 staticClass: "form-control",
@@ -52234,11 +52257,9 @@ var render = function() {
                         var val = "_value" in o ? o._value : o.value
                         return val
                       })
-                    _vm.$set(
-                      _vm.fields,
-                      "jenis_permohonan_id",
-                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                    )
+                    _vm.jenis_permohonan_id = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
                   }
                 }
               },
@@ -52299,8 +52320,8 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.fields.doc_title,
-                  expression: "fields.doc_title"
+                  value: _vm.doc_title,
+                  expression: "doc_title"
                 }
               ],
               staticClass: "form-control",
@@ -52311,13 +52332,13 @@ var render = function() {
                 required: "",
                 autofocus: ""
               },
-              domProps: { value: _vm.fields.doc_title },
+              domProps: { value: _vm.doc_title },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.fields, "doc_title", $event.target.value)
+                  _vm.doc_title = $event.target.value
                 }
               }
             }),
@@ -52344,11 +52365,7 @@ var render = function() {
             _c("input", {
               ref: "file_link",
               attrs: { type: "file", id: "file_link", name: "file_link" },
-              on: {
-                change: function($event) {
-                  return _vm.submit()
-                }
-              }
+              on: { change: _vm.filePreview }
             })
           ])
         ]),
@@ -52369,19 +52386,19 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.fields.komen,
-                  expression: "fields.komen"
+                  value: _vm.komen,
+                  expression: "komen"
                 }
               ],
               staticClass: "form-control",
               attrs: { id: "komen", name: "komen" },
-              domProps: { value: _vm.fields.komen },
+              domProps: { value: _vm.komen },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.fields, "komen", $event.target.value)
+                  _vm.komen = $event.target.value
                 }
               }
             }),

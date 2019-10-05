@@ -14,7 +14,7 @@
             name="jenis_permohonan_id"
             style="width:330px;"
             id="jenis_permohonan_id"
-            v-model="fields.jenis_permohonan_id"
+            v-model="jenis_permohonan_id"
             required
           >
             <option value="#">Sila pilih</option>
@@ -40,7 +40,7 @@
             type="text"
             class="form-control"
             name="doc_title"
-            v-model="fields.doc_title"
+            v-model="doc_title"
             required
             autofocus
           />
@@ -50,7 +50,13 @@
       <div class="form-group row">
         <label for="file_link" class="col-md-4 col-form-label text-md-right">Pautan kepada fail</label>
         <div class="col-md-6">
-          <input type="file" id="file_link" name="file_link" ref="file_link" v-on:change="submit()" />
+          <input
+            type="file"
+            id="file_link"
+            v-on:change="filePreview"
+            name="file_link"
+            ref="file_link"
+          />
         </div>
       </div>
       <div class="form-group row">
@@ -59,7 +65,7 @@
           class="col-md-4 col-form-label text-md-right"
         >Komen( Tidak diwajibkan )</label>
         <div class="col-md-6">
-          <textarea class="form-control" v-model="fields.komen" id="komen" name="komen"></textarea>
+          <textarea class="form-control" v-model="komen" id="komen" name="komen"></textarea>
           <div v-if="errors && errors.komen" class="text-danger">{{ errors.komen[0] }}</div>
         </div>
       </div>
@@ -77,32 +83,56 @@
 export default {
   data() {
     return {
-      fields: {},
+      jenis_permohonan_id: "",
+      doc_title: "",
+      komen: "",
       errors: {},
-      file_link: {},
+      // file_link: {},
       success: false,
       loaded: true
     };
   },
   methods: {
+    filePreview(event) {
+      let selectedFile = event.target.files[0];
+    },
     submit() {
+      let formData = new FormData();
+      formData.append("file_link", formData);
+      // this.jenis_permohonan_id = {};
+      // this.doc_title = {};
+      // this.komen = {};
+      // this.errors = {};
       this.loaded = false;
       this.success = false;
       this.errors = {};
-
-      let formData = new FormData();
-      formData.append("file_link", this.file_link);
       axios
-        // .post("api/permohonan-submit", this.fields, {
-        //   headers: {
-        //     "Content-Type": "multipart/form-data"
+        // .post(
+        //   "api/permohonan_submit",
+        //   {
+        //     jenis_permohonan_id: this.jenis_permohonan_id,
+        //     doc_title: this.doc_title,
+        //     komen: this.komen,
+        //     file_link: pdf_file
+        //   },
+        //   {
+        //     // headers: { "Content-Type": "multipart/form-data" }
+        //     // headers: {}
         //   }
-        // })
-        .post("api/permohonan-submit", this.fields)
-        .then(response => {
-          this.fields = {};
-          this.loaded = true;
-          this.success = true;
+        // )
+        .post(
+          "api/permohonan_submit",
+          jenis_permohonan_id,
+          doc_title,
+          komen,
+          formData,
+          {
+            // headers: { "Content-Type": "multipart/form-data" }
+            // headers: {}
+          }
+        )
+        .then(res => {
+          console.log(res);
         })
         .catch(error => {
           if (error.response.status === 422) {

@@ -14,9 +14,9 @@
 Auth::routes();
 Route::get('/show-testing', 'PermohonanController@testing_show'); // Redirect to dashboard/home(Same page)
 
-Route::get('/pusher', function () {
-	return view('pusher');
-});
+// Route::get('/pusher', function () {
+// 	return view('pusher');
+// });
 
 Route::post('/search', 'SearchController@search')->name('search');
 Route::get('/dashboard', 'HomeController@index')->name('/dashboard')->middleware('auth'); // Redirect to dashboard/home(Same page)
@@ -27,7 +27,7 @@ Route::get('/notifikasi', 'NotificationController@index')->middleware('auth')->n
 /*----------------------- API REST VUE ------------- */
 Route::group(['prefix' => 'api'], function () {
 	Route::get('/permohonan_dihantar', 'PermohonanController@api_permohonanDihantar')->name('api.permohonan.dihantar');
-	Route::post('/permohonan-submit', 'PermohonanController@store')->name('api.permohonan.submit');
+	Route::post('/permohonan_submit', 'PermohonanController@store')->name('api.permohonan.submit');
 });
 /*........................................Start middleware.............................*/
 /*----------------------- Bahagian pihak fakulti ------------- */

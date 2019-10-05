@@ -27,7 +27,7 @@ Route::get('/notifikasi', 'NotificationController@index')->middleware('auth')->n
 /*----------------------- API REST VUE ------------- */
 Route::group(['prefix' => 'api'], function () {
 	Route::get('/permohonan_dihantar', 'PermohonanController@api_permohonanDihantar')->name('api.permohonan.dihantar');
-	Route::post('/permohonan-baharu', 'PermohonanController@store')->name('api.permohonan.index.submit');
+	Route::post('/permohonan-submit', 'PermohonanController@store')->name('api.permohonan.submit');
 });
 /*........................................Start middleware.............................*/
 /*----------------------- Bahagian pihak fakulti ------------- */

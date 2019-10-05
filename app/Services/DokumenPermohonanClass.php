@@ -12,63 +12,60 @@ use SPDP\TetapanAliranKerja;
 use SPDP\User;
 
 
-class DokumenPermohonanClass 
+class DokumenPermohonanClass
 {
 
-    public function create($permohonan,$fileNameWithExt,$fileNameToStore,$request,$fileSize)
-    {   
+    public function create($permohonan, $fileNameWithExt, $fileNameToStore, $request, $fileSize)
+    {
         $dp = new DokumenPermohonan();
-        $dp->permohonan_id= $permohonan->permohonan_id;
+        $dp->permohonan_id = $permohonan->permohonan_id;
         $dp->file_name = $fileNameWithExt;
-        $dp->file_link=$fileNameToStore;
-        $dp->file_size=$fileSize/1000;
-        $dp ->komen =$request -> input('summary-ckeditor');
+        $dp->file_link = $fileNameToStore;
+        $dp->file_size = $fileSize / 1000;
+        $dp->komen = $request->input('komen');
         $dp->versi = 1;
         $dp->save();
-
     }
 
-    
-    public function update($permohonan,Request $request,$attached)
-    {    
+
+    public function update($permohonan, Request $request, $attached)
+    {
         //Handle file upload
-        if($request->hasFile($attached))
-        {
-        $fileNameWithExt=$request->file($attached)->getClientOriginalName();
-        // Get the full file name
-        $filename = pathinfo($fileNameWithExt,PATHINFO_FILENAME);
-        //Get the extension file name
-        $extension = $request ->file($attached)-> getClientOriginalExtension();
-        //File name to store
-        $fileNameToStore=$filename.'_'.time().'.'.$extension;        
-        //Upload Pdf file
-        $path =$request ->file($attached)->storeAs('public/cadangan_permohonan_baharu',$fileNameToStore);
+        if ($request->hasFile($attached)) {
+            $fileNameWithExt = $request->file($attached)->getClientOriginalName();
+            // Get the full file name
+            $filename = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            //Get the extension file name
+            $extension = $request->file($attached)->getClientOriginalExtension();
+            //File name to store
+            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+            //Upload Pdf file
+            $path = $request->file($attached)->storeAs('public/cadangan_permohonan_baharu', $fileNameToStore);
+        } else {
+            $fileNameToStore = 'noPDF.pdf';
         }
-            else{
-                $fileNameToStore = 'noPDF.pdf';
-            }
-        
+
         $fileSize = $request->file($attached)->getSize();
 
         $dp = new DokumenPermohonan();
-        $dp->permohonan_id= $permohonan->permohonan_id;
+        $dp->permohonan_id = $permohonan->permohonan_id;
         $dp->file_name = $fileNameWithExt;
-        $dp->file_link=$fileNameToStore;
-        $dp->file_size=$fileSize/1000;
-        $dp ->komen =$request -> input('summary-ckeditor');
-        $dp->versi =((int)$permohonan->version_counts())+1;
+        $dp->file_link = $fileNameToStore;
+        $dp->file_size = $fileSize / 1000;
+        $dp->komen = $request->input('summary-ckeditor');
+        $dp->versi = ((int) $permohonan->version_counts()) + 1;
         $dp->save();
-        
-        $status_permohonan= $permohonan->status_permohonan_id;
-        $permohonan->status_permohonan_id= $this->getStatusPermohonan($status_permohonan);
+
+        $status_permohonan = $permohonan->status_permohonan_id;
+        $permohonan->status_permohonan_id = $this->getStatusPermohonan($status_permohonan);
         $permohonan->save();
 
-        $kp= new KemajuanPermohonanClass();
+        $kp = new KemajuanPermohonanClass();
         $kp->create($permohonan);
-        
-         $user = $this->getEmailPenambahbaikkan($permohonan,$status_permohonan);
+
+        $user = $this->getEmailPenambahbaikkan($permohonan, $status_permohonan);
         //Hantar email kepada penghantar
-        Notification::route('mail',$user->email)->notify(new DokumenPenambahbaikkan($dp)); //hantar email kepada penghantar
+        Notification::route('mail', $user->email)->notify(new DokumenPenambahbaikkan($dp)); //hantar email kepada penghantar
 
         //$email = $this->getEmailPenambahbaikkan($permohonan,$status_permohonan);
 
@@ -80,46 +77,45 @@ class DokumenPermohonanClass
         switch ($status_permohonan_id) {
             case 8:
                 return 12;
-            break;
+                break;
             case 9:
                 return 13;
-            break; 
+                break;
             case 10:
                 return 14;
-            break; 
+                break;
             case 11:
                 return 15;
-            break; 
-            
+                break;
+
             default:
                 return;
                 break;
         }
-
     }
 
-    public function getEmailPenambahbaikkan($permohonan,$status_permohonan_id)
-    {   
+    public function getEmailPenambahbaikkan($permohonan, $status_permohonan_id)
+    {
         switch ($status_permohonan_id) {
             case 8:
-            $panel = $permohonan->penilaian_panels->pluck('id_penilai');
-            $user = User::find($panel);
-            break;
+                $panel = $permohonan->penilaian_panels->pluck('id_penilai');
+                $user = User::find($panel);
+                break;
             case 9:
-            $tetapan = TetapanAliranKerja::all()->first();
-            $id_user= $tetapan->value('id_pjk');
-            $user= User::find($id_user);
-            break; 
+                $tetapan = TetapanAliranKerja::all()->first();
+                $id_user = $tetapan->value('id_pjk');
+                $user = User::find($id_user);
+                break;
             case 10:
-            $tetapan = TetapanAliranKerja::all()->first();
-            $id_user= $tetapan->value('id_jppa');
-            $user= User::find($id_user);
-            break; 
+                $tetapan = TetapanAliranKerja::all()->first();
+                $id_user = $tetapan->value('id_jppa');
+                $user = User::find($id_user);
+                break;
             case 11:
-            $tetapan = TetapanAliranKerja::all()->first();
-            $id_user= $tetapan->value('id_senat');
-            $user= User::find($id_user);
-            break;
+                $tetapan = TetapanAliranKerja::all()->first();
+                $id_user = $tetapan->value('id_senat');
+                $user = User::find($id_user);
+                break;
 
             default:
                 return;
@@ -127,21 +123,12 @@ class DokumenPermohonanClass
         }
 
         return $user;
-
     }
 
 
     public function show($id)
     {
-        $permohonan= Permohonan::find($id);
-        return view('fakulti.kemajuan-permohonan')->with('kjs',$permohonan->kemajuan_permohonans)->with('permohonan',$permohonan)->with('dokumen_permohonans',$permohonan->dokumen_permohonans);
-
+        $permohonan = Permohonan::find($id);
+        return view('fakulti.kemajuan-permohonan')->with('kjs', $permohonan->kemajuan_permohonans)->with('permohonan', $permohonan)->with('dokumen_permohonans', $permohonan->dokumen_permohonans);
     }
-
-   
-
-
-   
-
-   
 }

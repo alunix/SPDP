@@ -1,5 +1,6 @@
 import VModal from "vue-js-modal";
 import VueRouter from "vue-router";
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -41,7 +42,7 @@ Vue.component("permohonans", require("./components/Permohonans.vue"));
 Vue.component("permohonanModal", require("./components/PermohonanModal.vue"));
 
 const router = new VueRouter({
-    mode : 'history',
+    mode: "history",
     routes // short for `routes: routes`
 });
 

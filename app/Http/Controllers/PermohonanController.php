@@ -66,10 +66,8 @@ class PermohonanController extends Controller
         //     'doc_title' => 'required|string',
         //     // 'file_link' => 'required|mimes:pdf|max:1999',
         // ]);
-        // $pc = new PermohonanClass();
-        // return $permohonan = $pc->create($request);
-
-        return response()->json($request->file('file_link'));
+        $pc = new PermohonanClass();
+        return $permohonan = $pc->create($request);
     }
     public function show($id)
     {

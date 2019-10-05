@@ -94,30 +94,28 @@ export default {
   },
   methods: {
     filePreview(event) {
-      console.log(event.target.files[0]);
       this.file_link = event.target.files[0];
     },
     submit() {
-      // let that = this;
       let formData = new FormData();
       formData.append("file_link", this.file_link);
+      formData.append("jenis_permohonan_id", this.jenis_permohonan_id);
+      formData.append("doc_title", this.doc_title);
+      formData.append("komen", this.komen);
       this.loaded = false;
       this.success = false;
       this.errors = {};
       axios
-        .post(
-          "api/permohonan_submit",
-          jenis_permohonan_id,
-          doc_title,
-          komen,
-          formData,
-          {
-            headers: { "Content-Type": "multipart/form-data" }
+        .post("api/permohonan_submit", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data"
+            // boundary: "----WebKitFormBoundaryyrV7KO0BoCBuDbTL"
           }
-        )
+        })
         .then(res => {
           this.success = true;
-          // that.success = response.data.success;
+          this.fetchPermohonans();
+          // this.success = response.data.success;
           console.log(res);
         })
         .catch(error => {

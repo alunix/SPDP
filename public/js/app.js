@@ -52152,23 +52152,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   methods: {
     filePreview: function filePreview(event) {
-      console.log(event.target.files[0]);
       this.file_link = event.target.files[0];
     },
     submit: function submit() {
       var _this = this;
 
-      // let that = this;
       var formData = new FormData();
       formData.append("file_link", this.file_link);
+      formData.append("jenis_permohonan_id", this.jenis_permohonan_id);
+      formData.append("doc_title", this.doc_title);
+      formData.append("komen", this.komen);
       this.loaded = false;
       this.success = false;
       this.errors = {};
-      axios.post("api/permohonan_submit", jenis_permohonan_id, doc_title, komen, formData, {
-        headers: { "Content-Type": "multipart/form-data" }
+      axios.post("api/permohonan_submit", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+          // boundary: "----WebKitFormBoundaryyrV7KO0BoCBuDbTL"
+        }
       }).then(function (res) {
         _this.success = true;
-        // that.success = response.data.success;
+        _this.fetchPermohonans();
+        // this.success = response.data.success;
         console.log(res);
       }).catch(function (error) {
         if (error.response.status === 422) {
@@ -52619,8 +52624,6 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
 //
 //
 //

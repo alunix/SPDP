@@ -1,5 +1,6 @@
 <template>
   <div class="card-body">
+    <div v-if="success" class="alert alert-success mt-3">Permohonan berjaya dihantar</div>
     <h2>Permohonan baharu</h2>
     <hr />
     <form @submit.prevent="submit">
@@ -74,7 +75,6 @@
           <button type="submit" class="btn btn-primary double-submit-prevent">Hantar</button>
         </div>
       </div>
-      <div v-if="success" class="alert alert-success mt-3">Permohonan berjaya dihantar</div>
     </form>
     <hr />
   </div>
@@ -86,40 +86,25 @@ export default {
       jenis_permohonan_id: "",
       doc_title: "",
       komen: "",
+      file_link: null,
       errors: {},
-      // file_link: {},
       success: false,
       loaded: true
     };
   },
   methods: {
     filePreview(event) {
-      let selectedFile = event.target.files[0];
+      console.log(event.target.files[0]);
+      this.file_link = event.target.files[0];
     },
     submit() {
+      // let that = this;
       let formData = new FormData();
-      formData.append("file_link", formData);
-      // this.jenis_permohonan_id = {};
-      // this.doc_title = {};
-      // this.komen = {};
-      // this.errors = {};
+      formData.append("file_link", this.file_link);
       this.loaded = false;
       this.success = false;
       this.errors = {};
       axios
-        // .post(
-        //   "api/permohonan_submit",
-        //   {
-        //     jenis_permohonan_id: this.jenis_permohonan_id,
-        //     doc_title: this.doc_title,
-        //     komen: this.komen,
-        //     file_link: pdf_file
-        //   },
-        //   {
-        //     // headers: { "Content-Type": "multipart/form-data" }
-        //     // headers: {}
-        //   }
-        // )
         .post(
           "api/permohonan_submit",
           jenis_permohonan_id,
@@ -127,11 +112,12 @@ export default {
           komen,
           formData,
           {
-            // headers: { "Content-Type": "multipart/form-data" }
-            // headers: {}
+            headers: { "Content-Type": "multipart/form-data" }
           }
         )
         .then(res => {
+          this.success = true;
+          // that.success = response.data.success;
           console.log(res);
         })
         .catch(error => {

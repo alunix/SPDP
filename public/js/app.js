@@ -52143,8 +52143,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       jenis_permohonan_id: "",
       doc_title: "",
       komen: "",
+      file_link: null,
       errors: {},
-      // file_link: {},
       success: false,
       loaded: true
     };
@@ -52152,38 +52152,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   methods: {
     filePreview: function filePreview(event) {
-      var selectedFile = event.target.files[0];
+      console.log(event.target.files[0]);
+      this.file_link = event.target.files[0];
     },
     submit: function submit() {
       var _this = this;
 
+      // let that = this;
       var formData = new FormData();
-      formData.append("file_link", formData);
-      // this.jenis_permohonan_id = {};
-      // this.doc_title = {};
-      // this.komen = {};
-      // this.errors = {};
+      formData.append("file_link", this.file_link);
       this.loaded = false;
       this.success = false;
       this.errors = {};
-      axios
-      // .post(
-      //   "api/permohonan_submit",
-      //   {
-      //     jenis_permohonan_id: this.jenis_permohonan_id,
-      //     doc_title: this.doc_title,
-      //     komen: this.komen,
-      //     file_link: pdf_file
-      //   },
-      //   {
-      //     // headers: { "Content-Type": "multipart/form-data" }
-      //     // headers: {}
-      //   }
-      // )
-      .post("api/permohonan_submit", jenis_permohonan_id, doc_title, komen, formData, {
-        // headers: { "Content-Type": "multipart/form-data" }
-        // headers: {}
+      axios.post("api/permohonan_submit", jenis_permohonan_id, doc_title, komen, formData, {
+        headers: { "Content-Type": "multipart/form-data" }
       }).then(function (res) {
+        _this.success = true;
+        // that.success = response.data.success;
         console.log(res);
       }).catch(function (error) {
         if (error.response.status === 422) {
@@ -52203,6 +52188,12 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card-body" }, [
+    _vm.success
+      ? _c("div", { staticClass: "alert alert-success mt-3" }, [
+          _vm._v("Permohonan berjaya dihantar")
+        ])
+      : _vm._e(),
+    _vm._v(" "),
     _c("h2", [_vm._v("Permohonan baharu")]),
     _vm._v(" "),
     _c("hr"),
@@ -52411,13 +52402,7 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _vm._m(0),
-        _vm._v(" "),
-        _vm.success
-          ? _c("div", { staticClass: "alert alert-success mt-3" }, [
-              _vm._v("Permohonan berjaya dihantar")
-            ])
-          : _vm._e()
+        _vm._m(0)
       ]
     ),
     _vm._v(" "),

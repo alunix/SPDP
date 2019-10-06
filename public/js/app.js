@@ -52902,7 +52902,9 @@ var render = function() {
                           },
                           on: {
                             click: function($event) {
-                              return _vm.showKemajuanModel()
+                              return _vm.showKemajuanModel(
+                                permohonan.permohonan_id
+                              )
                             }
                           }
                         },
@@ -52920,7 +52922,9 @@ var render = function() {
                           },
                           on: {
                             click: function($event) {
-                              return _vm.showDokumenModel()
+                              return _vm.showDokumenModel(
+                                permohonan.permohonan_id
+                              )
                             }
                           }
                         },
@@ -53010,7 +53014,7 @@ if (false) {
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__(62)
 /* template */
 var __vue_template__ = __webpack_require__(61)
 /* template functional */
@@ -53125,9 +53129,60 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h2", [_vm._v("Dokumen")])
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _c("div", { staticClass: "col-md-8" }, [
+          _c("div", { staticClass: "card", staticStyle: { width: "65rem" } }, [
+            _c("div", { staticClass: "card-header" }, [
+              _vm._v("Sejarah versi dokumen")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _c("div", { staticClass: "container" }, [
+                _c("h5", [_vm._v("Dokumen yang telah dihantar")]),
+                _vm._v(" "),
+                _c("table", { staticClass: "table table-striped" }, [
+                  _c("thead", [
+                    _c("tr", [
+                      _c("th", { attrs: { scope: "col" } }, [_vm._v("No")]),
+                      _vm._v(" "),
+                      _c("th", { attrs: { scope: "col" } }, [
+                        _vm._v("Dokumen")
+                      ]),
+                      _vm._v(" "),
+                      _c("th", { attrs: { scope: "col" } }, [_vm._v("Saiz")]),
+                      _vm._v(" "),
+                      _c("th", { attrs: { scope: "col" } }, [_vm._v("Komen")]),
+                      _vm._v(" "),
+                      _c("th", { attrs: { scope: "col" } }, [_vm._v("Versi")]),
+                      _vm._v(" "),
+                      _c("th", { attrs: { scope: "col" } }, [
+                        _vm._v("Jumlah laporan")
+                      ]),
+                      _vm._v(" "),
+                      _c("th", { attrs: { scope: "col" } }, [
+                        _vm._v("Tarikh/Masa Penghantaran")
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("tbody", [_c("tr")])
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -53136,6 +53191,110 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-fb7a490e", module.exports)
   }
 }
+
+/***/ }),
+/* 62 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return _defineProperty({
+      permohonans: []
+    }, "permohonans", {
+      permohonan_id: "",
+      jenis: "",
+      bil_hantar: "",
+      doc_title: "",
+      nama: "",
+      created_at: "",
+      status_permohonan_id: "",
+      updated_at: ""
+    });
+  },
+
+  components: {
+    PermohonansModal: PermohonansModal
+  },
+
+  created: function created() {
+    this.fetchPermohonans();
+  },
+
+
+  methods: {
+    fetchPermohonans: function fetchPermohonans() {
+      var _this = this;
+
+      fetch("api/permohonan_dihantar").then(function (res) {
+        return res.json();
+      }).then(function (res) {
+        _this.permohonans = res;
+      });
+    },
+    parentPermohonans: function parentPermohonans() {
+      console.log("Testing parent");
+    },
+    showModel: function showModel() {
+      this.$modal.show("permohonan_baharu");
+    },
+    showKemajuanModel: function showKemajuanModel() {
+      this.$modal.show("kemajuan_permohonan");
+    },
+    showDokumenModel: function showDokumenModel() {
+      this.$modal.show("dokumen_permohonan");
+    }
+  }
+});
 
 /***/ })
 /******/ ]);

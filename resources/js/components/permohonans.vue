@@ -60,7 +60,7 @@
             <td>
               <div class="table-data-feature">
                 <button
-                  v-on:click="showKemajuanModel()"
+                  v-on:click="showKemajuanModel(permohonan.permohonan_id)"
                   class="item"
                   data-toggle="tooltip"
                   data-placement="top"
@@ -69,7 +69,7 @@
                   <i class="fas fa-spinner"></i>
                 </button>
                 <button
-                  v-on:click="showDokumenModel()"
+                  v-on:click="showDokumenModel(permohonan.permohonan_id)"
                   class="item"
                   data-toggle="tooltip"
                   data-placement="top"

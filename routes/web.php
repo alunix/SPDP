@@ -28,6 +28,7 @@ Route::get('/notifikasi', 'NotificationController@index')->middleware('auth')->n
 Route::group(['prefix' => 'api'], function () {
 	Route::get('/permohonan_dihantar', 'PermohonanController@api_permohonanDihantar')->name('api.permohonan.dihantar');
 	Route::post('/permohonan_submit', 'PermohonanController@store')->name('api.permohonan.submit');
+	Route::get('/kemajuan-permohonan/{permohonan}', 'KemajuanPermohonanController@show')->name('api.fakulti.kemajuanPermohonan');
 });
 /*........................................Start middleware.............................*/
 /*----------------------- Bahagian pihak fakulti ------------- */
@@ -49,7 +50,6 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware', 'middlew
 	Route::get('/settings', 'UserController@edit')->name('settings');
 	Route::post('/settings', 'UserController@update')->name('settings.submit');
 
-	Route::get('/kemajuan-permohonan/{permohonan}', 'KemajuanPermohonanController@show')->name('fakulti.kemajuanPermohonan');
 
 	/*----------------------- Fakulti nak memuat naik laporan---------------------------- */
 	Route::get('/muat-naik-penambahbaikkan/{permohonan}', 'DokumenPermohonanController@showPenambahbaikkan')->name('dokumenPermohonan.penambahbaikkan.show');

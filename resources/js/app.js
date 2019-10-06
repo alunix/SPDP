@@ -41,6 +41,10 @@ const routes = [
 Vue.component("permohonans", require("./components/Permohonans.vue"));
 Vue.component("permohonanModal", require("./components/PermohonanModal.vue"));
 
+//Modal
+Vue.component("kemajuanModal", require("./components/modal/KemajuanModal.vue"));
+Vue.component("dokumenModal", require("./components/modal/DokumenModal.vue"));
+
 const router = new VueRouter({
     mode: "history",
     routes // short for `routes: routes`

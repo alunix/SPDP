@@ -11,7 +11,13 @@
           <modal height="auto" :scrollable="true" name="permohonan_baharu">
             <permohonanModal @event="fetchPermohonans"></permohonanModal>
           </modal>
-          <a v-on:click="show_model()" class="btn btn-success mb-2" id="create-permohonan">
+          <modal height="auto" :scrollable="true" name="kemajuan_permohonan">
+            <kemajuanModal @event="fetchPermohonans"></kemajuanModal>
+          </modal>
+          <modal height="auto" :scrollable="true" name="dokumen_permohonan">
+            <dokumenModal @event="fetchPermohonans"></dokumenModal>
+          </modal>
+          <a v-on:click="showModel()" class="btn btn-success mb-2" id="create-permohonan">
             <i class="zmdi zmdi-plus"></i>
             Permohonan Baharu
           </a>
@@ -54,7 +60,7 @@
             <td>
               <div class="table-data-feature">
                 <button
-                  v-on:click="location.href=url('/kemajuan-permohonan/{{permohonan.permohonan_id}}')"
+                  v-on:click="showKemajuanModel()"
                   class="item"
                   data-toggle="tooltip"
                   data-placement="top"
@@ -63,7 +69,7 @@
                   <i class="fas fa-spinner"></i>
                 </button>
                 <button
-                  v-bind:href="'/senarai-dokumen-permohonan'+ permohonan.permohonan_id"
+                  v-on:click="showDokumenModel()"
                   class="item"
                   data-toggle="tooltip"
                   data-placement="top"
@@ -119,8 +125,14 @@ export default {
     parentPermohonans() {
       console.log("Testing parent");
     },
-    show_model() {
+    showModel() {
       this.$modal.show("permohonan_baharu");
+    },
+    showKemajuanModel() {
+      this.$modal.show("kemajuan_permohonan");
+    },
+    showDokumenModel() {
+      this.$modal.show("dokumen_permohonan");
     }
   }
 };

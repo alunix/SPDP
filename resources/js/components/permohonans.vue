@@ -11,12 +11,6 @@
           <modal height="auto" :scrollable="true" name="permohonan_baharu">
             <permohonanModal @event="fetchPermohonans"></permohonanModal>
           </modal>
-          <modal height="auto" :scrollable="true" name="kemajuan_permohonan">
-            <kemajuanModal @event="fetchPermohonans"></kemajuanModal>
-          </modal>
-          <modal height="auto" :scrollable="true" name="dokumen_permohonan">
-            <dokumenModal @event="fetchPermohonans"></dokumenModal>
-          </modal>
           <a v-on:click="showModel()" class="btn btn-success mb-2" id="create-permohonan">
             <i class="zmdi zmdi-plus"></i>
             Permohonan Baharu
@@ -60,7 +54,7 @@
             <td>
               <div class="table-data-feature">
                 <button
-                  v-on:click="showKemajuanModel(permohonan.permohonan_id)"
+                  v-on:click="showKemajuanModel();changePermohonanId(permohonan.permohonan_id)"
                   class="item"
                   data-toggle="tooltip"
                   data-placement="top"
@@ -68,8 +62,11 @@
                 >
                   <i class="fas fa-spinner"></i>
                 </button>
+                <modal height="auto" :scrollable="true" name="kemajuan_permohonan">
+                  <kemajuanModal :permohonan_id="permohonan_id"></kemajuanModal>
+                </modal>
                 <button
-                  v-on:click="showDokumenModel(permohonan.permohonan_id)"
+                  v-on:click="showDokumenModel();changePermohonanId(permohonan.permohonan_id)"
                   class="item"
                   data-toggle="tooltip"
                   data-placement="top"
@@ -77,6 +74,9 @@
                 >
                   <i class="fas fa-file-upload"></i>
                 </button>
+                <modal height="auto" :scrollable="true" name="dokumen_permohonan">
+                  <dokumenModal :permohonan_id="permohonan_id"></dokumenModal>
+                </modal>
               </div>
             </td>
           </tr>
@@ -94,6 +94,7 @@ export default {
   data() {
     return {
       permohonans: [],
+      permohonan_id: "",
       permohonans: {
         permohonan_id: "",
         jenis: "",
@@ -113,7 +114,6 @@ export default {
   created() {
     this.fetchPermohonans();
   },
-
   methods: {
     fetchPermohonans() {
       fetch("api/permohonan_dihantar")
@@ -121,6 +121,9 @@ export default {
         .then(res => {
           this.permohonans = res;
         });
+    },
+    changePermohonanId(id) {
+      this.permohonan_id = id;
     },
     parentPermohonans() {
       console.log("Testing parent");

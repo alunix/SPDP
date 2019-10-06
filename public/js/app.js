@@ -52727,7 +52727,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return _defineProperty({
-      permohonans: []
+      permohonans: [],
+      permohonan_id: ""
     }, "permohonans", {
       permohonan_id: "",
       jenis: "",
@@ -52748,7 +52749,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.fetchPermohonans();
   },
 
-
   methods: {
     fetchPermohonans: function fetchPermohonans() {
       var _this = this;
@@ -52758,6 +52758,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }).then(function (res) {
         _this.permohonans = res;
       });
+    },
+    changePermohonanId: function changePermohonanId(id) {
+      this.permohonan_id = id;
     },
     parentPermohonans: function parentPermohonans() {
       console.log("Testing parent");
@@ -52801,32 +52804,6 @@ var render = function() {
                 }
               },
               [_c("permohonanModal", { on: { event: _vm.fetchPermohonans } })],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "modal",
-              {
-                attrs: {
-                  height: "auto",
-                  scrollable: true,
-                  name: "kemajuan_permohonan"
-                }
-              },
-              [_c("kemajuanModal", { on: { event: _vm.fetchPermohonans } })],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "modal",
-              {
-                attrs: {
-                  height: "auto",
-                  scrollable: true,
-                  name: "dokumen_permohonan"
-                }
-              },
-              [_c("dokumenModal", { on: { event: _vm.fetchPermohonans } })],
               1
             ),
             _vm._v(" "),
@@ -52890,47 +52867,84 @@ var render = function() {
                   _c("td", [_vm._v(_vm._s(permohonan.updated_at))]),
                   _vm._v(" "),
                   _c("td", [
-                    _c("div", { staticClass: "table-data-feature" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "item",
-                          attrs: {
-                            "data-toggle": "tooltip",
-                            "data-placement": "top",
-                            title: "Kemajuan Permohonan"
-                          },
-                          on: {
-                            click: function($event) {
-                              return _vm.showKemajuanModel(
-                                permohonan.permohonan_id
-                              )
+                    _c(
+                      "div",
+                      { staticClass: "table-data-feature" },
+                      [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "item",
+                            attrs: {
+                              "data-toggle": "tooltip",
+                              "data-placement": "top",
+                              title: "Kemajuan Permohonan"
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.showKemajuanModel()
+                                _vm.changePermohonanId(permohonan.permohonan_id)
+                              }
                             }
-                          }
-                        },
-                        [_c("i", { staticClass: "fas fa-spinner" })]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "item",
-                          attrs: {
-                            "data-toggle": "tooltip",
-                            "data-placement": "top",
-                            title: "Dokumen dihantar"
                           },
-                          on: {
-                            click: function($event) {
-                              return _vm.showDokumenModel(
-                                permohonan.permohonan_id
-                              )
+                          [_c("i", { staticClass: "fas fa-spinner" })]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "modal",
+                          {
+                            attrs: {
+                              height: "auto",
+                              scrollable: true,
+                              name: "kemajuan_permohonan"
                             }
-                          }
-                        },
-                        [_c("i", { staticClass: "fas fa-file-upload" })]
-                      )
-                    ])
+                          },
+                          [
+                            _c("kemajuanModal", {
+                              attrs: { permohonan_id: _vm.permohonan_id }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "item",
+                            attrs: {
+                              "data-toggle": "tooltip",
+                              "data-placement": "top",
+                              title: "Dokumen dihantar"
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.showDokumenModel()
+                                _vm.changePermohonanId(permohonan.permohonan_id)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fas fa-file-upload" })]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "modal",
+                          {
+                            attrs: {
+                              height: "auto",
+                              scrollable: true,
+                              name: "dokumen_permohonan"
+                            }
+                          },
+                          [
+                            _c("dokumenModal", {
+                              attrs: { permohonan_id: _vm.permohonan_id }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
                   ])
                 ]
               )
@@ -53247,6 +53261,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["permohonan_id"],
   data: function data() {
     return _defineProperty({
       permohonans: []
@@ -53273,7 +53288,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
   methods: {
     fetchDokumens: function fetchDokumens() {
-      fetch("api/senarai-dokumen-permohonan/1").then(function (res) {
+      fetch("api/senarai-dokumen-permohonan/" + this.permohonan_id).then(function (res) {
         return res.json();
       }).then(function (res) {
         //   this.permohonans = res;

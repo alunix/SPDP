@@ -45,6 +45,7 @@
 </template>
 <script>
 export default {
+  props: ["permohonan_id"],
   data() {
     return {
       permohonans: [],
@@ -70,7 +71,7 @@ export default {
 
   methods: {
     fetchDokumens() {
-      fetch("api/senarai-dokumen-permohonan/1")
+      fetch("api/senarai-dokumen-permohonan/" + this.permohonan_id)
         .then(res => res.json())
         .then(res => {
           //   this.permohonans = res;

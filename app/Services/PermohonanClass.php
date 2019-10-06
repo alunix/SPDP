@@ -57,14 +57,14 @@ class PermohonanClass
             'message' => 'Permohonan berjaya dihantar',
         ];
 
-        // //Hantar email kepada pemeriksa        
-        // if ($permohonan->jenis_permohonan_id == 8)
-        //     $email = TetapanAliranKerja::all()->first()->jppa->email;
-        // else
-        //     $email = TetapanAliranKerja::all()->first()->pjk->email;
+        //Hantar email kepada pemeriksa        
+        if ($permohonan->jenis_permohonan_id == 8)
+            $email = TetapanAliranKerja::all()->first()->jppa->email;
+        else
+            $email = TetapanAliranKerja::all()->first()->pjk->email;
 
-        // $pemeriksa = User::where('email', $email)->first();
-        // Notification::route('mail', $pemeriksa->email)->notify(new PermohonanBaharu($permohonan, $pemeriksa)); //hantar email kepada penghantar
+        $pemeriksa = User::where('email', $email)->first();
+        Notification::route('mail', $pemeriksa->email)->notify(new PermohonanBaharu($permohonan, $pemeriksa)); //hantar email kepada penghantar
 
         return response()->json('Success');
     }

@@ -53146,6 +53146,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["permohonan_id"],
@@ -53177,6 +53180,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.dokumens = res.dokumen_permohonans;
         _this.permohonan = res.permohonan;
       });
+    },
+    downloadPdf: function downloadPdf(file_link) {
+      //   axios
+      //     .get("api/dokumen/" + file_link, { responseType: "arraybuffer" })
+      //     .then(function(response) {
+      //       var headers = response.headers();
+      //       var blob = new Blob([response.data], {
+      //         type: headers["content-type"]
+      //       });
+      //       var link = document.createElement("a");
+      //       link.href = window.URL.createObjectURL(blob);
+      //       link.download = dokumen.file_name;
+      //       link.click();
+      //     });
+      //     axios.get('api/dokumen/', file_link)
+      // .then(function (response) {
+      //      this.previewDokumen = response.data;
+      // }.bind(this));
     }
   }
 });

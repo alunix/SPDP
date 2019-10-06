@@ -86,4 +86,11 @@ class DokumenPermohonanController extends Controller
             return redirect()->route('dokumenPermohonan.penambahbaikkan.show', [$permohonan->permohonan_id])->with($msg);
         }
     }
+
+    #API
+    public function downloadDokumen($file_link)
+    {
+        return response(Storage::disk('local')->get('storage/cadangan_permohonan_baharu/' . $file_link), 200)
+            ->header('Content-Type', 'application/pdf');
+    }
 }

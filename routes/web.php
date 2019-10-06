@@ -31,6 +31,7 @@ Route::group(['prefix' => 'api'], function () {
 	Route::get('/kemajuan-permohonan/{permohonan}', 'KemajuanPermohonanController@show')->name('api.fakulti.kemajuanPermohonan');
 	/*----------------------- Senarai dokumen permohonan ------------- */
 	Route::get('/senarai-dokumen-permohonan/{permohonan}', 'DokumenPermohonanController@show')->name('api.dokumen.dihantar');
+	Route::get('/dokumen/{file_link}', 'DokumenPermohonanController@downloadDokumen')->name('api.dokumen.download');
 });
 /*........................................Start middleware.............................*/
 /*----------------------- Bahagian pihak fakulti ------------- */

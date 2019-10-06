@@ -27,7 +27,14 @@
           <td>{{dokumen.versi}}</td>
           <td>{{dokumen.laporans.count}}</td>
           <td>{{dokumen.created_at}}</td>
-          <!-- <td>{{dokumen.laporans.count()}}</td> -->
+          <!-- <a
+            v-on:click="downloadPdf(dokumen.file_link)"
+            class="btn btn-success mb-2"
+            id="download_pdf"
+          >
+            <i class="zmdi zmdi-plus"></i>
+            Download
+          </a>-->
           <!-- <td><a href ="<?php echo asset("storage/cadangan_permohonan_baharu/dokumen.file_link")?>">{{ basename(dokumen.file_name) }}</td> </a> -->
           <!-- <a
                       href="storage/cadangan_permohonan_baharu/"
@@ -35,10 +42,6 @@
                       dokumen.file_link
                       target="_blank"
           >{{dokumen.file_name}}</a>-->
-          <!-- <td> {{$dk->file_size}} KB</td>
-<td> {{$dk->komen}}</td> 
-<td> {{$dk->versi}}</td>     
-          <td> {{$dk->laporans->count()}}</td>-->
           <!-- <td>{{$dk->created_at->format('d/m/Y h:i a')}}</td>-->
           <!-- <td><a href="{{ route('senaraiLaporan.show',$dk->dokumen_permohonan_id) }}" class="btn btn-primary">Senarai laporan</a></td> -->
         </tr>
@@ -73,6 +76,24 @@ export default {
           this.dokumens = res.dokumen_permohonans;
           this.permohonan = res.permohonan;
         });
+    },
+    downloadPdf(file_link) {
+      //   axios
+      //     .get("api/dokumen/" + file_link, { responseType: "arraybuffer" })
+      //     .then(function(response) {
+      //       var headers = response.headers();
+      //       var blob = new Blob([response.data], {
+      //         type: headers["content-type"]
+      //       });
+      //       var link = document.createElement("a");
+      //       link.href = window.URL.createObjectURL(blob);
+      //       link.download = dokumen.file_name;
+      //       link.click();
+      //     });
+      //     axios.get('api/dokumen/', file_link)
+      // .then(function (response) {
+      //      this.previewDokumen = response.data;
+      // }.bind(this));
     }
   }
 };

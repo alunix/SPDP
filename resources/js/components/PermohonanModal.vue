@@ -81,6 +81,7 @@
 </template>
 <script>
 export default {
+  // components: { permohonans: permohonans },
   data() {
     return {
       jenis_permohonan_id: "",
@@ -109,14 +110,15 @@ export default {
         .post("api/permohonan_submit", formData, {
           headers: {
             "Content-Type": "multipart/form-data"
-            // boundary: "----WebKitFormBoundaryyrV7KO0BoCBuDbTL"
           }
         })
         .then(res => {
           this.success = true;
-          this.fetchPermohonans();
-          // this.success = response.data.success;
-          console.log(res);
+          this.jenis_permohonan_id = "";
+          this.doc_title = "";
+          this.komen = "";
+          this.file_link = null;
+          this.$emit("event");
         })
         .catch(error => {
           if (error.response.status === 422) {

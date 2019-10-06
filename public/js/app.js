@@ -52138,6 +52138,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  // components: { permohonans: permohonans },
   data: function data() {
     return {
       jenis_permohonan_id: "",
@@ -52168,13 +52169,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       axios.post("api/permohonan_submit", formData, {
         headers: {
           "Content-Type": "multipart/form-data"
-          // boundary: "----WebKitFormBoundaryyrV7KO0BoCBuDbTL"
         }
       }).then(function (res) {
         _this.success = true;
-        _this.fetchPermohonans();
-        // this.success = response.data.success;
-        console.log(res);
+        _this.jenis_permohonan_id = "";
+        _this.doc_title = "";
+        _this.komen = "";
+        _this.file_link = null;
+        _this.$emit("event");
       }).catch(function (error) {
         if (error.response.status === 422) {
           _this.errors = error.response.data.errors || {};
@@ -52622,6 +52624,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__PermohonanModal__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__PermohonanModal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__PermohonanModal__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //
@@ -52708,14 +52712,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -52732,13 +52729,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       updated_at: ""
     });
   },
+
+  components: {
+    PermohonansModal: __WEBPACK_IMPORTED_MODULE_0__PermohonanModal___default.a
+  },
+
   created: function created() {
     this.fetchPermohonans();
   },
 
 
   methods: {
-    fetchPermohonans: function fetchPermohonans(page_url) {
+    fetchPermohonans: function fetchPermohonans() {
       var _this = this;
 
       fetch("api/permohonan_dihantar").then(function (res) {
@@ -52746,6 +52748,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }).then(function (res) {
         _this.permohonans = res;
       });
+    },
+    parentPermohonans: function parentPermohonans() {
+      console.log("Testing parent");
     },
     show_model: function show_model() {
       this.$modal.show("permohonan_baharu");
@@ -52779,7 +52784,7 @@ var render = function() {
                   name: "permohonan_baharu"
                 }
               },
-              [_c("permohonanModal")],
+              [_c("permohonanModal", { on: { event: _vm.fetchPermohonans } })],
               1
             ),
             _vm._v(" "),
@@ -52796,7 +52801,7 @@ var render = function() {
               },
               [
                 _c("i", { staticClass: "zmdi zmdi-plus" }),
-                _vm._v("\n            Permohonan Baharu\n          ")
+                _vm._v("\n          Permohonan Baharu\n        ")
               ]
             )
           ],

@@ -9,13 +9,8 @@
             </div>
           </div>
           <modal height="auto" :scrollable="true" name="permohonan_baharu">
-            <permohonanModal></permohonanModal>
+            <permohonanModal @event="fetchPermohonans"></permohonanModal>
           </modal>
-
-          <!-- <a v-bind:href="'/permohonan-baharu'" class="btn btn-success mb-2" id="create-permohonan">
-            <i class="zmdi zmdi-plus"></i>
-            Permohonan Baharu
-          </a>-->
           <a v-on:click="show_model()" class="btn btn-success mb-2" id="create-permohonan">
             <i class="zmdi zmdi-plus"></i>
             Permohonan Baharu
@@ -83,14 +78,12 @@
           <tr class="spacer"></tr>
         </tbody>
       </table>
-      <!-- @else
-			<p> Tiada permohonan telah dijumpai </p>
-      @endif-->
     </div>
   </div>
 </template>
 
 <script>
+import PermohonansModal from "./PermohonanModal";
 export default {
   data() {
     return {
@@ -107,18 +100,24 @@ export default {
       }
     };
   },
+  components: {
+    PermohonansModal
+  },
 
   created() {
     this.fetchPermohonans();
   },
 
   methods: {
-    fetchPermohonans(page_url) {
+    fetchPermohonans() {
       fetch("api/permohonan_dihantar")
         .then(res => res.json())
         .then(res => {
           this.permohonans = res;
         });
+    },
+    parentPermohonans() {
+      console.log("Testing parent");
     },
     show_model() {
       this.$modal.show("permohonan_baharu");

@@ -11,6 +11,12 @@
           <modal height="auto" :scrollable="true" name="permohonan_baharu">
             <permohonanModal @event="fetchPermohonans"></permohonanModal>
           </modal>
+          <modal :adaptive="true" width="50%" height="50%" name="dokumen_permohonan">
+            <dokumenModal :permohonan_id="permohonan_id"></dokumenModal>
+          </modal>
+          <modal :adaptive="true" width="50%" height="50%" name="kemajuan_permohonan">
+            <kemajuanModal :permohonan_id="permohonan_id"></kemajuanModal>
+          </modal>
           <a v-on:click="showModel()" class="btn btn-success mb-2" id="create-permohonan">
             <i class="zmdi zmdi-plus"></i>
             Permohonan Baharu
@@ -63,9 +69,7 @@
                 >
                   <i class="fas fa-spinner"></i>
                 </button>
-                <modal height="auto" :scrollable="true" name="kemajuan_permohonan">
-                  <kemajuanModal :permohonan_id="permohonan_id"></kemajuanModal>
-                </modal>
+
                 <button
                   v-on:click="showDokumenModel();setPermohonanId(permohonan.permohonan_id)"
                   class="item"
@@ -75,9 +79,6 @@
                 >
                   <i class="fas fa-file-upload"></i>
                 </button>
-                <modal height="auto" :scrollable="true" name="dokumen_permohonan">
-                  <dokumenModal :permohonan_id="permohonan_id"></dokumenModal>
-                </modal>
               </div>
             </td>
           </tr>

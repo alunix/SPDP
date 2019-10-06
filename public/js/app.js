@@ -52605,6 +52605,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -52688,6 +52689,42 @@ var render = function() {
             ),
             _vm._v(" "),
             _c(
+              "modal",
+              {
+                attrs: {
+                  adaptive: true,
+                  width: "50%",
+                  height: "50%",
+                  name: "dokumen_permohonan"
+                }
+              },
+              [
+                _c("dokumenModal", {
+                  attrs: { permohonan_id: _vm.permohonan_id }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "modal",
+              {
+                attrs: {
+                  adaptive: true,
+                  width: "50%",
+                  height: "50%",
+                  name: "kemajuan_permohonan"
+                }
+              },
+              [
+                _c("kemajuanModal", {
+                  attrs: { permohonan_id: _vm.permohonan_id }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
               "a",
               {
                 staticClass: "btn btn-success mb-2",
@@ -52747,84 +52784,45 @@ var render = function() {
                   _c("td", [_vm._v(_vm._s(permohonan.updated_at))]),
                   _vm._v(" "),
                   _c("td", [
-                    _c(
-                      "div",
-                      { staticClass: "table-data-feature" },
-                      [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "item",
-                            attrs: {
-                              "data-toggle": "tooltip",
-                              "data-placement": "top",
-                              title: "Kemajuan Permohonan"
-                            },
-                            on: {
-                              click: function($event) {
-                                _vm.showKemajuanModel()
-                                _vm.setPermohonanId(permohonan.permohonan_id)
-                              }
-                            }
+                    _c("div", { staticClass: "table-data-feature" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "item",
+                          attrs: {
+                            "data-toggle": "tooltip",
+                            "data-placement": "top",
+                            title: "Kemajuan Permohonan"
                           },
-                          [_c("i", { staticClass: "fas fa-spinner" })]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "modal",
-                          {
-                            attrs: {
-                              height: "auto",
-                              scrollable: true,
-                              name: "kemajuan_permohonan"
+                          on: {
+                            click: function($event) {
+                              _vm.showKemajuanModel()
+                              _vm.setPermohonanId(permohonan.permohonan_id)
                             }
+                          }
+                        },
+                        [_c("i", { staticClass: "fas fa-spinner" })]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "item",
+                          attrs: {
+                            "data-toggle": "tooltip",
+                            "data-placement": "top",
+                            title: "Dokumen dihantar"
                           },
-                          [
-                            _c("kemajuanModal", {
-                              attrs: { permohonan_id: _vm.permohonan_id }
-                            })
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "item",
-                            attrs: {
-                              "data-toggle": "tooltip",
-                              "data-placement": "top",
-                              title: "Dokumen dihantar"
-                            },
-                            on: {
-                              click: function($event) {
-                                _vm.showDokumenModel()
-                                _vm.setPermohonanId(permohonan.permohonan_id)
-                              }
+                          on: {
+                            click: function($event) {
+                              _vm.showDokumenModel()
+                              _vm.setPermohonanId(permohonan.permohonan_id)
                             }
-                          },
-                          [_c("i", { staticClass: "fas fa-file-upload" })]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "modal",
-                          {
-                            attrs: {
-                              height: "auto",
-                              scrollable: true,
-                              name: "dokumen_permohonan"
-                            }
-                          },
-                          [
-                            _c("dokumenModal", {
-                              attrs: { permohonan_id: _vm.permohonan_id }
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
+                          }
+                        },
+                        [_c("i", { staticClass: "fas fa-file-upload" })]
+                      )
+                    ])
                   ])
                 ]
               )
@@ -53023,39 +53021,39 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card-body" }, [
-    _c("div", { staticClass: "container" }, [
-      _c("h5", [_vm._v("Dokumen yang telah dihantar")]),
+  return _c("div", { staticClass: "container" }, [
+    _c("h2", [_vm._v("Dokumen yang telah dihantar")]),
+    _vm._v(" "),
+    _c("table", { staticClass: "table table-striped" }, [
+      _vm._m(0),
       _vm._v(" "),
-      _c("table", { staticClass: "table table-striped" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c(
-          "tbody",
-          _vm._l(_vm.dokumens, function(dokumen) {
-            return _c(
-              "tr",
-              { key: dokumen.dokumen_permohonan_id, staticClass: "tr-shadow" },
-              [
-                _c("th", { attrs: { scope: "row" } }, [
-                  _vm._v(_vm._s(dokumen.versi))
-                ]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(dokumen.file_name))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(dokumen.file_size))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(dokumen.komen))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(dokumen.versi))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(dokumen.laporans.count))])
-              ]
-            )
-          }),
-          0
-        )
-      ])
+      _c(
+        "tbody",
+        _vm._l(_vm.dokumens, function(dokumen) {
+          return _c(
+            "tr",
+            { key: dokumen.dokumen_permohonan_id, staticClass: "tr-shadow" },
+            [
+              _c("th", { attrs: { scope: "row" } }, [
+                _vm._v(_vm._s(dokumen.versi))
+              ]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(dokumen.file_name))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(dokumen.file_size))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(dokumen.komen))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(dokumen.versi))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(dokumen.laporans.count))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(dokumen.created_at))])
+            ]
+          )
+        }),
+        0
+      )
     ])
   ])
 }
@@ -53100,7 +53098,6 @@ if (false) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
 //
 //
 //

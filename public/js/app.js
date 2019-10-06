@@ -53263,35 +53263,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
 
   components: {
-    PermohonansModal: PermohonansModal
+    // PermohonansModal
   },
 
   created: function created() {
-    this.fetchPermohonans();
+    this.fetchDokumens();
   },
 
 
   methods: {
-    fetchPermohonans: function fetchPermohonans() {
-      var _this = this;
-
-      fetch("api/permohonan_dihantar").then(function (res) {
+    fetchDokumens: function fetchDokumens() {
+      fetch("api/senarai-dokumen-permohonan/1").then(function (res) {
         return res.json();
       }).then(function (res) {
-        _this.permohonans = res;
+        //   this.permohonans = res;
+        console.log(res);
       });
-    },
-    parentPermohonans: function parentPermohonans() {
-      console.log("Testing parent");
-    },
-    showModel: function showModel() {
-      this.$modal.show("permohonan_baharu");
-    },
-    showKemajuanModel: function showKemajuanModel() {
-      this.$modal.show("kemajuan_permohonan");
-    },
-    showDokumenModel: function showDokumenModel() {
-      this.$modal.show("dokumen_permohonan");
     }
   }
 });

@@ -29,6 +29,8 @@ Route::group(['prefix' => 'api'], function () {
 	Route::get('/permohonan_dihantar', 'PermohonanController@api_permohonanDihantar')->name('api.permohonan.dihantar');
 	Route::post('/permohonan_submit', 'PermohonanController@store')->name('api.permohonan.submit');
 	Route::get('/kemajuan-permohonan/{permohonan}', 'KemajuanPermohonanController@show')->name('api.fakulti.kemajuanPermohonan');
+	/*----------------------- Senarai dokumen permohonan ------------- */
+	Route::get('/senarai-dokumen-permohonan/{permohonan}', 'DokumenPermohonanController@show')->name('api.dokumen.dihantar');
 });
 /*........................................Start middleware.............................*/
 /*----------------------- Bahagian pihak fakulti ------------- */
@@ -43,8 +45,8 @@ Route::group(['middleware' => 'SPDP\Http\Middleware\fakultiMiddleware', 'middlew
 	Route::get('/senarai-permohonan-dihantar', 'PermohonanController@permohonanDihantar')->name('permohonan.dihantar');
 	Route::post('/senarai-permohonan-dihantar/create', 'PermohonanController@store')->name('permohonan.dihantar.store');
 
-	/*----------------------- Senarai dokumen permohonan ------------- */
-	Route::get('/senarai-dokumen-permohonan/{permohonan}', 'DokumenPermohonanController@show')->name('dokumenPermohonan.dihantar');
+	// /*----------------------- Senarai dokumen permohonan ------------- */
+	// Route::get('/senarai-dokumen-permohonan/{permohonan}', 'DokumenPermohonanController@show')->name('dokumenPermohonan.dihantar');
 
 	/*----------------------- Fakulti nak mengemas kini tetapan profil ------------- */
 	Route::get('/settings', 'UserController@edit')->name('settings');

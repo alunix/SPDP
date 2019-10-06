@@ -128,7 +128,9 @@ class DokumenPermohonanClass
 
     public function show($id)
     {
+        // $permohonan = Permohonan::find($id);
         $permohonan = Permohonan::find($id);
-        return view('fakulti.kemajuan-permohonan')->with('kjs', $permohonan->kemajuan_permohonans)->with('permohonan', $permohonan)->with('dokumen_permohonans', $permohonan->dokumen_permohonans);
+        // return view('fakulti.kemajuan-permohonan')->with('kjs', $permohonan->kemajuan_permohonans)->with('permohonan', $permohonan)->with('dokumen_permohonans', $permohonan->dokumen_permohonans);
+
     }
 }

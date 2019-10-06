@@ -5,6 +5,7 @@ namespace SPDP\Http\Controllers;
 
 use Illuminate\Http\Request;
 use SPDP\Permohonan;
+use SPDP\DokumenPermohonan;
 use SPDP\Services\DokumenPermohonanClass;
 use SPDP\Services\ShowPermohonan;
 
@@ -24,7 +25,9 @@ class DokumenPermohonanController extends Controller
         if ($dp == 0) {
             abort(403, 'Tidak dibenarkan');
         } else {
-            return view('fakulti.senarai-dokumen-permohonan')->with('dokumen_permohonans', $permohonan->dokumen_permohonans)->with('permohonan', $permohonan);
+            // return view('fakulti.senarai-dokumen-permohonan')->with('dokumen_permohonans', $permohonan->dokumen_permohonans)->with('permohonan', $permohonan);
+            $dp = $permohonan->dokumen_permohonans;
+            return response()->json(['permohonan' => $permohonan, 'dokumen_permohonans' => $dp]);
         }
     }
 

@@ -61,32 +61,21 @@ export default {
     };
   },
   components: {
-    PermohonansModal
+    // PermohonansModal
   },
 
   created() {
-    this.fetchPermohonans();
+    this.fetchDokumens();
   },
 
   methods: {
-    fetchPermohonans() {
-      fetch("api/permohonan_dihantar")
+    fetchDokumens() {
+      fetch("api/senarai-dokumen-permohonan/1")
         .then(res => res.json())
         .then(res => {
-          this.permohonans = res;
+          //   this.permohonans = res;
+          console.log(res);
         });
-    },
-    parentPermohonans() {
-      console.log("Testing parent");
-    },
-    showModel() {
-      this.$modal.show("permohonan_baharu");
-    },
-    showKemajuanModel() {
-      this.$modal.show("kemajuan_permohonan");
-    },
-    showDokumenModel() {
-      this.$modal.show("dokumen_permohonan");
     }
   }
 };

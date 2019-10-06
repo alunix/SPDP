@@ -48,17 +48,8 @@ export default {
   props: ["permohonan_id"],
   data() {
     return {
-      permohonans: [],
-      permohonans: {
-        permohonan_id: "",
-        jenis: "",
-        bil_hantar: "",
-        doc_title: "",
-        nama: "",
-        created_at: "",
-        status_permohonan_id: "",
-        updated_at: ""
-      }
+      dokumens: [],
+      permohonan: ""
     };
   },
   components: {
@@ -74,8 +65,9 @@ export default {
       fetch("api/senarai-dokumen-permohonan/" + this.permohonan_id)
         .then(res => res.json())
         .then(res => {
-          //   this.permohonans = res;
-          console.log(res);
+          console.log(res.permohonan.dokumen_permohonans);
+          this.dokumens = res.permohonan.dokumen_permohonans;
+          this.permohonan = res.permohonan;
         });
     }
   }

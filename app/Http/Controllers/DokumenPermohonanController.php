@@ -27,7 +27,8 @@ class DokumenPermohonanController extends Controller
         } else {
             // return view('fakulti.senarai-dokumen-permohonan')->with('dokumen_permohonans', $permohonan->dokumen_permohonans)->with('permohonan', $permohonan);
             $dp = $permohonan->dokumen_permohonans;
-            return response()->json(['permohonan' => $permohonan, 'dokumen_permohonans' => $dp]);
+            // return response()->json(['permohonan' => $permohonan, 'dokumen_permohonans' => $dp]);
+            return response()->json(['permohonan' => $permohonan]);
         }
     }
 

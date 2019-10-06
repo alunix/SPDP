@@ -52759,11 +52759,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this.permohonans = res;
       });
     },
-    changePermohonanId: function changePermohonanId(id) {
+    setPermohonanId: function setPermohonanId(id) {
       this.permohonan_id = id;
-    },
-    parentPermohonans: function parentPermohonans() {
-      console.log("Testing parent");
     },
     showModel: function showModel() {
       this.$modal.show("permohonan_baharu");
@@ -52883,7 +52880,7 @@ var render = function() {
                             on: {
                               click: function($event) {
                                 _vm.showKemajuanModel()
-                                _vm.changePermohonanId(permohonan.permohonan_id)
+                                _vm.setPermohonanId(permohonan.permohonan_id)
                               }
                             }
                           },
@@ -52919,7 +52916,7 @@ var render = function() {
                             on: {
                               click: function($event) {
                                 _vm.showDokumenModel()
-                                _vm.changePermohonanId(permohonan.permohonan_id)
+                                _vm.setPermohonanId(permohonan.permohonan_id)
                               }
                             }
                           },
@@ -53212,8 +53209,6 @@ if (false) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -53263,18 +53258,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["permohonan_id"],
   data: function data() {
-    return _defineProperty({
-      permohonans: []
-    }, "permohonans", {
-      permohonan_id: "",
-      jenis: "",
-      bil_hantar: "",
-      doc_title: "",
-      nama: "",
-      created_at: "",
-      status_permohonan_id: "",
-      updated_at: ""
-    });
+    return {
+      dokumens: [],
+      permohonan: ""
+    };
   },
 
   components: {
@@ -53288,11 +53275,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
   methods: {
     fetchDokumens: function fetchDokumens() {
+      var _this = this;
+
       fetch("api/senarai-dokumen-permohonan/" + this.permohonan_id).then(function (res) {
         return res.json();
       }).then(function (res) {
-        //   this.permohonans = res;
-        console.log(res);
+        console.log(res.permohonan.dokumen_permohonans);
+        _this.dokumens = res.permohonan.dokumen_permohonans;
+        _this.permohonan = res.permohonan;
       });
     }
   }

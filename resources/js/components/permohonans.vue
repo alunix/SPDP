@@ -54,7 +54,7 @@
             <td>
               <div class="table-data-feature">
                 <button
-                  v-on:click="showKemajuanModel();changePermohonanId(permohonan.permohonan_id)"
+                  v-on:click="showKemajuanModel();setPermohonanId(permohonan.permohonan_id)"
                   class="item"
                   data-toggle="tooltip"
                   data-placement="top"
@@ -66,7 +66,7 @@
                   <kemajuanModal :permohonan_id="permohonan_id"></kemajuanModal>
                 </modal>
                 <button
-                  v-on:click="showDokumenModel();changePermohonanId(permohonan.permohonan_id)"
+                  v-on:click="showDokumenModel();setPermohonanId(permohonan.permohonan_id)"
                   class="item"
                   data-toggle="tooltip"
                   data-placement="top"
@@ -122,11 +122,8 @@ export default {
           this.permohonans = res;
         });
     },
-    changePermohonanId(id) {
+    setPermohonanId(id) {
       this.permohonan_id = id;
-    },
-    parentPermohonans() {
-      console.log("Testing parent");
     },
     showModel() {
       this.$modal.show("permohonan_baharu");

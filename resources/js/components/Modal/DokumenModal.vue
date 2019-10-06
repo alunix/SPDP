@@ -27,23 +27,6 @@
           <td>{{dokumen.versi}}</td>
           <td>{{dokumen.laporans.count}}</td>
           <td>{{dokumen.created_at}}</td>
-          <!-- <a
-            v-on:click="downloadPdf(dokumen.file_link)"
-            class="btn btn-success mb-2"
-            id="download_pdf"
-          >
-            <i class="zmdi zmdi-plus"></i>
-            Download
-          </a>-->
-          <!-- <td><a href ="<?php echo asset("storage/cadangan_permohonan_baharu/dokumen.file_link")?>">{{ basename(dokumen.file_name) }}</td> </a> -->
-          <!-- <a
-                      href="storage/cadangan_permohonan_baharu/"
-                      +
-                      dokumen.file_link
-                      target="_blank"
-          >{{dokumen.file_name}}</a>-->
-          <!-- <td>{{$dk->created_at->format('d/m/Y h:i a')}}</td>-->
-          <!-- <td><a href="{{ route('senaraiLaporan.show',$dk->dokumen_permohonan_id) }}" class="btn btn-primary">Senarai laporan</a></td> -->
         </tr>
       </tbody>
     </table>

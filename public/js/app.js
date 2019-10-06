@@ -52711,7 +52711,7 @@ var render = function() {
               {
                 attrs: {
                   adaptive: true,
-                  width: "50%",
+                  width: "60%",
                   height: "50%",
                   name: "kemajuan_permohonan"
                 }
@@ -52953,7 +52953,7 @@ module.exports = Component.exports
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__(63)
 /* template */
 var __vue_template__ = __webpack_require__(60)
 /* template functional */
@@ -53001,9 +53001,114 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h2", [_vm._v("Kemajuan Modal")])
+  return _c("div", [
+    _c("h2", [_vm._v("Kemajuan Permohonan")]),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("h5", [_vm._v("Permohonan ID :" + _vm._s(_vm.permohonan_id))]),
+        _vm._v(" "),
+        _c("table", { staticClass: "table table-striped" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.kemajuans, function(kemajuan) {
+              return _c("tr", { key: kemajuan.id, staticClass: "tr-shadow" }, [
+                _c("th", { attrs: { scope: "row" } }, [
+                  _vm._v(_vm._s(kemajuan.id))
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(
+                    _vm._s(kemajuan.status_permohonan.status_permohonan_huraian)
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(kemajuan.created_at))])
+              ])
+            }),
+            0
+          )
+        ]),
+        _vm._v(" "),
+        _c("h5", [_vm._v("Semua laporan yang telah dikeluarkan")]),
+        _vm._v(" "),
+        _c("table", { staticClass: "table table-striped" }, [
+          _vm._m(1),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.laporans, function(laporan) {
+              return _c(
+                "tr",
+                { key: laporan.laporan_id, staticClass: "tr-shadow" },
+                [
+                  _c("th", { attrs: { scope: "row" } }, [
+                    _vm._v(_vm._s(laporan.versi))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(laporan.tajuk_fail_link))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(laporan.id_penghantar.name))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(laporan.id_penghantar.role))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(laporan.komen))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(laporan.versi_laporan))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(laporan.created_at))])
+                ]
+              )
+            }),
+            0
+          )
+        ])
+      ])
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("No")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Status Permohonan")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tarikh/Masa Status")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("No")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Laporan")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Dihantar")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Pihak")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Komen")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Versi")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tarikh/Masa Laporan")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -53132,23 +53237,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["permohonan_id"],
@@ -53198,6 +53286,96 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       // .then(function (response) {
       //      this.previewDokumen = response.data;
       // }.bind(this));
+    }
+  }
+});
+
+/***/ }),
+/* 63 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["permohonan_id"],
+  data: function data() {
+    return {
+      //   permohonan_id: "",
+      kemajuans: [],
+      laporans: []
+    };
+  },
+  created: function created() {
+    this.fetchKemajuan();
+  },
+
+  methods: {
+    fetchKemajuan: function fetchKemajuan() {
+      var _this = this;
+
+      fetch("api/kemajuan-permohonan/" + this.permohonan_id).then(function (res) {
+        return res.json();
+      }).then(function (res) {
+        _this.laporans = res.laporans;
+        _this.kemajuans = res.kemajuans;
+      });
     }
   }
 });

@@ -29,8 +29,9 @@ class KemajuanPermohonanClass
             abort(403, 'Tidak dibenarkan');
         } else {
             $dp = $permohonan->dokumen_permohonans->pluck('dokumen_permohonan_id');
-            $laporans = Laporan::whereIn('dokumen_permohonan_id', $dp)->get();
-            return response()->json(['laporans' => $laporans, 'dokumen_permohonans' => $permohonan->dokumen_permohonans, 'kjs' => $permohonan->kemajuan_permohonans]);
+            $laporans = Laporan::with('id_penghantar_nama')->whereIn('dokumen_permohonan_id', $dp)->get();
+            $kemajuans = KemajuanPermohonan::with('statusPermohonan')->where('permohonan_id', $permohonan->permohonan_id)->get();
+            return response()->json(['laporans' => $laporans, 'kemajuans' => $kemajuans]);
             // return view('fakulti.kemajuan-permohonan')->with('kjs', $permohonan->kemajuan_permohonans)->with('permohonan', $permohonan)->with('dokumen_permohonans', $permohonan->dokumen_permohonans)->with('laporans', $laporans);
         }
     }

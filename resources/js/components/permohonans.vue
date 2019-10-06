@@ -14,7 +14,7 @@
           <modal :adaptive="true" width="50%" height="50%" name="dokumen_permohonan">
             <dokumenModal :permohonan_id="permohonan_id"></dokumenModal>
           </modal>
-          <modal :adaptive="true" width="50%" height="50%" name="kemajuan_permohonan">
+          <modal :adaptive="true" width="60%" height="50%" name="kemajuan_permohonan">
             <kemajuanModal :permohonan_id="permohonan_id"></kemajuanModal>
           </modal>
           <a v-on:click="showModel()" class="btn btn-success mb-2" id="create-permohonan">

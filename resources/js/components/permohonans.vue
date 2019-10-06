@@ -42,7 +42,7 @@
             v-for="permohonan in permohonans"
             v-bind:key="permohonan.permohonan_id"
           >
-            <!-- <th scope="row">{{permohonan.permohonan_id}}</th>
+            <th scope="row">{{permohonan.permohonan_id}}</th>
             <td>{{permohonan.permohonan_id}}</td>
             <td>{{permohonan.jenis}}</td>
             <td>{{permohonan.bil_hantar}}</td>
@@ -50,16 +50,6 @@
             <td>{{permohonan.nama}}</td>
             <td>{{permohonan.created_at}}</td>
             <td>{{permohonan.status}}</td>
-            <td>{{permohonan.updated_at}}</td>-->
-
-            <th scope="row">{{permohonan.permohonan_id}}</th>
-            <td>{{permohonan.permohonan_id}}</td>
-            <!-- <td>{{permohonan.jenis_permohonan.jenis_permohonan_huraian}}</td> -->
-            <td>{{permohonan.version_counts()}}</td>
-            <td>{{permohonan.jenis}}</td>
-            <td>{{permohonan.user.name}}</td>
-            <td>{{permohonan.created_at}}</td>
-            <td>{{permohonan.status_permohonan.status_permohonan_huraian}}</td>
             <td>{{permohonan.updated_at}}</td>
 
             <td>

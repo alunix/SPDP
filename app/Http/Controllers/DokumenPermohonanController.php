@@ -26,9 +26,10 @@ class DokumenPermohonanController extends Controller
             abort(403, 'Tidak dibenarkan');
         } else {
             // return view('fakulti.senarai-dokumen-permohonan')->with('dokumen_permohonans', $permohonan->dokumen_permohonans)->with('permohonan', $permohonan);
-            $dp = $permohonan->dokumen_permohonans;
-            // return response()->json(['permohonan' => $permohonan, 'dokumen_permohonans' => $dp]);
-            return response()->json(['permohonan' => $permohonan]);
+            // $permohonan = Permohonan::with('dokumen_permohonans')->where('permohonan_id', $id)->get();
+            $dokumen_permohonans = DokumenPermohonan::with(['laporans'])->where('permohonan_id', $id)->get();
+
+            return response()->json(['permohonan' => $permohonan, 'dokumen_permohonans' => $dokumen_permohonans]);
         }
     }
 

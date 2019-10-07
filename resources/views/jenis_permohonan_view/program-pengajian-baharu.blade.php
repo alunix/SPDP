@@ -11,7 +11,6 @@
                         @csrf
                          <div class="form-group row">
                             <label for="doc_title" class="col-md-4 col-form-label text-md-right">{{ __('Tajuk Program') }}</label>
-
                             <div class="col-md-6">
                                 <input id="doc_title" type="text" value="{{ $permohonan->doc_title }}"  class="form-control" name="doc_title"  required autofocus readonly>
                             </div>

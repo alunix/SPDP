@@ -19,7 +19,7 @@ class DokumenPermohonanController extends Controller
      */
     public function show($id)
     {
-        $permohonan = Permohonan::find($id);
+        $permohonan = Permohonan::findOrFail($id);
         $sp = new ShowPermohonan();
         $dp = $sp->getBoolPermohonan($permohonan);
         if ($dp == 0) {
@@ -35,7 +35,7 @@ class DokumenPermohonanController extends Controller
 
     public function showPenambahbaikkan($id)
     {
-        $permohonan = Permohonan::find($id);
+        $permohonan = Permohonan::findOrFail($id);
 
         $sp = new ShowPermohonan();
         $dp =  $sp->getBoolPermohonan($permohonan);
@@ -54,7 +54,7 @@ class DokumenPermohonanController extends Controller
             'dokumen' => 'required|file|max:1999',
         ]);
 
-        $permohonan = Permohonan::find($id);
+        $permohonan = Permohonan::findOrFail($id);
 
         if ($permohonan->status_permohonan_id != 8 && $permohonan->status_permohonan_id != 9 && $permohonan->status_permohonan_id != 10 && $permohonan->status_permohonan_id != 11) {
 
@@ -73,7 +73,7 @@ class DokumenPermohonanController extends Controller
             abort(403, 'Tidak dibenarkan');
         } else {
             $attached = 'dokumen';
-            $permohonan = Permohonan::find($id);
+            $permohonan = Permohonan::findOrFail($id);
 
 
             $dp = new DokumenPermohonanClass();

@@ -44,6 +44,10 @@ Vue.component("permohonanModal", require("./components/PermohonanModal.vue"));
 //Modal
 Vue.component("kemajuanModal", require("./components/modal/KemajuanModal.vue"));
 Vue.component("dokumenModal", require("./components/modal/DokumenModal.vue"));
+Vue.component(
+    "jenisPermohonan",
+    require("./components/View/JenisPermohonan/JenisPermohonan.vue")
+);
 
 // const router = new VueRouter({
 //     mode: "history",

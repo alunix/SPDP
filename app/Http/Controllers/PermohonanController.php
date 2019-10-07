@@ -61,17 +61,17 @@ class PermohonanController extends Controller
 
     public function store(Request $request)
     {
-        // $this->validate($request, [
-        //     'jenis_permohonan_id' => 'required|integer|max:255',
-        //     'doc_title' => 'required|string',
-        //     // 'file_link' => 'required|mimes:pdf|max:1999',
-        // ]);
+        $this->validate($request, [
+            'jenis_permohonan_id' => 'required|integer|max:255',
+            'doc_title' => 'required|string',
+            'file_link' => 'required|mimes:pdf|max:1999',
+        ]);
         $pc = new PermohonanClass();
         return $permohonan = $pc->create($request);
     }
     public function show($id)
     {
-        $permohonan = Permohonan::find($id);
+        $permohonan = Permohonan::findOrFail($id);
         if ($permohonan == null) {
             abort(403, 'Tidak dibenarkan');
         }

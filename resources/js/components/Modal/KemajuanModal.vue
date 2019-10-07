@@ -8,7 +8,6 @@
     <hr />
     <div class="row justify-content-center">
       <div class="container">
-        <h5>Permohonan ID :{{permohonan_id}}</h5>
         <table class="table table-striped">
           <thead>
             <tr>
@@ -59,7 +58,6 @@ export default {
   props: ["permohonan_id"],
   data() {
     return {
-      //   permohonan_id: "",
       kemajuans: [],
       laporans: []
     };

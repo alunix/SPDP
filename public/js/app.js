@@ -14296,9 +14296,9 @@ module.exports = Cancel;
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(44)
+var __vue_script__ = __webpack_require__(46)
 /* template */
-var __vue_template__ = __webpack_require__(45)
+var __vue_template__ = __webpack_require__(47)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -14341,7 +14341,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(14);
-module.exports = __webpack_require__(53);
+module.exports = __webpack_require__(55);
 
 
 /***/ }),
@@ -14393,12 +14393,13 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_js_modal___default.a);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component("permohonans", __webpack_require__(50));
+Vue.component("permohonans", __webpack_require__(44));
 Vue.component("permohonanModal", __webpack_require__(12));
 
 //Modal
-Vue.component("kemajuanModal", __webpack_require__(59));
-Vue.component("dokumenModal", __webpack_require__(58));
+Vue.component("kemajuanModal", __webpack_require__(49));
+Vue.component("dokumenModal", __webpack_require__(52));
+Vue.component("jenisPermohonan", __webpack_require__(60));
 
 // const router = new VueRouter({
 //     mode: "history",
@@ -52060,10 +52061,212 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 /* 44 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(45)
+/* template */
+var __vue_template__ = __webpack_require__(48)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/Permohonans.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5af14863", Component.options)
+  } else {
+    hotAPI.reload("data-v-5af14863", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 45 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__PermohonanModal__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__PermohonanModal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__PermohonanModal__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return _defineProperty({
+      permohonans: [],
+      permohonan_id: ""
+    }, "permohonans", {
+      permohonan_id: "",
+      jenis: "",
+      bil_hantar: "",
+      doc_title: "",
+      nama: "",
+      created_at: "",
+      status_permohonan_id: "",
+      updated_at: ""
+    });
+  },
+
+  components: {
+    PermohonansModal: __WEBPACK_IMPORTED_MODULE_0__PermohonanModal___default.a
+  },
+
+  created: function created() {
+    this.fetchPermohonans();
+  },
+
+  methods: {
+    fetchPermohonans: function fetchPermohonans() {
+      var _this = this;
+
+      fetch("api/permohonan_dihantar").then(function (res) {
+        return res.json();
+      }).then(function (res) {
+        _this.permohonans = res;
+      });
+    },
+    setPermohonanId: function setPermohonanId(id) {
+      this.permohonan_id = id;
+    },
+    showModel: function showModel() {
+      this.$modal.show("permohonan_baharu");
+    },
+    showKemajuanModel: function showKemajuanModel() {
+      this.$modal.show("kemajuan_permohonan");
+    },
+    showDokumenModel: function showDokumenModel() {
+      this.$modal.show("dokumen_permohonan");
+    }
+  }
+});
+
+/***/ }),
+/* 46 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -52156,6 +52359,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       file_link: null,
       errors: {},
       success: false,
+      error: false,
       loaded: true
     };
   },
@@ -52184,11 +52388,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.jenis_permohonan_id = "";
         _this.doc_title = "";
         _this.komen = "";
-        _this.file_link = null;
+        _this.file_link = "";
         _this.$emit("event");
       }).catch(function (error) {
         if (error.response.status === 422) {
           _this.errors = error.response.data.errors || {};
+          console.log(error);
+          _this.error = true;
         }
       });
     }
@@ -52196,7 +52402,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 45 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -52207,6 +52413,12 @@ var render = function() {
     _vm.success
       ? _c("div", { staticClass: "alert alert-success mt-3" }, [
           _vm._v("Permohonan berjaya dihantar")
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.error
+      ? _c("div", { staticClass: "alert alert-danger mt-3" }, [
+          _vm._v("Permohonan tidak dapat dihantar")
         ])
       : _vm._e(),
     _vm._v(" "),
@@ -52454,212 +52666,7 @@ if (false) {
 }
 
 /***/ }),
-/* 46 */,
-/* 47 */,
-/* 48 */,
-/* 49 */,
-/* 50 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(2)
-/* script */
-var __vue_script__ = __webpack_require__(51)
-/* template */
-var __vue_template__ = __webpack_require__(52)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/js/components/Permohonans.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5af14863", Component.options)
-  } else {
-    hotAPI.reload("data-v-5af14863", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 51 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__PermohonanModal__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__PermohonanModal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__PermohonanModal__);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return _defineProperty({
-      permohonans: [],
-      permohonan_id: ""
-    }, "permohonans", {
-      permohonan_id: "",
-      jenis: "",
-      bil_hantar: "",
-      doc_title: "",
-      nama: "",
-      created_at: "",
-      status_permohonan_id: "",
-      updated_at: ""
-    });
-  },
-
-  components: {
-    PermohonansModal: __WEBPACK_IMPORTED_MODULE_0__PermohonanModal___default.a
-  },
-
-  created: function created() {
-    this.fetchPermohonans();
-  },
-
-  methods: {
-    fetchPermohonans: function fetchPermohonans() {
-      var _this = this;
-
-      fetch("api/permohonan_dihantar").then(function (res) {
-        return res.json();
-      }).then(function (res) {
-        _this.permohonans = res;
-      });
-    },
-    setPermohonanId: function setPermohonanId(id) {
-      this.permohonan_id = id;
-    },
-    showModel: function showModel() {
-      this.$modal.show("permohonan_baharu");
-    },
-    showKemajuanModel: function showKemajuanModel() {
-      this.$modal.show("kemajuan_permohonan");
-    },
-    showDokumenModel: function showDokumenModel() {
-      this.$modal.show("dokumen_permohonan");
-    }
-  }
-});
-
-/***/ }),
-/* 52 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -52890,72 +52897,15 @@ if (false) {
 }
 
 /***/ }),
-/* 53 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 54 */,
-/* 55 */,
-/* 56 */,
-/* 57 */,
-/* 58 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(62)
+var __vue_script__ = __webpack_require__(50)
 /* template */
-var __vue_template__ = __webpack_require__(61)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/js/components/modal/DokumenModal.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-fb7a490e", Component.options)
-  } else {
-    hotAPI.reload("data-v-fb7a490e", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 59 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(2)
-/* script */
-var __vue_script__ = __webpack_require__(63)
-/* template */
-var __vue_template__ = __webpack_require__(60)
+var __vue_template__ = __webpack_require__(51)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -52994,7 +52944,95 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 60 */
+/* 50 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["permohonan_id"],
+  data: function data() {
+    return {
+      kemajuans: [],
+      laporans: []
+    };
+  },
+  created: function created() {
+    this.fetchKemajuan();
+  },
+
+  methods: {
+    fetchKemajuan: function fetchKemajuan() {
+      var _this = this;
+
+      fetch("api/kemajuan-permohonan/" + this.permohonan_id).then(function (res) {
+        return res.json();
+      }).then(function (res) {
+        _this.laporans = res.laporans;
+        _this.kemajuans = res.kemajuans;
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -53008,8 +53046,6 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "row justify-content-center" }, [
       _c("div", { staticClass: "container" }, [
-        _c("h5", [_vm._v("Permohonan ID :" + _vm._s(_vm.permohonan_id))]),
-        _vm._v(" "),
         _c("table", { staticClass: "table table-striped" }, [
           _vm._m(0),
           _vm._v(" "),
@@ -53119,86 +53155,54 @@ if (false) {
 }
 
 /***/ }),
-/* 61 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("h2", [_vm._v("Dokumen yang telah dihantar")]),
-    _vm._v(" "),
-    _c("table", { staticClass: "table table-striped" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "tbody",
-        _vm._l(_vm.dokumens, function(dokumen) {
-          return _c(
-            "tr",
-            { key: dokumen.dokumen_permohonan_id, staticClass: "tr-shadow" },
-            [
-              _c("th", { attrs: { scope: "row" } }, [
-                _vm._v(_vm._s(dokumen.versi))
-              ]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(dokumen.file_name))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(dokumen.file_size))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(dokumen.komen))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(dokumen.versi))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(dokumen.laporans.count))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(dokumen.created_at))])
-            ]
-          )
-        }),
-        0
-      )
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("No")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Dokumen")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Saiz(kb)")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Komen")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Versi")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Jumlah laporan")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [
-          _vm._v("Tarikh/Masa Penghantaran")
-        ])
-      ])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(53)
+/* template */
+var __vue_template__ = __webpack_require__(54)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/modal/DokumenModal.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
   module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-fb7a490e", module.exports)
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-fb7a490e", Component.options)
+  } else {
+    hotAPI.reload("data-v-fb7a490e", Component.options)
   }
-}
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
 
 /***/ }),
-/* 62 */
+/* 53 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -53291,94 +53295,123 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 63 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["permohonan_id"],
-  data: function data() {
-    return {
-      //   permohonan_id: "",
-      kemajuans: [],
-      laporans: []
-    };
-  },
-  created: function created() {
-    this.fetchKemajuan();
-  },
-
-  methods: {
-    fetchKemajuan: function fetchKemajuan() {
-      var _this = this;
-
-      fetch("api/kemajuan-permohonan/" + this.permohonan_id).then(function (res) {
-        return res.json();
-      }).then(function (res) {
-        _this.laporans = res.laporans;
-        _this.kemajuans = res.kemajuans;
-      });
-    }
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("h2", [_vm._v("Dokumen yang telah dihantar")]),
+    _vm._v(" "),
+    _c("table", { staticClass: "table table-striped" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        _vm._l(_vm.dokumens, function(dokumen) {
+          return _c(
+            "tr",
+            { key: dokumen.dokumen_permohonan_id, staticClass: "tr-shadow" },
+            [
+              _c("th", { attrs: { scope: "row" } }, [
+                _vm._v(_vm._s(dokumen.versi))
+              ]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(dokumen.file_name))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(dokumen.file_size))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(dokumen.komen))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(dokumen.versi))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(dokumen.laporans.count))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(dokumen.created_at))])
+            ]
+          )
+        }),
+        0
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("No")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Dokumen")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Saiz(kb)")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Komen")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Versi")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Jumlah laporan")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [
+          _vm._v("Tarikh/Masa Penghantaran")
+        ])
+      ])
+    ])
   }
-});
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-fb7a490e", module.exports)
+  }
+}
+
+/***/ }),
+/* 55 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = null
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/View/JenisPermohonan/JenisPermohonan.vue"
+
+module.exports = Component.exports
+
 
 /***/ })
 /******/ ]);

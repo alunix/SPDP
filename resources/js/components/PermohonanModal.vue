@@ -1,6 +1,7 @@
 <template>
   <div class="card-body">
     <div v-if="success" class="alert alert-success mt-3">Permohonan berjaya dihantar</div>
+    <div v-if="error" class="alert alert-danger mt-3">Permohonan tidak dapat dihantar</div>
     <h2>Permohonan baharu</h2>
     <hr />
     <form @submit.prevent="submit">
@@ -90,6 +91,7 @@ export default {
       file_link: null,
       errors: {},
       success: false,
+      error: false,
       loaded: true
     };
   },
@@ -117,12 +119,14 @@ export default {
           this.jenis_permohonan_id = "";
           this.doc_title = "";
           this.komen = "";
-          this.file_link = null;
+          this.file_link = "";
           this.$emit("event");
         })
         .catch(error => {
           if (error.response.status === 422) {
             this.errors = error.response.data.errors || {};
+            console.log(error);
+            this.error = true;
           }
         });
     }

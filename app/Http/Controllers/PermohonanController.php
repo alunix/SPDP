@@ -31,8 +31,7 @@ class PermohonanController extends Controller
 
     public function showListPermohonanBaharu()
     {
-        $sp = new SenaraiPermohonan();
-        return  $sp->index();
+        return view('pjk.pjk-view-permohonan-baharu');
     }
 
     public function senaraiPerakuan()
@@ -113,5 +112,11 @@ class PermohonanController extends Controller
             $A[$i]['updated_at'] = $permohonans[$i]->updated_at->format('h:i a d/m/Y');
         }
         return response()->json($A);
+    }
+
+    public function api_showListPermohonanBaharu()
+    {
+        $sp = new SenaraiPermohonan();
+        return  $sp->index();
     }
 }

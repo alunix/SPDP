@@ -32,6 +32,8 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function () {
 	/*----------------------- Senarai dokumen permohonan ------------- */
 	Route::get('/senarai-dokumen-permohonan/{permohonan}', 'DokumenPermohonanController@show')->name('api.dokumen.dihantar');
 	Route::get('/dokumen/{file_link}', 'DokumenPermohonanController@downloadDokumen')->name('api.dokumen.download');
+	/*----------------------- PJK menerima program pengajian daripada fakulti ------------- */
+	Route::get('/senarai-permohonan-baharu', 'PermohonanController@api_showListPermohonanBaharu')->name('api.senaraiPermohonan');
 });
 /*........................................Start middleware.............................*/
 /*----------------------- Bahagian pihak fakulti ------------- */

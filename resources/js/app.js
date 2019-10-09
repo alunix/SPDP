@@ -42,11 +42,16 @@ Vue.component("permohonans", require("./components/Permohonans.vue"));
 Vue.component("permohonanModal", require("./components/PermohonanModal.vue"));
 
 //Modal
-Vue.component("kemajuanModal", require("./components/modal/KemajuanModal.vue"));
-Vue.component("dokumenModal", require("./components/modal/DokumenModal.vue"));
+Vue.component("kemajuanModal", require("./components/Modal/KemajuanModal.vue"));
+Vue.component("dokumenModal", require("./components/Modal/DokumenModal.vue"));
 Vue.component(
-    "jenisPermohonan",
-    require("./components/View/JenisPermohonan/JenisPermohonan.vue")
+    "showPermohonan",
+    require("./components/Modal/ShowPermohonan.vue")
+);
+//View
+Vue.component(
+    "senaraiPermohonan",
+    require("./components/view/SenaraiPermohonan/SenaraiPermohonan.vue")
 );
 
 // const router = new VueRouter({

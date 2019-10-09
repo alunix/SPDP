@@ -36,7 +36,7 @@ class SenaraiPermohonan
                     return null;
                 break;
         }        
-        return view ('pjk.pjk-view-permohonan-baharu')->with('permohonans',$permohonans);
+        return response()->json($permohonans);
        
     }
 

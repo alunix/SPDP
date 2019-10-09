@@ -7,8 +7,6 @@ use SPDP\Penilaian;
 use SPDP\PenilaianPanel;
 use Illuminate\Support\Facades\DB;
 
-
-
 class SenaraiPermohonan
 {
     /**

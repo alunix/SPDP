@@ -20,14 +20,10 @@ class ShowPermohonan
         switch ($role) {
             case 'fakulti':
             return $this->fakulti($permohonan);
-            
             break;
-
             case 'penilai':
             return $this->penilai($permohonan);
-
             break;
-           
             default:
             $rp = new RedirectPermohonan();
             return $rp->redirect($permohonan);

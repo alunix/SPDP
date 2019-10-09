@@ -2,7 +2,7 @@
 @section('pageTitle', 'Senarai permohonan')
 @section('content')
 
-<senaraiPermohonan></senaraiPermohonan>
+<senarai></senarai>
 
 
 @endsection

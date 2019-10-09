@@ -49,10 +49,7 @@ Vue.component(
     require("./components/Modal/ShowPermohonan.vue")
 );
 //View
-Vue.component(
-    "senaraiPermohonan",
-    require("./components/view/SenaraiPermohonan/SenaraiPermohonan.vue")
-);
+Vue.component("senarai", require("./components/view/senarai.vue"));
 
 // const router = new VueRouter({
 //     mode: "history",

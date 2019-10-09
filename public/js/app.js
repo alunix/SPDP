@@ -14401,7 +14401,7 @@ Vue.component("kemajuanModal", __webpack_require__(49));
 Vue.component("dokumenModal", __webpack_require__(52));
 Vue.component("showPermohonan", __webpack_require__(55));
 //View
-Vue.component("senaraiPermohonan", __webpack_require__(57));
+Vue.component("senarai", __webpack_require__(78));
 
 // const router = new VueRouter({
 //     mode: "history",
@@ -14409,8 +14409,8 @@ Vue.component("senaraiPermohonan", __webpack_require__(57));
 // });
 
 var app = new Vue({
-    el: "#app"
-    // router
+  el: "#app"
+  // router
 });
 
 /***/ }),
@@ -53456,15 +53456,41 @@ if (false) {
 }
 
 /***/ }),
-/* 57 */
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 61 */,
+/* 62 */,
+/* 63 */,
+/* 64 */,
+/* 65 */,
+/* 66 */,
+/* 67 */,
+/* 68 */,
+/* 69 */,
+/* 70 */,
+/* 71 */,
+/* 72 */,
+/* 73 */,
+/* 74 */,
+/* 75 */,
+/* 76 */,
+/* 77 */,
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(58)
+var __vue_script__ = __webpack_require__(79)
 /* template */
-var __vue_template__ = __webpack_require__(59)
+var __vue_template__ = __webpack_require__(80)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -53481,7 +53507,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/js/components/view/SenaraiPermohonan/SenaraiPermohonan.vue"
+Component.options.__file = "resources/js/components/view/senarai.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -53490,9 +53516,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4e516026", Component.options)
+    hotAPI.createRecord("data-v-65b3b356", Component.options)
   } else {
-    hotAPI.reload("data-v-4e516026", Component.options)
+    hotAPI.reload("data-v-65b3b356", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -53503,8 +53529,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 58 */
-/***/ (function(module, exports) {
+/* 79 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //
 //
@@ -53561,55 +53591,54 @@ module.exports = Component.exports
 //
 //
 
-// export default {
-//   data() {
-//     return {
-//       permohonans: [],
-//       permohonan_id: "",
-//       permohonans: {
-//         permohonan_id: "",
-//         jenis: "",
-//         bil_hantar: "",
-//         doc_title: "",
-//         nama: "",
-//         created_at: "",
-//         status_permohonan_id: "",
-//         updated_at: ""
-//       }
-//     };
-//   },
-//   components: {
-//     PermohonansModal
-//   },
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return _defineProperty({
+      permohonans: [],
+      permohonan_id: ""
+    }, "permohonans", {
+      permohonan_id: "",
+      jenis_permohonan: "",
+      bil_hantar: "",
+      doc_title: "",
+      nama: "",
+      created_at: "",
+      status_permohonan_id: "",
+      updated_at: ""
+    });
+  },
+  created: function created() {
+    this.fetchPermohonans();
+  },
 
-//   created() {
-//     this.fetchPermohonans();
-//   },
-//   methods: {
-//     fetchPermohonans() {
-//       fetch("api/permohonan_dihantar")
-//         .then(res => res.json())
-//         .then(res => {
-//           this.permohonans = res;
-//         });
-//     },
-//     setPermohonanId(id) {
-//       this.permohonan_id = id;
-//     },
-//     showModel() {
-//       this.$modal.show("permohonan_baharu");
-//     },
-//     showKemajuanModel() {
-//       this.$modal.show("kemajuan_permohonan");
-//     },
-//     showDokumenModel() {
-//       this.$modal.show("dokumen_permohonan");
-//     }
-//   }
-// };
+  methods: {
+    fetchPermohonans: function fetchPermohonans() {
+      var _this = this;
+
+      fetch("api/senarai-permohonan-baharu").then(function (res) {
+        return res.json();
+      }).then(function (res) {
+        _this.permohonans = res;
+        console.log(res);
+      });
+    },
+    setPermohonanId: function setPermohonanId(id) {
+      this.permohonan_id = id;
+    },
+    showModel: function showModel() {
+      this.$modal.show("permohonan_baharu");
+    },
+    showKemajuanModel: function showKemajuanModel() {
+      this.$modal.show("kemajuan_permohonan");
+    },
+    showDokumenModel: function showDokumenModel() {
+      this.$modal.show("dokumen_permohonan");
+    }
+  }
+});
 
 /***/ }),
-/* 59 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -53649,13 +53678,11 @@ var render = function() {
                     _vm._v(_vm._s(p.jenis_permohonan.jenis_permohonan_huraian))
                   ]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(p.version_counts()))]),
-                  _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(p.doc_title))]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(p.user.name))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(p.user.fakulti.fnama_kod))]),
+                  _c("td", [_vm._v(_vm._s(p.id_penghantar.fakulti_id))]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(p.created_at))]),
                   _vm._v(" "),
@@ -53729,15 +53756,9 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-4e516026", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-65b3b356", module.exports)
   }
 }
-
-/***/ }),
-/* 60 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

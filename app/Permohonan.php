@@ -88,8 +88,7 @@ public function dokumen_permohonans(){
 }
 
  public function jenis_permohonan(){
-  // return $this->hasOne('SPDP\Penilaian','penilaianID');
-   return $this->belongsTo('SPDP\JenisPermohonan','jenis_permohonan_id');
+    return $this->belongsTo('SPDP\JenisPermohonan','jenis_permohonan_id');
 }
 
  

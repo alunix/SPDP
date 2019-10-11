@@ -1,8 +1,5 @@
 <template>
   <div>
-    <div>
-      <h2>Senarai permohonan</h2>
-    </div>
     <div class="container">
       <div class="row">
         <div class="col-md-12">
@@ -50,12 +47,12 @@
             <tr class="tr-shadow" v-for="p in permohonans" v-bind:key="p.permohonan_id">
               <th scope="row">{{p.permohonan_id}}</th>
               <td>{{p.permohonan_id}}</td>
-              <td>{{p.jenis}}</td>
-              <td>{{p.bil_hantar}}</td>
-              <td>{{p.jenis}}</td>
-              <td>{{p.nama}}</td>
+              <td>{{p.jenis_permohonan.jenis_permohonan_huraian}}</td>
+              <td>{{p.dokumen_permohonans.length}}</td>
+              <td>{{p.doc_title}}</td>
+              <td>{{p.user.name}}</td>
               <td>{{p.created_at}}</td>
-              <td>{{p.status}}</td>
+              <td>{{p.status_permohonan.status_permohonan_huraian}}</td>
               <td>{{p.updated_at}}</td>
 
               <td>
@@ -100,7 +97,7 @@ export default {
       permohonan_id: "",
       permohonans: {
         permohonan_id: "",
-        jenis: "",
+        jenis_permohonan: "",
         bil_hantar: "",
         doc_title: "",
         nama: "",

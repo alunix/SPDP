@@ -25,10 +25,10 @@
             <th scope="row">{{p.permohonan_id}}</th>
             <td>{{p.permohonan_id}}</td>
             <td>{{p.jenis_permohonan.jenis_permohonan_huraian}}</td>
-            <!-- <td>{{p.version_counts()}}</td> -->
+            <td>{{p.dokumen_permohonans.length}}</td>
             <td>{{p.doc_title}}</td>
             <td>{{p.user.name}}</td>
-            <td>{{p.id_penghantar.fakulti_id}}</td>
+            <td>{{p.user.fakulti.f_nama}}</td>
             <td>{{p.created_at}}</td>
 
             <td>
@@ -61,6 +61,7 @@ export default {
       permohonans: {
         permohonan_id: "",
         jenis_permohonan: "",
+        jenis_permohonan_id: "",
         bil_hantar: "",
         doc_title: "",
         nama: "",

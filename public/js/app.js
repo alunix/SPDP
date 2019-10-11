@@ -14401,7 +14401,7 @@ Vue.component("kemajuanModal", __webpack_require__(49));
 Vue.component("dokumenModal", __webpack_require__(52));
 Vue.component("showPermohonan", __webpack_require__(55));
 //View
-Vue.component("senarai", __webpack_require__(78));
+Vue.component("senarai", __webpack_require__(57));
 
 // const router = new VueRouter({
 //     mode: "history",
@@ -52208,9 +52208,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -52220,7 +52217,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       permohonan_id: ""
     }, "permohonans", {
       permohonan_id: "",
-      jenis: "",
+      jenis_permohonan: "",
       bil_hantar: "",
       doc_title: "",
       nama: "",
@@ -52677,8 +52674,6 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm._m(0),
-    _vm._v(" "),
     _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-md-12" }, [
@@ -52686,7 +52681,7 @@ var render = function() {
             "div",
             { staticClass: "au-breadcrumb-content" },
             [
-              _vm._m(1),
+              _vm._m(0),
               _vm._v(" "),
               _c(
                 "modal",
@@ -52767,7 +52762,7 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "table-responsive table-responsive-data2" }, [
         _c("table", { staticClass: "table table-data2" }, [
-          _vm._m(2),
+          _vm._m(1),
           _vm._v(" "),
           _c(
             "tbody",
@@ -52784,17 +52779,25 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(p.permohonan_id))]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(p.jenis))]),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(p.jenis_permohonan.jenis_permohonan_huraian)
+                      )
+                    ]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(p.bil_hantar))]),
+                    _c("td", [_vm._v(_vm._s(p.dokumen_permohonans.length))]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(p.jenis))]),
+                    _c("td", [_vm._v(_vm._s(p.doc_title))]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(p.nama))]),
+                    _c("td", [_vm._v(_vm._s(p.user.name))]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(p.created_at))]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(p.status))]),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(p.status_permohonan.status_permohonan_huraian)
+                      )
+                    ]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(p.updated_at))]),
                     _vm._v(" "),
@@ -52853,12 +52856,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [_c("h2", [_vm._v("Senarai permohonan")])])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -53456,41 +53453,15 @@ if (false) {
 }
 
 /***/ }),
-/* 57 */,
-/* 58 */,
-/* 59 */,
-/* 60 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 61 */,
-/* 62 */,
-/* 63 */,
-/* 64 */,
-/* 65 */,
-/* 66 */,
-/* 67 */,
-/* 68 */,
-/* 69 */,
-/* 70 */,
-/* 71 */,
-/* 72 */,
-/* 73 */,
-/* 74 */,
-/* 75 */,
-/* 76 */,
-/* 77 */,
-/* 78 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(79)
+var __vue_script__ = __webpack_require__(58)
 /* template */
-var __vue_template__ = __webpack_require__(80)
+var __vue_template__ = __webpack_require__(59)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -53529,7 +53500,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 79 */
+/* 58 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -53599,6 +53570,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }, "permohonans", {
       permohonan_id: "",
       jenis_permohonan: "",
+      jenis_permohonan_id: "",
       bil_hantar: "",
       doc_title: "",
       nama: "",
@@ -53638,7 +53610,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 });
 
 /***/ }),
-/* 80 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -53678,11 +53650,13 @@ var render = function() {
                     _vm._v(_vm._s(p.jenis_permohonan.jenis_permohonan_huraian))
                   ]),
                   _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(p.dokumen_permohonans.length))]),
+                  _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(p.doc_title))]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(p.user.name))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(p.id_penghantar.fakulti_id))]),
+                  _c("td", [_vm._v(_vm._s(p.user.fakulti.f_nama))]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(p.created_at))]),
                   _vm._v(" "),
@@ -53759,6 +53733,12 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-65b3b356", module.exports)
   }
 }
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

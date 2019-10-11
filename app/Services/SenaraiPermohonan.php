@@ -39,7 +39,7 @@ class SenaraiPermohonan
     }
 
     public function pjk(){
-     $permohonans = Permohonan::with(['user', 'jenis_permohonan', 'fakulti'])->where('jenis_permohonan_id','!=','8')->where('status_permohonan_id','=','1')->get();
+     $permohonans = Permohonan::with(['user.fakulti', 'jenis_permohonan', 'dokumen_permohonans' ,'fakulti'])->where('jenis_permohonan_id','!=','8')->where('status_permohonan_id','=','1')->get();
      return $permohonans;
     }
     

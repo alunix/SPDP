@@ -31,7 +31,7 @@
     <link href="{{ asset('vendor/font-awesome-5/css/fontawesome-all.min.css')}}" rel="stylesheet" media="all"> -->
     <link href="{{ asset('vendor/mdi-font/css/material-design-iconic-font.min.css')}}" rel="stylesheet" media="all">
     <link href="{{ asset('vendor/bootstrap-4.1/bootstrap.min.css')}}" rel="stylesheet" media="all">
-    <link href="{{ asset('vendor/animsition/animsition.min.css')}}" rel="stylesheet" media="all">
+    <!-- <link href="{{ asset('vendor/animsition/animsition.min.css')}}" rel="stylesheet" media="all"> -->
     <link href="{{ asset('vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css')}}" rel="stylesheet" media="all">
     <link href="{{ asset('vendor/wow/animate.css')}}" rel="stylesheet" media="all">
     <link href="{{ asset('vendor/css-hamburgers/hamburgers.min.css')}}" rel="stylesheet" media="all">
@@ -50,7 +50,7 @@
     <!-- Vendor JS       -->
     <script src="{{asset('vendor/slick/slick.min.js')}}" defer></script>
     <script src="{{asset('vendor/wow/wow.min.js') }}" defer></script>
-    <script src="{{asset('vendor/animsition/animsition.min.js') }}" defer></script>
+    <!-- <script src="{{asset('vendor/animsition/animsition.min.js') }}" defer></script> -->
     <script src="{{asset('vendor/bootstrap-progressbar/bootstrap-progressbar.min.js')}}" defer></script>
     <script src="{{asset('vendor/counter-up/jquery.waypoints.min.js') }}" defer></script>
     <script src="{{asset('vendor/counter-up/jquery.counterup.min.js')}}" defer></script>
@@ -63,10 +63,10 @@
     <script src="{{asset('js/main.js')}}" defer></script>
 
     <!-- Ajax Crud -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script> -->
 
 </head>
 

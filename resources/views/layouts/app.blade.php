@@ -14,7 +14,7 @@
     <script src="{{ asset('js/submit.js') }}" defer></script>
     <!-- Script for chart-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
-    <script src="https://unpkg.com/vue"></script>
+    <!-- <script src="https://unpkg.com/vue"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.0.2/echarts-en.min.js" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/6.0.6/highcharts.js" charset="utf-8"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -58,10 +58,10 @@
     <!-- Main JS-->
     <script src="{{asset('js/main.js')}}" defer></script>
     <!-- Ajax crud JS-->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script> -->
 
 </head>
 
@@ -139,28 +139,21 @@
                         </ul>
                     </div>
                     <div class="header__tool">
-
-
                         <div class="account-wrap">
                             <div class="account-item account-item--style2 clearfix js-item-menu">
-
                                 <div class="content">
                                     <a class="js-acc-btn" href="#"> {{ Auth::user()->name }}</a>
                                 </div>
                                 <div class="account-dropdown js-dropdown">
-
                                     <div class="account-dropdown__body">
-
                                         <div class="account-dropdown__item">
                                             <a href="{{route('settings')}}">
                                                 <i class="zmdi zmdi-settings"></i>Settings</a>
                                         </div>
-
                                         <div class="account-dropdown__item">
                                             <a href="{{route('aliranKerja.settings.show')}}">
                                                 <i class="#"></i>Email workflow settings</a>
                                         </div>
-
                                     </div>
                                     <div class="account-dropdown__footer">
                                         <a href="{{route('logout')}}" onclick="event.preventDefault();
@@ -178,8 +171,6 @@
             </div>
         </header>
         @endguest
-
-
         <main class="py-4">
             <!-- Message in blade testing on 27/1/2019 by Bezane -->
             @if (Session::has('message'))
@@ -199,18 +190,11 @@
                 </div>
             </div>
         </main>
-
         @yield('div')
-
     </div>
-
 </body>
-
 @yield('myjsfile')
-
 </html>
-
-
 <script>
     $('.item-nav').click(function(event) {
         // Avoid the link click from loading a new page

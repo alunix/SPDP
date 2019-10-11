@@ -14341,7 +14341,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(14);
-module.exports = __webpack_require__(69);
+module.exports = __webpack_require__(70);
 
 
 /***/ }),
@@ -14394,15 +14394,15 @@ var routes = [{
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component("permohonans", __webpack_require__(55));
+Vue.component("permohonans", __webpack_require__(56));
 Vue.component("permohonanModal", __webpack_require__(3));
 
 //Modal
-Vue.component("kemajuanModal", __webpack_require__(58));
-Vue.component("dokumenModal", __webpack_require__(61));
-Vue.component("showPermohonan", __webpack_require__(64));
+Vue.component("kemajuanModal", __webpack_require__(59));
+Vue.component("dokumenModal", __webpack_require__(62));
+Vue.component("showPermohonan", __webpack_require__(65));
 //View
-Vue.component("senarai", __webpack_require__(66));
+Vue.component("senarai", __webpack_require__(67));
 
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
     mode: "history",
@@ -53043,9 +53043,9 @@ if (false) {
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(74)
+var __vue_script__ = __webpack_require__(54)
 /* template */
-var __vue_template__ = __webpack_require__(54)
+var __vue_template__ = __webpack_require__(55)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -53085,6 +53085,131 @@ module.exports = Component.exports
 
 /***/ }),
 /* 54 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      permohonans: [],
+      lulus: "",
+      permohonan_id: "",
+      dokumens: ""
+    };
+  },
+  created: function created() {
+    this.loadDashboard();
+  },
+
+  methods: {
+    loadDashboard: function loadDashboard() {
+      var _this = this;
+
+      fetch("api/dashboard").then(function (res) {
+        return res.json();
+      }).then(function (res) {
+        _this.permohonans = res;
+        console.log(res);
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -53098,7 +53223,7 @@ var render = function() {
       _c("div", { staticClass: "col-md-6 col-lg-3" }, [
         _c("div", { staticClass: "statistic__item statistic__item--green" }, [
           _c("h2", { staticClass: "number", staticStyle: { color: "white" } }, [
-            _vm._v(_vm._s(_vm.permohonans))
+            _vm._v(_vm._s(_vm.permohonans.length))
           ]),
           _vm._v(" "),
           _c("span", { staticClass: "desc", staticStyle: { color: "white" } }, [
@@ -53106,54 +53231,48 @@ var render = function() {
           ]),
           _vm._v(" "),
           _vm._m(1)
-        ])
-      ]),
-      _vm._v('@if(Auth::user()->role == "pjk")\n    '),
-      _c("div", { staticClass: "col-md-6 col-lg-3" }, [
-        _c("div", { staticClass: "statistic__item statistic__item--orange" }, [
-          _c("h2", { staticClass: "number", staticStyle: { color: "white" } }, [
-            _vm._v(_vm._s(_vm.permohonan_diperakui.length))
-          ]),
-          _vm._v(" "),
-          _c("span", { staticClass: "desc", staticStyle: { color: "white" } }, [
-            _vm._v("permohonan untuk diperakui")
-          ]),
-          _vm._v(" "),
-          _vm._m(2)
-        ])
-      ]),
-      _vm._v("@endif\n    "),
-      _c("div", { staticClass: "col-md-6 col-lg-3" }, [
-        _c("div", { staticClass: "statistic__item statistic__item--blue" }, [
-          _c("h2", { staticClass: "number", staticStyle: { color: "white" } }, [
-            _vm._v(_vm._s(_vm.permohonan_in_progress))
-          ]),
-          _vm._v(" "),
-          _c("span", { staticClass: "desc", staticStyle: { color: "white" } }, [
-            _vm._v("permohonan sedang dinilai")
-          ]),
-          _vm._v(" "),
-          _vm._m(3)
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-6 col-lg-3" }, [
-        _c("div", { staticClass: "statistic__item statistic__item--red" }, [
-          _c("h2", { staticClass: "number", staticStyle: { color: "white" } }, [
-            _vm._v(_vm._s(_vm.permohonan_diluluskan))
-          ]),
-          _vm._v(" "),
-          _c("span", { staticClass: "desc", staticStyle: { color: "white" } }, [
-            _vm._v("permohonan diluluskan")
-          ]),
-          _vm._v(" "),
-          _vm._m(4)
-        ])
-      ]),
-      _vm._v(" "),
-      _vm._m(5),
-      _vm._v(" "),
-      _vm._m(6)
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-6 col-lg-3" }, [
+          _c("div", { staticClass: "statistic__item statistic__item--blue" }, [
+            _c(
+              "h2",
+              { staticClass: "number", staticStyle: { color: "white" } },
+              [_vm._v(_vm._s(_vm.progress))]
+            ),
+            _vm._v(" "),
+            _c(
+              "span",
+              { staticClass: "desc", staticStyle: { color: "white" } },
+              [_vm._v("permohonan sedang dinilai")]
+            ),
+            _vm._v(" "),
+            _vm._m(2)
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-6 col-lg-3" }, [
+          _c("div", { staticClass: "statistic__item statistic__item--red" }, [
+            _c(
+              "h2",
+              { staticClass: "number", staticStyle: { color: "white" } },
+              [_vm._v(_vm._s(_vm.lulus))]
+            ),
+            _vm._v(" "),
+            _c(
+              "span",
+              { staticClass: "desc", staticStyle: { color: "white" } },
+              [_vm._v("permohonan diluluskan")]
+            ),
+            _vm._v(" "),
+            _vm._m(3)
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(4),
+        _vm._v(" "),
+        _vm._m(5)
+      ])
     ])
   ])
 }
@@ -53214,14 +53333,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "icon" }, [
-      _c("i", { staticClass: "zmdi zmdi-alert-circle-o" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "icon" }, [
       _c("i", { staticClass: "zmdi zmdi-calendar-note" })
     ])
   },
@@ -53246,7 +53357,7 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("div", { staticClass: "recent-report__chart" }, [
             _vm._v(
-              "\n            {!! $chart->container() !!}\n            {!! $chart->script() !!}\n          "
+              "\n              {!! $chart->container() !!}\n              {!! $chart->script() !!}\n            "
             )
           ])
         ])
@@ -53264,7 +53375,7 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("div", { staticClass: "recent-report__chart" }, [
             _vm._v(
-              "\n            {!! $pie_chart->container() !!}\n            {!! $pie_chart->script() !!}\n          "
+              "\n              {!! $pie_chart->container() !!}\n              {!! $pie_chart->script() !!}\n            "
             )
           ])
         ])
@@ -53282,15 +53393,15 @@ if (false) {
 }
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(56)
+var __vue_script__ = __webpack_require__(57)
 /* template */
-var __vue_template__ = __webpack_require__(57)
+var __vue_template__ = __webpack_require__(58)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -53329,7 +53440,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -53481,7 +53592,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 });
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -53724,15 +53835,15 @@ if (false) {
 }
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(59)
+var __vue_script__ = __webpack_require__(60)
 /* template */
-var __vue_template__ = __webpack_require__(60)
+var __vue_template__ = __webpack_require__(61)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -53771,7 +53882,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -53859,7 +53970,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -53982,15 +54093,15 @@ if (false) {
 }
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(62)
+var __vue_script__ = __webpack_require__(63)
 /* template */
-var __vue_template__ = __webpack_require__(63)
+var __vue_template__ = __webpack_require__(64)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -54029,7 +54140,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -54122,7 +54233,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -54201,7 +54312,7 @@ if (false) {
 }
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
@@ -54209,7 +54320,7 @@ var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = null
 /* template */
-var __vue_template__ = __webpack_require__(65)
+var __vue_template__ = __webpack_require__(66)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -54248,7 +54359,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -54268,15 +54379,15 @@ if (false) {
 }
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(67)
+var __vue_script__ = __webpack_require__(68)
 /* template */
-var __vue_template__ = __webpack_require__(68)
+var __vue_template__ = __webpack_require__(69)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -54315,7 +54426,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -54425,7 +54536,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 });
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -54550,158 +54661,10 @@ if (false) {
 }
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 70 */,
-/* 71 */,
-/* 72 */,
-/* 73 */,
-/* 74 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return _defineProperty({
-      permohonans: [],
-      permohonan_id: ""
-    }, "permohonans", {
-      permohonan_id: "",
-      jenis_permohonan: "",
-      bil_hantar: "",
-      doc_title: "",
-      nama: "",
-      created_at: "",
-      status_permohonan_id: "",
-      updated_at: ""
-    });
-  },
-  created: function created() {
-    this.fetchPermohonans();
-  },
-
-  methods: {
-    fetchPermohonans: function fetchPermohonans() {
-      var _this = this;
-
-      fetch("api/permohonan_dihantar").then(function (res) {
-        return res.json();
-      }).then(function (res) {
-        _this.permohonans = res;
-      });
-    },
-    setPermohonanId: function setPermohonanId(id) {
-      this.permohonan_id = id;
-    },
-    showModel: function showModel() {
-      this.$modal.show("permohonan_baharu");
-    },
-    showKemajuanModel: function showKemajuanModel() {
-      this.$modal.show("kemajuan_permohonan");
-    },
-    showDokumenModel: function showDokumenModel() {
-      this.$modal.show("dokumen_permohonan");
-    }
-  }
-});
 
 /***/ })
 /******/ ]);

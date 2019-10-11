@@ -83,8 +83,6 @@
                 </div>
             </div>
         </header>
-
-
         @else
         <header class="header-desktop3 d-none d-lg-block">
             <div class="section__content section__content--p35">
@@ -108,7 +106,8 @@
                             <li>
                                 <router-link to="/permohonans">
                                     <i class="fas fa-list"></i>
-                                    <span class="bot-line"></span>Permohonan</router-link>
+                                    <span class="bot-line"></span>Permohonan
+                                </router-link>
                             </li>
 
                             @else
@@ -185,8 +184,8 @@
             <!-- End message -->
             <div class="section__content section__content--p30">
                 <div class="container">
-                    <!-- @yield('content') -->
-                    <router-view></router-view>
+                    @yield('content')
+                    <!-- <router-view></router-view> -->
                 </div>
             </div>
         </main>

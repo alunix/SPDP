@@ -8,7 +8,7 @@
               <div class="overview-wrap">
                 <h2 class="title-1">Senarai permohonan dihantar</h2>
               </div>
-          </div>
+            </div>
             <modal height="auto" :scrollable="true" name="permohonan_baharu">
               <permohonanModal @event="fetchPermohonans"></permohonanModal>
             </modal>
@@ -94,17 +94,19 @@ export default {
   data() {
     return {
       permohonans: [],
-      permohonan_id: "",
-      permohonans: {
-        permohonan_id: "",
-        jenis_permohonan: "",
-        bil_hantar: "",
-        doc_title: "",
-        nama: "",
-        created_at: "",
-        status_permohonan_id: "",
-        updated_at: ""
-      }
+      permohonan_id: ""
+      // permohonans: {
+      //   permohonan_id: "",
+      //   jenis_permohonan: {
+      //     jenis_permohonan_huraian: ""
+      //   },
+      //   bil_hantar: "",
+      //   doc_title: "",
+      //   nama: "",
+      //   created_at: "",
+      //   status_permohonan_id: "",
+      //   updated_at: ""
+      // }
     };
   },
   components: {

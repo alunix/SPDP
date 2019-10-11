@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="row">
+  <div class="row">
+    <div>
       <div class="col-md-12">
         <div class="au-breadcrumb-content">
           <div class="au-breadcrumb-left">
@@ -9,7 +9,6 @@
             </div>
           </div>
           <form class="au-form-icon--sm" action="/search" method="post">
-            @csrf
             <input
               class="au-input--w300 au-input--style2"
               type="text"
@@ -23,68 +22,59 @@
         </div>
       </div>
     </div>
+    <!-- End Top -->
+    <hr />
     <div class="row m-t-25">
       <div class="col-md-6 col-lg-3">
         <div class="statistic__item statistic__item--green">
           <h2 class="number" style="color:white">{{permohonans.length}}</h2>
-          <span class="desc" style="color:white">permohonan baharu</span>
+          <span class="desc" style="color:white">permohonan dihantar</span>
           <div class="icon">
             <i class="zmdi zmdi-file"></i>
           </div>
         </div>
-        <!-- </div>@if(Auth::user()->role == "pjk")
+      </div>
       <div class="col-md-6 col-lg-3">
-        <div class="statistic__item statistic__item--orange">
-          <h2 class="number" style="color:white">{{permohonan_diperakui.length}}</h2>
-          <span class="desc" style="color:white">permohonan untuk diperakui</span>
+        <div class="statistic__item statistic__item--blue">
+          <h2 class="number" style="color:white">{{progress}}</h2>
+          <span class="desc" style="color:white">permohonan sedang dinilai</span>
           <div class="icon">
-            <i class="zmdi zmdi-alert-circle-o"></i>
+            <i class="zmdi zmdi-calendar-note"></i>
           </div>
         </div>
-        </div>@endif-->
-        <div class="col-md-6 col-lg-3">
-          <div class="statistic__item statistic__item--blue">
-            <h2 class="number" style="color:white">{{progress}}</h2>
-            <span class="desc" style="color:white">permohonan sedang dinilai</span>
-            <div class="icon">
-              <i class="zmdi zmdi-calendar-note"></i>
-            </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="statistic__item statistic__item--red">
+          <h2 class="number" style="color:white">{{lulus}}</h2>
+          <span class="desc" style="color:white">permohonan diluluskan</span>
+          <div class="icon">
+            <i class="zmdi zmdi-check"></i>
           </div>
         </div>
-        <div class="col-md-6 col-lg-3">
-          <div class="statistic__item statistic__item--red">
-            <h2 class="number" style="color:white">{{lulus}}</h2>
-            <span class="desc" style="color:white">permohonan diluluskan</span>
-            <div class="icon">
-              <i class="zmdi zmdi-check"></i>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="au-card recent-report">
-            <div class="au-card-inner">
-              <h3 class="title-2">Jumlah permohonan</h3>
-              <div class="chart-info"></div>
-              <div class="recent-report__chart">
-                {!! $chart->container() !!}
-                {!! $chart->script() !!}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="au-card recent-report">
-            <div class="au-card-inner">
-              <h3 class="title-2">Jenis permohonan</h3>
-
-              <div class="recent-report__chart">
-                {!! $pie_chart->container() !!}
-                {!! $pie_chart->script() !!}
-              </div>
+      </div>
+      <!-- <div class="col-lg-6">
+        <div class="au-card recent-report">
+          <div class="au-card-inner">
+            <h3 class="title-2">Jumlah dokumen permohonan</h3>
+            <div class="chart-info"></div>
+            <div class="recent-report__chart">
+              {!! $line_chart->container() !!}
+              {!! $line_chart->script() !!}
             </div>
           </div>
         </div>
       </div>
+      <div class="col-lg-6">
+        <div class="au-card recent-report">
+          <div class="au-card-inner">
+            <h3 class="title-2">Jenis permohonan</h3>
+            <div class="recent-report__chart">
+              {!! $pie_chart->container() !!}
+              {!! $pie_chart->script() !!}
+            </div>
+          </div>
+        </div>
+      </div>-->
     </div>
   </div>
 </template>
@@ -95,8 +85,8 @@ export default {
     return {
       permohonans: [],
       lulus: "",
-      permohonan_id: "",
-      dokumens: ""
+      dokumens: [],
+      progress: ""
     };
   },
   created() {
@@ -108,6 +98,9 @@ export default {
         .then(res => res.json())
         .then(res => {
           this.permohonans = res;
+          this.progress = res.progress;
+          this.lulus = res.lulus;
+          this.dokumens = res.dokumens;
           console.log(res);
         });
     }

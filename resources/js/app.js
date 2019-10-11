@@ -46,7 +46,6 @@ const routes = [
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component("permohonans", require("./components/Permohonans.vue"));
 Vue.component("permohonanModal", require("./components/PermohonanModal.vue"));
 
 //Modal

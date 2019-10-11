@@ -129,11 +129,12 @@ class HomeController extends Controller
         'colorCount'=>10,'dimensions'=>[800,800]
      ]);
      
+    
      $progress = Permohonan::where('status_permohonan_id','!=',1)->orWhere('status_permohonan_id','!=',6)->orWhere('status_permohonan_id','!=',7)->get()->count();
      $lulus = Permohonan::where('status_permohonan_id','=',6)->orWhere('status_permohonan_id','=',7)->get()->count();
      
-    //  return view ('dashboard.fakulti-dashboard')->with('dokumen_permohonans',$dokumen_permohonans)->with('permohonans',$permohonans)->with('line_chart',$line_chart)->with('pie_chart',$pie_chart)->with('permohonan_in_progress', $permohonan_in_progress)->with('permohonan_diluluskan',$permohonan_diluluskan);
-     return response()->json(['dokumens'=>$dokumen_permohonans, 'permohonans'=>$permohonans, 'lulus'=>$lulus, 'progress' => $progress ]);
+     return view ('dashboard.fakulti-dashboard')->with('dokumen_permohonans',$dokumen_permohonans)->with('permohonans',$permohonans)->with('line_chart',$line_chart)->with('pie_chart',$pie_chart)->with('permohonan_in_progress', $progress)->with('permohonan_diluluskan',$lulus);
+    //  return response()->json(['dokumens'=>$dokumen_permohonans, 'permohonans'=>$permohonans, 'lulus'=>$lulus, 'progress' => $progress ]);
     }
 
     public function senaraiPermohonan($sp){

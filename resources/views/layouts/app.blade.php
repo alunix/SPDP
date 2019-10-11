@@ -12,7 +12,6 @@
     <title>@yield('pageTitle') | Persona</title>
     <!-- Scripts -->
     <script src="{{ asset('js/submit.js') }}" defer></script>
-    <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
     <!-- Script for chart-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
     <script src="https://unpkg.com/vue"></script>
@@ -27,11 +26,8 @@
     <link href="{{ asset('css/styles.scss') }}" rel="stylesheet">
     <!-- CoolAdmin template styles-->
     <link href="{{ asset('css/font-face.css')}}" rel="stylesheet" media="all">
-    <!-- <link href="{{ asset('vendor/font-awesome-4.7/css/font-awesome.min.css')}}" rel="stylesheet" media="all">
-    <link href="{{ asset('vendor/font-awesome-5/css/fontawesome-all.min.css')}}" rel="stylesheet" media="all"> -->
     <link href="{{ asset('vendor/mdi-font/css/material-design-iconic-font.min.css')}}" rel="stylesheet" media="all">
     <link href="{{ asset('vendor/bootstrap-4.1/bootstrap.min.css')}}" rel="stylesheet" media="all">
-    <!-- <link href="{{ asset('vendor/animsition/animsition.min.css')}}" rel="stylesheet" media="all"> -->
     <link href="{{ asset('vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css')}}" rel="stylesheet" media="all">
     <link href="{{ asset('vendor/wow/animate.css')}}" rel="stylesheet" media="all">
     <link href="{{ asset('vendor/css-hamburgers/hamburgers.min.css')}}" rel="stylesheet" media="all">
@@ -61,12 +57,11 @@
 
     <!-- Main JS-->
     <script src="{{asset('js/main.js')}}" defer></script>
-
-    <!-- Ajax Crud -->
-    <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <!-- Ajax crud JS-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script> -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
 </head>
 
@@ -102,18 +97,18 @@
                     <div class="header__navbar nav-item">
                         <ul class="list-unstyled">
                             <li class="has-sub">
-                                <a href="{{route('home')}}">
+                                <router-link to="/dashboard">
                                     <i class="fas fa-tachometer-alt"></i>Papan pemuka
                                     <span class="bot-line"></span>
-                                </a>
+                                </router-link>
 
                             </li>
 
                             @if(Auth::user()->role == "fakulti")
                             <li>
-                                <a href="{{route('permohonan.dihantar')}}">
+                                <router-link to="/permohonans">
                                     <i class="fas fa-list"></i>
-                                    <span class="bot-line"></span>Permohonan</a>
+                                    <span class="bot-line"></span>Permohonan</router-link>
                             </li>
 
                             @else
@@ -123,7 +118,7 @@
                                     <span class="bot-line"></span>Permohonan</a>
                                 <ul class="header3-sub-list list-unstyled">
                                     <li>
-                                        <a href="{{route('senaraiPermohonanBaharu')}}">Senarai permohonan baharu</a>
+                                        <router-link to="{{route('senaraiPermohonanBaharu')}}">Senarai permohonan baharu</router-link>
                                     </li>
                                     <li>
                                         <a href="{{route('senaraiPerakuan.show')}}">Permohonan untuk diperakui</a>
@@ -136,18 +131,11 @@
                                 </ul>
                             </li>
                             @endif
-
-
                             <li>
                                 <a href="{{route('analitik.permohonan.dashboard')}}">
                                     <i class="fas fa-chart-bar"></i>
                                     <span class="bot-line"></span>Analitik</a>
                             </li>
-
-
-
-
-
                         </ul>
                     </div>
                     <div class="header__tool">
@@ -206,8 +194,8 @@
             <!-- End message -->
             <div class="section__content section__content--p30">
                 <div class="container">
-                    @yield('content')
-
+                    <!-- @yield('content') -->
+                    <router-view></router-view>
                 </div>
             </div>
         </main>

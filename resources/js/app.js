@@ -11,26 +11,34 @@ require("./bootstrap");
 
 window.Vue = require("vue");
 Vue.use(VModal);
-// Vue.use(VueRouter);
+Vue.use(VueRouter);
 
-// const routes = [
-//     {
-//         path: "/modal_permohonan_baharu",
-//         component: require("./components/PermohonanModal.vue")
-//     },
-//     {
-//         path: "/modal_kemajuan_permohonan",
-//         component: require("./components/KemajuanPermohonan.vue")
-//     },
-//     {
-//         path: "/modal_dokumen_permohonan",
-//         component: require("./components/DokumenPermohonan.vue")
-//     },
-//     {
-//         path: "/modal_pengguna_baharu",
-//         component: require("./components/Pengguna.vue")
-//     }
-// ];
+const routes = [
+    {
+        path: "/modal_permohonan_baharu",
+        component: require("./components/PermohonanModal.vue")
+    },
+    {
+        path: "/modal_kemajuan_permohonan",
+        component: require("./components/KemajuanPermohonan.vue")
+    },
+    {
+        path: "/modal_dokumen_permohonan",
+        component: require("./components/DokumenPermohonan.vue")
+    },
+    {
+        path: "/modal_pengguna_baharu",
+        component: require("./components/Pengguna.vue")
+    },
+    {
+        path: "/permohonans",
+        component: require("./components/permohonans.vue")
+    },
+    {
+        path: "/dashboard",
+        component: require("./components/View/Dashboard/Dashboard.vue")
+    }
+];
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -51,12 +59,12 @@ Vue.component(
 //View
 Vue.component("senarai", require("./components/view/senarai.vue"));
 
-// const router = new VueRouter({
-//     mode: "history",
-//     routes // short for `routes: routes`
-// });
+const router = new VueRouter({
+    mode: "history",
+    routes // short for `routes: routes`
+});
 
 const app = new Vue({
-    el: "#app"
-    // router
+    el: "#app",
+    router
 });

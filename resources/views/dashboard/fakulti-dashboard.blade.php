@@ -24,9 +24,7 @@
                             </div>                           
                         </div>
                 <!-- End Top -->
-               
                         <hr>
-                        
                         <div class="row m-t-25">
                         <div class="col-md-6 col-lg-3">
                             <div class="statistic__item statistic__item--green">

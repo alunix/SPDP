@@ -8,7 +8,7 @@
               <div class="overview-wrap">
                 <h2 class="title-1">Senarai permohonan dihantar</h2>
               </div>
-            </div>
+          </div>
             <modal height="auto" :scrollable="true" name="permohonan_baharu">
               <permohonanModal @event="fetchPermohonans"></permohonanModal>
             </modal>

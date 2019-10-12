@@ -17,67 +17,53 @@ use SPDP\Services\SenaraiPermohonan;
 class LaporanController extends Controller
 {
   
-    public function index()
-    {
+    public function index() {
         $laporan = Laporan::all();
     }
    
-    public function show($id)
-    {   
-
+    public function show($id) {
         $dp = DokumenPermohonan::find($id);
-
-        if($dp==null){
+        if($dp==null) {
             abort (404);
         }
-
         $isFakulti = $this->isFakulti();
-
         if($isFakulti==1){
             return $this->fakulti($dp);
         }
-        else{
+        else {
             return view ('fakulti.senarai-laporan-dokumen-permohonan')->with('dokumen_permohonan',$dp)->with('laporans',$dp->laporans);
         }
-
     }
 
-    public function fakulti($dp){
+    public function fakulti($dp) {
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
         $permohonans_id= $user->permohonans->pluck('permohonan_id');
         $dokumen_permohonans_id= DokumenPermohonan::whereIn('permohonan_id',$permohonans_id)->pluck('dokumen_permohonan_id');
 
-        if(count($permohonans_id)==0||count($dokumen_permohonans_id)==0) //check whether fakulti does have permohonans
-        {
+        //check whether fakulti does have permohonans
+        if(count($permohonans_id)==0||count($dokumen_permohonans_id)==0) {
             abort(404);
         }
 
-        for($i=0;$i<count($dokumen_permohonans_id);$i++){ // fixed bug where the loop was i<count instead of i<=count // basic first year error
-           
+        for($i=0;$i<count($dokumen_permohonans_id);$i++) {
             if($dp->dokumen_permohonan_id == $dokumen_permohonans_id[$i]) {
                 return view ('fakulti.senarai-laporan-dokumen-permohonan')->with('dokumen_permohonan',$dp)->with('laporans',$dp->laporans);
-               }
-       } 
-       abort(404);
-
-
+            }
+        } 
+        abort(404);
     }
 
- public function isFakulti(){
+ public function isFakulti() {
         $role = auth()->user()->role;
-
         switch ($role) {
             case 'fakulti':
-            return 1;
-            
-            break;
-           
+                return 1;
+                break;           
             default:
-            return 0;
+                return 0;
                 break;
         }
-
     }
 
    

@@ -40979,16 +40979,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       dokumens: [],
       progress: "",
       loaded: false,
-      pieChart: {
-        options: [],
-        series: []
-      },
-      lineChart: {
-        options: [],
-        series: {
-          data: []
-        }
-      }
+      pieChart: [],
+      lineChart: []
     };
   },
   created: function created() {
@@ -41002,7 +40994,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       fetch("api/dashboard").then(function (res) {
         return res.json();
       }).then(function (res) {
-        console.log(res);
         _this.permohonans = res.permohonans;
         _this.progress = res.progress;
         _this.lulus = res.lulus;

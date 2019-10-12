@@ -10,8 +10,7 @@ use SPDP\Services\ShowPermohonan;
 use SPDP\Services\KemajuanPermohonanClass;
 
 class KemajuanPermohonanController extends Controller
-{
-   
+{   
     public function show($id)
     {       
         $kp = new KemajuanPermohonanClass();

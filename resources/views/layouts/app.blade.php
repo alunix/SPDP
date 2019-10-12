@@ -52,7 +52,7 @@
     <script src="{{asset('vendor/counter-up/jquery.counterup.min.js')}}" defer></script>
     <script src="{{asset('vendor/circle-progress/circle-progress.min.js') }}" defer></script>
     <script src="{{asset('vendor/perfect-scrollbar/perfect-scrollbar.js') }}" defer></script>
-    <script src="{{asset('vendor/chartjs/Chart.bundle.min.js') }}" defer></script>
+    <!-- <script src="{{asset('vendor/chartjs/Chart.bundle.min.js') }}" defer></script> -->
     <script src="{{asset('vendor/select2/select2.min.js')}}" defer></script>
 
     <!-- Main JS-->

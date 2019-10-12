@@ -9,34 +9,27 @@ use SPDP\Laporan;
 class RedirectPermohonan
 {
  
-    public function redirect($permohonan)
-    
-    {     
-        if($permohonan==null){
+    public function redirect($permohonan) {     
+        if($permohonan==null) {
             abort(404);
         }
-
         $dp = $permohonan->dokumen_permohonans->pluck('dokumen_permohonan_id');
         $laporans= Laporan::whereIn('dokumen_permohonan_id',$dp)->get();
         $role = auth()->user()->role;
 
-        if($role == 'pjk'){
-
+        if($role == 'pjk') { 
             if(($permohonan->status_permohonan_id==1 && $permohonan->jenis_permohonan_id!=8)||$permohonan->status_permohonan_id==3||$permohonan->status_permohonan_id==13)
                 return $this->redirectPermohonan($permohonan);
             else
                 return view ('jenis_permohonan_view.default_permohonan')->with('permohonan',$permohonan)->with('laporans',$laporans);
         }
-
-        else if($role == 'jppa'){
-
+        else if($role == 'jppa') {
             if(($permohonan->status_permohonan_id==1 && $permohonan->jenis_permohonan_id==8)||$permohonan->status_permohonan_id==4||$permohonan->status_permohonan_id==14)
                 return $this->redirectPermohonan($permohonan);
             else
                 return view ('jenis_permohonan_view.default_permohonan')->with('permohonan',$permohonan)->with('laporans',$laporans);
         }
-        else if($role == 'senat'){
-
+        else if($role == 'senat') {
             if($permohonan->status_permohonan_id==5||$permohonan->status_permohonan_id==15)
                 return $this->redirectPermohonan($permohonan);
             else
@@ -44,38 +37,32 @@ class RedirectPermohonan
         }
     }
 
-    public function redirectPermohonan($permohonan){
+    public function redirectPermohonan($permohonan) {
 
-        $jp =$permohonan->jenis_permohonan->jenis_permohonan_kod;  
-        
+        $jp =$permohonan->jenis_permohonan->jenis_permohonan_kod;
         $dp = $permohonan->dokumen_permohonans->pluck('dokumen_permohonan_id');
         $laporans= Laporan::whereIn('dokumen_permohonan_id',$dp)->get();
         
         switch ($jp) {
             case 'program_baharu':
-            return $this->program_baharu($permohonan,$laporans);   
-            break; 
-
+                return $this->program_baharu($permohonan,$laporans);   
+            break;
             case 'kursus_teras_baharu':
-            return $this->kursus_teras_baharu($permohonan,$laporans);   
-            break; 
-
+                return $this->kursus_teras_baharu($permohonan,$laporans);   
+            break;
             case 'kursus_elektif_baharu':
                 return $this->kursus_elektif_baharu($permohonan,$laporans);
             break;
-
             case 'semakan_kursus_teras':
             case 'semakan_program':
             case 'semakan_kursus_elektif':
-            return $this->semakan_kursus_program($permohonan,$laporans);
+                return $this->semakan_kursus_program($permohonan,$laporans);
             break;
-
             case 'penjumudan_program':
-            return $this->penjumudan_program($permohonan,$laporans);
+                return $this->penjumudan_program($permohonan,$laporans);
             break;
-
             default:
-                    return;
+                return;
         }
     }
 

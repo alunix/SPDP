@@ -16,8 +16,7 @@ use Notification;
 
 class PenilaianSenat
 { 
-    public function uploadPerakuanSenat(Request $request, $id){
-
+    public function uploadPerakuanSenat(Request $request, $id) {
         /* Cari permohonan since penilaian belongs to permohonan then baru boleh cari penilaian through eloquent relationship */
         $permohonan= Permohonan::find($id);
 
@@ -45,12 +44,8 @@ class PenilaianSenat
 
     }
 
-    public function showPerakuanSenat($permohonan){
-
+    public function showPerakuanSenat($permohonan) {
         return view ('senat.lampiran-perakuan-senat')->with('permohonan',$permohonan);
-
-
-
     }
     
 }

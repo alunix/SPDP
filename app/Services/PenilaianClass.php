@@ -12,8 +12,7 @@ use Notification;
 class PenilaianClass 
 {
     
-    public function create($permohonan)
-    {   
+    public function create($permohonan) {   
         $role =auth()->user()->role;
         $user_id = auth()->user()->id;
         $penilaian = new Penilaian();
@@ -21,18 +20,17 @@ class PenilaianClass
 
         switch ($role) {
             case 'pjk':
-            $penilaian->penilaian_pjk= $user_id;
-            break;
+                $penilaian->penilaian_pjk= $user_id;
+                break;
             case 'jppa':
-            $penilaian->penilaian_jppa=$user_id;
+                $penilaian->penilaian_jppa=$user_id;
                 break; 
             default:
-                    return null;
+                return null;
                 break;
         }
         $penilaian->status_penilaian=1;
         $penilaian->save();
-
         return $penilaian;
     }   
 

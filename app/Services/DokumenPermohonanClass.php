@@ -15,8 +15,7 @@ use SPDP\User;
 class DokumenPermohonanClass
 {
 
-    public function create($permohonan, $fileNameWithExt, $fileNameToStore, $request, $fileSize)
-    {
+    public function create($permohonan, $fileNameWithExt, $fileNameToStore, $request, $fileSize) {
         $dp = new DokumenPermohonan();
         $dp->permohonan_id = $permohonan->permohonan_id;
         $dp->file_name = $fileNameWithExt;
@@ -27,9 +26,7 @@ class DokumenPermohonanClass
         $dp->save();
     }
 
-
-    public function update($permohonan, Request $request, $attached)
-    {
+    public function update($permohonan, Request $request, $attached) {
         //Handle file upload
         if ($request->hasFile($attached)) {
             $fileNameWithExt = $request->file($attached)->getClientOriginalName();
@@ -72,8 +69,7 @@ class DokumenPermohonanClass
 
     }
 
-    public function getStatusPermohonan($status_permohonan_id)
-    {
+    public function getStatusPermohonan($status_permohonan_id) {
         switch ($status_permohonan_id) {
             case 8:
                 return 12;
@@ -94,29 +90,27 @@ class DokumenPermohonanClass
         }
     }
 
-    public function getEmailPenambahbaikkan($permohonan, $status_permohonan_id)
-    {
+    public function getEmailPenambahbaikkan($permohonan, $status_permohonan_id) {
         switch ($status_permohonan_id) {
             case 8:
                 $panel = $permohonan->penilaian_panels->pluck('id_penilai');
-                $user = User::find($panel);
+                $user = User::findOrFail($panel);
                 break;
             case 9:
                 $tetapan = TetapanAliranKerja::all()->first();
                 $id_user = $tetapan->value('id_pjk');
-                $user = User::find($id_user);
+                $user = User::findOrFail($id_user);
                 break;
             case 10:
                 $tetapan = TetapanAliranKerja::all()->first();
                 $id_user = $tetapan->value('id_jppa');
-                $user = User::find($id_user);
+                $user = User::findOrFail($id_user);
                 break;
             case 11:
                 $tetapan = TetapanAliranKerja::all()->first();
                 $id_user = $tetapan->value('id_senat');
-                $user = User::find($id_user);
+                $user = User::findOrFail($id_user);
                 break;
-
             default:
                 return;
                 break;
@@ -125,12 +119,8 @@ class DokumenPermohonanClass
         return $user;
     }
 
-
-    public function show($id)
-    {
-        // $permohonan = Permohonan::find($id);
-        $permohonan = Permohonan::find($id);
+    public function show($id) {
+        $permohonan = Permohonan::findOrFail($id);
         // return view('fakulti.kemajuan-permohonan')->with('kjs', $permohonan->kemajuan_permohonans)->with('permohonan', $permohonan)->with('dokumen_permohonans', $permohonan->dokumen_permohonans);
-
     }
 }

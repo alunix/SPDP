@@ -16,8 +16,7 @@ use SPDP\TetapanAliranKerja;
 class PenilaianPenilai
 {
   
-    public function uploadLaporanPenilai(Request $request,$permohonan)
-    {   
+    public function uploadLaporanPenilai(Request $request,$permohonan) {   
         $attached= 'laporan_panel_penilai';
         
         $lc= new LaporanClass();

@@ -13,44 +13,37 @@ use Illuminate\Support\Facades\Hash;
 class LaporanClass 
 {
     
-    public function createLaporan(Request $request,$permohonan,$attached)
-    {   
+    public function createLaporan(Request $request,$permohonan,$attached) {   
+        //get filenametoStore directory from a function in the class
+        $attachedLocation = 'public/laporan';
 
+        //Handle file upload
+        if($request->hasFile($attached))
+        {
+            $fileNameWithExt=$request -> file($attached)->getClientOriginalName();
 
-    // $laporan_kelulusan = $this->getKelulusanLaporan($permohonan);
-       
-    //get filenametoStore directory from a function in the class
-    $attachedLocation = 'public/laporan';
+        // Get the full file name
+            $filename = pathinfo($fileNameWithExt,PATHINFO_FILENAME);            
 
-    //Handle file upload
-    if($request->hasFile($attached))
-    {
-        $fileNameWithExt=$request -> file($attached)->getClientOriginalName();
-
-    // Get the full file name
-        $filename = pathinfo($fileNameWithExt,PATHINFO_FILENAME);            
-
-    //Get the extension file name
-        $extension = $request ->file($attached)-> getClientOriginalExtension();
-    //File name to store
-        $fileNameToStore=$filename.'_'.time().'.'.$extension;
-    
-    //Upload Pdf file
-        $path =$request ->file($attached)->storeAs($attachedLocation,$fileNameToStore);
-    
-    }
+        //Get the extension file name
+            $extension = $request ->file($attached)-> getClientOriginalExtension();
+        //File name to store
+            $fileNameToStore=$filename.'_'.time().'.'.$extension;
+        
+        //Upload Pdf file
+            $path =$request ->file($attached)->storeAs($attachedLocation,$fileNameToStore);
+        
+        }
         else{
             $fileNameToStore = 'noPDF.pdf';
         }
-
-        
-          //get the role of the current user
+        //get the role of the current user
         $user_id = auth()->user()->id;
         // $laporans_id = $permohonan->dokumen_permohonans->where('id_penghantar',$user_id);
         $laporans_id = $permohonan->dokumen_permohonans->pluck('dokumen_permohonan_id');
         $laporan_count = Laporan::where('id_penghantar',$user_id)->where('dokumen_permohonan_id',$laporans_id)->get();        
 
-        if($laporans_id==null){
+        if($laporans_id==null) {
             $laporan = new Laporan();
             $laporan->dokumen_permohonan_id= $permohonan->dokumen_permohonan()->dokumen_permohonan_id; //retrieve latest dokumen_permohonan_id from permohonan has many dokumen permohonans
             $laporan->id_penghantar= auth()->user()->id;
@@ -61,7 +54,7 @@ class LaporanClass
             $laporan->save();
         }
 
-        else{
+        else {
 
             $laporan = new Laporan();
             $laporan->dokumen_permohonan_id= $permohonan->dokumen_permohonan()->dokumen_permohonan_id; //retrieve latest dokumen_permohonan_id from permohonan has many dokumen permohonans
@@ -76,39 +69,5 @@ class LaporanClass
         }
       
     }
-
-    // public function getKelulusanLaporan($permohonan){
-
-
-    //     $role = auth()->user()->role;
-    //     $status= $permohonan->status_permohonan_id;
-        
-    //     switch ($status) {
-    //         case 'pjk':{
-    //                 if($permohonan->status_permohonan_id==)
-
-    //         }
-                   
-    //             break; 
-    //         case 'senat':
-    //             return view('dashboard/senat-dashboard');
-    //         break; 
-    //         case 'penilai':
-    //                 return view('dashboard/penilai-dashboard');
-    //             break; 
-    //         case 'jppa':
-    //                 return view('dashboard/jppa-dashboard');
-    //             break; 
-    //         default:
-    //                 return view ('/login'); 
-    //             break;
-    //     }            
-    // }
-
- 
-   
-    
-
-    
     
 }

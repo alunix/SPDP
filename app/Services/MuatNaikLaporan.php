@@ -12,8 +12,7 @@ use SPDP\Services\PermohonanClass;
 class MuatNaikLaporan
 {
    
-    public function create(Permohonan $permohonan)
-    {
+    public function create(Permohonan $permohonan) {
         $kj = new KemajuanPermohonan();
         $kj-> permohonan_id = $permohonan->id;
         $kj-> status_permohonan= $permohonan->status_permohonan;

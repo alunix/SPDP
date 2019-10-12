@@ -14,13 +14,10 @@ use Notification;
 use SPDP\User;
 
 class CreateUser
-{
-  
-    public function store_pengguna($request)
-    {
+{   
+    public function store_pengguna($request) {
         $random = str_random(8);
         $radio= $request->input('radios');
-
             switch ($radio) {
                 case 'autoGenerate':
                     $password = $random;
@@ -42,7 +39,6 @@ class CreateUser
            ];     
 
         Notification::route('mail',$user->email)->notify(new PendaftaranPengguna($user,$password)); //hantar email kepada penghantar
-
         return redirect()->route('register.panel_penilai.show')->with($msg);
     }
 

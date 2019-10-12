@@ -16,7 +16,7 @@ use Notification;
 class PenilaianJppa
 {
 
-    public function uploadPerakuan(Request $request, $permohonan){
+    public function uploadPerakuan(Request $request, $permohonan) {
 
         $jp =$permohonan->jenis_permohonan_id;
         
@@ -57,30 +57,27 @@ class PenilaianJppa
     }
 
     public function penjumudanProgram($request,$permohonan){
+        $attached = 'perakuan_jppa';
+        $laporan = new LaporanClass();
+        $laporan->createLaporan($request,$permohonan,$attached);
+        
+        $permohonan=Permohonan::find($permohonan->id);
+        $sp = new StatusPermohonanClass();
+        $permohonan->status_permohonan_id=5;
+        $permohonan->save();
 
-    
-    $attached = 'perakuan_jppa';
-    $laporan = new LaporanClass();
-    $laporan->createLaporan($request,$permohonan,$attached);
+        $kj = new KemajuanPermohonanClass();
+        $kj->create($permohonan);
 
-    
-    $permohonan=Permohonan::find($permohonan->id);
-    $sp = new StatusPermohonanClass();
-    $permohonan->status_permohonan_id=5;
-    $permohonan->save();
+        $id_senat = TetapanAliranKerja::all()->first()->id_senat;
+        $senat = User::find($id_senat);
+        Notification::route('mail',$senat->email)->notify(new PermohonanBaharu($permohonan,$senat)); 
 
-    $kj = new KemajuanPermohonanClass();
-    $kj->create($permohonan);
+        $msg = [
+            'message' => 'Laporan berjaya dimuat naik',
+        ];
 
-    $id_senat = TetapanAliranKerja::all()->first()->id_senat;
-    $senat = User::find($id_senat);
-    Notification::route('mail',$senat->email)->notify(new PermohonanBaharu($permohonan,$senat)); 
-
-    $msg = [
-        'message' => 'Laporan berjaya dimuat naik',
-       ];
-
-       return redirect('/')->with($msg);
-    }
+        return redirect('/')->with($msg);
+        }
 
 }

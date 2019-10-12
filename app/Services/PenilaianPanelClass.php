@@ -13,8 +13,7 @@ use Carbon\Carbon;
 class PenilaianPanelClass 
 {
     
-    public function create($permohonan,$selectedPenilai,$request)
-    {   
+    public function create($permohonan,$selectedPenilai,$request) {   
         $currentDayTime = Carbon::now('Asia/Kuala_Lumpur');
         $dateTimeEnd=Carbon::parse( $request -> input('deadline')); 
         $from = Carbon::createFromFormat('Y-m-d H:s:i',$currentDayTime);

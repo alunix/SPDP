@@ -13,10 +13,10 @@
     <!-- Scripts -->
     <script src="{{ asset('js/submit.js') }}" defer></script>
     <!-- Script for chart-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script> -->
     <!-- <script src="https://unpkg.com/vue"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.0.2/echarts-en.min.js" charset="utf-8"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/6.0.6/highcharts.js" charset="utf-8"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.0.2/echarts-en.min.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/6.0.6/highcharts.js" charset="utf-8"></script> -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -184,8 +184,8 @@
             <!-- End message -->
             <div class="section__content section__content--p30">
                 <div class="container">
-                    @yield('content')
-                    <!-- <router-view></router-view> -->
+                    <!-- @yield('content') -->
+                    <router-view></router-view>
                 </div>
             </div>
         </main>
@@ -195,12 +195,12 @@
 @yield('myjsfile')
 </html>
 <script>
-    $('.item-nav').click(function(event) {
-        // Avoid the link click from loading a new page
-        event.preventDefault();
+    // $('.item-nav').click(function(event) {
+    //     // Avoid the link click from loading a new page
+    //     event.preventDefault();
 
-        // Load the content from the link's href attribute
-        $('.content').load($(this).attr('href'));
-    });
+    //     // Load the content from the link's href attribute
+    //     $('.content').load($(this).attr('href'));
+    // });
 </script>
 <script src="{{ asset('js/app.js') }}"></script>

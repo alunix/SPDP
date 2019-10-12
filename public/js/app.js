@@ -40971,11 +40971,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       fetch("api/dashboard").then(function (res) {
         return res.json();
       }).then(function (res) {
-        _this.permohonans = res;
+        _this.permohonans = res.permohonans;
         _this.progress = res.progress;
         _this.lulus = res.lulus;
         _this.dokumens = res.dokumens;
-        console.log(res);
       });
     }
   }
@@ -40989,7 +40988,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row" }, [
+  return _c("div", [
     _vm._m(0),
     _vm._v(" "),
     _c("hr"),

@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <div>
     <div>
       <div class="col-md-12">
         <div class="au-breadcrumb-content">
@@ -97,11 +97,10 @@ export default {
       fetch("api/dashboard")
         .then(res => res.json())
         .then(res => {
-          this.permohonans = res;
+          this.permohonans = res.permohonans;
           this.progress = res.progress;
           this.lulus = res.lulus;
           this.dokumens = res.dokumens;
-          console.log(res);
         });
     }
   }

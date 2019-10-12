@@ -1,5 +1,6 @@
 import VModal from "vue-js-modal";
 import VueRouter from "vue-router";
+import VueApexCharts from "vue-apexcharts";
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -10,14 +11,9 @@ import VueRouter from "vue-router";
 require("./bootstrap");
 
 window.Vue = require("vue");
-Vue.use(VModal);
-Vue.use(VueRouter);
+[VModal, VueRouter, VueApexCharts].forEach(x => Vue.use(x));
 
 const routes = [
-    {
-        path: "/modal_permohonan_baharu",
-        component: require("./components/PermohonanModal.vue")
-    },
     {
         path: "/modal_kemajuan_permohonan",
         component: require("./components/KemajuanPermohonan.vue")
@@ -57,6 +53,9 @@ Vue.component(
 );
 //View
 Vue.component("senarai", require("./components/view/senarai.vue"));
+
+//Chart library
+Vue.component("apexchart", VueApexCharts);
 
 const router = new VueRouter({
     mode: "history",

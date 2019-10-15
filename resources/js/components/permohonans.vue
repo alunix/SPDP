@@ -18,7 +18,6 @@
             <modal :adaptive="true" width="60%" height="50%" name="kemajuan_permohonan">
               <kemajuanModal :permohonan_id="permohonan_id"></kemajuanModal>
             </modal>
-            <button type="button" class="btn btn-dark">Dark</button>
             <a
               v-on:click="showModel()"
               type="button"
@@ -44,7 +43,7 @@
               <th scope="col">Bilangan penghantaran</th>
               <th scope="col">Nama program/semakan</th>
               <th scope="col">Penghantar</th>
-              <th scope="col">Tarikh/Masa Penghantaran</th>
+              <th scope="col">Dihantar</th>
               <th scope="col">Status</th>
               <th scope="col">Tarikh/Masa Status</th>
               <th scope="col"></th>
@@ -103,18 +102,6 @@ export default {
     return {
       permohonans: [],
       permohonan_id: ""
-      // permohonans: {
-      //   permohonan_id: "",
-      //   jenis_permohonan: {
-      //     jenis_permohonan_huraian: ""
-      //   },
-      //   bil_hantar: "",
-      //   doc_title: "",
-      //   nama: "",
-      //   created_at: "",
-      //   status_permohonan_id: "",
-      //   updated_at: ""
-      // }
     };
   },
   components: {

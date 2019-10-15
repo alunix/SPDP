@@ -33,6 +33,10 @@ const routes = [
     {
         path: "/dashboard",
         component: require("./components/View/Dashboard/Dashboard.vue")
+    },
+    {
+        path: "/senarai-permohonan-baharu",
+        component: require("./components/view/senarai.vue")
     }
 ];
 

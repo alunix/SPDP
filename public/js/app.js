@@ -14705,6 +14705,9 @@ var routes = [{
 }, {
     path: "/dashboard",
     component: __webpack_require__(57)
+}, {
+    path: "/senarai-permohonan-baharu",
+    component: __webpack_require__(68)
 }];
 
 /**
@@ -52645,7 +52648,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -52653,18 +52655,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       permohonans: [],
       permohonan_id: ""
-      // permohonans: {
-      //   permohonan_id: "",
-      //   jenis_permohonan: {
-      //     jenis_permohonan_huraian: ""
-      //   },
-      //   bil_hantar: "",
-      //   doc_title: "",
-      //   nama: "",
-      //   created_at: "",
-      //   status_permohonan_id: "",
-      //   updated_at: ""
-      // }
     };
   },
 
@@ -53176,12 +53166,6 @@ var render = function() {
               ),
               _vm._v(" "),
               _c(
-                "button",
-                { staticClass: "btn btn-dark", attrs: { type: "button" } },
-                [_vm._v("Dark")]
-              ),
-              _vm._v(" "),
-              _c(
                 "a",
                 {
                   staticClass: "btn btn-success",
@@ -53336,9 +53320,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Penghantar")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [
-          _vm._v("Tarikh/Masa Penghantaran")
-        ]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Dihantar")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")]),
         _vm._v(" "),
@@ -54477,7 +54459,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "table-responsive table-responsive-data2" }, [
-      _c("table", { staticClass: "table table-data2" }, [
+      _c("table", { staticClass: "table table-hover" }, [
         _vm._m(1),
         _vm._v(" "),
         _c(
@@ -54550,23 +54532,23 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("thead", [
+    return _c("thead", { staticClass: "thead-light" }, [
       _c("tr", [
-        _c("th", [_vm._v("no")]),
+        _c("th", [_vm._v("NO")]),
         _vm._v(" "),
-        _c("th", [_vm._v("id")]),
+        _c("th", [_vm._v("ID")]),
         _vm._v(" "),
-        _c("th", [_vm._v("jenis")]),
+        _c("th", [_vm._v("JENIS")]),
         _vm._v(" "),
-        _c("th", [_vm._v("bil penghantaran")]),
+        _c("th", [_vm._v("BIL HANTAR")]),
         _vm._v(" "),
-        _c("th", [_vm._v("nama program/kursus")]),
+        _c("th", [_vm._v("NAMA PROGRAM/KURSUS")]),
         _vm._v(" "),
-        _c("th", [_vm._v("penghantar")]),
+        _c("th", [_vm._v("PENGHANTAR")]),
         _vm._v(" "),
-        _c("th", [_vm._v("fakulti")]),
+        _c("th", [_vm._v("FAKULTI")]),
         _vm._v(" "),
-        _c("th", [_vm._v("tarikh")]),
+        _c("th", [_vm._v("DIHANTAR")]),
         _vm._v(" "),
         _c("th")
       ])

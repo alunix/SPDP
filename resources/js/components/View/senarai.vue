@@ -6,17 +6,17 @@
     </div>
     <h4>Jumlah permohonan baharu : {{permohonans.length}}</h4>
     <div class="table-responsive table-responsive-data2">
-      <table class="table table-data2">
-        <thead>
+      <table class="table table-hover">
+        <thead class="thead-light">
           <tr>
-            <th>no</th>
-            <th>id</th>
-            <th>jenis</th>
-            <th>bil penghantaran</th>
-            <th>nama program/kursus</th>
-            <th>penghantar</th>
-            <th>fakulti</th>
-            <th>tarikh</th>
+            <th>NO</th>
+            <th>ID</th>
+            <th>JENIS</th>
+            <th>BIL HANTAR</th>
+            <th>NAMA PROGRAM/KURSUS</th>
+            <th>PENGHANTAR</th>
+            <th>FAKULTI</th>
+            <th>DIHANTAR</th>
             <th></th>
           </tr>
         </thead>

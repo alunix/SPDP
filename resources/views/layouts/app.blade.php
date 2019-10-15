@@ -54,21 +54,7 @@
 <body>
     <div id="app">
         @guest
-        <header class="header-desktop3 d-none d-lg-block">
-            <div class="section__content section__content--p35">
-                <div class="header3-wrap">
-                    <div class="header__logo">
-                        <a href="#">
-                            <img src="img/latest.png" alt="Persona" style="height:50px" />
-                        </a>
-                    </div>
-                    <div class="header__navbar">
-                    </div>
-                    <div class="header__tool">
-                    </div>
-                </div>
-            </div>
-        </header>
+       
         @else
         <header class="header-desktop3 d-none d-lg-block">
             <div class="section__content section__content--p35">
@@ -103,7 +89,7 @@
                                     <span class="bot-line"></span>Permohonan</a>
                                 <ul class="header3-sub-list list-unstyled">
                                     <li>
-                                        <router-link to="{{route('senaraiPermohonanBaharu')}}">Senarai permohonan baharu</router-link>
+                                        <router-link to="senarai-permohonan-baharu">Senarai permohonan baharu</router-link>
                                     </li>
                                     <li>
                                         <a href="{{route('senaraiPerakuan.show')}}">Permohonan untuk diperakui</a>
@@ -170,8 +156,11 @@
             <!-- End message -->
             <div class="section__content section__content--p30">
                 <div class="container">
-                    <!-- @yield('content') -->
-                    <router-view></router-view>
+                    @guest
+                    @yield('content')
+                    @else
+                    <router-view></<router-view> 
+                    @endguest
                 </div>
             </div>
         </main>
@@ -180,13 +169,4 @@
 </body>
 @yield('myjsfile')
 </html>
-<script>
-    // $('.item-nav').click(function(event) {
-    //     // Avoid the link click from loading a new page
-    //     event.preventDefault();
-
-    //     // Load the content from the link's href attribute
-    //     $('.content').load($(this).attr('href'));
-    // });
-</script>
 <script src="{{ asset('js/app.js') }}"></script>

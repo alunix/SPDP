@@ -18,7 +18,14 @@
             <modal :adaptive="true" width="60%" height="50%" name="kemajuan_permohonan">
               <kemajuanModal :permohonan_id="permohonan_id"></kemajuanModal>
             </modal>
-            <a v-on:click="showModel()" class="btn btn-success mb-2" id="create-permohonan">
+            <button type="button" class="btn btn-dark">Dark</button>
+            <a
+              v-on:click="showModel()"
+              type="button"
+              class="btn btn-success"
+              style="color:white;"
+              id="create-permohonan"
+            >
               <i class="zmdi zmdi-plus"></i>
               Permohonan Baharu
             </a>
@@ -28,8 +35,8 @@
       </div>
       <br />
       <div class="table-responsive table-responsive-data2">
-        <table class="table table-data2">
-          <thead>
+        <table class="table table-hover">
+          <thead class="thead-light">
             <tr>
               <th scope="col">No</th>
               <th scope="col">ID</th>
@@ -40,6 +47,7 @@
               <th scope="col">Tarikh/Masa Penghantaran</th>
               <th scope="col">Status</th>
               <th scope="col">Tarikh/Masa Status</th>
+              <th scope="col"></th>
             </tr>
           </thead>
 

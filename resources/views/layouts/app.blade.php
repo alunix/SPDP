@@ -12,12 +12,6 @@
     <title>@yield('pageTitle') | Persona</title>
     <!-- Scripts -->
     <script src="{{ asset('js/submit.js') }}" defer></script>
-    <!-- Script for chart-->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
-    <script src="https://unpkg.com/vue"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.0.2/echarts-en.min.js" charset="utf-8"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/6.0.6/highcharts.js" charset="utf-8"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
@@ -46,8 +40,6 @@
     <!-- Vendor JS       -->
     <script src="{{asset('vendor/slick/slick.min.js')}}" defer></script>
     <script src="{{asset('vendor/wow/wow.min.js') }}" defer></script>
-    <!-- <script src="{{asset('vendor/animsition/animsition.min.js') }}" defer></script> -->
-    <script src="{{asset('vendor/bootstrap-progressbar/bootstrap-progressbar.min.js')}}" defer></script>
     <script src="{{asset('vendor/counter-up/jquery.waypoints.min.js') }}" defer></script>
     <script src="{{asset('vendor/counter-up/jquery.counterup.min.js')}}" defer></script>
     <script src="{{asset('vendor/circle-progress/circle-progress.min.js') }}" defer></script>
@@ -57,12 +49,6 @@
 
     <!-- Main JS-->
     <script src="{{asset('js/main.js')}}" defer></script>
-    <!-- Ajax crud JS-->
-    <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script> -->
-
 </head>
 
 <body>

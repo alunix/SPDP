@@ -1,19 +1,37 @@
 <template>
   <div class="container">
-    <h3 class="title-5 m-b-35">Senarai permohonan baharu</h3>
+    <div class="au-breadcrumb-left">
+      <div class="overview-wrap">
+        <h2 class="title-1">Permohonan</h2>
+        <br />
+      </div>
+    </div>
     <div class="table-data__tool">
       <div class="table-data__tool-left"></div>
     </div>
     <h4>Jumlah permohonan baharu : {{permohonans.length}}</h4>
+    <div>
+      <b-tabs content-class="mt-3" justified>
+        <b-tab title="Baharu" active>
+          <!-- <p>I'm the first tab</p> -->
+        </b-tab>
+        <b-tab title="Untuk diperakui">
+          <!-- <p>I'm the second tab</p> -->
+        </b-tab>
+        <b-tab title="Penilaian panel">
+          <!-- <p>I'm the tab with the very, very long title</p> -->
+        </b-tab>
+      </b-tabs>
+    </div>
     <div class="table-responsive table-responsive-data2">
       <table class="table table-hover">
         <thead class="thead-light">
           <tr>
             <th>NO</th>
-            <th>ID</th>
+            <!-- <th>ID</th> -->
             <th>JENIS</th>
             <th>BIL HANTAR</th>
-            <th>NAMA PROGRAM/KURSUS</th>
+            <th>NAMA DOKUMEN</th>
             <th>PENGHANTAR</th>
             <th>FAKULTI</th>
             <th>DIHANTAR</th>
@@ -21,14 +39,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="tr-shadow" v-for="p in permohonans" v-bind:key="p.permohonan_id">
-            <th scope="row">{{p.permohonan_id}}</th>
-            <td>{{p.permohonan_id}}</td>
+          <tr class="tr-shadow" v-for="(p, index) in permohonans" v-bind:key="p.permohonan_id">
+            <th scope="row">{{index+1}}</th>
+            <!-- <td>{{p.permohonan_id}}</td> -->
             <td>{{p.jenis_permohonan.jenis_permohonan_huraian}}</td>
             <td>{{p.dokumen_permohonans.length}}</td>
             <td>{{p.doc_title}}</td>
             <td>{{p.user.name}}</td>
-            <td>{{p.user.fakulti.f_nama}}</td>
+            <td>{{p.user.fakulti.fnama_kod}}</td>
             <td>{{p.created_at}}</td>
 
             <td>

@@ -40,7 +40,7 @@
               <th scope="col">No</th>
               <th scope="col">ID</th>
               <th scope="col">Jenis</th>
-              <th scope="col">Bilangan penghantaran</th>
+              <th scope="col">Bil hantar</th>
               <th scope="col">Nama program/semakan</th>
               <th scope="col">Penghantar</th>
               <th scope="col">Dihantar</th>

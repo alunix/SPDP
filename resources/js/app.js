@@ -1,6 +1,7 @@
 import VModal from "vue-js-modal";
 import VueRouter from "vue-router";
 import VueApexCharts from "vue-apexcharts";
+import BootstrapVue from "bootstrap-vue";
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -11,7 +12,7 @@ import VueApexCharts from "vue-apexcharts";
 require("./bootstrap");
 
 window.Vue = require("vue");
-[VModal, VueRouter, VueApexCharts].forEach(x => Vue.use(x));
+[VModal, VueRouter, VueApexCharts, BootstrapVue].forEach(x => Vue.use(x));
 
 const routes = [
     {

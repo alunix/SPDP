@@ -23,8 +23,6 @@ class PermohonanController extends Controller
 
     public function permohonanDihantar()
     {
-        $user_id = auth()->user()->id;
-        $user = User::find($user_id);
         return view('fakulti.senarai_permohonan_dihantar');
     }
 

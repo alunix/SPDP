@@ -62,6 +62,12 @@ Vue.component("senarai", require("./components/view/senarai.vue"));
 //Chart library
 Vue.component("apexchart", VueApexCharts);
 
+//Tab
+Vue.component(
+    "senaraiPermohonan",
+    require("./components/view/SenaraiPermohonan/SenaraiPermohonan.vue")
+);
+
 const router = new VueRouter({
     mode: "history",
     routes // short for `routes: routes`

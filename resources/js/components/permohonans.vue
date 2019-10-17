@@ -38,7 +38,7 @@
           <thead class="thead-light">
             <tr>
               <th scope="col">No</th>
-              <th scope="col">ID</th>
+              <!-- <th scope="col">ID</th> -->
               <th scope="col">Jenis</th>
               <th scope="col">Bil hantar</th>
               <th scope="col">Nama program/semakan</th>
@@ -51,9 +51,9 @@
           </thead>
 
           <tbody id="permohonans-add">
-            <tr class="tr-shadow" v-for="p in permohonans" v-bind:key="p.permohonan_id">
-              <th scope="row">{{p.permohonan_id}}</th>
-              <td>{{p.permohonan_id}}</td>
+            <tr class="tr-shadow" v-for="(p, index) in permohonans" v-bind:key="p.permohonan_id">
+              <th scope="row">{{index + 1}}}</th>
+              <!-- <td>{{p.permohonan_id}}</td> -->
               <td>{{p.jenis_permohonan.jenis_permohonan_huraian}}</td>
               <td>{{p.dokumen_permohonans.length}}</td>
               <td>{{p.doc_title}}</td>

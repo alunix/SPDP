@@ -44,11 +44,11 @@
     <script src="{{asset('vendor/counter-up/jquery.counterup.min.js')}}" defer></script>
     <script src="{{asset('vendor/circle-progress/circle-progress.min.js') }}" defer></script>
     <script src="{{asset('vendor/perfect-scrollbar/perfect-scrollbar.js') }}" defer></script>
-    <!-- <script src="{{asset('vendor/chartjs/Chart.bundle.min.js') }}" defer></script> -->
     <script src="{{asset('vendor/select2/select2.min.js')}}" defer></script>
-
     <!-- Main JS-->
     <script src="{{asset('js/main.js')}}" defer></script>
+    <!-- Vuetify icon -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet">
 </head>
 
 <body>
@@ -159,10 +159,10 @@
                     @guest
                     @yield('content')
                     @else
-                    <router-view>
                     <v-app id="app">
-                    </v-app>        
-                    </<router-view> 
+                    <router-view>
+                    </<router-view>
+                    </v-app>      
                     @endguest
                 </div>
             </div>

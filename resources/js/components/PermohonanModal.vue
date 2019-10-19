@@ -1,13 +1,11 @@
 <template>
   <div class="card-body">
-    <div v-if="success" class="alert alert-success mt-3">Permohonan berjaya dihantar</div>
     <v-alert v-if="success" type="success">Permohonan berjaya dihantar</v-alert>
-    <div v-if="error" class="alert alert-danger mt-3">Permohonan tidak dapat dihantar</div>
-    <v-alert v-if="error" type="error">I'm an error alert.</v-alert>
+    <v-alert v-if="error" type="error">Permohonan tidak dapat dihantar</v-alert>
     <h4>Permohonan baharu</h4>
     <hr />
 
-    <v-form ref="form">
+    <v-form ref="form" @submit.prevent="submit">
       <v-select
         v-model="jenis_permohonan_id"
         item-text="name"
@@ -27,15 +25,11 @@
 
       <v-file-input label="Pautan fail"></v-file-input>
 
-      <v-textarea class="mx-2" label="Komen( Tidak diwajibkan )" rows="1" prepend-icon="comment"></v-textarea>
+      <v-textarea class="mx-2" label="Komen( Tidak diwajibkan )" rows="3"></v-textarea>
 
-      <v-btn small class="mr-4" color="normal">Batal</v-btn>
-      <br />
-      <v-btn small class="mr-4" color="primary">Hantar</v-btn>
+      <v-btn color="normal" class="mr-4" @click="$modal.hide('permohonan_baharu')">Batal</v-btn>
 
-      <!-- <v-btn color="error" class="mr-4" @click="reset">Reset Form</v-btn>
-
-      <v-btn color="warning" @click="resetValidation">Reset Validation</v-btn>-->
+      <v-btn color="primary">Hantar</v-btn>
     </v-form>
 
     <hr />

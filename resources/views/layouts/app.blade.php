@@ -159,7 +159,10 @@
                     @guest
                     @yield('content')
                     @else
-                    <router-view></<router-view> 
+                    <router-view>
+                    <v-app id="app">
+                    </v-app>        
+                    </<router-view> 
                     @endguest
                 </div>
             </div>

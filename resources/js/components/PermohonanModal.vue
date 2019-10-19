@@ -50,6 +50,16 @@
         </div>
       </div>
       <div class="form-group row">
+        <!-- <v-col cols="12" sm="6" md="3">
+          <v-text-field label="Regular"></v-text-field>
+        </v-col>-->
+        <label for="doc_title" class="col-md-4 col-form-label text-md-right">Nama program/kursus</label>
+        <div class="col-md-6">
+          <v-text-field label="Regular"></v-text-field>
+        </div>
+      </div>
+
+      <div class="form-group row">
         <label for="file_link" class="col-md-4 col-form-label text-md-right">Pautan kepada fail</label>
         <div class="col-md-6">
           <input

@@ -48,7 +48,7 @@
     <!-- Main JS-->
     <script src="{{asset('js/main.js')}}" defer></script>
     <!-- Vuetify icon -->
-    <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
@@ -71,9 +71,7 @@
                                     <i class="fas fa-tachometer-alt"></i>Papan pemuka
                                     <span class="bot-line"></span>
                                 </router-link>
-
                             </li>
-
                             @if(Auth::user()->role == "fakulti")
                             <li>
                                 <router-link to="/permohonans">
@@ -81,7 +79,6 @@
                                     <span class="bot-line"></span>Permohonan
                                 </router-link>
                             </li>
-
                             @else
                             <li class="has-sub">
                                 <a href="#">

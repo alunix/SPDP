@@ -18,16 +18,10 @@
             <modal :adaptive="true" width="60%" height="50%" name="kemajuan_permohonan">
               <kemajuanModal :permohonan_id="permohonan_id"></kemajuanModal>
             </modal>
-            <a
-              v-on:click="showModel()"
-              type="button"
-              class="btn btn-success"
-              style="color:white;"
-              id="create-permohonan"
-            >
-              <i class="zmdi zmdi-plus"></i>
-              Permohonan Baharu
-            </a>
+
+            <div class="my-2">
+              <v-btn v-on:click="showModel()" small>Permohonan baru</v-btn>
+            </div>
           </div>
         </div>
         <hr />
@@ -38,10 +32,10 @@
           <thead class="thead-light">
             <tr>
               <th scope="col">No</th>
-              <!-- <th scope="col">ID</th> -->
+              <th scope="col">ID</th>
               <th scope="col">Jenis</th>
               <th scope="col">Bil hantar</th>
-              <th scope="col">Nama program/semakan</th>
+              <th scope="col">Nama permohonan</th>
               <th scope="col">Penghantar</th>
               <th scope="col">Dihantar</th>
               <th scope="col">Status</th>
@@ -52,8 +46,8 @@
 
           <tbody id="permohonans-add">
             <tr class="tr-shadow" v-for="(p, index) in permohonans" v-bind:key="p.permohonan_id">
-              <th scope="row">{{index + 1}}}</th>
-              <!-- <td>{{p.permohonan_id}}</td> -->
+              <th scope="row">{{index + 1}}</th>
+              <td>{{p.permohonan_id}}</td>
               <td>{{p.jenis_permohonan.jenis_permohonan_huraian}}</td>
               <td>{{p.dokumen_permohonans.length}}</td>
               <td>{{p.doc_title}}</td>
@@ -101,7 +95,8 @@ export default {
   data() {
     return {
       permohonans: [],
-      permohonan_id: ""
+      permohonan_id: "",
+      pagination: {}
     };
   },
   components: {
@@ -117,6 +112,7 @@ export default {
         .then(res => res.json())
         .then(res => {
           this.permohonans = res;
+          console.log(res);
         });
     },
     setPermohonanId(id) {

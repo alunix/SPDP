@@ -2,7 +2,7 @@
   <div class="card-body">
     <v-alert v-if="success" type="success">Permohonan berjaya dihantar</v-alert>
     <v-alert v-if="error" type="error">Permohonan tidak dapat dihantar</v-alert>
-    <h4>Permohonan baharu</h4>
+    <h4>Permohonan baru</h4>
     <hr />
 
     <v-form ref="form" @submit.prevent="submit">
@@ -23,13 +23,42 @@
         required
       ></v-text-field>
 
-      <v-file-input label="Pautan fail"></v-file-input>
+      <v-row>
+        <v-btn color="blue-grey" class="ma-2 white--text" @click="pickFile">
+          Fail(pdf)
+          <v-icon right dark>mdi-cloud-upload</v-icon>
+        </v-btn>
+        <br />
+        <p style="white-space: pre-line;">{{ fileName }}</p>
+      </v-row>
 
-      <v-textarea class="mx-2" label="Komen( Tidak diwajibkan )" rows="3"></v-textarea>
+      <input
+        style="display:none;"
+        type="file"
+        id="file_link"
+        accept=".pdf"
+        v-on:change="filePreview"
+        name="file_link"
+        ref="file_link"
+      />
 
-      <v-btn color="normal" class="mr-4" @click="$modal.hide('permohonan_baharu')">Batal</v-btn>
+      <v-textarea
+        class="mx-2"
+        v-model="komen"
+        id="komen"
+        name="komen"
+        label="Komen( Tidak diwajibkan )"
+        rows="3"
+      ></v-textarea>
+  
+      <v-btn
+        color="normal"
+        accept=".pdf"
+        class="mr-4"
+        @click="$modal.hide('permohonan_baharu')"
+      >Batal</v-btn>
 
-      <v-btn color="primary">Hantar</v-btn>
+      <v-btn type="submit" color="primary">Hantar</v-btn>
     </v-form>
 
     <hr />
@@ -72,6 +101,7 @@ export default {
       jenis_permohonan_id: "",
       doc_title: "",
       komen: "",
+      fileName: "",
       file_link: null,
       errors: {},
       success: false,
@@ -82,6 +112,10 @@ export default {
   methods: {
     filePreview(event) {
       this.file_link = event.target.files[0];
+      this.fileName = event.target.files[0].name;
+    },
+    pickFile() {
+      this.$refs.file_link.click();
     },
     submit() {
       let formData = new FormData();
@@ -104,6 +138,7 @@ export default {
           this.doc_title = "";
           this.komen = "";
           this.file_link = "";
+          this.fileName = "";
           this.$emit("event");
         })
         .catch(error => {

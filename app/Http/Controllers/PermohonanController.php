@@ -96,7 +96,8 @@ class PermohonanController extends Controller
     public function api_permohonanDihantar()
     {
         $id = auth()->user()->id;
-        $permohonans = Permohonan::with(['jenis_permohonan', 'dokumen_permohonans', 'user','status_permohonan'])->where('id_penghantar', $id)->get();
+        // $permohonans = Permohonan::with(['jenis_permohonan', 'dokumen_permohonans', 'user','status_permohonan'])->where('id_penghantar', $id)->get();
+        $permohonans = Permohonan::with(['jenis_permohonan', 'dokumen_permohonans', 'user','status_permohonan'])->where('id_penghantar', $id)->paginate(10);
         return response()->json($permohonans);
     }
 

@@ -6,7 +6,27 @@
             Muat naik penambahbaikkan
     </a>-->
     <hr />
-    <div class="row justify-content-center">
+    <v-timeline>
+      <v-timeline-item
+        v-for="kemajuan in kemajuans"
+        :right="true"
+        :fill-dot="true"
+        :small="true"
+        color="red lighten-2"
+        v-bind:key="kemajuan.id"
+        large
+      >
+        <template v-slot:icon>
+          <span>{{kemajuan.created_at}}</span>
+        </template>
+        <v-card class="elevation-2">
+          <v-card-title class="headline">{{kemajuan.status_permohonan.status_permohonan_huraian}}</v-card-title>
+          <v-card-text></v-card-text>
+        </v-card>
+      </v-timeline-item>
+    </v-timeline>
+
+    <!-- <div class="row justify-content-center">
       <div class="container">
         <table class="table table-striped">
           <thead>
@@ -50,7 +70,7 @@
           </tbody>
         </table>
       </div>
-    </div>
+    </div>-->
   </div>
 </template>
 <script>

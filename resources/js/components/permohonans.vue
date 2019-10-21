@@ -19,20 +19,37 @@
               <kemajuanModal :permohonan_id="permohonan_id"></kemajuanModal>
             </modal>
 
+            <div class="text-center">
+              <v-row>
+                <v-btn
+                  :disabled="!pagination.prev_page_url"
+                  v-on:click="fetchPermohonans(pagination.prev_page_url)"
+                  small
+                >Prev</v-btn>
+                <div class="divider" />
+                <v-btn
+                  :disabled="!pagination.next_page_url"
+                  v-on:click="fetchPermohonans(pagination.next_page_url)"
+                  small
+                >Next</v-btn>
+              </v-row>
+            </div>
+
             <div class="my-2">
-              <v-btn v-on:click="showModel()" small>Permohonan baru</v-btn>
+              <v-btn v-on:click="showModel()" normal>Permohonan baru</v-btn>
             </div>
           </div>
         </div>
         <hr />
       </div>
       <br />
+      <p style="white-space: pre-line;">{{ pagination.total }} permohonan dihantar</p>
       <div class="table-responsive table-responsive-data2">
         <table class="table table-hover">
           <thead class="thead-light">
             <tr>
               <th scope="col">No</th>
-              <th scope="col">ID</th>
+              <!-- <th scope="col">ID</!-->
               <th scope="col">Jenis</th>
               <th scope="col">Bil hantar</th>
               <th scope="col">Nama permohonan</th>
@@ -46,8 +63,9 @@
 
           <tbody id="permohonans-add">
             <tr class="tr-shadow" v-for="(p, index) in permohonans" v-bind:key="p.permohonan_id">
-              <th scope="row">{{index + 1}}</th>
-              <td>{{p.permohonan_id}}</td>
+              <th v-if="!pagination.prev_page_url" scope="row">{{index + 1}}</th>
+              <th v-if="pagination.prev_page_url" scope="row">{{index + 1 + pagination.per_page}}</th>
+              <!-- <td>{{p.permohonan_id}}</td> -->
               <td>{{p.jenis_permohonan.jenis_permohonan_huraian}}</td>
               <td>{{p.dokumen_permohonans.length}}</td>
               <td>{{p.doc_title}}</td>
@@ -107,13 +125,28 @@ export default {
     this.fetchPermohonans();
   },
   methods: {
-    fetchPermohonans() {
-      fetch("api/permohonan_dihantar")
+    fetchPermohonans(page_url) {
+      let that = this;
+      page_url = page_url || "api/permohonan_dihantar";
+      fetch(page_url)
         .then(res => res.json())
         .then(res => {
-          this.permohonans = res;
+          this.permohonans = res.data;
+          that.makePagination(res);
           console.log(res);
         });
+    },
+    makePagination(res) {
+      let pagination = {
+        total: res.total,
+        current_page: res.current_page,
+        last_page: res.last_page,
+        next_page_url: res.next_page_url,
+        prev_page_url: res.prev_page_url,
+        last_page_url: res.last_page_url,
+        per_page: res.per_page
+      };
+      this.pagination = pagination;
     },
     setPermohonanId(id) {
       this.permohonan_id = id;

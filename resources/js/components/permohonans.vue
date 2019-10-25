@@ -9,6 +9,7 @@
                 <h2 class="title-1">Senarai permohonan dihantar</h2>
               </div>
             </div>
+
             <modal height="auto" :scrollable="true" name="permohonan_baharu">
               <permohonanModal @event="fetchPermohonans"></permohonanModal>
             </modal>
@@ -19,22 +20,6 @@
               <kemajuanModal :permohonan_id="permohonan_id"></kemajuanModal>
             </modal>
 
-            <div class="text-center">
-              <v-row>
-                <v-btn
-                  :disabled="!pagination.prev_page_url"
-                  v-on:click="fetchPermohonans(pagination.prev_page_url)"
-                  small
-                >Prev</v-btn>
-                <div class="divider" />
-                <v-btn
-                  :disabled="!pagination.next_page_url"
-                  v-on:click="fetchPermohonans(pagination.next_page_url)"
-                  small
-                >Next</v-btn>
-              </v-row>
-            </div>
-
             <div class="my-2">
               <v-btn v-on:click="showModel()" normal>Permohonan baru</v-btn>
             </div>
@@ -43,20 +28,36 @@
         <hr />
       </div>
       <br />
-      <p style="white-space: pre-line;">{{ pagination.total }} permohonan dihantar</p>
+
+      <p style="white-space: pre-line;">{{ pagination.total }} permohonan</p>
+      <div class="text-right">
+        <v-row>
+          <v-btn
+            :disabled="!pagination.prev_page_url"
+            v-on:click="fetchPermohonans(pagination.prev_page_url)"
+            small
+          >Prev</v-btn>
+          <div class="divider" />
+          <v-btn
+            :disabled="!pagination.next_page_url"
+            v-on:click="fetchPermohonans(pagination.next_page_url)"
+            small
+          >Next</v-btn>
+        </v-row>
+      </div>
       <div class="table-responsive table-responsive-data2">
         <table class="table table-hover">
           <thead class="thead-light">
             <tr>
-              <th scope="col">No</th>
+              <th scope="col">NO</th>
               <!-- <th scope="col">ID</!-->
-              <th scope="col">Jenis</th>
-              <th scope="col">Bil hantar</th>
-              <th scope="col">Nama permohonan</th>
-              <th scope="col">Penghantar</th>
-              <th scope="col">Dihantar</th>
-              <th scope="col">Status</th>
-              <th scope="col">Tarikh/Masa Status</th>
+              <th scope="col">JENIS</th>
+              <th scope="col">BIL HANTAR</th>
+              <th scope="col">TAJUK</th>
+              <th scope="col">PENGHANTAR</th>
+              <th scope="col">DIHANTAR</th>
+              <th scope="col">STATUS</th>
+              <th scope="col">TARIKH STATUS</th>
               <th scope="col"></th>
             </tr>
           </thead>
@@ -64,7 +65,10 @@
           <tbody id="permohonans-add">
             <tr class="tr-shadow" v-for="(p, index) in permohonans" v-bind:key="p.permohonan_id">
               <th v-if="!pagination.prev_page_url" scope="row">{{index + 1}}</th>
-              <th v-if="pagination.prev_page_url" scope="row">{{index + 1 + pagination.per_page}}</th>
+              <th
+                v-if="pagination.prev_page_url"
+                scope="row"
+              >{{index + 1 + (pagination.per_page * pagination.current_page)}}</th>
               <!-- <td>{{p.permohonan_id}}</td> -->
               <td>{{p.jenis_permohonan.jenis_permohonan_huraian}}</td>
               <td>{{p.dokumen_permohonans.length}}</td>
@@ -73,7 +77,6 @@
               <td>{{p.created_at}}</td>
               <td>{{p.status_permohonan.status_permohonan_huraian}}</td>
               <td>{{p.updated_at}}</td>
-
               <td>
                 <div class="table-data-feature">
                   <button
@@ -85,7 +88,6 @@
                   >
                     <i class="fas fa-spinner"></i>
                   </button>
-
                   <button
                     v-on:click="showDokumenModel();setPermohonanId(p.permohonan_id)"
                     class="item"
@@ -133,7 +135,6 @@ export default {
         .then(res => {
           this.permohonans = res.data;
           that.makePagination(res);
-          console.log(res);
         });
     },
     makePagination(res) {

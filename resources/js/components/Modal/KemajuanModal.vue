@@ -1,12 +1,12 @@
 <template>
   <div>
-    <h4>Kemajuan Permohonan</h4>
+    <h3>Kemajuan Permohonan</h3>
     <!-- @if(($permohonan->status_permohonan_id == 8 or $permohonan->status_permohonan_id == 9 or $permohonan->status_permohonan_id == 10 or $permohonan->status_permohonan_id == 11  ) and (Auth::user()->role == "fakulti"))
             <a class="btn icon-btn btn-info" style="font-size:14px" href="{{ route('dokumenPermohonan.penambahbaikkan.show',$permohonan->permohonan_id) }}">
             Muat naik penambahbaikkan
     </a>-->
-    <hr />
-    <v-timeline>
+    <!-- <hr /> -->
+    <!-- <v-timeline>
       <v-timeline-item
         v-for="kemajuan in kemajuans"
         :right="true"
@@ -24,9 +24,9 @@
           <v-card-text></v-card-text>
         </v-card>
       </v-timeline-item>
-    </v-timeline>
+    </v-timeline>-->
 
-    <!-- <div class="row justify-content-center">
+    <div class="row justify-content-center">
       <div class="container">
         <table class="table table-striped">
           <thead>
@@ -70,7 +70,7 @@
           </tbody>
         </table>
       </div>
-    </div>-->
+    </div>
   </div>
 </template>
 <script>

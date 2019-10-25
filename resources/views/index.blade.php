@@ -65,7 +65,7 @@
                 margin-bottom: 30px;
             }
 
-            body {font-family: Arial, Helvetica, sans-serif;}
+            body {font-family: 'Nunito', sans-serif;}
             * {box-sizing: border-box;}
 
             input[type=text],  select, textarea {

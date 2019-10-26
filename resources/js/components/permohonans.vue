@@ -1,51 +1,35 @@
 <template>
-  <div>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="au-breadcrumb-content">
-            <div class="au-breadcrumb-left">
-              <div class="overview-wrap">
-                <h2 class="title-1">Senarai permohonan dihantar</h2>
-              </div>
-            </div>
+  <v-container>
+    <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+    <v-row>
+      <v-col cols="12" md="8">
+        <!-- <v-card class="pa-2" outlined tile>.col-12 .col-md-8</v-card> -->
+        <h3>Senarai permohonan dihantar</h3>
 
-            <modal height="auto" :scrollable="true" name="permohonan_baharu">
-              <permohonanModal @event="fetchPermohonans"></permohonanModal>
-            </modal>
-            <modal :adaptive="true" width="50%" height="50%" name="dokumen_permohonan">
-              <dokumenModal :permohonan_id="permohonan_id"></dokumenModal>
-            </modal>
-            <modal :adaptive="true" width="60%" height="50%" name="kemajuan_permohonan">
-              <kemajuanModal :permohonan_id="permohonan_id"></kemajuanModal>
-            </modal>
-
-            <div class="my-2">
-              <v-btn v-on:click="showModel()" normal>Permohonan baru</v-btn>
-            </div>
-          </div>
-        </div>
         <hr />
-      </div>
-      <br />
+      </v-col>
+      <v-col cols="12" md="6">
+        <v-btn v-on:click="showModel()" color="primary" normal>Permohonan baru</v-btn>
+        <modal height="auto" :scrollable="true" name="permohonan_baharu">
+          <permohonanModal @event="fetchPermohonans"></permohonanModal>
+        </modal>
+        <modal :adaptive="true" width="50%" height="50%" name="dokumen_permohonan">
+          <dokumenModal :permohonan_id="permohonan_id"></dokumenModal>
+        </modal>
+        <modal :adaptive="true" width="60%" height="50%" name="kemajuan_permohonan">
+          <kemajuanModal :permohonan_id="permohonan_id"></kemajuanModal>
+        </modal>
+      </v-col>
+    </v-row>
 
-      <p style="white-space: pre-line;">{{ pagination.total }} permohonan</p>
-      <div class="text-right">
-        <v-row>
-          <v-btn
-            :disabled="!pagination.prev_page_url"
-            v-on:click="fetchPermohonans(pagination.prev_page_url)"
-            small
-          >Prev</v-btn>
-          <div class="divider" />
-          <v-btn
-            :disabled="!pagination.next_page_url"
-            v-on:click="fetchPermohonans(pagination.next_page_url)"
-            small
-          >Next</v-btn>
-        </v-row>
-      </div>
-      <div class="table-responsive table-responsive-data2">
+    <v-row>
+      <v-col cols="6" md="4">
+        <p style="white-space: pre-line;">{{ pagination.total }} permohonan</p>
+      </v-col>
+    </v-row>
+
+    <v-row>
+      <v-col cols="6" md="0">
         <table class="table table-hover">
           <thead class="thead-light">
             <tr>
@@ -104,9 +88,9 @@
             <tr class="spacer"></tr>
           </tbody>
         </table>
-      </div>
-    </div>
-  </div>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>

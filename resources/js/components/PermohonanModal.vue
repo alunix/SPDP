@@ -50,7 +50,7 @@
         label="Komen( Tidak diwajibkan )"
         rows="3"
       ></v-textarea>
-  
+
       <v-btn
         color="normal"
         accept=".pdf"
@@ -106,7 +106,7 @@ export default {
       errors: {},
       success: false,
       error: false,
-      loaded: true
+      loaded: true,
     };
   },
   methods: {

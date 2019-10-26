@@ -44,11 +44,11 @@
     <script src="{{asset('vendor/counter-up/jquery.counterup.min.js')}}" defer></script>
     <script src="{{asset('vendor/circle-progress/circle-progress.min.js') }}" defer></script>
     <script src="{{asset('vendor/perfect-scrollbar/perfect-scrollbar.js') }}" defer></script>
-    <!-- <script src="{{asset('vendor/chartjs/Chart.bundle.min.js') }}" defer></script> -->
     <script src="{{asset('vendor/select2/select2.min.js')}}" defer></script>
-
     <!-- Main JS-->
     <script src="{{asset('js/main.js')}}" defer></script>
+    <!-- Vuetify icon -->
+   <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
@@ -71,9 +71,7 @@
                                     <i class="fas fa-tachometer-alt"></i>Papan pemuka
                                     <span class="bot-line"></span>
                                 </router-link>
-
                             </li>
-
                             @if(Auth::user()->role == "fakulti")
                             <li>
                                 <router-link to="/permohonans">
@@ -81,7 +79,6 @@
                                     <span class="bot-line"></span>Permohonan
                                 </router-link>
                             </li>
-
                             @else
                             <li class="has-sub">
                                 <a href="#">
@@ -142,7 +139,7 @@
             </div>
         </header>
         @endguest
-        <main class="py-4">
+        <main class="container"  style="background-color:white">
             <!-- Message in blade testing on 27/1/2019 by Bezane -->
             @if (Session::has('message'))
             <div class="alert alert-success" role="alert">
@@ -154,15 +151,18 @@
             </div>
             @endif
             <!-- End message -->
-            <div class="section__content section__content--p30">
-                <div class="container">
-                    @guest
-                    @yield('content')
-                    @else
-                    <router-view></<router-view> 
-                    @endguest
-                </div>
-            </div>
+            @guest
+            @yield('content')
+            @else
+           
+            <v-app id="app">
+            <router-view>
+            </<router-view>
+            </v-app>
+            
+                  
+            @endguest
+            
         </main>
         @yield('div')
     </div>

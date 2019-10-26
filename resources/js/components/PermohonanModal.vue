@@ -1,93 +1,109 @@
 <template>
   <div class="card-body">
-    <div v-if="success" class="alert alert-success mt-3">Permohonan berjaya dihantar</div>
-    <div v-if="error" class="alert alert-danger mt-3">Permohonan tidak dapat dihantar</div>
-    <h2>Permohonan baharu</h2>
+    <v-alert v-if="success" type="success">Permohonan berjaya dihantar</v-alert>
+    <v-alert v-if="error" type="error">Permohonan tidak dapat dihantar</v-alert>
+    <h4>Permohonan baru</h4>
     <hr />
-    <form @submit.prevent="submit">
-      <div class="form-group row">
-        <label
-          for="jenis_permohonan_id"
-          class="col-md-4 col-form-label text-md-right"
-        >Jenis Permohonan</label>
-        <div class="col-md-6">
-          <select
-            class="form-control"
-            name="jenis_permohonan_id"
-            style="width:330px;"
-            id="jenis_permohonan_id"
-            v-model="jenis_permohonan_id"
-            required
-          >
-            <option value="#">Sila pilih</option>
-            <option value="1">Program Pengajian Baru</option>
-            <option value="2">Semakan Program Pengajian</option>
-            <option value="3">Kursus Teras Baru</option>
-            <option value="4">Kursus Elektif Baru</option>
-            <option value="5">Semakan Kursus Teras</option>
-            <option value="6">Semakan Kursus Elektif</option>
-            <option value="8">Penjumudan Program Pengajian</option>
-          </select>
-          <div
-            v-if="errors && errors.jenis_permohonan_id"
-            class="text-danger"
-          >{{ errors.jenis_permohonan_id[0] }}</div>
+
+    <v-form ref="form" @submit.prevent="submit">
+      <v-select
+        v-model="jenis_permohonan_id"
+        item-text="name"
+        item-value="value"
+        :items="jenis"
+        :rules="[v => !!v || 'Sila pilih jenis']"
+        label="Jenis Permohonan"
+        required
+      ></v-select>
+
+      <v-text-field
+        v-model="doc_title"
+        label="Nama program/kursus"
+        :rules="[v => !!v || 'Sila isi bahagian ini']"
+        required
+      ></v-text-field>
+
+    <v-row style="padding-left:10px">
+        <v-btn color="blue-grey" class="ma-2 white--text" @click="pickFile">
+          Fail(pdf)
+          <v-icon right dark>mdi-cloud-upload</v-icon>
+        </v-btn>
+        <br />
+        <div style="padding-top:10px">
+          <p style="white-space: pre-line;">{{ fileName }}</p>
         </div>
-      </div>
-      <div class="form-group row">
-        <label for="doc_title" class="col-md-4 col-form-label text-md-right">Nama program/kursus</label>
-        <div class="col-md-6">
-          <input
-            id="doc_title"
-            type="text"
-            class="form-control"
-            name="doc_title"
-            v-model="doc_title"
-            required
-            autofocus
-          />
-          <div v-if="errors && errors.doc_title" class="text-danger">{{ errors.doc_title[0] }}</div>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="file_link" class="col-md-4 col-form-label text-md-right">Pautan kepada fail</label>
-        <div class="col-md-6">
-          <input
-            type="file"
-            id="file_link"
-            v-on:change="filePreview"
-            name="file_link"
-            ref="file_link"
-          />
-        </div>
-      </div>
-      <div class="form-group row">
-        <label
-          for="summary-ckeditor"
-          class="col-md-4 col-form-label text-md-right"
-        >Komen( Tidak diwajibkan )</label>
-        <div class="col-md-6">
-          <textarea class="form-control" v-model="komen" id="komen" name="komen"></textarea>
-          <div v-if="errors && errors.komen" class="text-danger">{{ errors.komen[0] }}</div>
-        </div>
-      </div>
-      <div class="form-group row mb-0">
-        <div class="col-md-6 offset-md-4">
-          <button type="submit" class="btn btn-primary double-submit-prevent">Hantar</button>
-        </div>
-      </div>
-    </form>
+      </v-row>
+
+      <input
+        style="display:none;"
+        type="file"
+        id="file_link"
+        accept=".pdf"
+        v-on:change="filePreview"
+        name="file_link"
+        ref="file_link"
+      />
+
+      <v-textarea
+        class="mx-2"
+        v-model="komen"
+        id="komen"
+        name="komen"
+        label="Komen( Tidak diwajibkan )"
+        rows="3"
+      ></v-textarea>
+
+      <v-btn
+        color="normal"
+        accept=".pdf"
+        class="mr-4"
+        @click="$modal.hide('permohonan_baharu')"
+      >Batal</v-btn>
+
+      <v-btn type="submit" color="primary">Hantar</v-btn>
+    </v-form>
+
     <hr />
   </div>
 </template>
 <script>
 export default {
-  // components: { permohonans: permohonans },
   data() {
     return {
+      jenis: [
+        {
+          name: "Program Pengajian Baru",
+          value: "1"
+        },
+        {
+          name: "Semakan Program Pengajian",
+          value: "2"
+        },
+        {
+          name: "Kursus Teras Baru",
+          value: "3"
+        },
+        {
+          name: "Kursus Elektif Baru",
+          value: "4"
+        },
+        {
+          name: "Semakan Kursus Teras",
+          value: "5"
+        },
+        {
+          name: "Semakan Kursus Elektif",
+          value: "6"
+        },
+        {
+          name: "Penjumudan Program Pengajian",
+          value: "8"
+        }
+      ],
       jenis_permohonan_id: "",
       doc_title: "",
       komen: "",
+      fileName: "",
       file_link: null,
       errors: {},
       success: false,
@@ -98,6 +114,10 @@ export default {
   methods: {
     filePreview(event) {
       this.file_link = event.target.files[0];
+      this.fileName = event.target.files[0].name;
+    },
+    pickFile() {
+      this.$refs.file_link.click();
     },
     submit() {
       let formData = new FormData();
@@ -120,6 +140,7 @@ export default {
           this.doc_title = "";
           this.komen = "";
           this.file_link = "";
+          this.fileName = "";
           this.$emit("event");
         })
         .catch(error => {

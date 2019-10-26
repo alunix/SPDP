@@ -3,6 +3,8 @@ import VueRouter from "vue-router";
 import VueApexCharts from "vue-apexcharts";
 import BootstrapVue from "bootstrap-vue";
 import Vuetify from "vuetify";
+import dayjs from "dayjs";
+import LocalizedFormat from "dayjs/plugin/localizedFormat";
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -12,8 +14,10 @@ import Vuetify from "vuetify";
 
 require("./bootstrap");
 
+dayjs.extend(LocalizedFormat);
+
 window.Vue = require("vue");
-[VModal, VueRouter, VueApexCharts, BootstrapVue, Vuetify].forEach(x =>
+[VModal, VueRouter, VueApexCharts, BootstrapVue, Vuetify, dayjs].forEach(x =>
     Vue.use(x)
 );
 

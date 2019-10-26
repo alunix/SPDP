@@ -39,6 +39,14 @@
     display: inline-block;
 }
 
+.left-padding {
+    padding-left: 20px;
+}
+
+.padding-right {
+    padding-right: 25px;
+}
+
 @import "bourbon";
 
 $color_purple: #5133ab;
@@ -61,6 +69,13 @@ body {
     font-size: $base_font_size;
     line-height: $base_line_height;
     font-weight: 400;
+}
+
+.table td,
+.table th {
+    width: 100px;
+    height: "50%";
+    font-size: 14px;
 }
 
 p,

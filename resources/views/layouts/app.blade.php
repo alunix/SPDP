@@ -139,7 +139,7 @@
             </div>
         </header>
         @endguest
-        <main class="py-4">
+        <main class="container"  style="background-color:white">
             <!-- Message in blade testing on 27/1/2019 by Bezane -->
             @if (Session::has('message'))
             <div class="alert alert-success" role="alert">
@@ -151,18 +151,18 @@
             </div>
             @endif
             <!-- End message -->
-            <div class="section__content section__content--p30">
-                <div class="container">
-                    @guest
-                    @yield('content')
-                    @else
-                    <v-app id="app">
-                    <router-view>
-                    </<router-view>
-                    </v-app>      
-                    @endguest
-                </div>
-            </div>
+            @guest
+            @yield('content')
+            @else
+           
+            <v-app id="app">
+            <router-view>
+            </<router-view>
+            </v-app>
+            
+                  
+            @endguest
+            
         </main>
         @yield('div')
     </div>

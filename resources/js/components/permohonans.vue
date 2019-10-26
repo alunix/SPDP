@@ -1,94 +1,99 @@
 <template>
   <v-container>
-    <!-- Stack the columns on mobile by making one full-width and the other half-width -->
     <v-row>
-      <v-col cols="12" md="8">
-        <!-- <v-card class="pa-2" outlined tile>.col-12 .col-md-8</v-card> -->
-        <h3>Senarai permohonan dihantar</h3>
+      <v-card>
+        <v-row :align="alignment" :justify="justify">
+          <v-col cols="3" md="6">
+            <h3>Senarai permohonan dihantar</h3>
+            <hr />
+          </v-col>
+          <v-col cols="3" md="4">
+            <v-btn v-on:click="showModel()" color="primary" normal>Permohonan baru</v-btn>
+            <modal height="auto" :scrollable="true" name="permohonan_baharu">
+              <permohonanModal @event="fetchPermohonans"></permohonanModal>
+            </modal>
+            <modal :adaptive="true" width="50%" height="50%" name="dokumen_permohonan">
+              <dokumenModal :permohonan_id="permohonan_id"></dokumenModal>
+            </modal>
+            <modal :adaptive="true" width="60%" height="50%" name="kemajuan_permohonan">
+              <kemajuanModal :permohonan_id="permohonan_id"></kemajuanModal>
+            </modal>
+          </v-col>
+        </v-row>
 
-        <hr />
-      </v-col>
-      <v-col cols="12" md="6">
-        <v-btn v-on:click="showModel()" color="primary" normal>Permohonan baru</v-btn>
-        <modal height="auto" :scrollable="true" name="permohonan_baharu">
-          <permohonanModal @event="fetchPermohonans"></permohonanModal>
-        </modal>
-        <modal :adaptive="true" width="50%" height="50%" name="dokumen_permohonan">
-          <dokumenModal :permohonan_id="permohonan_id"></dokumenModal>
-        </modal>
-        <modal :adaptive="true" width="60%" height="50%" name="kemajuan_permohonan">
-          <kemajuanModal :permohonan_id="permohonan_id"></kemajuanModal>
-        </modal>
-      </v-col>
-    </v-row>
+        <v-row :align="alignment" :justify="justify">
+          <v-col cols="4" md="0">
+            <p style="white-space: pre-line;">{{ pagination.total }} permohonan</p>
+          </v-col>
+        </v-row>
 
-    <v-row>
-      <v-col cols="6" md="4">
-        <p style="white-space: pre-line;">{{ pagination.total }} permohonan</p>
-      </v-col>
-    </v-row>
+        <v-row :align="alignment" :justify="center" >
+          <v-col cols="4" md="5">
+            <table class="table table-hover">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">NO</th>
+                  <!-- <th scope="col">ID</!-->
+                  <th scope="col">JENIS</th>
+                  <th scope="col">BIL HANTAR</th>
+                  <th scope="col">TAJUK</th>
+                  <th scope="col">PENGHANTAR</th>
+                  <th scope="col">DIHANTAR</th>
+                  <th scope="col">STATUS</th>
+                  <th scope="col">TARIKH STATUS</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
 
-    <v-row>
-      <v-col cols="6" md="0">
-        <table class="table table-hover">
-          <thead class="thead-light">
-            <tr>
-              <th scope="col">NO</th>
-              <!-- <th scope="col">ID</!-->
-              <th scope="col">JENIS</th>
-              <th scope="col">BIL HANTAR</th>
-              <th scope="col">TAJUK</th>
-              <th scope="col">PENGHANTAR</th>
-              <th scope="col">DIHANTAR</th>
-              <th scope="col">STATUS</th>
-              <th scope="col">TARIKH STATUS</th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
+              <tbody id="permohonans-add">
+                <tr
+                  class="tr-shadow"
+                  v-for="(p, index) in permohonans"
+                  v-bind:key="p.permohonan_id"
+                >
+                  <th v-if="!pagination.prev_page_url" scope="row">{{index + 1}}</th>
+                  <th
+                    v-if="pagination.prev_page_url"
+                    scope="row"
+                  >{{index + 1 + (pagination.per_page * pagination.current_page)}}</th>
+                  <!-- <td>{{p.permohonan_id}}</td> -->
+                  <td>{{p.jenis_permohonan.jenis_permohonan_huraian}}</td>
+                  <td>{{p.dokumen_permohonans.length}}</td>
+                  <td>{{p.doc_title}}</td>
+                  <td>{{p.user.name}}</td>
+                  <td>{{p.created_at}}</td>
+                  <td>{{p.status_permohonan.status_permohonan_huraian}}</td>
+                  <td>{{p.updated_at}}</td>
+                  <td>
+                    <div class="table-data-feature">
+                      <button
+                        v-on:click="showKemajuanModel();setPermohonanId(p.permohonan_id)"
+                        class="item"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="Kemajuan Permohonan"
+                      >
+                        <i class="fas fa-spinner"></i>
+                      </button>
+                      <button
+                        v-on:click="showDokumenModel();setPermohonanId(p.permohonan_id)"
+                        class="item"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="Dokumen dihantar"
+                      >
+                        <i class="fas fa-file-upload"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
 
-          <tbody id="permohonans-add">
-            <tr class="tr-shadow" v-for="(p, index) in permohonans" v-bind:key="p.permohonan_id">
-              <th v-if="!pagination.prev_page_url" scope="row">{{index + 1}}</th>
-              <th
-                v-if="pagination.prev_page_url"
-                scope="row"
-              >{{index + 1 + (pagination.per_page * pagination.current_page)}}</th>
-              <!-- <td>{{p.permohonan_id}}</td> -->
-              <td>{{p.jenis_permohonan.jenis_permohonan_huraian}}</td>
-              <td>{{p.dokumen_permohonans.length}}</td>
-              <td>{{p.doc_title}}</td>
-              <td>{{p.user.name}}</td>
-              <td>{{p.created_at}}</td>
-              <td>{{p.status_permohonan.status_permohonan_huraian}}</td>
-              <td>{{p.updated_at}}</td>
-              <td>
-                <div class="table-data-feature">
-                  <button
-                    v-on:click="showKemajuanModel();setPermohonanId(p.permohonan_id)"
-                    class="item"
-                    data-toggle="tooltip"
-                    data-placement="top"
-                    title="Kemajuan Permohonan"
-                  >
-                    <i class="fas fa-spinner"></i>
-                  </button>
-                  <button
-                    v-on:click="showDokumenModel();setPermohonanId(p.permohonan_id)"
-                    class="item"
-                    data-toggle="tooltip"
-                    data-placement="top"
-                    title="Dokumen dihantar"
-                  >
-                    <i class="fas fa-file-upload"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-
-            <tr class="spacer"></tr>
-          </tbody>
-        </table>
-      </v-col>
+                <tr class="spacer"></tr>
+              </tbody>
+            </table>
+          </v-col>
+        </v-row>
+      </v-card>
     </v-row>
   </v-container>
 </template>
@@ -100,7 +105,9 @@ export default {
     return {
       permohonans: [],
       permohonan_id: "",
-      pagination: {}
+      pagination: {},
+      alignment: "center",
+      justify: "center",
     };
   },
   components: {

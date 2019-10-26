@@ -23,13 +23,15 @@
         required
       ></v-text-field>
 
-      <v-row>
+    <v-row style="padding-left:10px">
         <v-btn color="blue-grey" class="ma-2 white--text" @click="pickFile">
           Fail(pdf)
           <v-icon right dark>mdi-cloud-upload</v-icon>
         </v-btn>
         <br />
-        <p style="white-space: pre-line;">{{ fileName }}</p>
+        <div style="padding-top:10px">
+          <p style="white-space: pre-line;">{{ fileName }}</p>
+        </div>
       </v-row>
 
       <input
@@ -106,7 +108,7 @@ export default {
       errors: {},
       success: false,
       error: false,
-      loaded: true,
+      loaded: true
     };
   },
   methods: {

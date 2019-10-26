@@ -1,7 +1,6 @@
 <?php
 
 namespace SPDP\Services;
-
 use SPDP\Permohonan;
 use Illuminate\Http\Request;
 use SPDP\KemajuanPermohonan;
@@ -10,7 +9,6 @@ use SPDP\Penilaian;
 use SPDP\User;
 use SPDP\Services\KemajuanPermohonanClass;
 use SPDP\Services\MuatNaikLaporan;
-
 
 class StatusPermohonanClass
 {
@@ -34,8 +32,6 @@ class StatusPermohonanClass
                 break;
         }
     }
-
-   
 
     public function pjk($permohonan) {
         $jp =$permohonan->jenis_permohonan->jenis_permohonan_kod;

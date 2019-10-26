@@ -1,8 +1,6 @@
 <?php
 
 namespace SPDP\Services;
-
-
 use SPDP\User;
 use SPDP\Services\RedirectPermohonan;
 use SPDP\Permohonan;
@@ -73,18 +71,16 @@ class ShowPermohonan
         $permohonans_id= $user->permohonans->pluck('permohonan_id');
         
         //check whether fakulti does have permohonans
-        if(count($permohonans_id)==0) {
+        if(count($permohonans_id) == 0 ) {
             return 0;
             die();
         }
-        for($i=0;$i<count($permohonans_id);$i++) { // fixed bug where the loop was i<count instead of i<=count // basic first year error
-           
+        for($i = 0; $i<count($permohonans_id); $i++) { 
             if($permohonan->permohonan_id == $permohonans_id[$i]) {
                 return 1;
             }
         } 
            return 0;
-
         }
 
     }

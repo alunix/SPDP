@@ -1,7 +1,6 @@
 <template>
   <v-container>
     <v-card>
-
       <v-row class="left-padding" :align="alignment" :justify="start">
         <v-col class="divider" cols="3" md="6">
           <h3>Senarai permohonan dihantar</h3>
@@ -48,7 +47,6 @@
             <thead class="thead-light">
               <tr>
                 <th scope="col">NO</th>
-                <!-- <th scope="col">ID</!-->
                 <th scope="col">JENIS</th>
                 <th scope="col">BIL HANTAR</th>
                 <th scope="col">TAJUK</th>
@@ -64,7 +62,6 @@
                 <th
                   scope="row"
                 >{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
-                <!-- <td>{{p.permohonan_id}}</td> -->
                 <td>{{p.jenis_permohonan.jenis_permohonan_huraian}}</td>
                 <td>{{p.dokumen_permohonans.length}}</td>
                 <td>{{p.doc_title}}</td>
@@ -153,10 +150,8 @@ export default {
       let pagination = {
         total: res.total,
         current_page: res.current_page,
-        last_page: res.last_page,
         next_page_url: res.next_page_url,
         prev_page_url: res.prev_page_url,
-        last_page_url: res.last_page_url,
         per_page: res.per_page
       };
       this.pagination = pagination;

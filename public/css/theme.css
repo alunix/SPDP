@@ -152,6 +152,8 @@ strong {
     font-weight: 700;
 }
 
+th, td { cursor: pointer; }
+
 /*-----------------------------------------------------*/
 /*                   ELEMENTS                          */
 /*-----------------------------------------------------*/
@@ -165,6 +167,8 @@ strong {
   display: flex;
   align-items: center;
 }
+
+
 
 /* ----- Title ----- */
 .title--sbold {

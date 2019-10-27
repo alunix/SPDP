@@ -32,7 +32,7 @@ const routes = [
         component: require("./components/Pengguna.vue")
     },
     {
-        path: "/permohonans",
+        path: "/senarai-permohonan",
         name: "permohonans",
         component: require("./components/permohonans.vue")
     },

@@ -2,28 +2,39 @@
   <v-container>
     <!-- Stack the columns on mobile by making one full-width and the other half-width -->
     <h2>Permohonan</h2>
-    <v-row>
-      <v-col cols="12" md="8">
-        <v-card class="pa-2" outlined tile>.col-12 .col-md-8</v-card>
-      </v-col>
-      <v-col cols="6" md="4">
-        <v-card class="pa-2" outlined tile>.col-6 .col-md-4</v-card>
-      </v-col>
-    </v-row>
+    <v-card>
+      <v-list two-line subheader>
+        <v-subheader>General</v-subheader>
 
-    <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
-    <v-row>
-      <v-col v-for="n in 3" :key="n" cols="6" md="4">
-        <v-card class="pa-2" outlined tile>.col-6 .col-md-4</v-card>
-      </v-col>
-    </v-row>
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title>Tajuk dokumen</v-list-item-title>
+            <v-list-item-subtitle>{{permohonan.doc_title}}</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
 
-    <!-- Columns are always 50% wide, on mobile and desktop -->
-    <v-row>
-      <v-col v-for="n in 2" :key="n" cols="6">
-        <v-card class="pa-2" outlined tile>.col-6</v-card>
-      </v-col>
-    </v-row>
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title>Dihantar</v-list-item-title>
+            <v-list-item-subtitle>{{date(permohonan.created_at)}}</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title>Show your status</v-list-item-title>
+            <v-list-item-subtitle>Your status is visible to everyone</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title>Show your status</v-list-item-title>
+            <v-list-item-subtitle>Your status is visible to everyone</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-card>
   </v-container>
 </template>
 
@@ -32,16 +43,17 @@ import dayjs from "dayjs";
 export default {
   data() {
     return {
-      // loading: false,
+      loading: false,
       // permohonan_id: "",
-      // dokumens: [],
-      // kemajuans: [],
-      // permohonan: [],
-      // pagination: {},
-      // alignment: "center",
-      // justify: "center",
-      // start: "start",
-      // end: "end"
+      dokumens: [],
+      kemajuans: [],
+      permohonan: [],
+      laporans: [],
+      pagination: {},
+      alignment: "center",
+      justify: "center",
+      start: "start",
+      end: "end"
     };
   },
   created() {
@@ -52,14 +64,14 @@ export default {
     showPermohonan(id) {
       console.log(id);
       // axios.get('/permohonan_dihantar')
-      fetch("api/permohonan/" + id)
+      fetch("/api/permohonan/" + id)
         .then(res => res.json())
         .then(res => {
+          console.log(res);
           this.permohonan = res.permohonan;
-          console.log(this.permohonan);
-          // this.dokumens = res.dokumens;
-          // this.kemajuans = res.kemajuans;
-          // that.makePagination(res);
+          this.dokumens = res.permohonan.dokumen_permohonans;
+          this.kemajuans = res.kemajuans;
+          this.laporans = res.laporans;
         });
     },
     date(created_at) {

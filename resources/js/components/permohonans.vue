@@ -9,7 +9,7 @@
 
         <v-row style="padding-right:45px" class="padding-right" :align="alignment" :justify="end">
           <v-btn v-on:click="showModel()" color="primary" small>Permohonan baru</v-btn>
-          <modal height="auto" :scrollable="true" name="permohonan_baharu">
+          <modal height="auto" width="25%" :scrollable="true" name="permohonan_baharu">
             <permohonanModal @event="fetchPermohonans"></permohonanModal>
           </modal>
           <modal :adaptive="true" width="50%" height="50%" name="dokumen_permohonan">
@@ -58,7 +58,12 @@
             </thead>
 
             <tbody id="permohonans-add">
-              <tr class="tr-shadow" v-for="(p, index) in permohonans" v-bind:key="p.permohonan_id">
+              <tr
+                class="tr-shadow"
+                v-for="(p, index) in permohonans"
+                v-bind:key="p.permohonan_id"
+                v-on:click="testing(p.permohonan_id)"
+              >
                 <th
                   scope="row"
                 >{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
@@ -121,14 +126,6 @@ export default {
   created() {
     this.fetchPermohonans();
   },
-  filters: {
-    date_created: created_at => {
-      if (!created_at) {
-        return null;
-      }
-      return dayjs(created_at).format("LLL");
-    }
-  },
   methods: {
     fetchPermohonans(page_url) {
       let that = this;
@@ -145,6 +142,9 @@ export default {
         return null;
       }
       return dayjs(created_at).format("LLL");
+    },
+    testing(id) {
+      this.$router.push({ name: "permohonan", params: { id: id } });
     },
     makePagination(res) {
       let pagination = {

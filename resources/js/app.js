@@ -24,10 +24,12 @@ window.Vue = require("vue");
 const routes = [
     {
         path: "/modal_kemajuan_permohonan",
+        name: "modal_kemajuan",
         component: require("./components/KemajuanPermohonan.vue")
     },
     {
         path: "/modal_dokumen_permohonan",
+        name: "modal_dokumen",
         component: require("./components/DokumenPermohonan.vue")
     },
     {
@@ -36,23 +38,24 @@ const routes = [
     },
     {
         path: "/permohonans",
+        name: "permohonans",
         component: require("./components/permohonans.vue")
     },
     {
         path: "/dashboard",
+        name: "dashboard",
         component: require("./components/View/Dashboard/Dashboard.vue")
     },
     {
         path: "/senarai-permohonan-baharu",
         component: require("./components/view/senarai.vue")
+    },
+    {
+        path: "/permohonan/:id",
+        name: "permohonan",
+        component: require("./components/view/Permohonan/ShowPermohonan.vue")
     }
 ];
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
 
 Vue.component("permohonanModal", require("./components/PermohonanModal.vue"));
 

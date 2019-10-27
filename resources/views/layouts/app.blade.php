@@ -100,9 +100,10 @@
                             </li>
                             @endif
                             <li>
-                                <a href="{{route('analitik.permohonan.dashboard')}}">
-                                    <i class="fas fa-chart-bar"></i>
+                                <router-link to="/analitik">
+                                   <i class="fas fa-chart-bar"></i>
                                     <span class="bot-line"></span>Analitik</a>
+                                </router-link>
                             </li>
                         </ul>
                     </div>
@@ -115,12 +116,14 @@
                                 <div class="account-dropdown js-dropdown">
                                     <div class="account-dropdown__body">
                                         <div class="account-dropdown__item">
-                                            <a href="{{route('settings')}}">
+                                            <router-link to="/settings">
                                                 <i class="zmdi zmdi-settings"></i>Settings</a>
+                                            </router-link>
                                         </div>
                                         <div class="account-dropdown__item">
-                                            <a href="{{route('aliranKerja.settings.show')}}">
-                                                <i class="#"></i>Email workflow settings</a>
+                                             <router-link to="/workflow_settings">
+                                                 <i class="#"></i>Email workflow settings
+                                            </router-link>
                                         </div>
                                     </div>
                                     <div class="account-dropdown__footer">

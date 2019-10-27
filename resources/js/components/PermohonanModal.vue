@@ -23,7 +23,7 @@
         required
       ></v-text-field>
 
-    <v-row style="padding-left:10px">
+      <v-row style="padding-left:10px">
         <v-btn color="blue-grey" class="ma-2 white--text" @click="pickFile">
           Fail(pdf)
           <v-icon right dark>mdi-cloud-upload</v-icon>
@@ -53,14 +53,15 @@
         rows="3"
       ></v-textarea>
 
-      <v-btn
-        color="normal"
-        accept=".pdf"
-        class="mr-4"
-        @click="$modal.hide('permohonan_baharu')"
-      >Batal</v-btn>
-
-      <v-btn type="submit" color="primary">Hantar</v-btn>
+      <v-row style="padding-right:15px" :align="alignment" :justify="end">
+        <v-btn
+          color="normal"
+          accept=".pdf"
+          class="mr-4"
+          @click="$modal.hide('permohonan_baharu')"
+        >Batal</v-btn>
+        <v-btn type="submit" color="primary">Hantar</v-btn>
+      </v-row>
     </v-form>
 
     <hr />
@@ -108,7 +109,9 @@ export default {
       errors: {},
       success: false,
       error: false,
-      loaded: true
+      loaded: true,
+      alignment: "center",
+      end: "end"
     };
   },
   methods: {

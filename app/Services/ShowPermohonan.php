@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace SPDP\Services;
 use SPDP\User;
@@ -8,10 +8,9 @@ use SPDP\Penilaian;
 use SPDP\Services\KemajuanPermohonanClass;
 use SPDP\Services\SenaraiPermohonan;
 
-
 class ShowPermohonan
 {
-   public function show($permohonan) { 
+    public function show($permohonan) { 
         $role = auth()->user()->role;
         switch ($role) {
             case 'fakulti':
@@ -40,10 +39,9 @@ class ShowPermohonan
         $permohonans = new SenaraiPermohonan();
         $permohonans = $permohonans->penilai();
 
-        if ($permohonans==null) {
+        if ($permohonans == null) {
             abort(404);
         }
-
         $permohonans_id = $permohonans->pluck('permohonan_id');
         for($i=0;$i<count($permohonans_id);$i++){ 
             if($permohonan->permohonan_id == $permohonans_id[$i]) {
@@ -56,12 +54,11 @@ class ShowPermohonan
 
 
     public function getBoolPermohonan($permohonan) {
-        if($permohonan==null){
+        if($permohonan==null) {
             return 0;
-         }
+        }
         
         $isFakulti = $this->isFakulti();
-
         if($isFakulti==0){
             return 1;
         }

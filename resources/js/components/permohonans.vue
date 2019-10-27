@@ -62,7 +62,7 @@
                 class="tr-shadow"
                 v-for="(p, index) in permohonans"
                 v-bind:key="p.permohonan_id"
-                v-on:click="testing(p.permohonan_id)"
+                v-on:click="show(p.permohonan_id)"
               >
                 <th
                   scope="row"
@@ -143,8 +143,14 @@ export default {
       }
       return dayjs(created_at).format("LLL");
     },
-    testing(id) {
-      this.$router.push({ name: "permohonan", params: { id: id } });
+    show(id) {
+      let that = this;
+      // that.$router.push({ name: "permohonan", params: { id: id } });
+      this.$router
+        .replace({ name: "permohonan", params: { id: id } })
+        .catch(err => {
+          console.log("all good");
+        });
     },
     makePagination(res) {
       let pagination = {

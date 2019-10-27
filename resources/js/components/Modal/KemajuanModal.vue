@@ -5,27 +5,6 @@
             <a class="btn icon-btn btn-info" style="font-size:14px" href="{{ route('dokumenPermohonan.penambahbaikkan.show',$permohonan->permohonan_id) }}">
             Muat naik penambahbaikkan
     </a>-->
-    <!-- <hr /> -->
-    <!-- <v-timeline>
-      <v-timeline-item
-        v-for="kemajuan in kemajuans"
-        :right="true"
-        :fill-dot="true"
-        :small="true"
-        color="red lighten-2"
-        v-bind:key="kemajuan.id"
-        large
-      >
-        <template v-slot:icon>
-          <span>{{kemajuan.created_at}}</span>
-        </template>
-        <v-card class="elevation-2">
-          <v-card-title class="headline">{{kemajuan.status_permohonan.status_permohonan_huraian}}</v-card-title>
-          <v-card-text></v-card-text>
-        </v-card>
-      </v-timeline-item>
-    </v-timeline>-->
-
     <div class="row justify-content-center">
       <div class="container">
         <table class="table table-striped">

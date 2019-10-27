@@ -11,27 +11,14 @@
 |
 */
 Auth::routes();
-Route::get('/show-testing', 'PermohonanController@testing_show'); // Redirect to dashboard/home(Same page)
-
-// Route::get('/pusher', function () {
-// 	return view('pusher');
-// });
-
 Route::post('/search', 'SearchController@search')->name('search');
-// Route::get('/', 'HomeController@index')->middleware('auth')->name('home'); //Redirect index page to login if not authenticated and will return homepage if authenticated.
-Route::get('/notifikasi', 'NotificationController@index')->middleware('auth')->name('notifications.index'); //Redirect index page to login if not authenticated and will return homepage if authenticated.
-
-//Testing vue redirect and api call
-// Route::get('/', function () {
-//     return view('layouts/app');
-// })->middleware('auth');
-
 /*----------------------- API REST VUE ------------- */
 Route::group(['prefix' => 'api', 'middleware' => 'auth'], function () {
 	/* Fakulti */
 	Route::get('/permohonan_dihantar', 'PermohonanController@api_permohonanDihantar')->name('api.permohonan.dihantar');
 	Route::post('/permohonan_submit', 'PermohonanController@store')->name('api.permohonan.submit');
-	Route::get('/kemajuan-permohonan/{permohonan}', 'KemajuanPermohonanController@show')->name('api.fakulti.kemajuanPermohonan');
+	Route::get('/permohonan/{permohonan}', 'PermohonanController@show')->name('view-permohonan-baharu');
+	Route::get('/kemajuan-permohonan/{permohonan}', 'KemajuanPermohonanController@show')->name('api.fakulti.kemajuanPermohonan');	
 	/*----------------------- Senarai dokumen permohonan ------------- */
 	Route::get('/senarai-dokumen-permohonan/{permohonan}', 'DokumenPermohonanController@show')->name('api.dokumen.dihantar');
 	Route::get('/dokumen/{file_link}', 'DokumenPermohonanController@downloadDokumen')->name('api.dokumen.download');
@@ -111,4 +98,4 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function () {
 
 Route::get('{any}', function () {
     return view('layouts/app');
-})->where('any','.*');
+})->where('any','.*')->middleware('auth');

@@ -15,18 +15,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr
-          class="tr-shadow"
-          v-for="dokumen in dokumens"
-          v-bind:key="dokumen.dokumen_permohonan_id"
-        >
-          <th scope="row">{{dokumen.versi}}</th>
-          <td>{{dokumen.file_name}}</td>
-          <td>{{dokumen.file_size}}</td>
-          <td>{{dokumen.komen}}</td>
-          <td>{{dokumen.versi}}</td>
-          <td>{{dokumen.laporans.count}}</td>
-          <td>{{dokumen.created_at}}</td>
+        <tr class="tr-shadow" v-for="d in dokumens" v-bind:key="d.dokumen_permohonan_id">
+          <th scope="row">{{d.versi}}</th>
+          <td>{{d.file_name}}</td>
+          <td>{{d.file_size}}</td>
+          <td>{{d.komen}}</td>
+          <td>{{d.versi}}</td>
+          <td>{{d.laporans.count}}</td>
+          <td>{{d.created_at}}</td>
         </tr>
       </tbody>
     </table>

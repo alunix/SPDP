@@ -1,6 +1,7 @@
 <template>
-  <v-container v-if="loading">
+  <v-container>
     <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+    <h2>Permohonan</h2>
     <v-row>
       <v-col cols="12" md="8">
         <v-card class="pa-2" outlined tile>.col-12 .col-md-8</v-card>
@@ -31,40 +32,52 @@ import dayjs from "dayjs";
 export default {
   data() {
     return {
-      loading: false,
-      permohonans: [],
-      permohonan_id: "",
-      pagination: {},
-      alignment: "center",
-      justify: "center",
-      start: "start",
-      end: "end"
+      // loading: false,
+      // permohonan_id: "",
+      // dokumens: [],
+      // kemajuans: [],
+      // permohonan: [],
+      // pagination: {},
+      // alignment: "center",
+      // justify: "center",
+      // start: "start",
+      // end: "end"
     };
   },
   created() {
-    this.showPermohonan();
+    var id = this.$route.params.id;
+    this.showPermohonan(id);
   },
   methods: {
-    showPermohonan() {
-      var id = this.$route.params.id;
+    showPermohonan(id) {
       console.log(id);
+      // axios.get('/permohonan_dihantar')
+      fetch("api/permohonan/" + id)
+        .then(res => res.json())
+        .then(res => {
+          this.permohonan = res.permohonan;
+          console.log(this.permohonan);
+          // this.dokumens = res.dokumens;
+          // this.kemajuans = res.kemajuans;
+          // that.makePagination(res);
+        });
     },
     date(created_at) {
       if (!created_at) {
         return null;
       }
       return dayjs(created_at).format("LLL");
-    },
-    makePagination(res) {
-      let pagination = {
-        total: res.total,
-        current_page: res.current_page,
-        next_page_url: res.next_page_url,
-        prev_page_url: res.prev_page_url,
-        per_page: res.per_page
-      };
-      this.pagination = pagination;
     }
+    // makePagination(res) {
+    //   let pagination = {
+    //     total: res.total,
+    //     current_page: res.current_page,
+    //     next_page_url: res.next_page_url,
+    //     prev_page_url: res.prev_page_url,
+    //     per_page: res.per_page
+    //   };
+    //   this.pagination = pagination;
+    // }
   }
 };
 </script>

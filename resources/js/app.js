@@ -28,11 +28,6 @@ const routes = [
         component: require("./components/KemajuanPermohonan.vue")
     },
     {
-        path: "/modal_dokumen_permohonan",
-        name: "modal_dokumen",
-        component: require("./components/DokumenPermohonan.vue")
-    },
-    {
         path: "/modal_pengguna_baharu",
         component: require("./components/Pengguna.vue")
     },
@@ -44,7 +39,7 @@ const routes = [
     {
         path: "/dashboard",
         name: "dashboard",
-        component: require("./components/View/Dashboard/Dashboard.vue")
+        component: require("./components/View/Dashboard/Dashboard.vue"),
     },
     {
         path: "/senarai-permohonan-baharu",
@@ -54,6 +49,11 @@ const routes = [
         path: "/permohonan/:id",
         name: "permohonan",
         component: require("./components/view/Permohonan/ShowPermohonan.vue")
+    },
+    {
+        path: "*",
+        name: "NotFound",
+        component: require("./components/view/ErrorHandling/404.vue")
     }
 ];
 
@@ -62,10 +62,6 @@ Vue.component("permohonanModal", require("./components/PermohonanModal.vue"));
 //Modal
 Vue.component("kemajuanModal", require("./components/Modal/KemajuanModal.vue"));
 Vue.component("dokumenModal", require("./components/Modal/DokumenModal.vue"));
-Vue.component(
-    "showPermohonan",
-    require("./components/Modal/ShowPermohonan.vue")
-);
 //View
 Vue.component("senarai", require("./components/view/senarai.vue"));
 

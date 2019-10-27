@@ -9,9 +9,8 @@ use SPDP\Laporan;
 use SPDP\Penilaian;
 use SPDP\Services\ShowPermohonan;
 
-class KemajuanPermohonanClass
-{
-
+class KemajuanPermohonanClass 
+{   
     public function create(Permohonan $permohonan) {
         $kj = new KemajuanPermohonan();
         $kj->permohonan_id = $permohonan->permohonan_id;
@@ -29,7 +28,7 @@ class KemajuanPermohonanClass
             $dp = $permohonan->dokumen_permohonans->pluck('dokumen_permohonan_id');
             $laporans = Laporan::with('id_penghantar_nama')->whereIn('dokumen_permohonan_id', $dp)->get();
             $kemajuans = KemajuanPermohonan::with('statusPermohonan')->where('permohonan_id', $permohonan->permohonan_id)->get();
-            return response()->json(['laporans' => $laporans, 'kemajuans' => $kemajuans]);
+            return response()->json(['laporans' => $laporans, 'kemajuans' => $kemajuans, 'permohonan' => $permohonan]);
         }
     }
 }

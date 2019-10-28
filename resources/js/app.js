@@ -69,7 +69,6 @@ Vue.component(
     "tab-kemajuan",
     require("./components/view/Permohonan/Kemajuan.vue")
 );
-
 //Chart library
 Vue.component("apexchart", VueApexCharts);
 

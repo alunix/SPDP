@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table class="table table-striped">
+    <table class="table table-hover">
       <thead>
         <tr>
           <th scope="col">No</th>
@@ -13,7 +13,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="tr-shadow" v-for="(l, index) in laporans" v-bind:key="l.laporan_id">
+        <tr class="tr-shadow td-cursor" v-for="(l, index) in laporans" v-bind:key="l.laporan_id">
           <th scope="row">{{index+1}}</th>
           <td>{{l.tajuk_fail_link}}</td>
           <td>{{l.id_penghantar.name}}</td>

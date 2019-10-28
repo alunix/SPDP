@@ -60,7 +60,7 @@
 
             <tbody id="permohonans-add">
               <tr
-                class="tr-shadow"
+                class="tr-shadow td-cursor"
                 v-for="(p, index) in permohonans"
                 v-bind:key="p.permohonan_id"
                 v-on:click="show(p.permohonan_id)"
@@ -69,7 +69,7 @@
                   scope="row"
                 >{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
                 <td>{{p.jenis_permohonan.jenis_permohonan_huraian}}</td>
-                 <td>{{p.permohonan_id}}</td>
+                <td>{{p.permohonan_id}}</td>
                 <td>{{p.dokumen_permohonans.length}}</td>
                 <td>{{p.doc_title}}</td>
                 <td>{{date(p.created_at)}}</td>
@@ -179,3 +179,8 @@ export default {
   }
 };
 </script>
+<style>
+/* td {
+  cursor: pointer;
+} */
+</style>

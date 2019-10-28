@@ -23,11 +23,6 @@ window.Vue = require("vue");
 
 const routes = [
     {
-        path: "/modal_kemajuan_permohonan",
-        name: "modal_kemajuan",
-        component: require("./components/KemajuanPermohonan.vue")
-    },
-    {
         path: "/modal_pengguna_baharu",
         component: require("./components/Pengguna.vue")
     },
@@ -59,14 +54,21 @@ const routes = [
 
 Vue.component("permohonanModal", require("./components/PermohonanModal.vue"));
 
-//Modal
-Vue.component("kemajuanModal", require("./components/Modal/KemajuanModal.vue"));
 //View
 Vue.component("senarai", require("./components/view/senarai.vue"));
 //Tabs
-Vue.component("tab-dokumen", require("./components/view/Permohonan/Dokumen.vue"));
-Vue.component("tab-laporan", require("./components/view/Permohonan/Laporan.vue"));
-Vue.component("tab-kemajuan", require("./components/view/Permohonan/Kemajuan.vue"));
+Vue.component(
+    "tab-dokumen",
+    require("./components/view/Permohonan/Dokumen.vue")
+);
+Vue.component(
+    "tab-laporan",
+    require("./components/view/Permohonan/Laporan.vue")
+);
+Vue.component(
+    "tab-kemajuan",
+    require("./components/view/Permohonan/Kemajuan.vue")
+);
 
 //Chart library
 Vue.component("apexchart", VueApexCharts);

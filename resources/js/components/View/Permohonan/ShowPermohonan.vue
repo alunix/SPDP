@@ -28,7 +28,7 @@
                 >{{tab}}</v-tab>
               </v-tabs>
               <keep-alive>
-                <component v-bind:is="currentTab"></component>
+                <component v-bind:is="currentTab" :permohonan_id="permohonan.permohonan_id"></component>
               </keep-alive>
             </div>
           </div>

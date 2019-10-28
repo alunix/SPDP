@@ -2,70 +2,34 @@
   <v-container>
     <v-row>
       <v-col cols="6" md="4">
-        <v-card>
-          <v-list two-line subheader>
+        <v-card v-if="loaded">
+          <v-list v-for="list in lists" :key="list.id" two-line subheader>
             <v-list-item>
               <v-list-item-content>
-                <v-list-item-title>Tajuk permohonan</v-list-item-title>
-                <v-list-item-subtitle>{{permohonan.doc_title}}</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-
-            <v-list-item>
-              <v-list-item-content>
-                <v-list-item-title>Dihantar</v-list-item-title>
-                <v-list-item-subtitle>{{date(permohonan.created_at)}}</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-
-            <v-list-item>
-              <v-list-item-content>
-                <v-list-item-title>Jumlah dokumen dihantar</v-list-item-title>
-                <v-list-item-subtitle>{{permohonan.dokumen_permohonans.length}}</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-
-            <v-list-item>
-              <v-list-item-content>
-                <v-list-item-title>Jumlah laporan dikeluarkan</v-list-item-title>
-                <v-list-item-subtitle>{{laporans.length}}</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-
-            <v-list-item>
-              <v-list-item-content>
-                <v-list-item-title>ID</v-list-item-title>
-                <v-list-item-subtitle>{{permohonan.permohonan_id}}</v-list-item-subtitle>
+                <v-list-item-title>{{list.title}}</v-list-item-title>
+                <v-list-item-subtitle>{{list.subtitle}}</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
           </v-list>
         </v-card>
       </v-col>
       <v-col cols="12" md="8">
-        <v-card class="pa-2" outlined tile>
+        <v-card v-if="loaded" class="pa-2" outlined tile>
           <div class="container">
             <div class="table-data__tool">
               <div class="table-data__tool-left"></div>
             </div>
             <div>
-              <!-- <b-tabs content-class="mt-3" justified>
-                <b-tab title="Dokumen" active>
-                  <senaraiPermohonan></senaraiPermohonan>
-                </b-tab>
-                <b-tab title="Laporan"></b-tab>
-                <b-tab title="Kemajuan"></b-tab>
-              </b-tabs>-->
               <v-tabs fixed-tabs>
-                <v-tab>
-                  Dokumen
-                  <!-- <senaraiPermohonan></senaraiPermohonan> -->
-                </v-tab>
-                <v-tab>Laporan</v-tab>
-                <v-tab>
-                  Kemajuan
-                  <!-- <senaraiPermohonan></senaraiPermohonan> -->
-                </v-tab>
+                <v-tab
+                  v-for="tab in tabs"
+                  v-bind:key="tab"
+                  @click="currentTabComponent(tab)"
+                >{{tab}}</v-tab>
               </v-tabs>
+              <keep-alive>
+                <component :is="currentTabComponent"></component>
+              </keep-alive>
             </div>
           </div>
         </v-card>
@@ -93,20 +57,17 @@ import dayjs from "dayjs";
 export default {
   data() {
     return {
-      loading: false,
+      loaded: false,
       // permohonan_id: "",
-      tabs: [
-        { title: "Kemajuan", component: <kemajuan></kemajuan> },
-        { title: "Laporan", component: <laporan></laporan> },
-        { title: "Dokumen", component: <dokumen></dokumen> }
-      ],
-      list: [],
+      currentTab: "Laporan",
+      tabs: ["Kemajuan", "Laporan", "Dokumen"],
       dokumens: [],
       kemajuans: [],
       permohonan: {
         dokumen_permohonans: []
       },
       laporans: [],
+      lists: [],
       pagination: {},
       alignment: "center",
       justify: "center",
@@ -120,8 +81,6 @@ export default {
   },
   methods: {
     showPermohonan(id) {
-      console.log(id);
-      // axios.get('/permohonan_dihantar')
       fetch("/api/permohonan/" + id)
         .then(res => res.json())
         .then(res => {
@@ -130,6 +89,30 @@ export default {
           this.dokumens = res.permohonan.dokumen_permohonans;
           this.kemajuans = res.kemajuans;
           this.laporans = res.laporans;
+          this.lists = [
+            {
+              title: "Tajuk permohonan",
+              subtitle: this.permohonan.doc_title,
+              id: 1
+            },
+            {
+              title: "Dihantar",
+              subtitle: this.date(this.permohonan.created_at),
+              id: 2
+            },
+            {
+              title: "Jumlah dokumen dihantar",
+              subtitle: this.permohonan.dokumen_permohonans.length,
+              id: 3
+            },
+            {
+              title: "Jumlah laporan dikeluarkan",
+              subtitle: this.laporans.length,
+              id: 4
+            },
+            { title: "Id", subtitle: this.permohonan.permohonan_id, id: 5 }
+          ];
+          this.loaded = true;
         });
     },
     date(created_at) {
@@ -137,6 +120,11 @@ export default {
         return null;
       }
       return dayjs(created_at).format("LLL");
+    },
+    currentTabComponent(tab) {
+      this.currentTab = tab.toString().toLowerCase();
+      console.log(this.currentTab);
+      return this.currentTab;
     }
     // makePagination(res) {
     //   let pagination = {

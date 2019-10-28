@@ -28,7 +28,7 @@
                 >{{tab}}</v-tab>
               </v-tabs>
               <keep-alive>
-                <component :is="currentTabComponent"></component>
+                <component v-bind:is="currentTab"></component>
               </keep-alive>
             </div>
           </div>
@@ -59,7 +59,7 @@ export default {
     return {
       loaded: false,
       // permohonan_id: "",
-      currentTab: "Laporan",
+      currentTab: "tab-kemajuan",
       tabs: ["Kemajuan", "Laporan", "Dokumen"],
       dokumens: [],
       kemajuans: [],
@@ -122,7 +122,7 @@ export default {
       return dayjs(created_at).format("LLL");
     },
     currentTabComponent(tab) {
-      this.currentTab = tab.toString().toLowerCase();
+      this.currentTab = "tab-" + tab.toString().toLowerCase();
       console.log(this.currentTab);
       return this.currentTab;
     }

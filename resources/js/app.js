@@ -39,7 +39,7 @@ const routes = [
     {
         path: "/dashboard",
         name: "dashboard",
-        component: require("./components/View/Dashboard/Dashboard.vue"),
+        component: require("./components/View/Dashboard/Dashboard.vue")
     },
     {
         path: "/senarai-permohonan-baharu",
@@ -49,6 +49,11 @@ const routes = [
         path: "/permohonan/:id",
         name: "permohonan",
         component: require("./components/view/Permohonan/ShowPermohonan.vue")
+    },
+    {
+        path: "laporan",
+        name: "laporan",
+        component: require("./components/view/Permohonan/Laporan.vue")
     },
     {
         path: "*",
@@ -61,9 +66,11 @@ Vue.component("permohonanModal", require("./components/PermohonanModal.vue"));
 
 //Modal
 Vue.component("kemajuanModal", require("./components/Modal/KemajuanModal.vue"));
-Vue.component("dokumenModal", require("./components/Modal/DokumenModal.vue"));
 //View
 Vue.component("senarai", require("./components/view/senarai.vue"));
+Vue.component("dokumen", require("./components/view/Permohonan/Dokumen.vue"));
+Vue.component("laporan", require("./components/view/Permohonan/Laporan.vue"));
+Vue.component("kemajuan", require("./components/view/Permohonan/Kemajuan.vue"));
 
 //Chart library
 Vue.component("apexchart", VueApexCharts);

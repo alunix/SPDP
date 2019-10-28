@@ -16,10 +16,10 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="tr-shadow" v-for="kemajuan in kemajuans" v-bind:key="kemajuan.id">
-              <th scope="row">{{kemajuan.id}}</th>
-              <td>{{kemajuan.status_permohonan.status_permohonan_huraian}}</td>
-              <td>{{kemajuan.created_at}}</td>
+            <tr class="tr-shadow" v-for="k in kemajuans" v-bind:key="k.id">
+              <th scope="row">{{k.id}}</th>
+              <td>{{k.status_permohonan.status_permohonan_huraian}}</td>
+              <td>{{k.created_at}}</td>
             </tr>
           </tbody>
         </table>
@@ -37,14 +37,14 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="tr-shadow" v-for="laporan in laporans" v-bind:key="laporan.laporan_id">
-              <th scope="row">{{laporan.versi}}</th>
-              <td>{{laporan.tajuk_fail_link}}</td>
-              <td>{{laporan.id_penghantar.name}}</td>
-              <td>{{laporan.id_penghantar.role}}</td>
-              <td>{{laporan.komen}}</td>
-              <td>{{laporan.versi_laporan}}</td>
-              <td>{{laporan.created_at}}</td>
+            <tr class="tr-shadow" v-for="l in laporans" v-bind:key="l.laporan_id">
+              <th scope="row">{{l.versi}}</th>
+              <td>{{l.tajuk_fail_link}}</td>
+              <td>{{l.id_penghantar.name}}</td>
+              <td>{{l.id_penghantar.role}}</td>
+              <td>{{l.komen}}</td>
+              <td>{{l.versi_laporan}}</td>
+              <td>{{l.created_at}}</td>
             </tr>
           </tbody>
         </table>
@@ -57,7 +57,13 @@ export default {
   props: ["permohonan_id"],
   data() {
     return {
-      kemajuans: [],
+      kemajuans: [
+        {
+          status_permohonan: {
+            status_permohonan_huraian: ""
+          }
+        }
+      ],
       laporans: []
     };
   },

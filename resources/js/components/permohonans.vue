@@ -147,7 +147,7 @@ export default {
       let that = this;
       // that.$router.push({ name: "permohonan", params: { id: id } });
       this.$router
-        .replace({ name: "permohonan", params: { id: id } })
+        .push({ name: "permohonan", params: { id: id } })
         .catch(err => {
           console.log("all good");
         });

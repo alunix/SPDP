@@ -48,6 +48,7 @@
               <tr>
                 <th scope="col">NO</th>
                 <th scope="col">JENIS</th>
+                <th scope="col">ID</th>
                 <th scope="col">BIL HANTAR</th>
                 <th scope="col">TAJUK</th>
                 <th scope="col">TARIKH HANTAR</th>
@@ -68,6 +69,7 @@
                   scope="row"
                 >{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
                 <td>{{p.jenis_permohonan.jenis_permohonan_huraian}}</td>
+                 <td>{{p.permohonan_id}}</td>
                 <td>{{p.dokumen_permohonans.length}}</td>
                 <td>{{p.doc_title}}</td>
                 <td>{{date(p.created_at)}}</td>

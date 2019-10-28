@@ -4,6 +4,16 @@
             <a class="btn icon-btn btn-info" style="font-size:14px" href="{{ route('dokumenPermohonan.penambahbaikkan.show',$permohonan->permohonan_id) }}">
             Muat naik penambahbaikkan
     </a>-->
+    <v-row
+      style="padding-right:20px; padding-top:8px"
+      class="padding-right"
+      :align="alignment"
+      :justify="end"
+    >
+      <v-btn small>Prev</v-btn>
+      <div class="divider" />
+      <v-btn small>Next</v-btn>
+    </v-row>
     <div class="row justify-content-center">
       <div class="container">
         <table class="table table-striped">
@@ -11,39 +21,14 @@
             <tr>
               <th scope="col">No</th>
               <th scope="col">Status Permohonan</th>
-              <th scope="col">Tarikh/Masa Status</th>
+              <th scope="col">Tarikh/Masa</th>
             </tr>
           </thead>
           <tbody>
-            <tr class="tr-shadow" v-for="k in kemajuans" v-bind:key="k.id">
-              <th scope="row">{{k.id}}</th>
+            <tr class="tr-shadow" v-for="(k, index) in kemajuans" v-bind:key="k.id">
+              <th scope="row">{{index + 1}}</th>
               <td>{{k.status_permohonan.status_permohonan_huraian}}</td>
-              <td>{{k.created_at}}</td>
-            </tr>
-          </tbody>
-        </table>
-        <h5>Semua laporan yang telah dikeluarkan</h5>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">No</th>
-              <th scope="col">Laporan</th>
-              <th scope="col">Dihantar</th>
-              <th scope="col">Pihak</th>
-              <th scope="col">Komen</th>
-              <th scope="col">Versi</th>
-              <th scope="col">Tarikh/Masa Laporan</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="tr-shadow" v-for="l in laporans" v-bind:key="l.laporan_id">
-              <th scope="row">{{l.versi}}</th>
-              <td>{{l.tajuk_fail_link}}</td>
-              <td>{{l.id_penghantar.name}}</td>
-              <td>{{l.id_penghantar.role}}</td>
-              <td>{{l.komen}}</td>
-              <td>{{l.versi_laporan}}</td>
-              <td>{{l.created_at}}</td>
+              <td>{{date(k.created_at)}}</td>
             </tr>
           </tbody>
         </table>
@@ -52,8 +37,9 @@
   </div>
 </template>
 <script>
+import dayjs from "dayjs";
 export default {
-  props: ["permohonan_id"],
+  props: ["kemajuans_props"],
   data() {
     return {
       kemajuans: [
@@ -63,20 +49,20 @@ export default {
           }
         }
       ],
-      laporans: []
+      laporans: [],
+      alignment: "center",
+      end: "end"
     };
   },
   created() {
-    this.fetchKemajuan();
+    this.kemajuans = this.kemajuans_props;
   },
   methods: {
-    fetchKemajuan() {
-      fetch("/api/kemajuan-permohonan/" + this.permohonan_id)
-        .then(res => res.json())
-        .then(res => {
-          this.laporans = res.laporans;
-          this.kemajuans = res.kemajuans;
-        });
+    date(created_at) {
+      if (!created_at) {
+        return null;
+      }
+      return dayjs(created_at).format("LLL");
     }
   }
 };

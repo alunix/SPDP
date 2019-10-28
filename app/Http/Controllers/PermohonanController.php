@@ -99,9 +99,6 @@ class PermohonanController extends Controller
     public function show($id)
     {
         $permohonan = Permohonan::findOrFail($id);
-        // if ($permohonan == null) {
-        //     abort(403, 'Tidak dibenarkan');
-        // }
         $show = new ShowPermohonan();
         return $show->show($permohonan);
     }

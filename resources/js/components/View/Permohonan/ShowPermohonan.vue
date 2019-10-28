@@ -28,7 +28,7 @@
                 >{{tab}}</v-tab>
               </v-tabs>
               <keep-alive>
-                <component v-bind:is="currentTab" :permohonan_id="permohonan.permohonan_id"></component>
+                <component v-bind:is="currentTab" v-bind="getDataBind()"></component>
               </keep-alive>
             </div>
           </div>
@@ -37,18 +37,18 @@
     </v-row>
 
     <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
-    <v-row>
+    <!-- <v-row>
       <v-col v-for="n in 3" :key="n" cols="6" md="4">
         <v-card class="pa-2" outlined tile>.col-6 .col-md-4</v-card>
       </v-col>
-    </v-row>
+    </v-row> -->
 
     <!-- Columns are always 50% wide, on mobile and desktop -->
-    <v-row>
+    <!-- <v-row>
       <v-col v-for="n in 2" :key="n" cols="6">
         <v-card class="pa-2" outlined tile>.col-6</v-card>
       </v-col>
-    </v-row>
+    </v-row> -->
   </v-container>
 </template>
 
@@ -58,6 +58,7 @@ export default {
   data() {
     return {
       loaded: false,
+      dataBind: [],
       // permohonan_id: "",
       currentTab: "tab-kemajuan",
       tabs: ["Kemajuan", "Laporan", "Dokumen"],
@@ -123,8 +124,33 @@ export default {
     },
     currentTabComponent(tab) {
       this.currentTab = "tab-" + tab.toString().toLowerCase();
-      console.log(this.currentTab);
+      if (this.currentTab == "tab-kemajuan") {
+        this.dataBind = this.kemajuans;
+      } else if (this.currentTab == "tab-dokumen") {
+        this.dataBind = this.dokumens;
+      } else {
+        this.dataBind = this.laporans;
+      }
       return this.currentTab;
+    },
+    getDataBind() {
+      if (this.currentTab == "tab-kemajuan") {
+        return { kemajuans_props: this.kemajuans };
+      } else if (this.currentTab == "tab-dokumen") {
+        return { dokumens_props: this.dokumens };
+      } else {
+        return { laporans_props: this.laporans };
+      }
+      // console.log(this.dataBind);
+      // return this.dataBind;
+
+      // if (this.currentTab == "tab-kemajuan") {
+      //   return this.kemajuans;
+      // } else if (this.currentTab == "tab-dokumen") {
+      //   return this.dokumens;
+      // } else {
+      //   return this.laporans;
+      // }
     }
     // makePagination(res) {
     //   let pagination = {

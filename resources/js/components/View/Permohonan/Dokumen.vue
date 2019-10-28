@@ -1,7 +1,5 @@
 <template>
   <div class="container">
-    <h2>Dokumen yang telah dihantar</h2>
-
     <table class="table table-striped">
       <thead>
         <tr>
@@ -11,50 +9,43 @@
           <th scope="col">Komen</th>
           <th scope="col">Versi</th>
           <th scope="col">Jumlah laporan</th>
-          <th scope="col">Tarikh/Masa Penghantaran</th>
+          <th scope="col">Tarikh/Masa</th>
         </tr>
       </thead>
       <tbody>
-        <tr class="tr-shadow" v-for="d in dokumens" v-bind:key="d.dokumen_permohonan_id">
-          <th scope="row">{{d.versi}}</th>
+        <tr class="tr-shadow" v-for="(d, index) in dokumens" v-bind:key="d.dokumen_permohonan_id">
+          <th scope="row">{{index+1}}</th>
           <td>{{d.file_name}}</td>
           <td>{{d.file_size}}</td>
           <td>{{d.komen}}</td>
           <td>{{d.versi}}</td>
           <td>{{d.laporans.count}}</td>
-          <td>{{d.created_at}}</td>
+          <td>{{date(d.created_at)}}</td>
         </tr>
       </tbody>
     </table>
   </div>
 </template>
 <script>
+import dayjs from "dayjs";
 export default {
-  props: ["permohonan_id"],
+  props: ["dokumens_props"],
   data() {
     return {
       dokumens: [],
       permohonan: ""
     };
   },
-  components: {
-    // PermohonansModal
-  },
-
   created() {
-    this.fetchDokumens();
+    this.dokumens = this.dokumens_props;
   },
 
   methods: {
-    fetchDokumens() {
-      fetch("api/senarai-dokumen-permohonan/" + this.permohonan_id)
-        .then(res => res.json())
-        .then(res => {
-          //   console.log(res.permohonan.dokumen_permohonans);
-          console.log(res);
-          this.dokumens = res.dokumen_permohonans;
-          this.permohonan = res.permohonan;
-        });
+    date(created_at) {
+      if (!created_at) {
+        return null;
+      }
+      return dayjs(created_at).format("LLL");
     },
     downloadPdf(file_link) {
       //   axios

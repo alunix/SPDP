@@ -23,49 +23,52 @@ window.Vue = require("vue");
 
 const routes = [
     {
-        path: "/modal_kemajuan_permohonan",
-        component: require("./components/KemajuanPermohonan.vue")
-    },
-    {
-        path: "/modal_dokumen_permohonan",
-        component: require("./components/DokumenPermohonan.vue")
-    },
-    {
         path: "/modal_pengguna_baharu",
         component: require("./components/Pengguna.vue")
     },
     {
-        path: "/permohonans",
+        path: "/senarai-permohonan",
+        name: "permohonans",
         component: require("./components/permohonans.vue")
     },
     {
         path: "/dashboard",
+        name: "dashboard",
         component: require("./components/View/Dashboard/Dashboard.vue")
     },
     {
         path: "/senarai-permohonan-baharu",
         component: require("./components/view/senarai.vue")
+    },
+    {
+        path: "/permohonan/:id",
+        name: "permohonan",
+        component: require("./components/view/Permohonan/ShowPermohonan.vue")
+    },
+    {
+        path: "*",
+        name: "NotFound",
+        component: require("./components/view/ErrorHandling/404.vue")
     }
 ];
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
 Vue.component("permohonanModal", require("./components/PermohonanModal.vue"));
 
-//Modal
-Vue.component("kemajuanModal", require("./components/Modal/KemajuanModal.vue"));
-Vue.component("dokumenModal", require("./components/Modal/DokumenModal.vue"));
-Vue.component(
-    "showPermohonan",
-    require("./components/Modal/ShowPermohonan.vue")
-);
 //View
 Vue.component("senarai", require("./components/view/senarai.vue"));
-
+//Tabs
+Vue.component(
+    "tab-dokumen",
+    require("./components/view/Permohonan/Dokumen.vue")
+);
+Vue.component(
+    "tab-laporan",
+    require("./components/view/Permohonan/Laporan.vue")
+);
+Vue.component(
+    "tab-kemajuan",
+    require("./components/view/Permohonan/Kemajuan.vue")
+);
 //Chart library
 Vue.component("apexchart", VueApexCharts);
 

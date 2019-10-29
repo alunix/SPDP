@@ -9,7 +9,7 @@
 
         <v-row style="padding-right:45px" class="padding-right" :align="alignment" :justify="end">
           <v-btn v-on:click="showModel()" color="primary" small>Permohonan baru</v-btn>
-          <modal height="auto" :scrollable="true" name="permohonan_baharu">
+          <modal height="auto" width="25%" :scrollable="true" name="permohonan_baharu">
             <permohonanModal @event="fetchPermohonans"></permohonanModal>
           </modal>
           <modal :adaptive="true" width="50%" height="50%" name="dokumen_permohonan">
@@ -48,6 +48,7 @@
               <tr>
                 <th scope="col">NO</th>
                 <th scope="col">JENIS</th>
+                <th scope="col">ID</th>
                 <th scope="col">BIL HANTAR</th>
                 <th scope="col">TAJUK</th>
                 <th scope="col">TARIKH HANTAR</th>
@@ -58,11 +59,17 @@
             </thead>
 
             <tbody id="permohonans-add">
-              <tr class="tr-shadow" v-for="(p, index) in permohonans" v-bind:key="p.permohonan_id">
+              <tr
+                class="tr-shadow td-cursor"
+                v-for="(p, index) in permohonans"
+                v-bind:key="p.permohonan_id"
+                v-on:click="show(p.permohonan_id)"
+              >
                 <th
                   scope="row"
                 >{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
                 <td>{{p.jenis_permohonan.jenis_permohonan_huraian}}</td>
+                <td>{{p.permohonan_id}}</td>
                 <td>{{p.dokumen_permohonans.length}}</td>
                 <td>{{p.doc_title}}</td>
                 <td>{{date(p.created_at)}}</td>
@@ -121,14 +128,6 @@ export default {
   created() {
     this.fetchPermohonans();
   },
-  filters: {
-    date_created: created_at => {
-      if (!created_at) {
-        return null;
-      }
-      return dayjs(created_at).format("LLL");
-    }
-  },
   methods: {
     fetchPermohonans(page_url) {
       let that = this;
@@ -145,6 +144,15 @@ export default {
         return null;
       }
       return dayjs(created_at).format("LLL");
+    },
+    show(id) {
+      let that = this;
+      // that.$router.push({ name: "permohonan", params: { id: id } });
+      this.$router
+        .push({ name: "permohonan", params: { id: id } })
+        .catch(err => {
+          console.log("all good");
+        });
     },
     makePagination(res) {
       let pagination = {
@@ -171,3 +179,8 @@ export default {
   }
 };
 </script>
+<style>
+/* td {
+  cursor: pointer;
+} */
+</style>

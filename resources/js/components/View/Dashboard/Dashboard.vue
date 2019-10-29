@@ -55,7 +55,7 @@
       <div class="col-lg-6">
         <div class="au-card recent-report">
           <div class="au-card-inner">
-            <h3 class="title-2">Jumlah dokumen permohonan</h3>
+            <h3 class="title-2">Dokumen permohonan dihantar</h3>
             <div class="chart-info"></div>
             <div class="recent-report__chart">
               <apexchart
@@ -114,6 +114,7 @@ export default {
       fetch("api/dashboard")
         .then(res => res.json())
         .then(res => {
+          console.log(res);
           this.permohonans = res.permohonans;
           this.progress = res.progress;
           this.lulus = res.lulus;
@@ -129,7 +130,7 @@ export default {
             },
             series: [
               {
-                name: res.line_chart.labels,
+                name: "Jumlah",
                 data: res.line_chart.data
               }
             ]

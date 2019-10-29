@@ -65,16 +65,7 @@ class PermohonanController extends Controller
         $pc = new PermohonanClass();
         return $permohonan = $pc->create($request);
     }
-    public function show($id)
-    {
-        $permohonan = Permohonan::findOrFail($id);
-        if ($permohonan == null) {
-            abort(403, 'Tidak dibenarkan');
-        }
-        $show = new ShowPermohonan();
-        return $show->show($permohonan);
-    }
-
+    
     public function  showPelantikanPenilai($id)
     {
         $permohonan = Permohonan::find($id);
@@ -82,7 +73,6 @@ class PermohonanController extends Controller
         $dp = DokumenPermohonan::where('permohonan_id', $permohonan->permohonan_id)->orderBy('versi', 'DESC')->first();
         return view('pjk.pjk-melantik-penilai')->with('users', $users)->with('permohonan', $permohonan)->with('dp', $dp);
     }
-
 
     public function pelantikanPenilaiSubmit(PenilaianPJK $pp, Request $request, $id)
     {
@@ -104,5 +94,12 @@ class PermohonanController extends Controller
     {
         $sp = new SenaraiPermohonan();
         return  $sp->index();
+    }
+
+    public function show($id)
+    {
+        $permohonan = Permohonan::findOrFail($id);
+        $show = new ShowPermohonan();
+        return $show->show($permohonan);
     }
 }

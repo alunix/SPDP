@@ -89,6 +89,7 @@ class HomeController extends Controller
     public function fakulti() {
         $fakulti_id = auth()->user()->fakulti_id;
         $year = date('Y');
+        
         /*------------------ Line chart for jumlah dokumen permohonan in a year--------------*/
         $dokumens =  DB::table("dokumen_permohonans") 
         ->join('permohonans','dokumen_permohonans.permohonan_id','=','permohonans.permohonan_id')

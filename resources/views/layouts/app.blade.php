@@ -48,7 +48,9 @@
     <!-- Main JS-->
     <script src="{{asset('js/main.js')}}" defer></script>
     <!-- Vuetify icon -->
-   <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -88,14 +90,6 @@
                                     <li>
                                         <router-link to="senarai-permohonan-baharu">Senarai permohonan baharu</router-link>
                                     </li>
-                                    <li>
-                                        <a href="{{route('senaraiPerakuan.show')}}">Permohonan untuk diperakui</a>
-                                    </li>
-
-                                    <li>
-                                        <a href="{{route('penilaian.show')}}">Senarai penilaian panel</a>
-                                    </li>
-
                                 </ul>
                             </li>
                             @endif

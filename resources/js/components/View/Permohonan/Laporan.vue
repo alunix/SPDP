@@ -13,7 +13,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="tr-shadow td-cursor" v-for="(l, index) in laporans" v-bind:key="l.laporan_id">
+        <tr
+          class="tr-shadow td-cursor"
+          v-for="(l, index) in laporans"
+          v-bind:key="l.laporan_id"
+          v-on:click="openFile(l.tajuk_fail_link)"
+        >
           <th scope="row">{{index+1}}</th>
           <td>{{l.tajuk_fail_link}}</td>
           <td>{{l.id_penghantar.name}}</td>
@@ -44,6 +49,9 @@ export default {
         return null;
       }
       return dayjs(created_at).format("LLL");
+    },
+    openFile(tajuk_fail_link) {
+      return window.open("/storage/laporan/" + tajuk_fail_link);
     }
   }
 };

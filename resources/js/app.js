@@ -24,58 +24,62 @@ window.Vue = require("vue");
 const routes = [
     {
         path: "/modal_pengguna_baharu",
-        component: require("./components/Pengguna.vue")
+        component: require("./components/Pengguna.vue").default
     },
     {
         path: "/senarai-permohonan",
         name: "permohonans",
-        component: require("./components/permohonans.vue")
+        component: require("./components/permohonans.vue").default
     },
     {
         path: "/dashboard",
         name: "dashboard",
-        component: require("./components/View/Dashboard/Dashboard.vue")
+        component: require("./components/View/Dashboard/Dashboard.vue").default
     },
     {
         path: "/senarai-permohonan-baharu",
-        component: require("./components/view/senarai.vue")
+        component: require("./components/view/senarai.vue").default
     },
     {
         path: "/permohonan/:id",
         name: "permohonan",
         component: require("./components/view/Permohonan/ShowPermohonan.vue")
+            .default
     },
     {
         path: "*",
         name: "NotFound",
-        component: require("./components/view/ErrorHandling/404.vue")
+        component: require("./components/view/ErrorHandling/404.vue").default
     }
 ];
 
-Vue.component("permohonanModal", require("./components/PermohonanModal.vue"));
+Vue.component(
+    "permohonanModal",
+    require("./components/PermohonanModal.vue").default
+);
 
 //View
-Vue.component("senarai", require("./components/view/senarai.vue"));
+Vue.component("senarai", require("./components/view/senarai.vue")).default;
 //Tabs
 Vue.component(
     "tab-dokumen",
-    require("./components/view/Permohonan/Dokumen.vue")
+    require("./components/view/Permohonan/Dokumen.vue").default
 );
 Vue.component(
     "tab-laporan",
-    require("./components/view/Permohonan/Laporan.vue")
+    require("./components/view/Permohonan/Laporan.vue").default
 );
 Vue.component(
     "tab-kemajuan",
-    require("./components/view/Permohonan/Kemajuan.vue")
+    require("./components/view/Permohonan/Kemajuan.vue").default
 );
 //Chart library
-Vue.component("apexchart", VueApexCharts);
+Vue.component("apexchart", VueApexCharts).default;
 
 //Tab
 Vue.component(
     "senaraiPermohonan",
-    require("./components/view/SenaraiPermohonan/SenaraiPermohonan.vue")
+    require("./components/view/SenaraiPermohonan/SenaraiPermohonan.vue").default
 );
 
 const router = new VueRouter({

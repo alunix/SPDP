@@ -36,7 +36,7 @@ class PermohonanClass
 
         //Permohonan baharu
         $user_id = auth()->user()->id;
-
+        
         $permohonan = new Permohonan();
         $permohonan->doc_title = $request->input('doc_title');
         $permohonan->jenis_permohonan_id = $request->input('jenis_permohonan_id');
@@ -47,7 +47,6 @@ class PermohonanClass
         $dk = new DokumenPermohonanClass();
         $dk->create($permohonan, $fileNameWithExt, $fileNameToStore, $request, $fileSize);
 
-        //Create a new kemajuan permohonan for each progress
         $kp = new KemajuanPermohonanClass();
         $kp->create($permohonan);
 

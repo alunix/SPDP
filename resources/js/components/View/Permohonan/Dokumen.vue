@@ -21,6 +21,7 @@
           class="tr-shadow td-cursor"
           v-for="(d, index) in dokumens"
           v-bind:key="d.dokumen_permohonan_id"
+          v-on:click="download(d.file_link)"
         >
           <th scope="row">{{index+1}}</th>
           <td>{{d.file_name}}</td>
@@ -35,6 +36,12 @@
               color="primary"
               small
             >Laporan</v-btn>
+            <!-- <a href ="<?php echo asset("storage/cadangan_permohonan_baharu/{$permohonan->dokumen_permohonan()->file_link}")?>">{{ basename($permohonan->dokumen_permohonan()->file_name) }} </a> -->
+            <a v-bind:href="url(d.file_link)"></a>
+          </th>
+          <th>
+            <v-btn v-bind:href="url(d.file_link)">Download</v-btn>
+            <img :src="'/storage/app/public/cadangan_permohonan_baharu/' + d.file_link" />
           </th>
         </tr>
       </tbody>
@@ -68,6 +75,14 @@ export default {
     },
     setLaporansProps(laporans) {
       this.laporans_props = laporans;
+    },
+    url(file_link) {
+      return "storage/cadangan/" + file_link;
+    },
+    download(file_link) {
+      return window.open(
+        "/storage/app/public/cadangan_permohonan_baharu/" + file_link
+      );
     },
     downloadPdf(file_link) {
       //   axios

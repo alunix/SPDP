@@ -27,7 +27,7 @@ class KemajuanPermohonanClass
         if ($dp == 0) {
             abort(403, 'Tidak dibenarkan');
         } else {
-           return response()->json(['laporans' => $permohonan[0]->laporans, 'kemajuans' => $permohonan[0]->kemajuan_permohonans, 'permohonan' => $permohonan[0], 'dokumens' => $permohonan[0]->dokumen_permohonans]);
+            return response()->json(['laporans' => $permohonan[0]->laporans, 'kemajuans' => $permohonan[0]->kemajuan_permohonans, 'permohonan' => $permohonan[0], 'dokumens' => $permohonan[0]->dokumen_permohonans]);
 
         }
     }

@@ -124,7 +124,6 @@ export default {
   components: {
     PermohonansModal
   },
-
   created() {
     this.fetchPermohonans();
   },
@@ -147,7 +146,6 @@ export default {
     },
     show(id) {
       let that = this;
-      // that.$router.push({ name: "permohonan", params: { id: id } });
       this.$router
         .push({ name: "permohonan", params: { id: id } })
         .catch(err => {

@@ -46,10 +46,6 @@ public function laporans(){
         'dokumen_permohonan_id'); //Local key on users table
 }
 
-// public function laporans_count(){
-//     return $this->laporans()->count();
-// }
-
 public function penilaian(){
     return $this->hasOne('SPDP\Penilaian','permohonan_id_penilaian');
  }

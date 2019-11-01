@@ -54,12 +54,12 @@ class ShowPermohonan
 
 
     public function getBoolPermohonan($permohonan) {
-        if($permohonan==null) {
+        if($permohonan == null) {
             return 0;
         }
         
         $isFakulti = $this->isFakulti();
-        if($isFakulti==0){
+        if($isFakulti == 0) {
             return 1;
         }
         else { 
@@ -84,15 +84,13 @@ class ShowPermohonan
 
     public function isFakulti(){
         $role = auth()->user()->role;
-        switch ($role) {
-            case 'fakulti':
-                return 1;
-            break;
-            default:
-                return 0;
-                break;
-        }
 
+        if (!$role == 'fakulti') {
+            return 0;
+        }
+        else {
+            return 1;
+        }
     }
 
    

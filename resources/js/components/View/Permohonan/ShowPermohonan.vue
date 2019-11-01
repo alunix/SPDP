@@ -87,9 +87,9 @@ export default {
         .then(res => {
           console.log(res);
           this.permohonan = res.permohonan;
-          this.dokumens = res.permohonan.dokumen_permohonans;
-          this.kemajuans = res.kemajuans;
-          this.laporans = res.laporans;
+          this.dokumens = res.dokumens.data;
+          this.kemajuans = res.kemajuans.data;
+          this.laporans = res.laporans.data;
           this.lists = [
             {
               title: "Tajuk permohonan",
@@ -103,12 +103,12 @@ export default {
             },
             {
               title: "Jumlah dokumen dihantar",
-              subtitle: this.permohonan.dokumen_permohonans.length,
+              subtitle: this.permohonan.dokumen_permohonans.count,
               id: 3
             },
             {
               title: "Jumlah laporan dikeluarkan",
-              subtitle: this.laporans.length,
+              subtitle: this.laporans.total,
               id: 4
             },
             { title: "Id", subtitle: this.permohonan.permohonan_id, id: 5 }

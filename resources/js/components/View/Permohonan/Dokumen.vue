@@ -1,5 +1,15 @@
 <template>
-  <div class="container">
+  <div>
+    <v-row
+      style="padding-right:20px; padding-top:8px;padding-bottom:8px"
+      class="padding-right"
+      :align="alignment"
+      :justify="end"
+    >
+      <v-btn small>Prev</v-btn>
+      <div class="divider" />
+      <v-btn small>Next</v-btn>
+    </v-row>
     <modal :adaptive="true" width="50%" height="50%" name="modal-laporan">
       <tab-laporan :laporans_props="laporans_props"></tab-laporan>
     </modal>
@@ -50,7 +60,9 @@ export default {
     return {
       dokumens: [],
       permohonan: "",
-      laporans_props: []
+      laporans_props: [],
+      alignment: "center",
+      end: "end"
     };
   },
   created() {

@@ -7,6 +7,7 @@ use SPDP\Permohonan;
 use SPDP\Penilaian;
 use SPDP\Services\KemajuanPermohonanClass;
 use SPDP\Services\SenaraiPermohonan;
+use SPDP\Support\Collection;
 
 class ShowPermohonan
 {
@@ -27,9 +28,20 @@ class ShowPermohonan
     }
 
     public function fakulti($permohonan) {
-        //Redirect ke page kemajuan permohonan
-        $kp = new KemajuanPermohonanClass();
-        return $kp->show($permohonan);
+        $dp =  $this->getBoolPermohonan($permohonan);
+        if ($dp == false) {
+            abort(403, 'Tidak dibenarkan');
+        } else {
+            $permohonan = Permohonan::where('permohonan_id', $permohonan->permohonan_id )
+            ->with(['dokumen_permohonans.laporans.id_penghantar_nama', 'laporans.id_penghantar_nama', 'kemajuan_permohonans.statusPermohonan' ])->get();
+
+            // $kemajuan = (new Collection($permohonan[0]->kemajuan_permohonans))->paginate(3 ,['*'], 'kemajuan');
+            $kemajuan = ($permohonan[0]->kemajuan_permohonans->paginate(3,['*'], 'kemajuan' ));
+            // $dokumens =  (new Collection($permohonan[0]->dokumen_permohonans))->paginate(3);
+            $laporans = (new Collection($permohonan[0]->laporans))->paginate(3);
+            return response()->json(['kemajuans' => $kemajuan , 'dokumens' => $dokumens, 'laporans' => $laporans , 'permohonan' => $permohonan[0]]);
+            // return response()->json(['laporans' => $permohonan[0]->laporans, 'kemajuans' => $permohonan[0]->kemajuan_permohonans, 'permohonan' => $permohonan[0], 'dokumens' => $permohonan[0]->dokumen_permohonans]);
+        }
     }
 
     public function penilai($permohonan) {
@@ -55,12 +67,12 @@ class ShowPermohonan
 
     public function getBoolPermohonan($permohonan) {
         if($permohonan == null) {
-            return 0;
+            return false;
         }
         
         $isFakulti = $this->isFakulti();
-        if($isFakulti == 0) {
-            return 1;
+        if($isFakulti == false) {
+            return true;
         }
         else { 
         $user_id = auth()->user()->id;
@@ -68,16 +80,16 @@ class ShowPermohonan
         $permohonans_id= $user->permohonans->pluck('permohonan_id');
         
         //check whether fakulti does have permohonans
-        if(count($permohonans_id) == 0 ) {
-            return 0;
+        if(!sizeof($permohonans_id) > 0 ) {
+            return false;
             die();
         }
         for($i = 0; $i<count($permohonans_id); $i++) { 
             if($permohonan->permohonan_id == $permohonans_id[$i]) {
-                return 1;
+                return true;
             }
         } 
-           return 0;
+           return false;
         }
 
     }

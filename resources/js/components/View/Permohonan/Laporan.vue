@@ -1,22 +1,27 @@
 <template>
   <div>
-    <v-row
-      style="padding-right:20px; padding-top:8px; padding-bottom:8px"
-      class="padding-right"
-      :align="alignment"
-      :justify="end"
-    >
-      <v-btn
-        :disabled="!pagination.prev_page_url"
-        v-on:click="fetchLaporans(pagination.prev_page_url)"
-        small
-      >Prev</v-btn>
-      <div class="divider" />
-      <v-btn
-        :disabled="!pagination.next_page_url"
-        v-on:click="fetchLaporans(pagination.next_page_url)"
-        small
-      >Next</v-btn>
+    <v-row :align="alignment" :justify="justify">
+      <div style="padding-left:20px; padding-top:20px">
+        <p>{{ pagination.total }} keputusan</p>
+      </div>
+      <v-row
+        style="padding-right:25px; padding-top:8px; padding-bottom:8px"
+        class="padding-right"
+        :align="alignment"
+        :justify="end"
+      >
+        <v-btn
+          :disabled="!pagination.prev_page_url"
+          v-on:click="fetchLaporans(pagination.prev_page_url)"
+          small
+        >Prev</v-btn>
+        <div class="divider" />
+        <v-btn
+          :disabled="!pagination.next_page_url"
+          v-on:click="fetchLaporans(pagination.next_page_url)"
+          small
+        >Next</v-btn>
+      </v-row>
     </v-row>
     <table class="table table-hover">
       <thead>
@@ -39,8 +44,8 @@
         >
           <th scope="row">{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
           <td>{{l.tajuk_fail_link}}</td>
-          <td>{{l.id_penghantar.name}}</td>
-          <td>{{l.id_penghantar.role}}</td>
+          <td>{{l.id_penghantar_nama.name}}</td>
+          <td>{{l.id_penghantar_nama.role}}</td>
           <td>{{l.komen}}</td>
           <td>{{l.versi_laporan}}</td>
           <td>{{date(l.created_at)}}</td>
@@ -58,6 +63,7 @@ export default {
       laporans: [],
       alignment: "center",
       end: "end",
+      justify: "center",
       pagination: {},
       permohonan_id: this.permohonan_id_props
     };
@@ -67,12 +73,10 @@ export default {
   },
   methods: {
     fetchLaporans(page_url) {
-      // let that = this;
       page_url = page_url || "/api/senarai-laporan/" + this.permohonan_id;
       fetch(page_url)
         .then(res => res.json())
         .then(res => {
-          console.log(res);
           this.laporans = res.data;
           this.makePagination(res);
         });

@@ -24,7 +24,7 @@ class LaporanController extends Controller
    
     public function show($id) {
         $permohonan = Permohonan::findOrFail($id);
-        $laporans = Laporan::whereIn('dokumen_permohonan_id', $permohonan->dokumen_permohonans->pluck('dokumen_permohonan_id'))->paginate(10);
+        $laporans = Laporan::with('id_penghantar_nama:id,name,role')->whereIn('dokumen_permohonan_id', $permohonan->dokumen_permohonans->pluck('dokumen_permohonan_id'))->orderBy('created_at', 'desc')->paginate(10);
         // return response()->json($laporans);
         return response()->json($laporans);
     }

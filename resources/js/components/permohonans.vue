@@ -51,7 +51,6 @@
                 <th scope="col">NO</th>
                 <th scope="col">JENIS</th>
                 <th scope="col">ID</th>
-                <th scope="col">BIL HANTAR</th>
                 <th scope="col">TAJUK</th>
                 <th scope="col">TARIKH HANTAR</th>
                 <th scope="col">STATUS</th>
@@ -71,7 +70,6 @@
                 >{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
                 <td>{{p.jenis_permohonan.jenis_permohonan_huraian}}</td>
                 <td>{{p.permohonan_id}}</td>
-                <td>{{p.dokumen_permohonans.length}}</td>
                 <td>{{p.doc_title}}</td>
                 <td>{{date(p.created_at)}}</td>
                 <td>{{p.status_permohonan.status_permohonan_huraian}}</td>
@@ -135,7 +133,6 @@ export default {
       fetch(page_url)
         .then(res => res.json())
         .then(res => {
-          console.log(res);
           this.permohonans = res.data;
           that.makePagination(res);
         });

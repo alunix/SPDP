@@ -14,7 +14,7 @@ class DokumenPermohonanController extends Controller
 {
     public function show($id) {
         $permohonan = Permohonan::findOrFail($id);
-        $dokumen_permohonans = DokumenPermohonan::with(['laporans'])->where('permohonan_id', $id)->paginate(10);
+        $dokumen_permohonans = DokumenPermohonan::with(['laporans'])->where('permohonan_id', $id)->orderBy('created_at', 'desc')->paginate(10);
         return response()->json($dokumen_permohonans);
     }
 

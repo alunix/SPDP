@@ -1,22 +1,27 @@
 <template>
   <div>
-    <v-row
-      style="padding-right:20px; padding-top:8px;padding-bottom:8px"
-      class="padding-right"
-      :align="alignment"
-      :justify="end"
-    >
-      <v-btn
-        :disabled="!pagination.prev_page_url"
-        v-on:click="fetchDokumens(pagination.prev_page_url)"
-        small
-      >Prev</v-btn>
-      <div class="divider" />
-      <v-btn
-        :disabled="!pagination.next_page_url"
-        v-on:click="fetchDokumens(pagination.next_page_url)"
-        small
-      >Next</v-btn>
+    <v-row :align="alignment" :justify="justify">
+      <div style="padding-left:20px; padding-top:20px">
+        <p>{{ pagination.total }} keputusan</p>
+      </div>
+      <v-row
+        style="padding-right:25px; padding-top:8px;padding-bottom:8px"
+        class="padding-right"
+        :align="alignment"
+        :justify="end"
+      >
+        <v-btn
+          :disabled="!pagination.prev_page_url"
+          v-on:click="fetchDokumens(pagination.prev_page_url)"
+          small
+        >Prev</v-btn>
+        <div class="divider" />
+        <v-btn
+          :disabled="!pagination.next_page_url"
+          v-on:click="fetchDokumens(pagination.next_page_url)"
+          small
+        >Next</v-btn>
+      </v-row>
     </v-row>
     <modal :adaptive="true" width="50%" height="50%" name="modal-laporan">
       <tab-laporan :laporans_props="laporans_props"></tab-laporan>
@@ -71,6 +76,7 @@ export default {
       laporans_props: [],
       pagination: {},
       alignment: "center",
+      justify: "center",
       permohonan_id: this.permohonan_id_props,
       end: "end"
     };

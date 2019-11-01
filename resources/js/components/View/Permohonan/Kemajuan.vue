@@ -4,23 +4,28 @@
             <a class="btn icon-btn btn-info" style="font-size:14px" href="{{ route('dokumenPermohonan.penambahbaikkan.show',$permohonan->permohonan_id) }}">
             Muat naik penambahbaikkan
     </a>-->
-    <v-row
-      style="padding-right:20px; padding-top:8px; "
-      class="padding-right"
-      :align="alignment"
-      :justify="end"
-    >
-      <v-btn
-        :disabled="!pagination.prev_page_url"
-        v-on:click="fetchKemajuans(pagination.prev_page_url)"
-        small
-      >Prev</v-btn>
-      <div class="divider" />
-      <v-btn
-        :disabled="!pagination.next_page_url"
-        v-on:click="fetchKemajuans(pagination.next_page_url)"
-        small
-      >Next</v-btn>
+    <v-row :align="alignment" :justify="justify">
+      <div style="padding-left:20px; padding-top:20px">
+        <p>{{ pagination.total }} keputusan</p>
+      </div>
+      <v-row
+        style="padding-right:25px; padding-top:8px; "
+        class="padding-right"
+        :align="alignment"
+        :justify="end"
+      >
+        <v-btn
+          :disabled="!pagination.prev_page_url"
+          v-on:click="fetchKemajuans(pagination.prev_page_url)"
+          small
+        >Prev</v-btn>
+        <div class="divider" />
+        <v-btn
+          :disabled="!pagination.next_page_url"
+          v-on:click="fetchKemajuans(pagination.next_page_url)"
+          small
+        >Next</v-btn>
+      </v-row>
     </v-row>
     <div class="row justify-content-center">
       <div class="container">
@@ -62,12 +67,12 @@ export default {
       laporans: [],
       alignment: "center",
       end: "end",
+      justify: "center",
       pagination: {},
       permohonan_id: this.permohonan_id_props
     };
   },
   created() {
-    // this.kemajuans = this.kemajuans_props;
     this.fetchKemajuans();
   },
   methods: {
@@ -76,7 +81,7 @@ export default {
       fetch(page_url)
         .then(res => res.json())
         .then(res => {
-          console.log(res);
+          console.log(res.data);
           this.kemajuans = res.data;
           this.makePagination(res);
         });

@@ -15,14 +15,11 @@ use Illuminate\Support\Carbon;
 use SPDP\Fakulti;
 use Illuminate\Support\Facades\DB;
 class HomeController extends Controller
- 
-{
-    
+{   
     public function __construct() {
         $this->middleware('auth');
     }
-  
-    // This is for after authenticated, which homepage the system will redirect.
+    
     public function index() {
         $role = auth()->user()->role;
         switch ($role) {
@@ -41,14 +38,16 @@ class HomeController extends Controller
         $sp = new SenaraiPermohonan();
         $permohonan_baharu = $this->senaraiPermohonan($sp)->count();
         $permohonans = Fakulti::with(['permohonans' => function($query) use ($year) {
+            $query->select(['permohonan_id','permohonans.created_at']);
             $query->whereYear('permohonans.created_at', $year); //specify which table created at to query
         }])->get()->sortBy('fakulti_id');
-
+        
         $count_permohonan= $permohonans->pluck('permohonans');
 
-        for($i=0;$i<$count_permohonan->count();$i++){
+        for($i=0; $i<sizeof($count_permohonan); $i++) {
             $A[$i]= count($count_permohonan[$i]);  //calculate count of permohoann in each fakulti
         } 
+
         $chart = new JenisPermohonanChart();       
         $chart->labels( $permohonans->pluck('fnama_kod')); 
         $chart->dataset('Permohonan sepanjang tahun '.$year, 'bar',$A);
@@ -83,7 +82,7 @@ class HomeController extends Controller
         $permohonan_diluluskan = Permohonan::where('status_permohonan_id','=',6)->orWhere('status_permohonan_id','=',7)->get()->count();
         $permohonan_diperakui = $this->permohonanDiperakukan();
 
-        return view ('panel_penilai.senarai-testing')->with('permohonans',$permohonan_baharu)->with('chart',$chart)->with('line_chart',$line_chart)->with('pie_chart',$pie_chart)->with('permohonan_in_progress', $permohonan_in_progress)->with('permohonan_diluluskan',$permohonan_diluluskan)->with('permohonan_diperakui',$permohonan_diperakui);
+        // return view ('panel_penilai.senarai-testing')->with('permohonans',$permohonan_baharu)->with('chart',$chart)->with('line_chart',$line_chart)->with('pie_chart',$pie_chart)->with('permohonan_in_progress', $permohonan_in_progress)->with('permohonan_diluluskan',$permohonan_diluluskan)->with('permohonan_diperakui',$permohonan_diperakui);
     }
 
     public function fakulti() {
@@ -123,8 +122,8 @@ class HomeController extends Controller
         $pie_chart['data'] = $permohonans->pluck('count');
         $pie_chart['id'] = 'Jenis permohonan tahun';
 
-        $progress = Permohonan::where('status_permohonan_id','!=',1)->orWhere('status_permohonan_id','!=',6)->orWhere('status_permohonan_id','!=',7)->get()->count();
-        $lulus = Permohonan::where('status_permohonan_id','=',6)->orWhere('status_permohonan_id','=',7)->get()->count();
+        $progress = Permohonan::where('status_permohonan_id','!=',1)->orWhere('status_permohonan_id','!=',6)->orWhere('status_permohonan_id','!=',7)->select('permohonan_id')->count();
+        $lulus = Permohonan::where('status_permohonan_id','=',6)->orWhere('status_permohonan_id','=',7)->select('permohonan_id')->count();
         
         return response()->json(['dokumens'=> $dokumens, 'permohonans'=> $permohonans, 
         'lulus'=> $lulus, 'progress' => $progress, 'line_chart' => $line_chart, 
@@ -150,7 +149,6 @@ class HomeController extends Controller
                 return;
                 break;
         }
-        
     }
     
     public function permohonanDiperakukan() {

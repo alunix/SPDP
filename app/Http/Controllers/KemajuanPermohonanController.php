@@ -14,7 +14,7 @@ class KemajuanPermohonanController extends Controller
     public function show($id)
     {       
         $permohonan= Permohonan::findOrFail($id);
-        $kemajuan = KemajuanPermohonan::with('statusPermohonan')->where('permohonan_id', $permohonan->permohonan_id)->paginate(10);
+        $kemajuan = KemajuanPermohonan::with('statusPermohonan:status_id,status_permohonan_huraian')->where('permohonan_id', $permohonan->permohonan_id)->orderBy('created_at', 'desc')->paginate(10);
         return response()->json($kemajuan);
     }
 

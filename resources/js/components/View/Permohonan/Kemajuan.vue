@@ -10,9 +10,17 @@
       :align="alignment"
       :justify="end"
     >
-      <v-btn small>Prev</v-btn>
+      <v-btn
+        :disabled="!pagination.prev_page_url"
+        v-on:click="fetchKemajuans(pagination.prev_page_url)"
+        small
+      >Prev</v-btn>
       <div class="divider" />
-      <v-btn small>Next</v-btn>
+      <v-btn
+        :disabled="!pagination.next_page_url"
+        v-on:click="fetchKemajuans(pagination.next_page_url)"
+        small
+      >Next</v-btn>
     </v-row>
     <div class="row justify-content-center">
       <div class="container">
@@ -26,7 +34,9 @@
           </thead>
           <tbody>
             <tr class="tr-shadow" v-for="(k, index) in kemajuans" v-bind:key="k.id">
-              <th scope="row">{{index + 1}}</th>
+              <th
+                scope="row"
+              >{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
               <td>{{k.status_permohonan.status_permohonan_huraian}}</td>
               <td>{{date(k.created_at)}}</td>
             </tr>
@@ -39,7 +49,7 @@
 <script>
 import dayjs from "dayjs";
 export default {
-  props: ["kemajuans_props"],
+  props: ["permohonan_id_props"],
   data() {
     return {
       kemajuans: [
@@ -51,13 +61,36 @@ export default {
       ],
       laporans: [],
       alignment: "center",
-      end: "end"
+      end: "end",
+      pagination: {},
+      permohonan_id: this.permohonan_id_props
     };
   },
   created() {
-    this.kemajuans = this.kemajuans_props;
+    // this.kemajuans = this.kemajuans_props;
+    this.fetchKemajuans();
   },
   methods: {
+    fetchKemajuans(page_url) {
+      page_url = page_url || "/api/senarai-kemajuan/" + this.permohonan_id;
+      fetch(page_url)
+        .then(res => res.json())
+        .then(res => {
+          console.log(res);
+          this.kemajuans = res.data;
+          this.makePagination(res);
+        });
+    },
+    makePagination(res) {
+      let pagination = {
+        total: res.total,
+        current_page: res.current_page,
+        next_page_url: res.next_page_url,
+        prev_page_url: res.prev_page_url,
+        per_page: res.per_page
+      };
+      this.pagination = pagination;
+    },
     date(created_at) {
       if (!created_at) {
         return null;

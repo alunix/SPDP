@@ -6,9 +6,17 @@
       :align="alignment"
       :justify="end"
     >
-      <v-btn small>Prev</v-btn>
+      <v-btn
+        :disabled="!pagination.prev_page_url"
+        v-on:click="fetchLaporans(pagination.prev_page_url)"
+        small
+      >Prev</v-btn>
       <div class="divider" />
-      <v-btn small>Next</v-btn>
+      <v-btn
+        :disabled="!pagination.next_page_url"
+        v-on:click="fetchLaporans(pagination.next_page_url)"
+        small
+      >Next</v-btn>
     </v-row>
     <table class="table table-hover">
       <thead>
@@ -29,7 +37,7 @@
           v-bind:key="l.laporan_id"
           v-on:click="openFile(l.tajuk_fail_link)"
         >
-          <th scope="row">{{index+1}}</th>
+          <th scope="row">{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
           <td>{{l.tajuk_fail_link}}</td>
           <td>{{l.id_penghantar.name}}</td>
           <td>{{l.id_penghantar.role}}</td>
@@ -44,18 +52,41 @@
 <script>
 import dayjs from "dayjs";
 export default {
-  props: ["laporans_props"],
+  props: ["permohonan_id_props"],
   data() {
     return {
       laporans: [],
       alignment: "center",
-      end: "end"
+      end: "end",
+      pagination: {},
+      permohonan_id: this.permohonan_id_props
     };
   },
   created() {
-    this.laporans = this.laporans_props;
+    this.fetchLaporans();
   },
   methods: {
+    fetchLaporans(page_url) {
+      // let that = this;
+      page_url = page_url || "/api/senarai-laporan/" + this.permohonan_id;
+      fetch(page_url)
+        .then(res => res.json())
+        .then(res => {
+          console.log(res);
+          this.laporans = res.data;
+          this.makePagination(res);
+        });
+    },
+    makePagination(res) {
+      let pagination = {
+        total: res.total,
+        current_page: res.current_page,
+        next_page_url: res.next_page_url,
+        prev_page_url: res.prev_page_url,
+        per_page: res.per_page
+      };
+      this.pagination = pagination;
+    },
     date(created_at) {
       if (!created_at) {
         return null;

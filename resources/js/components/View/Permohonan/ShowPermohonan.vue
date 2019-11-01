@@ -41,14 +41,14 @@
       <v-col v-for="n in 3" :key="n" cols="6" md="4">
         <v-card class="pa-2" outlined tile>.col-6 .col-md-4</v-card>
       </v-col>
-    </v-row> -->
+    </v-row>-->
 
     <!-- Columns are always 50% wide, on mobile and desktop -->
     <!-- <v-row>
       <v-col v-for="n in 2" :key="n" cols="6">
         <v-card class="pa-2" outlined tile>.col-6</v-card>
       </v-col>
-    </v-row> -->
+    </v-row>-->
   </v-container>
 </template>
 
@@ -87,9 +87,9 @@ export default {
         .then(res => {
           console.log(res);
           this.permohonan = res.permohonan;
-          this.dokumens = res.dokumens.data;
-          this.kemajuans = res.kemajuans.data;
-          this.laporans = res.laporans.data;
+          // this.dokumens = res.permohonan.dokumen_permohonans;
+          this.kemajuans = res.permohonan.kemajuan_permohonans;
+          this.laporans = res.permohonan.laporans;
           this.lists = [
             {
               title: "Tajuk permohonan",
@@ -103,12 +103,12 @@ export default {
             },
             {
               title: "Jumlah dokumen dihantar",
-              subtitle: this.permohonan.dokumen_permohonans.count,
+              subtitle: this.permohonan.dokumen_permohonans.length,
               id: 3
             },
             {
               title: "Jumlah laporan dikeluarkan",
-              subtitle: this.laporans.total,
+              subtitle: this.laporans.length,
               id: 4
             },
             { title: "Id", subtitle: this.permohonan.permohonan_id, id: 5 }
@@ -135,22 +135,12 @@ export default {
     },
     getDataBind() {
       if (this.currentTab == "tab-kemajuan") {
-        return { kemajuans_props: this.kemajuans };
+        return { permohonan_id_props: this.permohonan.permohonan_id };
       } else if (this.currentTab == "tab-dokumen") {
-        return { dokumens_props: this.dokumens };
+        return { permohonan_id_props: this.permohonan.permohonan_id };
       } else {
-        return { laporans_props: this.laporans };
+        return { permohonan_id_props: this.permohonan.permohonan_id };
       }
-      // console.log(this.dataBind);
-      // return this.dataBind;
-
-      // if (this.currentTab == "tab-kemajuan") {
-      //   return this.kemajuans;
-      // } else if (this.currentTab == "tab-dokumen") {
-      //   return this.dokumens;
-      // } else {
-      //   return this.laporans;
-      // }
     }
     // makePagination(res) {
     //   let pagination = {

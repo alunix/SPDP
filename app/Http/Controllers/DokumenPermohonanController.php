@@ -14,14 +14,8 @@ class DokumenPermohonanController extends Controller
 {
     public function show($id) {
         $permohonan = Permohonan::findOrFail($id);
-        $sp = new ShowPermohonan();
-        $dp = $sp->getBoolPermohonan($permohonan);
-        if ($dp == 0) {
-            abort(403, 'Tidak dibenarkan');
-        } else {
-            $dokumen_permohonans = DokumenPermohonan::with(['laporans'])->where('permohonan_id', $id)->get();
-            return response()->json(['permohonan' => $permohonan, 'dokumen_permohonans' => $dokumen_permohonans]);
-        }
+        $dokumen_permohonans = DokumenPermohonan::with(['laporans'])->where('permohonan_id', $id)->paginate(10);
+        return response()->json($dokumen_permohonans);
     }
 
     public function showPenambahbaikkan($id) {

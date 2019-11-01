@@ -34,13 +34,8 @@ class ShowPermohonan
         } else {
             $permohonan = Permohonan::where('permohonan_id', $permohonan->permohonan_id )
             ->with(['dokumen_permohonans.laporans.id_penghantar_nama', 'laporans.id_penghantar_nama', 'kemajuan_permohonans.statusPermohonan' ])->get();
-
-            // $kemajuan = (new Collection($permohonan[0]->kemajuan_permohonans))->paginate(3 ,['*'], 'kemajuan');
-            $kemajuan = ($permohonan[0]->kemajuan_permohonans->paginate(3,['*'], 'kemajuan' ));
-            // $dokumens =  (new Collection($permohonan[0]->dokumen_permohonans))->paginate(3);
-            $laporans = (new Collection($permohonan[0]->laporans))->paginate(3);
-            return response()->json(['kemajuans' => $kemajuan , 'dokumens' => $dokumens, 'laporans' => $laporans , 'permohonan' => $permohonan[0]]);
             // return response()->json(['laporans' => $permohonan[0]->laporans, 'kemajuans' => $permohonan[0]->kemajuan_permohonans, 'permohonan' => $permohonan[0], 'dokumens' => $permohonan[0]->dokumen_permohonans]);
+            return response()->json(['permohonan' => $permohonan[0]]);
         }
     }
 

@@ -17,7 +17,7 @@ class PermohonansTableSeeder extends Seeder
         $faker = Faker::create();
          $j = JenisPermohonan::all()->pluck('id')->toArray();
 
-        for($i=0; $i<60; $i++){
+        for($i=0; $i<80; $i++){
             DB::table('permohonans')->insert([
             'doc_title' => 'Sarjana Muda '.$faker->word,
             'jenis_permohonan_id' => $faker->randomElement($j),

@@ -19,7 +19,7 @@ class DokumensTableSeeder extends Seeder
         $p = Permohonan::all()->pluck('permohonan_id')->toArray();
         $j = JenisPermohonan::all()->pluck('id')->toArray();
 
-        for($i=0; $i<120; $i++){
+        for($i=0; $i<1000; $i++){
             DB::table('dokumen_permohonans')->insert([
             'permohonan_id' =>  $faker->randomElement($p),
             'file_name' => 'CadanganSarjanaMuda.pdf',

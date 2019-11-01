@@ -5,7 +5,7 @@
             Muat naik penambahbaikkan
     </a>-->
     <v-row
-      style="padding-right:20px; padding-top:8px"
+      style="padding-right:20px; padding-top:8px; "
       class="padding-right"
       :align="alignment"
       :justify="end"

@@ -8,7 +8,9 @@
         </v-col>
 
         <v-row style="padding-right:45px" class="padding-right" :align="alignment" :justify="end">
-          <v-btn v-on:click="showModel()" color="primary" small>Permohonan baru</v-btn>
+          <v-btn v-on:click="showModel()" color="primary" normal>
+            <v-icon left dark>mdi-plus</v-icon>Permohonan
+          </v-btn>
           <modal height="auto" width="25%" :scrollable="true" name="permohonan_baharu">
             <permohonanModal @event="fetchPermohonans"></permohonanModal>
           </modal>
@@ -54,7 +56,6 @@
                 <th scope="col">TARIKH HANTAR</th>
                 <th scope="col">STATUS</th>
                 <th scope="col">TARIKH STATUS</th>
-                <th scope="col"></th>
               </tr>
             </thead>
 
@@ -75,7 +76,7 @@
                 <td>{{date(p.created_at)}}</td>
                 <td>{{p.status_permohonan.status_permohonan_huraian}}</td>
                 <td>{{date(p.updated_at)}}</td>
-                <td>
+                <!-- <td>
                   <div class="table-data-feature">
                     <button
                       v-on:click="showKemajuanModel();setPermohonanId(p.permohonan_id)"
@@ -96,7 +97,7 @@
                       <i class="fas fa-file-upload"></i>
                     </button>
                   </div>
-                </td>
+                </td>-->
               </tr>
             </tbody>
           </table>
@@ -124,7 +125,6 @@ export default {
   components: {
     PermohonansModal
   },
-
   created() {
     this.fetchPermohonans();
   },
@@ -147,7 +147,6 @@ export default {
     },
     show(id) {
       let that = this;
-      // that.$router.push({ name: "permohonan", params: { id: id } });
       this.$router
         .push({ name: "permohonan", params: { id: id } })
         .catch(err => {

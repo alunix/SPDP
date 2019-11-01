@@ -15,12 +15,6 @@ use Redirect, Response;
 
 class PermohonanController extends Controller
 {
-    public function index()
-    {
-        $permohonans = Permohonan::all();
-        return view('fakulti.fakulti-insert-permohonan')->with('permohonans', $permohonans);
-    }
-
     public function permohonanDihantar()
     {
         return view('fakulti.senarai_permohonan_dihantar');
@@ -83,21 +77,18 @@ class PermohonanController extends Controller
     }
 
     /*API START  */
-    public function api_permohonanDihantar()
-    {
+    public function api_permohonanDihantar() {
         $id = auth()->user()->id;
         $permohonans = Permohonan::with(['jenis_permohonan', 'dokumen_permohonans','status_permohonan'])->where('id_penghantar', $id)->orderBy('created_at','desc')->paginate(10);
         return response()->json($permohonans);
     }
 
-    public function api_showListPermohonanBaharu()
-    {
+    public function api_showListPermohonanBaharu() {
         $sp = new SenaraiPermohonan();
         return  $sp->index();
     }
 
-    public function show($id)
-    {
+    public function show($id) {
         $permohonan = Permohonan::findOrFail($id);
         $show = new ShowPermohonan();
         return $show->show($permohonan);

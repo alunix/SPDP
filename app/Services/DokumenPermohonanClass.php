@@ -37,7 +37,7 @@ class DokumenPermohonanClass
             //File name to store
             $fileNameToStore = $filename . '_' . time() . '.' . $extension;
             //Upload Pdf file
-            $path = $request->file($attached)->storeAs('public/cadangan_permohonan_baharu', $fileNameToStore);
+            $path = $request->file($attached)->storeAs('public/permohonan', $fileNameToStore);
         } else {
             $fileNameToStore = 'noPDF.pdf';
         }

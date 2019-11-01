@@ -1,5 +1,15 @@
 <template>
   <div>
+    <v-row
+      style="padding-right:20px; padding-top:8px; padding-bottom:8px"
+      class="padding-right"
+      :align="alignment"
+      :justify="end"
+    >
+      <v-btn small>Prev</v-btn>
+      <div class="divider" />
+      <v-btn small>Next</v-btn>
+    </v-row>
     <table class="table table-hover">
       <thead>
         <tr>
@@ -13,7 +23,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="tr-shadow td-cursor" v-for="(l, index) in laporans" v-bind:key="l.laporan_id">
+        <tr
+          class="tr-shadow td-cursor"
+          v-for="(l, index) in laporans"
+          v-bind:key="l.laporan_id"
+          v-on:click="openFile(l.tajuk_fail_link)"
+        >
           <th scope="row">{{index+1}}</th>
           <td>{{l.tajuk_fail_link}}</td>
           <td>{{l.id_penghantar.name}}</td>
@@ -32,7 +47,9 @@ export default {
   props: ["laporans_props"],
   data() {
     return {
-      laporans: []
+      laporans: [],
+      alignment: "center",
+      end: "end"
     };
   },
   created() {
@@ -44,6 +61,9 @@ export default {
         return null;
       }
       return dayjs(created_at).format("LLL");
+    },
+    openFile(tajuk_fail_link) {
+      return window.open("/storage/laporan/" + tajuk_fail_link);
     }
   }
 };

@@ -49,21 +49,21 @@
 export default {
   data() {
     return {
-      currentTab: "tab-baru",
-      tabs: ["Baru", "Perakuan", "Penilaian panel"]
+      currentTab: "permohonans",
+      tabs: ["permohonans", "Perakuan", "Penilaian panel"]
     };
   },
   created() {},
   methods: {
     currentTabComponent(tab) {
-      this.currentTab = "tab-" + tab.toString().toLowerCase();
-      if (this.currentTab == "tab-baru") {
-        this.dataBind = this.kemajuans;
-      } else if (this.currentTab == "tab-perakuan") {
-        this.dataBind = this.dokumens;
-      } else {
-        this.dataBind = this.laporans;
-      }
+      this.currentTab = tab.toString().toLowerCase();
+      // if (this.currentTab == "tab-baru") {
+      //   this.dataBind = this.kemajuans;
+      // } else if (this.currentTab == "tab-perakuan") {
+      //   this.dataBind = this.dokumens;
+      // } else {
+      //   this.dataBind = this.laporans;
+      // }
       return this.currentTab;
     },
     getDataBind() {

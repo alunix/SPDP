@@ -126,20 +126,20 @@ export default {
   },
   created() {
     this.getRole();
-    
   },
   methods: {
     getRole() {
-      fetch("api/role").then(res => res.json())
+      fetch("api/role")
+        .then(res => res.json())
         .then(res => {
-            if(res == 'fakulti') {
-              this.api = "api/permohonan_dihantar";
-              console.log(this.api);
-            }
-            else {
-               this.api = "api/senarai-permohonan-baharu'";
-            }
-            this.fetchPermohonans();
+          if (res == "fakulti") {
+            this.api = "api/permohonan_dihantar";
+            console.log(this.api);
+          } else {
+            this.api = "/api/senarai-permohonan-baharu'";
+            console.log(res);
+          }
+          this.fetchPermohonans();
         });
     },
     fetchPermohonans(page_url) {

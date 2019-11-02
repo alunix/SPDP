@@ -33,8 +33,7 @@ class ShowPermohonan
             abort(403, 'Tidak dibenarkan');
         } else {
             $permohonan = Permohonan::where('permohonan_id', $permohonan->permohonan_id )
-            ->with(['dokumen_permohonans.laporans.id_penghantar_nama', 'laporans.id_penghantar_nama', 'kemajuan_permohonans.statusPermohonan' ])->get();
-            // return response()->json(['laporans' => $permohonan[0]->laporans, 'kemajuans' => $permohonan[0]->kemajuan_permohonans, 'permohonan' => $permohonan[0], 'dokumens' => $permohonan[0]->dokumen_permohonans]);
+            ->withCount(['dokumen_permohonans', 'laporans', 'kemajuan_permohonans' ])->get();
             return response()->json(['permohonan' => $permohonan[0]]);
         }
     }

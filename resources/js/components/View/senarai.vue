@@ -35,7 +35,7 @@
                 <v-tab v-for="tab in tabs" v-bind:key="tab">{{tab}}</v-tab>
               </v-tabs>
               <keep-alive>
-                <component v-bind:is="currentTab"></component>
+                <component v-bind:is="currentTab" v-bind="getDataBind()"></component>
               </keep-alive>
             </div>
           </div>
@@ -49,10 +49,33 @@
 export default {
   data() {
     return {
-      tabs: ["Baharu", "Perakuan", "Penilaian panel"]
+      currentTab: "tab-baru",
+      tabs: ["Baru", "Perakuan", "Penilaian panel"]
     };
   },
   created() {},
-  methods: {}
+  methods: {
+    currentTabComponent(tab) {
+      this.currentTab = "tab-" + tab.toString().toLowerCase();
+      if (this.currentTab == "tab-baru") {
+        this.dataBind = this.kemajuans;
+      } else if (this.currentTab == "tab-perakuan") {
+        this.dataBind = this.dokumens;
+      } else {
+        this.dataBind = this.laporans;
+      }
+      return this.currentTab;
+    },
+    getDataBind() {
+      // if (this.currentTab == "tab-kemajuan") {
+      //   return { permohonan_id_props: this.permohonan.permohonan_id };
+      // } else if (this.currentTab == "tab-dokumen") {
+      //   return { permohonan_id_props: this.permohonan.permohonan_id };
+      // } else {
+      //   return { permohonan_id_props: this.permohonan.permohonan_id };
+      // }
+      return;
+    }
+  }
 };
 </script>

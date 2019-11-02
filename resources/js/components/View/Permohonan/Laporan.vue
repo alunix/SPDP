@@ -29,6 +29,7 @@
           <th scope="col">No</th>
           <th scope="col">Laporan</th>
           <th scope="col">Dihantar</th>
+          <th scope="col">Laporan Id</th>
           <th scope="col">Pihak</th>
           <th scope="col">Komen</th>
           <th scope="col">Versi</th>
@@ -45,6 +46,7 @@
           <th scope="row">{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
           <td>{{l.tajuk_fail_link}}</td>
           <td>{{l.id_penghantar_nama.name}}</td>
+          <td>{{l.laporan_id}}</td>
           <td>{{l.id_penghantar_nama.role}}</td>
           <td>{{l.komen}}</td>
           <td>{{l.versi_laporan}}</td>

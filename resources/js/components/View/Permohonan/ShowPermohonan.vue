@@ -87,9 +87,6 @@ export default {
         .then(res => {
           console.log(res);
           this.permohonan = res.permohonan;
-          // this.dokumens = res.permohonan.dokumen_permohonans;
-          this.kemajuans = res.permohonan.kemajuan_permohonans;
-          this.laporans = res.permohonan.laporans;
           this.lists = [
             {
               title: "Tajuk permohonan",
@@ -103,12 +100,12 @@ export default {
             },
             {
               title: "Jumlah dokumen dihantar",
-              subtitle: this.permohonan.dokumen_permohonans.length,
+              subtitle: this.permohonan.dokumen_permohonans_count,
               id: 3
             },
             {
               title: "Jumlah laporan dikeluarkan",
-              subtitle: this.laporans.length,
+              subtitle: this.permohonan.laporans_count,
               id: 4
             },
             { title: "Id", subtitle: this.permohonan.permohonan_id, id: 5 }
@@ -124,34 +121,25 @@ export default {
     },
     currentTabComponent(tab) {
       this.currentTab = "tab-" + tab.toString().toLowerCase();
-      if (this.currentTab == "tab-kemajuan") {
-        this.dataBind = this.kemajuans;
-      } else if (this.currentTab == "tab-dokumen") {
-        this.dataBind = this.dokumens;
-      } else {
-        this.dataBind = this.laporans;
-      }
+      // if (this.currentTab == "tab-kemajuan") {
+      //   this.dataBind = this.kemajuans;
+      // } else if (this.currentTab == "tab-dokumen") {
+      //   this.dataBind = this.dokumens;
+      // } else {
+      //   this.dataBind = this.laporans;
+      // }
       return this.currentTab;
     },
     getDataBind() {
-      if (this.currentTab == "tab-kemajuan") {
-        return { permohonan_id_props: this.permohonan.permohonan_id };
-      } else if (this.currentTab == "tab-dokumen") {
-        return { permohonan_id_props: this.permohonan.permohonan_id };
-      } else {
-        return { permohonan_id_props: this.permohonan.permohonan_id };
-      }
+      // if (this.currentTab == "tab-kemajuan") {
+      //   return { permohonan_id_props: this.permohonan.permohonan_id };
+      // } else if (this.currentTab == "tab-dokumen") {
+      //   return { permohonan_id_props: this.permohonan.permohonan_id };
+      // } else {
+      //   return { permohonan_id_props: this.permohonan.permohonan_id };
+      // }
+      return { permohonan_id_props: this.permohonan.permohonan_id };
     }
-    // makePagination(res) {
-    //   let pagination = {
-    //     total: res.total,
-    //     current_page: res.current_page,
-    //     next_page_url: res.next_page_url,
-    //     prev_page_url: res.prev_page_url,
-    //     per_page: res.per_page
-    //   };
-    //   this.pagination = pagination;
-    // }
   }
 };
 </script>

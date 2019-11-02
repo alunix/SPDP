@@ -14,6 +14,11 @@ class UserController extends Controller
         return view ('pjk.daftar-panel-penilai')->with('users',$users);
     }
 
+    public function getRole() {
+        $role = auth()->user()->role;
+        return response()->json($role);
+    }
+
     public function store_pengguna(Request $request)
     {    
         $radio= $request->input('radios');
@@ -45,7 +50,7 @@ class UserController extends Controller
     {   
         $user_id = auth()->user()->id;
         $user= User::find($user_id);
-       $fakultiSelected = auth()->user()->fakulti_id;
+        $fakultiSelected = auth()->user()->fakulti_id;
 
         $fakultis= Fakulti::all();
         return view('auth.settings')->with('user',$user)->with('fakultis',$fakultis)->with('selectedFakulti',$fakultiSelected);

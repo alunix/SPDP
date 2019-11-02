@@ -117,19 +117,34 @@ export default {
       alignment: "center",
       justify: "center",
       start: "start",
-      end: "end"
+      end: "end",
+      api: ""
     };
   },
   components: {
     PermohonansModal
   },
   created() {
-    this.fetchPermohonans();
+    this.getRole();
+    
   },
   methods: {
+    getRole() {
+      fetch("api/role").then(res => res.json())
+        .then(res => {
+            if(res == 'fakulti') {
+              this.api = "api/permohonan_dihantar";
+              console.log(this.api);
+            }
+            else {
+               this.api = "api/senarai-permohonan-baharu'";
+            }
+            this.fetchPermohonans();
+        });
+    },
     fetchPermohonans(page_url) {
       let that = this;
-      page_url = page_url || "api/permohonan_dihantar";
+      page_url = page_url || this.api;
       fetch(page_url)
         .then(res => res.json())
         .then(res => {

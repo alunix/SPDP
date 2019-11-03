@@ -38,6 +38,7 @@ const routes = [
     },
     {
         path: "/senarai-permohonan-baharu",
+        name: "senarai-baru",
         component: require("./components/view/senarai.vue").default
     },
     {

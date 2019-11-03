@@ -20,42 +20,44 @@
       </v-row>
     </v-row>
 
-    <v-row:align="alignment" :justify="justify">
+    <v-row :justify="justify">
       <v-col>
         <table class="table table-hover">
           <thead class="thead-light">
             <tr>
-              <th scope="col">Penilaain ID</th>
-              <th scope="col">Permohonan ID</th>
-              <th scope="col">Pelantik(PJK)</th>
-              <th scope="col">Penilai</th>
-              <th scope="col">Tarikh penilaian bermula</th>
-              <th scope="col">Tarikh Akhir/Deadline</th>
-              <th scope="col">Tempoh(Hari)</th>
+              <th scope="col">No</th>
+              <th scope="col">PENILAIAN ID</th>
+              <th scope="col">PERMOHONAN ID</th>
+              <th scope="col">PELANTIK</th>
+              <th scope="col">PENILAI</th>
+              <th scope="col">TARIKH PERNILAIAN BERMULA</th>
+              <th scope="col">Tarikh AKHIR/DEADLINE</th>
+              <th scope="col">TEMPOH(HARI)</th>
             </tr>
           </thead>
 
           <tbody id="permohonans-add">
             <tr
               class="tr-shadow td-cursor"
-              v-for="(p, index) in Penilaians"
-              v-bind:key="p.permohonan_id"
-              v-on:click="show(p.permohonan_id)"
+              v-for="(p, index) in penilaians"
+              v-bind:key="p.penilaian_id"
+              v-on:click="show(p.penilaian_id)"
             >
               <th
                 scope="row"
               >{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
-              <td>{{p.jenis_permohonan.jenis_permohonan_huraian}}</td>
-              <td>{{p.permohonan_id}}</td>
-              <td>{{p.doc_title}}</td>
-              <td>{{p.user.name}}</td>
-              <td>{{p.user.fakulti.fnama_kod}}</td>
+              <td>{{p.penilaian_id}}</td>
+              <td>{{p.permohonanID}}</td>
+              <td>{{p.pelantik.name}}</td>
+              <td>{{p.penilai.name}}</td>
               <td>{{date(p.created_at)}}</td>
+              <td>{{date(p.tarikhAkhir)}}</td>
+              <td>{{p.tempoh}}</td>
             </tr>
           </tbody>
         </table>
       </v-col>
-    </v-row:align="alignment">
+    </v-row>
   </v-container>
 </template>
 
@@ -65,7 +67,7 @@ export default {
   data() {
     return {
       fakulti: false,
-      Penilaians: [],
+      penilaians: [],
       permohonan_id: "",
       pagination: {},
       alignment: "center",
@@ -86,7 +88,7 @@ export default {
         .then(res => res.json())
         .then(res => {
           console.log(res);
-          this.Penilaians = res.data;
+          this.penilaians = res.data;
           that.makePagination(res);
         });
     },

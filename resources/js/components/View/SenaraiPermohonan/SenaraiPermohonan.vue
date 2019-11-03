@@ -44,7 +44,6 @@ export default {
         .then(res => res.json())
         .then(res => {
           this.permohonans = res;
-          console.log(res);
         });
     },
     setPermohonanId(id) {

@@ -82,15 +82,11 @@
                                 </router-link>
                             </li>
                             @else
-                            <li class="has-sub">
-                                <a href="#">
+                            <li>
+                                <router-link :to="{name: 'senarai-baru'}">
                                     <i class="fas fa-list"></i>
-                                    <span class="bot-line"></span>Permohonan</a>
-                                <ul class="header3-sub-list list-unstyled">
-                                    <li>
-                                        <router-link to="senarai-permohonan-baharu">Senarai permohonan baharu</router-link>
-                                    </li>
-                                </ul>
+                                    <span class="bot-line"></span>Permohonan
+                                </router-link>
                             </li>
                             @endif
                             <li>

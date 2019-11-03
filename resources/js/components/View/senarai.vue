@@ -19,7 +19,7 @@
             >{{tab.title}}</v-tab>
           </v-tabs>
           <keep-alive>
-            <component v-bind:is="currentTab" v-bind="getDataBind()"></component>
+            <component v-bind:is="currentTab"></component>
           </keep-alive>
         </v-card>
       </v-col>
@@ -43,26 +43,7 @@ export default {
   methods: {
     currentTabComponent(tab) {
       this.currentTab = tab;
-
-      // if (this.currentTab == "tab-baru") {
-      //   this.dataBind = this.kemajuans;
-      // } else if (this.currentTab == "tab-perakuan") {
-      //   this.dataBind = this.dokumens;
-      // } else {
-      //   this.dataBind = this.laporans;
-      // }
-      console.log(this.currentTab);
       return this.currentTab;
-    },
-    getDataBind() {
-      // if (this.currentTab == "tabSenaraiBaru") {
-      //   return { api_props: "api/senarai-permohonan-baharu" };
-      // } else if (this.currentTab == "tabSenaraiPerakuan") {
-      //   return { permohonan_id_props: this.permohonan.permohonan_id };
-      // } else {
-      //   return { permohonan_id_props: this.permohonan.permohonan_id };
-      // }
-      return;
     }
   }
 };

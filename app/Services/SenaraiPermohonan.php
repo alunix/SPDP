@@ -26,7 +26,7 @@ class SenaraiPermohonan
                 return $this->senat();
                 break;
             default:
-                return null;
+                return [];
                 break;
         }
     }
@@ -36,12 +36,6 @@ class SenaraiPermohonan
         $permohonans = Permohonan::with(['user.fakulti:fakulti_id,fnama_kod', 'jenis_permohonan:id,jenis_permohonan_huraian', 'status_permohonan:status_id,status_permohonan_huraian'])
             ->where('jenis_permohonan_id', '!=', '8')->where('status_permohonan_id', '=', '1')->paginate(1);
         return $permohonans;
-    }
-
-    public function perakuanPjk()
-    {
-        $permohonans = Permohonan::with(['user.fakulti:fakulti_id,fnama_kod', 'jenis_permohonan:id,jenis_permohonan_huraian'])->where('jenis_permohonan_id', '!=', '8')->where('status_permohonan_id', '=', 3)->paginate(10);
-        return response()->json($permohonans);
     }
 
     public function penilai()

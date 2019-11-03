@@ -19,15 +19,16 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function () {
 	Route::get('/permohonan_dihantar', 'PermohonanController@api_permohonanDihantar')->name('api.permohonan.dihantar');
 	Route::post('/permohonan_submit', 'PermohonanController@store')->name('api.permohonan.submit');
 	Route::get('/permohonan/{permohonan}', 'PermohonanController@show')->name('view-permohonan-baharu');
-	
+
 	/*----------------------- Senarai dokumen permohonan ------------- */
 	Route::get('/senarai-dokumen/{permohonan}', 'DokumenPermohonanController@show')->name('api.dokumen.dihantar');
 	Route::get('/senarai-kemajuan/{permohonan}', 'KemajuanPermohonanController@show')->name('api.kemajuan.index');
-	Route::get('/senarai-laporan/{permohonan}', 'LaporanController@show')->name('api.laporan.index');		
+	Route::get('/senarai-laporan/{permohonan}', 'LaporanController@show')->name('api.laporan.index');
 	Route::get('/dokumen/{file_link}', 'DokumenPermohonanController@downloadDokumen')->name('api.dokumen.download');
 	/*----------------------- PJK menerima program pengajian daripada fakulti ------------- */
 	Route::get('/senarai-permohonan-baharu', 'PermohonanController@api_showListPermohonanBaharu')->name('api.senaraiPermohonan');
-	Route::get('/dashboard', 'HomeController@index')->middleware('auth')->name('home'); 
+	Route::get('/senarai-perakuan', 'PermohonanController@senaraiPerakuan')->name('api.senaraiPerakuan');
+	Route::get('/dashboard', 'HomeController@index')->middleware('auth')->name('home');
 });
 
 // /*-----------------------Fakulti------------- */
@@ -100,5 +101,5 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function () {
 // });
 
 Route::get('{any}', function () {
-    return view('layouts/app');
-})->where('any','.*')->middleware('auth');
+	return view('layouts/app');
+})->where('any', '.*')->middleware('auth');

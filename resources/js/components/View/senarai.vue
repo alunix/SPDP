@@ -51,12 +51,13 @@ export default {
       // } else {
       //   this.dataBind = this.laporans;
       // }
+      console.log(this.currentTab);
       return this.currentTab;
     },
     getDataBind() {
-      // if (this.currentTab == "tab-kemajuan") {
-      //   return { permohonan_id_props: this.permohonan.permohonan_id };
-      // } else if (this.currentTab == "tab-dokumen") {
+      // if (this.currentTab == "tabSenaraiBaru") {
+      //   return { api_props: "api/senarai-permohonan-baharu" };
+      // } else if (this.currentTab == "tabSenaraiPerakuan") {
       //   return { permohonan_id_props: this.permohonan.permohonan_id };
       // } else {
       //   return { permohonan_id_props: this.permohonan.permohonan_id };

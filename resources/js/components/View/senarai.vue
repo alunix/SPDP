@@ -9,36 +9,18 @@
     <v-divider></v-divider>
 
     <v-row style="height:20px">
-      <!-- <div class="table-data__tool">
-        <div class="table-data__tool-left"></div>
-      </div>
-      <div>
-        <b-tabs content-class="mt-3" justified>
-          <b-tab title="Baharu" active>
-            <senaraiPermohonan></senaraiPermohonan>
-          </b-tab>
-          <b-tab title="Untuk diperakui">
-          </b-tab>
-          <b-tab title="Penilaian panel">
-          </b-tab>
-        </b-tabs>
-      </div>-->
-
       <v-col cols="5" md="12">
-        <v-card class="pa-2" outlined tile>
-          <div class="container">
-            <div class="table-data__tool">
-              <div class="table-data__tool-left"></div>
-            </div>
-            <div>
-              <v-tabs fixed-tabs>
-                <v-tab v-for="tab in tabs" v-bind:key="tab">{{tab}}</v-tab>
-              </v-tabs>
-              <keep-alive>
-                <component v-bind:is="currentTab" v-bind="getDataBind()"></component>
-              </keep-alive>
-            </div>
-          </div>
+        <v-card outlined tile>
+          <v-tabs fixed-tabs>
+            <v-tab
+              v-for="tab in tabs"
+              @click="currentTabComponent(tab.value)"
+              v-bind:key="tab.value"
+            >{{tab.title}}</v-tab>
+          </v-tabs>
+          <keep-alive>
+            <component v-bind:is="currentTab" v-bind="getDataBind()"></component>
+          </keep-alive>
         </v-card>
       </v-col>
     </v-row>
@@ -49,14 +31,19 @@
 export default {
   data() {
     return {
-      currentTab: "permohonans",
-      tabs: ["permohonans", "Perakuan", "Penilaian panel"]
+      tabs: [
+        { title: "baru", value: "tabSenaraiBaru", id: 1 },
+        { title: "perakuan", value: "tabSenaraiPerakuan", id: 2 },
+        { title: "penilaian panel", value: "tabPenilaianPanel", id: 3 }
+      ],
+      currentTab: "tabSenaraiBaru"
     };
   },
   created() {},
   methods: {
     currentTabComponent(tab) {
-      this.currentTab = tab.toString().toLowerCase();
+      this.currentTab = tab;
+
       // if (this.currentTab == "tab-baru") {
       //   this.dataBind = this.kemajuans;
       // } else if (this.currentTab == "tab-perakuan") {

@@ -6,19 +6,12 @@
           <h3>Senarai permohonan dihantar</h3>
           <hr />
         </v-col>
-
         <v-row style="padding-right:45px" class="padding-right" :align="alignment" :justify="end">
           <v-btn v-on:click="showModel()" color="primary" normal>
             <v-icon left dark>mdi-plus</v-icon>Permohonan
           </v-btn>
           <modal height="auto" width="25%" :scrollable="true" name="permohonan_baharu">
             <permohonanModal @event="fetchPermohonans"></permohonanModal>
-          </modal>
-          <modal :adaptive="true" width="50%" height="50%" name="dokumen_permohonan">
-            <dokumenModal :permohonan_id="permohonan_id"></dokumenModal>
-          </modal>
-          <modal :adaptive="true" width="60%" height="50%" name="kemajuan_permohonan">
-            <kemajuanModal :permohonan_id="permohonan_id"></kemajuanModal>
           </modal>
         </v-row>
       </v-row>
@@ -125,23 +118,9 @@ export default {
     PermohonansModal
   },
   created() {
-    this.getRole();
+    this.fetchPermohonans();
   },
   methods: {
-    getRole() {
-      fetch("api/role")
-        .then(res => res.json())
-        .then(res => {
-          if (res == "fakulti") {
-            this.api = "api/permohonan_dihantar";
-            console.log(this.api);
-          } else {
-            this.api = "/api/senarai-permohonan-baharu'";
-            console.log(res);
-          }
-          this.fetchPermohonans();
-        });
-    },
     fetchPermohonans(page_url) {
       let that = this;
       page_url = page_url || this.api;
@@ -181,18 +160,9 @@ export default {
     },
     showModel() {
       this.$modal.show("permohonan_baharu");
-    },
-    showKemajuanModel() {
-      this.$modal.show("kemajuan_permohonan");
-    },
-    showDokumenModel() {
-      this.$modal.show("dokumen_permohonan");
     }
   }
 };
 </script>
 <style>
-/* td {
-  cursor: pointer;
-} */
 </style>

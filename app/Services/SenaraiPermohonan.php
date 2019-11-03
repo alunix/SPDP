@@ -9,11 +9,6 @@ use Illuminate\Support\Facades\DB;
 
 class SenaraiPermohonan
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $role = auth()->user()->role;
@@ -38,9 +33,9 @@ class SenaraiPermohonan
 
     public function pjk()
     {
-        $permohonans = Permohonan::with(['user.fakulti:fakulti_id,fnama_kod', 'jenis_permohonan:id,jenis_permohonan_huraian'])
-            ->where('jenis_permohonan_id', '!=', '8')->where('status_permohonan_id', '=', '1')->paginate(10);
-        return response()->json($permohonans);
+        $permohonans = Permohonan::with(['user.fakulti:fakulti_id,fnama_kod', 'jenis_permohonan:id,jenis_permohonan_huraian', 'status_permohonan:status_id,status_permohonan_huraian'])
+            ->where('jenis_permohonan_id', '!=', '8')->where('status_permohonan_id', '=', '1')->paginate(1);
+        return $permohonans;
     }
 
     public function perakuanPjk()
@@ -70,9 +65,7 @@ class SenaraiPermohonan
     }
     public function jppa()
     {
-
         $permohonans = Permohonan::where('jenis_permohonan_id', 8)->where('status_permohonan_id', 1)->orWhere('status_permohonan_id', 4)->get();
-
         return $permohonans;
     }
     public function senat()

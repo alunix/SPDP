@@ -73,9 +73,21 @@ Vue.component(
     "tab-kemajuan",
     require("./components/view/Permohonan/Kemajuan.vue").default
 );
+Vue.component("permohonans", require("./components/permohonans.vue").default);
 Vue.component(
-    "permohonans",
-    require("./components/permohonans.vue").default
+    "tabSenaraiBaru",
+    require("./components/View/SenaraiPermohonan/tabSenaraiBaru.vue")
+        .default
+);
+Vue.component(
+    "tabSenaraiPerakuan",
+    require("./components/View/SenaraiPermohonan/tabSenaraiPerakuan.vue")
+        .default
+);
+Vue.component(
+    "tabPenilaianPanel",
+    require("./components/View/SenaraiPermohonan/tabPenilaianPanel.vue")
+        .default
 );
 //Chart library
 Vue.component("apexchart", VueApexCharts).default;

@@ -1,6 +1,7 @@
-<?php 
+<?php
 
 namespace SPDP\Services;
+
 use SPDP\User;
 use SPDP\Services\RedirectPermohonan;
 use SPDP\Permohonan;
@@ -11,7 +12,8 @@ use SPDP\Support\Collection;
 
 class ShowPermohonan
 {
-    public function show($permohonan) { 
+    public function show($permohonan)
+    {
         $role = auth()->user()->role;
         switch ($role) {
             case 'fakulti':
@@ -27,18 +29,20 @@ class ShowPermohonan
         }
     }
 
-    public function fakulti($permohonan) {
+    public function fakulti($permohonan)
+    {
         $dp =  $this->getBoolPermohonan($permohonan);
         if ($dp == false) {
             abort(403, 'Tidak dibenarkan');
         } else {
-            $permohonan = Permohonan::where('permohonan_id', $permohonan->permohonan_id )
-            ->withCount(['dokumen_permohonans', 'laporans', 'kemajuan_permohonans' ])->get();
+            $permohonan = Permohonan::where('permohonan_id', $permohonan->permohonan_id)
+                ->withCount(['dokumen_permohonans', 'laporans', 'kemajuan_permohonans'])->get();
             return response()->json(['permohonan' => $permohonan[0]]);
         }
     }
 
-    public function penilai($permohonan) {
+    public function penilai($permohonan)
+    {
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
 
@@ -49,63 +53,52 @@ class ShowPermohonan
             abort(404);
         }
         $permohonans_id = $permohonans->pluck('permohonan_id');
-        for($i=0;$i<count($permohonans_id);$i++){ 
-            if($permohonan->permohonan_id == $permohonans_id[$i]) {
+        for ($i = 0; $i < count($permohonans_id); $i++) {
+            if ($permohonan->permohonan_id == $permohonans_id[$i]) {
                 $rp = new RedirectPermohonan();
                 return $rp->redirectPermohonan($permohonan);
             }
-       }
-       abort(404);
+        }
+        abort(404);
     }
 
 
-    public function getBoolPermohonan($permohonan) {
-        if($permohonan == null) {
+    public function getBoolPermohonan($permohonan)
+    {
+        if ($permohonan == null) {
             return false;
         }
-        
+
         $isFakulti = $this->isFakulti();
-        if($isFakulti == false) {
+        if ($isFakulti == false) {
             return true;
-        }
-        else { 
-        $user_id = auth()->user()->id;
-        $user = User::find($user_id);
-        $permohonans_id= $user->permohonans->pluck('permohonan_id');
-        
-        //check whether fakulti does have permohonans
-        if(!sizeof($permohonans_id) > 0 ) {
-            return false;
-            die();
-        }
-        for($i = 0; $i<count($permohonans_id); $i++) { 
-            if($permohonan->permohonan_id == $permohonans_id[$i]) {
-                return true;
-            }
-        } 
-           return false;
-        }
+        } else {
+            $user_id = auth()->user()->id;
+            $user = User::find($user_id);
+            $permohonans_id = $user->permohonans->pluck('permohonan_id');
 
+            //check whether fakulti does have permohonans
+            if (!sizeof($permohonans_id) > 0) {
+                return false;
+                die();
+            }
+            for ($i = 0; $i < count($permohonans_id); $i++) {
+                if ($permohonan->permohonan_id == $permohonans_id[$i]) {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 
-    public function isFakulti(){
+    public function isFakulti()
+    {
         $role = auth()->user()->role;
 
         if (!$role == 'fakulti') {
             return 0;
-        }
-        else {
+        } else {
             return 1;
         }
     }
-
-   
-
-   
-        
-    
-   
-    
-
-   
 }

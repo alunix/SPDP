@@ -17,7 +17,8 @@ use SPDP\Notifications\PermohonanBaharu;
 class PermohonanClass
 {
 
-    public function create(Request $request) {   
+    public function create(Request $request)
+    {
         //Handle file upload
         if ($request->hasFile('file_link')) {
             $fileNameWithExt = $request->file('file_link')->getClientOriginalName();
@@ -36,7 +37,7 @@ class PermohonanClass
 
         //Permohonan baharu
         $user_id = auth()->user()->id;
-        
+
         $permohonan = new Permohonan();
         $permohonan->doc_title = $request->input('doc_title');
         $permohonan->jenis_permohonan_id = $request->input('jenis_permohonan_id');
@@ -62,7 +63,8 @@ class PermohonanClass
         return response()->json('Success');
     }
 
-    public function storePermohonanTidakDilulus(Request $request, $id) {
+    public function storePermohonanTidakDilulus(Request $request, $id)
+    {
         $attached = 'dokumen';
         $permohonan = Permohonan::findOrFail($id);
 
@@ -87,7 +89,8 @@ class PermohonanClass
         return redirect()->route('home')->with($msg);
     }
 
-    public function getStatusPenambahbaikkan() {
+    public function getStatusPenambahbaikkan()
+    {
         $role = auth()->user()->role;
 
         switch ($role) {

@@ -38,27 +38,27 @@
         <v-radio label="Biar saya tetap sendiri" value="true"></v-radio>
       </v-radio-group>
 
-      <v-text-field
-        v-if="passwordChoice == 'true'"
-        :append-icon="true ? 'visibility' : 'visibility_off'"
-        v-model="user.password"
-        :type="show1 ? 'text' : 'password'"
-        label="Kata laluan"
-        @click:append="show1 = !show1"
-        :rules="[rules.min]"
-        :required="requiredPassword()"
-      ></v-text-field>
+      <div v-if="passwordChoice == 'true'">
+        <v-text-field
+          :append-icon="true ? 'visibility' : 'visibility_off'"
+          v-model="user.password"
+          :type="show1 ? 'text' : 'password'"
+          label="Kata laluan"
+          @click:append="show1 = !show1"
+          :rules="[rules.min]"
+          :required="requiredPassword()"
+        ></v-text-field>
 
-      <v-text-field
-        v-if="passwordChoice == 'true'"
-        :append-icon="true ? 'visibility' : 'visibility_off'"
-        v-model="user.confirmPassword"
-        :type="show2 ? 'text' : 'password'"
-        label="Taip semula kata laluan"
-        @click:append="show2 = !show2"
-        :rules="[rules.min]"
-        :required="requiredPassword()"
-      ></v-text-field>
+        <v-text-field
+          :append-icon="true ? 'visibility' : 'visibility_off'"
+          v-model="user.confirmPassword"
+          :type="show2 ? 'text' : 'password'"
+          label="Taip semula kata laluan"
+          @click:append="show2 = !show2"
+          :rules="[rules.min]"
+          :required="requiredPassword()"
+        ></v-text-field>
+      </div>
 
       <v-row style="padding-right:15px" :align="alignment" :justify="end">
         <v-btn color="normal" accept=".pdf" class="mr-4" @click="$modal.hide('ModalPengguna')">Batal</v-btn>

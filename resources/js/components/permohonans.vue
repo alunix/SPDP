@@ -11,7 +11,7 @@
             <v-icon left dark>mdi-plus</v-icon>Permohonan
           </v-btn>
           <modal height="auto" width="25%" :scrollable="true" name="permohonan_baharu">
-            <permohonanModal @event="fetchPermohonans"></permohonanModal>
+            <PermohonanModal @event="fetchPermohonans"></PermohonanModal>
           </modal>
         </v-row>
       </v-row>
@@ -99,7 +99,7 @@
 </template>
 
 <script>
-import PermohonansModal from "./PermohonanModal";
+import permohonanModal from "./PermohonanModal";
 import dayjs from "dayjs";
 export default {
   data() {
@@ -110,12 +110,11 @@ export default {
       alignment: "center",
       justify: "center",
       start: "start",
-      end: "end",
-      api: ""
+      end: "end"
     };
   },
   components: {
-    PermohonansModal
+    permohonanModal
   },
   created() {
     this.fetchPermohonans();
@@ -123,7 +122,7 @@ export default {
   methods: {
     fetchPermohonans(page_url) {
       let that = this;
-      page_url = page_url || this.api;
+      page_url = page_url || "api/permohonan_dihantar";
       fetch(page_url)
         .then(res => res.json())
         .then(res => {

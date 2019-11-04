@@ -31,7 +31,7 @@
               <th scope="col">PELANTIK</th>
               <th scope="col">PENILAI</th>
               <th scope="col">TARIKH PERNILAIAN BERMULA</th>
-              <th scope="col">Tarikh AKHIR/DEADLINE</th>
+              <th scope="col">TARIKH AKHIR/DEADLINE</th>
               <th scope="col">TEMPOH(HARI)</th>
             </tr>
           </thead>

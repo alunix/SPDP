@@ -30,6 +30,9 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function () {
 	Route::get('/senarai-perakuan', 'PermohonanController@senaraiPerakuan')->name('api.senaraiPerakuan');
 	Route::get('/dashboard', 'HomeController@index')->middleware('auth')->name('home');
 	Route::get('/senarai-penilaian', 'PenilaianPanelController@index')->name('penilaian.show');
+	Route::get('/users', 'UserController@getUsers');
+	Route::get('/fakultis', 'FakultiController@getFakultis');
+	Route::post('/daftar-pengguna', 'UserController@daftarPengguna')->name('register.panel_penilai.submit');
 });
 
 // /*-----------------------Fakulti------------- */

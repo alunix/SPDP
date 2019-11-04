@@ -23,10 +23,6 @@ window.Vue = require("vue");
 
 const routes = [
     {
-        path: "/modal_pengguna_baharu",
-        component: require("./components/Pengguna.vue").default
-    },
-    {
         path: "/senarai-permohonan",
         name: "permohonans",
         component: require("./components/permohonans.vue").default
@@ -48,17 +44,26 @@ const routes = [
             .default
     },
     {
+        path: "/pengguna",
+        name: "pengguna",
+        component: require("./components/View/Pengguna/Pengguna.vue").default
+    },
+    {
         path: "*",
         name: "NotFound",
         component: require("./components/view/ErrorHandling/404.vue").default
     }
 ];
 
+//Modal
 Vue.component(
-    "permohonanModal",
+    "PermohonanModal",
     require("./components/PermohonanModal.vue").default
 );
-
+Vue.component(
+    "ModalPengguna",
+    require("./components/View/Pengguna/ModalPengguna.vue").default
+);
 //View
 Vue.component("senarai", require("./components/view/senarai.vue")).default;
 //Tabs
@@ -77,8 +82,7 @@ Vue.component(
 Vue.component("permohonans", require("./components/permohonans.vue").default);
 Vue.component(
     "tabSenaraiBaru",
-    require("./components/View/SenaraiPermohonan/tabSenaraiBaru.vue")
-        .default
+    require("./components/View/SenaraiPermohonan/tabSenaraiBaru.vue").default
 );
 Vue.component(
     "tabSenaraiPerakuan",
@@ -87,8 +91,7 @@ Vue.component(
 );
 Vue.component(
     "tabPenilaianPanel",
-    require("./components/View/SenaraiPermohonan/tabPenilaianPanel.vue")
-        .default
+    require("./components/View/SenaraiPermohonan/tabPenilaianPanel.vue").default
 );
 //Chart library
 Vue.component("apexchart", VueApexCharts).default;

@@ -95,6 +95,12 @@
                                     <span class="bot-line"></span>Analitik</a>
                                 </router-link>
                             </li>
+                            <li>
+                                <router-link :to="{name: 'pengguna'}">
+                                    <i class="fas fa-users"></i>
+                                    <span class="bot-line"></span>Pengguna</a>
+                                </router-link>
+                            </li>
                         </ul>
                     </div>
                     <div class="header__tool">

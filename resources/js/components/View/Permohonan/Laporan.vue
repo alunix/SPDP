@@ -47,7 +47,7 @@
           <td>{{l.tajuk_fail_link}}</td>
           <td>{{l.id_penghantar_nama.name}}</td>
           <td>{{l.laporan_id}}</td>
-          <td>{{l.id_penghantar_nama.role}}</td>
+          <td>{{l.id_penghantar_nama.role|uppercase}}</td>
           <td>{{l.komen}}</td>
           <td>{{l.versi_laporan}}</td>
           <td>{{date(l.created_at)}}</td>
@@ -72,6 +72,15 @@ export default {
   },
   created() {
     this.fetchLaporans();
+  },
+  filters: {
+    uppercase: function(value) {
+      if (!value) {
+        return "";
+      }
+
+      return value.toString().toUpperCase();
+    }
   },
   methods: {
     fetchLaporans(page_url) {

@@ -9,31 +9,39 @@
     <v-divider></v-divider>
 
     <v-form ref="form" @submit.prevent="submit">
-      <v-text-field v-model="user.name" label="Nama" :rules="[rules.required]"></v-text-field>
+      <v-text-field
+        v-model="user.name"
+        label="Nama"
+        :rules="[rules.required]"
+        :error-messages="name.error"
+      ></v-text-field>
 
       <v-text-field
         v-model="user.email"
         label="E-mel"
         :rules="[v => /.+@.+/.test(v)  || 'Sila isi bahagian ini']"
         required
+        :error-messages="email.error"
       ></v-text-field>
 
       <v-select
         v-model="user.role"
+        label="Peranan/Role"
         :items="peranans"
         :rules="[rules.required]"
-        label="Peranan/Role"
+        :error-messages="role.error"
       ></v-select>
 
       <v-select
         v-if="user.role == 'Fakulti'"
         v-model="user.fakulti_id"
+        label="Pilih fakulti"
         item-text="f_nama"
         item-value="fakulti_id"
         :items="fakultis"
         :rules="[rules.required]"
-        label="Pilih fakulti"
         :required="user.role == 'Fakulti'"
+        :error-messages="fakulti_id.error"
       ></v-select>
 
       <v-row style="padding-right:15px" :align="alignment" :justify="end">
@@ -60,7 +68,6 @@ export default {
       },
       success: false,
       error: false,
-      passwordChoice: "",
       loaded: true,
       alignment: "center",
       end: "end"
@@ -113,7 +120,7 @@ export default {
           this.$emit("event");
         })
         .catch(error => {
-          if (error.response.status === 500) {
+          if (error.response.status === 422) {
             this.errors = error.response.data.errors || {};
             console.log(error);
             this.error = true;

@@ -24,42 +24,21 @@ class UserController extends Controller
 
     public function daftarPengguna(Request $request)
     {
-        $password = str_random(8);
+        $this->validate($request, [
+            'name' => 'required|string|min:1',
+            'email' => 'required|email|max:255|unique:users',
+            'role' => 'required|string',
+        ]);
         $user = new User();
         $user->name = $request->input('name');
         $user->email = $request->input('email');
-        $user->role = $request->input('role');
+        $user->role =  strtolower($request->input('role'));
         if ($request->input('role') == 'Fakulti') {
             $user->fakulti_id = $request->input('fakulti_id');
         }
+        $password = str_random(8);
         $user->password = Hash::make($password);
         $user->save();
-
-        // return $request->all();
-
-
-        // switch ($radio) {
-        //     case 'autoGenerate':
-        //         $this->validate($request, [
-        //             'nama' => 'required|string|min:1',
-        //             'email' => 'required|email|max:255|unique:users',
-        //             'role' => 'required|string',
-
-        //         ]);
-        //         break;
-        //     case 'manualGenerate':
-        //         $this->validate($request, [
-        //             'nama' => 'required|string|min:1',
-        //             'email' => 'required|email|max:255|unique:users',
-        //             'role' => 'required|string',
-        //             'password' => 'min:6|required_with:password-confirm|same:password-confirm',
-        //             'password_confirmation' => 'min:6'
-
-        //         ]);
-        // }
-
-        // $user = new CreateUser;
-        // return $user->store_pengguna($request);
     }
 
     public function edit()
@@ -102,10 +81,5 @@ class UserController extends Controller
         } catch (Exception $e) {
             return view('errors.1062');
         }
-    }
-
-    public function destroy($id)
-    {
-        //
     }
 }

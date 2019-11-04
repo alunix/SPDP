@@ -36,31 +36,6 @@
         :required="user.role == 'Fakulti'"
       ></v-select>
 
-      <v-radio-group v-model="passwordChoice" :mandatory="true">
-        <v-radio label="Auto jana kata laluan" value="false"></v-radio>
-        <v-radio label="Biar saya tetap sendiri" value="true"></v-radio>
-      </v-radio-group>
-
-      <div v-if="passwordChoice == 'true'">
-        <v-text-field
-          :append-icon="true ? 'visibility' : 'visibility_off'"
-          v-model="user.password"
-          :type="show1 ? 'text' : 'password'"
-          label="Kata laluan"
-          @click:append="show1 = !show1"
-          :required="requiredPassword()"
-        ></v-text-field>
-
-        <v-text-field
-          :append-icon="true ? 'visibility' : 'visibility_off'"
-          v-model="user.confirmPassword"
-          :type="show2 ? 'text' : 'password'"
-          label="Taip semula kata laluan"
-          @click:append="show2 = !show2"
-          :required="requiredPassword()"
-        ></v-text-field>
-      </div>
-
       <v-row style="padding-right:15px" :align="alignment" :justify="end">
         <v-btn color="normal" accept=".pdf" class="mr-4" @click="$modal.hide('ModalPengguna')">Batal</v-btn>
         <v-btn type="submit" color="primary">Hantar</v-btn>

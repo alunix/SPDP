@@ -45,7 +45,6 @@
           :type="show1 ? 'text' : 'password'"
           label="Kata laluan"
           @click:append="show1 = !show1"
-          :rules="[rules.min]"
           :required="requiredPassword()"
         ></v-text-field>
 
@@ -55,7 +54,6 @@
           :type="show2 ? 'text' : 'password'"
           label="Taip semula kata laluan"
           @click:append="show2 = !show2"
-          :rules="[rules.min]"
           :required="requiredPassword()"
         ></v-text-field>
       </div>
@@ -80,8 +78,7 @@ export default {
       show1: false,
       show2: false,
       rules: {
-        required: v => !!v || "Sila isi bahagian ini",
-        min: v => v.length >= 8 || "Min 8 characters"
+        required: v => !!v || "Sila isi bahagian ini"
       },
       success: false,
       error: false,
@@ -118,6 +115,7 @@ export default {
       }
     },
     submit() {
+      console.log(this.user);
       axios
         .post("api/daftar-pengguna", this.user)
         .then(res => {
@@ -127,7 +125,7 @@ export default {
           this.$emit("event");
         })
         .catch(error => {
-          if (error.response.status === 422) {
+          if (error.response.status === 500) {
             this.errors = error.response.data.errors || {};
             console.log(error);
             this.error = true;

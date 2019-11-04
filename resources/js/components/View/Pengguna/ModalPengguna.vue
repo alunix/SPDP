@@ -1,7 +1,10 @@
 <template>
   <div class="card-body">
-    <v-alert v-if="success" type="success">Pengguna dicipta dan emel telah dihantar kepada pengguna</v-alert>
-    <v-alert v-if="error" type="error">Pengguna tidak dapat dicipta</v-alert>
+    <v-alert
+      v-if="success"
+      type="success"
+    >Pengguna berjaya didaftar dan emel telah dihantar kepada pengguna</v-alert>
+    <v-alert v-if="error" type="error">Pengguna tidak dapat didaftar</v-alert>
     <h4>Tambah pengguna</h4>
     <v-divider></v-divider>
 
@@ -115,9 +118,19 @@ export default {
       }
     },
     submit() {
-      console.log(this.user);
+      let formData = new FormData();
+      formData.append("name", this.user.name);
+      formData.append("email", this.user.email);
+      formData.append("role", this.user.role);
+      if (!this.user.fakulti_id == null) {
+        formData.append("fakulti_id", this.user.fakulti_id);
+      }
       axios
-        .post("api/daftar-pengguna", this.user)
+        .post("api/daftar-pengguna", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
+        })
         .then(res => {
           console.log(res);
           this.success = true;

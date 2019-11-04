@@ -6,17 +6,14 @@ use SPDP\User;
 use Illuminate\Http\Request;
 use SPDP\Fakulti;
 use SPDP\Services\CreateUser;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
-{   
-    public function getUsers() {
-        $users = User::paginate(10);
-        return $users;
-    }
-    public function create_pengguna()
+{
+    public function getUsers()
     {
-        $users = User::orderBy('created_at', 'desc')->get();
-        return view('pjk.daftar-panel-penilai')->with('users', $users);
+        $users = User::orderBy('created_at', 'desc')->paginate(10);
+        return $users;
     }
 
     public function getRole()
@@ -25,34 +22,44 @@ class UserController extends Controller
         return response()->json($role);
     }
 
-    public function store_pengguna(Request $request)
-    {   
-        return request()->all();
-        
-        $radio = $request->input('radios');
-
-        switch ($radio) {
-            case 'autoGenerate':
-                $this->validate($request, [
-                    'nama' => 'required|string|min:1',
-                    'email' => 'required|email|max:255|unique:users',
-                    'peranan' => 'required|string',
-
-                ]);
-                break;
-            case 'manualGenerate':
-                $this->validate($request, [
-                    'nama' => 'required|string|min:1',
-                    'email' => 'required|email|max:255|unique:users',
-                    'peranan' => 'required|string',
-                    'password' => 'min:6|required_with:password-confirm|same:password-confirm',
-                    'password_confirmation' => 'min:6'
-
-                ]);
+    public function daftarPengguna(Request $request)
+    {
+        $password = str_random(8);
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->role = $request->input('role');
+        if ($request->input('role') == 'Fakulti') {
+            $user->fakulti_id = $request->input('fakulti_id');
         }
+        $user->password = Hash::make($password);
+        $user->save();
 
-        $user = new CreateUser;
-        return $user->store_pengguna($request);
+        // return $request->all();
+
+
+        // switch ($radio) {
+        //     case 'autoGenerate':
+        //         $this->validate($request, [
+        //             'nama' => 'required|string|min:1',
+        //             'email' => 'required|email|max:255|unique:users',
+        //             'role' => 'required|string',
+
+        //         ]);
+        //         break;
+        //     case 'manualGenerate':
+        //         $this->validate($request, [
+        //             'nama' => 'required|string|min:1',
+        //             'email' => 'required|email|max:255|unique:users',
+        //             'role' => 'required|string',
+        //             'password' => 'min:6|required_with:password-confirm|same:password-confirm',
+        //             'password_confirmation' => 'min:6'
+
+        //         ]);
+        // }
+
+        // $user = new CreateUser;
+        // return $user->store_pengguna($request);
     }
 
     public function edit()

@@ -26,7 +26,9 @@ class UserController extends Controller
     }
 
     public function store_pengguna(Request $request)
-    {
+    {   
+        return request()->all();
+        
         $radio = $request->input('radios');
 
         switch ($radio) {

@@ -6,12 +6,7 @@
     <v-divider></v-divider>
 
     <v-form ref="form" @submit.prevent="submit">
-      <v-text-field
-        v-model="user.name"
-        label="Nama"
-        :rules="[v => !!v || 'Sila isi bahagian ini']"
-        required
-      ></v-text-field>
+      <v-text-field v-model="user.name" label="Nama" :rules="[rules.required]"></v-text-field>
 
       <v-text-field
         v-model="user.email"
@@ -23,9 +18,8 @@
       <v-select
         v-model="user.role"
         :items="peranans"
-        :rules="[v => !!v || 'Sila pilih jenis']"
+        :rules="[rules.required]"
         label="Peranan/Role"
-        required
       ></v-select>
 
       <v-select
@@ -34,30 +28,36 @@
         item-text="f_nama"
         item-value="fakulti_id"
         :items="fakultis"
-        :rules="[v => !!v || 'Sila pilih jenis']"
+        :rules="[rules.required]"
         label="Pilih fakulti"
-        required
+        :required="user.role == 'Fakulti'"
       ></v-select>
 
       <v-radio-group v-model="passwordChoice" :mandatory="true">
-        <v-radio label="Auto jana kata laluan" value="auto"></v-radio>
-        <v-radio label="Biar saya tetap sendiri" value="manual"></v-radio>
+        <v-radio label="Auto jana kata laluan" value="false"></v-radio>
+        <v-radio label="Biar saya tetap sendiri" value="true"></v-radio>
       </v-radio-group>
 
       <v-text-field
-        v-if="passwordChoice == 'manual'"
-        v-model="user.email"
+        v-if="passwordChoice == 'true'"
+        :append-icon="true ? 'visibility' : 'visibility_off'"
+        v-model="user.password"
+        :type="show1 ? 'text' : 'password'"
         label="Kata laluan"
-        :rules="[v => /.+@.+/.test(v)  || 'Sila isi bahagian ini']"
-        required
+        @click:append="show1 = !show1"
+        :rules="[rules.min]"
+        :required="requiredPassword()"
       ></v-text-field>
 
       <v-text-field
-        v-if="passwordChoice == 'manual'"
-        v-model="user.email"
+        v-if="passwordChoice == 'true'"
+        :append-icon="true ? 'visibility' : 'visibility_off'"
+        v-model="user.confirmPassword"
+        :type="show2 ? 'text' : 'password'"
         label="Taip semula kata laluan"
-        :rules="[v => /.+@.+/.test(v)  || 'Sila isi bahagian ini']"
-        required
+        @click:append="show2 = !show2"
+        :rules="[rules.min]"
+        :required="requiredPassword()"
       ></v-text-field>
 
       <v-row style="padding-right:15px" :align="alignment" :justify="end">
@@ -77,6 +77,12 @@ export default {
       user: [],
       errors: {},
       peranans: ["Penilai", "PJK", "JPPA", "Senat", "Fakulti"],
+      show1: false,
+      show2: false,
+      rules: {
+        required: v => !!v || "Sila isi bahagian ini",
+        min: v => v.length >= 8 || "Min 8 characters"
+      },
       success: false,
       error: false,
       passwordChoice: "",
@@ -101,39 +107,23 @@ export default {
       fetch("api/fakultis")
         .then(res => res.json())
         .then(res => {
-          console.log(res);
           this.fakultis = res;
         });
     },
-    filePreview(event) {
-      this.file_link = event.target.files[0];
-      this.fileName = event.target.files[0].name;
-    },
-    pickFile() {
-      this.$refs.file_link.click();
+    requiredPassword() {
+      if (this.passwordChoice == "true") {
+        return true;
+      } else {
+        return false;
+      }
     },
     submit() {
-      let formData = new FormData();
-      formData.append("file_link", this.file_link);
-      formData.append("jenis_permohonan_id", this.jenis_permohonan_id);
-      formData.append("doc_title", this.doc_title);
-      formData.append("komen", this.komen);
-      this.loaded = false;
-      this.success = false;
-      this.errors = {};
       axios
-        .post("api/permohonan_submit", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data"
-          }
-        })
+        .post("api/daftar-pengguna", this.user)
         .then(res => {
+          console.log(res);
           this.success = true;
-          this.jenis_permohonan_id = "";
-          this.doc_title = "";
-          this.komen = "";
-          this.file_link = "";
-          this.fileName = "";
+          this.user = [];
           this.$emit("event");
         })
         .catch(error => {

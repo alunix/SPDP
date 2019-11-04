@@ -16,8 +16,8 @@ Route::post('/search', 'SearchController@search')->name('search');
 Route::group(['prefix' => 'api', 'middleware' => 'auth'], function () {
 	Route::get('/role', 'UserController@getRole')->name('api.role');
 	/* Fakulti */
-	Route::get('/permohonan_dihantar', 'PermohonanController@api_permohonanDihantar')->name('api.permohonan.dihantar');
-	Route::post('/permohonan_submit', 'PermohonanController@store')->name('api.permohonan.submit');
+	Route::get('/senarai-permohonan-dihantar', 'PermohonanController@api_permohonanDihantar')->name('api.permohonan.dihantar');
+	Route::post('/permohonan/submit', 'PermohonanController@store')->name('api.permohonan.submit');
 	Route::get('/permohonan/{permohonan}', 'PermohonanController@show')->name('view-permohonan-baharu');
 
 	/*----------------------- Senarai dokumen permohonan ------------- */

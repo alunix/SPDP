@@ -132,7 +132,7 @@ export default {
       this.success = false;
       this.errors = {};
       axios
-        .post("api/permohonan_submit", formData, {
+        .post("api/permohonan/submit", formData, {
           headers: {
             "Content-Type": "multipart/form-data"
           }

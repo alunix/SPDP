@@ -122,7 +122,7 @@ export default {
   methods: {
     fetchPermohonans(page_url) {
       let that = this;
-      page_url = page_url || "api/permohonan_dihantar";
+      page_url = page_url || "api/senarai-permohonan-dihantar";
       fetch(page_url)
         .then(res => res.json())
         .then(res => {

@@ -4,20 +4,27 @@
       v-if="success"
       type="success"
     >Pengguna berjaya didaftar dan emel telah dihantar kepada pengguna</v-alert>
-    <v-alert v-if="error" type="error">Pengguna tidak dapat didaftar</v-alert>
+    <!-- <v-alert v-if="error" type="error">Pengguna tidak dapat didaftar</v-alert> -->
     <h4>Tambah pengguna</h4>
     <v-divider></v-divider>
 
     <v-form ref="form" @submit.prevent="submit">
+      <v-alert type="error" v-if="error">
+        <b></b>
+        <ul>
+          <li v-for="error in errors" v-bind:key="error[0]">{{ error[0] }}</li>
+        </ul>
+      </v-alert>
+
       <v-text-field
-        v-model="user.name"
+        v-model="name"
         label="Nama"
         :rules="[rules.required]"
         :error-messages="name.error"
       ></v-text-field>
 
       <v-text-field
-        v-model="user.email"
+        v-model="email"
         label="E-mel"
         :rules="[v => /.+@.+/.test(v)  || 'Sila isi bahagian ini']"
         required
@@ -25,7 +32,7 @@
       ></v-text-field>
 
       <v-select
-        v-model="user.role"
+        v-model="role"
         label="Peranan/Role"
         :items="peranans"
         :rules="[rules.required]"
@@ -33,14 +40,14 @@
       ></v-select>
 
       <v-select
-        v-if="user.role == 'Fakulti'"
-        v-model="user.fakulti_id"
+        v-if="role == 'Fakulti'"
+        v-model="fakulti_id"
         label="Pilih fakulti"
         item-text="f_nama"
         item-value="fakulti_id"
         :items="fakultis"
         :rules="[rules.required]"
-        :required="user.role == 'Fakulti'"
+        :required="role == 'Fakulti'"
         :error-messages="fakulti_id.error"
       ></v-select>
 
@@ -58,11 +65,12 @@ export default {
   data() {
     return {
       fakultis: [],
-      user: [],
+      name: "",
+      email: "",
+      role: "",
+      fakulti_id: "",
       errors: {},
       peranans: ["Penilai", "PJK", "JPPA", "Senat", "Fakulti"],
-      show1: false,
-      show2: false,
       rules: {
         required: v => !!v || "Sila isi bahagian ini"
       },
@@ -101,11 +109,11 @@ export default {
     },
     submit() {
       let formData = new FormData();
-      formData.append("name", this.user.name);
-      formData.append("email", this.user.email);
-      formData.append("role", this.user.role);
-      if (!this.user.fakulti_id == null) {
-        formData.append("fakulti_id", this.user.fakulti_id);
+      formData.append("name", this.name);
+      formData.append("email", this.email);
+      formData.append("role", this.role);
+      if (!this.fakulti_id == null) {
+        formData.append("fakulti_id", this.fakulti_id);
       }
       axios
         .post("api/daftar-pengguna", formData, {
@@ -121,8 +129,10 @@ export default {
         })
         .catch(error => {
           if (error.response.status === 422) {
-            this.errors = error.response.data.errors || {};
-            console.log(error);
+            // this.errors = error.response.data.errors || {};
+            console.log(error.response.data.errors);
+            this.errors = error.response.data.errors;
+            console.log(this.errors);
             this.error = true;
           }
         });

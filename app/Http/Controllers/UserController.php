@@ -29,6 +29,7 @@ class UserController extends Controller
             'email' => 'required|email|max:255|unique:users',
             'role' => 'required|string',
         ]);
+
         $user = new User();
         $user->name = $request->input('name');
         $user->email = $request->input('email');

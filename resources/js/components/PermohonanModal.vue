@@ -6,6 +6,7 @@
     <hr />
 
     <v-form ref="form" @submit.prevent="submit">
+    
       <v-select
         v-model="jenis_permohonan_id"
         item-text="name"

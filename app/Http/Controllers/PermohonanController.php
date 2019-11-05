@@ -59,7 +59,7 @@ class PermohonanController extends Controller
         $pc = new PermohonanClass();
         return $permohonan = $pc->create($request);
     }
-    
+
     public function  showPelantikanPenilai($id)
     {
         $permohonan = Permohonan::find($id);
@@ -77,18 +77,22 @@ class PermohonanController extends Controller
     }
 
     /*API START  */
-    public function api_permohonanDihantar() {
+    public function api_permohonanDihantar()
+    {
         $id = auth()->user()->id;
-        $permohonans = Permohonan::with(['jenis_permohonan', 'dokumen_permohonans','status_permohonan'])->where('id_penghantar', $id)->orderBy('created_at','desc')->paginate(10);
-        return response()->json($permohonans);
+        $permohonans = Permohonan::with(['jenis_permohonan:id,jenis_permohonan_huraian', 'status_permohonan:status_id,status_permohonan_huraian'])
+            ->where('id_penghantar', $id)->orderBy('created_at', 'desc')->paginate(10);
+        return $permohonans;
     }
 
-    public function api_showListPermohonanBaharu() {
+    public function api_showListPermohonanBaharu()
+    {
         $sp = new SenaraiPermohonan();
-        return  $sp->index();
+        return $sp->index();
     }
 
-    public function show($id) {
+    public function show($id)
+    {
         $permohonan = Permohonan::findOrFail($id);
         $show = new ShowPermohonan();
         return $show->show($permohonan);

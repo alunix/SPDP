@@ -13,6 +13,7 @@ use SPDP\Services\PermohonanClass;
 use SPDP\Services\RedirectPermohonan;
 use SPDP\Services\PenilaianPJK;
 use SPDP\Services\SenaraiPermohonan;
+use SPDP\Support\Collection;
 
 class LaporanController extends Controller
 {
@@ -22,17 +23,10 @@ class LaporanController extends Controller
     }
    
     public function show($id) {
-        $dp = DokumenPermohonan::find($id);
-        if($dp==null) {
-            abort (404);
-        }
-        $isFakulti = $this->isFakulti();
-        if($isFakulti==1){
-            return $this->fakulti($dp);
-        }
-        else {
-            return view ('fakulti.senarai-laporan-dokumen-permohonan')->with('dokumen_permohonan',$dp)->with('laporans',$dp->laporans);
-        }
+        $permohonan = Permohonan::findOrFail($id);
+        $laporans = Laporan::with('id_penghantar_nama:id,name,role')->whereIn('dokumen_permohonan_id', $permohonan->dokumen_permohonans->pluck('dokumen_permohonan_id'))->orderBy('created_at', 'desc')->paginate(10);
+        // return response()->json($laporans);
+        return response()->json($laporans);
     }
 
     public function fakulti($dp) {

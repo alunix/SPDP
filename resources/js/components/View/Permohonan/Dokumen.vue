@@ -1,14 +1,22 @@
 <template>
   <div>
-    <v-row
-      style="padding-right:20px; padding-top:8px;padding-bottom:8px"
-      class="padding-right"
-      :align="alignment"
-      :justify="end"
-    >
-      <v-btn small>Prev</v-btn>
-      <div class="divider" />
-      <v-btn small>Next</v-btn>
+    <v-row :align="alignment" :justify="justify">
+      <div style="padding-left:20px; padding-top:20px">
+        <p>{{ pagination.total }} keputusan</p>
+      </div>
+      <v-row class="padding-right" style="padding-left:20px" :align="alignment" :justify="end">
+        <v-btn
+          :disabled="!pagination.prev_page_url"
+          v-on:click="fetchDokumens(pagination.prev_page_url)"
+          small
+        >Prev</v-btn>
+        <div class="divider" />
+        <v-btn
+          :disabled="!pagination.next_page_url"
+          v-on:click="fetchDokumens(pagination.next_page_url)"
+          small
+        >Next</v-btn>
+      </v-row>
     </v-row>
     <modal :adaptive="true" width="50%" height="50%" name="modal-laporan">
       <tab-laporan :laporans_props="laporans_props"></tab-laporan>
@@ -33,7 +41,7 @@
           v-bind:key="d.dokumen_permohonan_id"
           v-on:click="openFile(d.file_link)"
         >
-          <th scope="row">{{index+1}}</th>
+          <th scope="row">{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
           <td>{{d.file_name}}</td>
           <td>{{d.file_size}}</td>
           <td>{{d.komen}}</td>
@@ -55,26 +63,50 @@
 <script>
 import dayjs from "dayjs";
 export default {
-  props: ["dokumens_props"],
+  props: ["permohonan_id_props"],
   data() {
     return {
       dokumens: [],
       permohonan: "",
       laporans_props: [],
+      pagination: {},
       alignment: "center",
+      justify: "center",
+      permohonan_id: this.permohonan_id_props,
       end: "end"
     };
   },
   created() {
-    this.dokumens = this.dokumens_props;
+    this.fetchDokumens();
   },
 
   methods: {
+    fetchDokumens(page_url) {
+      // let that = this;
+      page_url = page_url || "/api/senarai-dokumen/" + this.permohonan_id;
+      fetch(page_url)
+        .then(res => res.json())
+        .then(res => {
+          console.log(res);
+          this.dokumens = res.data;
+          this.makePagination(res);
+        });
+    },
     date(created_at) {
       if (!created_at) {
         return null;
       }
       return dayjs(created_at).format("LLL");
+    },
+    makePagination(res) {
+      let pagination = {
+        total: res.total,
+        current_page: res.current_page,
+        next_page_url: res.next_page_url,
+        prev_page_url: res.prev_page_url,
+        per_page: res.per_page
+      };
+      this.pagination = pagination;
     },
     showLaporan() {
       this.$modal.show("modal-laporan");
@@ -83,7 +115,7 @@ export default {
       this.laporans_props = laporans;
     },
     openFile(file_link) {
-      return window.open("/storage/cadangan_permohonan_baharu/" + file_link);
+      return window.open("/storage/cadangan/" + file_link);
     }
   }
 };

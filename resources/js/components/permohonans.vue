@@ -6,19 +6,12 @@
           <h3>Senarai permohonan dihantar</h3>
           <hr />
         </v-col>
-
         <v-row style="padding-right:45px" class="padding-right" :align="alignment" :justify="end">
           <v-btn v-on:click="showModel()" color="primary" normal>
             <v-icon left dark>mdi-plus</v-icon>Permohonan
           </v-btn>
           <modal height="auto" width="25%" :scrollable="true" name="permohonan_baharu">
-            <permohonanModal @event="fetchPermohonans"></permohonanModal>
-          </modal>
-          <modal :adaptive="true" width="50%" height="50%" name="dokumen_permohonan">
-            <dokumenModal :permohonan_id="permohonan_id"></dokumenModal>
-          </modal>
-          <modal :adaptive="true" width="60%" height="50%" name="kemajuan_permohonan">
-            <kemajuanModal :permohonan_id="permohonan_id"></kemajuanModal>
+            <PermohonanModal @event="fetchPermohonans"></PermohonanModal>
           </modal>
         </v-row>
       </v-row>
@@ -51,7 +44,6 @@
                 <th scope="col">NO</th>
                 <th scope="col">JENIS</th>
                 <th scope="col">ID</th>
-                <th scope="col">BIL HANTAR</th>
                 <th scope="col">TAJUK</th>
                 <th scope="col">TARIKH HANTAR</th>
                 <th scope="col">STATUS</th>
@@ -71,7 +63,6 @@
                 >{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
                 <td>{{p.jenis_permohonan.jenis_permohonan_huraian}}</td>
                 <td>{{p.permohonan_id}}</td>
-                <td>{{p.dokumen_permohonans.length}}</td>
                 <td>{{p.doc_title}}</td>
                 <td>{{date(p.created_at)}}</td>
                 <td>{{p.status_permohonan.status_permohonan_huraian}}</td>
@@ -108,7 +99,7 @@
 </template>
 
 <script>
-import PermohonansModal from "./PermohonanModal";
+import permohonanModal from "./PermohonanModal";
 import dayjs from "dayjs";
 export default {
   data() {
@@ -123,7 +114,7 @@ export default {
     };
   },
   components: {
-    PermohonansModal
+    permohonanModal
   },
   created() {
     this.fetchPermohonans();
@@ -131,7 +122,7 @@ export default {
   methods: {
     fetchPermohonans(page_url) {
       let that = this;
-      page_url = page_url || "api/permohonan_dihantar";
+      page_url = page_url || "api/senarai-permohonan-dihantar";
       fetch(page_url)
         .then(res => res.json())
         .then(res => {
@@ -168,18 +159,9 @@ export default {
     },
     showModel() {
       this.$modal.show("permohonan_baharu");
-    },
-    showKemajuanModel() {
-      this.$modal.show("kemajuan_permohonan");
-    },
-    showDokumenModel() {
-      this.$modal.show("dokumen_permohonan");
     }
   }
 };
 </script>
 <style>
-/* td {
-  cursor: pointer;
-} */
 </style>

@@ -1,14 +1,27 @@
 <template>
   <div>
-    <v-row
-      style="padding-right:20px; padding-top:8px; padding-bottom:8px"
-      class="padding-right"
-      :align="alignment"
-      :justify="end"
-    >
-      <v-btn small>Prev</v-btn>
-      <div class="divider" />
-      <v-btn small>Next</v-btn>
+    <v-row :align="alignment" :justify="justify">
+      <div style="padding-left:20px; padding-top:20px">
+        <p>{{ pagination.total }} keputusan</p>
+      </div>
+      <v-row
+        style="padding-right:25px; padding-top:8px; padding-bottom:8px"
+        class="padding-right"
+        :align="alignment"
+        :justify="end"
+      >
+        <v-btn
+          :disabled="!pagination.prev_page_url"
+          v-on:click="fetchLaporans(pagination.prev_page_url)"
+          small
+        >Prev</v-btn>
+        <div class="divider" />
+        <v-btn
+          :disabled="!pagination.next_page_url"
+          v-on:click="fetchLaporans(pagination.next_page_url)"
+          small
+        >Next</v-btn>
+      </v-row>
     </v-row>
     <table class="table table-hover">
       <thead>
@@ -16,6 +29,7 @@
           <th scope="col">No</th>
           <th scope="col">Laporan</th>
           <th scope="col">Dihantar</th>
+          <th scope="col">Laporan Id</th>
           <th scope="col">Pihak</th>
           <th scope="col">Komen</th>
           <th scope="col">Versi</th>
@@ -29,10 +43,11 @@
           v-bind:key="l.laporan_id"
           v-on:click="openFile(l.tajuk_fail_link)"
         >
-          <th scope="row">{{index+1}}</th>
+          <th scope="row">{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
           <td>{{l.tajuk_fail_link}}</td>
-          <td>{{l.id_penghantar.name}}</td>
-          <td>{{l.id_penghantar.role}}</td>
+          <td>{{l.id_penghantar_nama.name}}</td>
+          <td>{{l.laporan_id}}</td>
+          <td>{{l.id_penghantar_nama.role|uppercase}}</td>
           <td>{{l.komen}}</td>
           <td>{{l.versi_laporan}}</td>
           <td>{{date(l.created_at)}}</td>
@@ -44,18 +59,49 @@
 <script>
 import dayjs from "dayjs";
 export default {
-  props: ["laporans_props"],
+  props: ["permohonan_id_props"],
   data() {
     return {
       laporans: [],
       alignment: "center",
-      end: "end"
+      end: "end",
+      justify: "center",
+      pagination: {},
+      permohonan_id: this.permohonan_id_props
     };
   },
   created() {
-    this.laporans = this.laporans_props;
+    this.fetchLaporans();
+  },
+  filters: {
+    uppercase: function(value) {
+      if (!value) {
+        return "";
+      }
+
+      return value.toString().toUpperCase();
+    }
   },
   methods: {
+    fetchLaporans(page_url) {
+      page_url = page_url || "/api/senarai-laporan/" + this.permohonan_id;
+      fetch(page_url)
+        .then(res => res.json())
+        .then(res => {
+          this.laporans = res.data;
+          this.makePagination(res);
+        });
+    },
+    makePagination(res) {
+      let pagination = {
+        total: res.total,
+        current_page: res.current_page,
+        next_page_url: res.next_page_url,
+        prev_page_url: res.prev_page_url,
+        per_page: res.per_page
+      };
+      this.pagination = pagination;
+    },
     date(created_at) {
       if (!created_at) {
         return null;

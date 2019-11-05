@@ -41,14 +41,14 @@
       <v-col v-for="n in 3" :key="n" cols="6" md="4">
         <v-card class="pa-2" outlined tile>.col-6 .col-md-4</v-card>
       </v-col>
-    </v-row> -->
+    </v-row>-->
 
     <!-- Columns are always 50% wide, on mobile and desktop -->
     <!-- <v-row>
       <v-col v-for="n in 2" :key="n" cols="6">
         <v-card class="pa-2" outlined tile>.col-6</v-card>
       </v-col>
-    </v-row> -->
+    </v-row>-->
   </v-container>
 </template>
 
@@ -87,9 +87,6 @@ export default {
         .then(res => {
           console.log(res);
           this.permohonan = res.permohonan;
-          this.dokumens = res.dokumens.data;
-          this.kemajuans = res.kemajuans.data;
-          this.laporans = res.laporans.data;
           this.lists = [
             {
               title: "Tajuk permohonan",
@@ -103,12 +100,12 @@ export default {
             },
             {
               title: "Jumlah dokumen dihantar",
-              subtitle: this.permohonan.dokumen_permohonans.count,
+              subtitle: this.permohonan.dokumen_permohonans_count,
               id: 3
             },
             {
               title: "Jumlah laporan dikeluarkan",
-              subtitle: this.laporans.total,
+              subtitle: this.permohonan.laporans_count,
               id: 4
             },
             { title: "Id", subtitle: this.permohonan.permohonan_id, id: 5 }
@@ -124,44 +121,25 @@ export default {
     },
     currentTabComponent(tab) {
       this.currentTab = "tab-" + tab.toString().toLowerCase();
-      if (this.currentTab == "tab-kemajuan") {
-        this.dataBind = this.kemajuans;
-      } else if (this.currentTab == "tab-dokumen") {
-        this.dataBind = this.dokumens;
-      } else {
-        this.dataBind = this.laporans;
-      }
+      // if (this.currentTab == "tab-kemajuan") {
+      //   this.dataBind = this.kemajuans;
+      // } else if (this.currentTab == "tab-dokumen") {
+      //   this.dataBind = this.dokumens;
+      // } else {
+      //   this.dataBind = this.laporans;
+      // }
       return this.currentTab;
     },
     getDataBind() {
-      if (this.currentTab == "tab-kemajuan") {
-        return { kemajuans_props: this.kemajuans };
-      } else if (this.currentTab == "tab-dokumen") {
-        return { dokumens_props: this.dokumens };
-      } else {
-        return { laporans_props: this.laporans };
-      }
-      // console.log(this.dataBind);
-      // return this.dataBind;
-
       // if (this.currentTab == "tab-kemajuan") {
-      //   return this.kemajuans;
+      //   return { permohonan_id_props: this.permohonan.permohonan_id };
       // } else if (this.currentTab == "tab-dokumen") {
-      //   return this.dokumens;
+      //   return { permohonan_id_props: this.permohonan.permohonan_id };
       // } else {
-      //   return this.laporans;
+      //   return { permohonan_id_props: this.permohonan.permohonan_id };
       // }
+      return { permohonan_id_props: this.permohonan.permohonan_id };
     }
-    // makePagination(res) {
-    //   let pagination = {
-    //     total: res.total,
-    //     current_page: res.current_page,
-    //     next_page_url: res.next_page_url,
-    //     prev_page_url: res.prev_page_url,
-    //     per_page: res.per_page
-    //   };
-    //   this.pagination = pagination;
-    // }
   }
 };
 </script>

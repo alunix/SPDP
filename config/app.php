@@ -40,7 +40,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -146,10 +146,10 @@ return [
         Illuminate\Session\SessionServiceProvider::class,
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
-        Illuminate\View\ViewServiceProvider::class, 
+        Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class, //Laravel CollectiveS
         ConsoleTVs\Charts\ChartsServiceProvider::class, //LaravelChart
-        
+
 
         /*
          * Package Service Providers...
@@ -215,12 +215,12 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class, //laravel collective
-       
+
         'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
-      
-        
-        
-        
+
+
+
+
 
     ],
 

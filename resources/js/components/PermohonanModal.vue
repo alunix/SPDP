@@ -6,6 +6,7 @@
     <hr />
 
     <v-form ref="form" @submit.prevent="submit">
+    
       <v-select
         v-model="jenis_permohonan_id"
         item-text="name"
@@ -132,7 +133,7 @@ export default {
       this.success = false;
       this.errors = {};
       axios
-        .post("api/permohonan_submit", formData, {
+        .post("api/permohonan/submit", formData, {
           headers: {
             "Content-Type": "multipart/form-data"
           }

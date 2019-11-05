@@ -1,36 +1,50 @@
 <template>
-  <div class="container">
+  <v-container>
     <div class="au-breadcrumb-left">
       <div class="overview-wrap">
-        <h2 class="title-1">Permohonan</h2>
+        <h2 class="title-1">Senarai permohonan</h2>
         <hr />
       </div>
     </div>
-    <div class="table-data__tool">
-      <div class="table-data__tool-left"></div>
-    </div>
-    <div>
-      <b-tabs content-class="mt-3" justified>
-        <b-tab title="Baharu" active>
-          <senaraiPermohonan></senaraiPermohonan>
-        </b-tab>
-        <b-tab title="Untuk diperakui">
-          <!-- <p>I'm the second tab</p> -->
-        </b-tab>
-        <b-tab title="Penilaian panel">
-          <!-- <p>I'm the tab with the very, very long title</p> -->
-        </b-tab>
-      </b-tabs>
-    </div>
-  </div>
+    <v-divider></v-divider>
+
+    <v-row style="height:20px">
+      <v-col cols="5" md="12">
+        <v-card outlined tile>
+          <v-tabs fixed-tabs>
+            <v-tab
+              v-for="tab in tabs"
+              @click="currentTabComponent(tab.value)"
+              v-bind:key="tab.value"
+            >{{tab.title}}</v-tab>
+          </v-tabs>
+          <keep-alive>
+            <component v-bind:is="currentTab"></component>
+          </keep-alive>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
 export default {
   data() {
-    return {};
+    return {
+      tabs: [
+        { title: "baru", value: "tabSenaraiBaru", id: 1 },
+        { title: "perakuan", value: "tabSenaraiPerakuan", id: 2 },
+        { title: "penilaian panel", value: "tabPenilaianPanel", id: 3 }
+      ],
+      currentTab: "tabSenaraiBaru"
+    };
   },
   created() {},
-  methods: {}
+  methods: {
+    currentTabComponent(tab) {
+      this.currentTab = tab;
+      return this.currentTab;
+    }
+  }
 };
 </script>

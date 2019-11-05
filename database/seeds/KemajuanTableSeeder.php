@@ -14,7 +14,7 @@ class KemajuanTableSeeder extends Seeder
         $p = Permohonan::all()->pluck('permohonan_id')->toArray();
         $s = StatusPermohonan::all()->pluck('status_id')->toArray();
 
-        for($i=0; $i<350; $i++) {
+        for($i=0; $i<1000; $i++) {
             DB::table('kemajuan_permohonans')->insert([
             'permohonan_id' =>  $faker->randomElement($p),
             'status_permohonan' => $faker->randomElement($s),

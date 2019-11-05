@@ -56,7 +56,7 @@
 <body>
     <div id="app">
         @guest
-       
+
         @else
         <header class="header-desktop3 d-none d-lg-block">
             <div class="section__content section__content--p35">
@@ -82,21 +82,23 @@
                                 </router-link>
                             </li>
                             @else
-                            <li class="has-sub">
-                                <a href="#">
+                            <li>
+                                <router-link :to="{name: 'senarai-baru'}">
                                     <i class="fas fa-list"></i>
-                                    <span class="bot-line"></span>Permohonan</a>
-                                <ul class="header3-sub-list list-unstyled">
-                                    <li>
-                                        <router-link to="senarai-permohonan-baharu">Senarai permohonan baharu</router-link>
-                                    </li>
-                                </ul>
+                                    <span class="bot-line"></span>Permohonan
+                                </router-link>
                             </li>
                             @endif
                             <li>
                                 <router-link to="/analitik">
-                                   <i class="fas fa-chart-bar"></i>
+                                    <i class="fas fa-chart-bar"></i>
                                     <span class="bot-line"></span>Analitik</a>
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link :to="{name: 'pengguna'}">
+                                    <i class="fas fa-users"></i>
+                                    <span class="bot-line"></span>Pengguna</a>
                                 </router-link>
                             </li>
                         </ul>
@@ -115,8 +117,8 @@
                                             </router-link>
                                         </div>
                                         <div class="account-dropdown__item">
-                                             <router-link to="/workflow_settings">
-                                                 <i class="#"></i>Email workflow settings
+                                            <router-link to="/workflow_settings">
+                                                <i class="#"></i>Email workflow settings
                                             </router-link>
                                         </div>
                                     </div>
@@ -136,7 +138,7 @@
             </div>
         </header>
         @endguest
-        <main class="container"  style="background-color:white">
+        <main class="container" style="background-color:white">
             <!-- Message in blade testing on 27/1/2019 by Bezane -->
             @if (Session::has('message'))
             <div class="alert alert-success" role="alert">
@@ -151,19 +153,20 @@
             @guest
             @yield('content')
             @else
-           
+
             <v-app id="app">
-            <router-view>
-            </<router-view>
+                <router-view>
+                    </<router-view>
             </v-app>
-            
-                  
+
+
             @endguest
-            
+
         </main>
         @yield('div')
     </div>
 </body>
 @yield('myjsfile')
+
 </html>
 <script src="{{ asset('js/app.js') }}"></script>

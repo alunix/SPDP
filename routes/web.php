@@ -14,17 +14,25 @@ Auth::routes();
 Route::post('/search', 'SearchController@search')->name('search');
 /*----------------------- API REST VUE ------------- */
 Route::group(['prefix' => 'api', 'middleware' => 'auth'], function () {
+	Route::get('/role', 'UserController@getRole')->name('api.role');
 	/* Fakulti */
-	Route::get('/permohonan_dihantar', 'PermohonanController@api_permohonanDihantar')->name('api.permohonan.dihantar');
-	Route::post('/permohonan_submit', 'PermohonanController@store')->name('api.permohonan.submit');
+	Route::get('/senarai-permohonan-dihantar', 'PermohonanController@api_permohonanDihantar')->name('api.permohonan.dihantar');
+	Route::post('/permohonan/submit', 'PermohonanController@store')->name('api.permohonan.submit');
 	Route::get('/permohonan/{permohonan}', 'PermohonanController@show')->name('view-permohonan-baharu');
-	Route::get('/kemajuan-permohonan/{permohonan}', 'KemajuanPermohonanController@show')->name('api.fakulti.kemajuanPermohonan');	
+
 	/*----------------------- Senarai dokumen permohonan ------------- */
-	Route::get('/senarai-dokumen-permohonan/{permohonan}', 'DokumenPermohonanController@show')->name('api.dokumen.dihantar');
+	Route::get('/senarai-dokumen/{permohonan}', 'DokumenPermohonanController@show')->name('api.dokumen.dihantar');
+	Route::get('/senarai-kemajuan/{permohonan}', 'KemajuanPermohonanController@show')->name('api.kemajuan.index');
+	Route::get('/senarai-laporan/{permohonan}', 'LaporanController@show')->name('api.laporan.index');
 	Route::get('/dokumen/{file_link}', 'DokumenPermohonanController@downloadDokumen')->name('api.dokumen.download');
 	/*----------------------- PJK menerima program pengajian daripada fakulti ------------- */
 	Route::get('/senarai-permohonan-baharu', 'PermohonanController@api_showListPermohonanBaharu')->name('api.senaraiPermohonan');
-	Route::get('/dashboard', 'HomeController@index')->middleware('auth')->name('home'); //Redirect index page to login if not authenticated and will return homepage if authenticated.
+	Route::get('/senarai-perakuan', 'PermohonanController@senaraiPerakuan')->name('api.senaraiPerakuan');
+	Route::get('/dashboard', 'HomeController@index')->middleware('auth')->name('home');
+	Route::get('/senarai-penilaian', 'PenilaianPanelController@index')->name('penilaian.show');
+	Route::get('/users', 'UserController@getUsers');
+	Route::get('/fakultis', 'FakultiController@getFakultis');
+	Route::post('/daftar-pengguna', 'UserController@daftarPengguna')->name('register.panel_penilai.submit');
 });
 
 // /*-----------------------Fakulti------------- */
@@ -97,5 +105,5 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function () {
 // });
 
 Route::get('{any}', function () {
-    return view('layouts/app');
-})->where('any','.*')->middleware('auth');
+	return view('layouts/app');
+})->where('any', '.*')->middleware('auth');

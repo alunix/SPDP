@@ -7,11 +7,11 @@
           <hr />
         </v-col>
         <v-row style="padding-right:45px" class="padding-right" :align="alignment" :justify="end">
-          <v-btn v-on:click="showModel()" color="primary" small>
+          <v-btn v-on:click="setUserId();showModel()" color="primary" small>
             <v-icon left dark>mdi-plus</v-icon>Baru
           </v-btn>
           <modal height="auto" width="25%" :scrollable="true" name="ModalPengguna">
-            <ModalPengguna @event="fetchUsers"></ModalPengguna>
+            <ModalPengguna :user_id_props="user_id" @event="fetchUsers"></ModalPengguna>
           </modal>
         </v-row>
       </v-row>
@@ -60,7 +60,7 @@
                 <td>{{u.role|uppercase}}</td>
                 <td>{{date(u.created_at)}}</td>
                 <td>
-                  <v-btn v-on:click="showModel()" color="normal" small>
+                  <v-btn v-on:click="setUserId(u.id);showModel()" color="normal" small>
                     <v-icon></v-icon>Edit
                   </v-btn>
                   <div class="divider" />
@@ -78,7 +78,6 @@
 </template>
 
 <script>
-// import PermohonansModal from "./PermohonanModal";
 import dayjs from "dayjs";
 export default {
   data() {
@@ -89,7 +88,8 @@ export default {
       alignment: "center",
       justify: "center",
       start: "start",
-      end: "end"
+      end: "end",
+      user_id: ""
     };
   },
   filters: {
@@ -114,6 +114,9 @@ export default {
           this.users = res.data;
           that.makePagination(res);
         });
+    },
+    setUserId(id) {
+      this.user_id = id;
     },
     date(created_at) {
       if (!created_at) {

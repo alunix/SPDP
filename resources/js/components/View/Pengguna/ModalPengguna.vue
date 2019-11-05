@@ -105,10 +105,12 @@ export default {
         });
     },
     isEditingMode() {
-      if ((this.user_id = null || "")) {
+      if (this.user_id == null || "") {
         this.mode = "Cipta";
         this.editingMode = false;
       } else {
+        //TODO
+        // set role data on modal when edit user
         this.mode = "Kemaskini";
         fetch("api/pengguna/" + this.user_id + "/edit")
           .then(res => res.json())
@@ -124,8 +126,6 @@ export default {
       }
     },
     submit() {
-      //TODO
-      //add props to pengguna.vue when select edit send user.id
       let formData = new FormData();
       formData.append("name", this.name);
       formData.append("email", this.email);

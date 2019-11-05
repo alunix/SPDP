@@ -24,11 +24,20 @@ class UserController extends Controller
 
     public function daftarPengguna(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required|string|min:1',
-            'email' => 'required|email|max:255|unique:users',
-            'role' => 'required|string',
-        ]);
+        if ($request->input('role') == 'Fakulti') {
+            $this->validate($request, [
+                'name' => 'required|string|min:1',
+                'email' => 'required|email|max:255|unique:users',
+                'role' => 'required|string',
+                'fakulti' => 'required'
+            ]);
+        } else {
+            $this->validate($request, [
+                'name' => 'required|string|min:1',
+                'email' => 'required|email|max:255|unique:users',
+                'role' => 'required|string',
+            ]);
+        }
 
         $user = new User();
         $user->name = $request->input('name');

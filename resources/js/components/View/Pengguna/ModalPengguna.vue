@@ -1,12 +1,11 @@
 <template>
   <div class="card-body">
+    <h4>Tambah pengguna</h4>
+    <v-divider></v-divider>
     <v-alert
       v-if="success"
       type="success"
     >Pengguna berjaya didaftar dan emel telah dihantar kepada pengguna</v-alert>
-    <!-- <v-alert v-if="error" type="error">Pengguna tidak dapat didaftar</v-alert> -->
-    <h4>Tambah pengguna</h4>
-    <v-divider></v-divider>
 
     <v-form ref="form" @submit.prevent="submit">
       <v-alert type="error" v-if="error">
@@ -44,10 +43,9 @@
         v-model="fakulti"
         label="Pilih fakulti"
         item-text="f_nama"
-        item-value="fakulti"
+        item-value="fakulti_id"
         :items="fakultis"
         :rules="[rules.required]"
-        :required="role == 'Fakulti'"
         :error-messages="fakulti.error"
       ></v-select>
 
@@ -57,7 +55,7 @@
       </v-row>
     </v-form>
 
-    <hr />
+    <v-divider></v-divider>
   </div>
 </template>
 <script>
@@ -98,22 +96,18 @@ export default {
         .then(res => res.json())
         .then(res => {
           this.fakultis = res;
+          console.log(res);
         });
-    },
-    requiredPassword() {
-      if (this.passwordChoice == "true") {
-        return true;
-      } else {
-        return false;
-      }
     },
     submit() {
       let formData = new FormData();
       formData.append("name", this.name);
       formData.append("email", this.email);
       formData.append("role", this.role);
-      if (!this.fakulti == null) {
+      // console.log(formData);
+      if (!this.fakulti == "") {
         formData.append("fakulti", this.fakulti);
+        console.log("Exist");
       }
       axios
         .post("api/daftar-pengguna", formData, {
@@ -123,16 +117,16 @@ export default {
         })
         .then(res => {
           console.log(res);
+          this.error = false;
           this.success = true;
-          this.user = [];
-          this.$emit("event");
+          this.name = "";
+          (this.role = ""), (this.email = ""), this.$emit("event");
         })
         .catch(error => {
           if (error.response.status === 422) {
-            // this.errors = error.response.data.errors || {};
-            console.log(error.response.data.errors);
             this.errors = error.response.data.errors;
             console.log(this.errors);
+            this.success = false;
             this.error = true;
           }
         });

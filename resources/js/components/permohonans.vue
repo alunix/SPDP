@@ -67,28 +67,6 @@
                 <td>{{date(p.created_at)}}</td>
                 <td>{{p.status_permohonan.status_permohonan_huraian}}</td>
                 <td>{{date(p.updated_at)}}</td>
-                <!-- <td>
-                  <div class="table-data-feature">
-                    <button
-                      v-on:click="showKemajuanModel();setPermohonanId(p.permohonan_id)"
-                      class="item"
-                      data-toggle="tooltip"
-                      data-placement="top"
-                      title="Kemajuan Permohonan"
-                    >
-                      <i class="fas fa-spinner"></i>
-                    </button>
-                    <button
-                      v-on:click="showDokumenModel();setPermohonanId(p.permohonan_id)"
-                      class="item"
-                      data-toggle="tooltip"
-                      data-placement="top"
-                      title="Dokumen dihantar"
-                    >
-                      <i class="fas fa-file-upload"></i>
-                    </button>
-                  </div>
-                </td>-->
               </tr>
             </tbody>
           </table>

@@ -1,6 +1,6 @@
 <template>
   <div class="card-body">
-    <h4>Tambah pengguna</h4>
+    <h4>{{mode}} pengguna</h4>
     <v-divider></v-divider>
     <v-alert
       v-if="success"
@@ -50,7 +50,7 @@
       ></v-select>
 
       <v-row style="padding-right:15px" :align="alignment" :justify="end">
-        <v-btn color="normal" accept=".pdf" class="mr-4" @click="$modal.hide('ModalPengguna')">Batal</v-btn>
+        <v-btn color="normal" class="mr-4" @click="$modal.hide('ModalPengguna')">Batal</v-btn>
         <v-btn type="submit" color="primary">Hantar</v-btn>
       </v-row>
     </v-form>
@@ -60,6 +60,7 @@
 </template>
 <script>
 export default {
+  props: ["user_id_props"],
   data() {
     return {
       fakultis: [],
@@ -67,16 +68,20 @@ export default {
       email: "",
       role: "",
       fakulti: "",
+      user: {},
       errors: {},
       peranans: ["Penilai", "PJK", "JPPA", "Senat", "Fakulti"],
       rules: {
         required: v => !!v || "Sila isi bahagian ini"
       },
       success: false,
+      user_id: this.user_id_props,
+      editingMode: true,
       error: false,
       loaded: true,
       alignment: "center",
-      end: "end"
+      end: "end",
+      api: "api/daftar-pengguna"
     };
   },
   filters: {
@@ -88,6 +93,7 @@ export default {
     }
   },
   created() {
+    this.isEditingMode();
     this.getFakultis();
   },
   methods: {
@@ -96,27 +102,44 @@ export default {
         .then(res => res.json())
         .then(res => {
           this.fakultis = res;
-          console.log(res);
         });
     },
+    isEditingMode() {
+      if ((this.user_id = null || "")) {
+        this.mode = "Cipta";
+        this.editingMode = false;
+      } else {
+        this.mode = "Kemaskini";
+        fetch("api/pengguna/" + this.user_id + "/edit")
+          .then(res => res.json())
+          .then(res => {
+            this.name = res.name;
+            this.email = res.email;
+            this.role = res.role;
+            if (res.fakulti_id) {
+              this.fakulti = res.fakulti_id;
+            }
+            this.api = "api/kemaskini-pengguna";
+          });
+      }
+    },
     submit() {
+      //TODO
+      //add props to pengguna.vue when select edit send user.id
       let formData = new FormData();
       formData.append("name", this.name);
       formData.append("email", this.email);
       formData.append("role", this.role);
-      // console.log(formData);
       if (!this.fakulti == "") {
         formData.append("fakulti", this.fakulti);
-        console.log("Exist");
       }
       axios
-        .post("api/daftar-pengguna", formData, {
+        .post(this.api, formData, {
           headers: {
             "Content-Type": "multipart/form-data"
           }
         })
         .then(res => {
-          console.log(res);
           this.error = false;
           this.success = true;
           this.name = "";
@@ -125,7 +148,6 @@ export default {
         .catch(error => {
           if (error.response.status === 422) {
             this.errors = error.response.data.errors;
-            console.log(this.errors);
             this.success = false;
             this.error = true;
           }

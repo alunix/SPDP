@@ -33,8 +33,8 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function () {
 	Route::get('/users', 'UserController@getUsers');
 	Route::get('/fakultis', 'FakultiController@getFakultis');
 	Route::post('/daftar-pengguna', 'UserController@daftarPengguna')->name('register.panel_penilai.submit');
-	Route::post('/pengguna/{id}', 'UserController@update')->name('settings.submit');
-	Route::post('/kemaskini-pengguna', 'UserController@update')->name('settings.submit');
+	Route::get('/pengguna/{id}/edit', 'UserController@editPengguna')->name('api.user.edit');
+	Route::post('/kemaskini-pengguna', 'UserController@update')->name('api.user.update');
 });
 
 // /*-----------------------Fakulti------------- */

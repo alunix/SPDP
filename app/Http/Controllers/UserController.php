@@ -35,7 +35,7 @@ class UserController extends Controller
         $user->email = $request->input('email');
         $user->role =  strtolower($request->input('role'));
         if ($request->input('role') == 'Fakulti') {
-            $user->fakulti_id = $request->input('fakulti_id');
+            $user->fakulti_id = $request->input('fakulti');
         }
         $password = str_random(8);
         $user->password = Hash::make($password);
@@ -68,7 +68,7 @@ class UserController extends Controller
             $user->email = $request->get('email');
 
             if ($role == 'fakulti') {
-                $user->fakulti_id = $request->get('fakulti');
+                $user->fakulti = $request->get('fakulti');
                 $user->save();
             } else
                 $user->save();

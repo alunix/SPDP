@@ -41,14 +41,14 @@
 
       <v-select
         v-if="role == 'Fakulti'"
-        v-model="fakulti_id"
+        v-model="fakulti"
         label="Pilih fakulti"
         item-text="f_nama"
-        item-value="fakulti_id"
+        item-value="fakulti"
         :items="fakultis"
         :rules="[rules.required]"
         :required="role == 'Fakulti'"
-        :error-messages="fakulti_id.error"
+        :error-messages="fakulti.error"
       ></v-select>
 
       <v-row style="padding-right:15px" :align="alignment" :justify="end">
@@ -68,7 +68,7 @@ export default {
       name: "",
       email: "",
       role: "",
-      fakulti_id: "",
+      fakulti: "",
       errors: {},
       peranans: ["Penilai", "PJK", "JPPA", "Senat", "Fakulti"],
       rules: {
@@ -112,8 +112,8 @@ export default {
       formData.append("name", this.name);
       formData.append("email", this.email);
       formData.append("role", this.role);
-      if (!this.fakulti_id == null) {
-        formData.append("fakulti_id", this.fakulti_id);
+      if (!this.fakulti == null) {
+        formData.append("fakulti", this.fakulti);
       }
       axios
         .post("api/daftar-pengguna", formData, {

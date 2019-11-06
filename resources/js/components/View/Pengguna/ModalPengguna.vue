@@ -95,7 +95,7 @@ export default {
       editingMode: true,
       error: false,
       end: "end",
-      api: "api/daftar-pengguna",
+      api: "api/user/store",
       successMessage: ""
     };
   },
@@ -126,7 +126,7 @@ export default {
         this.loaded = true;
       } else {
         this.mode = "Kemaskini";
-        fetch("api/pengguna/" + this.user_id + "/edit")
+        fetch("api/user/" + this.user_id + "/edit")
           .then(res => res.json())
           .then(res => {
             this.name = res.name;
@@ -135,7 +135,7 @@ export default {
             if (res.fakulti_id) {
               this.fakulti = res.fakulti_id;
             }
-            this.api = "api/pengguna/" + this.user_id + "/update";
+            this.api = "api/user/" + this.user_id + "/update";
             this.loaded = true;
           });
       }
@@ -171,6 +171,9 @@ export default {
           if (!this.editingMode) {
             this.successMessage =
               "Pengguna berjaya didaftar dan emel telah dihantar kepada pengguna";
+            this.name = "";
+            this.email = "";
+            this.role = "";
           } else {
             this.successMessage = "Pengguna berjaya dikemaskini";
           }

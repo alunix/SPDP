@@ -22,7 +22,7 @@ class UserController extends Controller
         return $role;
     }
 
-    public function daftarPengguna(Request $request)
+    public function store(Request $request)
     {
         if ($request->input('role') == 'Fakulti') {
             $this->validate($request, [
@@ -78,7 +78,9 @@ class UserController extends Controller
         $user->role =  strtolower($request->input('role'));
         if ($request->input('role') == 'Fakulti') {
             $user->fakulti_id = $request->input('fakulti');
-        }
+        } else
+            $user->fakulti_id = null;
+
         $user->save();
     }
 }

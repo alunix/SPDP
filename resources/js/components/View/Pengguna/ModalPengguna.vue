@@ -2,10 +2,7 @@
   <div class="card-body">
     <h4>{{mode}} pengguna</h4>
     <v-divider></v-divider>
-    <v-alert
-      v-if="success"
-      type="success"
-    >Pengguna berjaya didaftar dan emel telah dihantar kepada pengguna</v-alert>
+    <v-alert v-if="success" type="success">{{successMessage}}</v-alert>
     <v-row :align="center" :justify="center">
       <v-progress-circular v-if="!loaded" :size="25" :width="2" color="blue-grey" indeterminate></v-progress-circular>
     </v-row>
@@ -54,8 +51,19 @@
         ></v-select>
 
         <v-row style="padding-right:15px" :align="center" :justify="end">
-          <v-btn v-if="editingMode" class="mr-4" v-on:click="showModel()" color="error" normal>Delete</v-btn>         
-          <v-btn color="normal" class="mr-4" @click="$modal.hide('ModalPengguna')">Batal</v-btn>
+          <v-btn
+            v-if="editingMode"
+            class="mr-4"
+            v-on:click="showModel()"
+            color="error"
+            normal
+          >Delete</v-btn>
+          <v-btn
+            color="normal"
+            class="mr-4"
+            @click="$modal.hide('ModalPengguna')"
+            ref="hideButton"
+          >Batal</v-btn>
           <v-btn type="submit" color="primary">Hantar</v-btn>
         </v-row>
       </v-form>
@@ -87,7 +95,8 @@ export default {
       editingMode: true,
       error: false,
       end: "end",
-      api: "api/daftar-pengguna"
+      api: "api/daftar-pengguna",
+      successMessage: ""
     };
   },
   filters: {
@@ -116,23 +125,33 @@ export default {
         this.editingMode = false;
         this.loaded = true;
       } else {
-        //TODO
-        // set role data on modal when edit user
         this.mode = "Kemaskini";
         fetch("api/pengguna/" + this.user_id + "/edit")
           .then(res => res.json())
           .then(res => {
             this.name = res.name;
             this.email = res.email;
-            this.role = res.role;
+            this.role = this.getRoleString(res.role);
             if (res.fakulti_id) {
               this.fakulti = res.fakulti_id;
             }
-            this.api = "api/kemaskini-pengguna";
+            this.api = "api/pengguna/" + this.user_id + "/update";
             this.loaded = true;
           });
       }
     },
+    //match string in database to dropdown value
+    getRoleString(role) {
+      switch (role) {
+        case "pjk":
+        case "jppa":
+          return role.toUpperCase();
+          break;
+        default:
+          return role.charAt(0).toUpperCase() + role.substring(1);
+      }
+    },
+
     submit() {
       let formData = new FormData();
       formData.append("name", this.name);
@@ -149,9 +168,14 @@ export default {
         })
         .then(res => {
           this.error = false;
+          if (!this.editingMode) {
+            this.successMessage =
+              "Pengguna berjaya didaftar dan emel telah dihantar kepada pengguna";
+          } else {
+            this.successMessage = "Pengguna berjaya dikemaskini";
+          }
           this.success = true;
-          this.name = "";
-          (this.role = ""), (this.email = ""), this.$emit("event");
+          this.$emit("event");
         })
         .catch(error => {
           if (error.response.status === 422) {

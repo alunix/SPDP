@@ -50,20 +50,10 @@ class UserController extends Controller
         $user->save();
     }
 
-    public function editPengguna($id)
+    public function edit($id)
     {
         $user = User::find($id);
         return $user;
-    }
-
-    public function edit()
-    {
-        $user_id = auth()->user()->id;
-        $user = User::find($user_id);
-        $fakultiSelected = auth()->user()->fakulti_id;
-
-        $fakultis = Fakulti::all();
-        return view('auth.settings')->with('user', $user)->with('fakultis', $fakultis)->with('selectedFakulti', $fakultiSelected);
     }
 
     public function update(Request $request, $id)
@@ -71,14 +61,14 @@ class UserController extends Controller
         if ($request->input('role') == 'Fakulti') {
             $this->validate($request, [
                 'name' => 'required|string|min:1',
-                'email' => 'required|email|max:255|unique:users',
+                'email' => 'required|email|max:255|',
                 'role' => 'required|string',
                 'fakulti' => 'required'
             ]);
         } else {
             $this->validate($request, [
                 'name' => 'required|string|min:1',
-                'email' => 'required|email|max:255|unique:users',
+                'email' => 'required|email|max:255|',
                 'role' => 'required|string',
             ]);
         }
@@ -90,10 +80,5 @@ class UserController extends Controller
             $user->fakulti_id = $request->input('fakulti');
         }
         $user->save();
-
-        $msg = [
-            'message' => 'Maklumat pengguna berjaya dikemaskini',
-        ];
-        return redirect('/settings')->with($msg);
     }
 }

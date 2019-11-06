@@ -11,7 +11,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('pageTitle') | Persona</title>
     <!-- Scripts -->
-    <script src="{{ asset('js/submit.js') }}" defer></script>
+    <!-- <script src="{{ asset('js/submit.js') }}" defer></script> -->
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
@@ -22,12 +22,6 @@
     <link href="{{ asset('css/font-face.css')}}" rel="stylesheet" media="all">
     <link href="{{ asset('vendor/mdi-font/css/material-design-iconic-font.min.css')}}" rel="stylesheet" media="all">
     <link href="{{ asset('vendor/bootstrap-4.1/bootstrap.min.css')}}" rel="stylesheet" media="all">
-    <link href="{{ asset('vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css')}}" rel="stylesheet" media="all">
-    <link href="{{ asset('vendor/wow/animate.css')}}" rel="stylesheet" media="all">
-    <link href="{{ asset('vendor/css-hamburgers/hamburgers.min.css')}}" rel="stylesheet" media="all">
-    <link href="{{ asset('vendor/slick/slick.css')}}" rel="stylesheet" media="all">
-    <link href="{{ asset('vendor/select2/select2.min.css')}}" rel="stylesheet" media="all">
-    <link href="{{ asset('/vendor/perfect-scrollbar/perfect-scrollbar.css')}}" rel="stylesheet" media="all">
     <link href="{{ asset('css/theme.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
@@ -38,13 +32,6 @@
     <script src="{{asset('vendor/bootstrap-4.1/popper.min.js') }}" defer></script>
     <script src="{{asset('vendor/bootstrap-4.1/bootstrap.min.js') }}" defer></script>
     <!-- Vendor JS       -->
-    <script src="{{asset('vendor/slick/slick.min.js')}}" defer></script>
-    <script src="{{asset('vendor/wow/wow.min.js') }}" defer></script>
-    <script src="{{asset('vendor/counter-up/jquery.waypoints.min.js') }}" defer></script>
-    <script src="{{asset('vendor/counter-up/jquery.counterup.min.js')}}" defer></script>
-    <script src="{{asset('vendor/circle-progress/circle-progress.min.js') }}" defer></script>
-    <script src="{{asset('vendor/perfect-scrollbar/perfect-scrollbar.js') }}" defer></script>
-    <script src="{{asset('vendor/select2/select2.min.js')}}" defer></script>
     <!-- Main JS-->
     <script src="{{asset('js/main.js')}}" defer></script>
     <!-- Vuetify icon -->

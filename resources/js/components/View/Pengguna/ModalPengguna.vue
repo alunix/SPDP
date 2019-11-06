@@ -64,7 +64,7 @@
             @click="$modal.hide('ModalPengguna')"
             ref="hideButton"
           >Batal</v-btn>
-          <v-btn type="submit" color="primary">Hantar</v-btn>
+          <v-btn :loading="loading" type="submit" color="primary">Hantar</v-btn>
         </v-row>
       </v-form>
     </div>
@@ -96,7 +96,8 @@ export default {
       error: false,
       end: "end",
       api: "api/user/store",
-      successMessage: ""
+      successMessage: "",
+      loading: false
     };
   },
   filters: {
@@ -153,6 +154,7 @@ export default {
     },
 
     submit() {
+      this.loading = true;
       let formData = new FormData();
       formData.append("name", this.name);
       formData.append("email", this.email);
@@ -178,6 +180,7 @@ export default {
             this.successMessage = "Pengguna berjaya dikemaskini";
           }
           this.success = true;
+          this.loading = false;
           this.$emit("event");
         })
         .catch(error => {

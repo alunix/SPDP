@@ -1,12 +1,13 @@
 <template>
   <v-container>
     <v-card>
-      <v-row class="left-padding" :align="alignment" :justify="start">
+      <v-row class="left-padding" :align="center" :justify="start">
         <v-col class="divider" cols="3" md="6">
           <h3>Pengguna</h3>
           <hr />
         </v-col>
-        <v-row style="padding-right:45px" class="padding-right" :align="alignment" :justify="end">
+
+        <v-row style="padding-right:45px" class="padding-right" :align="center" :justify="end">
           <v-btn v-on:click="setUserId();showModel()" color="primary" small>
             <v-icon left dark>mdi-plus</v-icon>Baru
           </v-btn>
@@ -16,63 +17,64 @@
         </v-row>
       </v-row>
 
-      <v-row :align="alignment" :justify="justify">
-        <div style="padding-left:35px">
-          <p>{{ pagination.total }} pengguna</p>
-        </div>
+      <v-row :align="center" :justify="center">
+        <v-progress-circular v-if="!loaded" :size="25" :width="2" color="blue-grey" indeterminate></v-progress-circular>
+      </v-row>
+      <div v-if="loaded">
+        <v-row :align="center" :justify="center">
+          <div style="padding-left:35px">
+            <p>{{ pagination.total }} pengguna</p>
+          </div>
 
-        <v-row style="padding-right:45px" class="padding-right" :align="alignment" :justify="end">
-          <v-btn
-            :disabled="!pagination.prev_page_url"
-            v-on:click="fetchUsers(pagination.prev_page_url)"
-            small
-          >Prev</v-btn>
-          <div class="divider" />
-          <v-btn
-            :disabled="!pagination.next_page_url"
-            v-on:click="fetchUsers(pagination.next_page_url)"
-            small
-          >Next</v-btn>
+          <v-row style="padding-right:45px" class="padding-right" :align="center" :justify="end">
+            <v-btn
+              :disabled="!pagination.prev_page_url"
+              v-on:click="fetchUsers(pagination.prev_page_url)"
+              small
+            >Prev</v-btn>
+            <div class="divider" />
+            <v-btn
+              :disabled="!pagination.next_page_url"
+              v-on:click="fetchUsers(pagination.next_page_url)"
+              small
+            >Next</v-btn>
+          </v-row>
         </v-row>
-      </v-row>
 
-      <v-row :align="alignment" :justify="justify">
-        <v-col>
-          <table class="table table-hover">
-            <thead class="thead-light">
-              <tr>
-                <th scope="col">NO</th>
-                <th scope="col">NAME</th>
-                <th scope="col">EMAIL</th>
-                <th scope="col">PERANAN</th>
-                <th scope="col">TARIKH DICIPTA</th>
-                <th></th>
-              </tr>
-            </thead>
+        <v-row :align="center" :justify="center">
+          <v-col>
+            <table class="table table-hover">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">NO</th>
+                  <th scope="col">NAME</th>
+                  <th scope="col">EMAIL</th>
+                  <th scope="col">PERANAN</th>
+                  <th scope="col">TARIKH DICIPTA</th>
+                  <th></th>
+                </tr>
+              </thead>
 
-            <tbody id="permohonans-add">
-              <tr class="tr-shadow td-cursor" v-for="(u, index) in users" v-bind:key="u.id">
-                <th
-                  scope="row"
-                >{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
-                <td>{{u.name}}</td>
-                <td>{{u.email}}</td>
-                <td>{{u.role|uppercase}}</td>
-                <td>{{date(u.created_at)}}</td>
-                <td>
-                  <v-btn v-on:click="setUserId(u.id);showModel()" color="normal" small>
-                    <v-icon></v-icon>Edit
-                  </v-btn>
-                  <div class="divider" />
-                  <v-btn v-on:click="showModel()" color="error" small>
-                    <v-icon></v-icon>Delete
-                  </v-btn>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </v-col>
-      </v-row>
+              <tbody id="permohonans-add">
+                <tr class="tr-shadow td-cursor" v-for="(u, index) in users" v-bind:key="u.id">
+                  <th
+                    scope="row"
+                  >{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
+                  <td>{{u.name}}</td>
+                  <td>{{u.email}}</td>
+                  <td>{{u.role|uppercase}}</td>
+                  <td>{{date(u.created_at)}}</td>
+                  <td>
+                    <v-btn v-on:click="setUserId(u.id);showModel()" color="normal" small>
+                      Edit
+                    </v-btn>
+                   </td>
+                </tr>
+              </tbody>
+            </table>
+          </v-col>
+        </v-row>
+      </div>
     </v-card>
   </v-container>
 </template>
@@ -85,11 +87,11 @@ export default {
       users: [],
       permohonan_id: "",
       pagination: {},
-      alignment: "center",
-      justify: "center",
+      center: "center",
       start: "start",
       end: "end",
-      user_id: ""
+      user_id: "",
+      loaded: false
     };
   },
   filters: {
@@ -106,13 +108,14 @@ export default {
   methods: {
     fetchUsers(page_url) {
       let that = this;
+      this.loaded = false;
       page_url = page_url || "api/users";
       fetch(page_url)
         .then(res => res.json())
         .then(res => {
-          console.log(res);
           this.users = res.data;
           that.makePagination(res);
+          this.loaded = true;
         });
     },
     setUserId(id) {

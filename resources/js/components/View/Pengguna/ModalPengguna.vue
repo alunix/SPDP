@@ -52,13 +52,6 @@
 
         <v-row style="padding-right:15px" :align="center" :justify="end">
           <v-btn
-            v-if="editingMode"
-            class="mr-4"
-            v-on:click="showModel()"
-            color="error"
-            normal
-          >Delete</v-btn>
-          <v-btn
             color="normal"
             class="mr-4"
             @click="$modal.hide('ModalPengguna')"

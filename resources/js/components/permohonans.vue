@@ -1,12 +1,12 @@
 <template>
   <v-container>
     <v-card>
-      <v-row class="left-padding" :align="alignment" :justify="start">
+      <v-row class="left-padding" :align="center" :justify="start">
         <v-col class="divider" cols="3" md="6">
           <h3>Senarai permohonan dihantar</h3>
           <hr />
         </v-col>
-        <v-row style="padding-right:45px" class="padding-right" :align="alignment" :justify="end">
+        <v-row style="padding-right:45px" class="padding-right" :align="center" :justify="end">
           <v-btn v-on:click="showModel()" color="primary" normal>
             <v-icon left dark>mdi-plus</v-icon>Permohonan
           </v-btn>
@@ -16,12 +16,12 @@
         </v-row>
       </v-row>
 
-      <v-row :align="alignment" :justify="justify">
+      <v-row :align="center" :justify="center">
         <div style="padding-left:35px">
           <p>{{ pagination.total }} permohonan</p>
         </div>
 
-        <v-row style="padding-right:45px" class="padding-right" :align="alignment" :justify="end">
+        <v-row style="padding-right:45px" class="padding-right" :align="center" :justify="end">
           <v-btn
             :disabled="!pagination.prev_page_url"
             v-on:click="fetchPermohonans(pagination.prev_page_url)"
@@ -36,7 +36,11 @@
         </v-row>
       </v-row>
 
-      <v-row :align="alignment" :justify="justify">
+      <v-row v-if="!loaded" :align="center" :justify="center">
+        <v-progress-circular :size="25" :width="2" color="blue-grey" indeterminate></v-progress-circular>
+      </v-row>
+
+      <v-row v-else :align="center" :justify="center">
         <v-col>
           <table class="table table-hover">
             <thead class="thead-light">
@@ -85,10 +89,10 @@ export default {
       permohonans: [],
       permohonan_id: "",
       pagination: {},
-      alignment: "center",
-      justify: "center",
       start: "start",
-      end: "end"
+      end: "end",
+      center: "center",
+      loaded: false
     };
   },
   components: {
@@ -100,12 +104,14 @@ export default {
   methods: {
     fetchPermohonans(page_url) {
       let that = this;
+       this.loaded = false;
       page_url = page_url || "api/senarai-permohonan-dihantar";
       fetch(page_url)
         .then(res => res.json())
         .then(res => {
           this.permohonans = res.data;
           that.makePagination(res);
+          this.loaded = true;
         });
     },
     date(created_at) {

@@ -65,10 +65,19 @@
                   <td>{{u.role|uppercase}}</td>
                   <td>{{date(u.created_at)}}</td>
                   <td>
-                    <v-btn v-on:click="setUserId(u.id);showModel()" color="normal" small>
-                      Edit
-                    </v-btn>
-                   </td>
+                    <!-- <v-btn v-on:click="setUserId(u.id);showModel()" color="normal" small>Edit</v-btn> -->
+
+                    <b-dropdown
+                      size="sm"
+                      id="dropdown-left"
+                      text="More"
+                      variant="white"
+                      class="m-2"
+                    >
+                      <b-dropdown-item v-on:click="setUserId(u.id);showModel()">Lihat pengguna</b-dropdown-item>
+                      <b-dropdown-item style="color:#ff0000;" href="#">Padam/Delete pengguna</b-dropdown-item>
+                    </b-dropdown>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -120,6 +129,10 @@ export default {
     },
     setUserId(id) {
       this.user_id = id;
+    },
+    showDropDown() {
+      this.$refs.dropDown.click();
+      // console.log("Woi");
     },
     date(created_at) {
       if (!created_at) {

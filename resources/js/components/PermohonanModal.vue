@@ -6,7 +6,6 @@
     <hr />
 
     <v-form ref="form" @submit.prevent="submit">
-    
       <v-select
         v-model="jenis_permohonan_id"
         item-text="name"
@@ -61,7 +60,7 @@
           class="mr-4"
           @click="$modal.hide('permohonan_baharu')"
         >Batal</v-btn>
-        <v-btn type="submit" color="primary">Hantar</v-btn>
+        <v-btn :loading="loading" type="submit" color="primary">Hantar</v-btn>
       </v-row>
     </v-form>
 
@@ -112,7 +111,8 @@ export default {
       error: false,
       loaded: true,
       alignment: "center",
-      end: "end"
+      end: "end",
+      loading: false
     };
   },
   methods: {
@@ -124,6 +124,7 @@ export default {
       this.$refs.file_link.click();
     },
     submit() {
+      this.loading = true;
       let formData = new FormData();
       formData.append("file_link", this.file_link);
       formData.append("jenis_permohonan_id", this.jenis_permohonan_id);
@@ -145,6 +146,7 @@ export default {
           this.komen = "";
           this.file_link = "";
           this.fileName = "";
+          this.loading = false;
           this.$emit("event");
         })
         .catch(error => {

@@ -59,7 +59,6 @@ export default {
     return {
       loaded: false,
       dataBind: [],
-      // permohonan_id: "",
       currentTab: "tab-kemajuan",
       tabs: ["Kemajuan", "Laporan", "Dokumen"],
       dokumens: [],
@@ -85,7 +84,6 @@ export default {
       fetch("/api/permohonan/" + id)
         .then(res => res.json())
         .then(res => {
-          console.log(res);
           this.permohonan = res.permohonan;
           this.lists = [
             {

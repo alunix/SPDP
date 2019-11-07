@@ -69,15 +69,15 @@ Vue.component("senarai", require("./components/view/senarai.vue")).default;
 //Tabs
 Vue.component(
     "tab-dokumen",
-    require("./components/view/Permohonan/Dokumen.vue").default
+    require("./components/view/Permohonan/Tab/Dokumen.vue").default
 );
 Vue.component(
     "tab-laporan",
-    require("./components/view/Permohonan/Laporan.vue").default
+    require("./components/view/Permohonan/Tab/Laporan.vue").default
 );
 Vue.component(
     "tab-kemajuan",
-    require("./components/view/Permohonan/Kemajuan.vue").default
+    require("./components/view/Permohonan/Tab/Kemajuan.vue").default
 );
 Vue.component("permohonans", require("./components/permohonans.vue").default);
 Vue.component(

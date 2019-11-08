@@ -18,29 +18,30 @@
       </v-row>
 
       <v-row :align="center" :justify="center">
+        <div style="padding-left:35px">
+          <p>{{ pagination.total }} pengguna</p>
+        </div>
+
+        <v-row style="padding-right:45px" class="padding-right" :align="center" :justify="end">
+          <v-btn
+            :disabled="!pagination.prev_page_url"
+            v-on:click="fetchUsers(pagination.prev_page_url)"
+            small
+          >Prev</v-btn>
+          <div class="divider" />
+          <v-btn
+            :disabled="!pagination.next_page_url"
+            v-on:click="fetchUsers(pagination.next_page_url)"
+            small
+          >Next</v-btn>
+        </v-row>
+      </v-row>
+
+      <v-row :align="center" :justify="center">
         <v-progress-circular v-if="!loaded" :size="25" :width="2" color="blue-grey" indeterminate></v-progress-circular>
       </v-row>
+
       <div v-if="loaded">
-        <v-row :align="center" :justify="center">
-          <div style="padding-left:35px">
-            <p>{{ pagination.total }} pengguna</p>
-          </div>
-
-          <v-row style="padding-right:45px" class="padding-right" :align="center" :justify="end">
-            <v-btn
-              :disabled="!pagination.prev_page_url"
-              v-on:click="fetchUsers(pagination.prev_page_url)"
-              small
-            >Prev</v-btn>
-            <div class="divider" />
-            <v-btn
-              :disabled="!pagination.next_page_url"
-              v-on:click="fetchUsers(pagination.next_page_url)"
-              small
-            >Next</v-btn>
-          </v-row>
-        </v-row>
-
         <v-row :align="center" :justify="center">
           <v-col>
             <table class="table table-hover">

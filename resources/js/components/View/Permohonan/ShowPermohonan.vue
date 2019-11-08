@@ -119,23 +119,9 @@ export default {
     },
     currentTabComponent(tab) {
       this.currentTab = "tab-" + tab.toString().toLowerCase();
-      // if (this.currentTab == "tab-kemajuan") {
-      //   this.dataBind = this.kemajuans;
-      // } else if (this.currentTab == "tab-dokumen") {
-      //   this.dataBind = this.dokumens;
-      // } else {
-      //   this.dataBind = this.laporans;
-      // }
       return this.currentTab;
     },
     getDataBind() {
-      // if (this.currentTab == "tab-kemajuan") {
-      //   return { permohonan_id_props: this.permohonan.permohonan_id };
-      // } else if (this.currentTab == "tab-dokumen") {
-      //   return { permohonan_id_props: this.permohonan.permohonan_id };
-      // } else {
-      //   return { permohonan_id_props: this.permohonan.permohonan_id };
-      // }
       return { permohonan_id_props: this.permohonan.permohonan_id };
     }
   }

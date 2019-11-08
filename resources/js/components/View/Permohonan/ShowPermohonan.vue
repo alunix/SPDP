@@ -13,8 +13,9 @@
           </v-list>
         </v-card>
       </v-col>
-      <v-col v-if="loaded" cols="12" md="8"></v-col>
-      <tabPermohonan :permohonan_id_props="id"></tabPermohonan>
+      <v-col v-if="loaded" cols="12" md="8">
+        <tabPermohonan :permohonan_id_props="id"></tabPermohonan>
+      </v-col>
     </v-row>
 
     <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
@@ -35,7 +36,7 @@
 
 <script>
 import dayjs from "dayjs";
-import tabPermohonan from "./TabPermohonan";
+import tabPermohonan from "./tabPermohonan";
 export default {
   components: {
     tabPermohonan
@@ -43,22 +44,8 @@ export default {
   data() {
     return {
       loaded: false,
-      // dataBind: [],
-      // currentTab: "tab-kemajuan",
-      // tabs: ["Kemajuan", "Laporan", "Dokumen"],
-      // dokumens: [],
-      // kemajuans: [],
-      permohonan: {
-        dokumen_permohonans: []
-      },
+      permohonan: {},
       id: ""
-      //   laporans: [],
-      //   lists: [],
-      //   pagination: {},
-      //   alignment: "center",
-      //   justify: "center",
-      //   start: "start",
-      //   end: "end"
     };
   },
   created() {

@@ -133,7 +133,6 @@ export default {
     },
     showDropDown() {
       this.$refs.dropDown.click();
-      // console.log("Woi");
     },
     date(created_at) {
       if (!created_at) {

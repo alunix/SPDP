@@ -6,12 +6,6 @@ import Vuetify from "vuetify";
 import dayjs from "dayjs";
 import LocalizedFormat from "dayjs/plugin/localizedFormat";
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
 require("./bootstrap");
 
 dayjs.extend(LocalizedFormat);
@@ -100,6 +94,11 @@ Vue.component("apexchart", VueApexCharts).default;
 Vue.component(
     "senaraiPermohonan",
     require("./components/view/SenaraiPermohonan/SenaraiPermohonan.vue").default
+);
+//Component
+Vue.component(
+    "tabPermohonan",
+    require("./components/View/Permohonan/TabPermohonan.vue").default
 );
 
 const router = new VueRouter({

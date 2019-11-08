@@ -13,27 +13,8 @@
           </v-list>
         </v-card>
       </v-col>
-      <v-col cols="12" md="8">
-        <v-card v-if="loaded" class="pa-2" outlined tile>
-          <div class="container">
-            <div class="table-data__tool">
-              <div class="table-data__tool-left"></div>
-            </div>
-            <div>
-              <v-tabs fixed-tabs>
-                <v-tab
-                  v-for="tab in tabs"
-                  v-bind:key="tab"
-                  @click="currentTabComponent(tab)"
-                >{{tab}}</v-tab>
-              </v-tabs>
-              <keep-alive>
-                <component v-bind:is="currentTab" v-bind="getDataBind()"></component>
-              </keep-alive>
-            </div>
-          </div>
-        </v-card>
-      </v-col>
+      <v-col v-if="loaded" cols="12" md="8"></v-col>
+      <tabPermohonan :permohonan_id_props="id"></tabPermohonan>
     </v-row>
 
     <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
@@ -54,30 +35,35 @@
 
 <script>
 import dayjs from "dayjs";
+import tabPermohonan from "./TabPermohonan";
 export default {
+  components: {
+    tabPermohonan
+  },
   data() {
     return {
       loaded: false,
-      dataBind: [],
-      currentTab: "tab-kemajuan",
-      tabs: ["Kemajuan", "Laporan", "Dokumen"],
-      dokumens: [],
-      kemajuans: [],
+      // dataBind: [],
+      // currentTab: "tab-kemajuan",
+      // tabs: ["Kemajuan", "Laporan", "Dokumen"],
+      // dokumens: [],
+      // kemajuans: [],
       permohonan: {
         dokumen_permohonans: []
       },
-      laporans: [],
-      lists: [],
-      pagination: {},
-      alignment: "center",
-      justify: "center",
-      start: "start",
-      end: "end"
+      id: ""
+      //   laporans: [],
+      //   lists: [],
+      //   pagination: {},
+      //   alignment: "center",
+      //   justify: "center",
+      //   start: "start",
+      //   end: "end"
     };
   },
   created() {
-    var id = this.$route.params.id;
-    this.showPermohonan(id);
+    this.id = this.$route.params.id;
+    this.showPermohonan(this.id);
   },
   methods: {
     showPermohonan(id) {

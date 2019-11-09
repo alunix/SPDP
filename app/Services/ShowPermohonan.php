@@ -35,7 +35,7 @@ class ShowPermohonan
         if ($dp == false) {
             abort(403, 'Tidak dibenarkan');
         } else {
-            $permohonan = Permohonan::where('permohonan_id', $permohonan->permohonan_id)
+            $permohonan = Permohonan::with('jenis_permohonan:id,jenis_permohonan_huraian')->where('permohonan_id', $permohonan->permohonan_id)
                 ->withCount(['dokumen_permohonans', 'laporans', 'kemajuan_permohonans'])->get();
             return response()->json(['permohonan' => $permohonan[0]]);
         }

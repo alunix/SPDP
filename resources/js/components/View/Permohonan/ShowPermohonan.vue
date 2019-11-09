@@ -14,8 +14,8 @@
         </v-card>
       </v-col>
       <v-col v-if="loaded" cols="12" md="8">
-        <laporanUpload v-if="isFakulti" :permohonan_id_props="id"></laporanUpload>
-        <tabPermohonan :permohonan_id_props="id"></tabPermohonan>
+        <LaporanUpload v-if="isFakulti" :permohonan_id_props="id"></LaporanUpload>
+        <PermohonanTab :permohonan_id_props="id"></PermohonanTab>
       </v-col>
     </v-row>
   </v-container>
@@ -23,12 +23,13 @@
 
 <script>
 import dayjs from "dayjs";
-import tabPermohonan from "./tabPermohonan";
-import laporanUpload from "../Approval/LaporanUpload";
+// import PermohonanTab from "./PermohonanTab.vue";
+// import LaporanUpload from "../Approval/LaporanUpload.vue";
 export default {
-  components: {
-    tabPermohonan
-  },
+  // components: {
+  //   PermohonanTab,
+  //   LaporanUpload
+  // },
   data() {
     return {
       loaded: false,
@@ -58,12 +59,18 @@ export default {
       fetch("/api/permohonan/" + id)
         .then(res => res.json())
         .then(res => {
+          console.log(res);
           this.permohonan = res.permohonan;
           this.lists = [
             {
               title: "Tajuk permohonan",
               subtitle: this.permohonan.doc_title,
               id: 1
+            },
+             {
+              title: "Jenis permohonan",
+              subtitle: this.permohonan.jenis_permohonan.jenis_permohonan_huraian,
+              id: 53
             },
             {
               title: "Dihantar",

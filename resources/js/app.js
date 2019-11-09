@@ -18,8 +18,8 @@ window.Vue = require("vue");
 const routes = [
     {
         path: "/senarai-permohonan",
-        name: "permohonans",
-        component: require("./components/permohonans.vue").default
+        name: "SenaraiPermohonan",
+        component: require("./components/SenaraiPermohonan.vue").default
     },
     {
         path: "/dashboard",
@@ -63,18 +63,17 @@ Vue.component(
 Vue.component("senarai", require("./components/view/senarai.vue")).default;
 //Tabs
 Vue.component(
-    "tab-dokumen",
-    require("./components/view/Permohonan/Tab/Dokumen.vue").default
+    "TabDokumen",
+    require("./components/view/Permohonan/Tab/TabDokumen.vue").default
 );
 Vue.component(
-    "tab-laporan",
-    require("./components/view/Permohonan/Tab/Laporan.vue").default
+    "TabLaporan",
+    require("./components/view/Permohonan/Tab/TabLaporan.vue").default
 );
 Vue.component(
-    "tab-kemajuan",
-    require("./components/view/Permohonan/Tab/Kemajuan.vue").default
+    "TabKemajuan",
+    require("./components/view/Permohonan/Tab/TabKemajuan.vue").default
 );
-Vue.component("permohonans", require("./components/permohonans.vue").default);
 Vue.component(
     "tabSenaraiBaru",
     require("./components/View/SenaraiPermohonan/tabSenaraiBaru.vue").default
@@ -98,12 +97,12 @@ Vue.component(
 );
 //Component
 Vue.component(
-    "tabPermohonan",
-    require("./components/View/Permohonan/TabPermohonan.vue").default
+    "PermohonanTab",
+    require("./components/View/Permohonan/PermohonanTab.vue").default
 );
 //Approval view
 Vue.component(
-    "laporanUpload",
+    "LaporanUpload",
     require("./components/View/Approval/LaporanUpload.vue").default
 );
 

@@ -23,7 +23,7 @@
         >Next</v-btn>
       </v-row>
     </v-row>
-    <table class="table table-hover">
+    <table v-if="laporans.length" class="table table-hover">
       <thead>
         <tr>
           <th scope="col">No</th>
@@ -45,7 +45,7 @@
         >
           <th scope="row">{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
           <td>{{l.tajuk_fail_link}}</td>
-          <td>{{l.id_penghantar_nama.name}}</td>
+          <td>{{l.id_penghantar_nama.name || " "}}</td>
           <td>{{l.laporan_id}}</td>
           <td>{{l.id_penghantar_nama.role|uppercase}}</td>
           <td>{{l.komen}}</td>
@@ -75,7 +75,6 @@ export default {
       if (!value) {
         return "";
       }
-
       return value.toString().toUpperCase();
     }
   },
@@ -85,6 +84,7 @@ export default {
       fetch(page_url)
         .then(res => res.json())
         .then(res => {
+          console.log(res.data);
           this.laporans = res.data;
           this.makePagination(res);
         });

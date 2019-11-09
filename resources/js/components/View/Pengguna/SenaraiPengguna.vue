@@ -61,6 +61,7 @@
                   <th scope="col">NAME</th>
                   <th scope="col">EMAIL</th>
                   <th scope="col">PERANAN</th>
+                  <th scope="col">FAKULTI</th>
                   <th scope="col">TARIKH DICIPTA</th>
                   <th></th>
                 </tr>
@@ -74,6 +75,7 @@
                   <td>{{u.name}}</td>
                   <td>{{u.email}}</td>
                   <td>{{u.role|uppercase}}</td>
+                  <td>{{u.fakulti.fnama_kod || ""}}</td>
                   <td>{{date(u.created_at)}}</td>
                   <td>
                     <!-- <v-btn v-on:click="setUserId(u.id);showModel()" color="normal" small>Edit</v-btn> -->
@@ -132,6 +134,7 @@ export default {
       fetch(page_url)
         .then(res => res.json())
         .then(res => {
+          console.log(res);
           this.users = res.data;
           that.makePagination(res);
           this.loaded = true;
@@ -139,9 +142,6 @@ export default {
     },
     setUserId(id) {
       this.user_id = id;
-    },
-    showDropDown() {
-      this.$refs.dropDown.click();
     },
     date(created_at) {
       if (!created_at) {

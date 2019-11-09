@@ -63,7 +63,7 @@
                             </li>
                             @if(Auth::user()->role == "fakulti")
                             <li>
-                                <router-link :to="{name: 'permohonans'}">
+                                <router-link :to="{name: 'SenaraiPermohonan'}">
                                     <i class="fas fa-list"></i>
                                     <span class="bot-line"></span>Permohonan
                                 </router-link>

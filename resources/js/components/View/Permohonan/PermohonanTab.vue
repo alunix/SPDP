@@ -16,13 +16,21 @@
   </v-card>
 </template>
 <script>
+// import TabLaporan from "./Tab/TabLaporan";
+// import TabKemajuan from "./Tab/TabKemajuan";
+// import TabDokumen from "./Tab/TabDokumen";
 export default {
   props: ["permohonan_id_props"],
+  // components: {
+  //   TabLaporan,
+  //   TabKemajuan,
+  //   TabDokumen
+  // },
   data() {
     return {
       loaded: false,
       dataBind: [],
-      currentTab: "tab-laporan",
+      currentTab: "TabLaporan",
       tabs: ["Laporan", "Dokumen", "Kemajuan"],
       dokumens: [],
       kemajuans: [],
@@ -44,7 +52,7 @@ export default {
       return dayjs(created_at).format("LLL");
     },
     currentTabComponent(tab) {
-      this.currentTab = "tab-" + tab.toString().toLowerCase();
+      this.currentTab = "Tab" + tab;
       return this.currentTab;
     },
     getDataBind() {

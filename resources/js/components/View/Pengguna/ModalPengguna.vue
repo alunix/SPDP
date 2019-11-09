@@ -26,10 +26,10 @@
         <v-text-field
           v-model="email"
           label="E-mel"
-          :rules="[v => /.+@.+/.test(v)  || 'Sila isi bahagian ini']"
+          :rules="emailRules"
           required
           :error-messages="email.error"
-      ></v-text-field>
+        ></v-text-field>
 
         <v-select
           v-model="role"
@@ -83,6 +83,10 @@ export default {
       rules: {
         required: v => !!v || "Sila isi bahagian ini"
       },
+      emailRules: [
+        v => !!v || "E-mel diperlukan",
+        v => /.+@.+\..+/.test(v) || "Masuk emel yang sah"
+      ],
       success: false,
       user_id: this.user_id_props,
       editingMode: true,

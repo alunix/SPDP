@@ -38,7 +38,7 @@ const routes = [
             .default
     },
     {
-        path: "/pengguna",
+        path: "/senarai-pengguna",
         name: "pengguna",
         component: require("./components/View/Pengguna/SenaraiPengguna.vue")
             .default

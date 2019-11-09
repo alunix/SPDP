@@ -75,7 +75,7 @@
                   <td>{{u.name}}</td>
                   <td>{{u.email}}</td>
                   <td>{{u.role|uppercase}}</td>
-                  <td>{{u.fakulti.fnama_kod || ""}}</td>
+                  <td>{{u.fakulti.fnama_kod}}</td>
                   <td>{{date(u.created_at)}}</td>
                   <td>
                     <!-- <v-btn v-on:click="setUserId(u.id);showModel()" color="normal" small>Edit</v-btn> -->
@@ -107,6 +107,7 @@ export default {
   data() {
     return {
       users: [],
+      emptyString: "",
       permohonan_id: "",
       pagination: {},
       start: "start",

@@ -13,8 +13,8 @@ class AddFakultiIdToUsers extends Migration
      */
     public function up()
     {
-        Schema::table('users', function($table) {
-            $table->integer('fakulti_id')->unsigned()->nullable();
+        Schema::table('users', function ($table) {
+            $table->integer('fakulti_id')->nullable()->unsigned();
             $table->foreign('fakulti_id')->references('fakulti_id')->on('fakultis');
         });
     }
@@ -26,7 +26,7 @@ class AddFakultiIdToUsers extends Migration
      */
     public function down()
     {
-        Schema::table('users', function($table) {
+        Schema::table('users', function ($table) {
             $table->dropColumn('fakulti_id');
         });
     }

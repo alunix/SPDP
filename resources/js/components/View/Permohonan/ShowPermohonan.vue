@@ -15,7 +15,7 @@
       </v-col>
       <v-col v-if="loaded" cols="12" md="8">
         <LaporanUpload v-if="isFakulti" :permohonan_id_props="id"></LaporanUpload>
-        <PermohonanTab :permohonan_id_props="id"></PermohonanTab>
+        <PermohonanTab v-if="!permohonan.status_permohonan_id == 1" :permohonan_id_props="id"></PermohonanTab>
       </v-col>
     </v-row>
   </v-container>
@@ -23,17 +23,12 @@
 
 <script>
 import dayjs from "dayjs";
-// import PermohonanTab from "./PermohonanTab.vue";
-// import LaporanUpload from "../Approval/LaporanUpload.vue";
 export default {
-  // components: {
-  //   PermohonanTab,
-  //   LaporanUpload
-  // },
   data() {
     return {
       loaded: false,
       permohonan: {},
+      dokumen: {},
       id: "",
       role: "",
       isFakulti: false
@@ -61,33 +56,40 @@ export default {
         .then(res => {
           console.log(res);
           this.permohonan = res.permohonan;
+          this.dokumen = res.dokumen;
           this.lists = [
             {
               title: "Tajuk permohonan",
               subtitle: this.permohonan.doc_title,
               id: 1
             },
-             {
+            {
               title: "Jenis permohonan",
-              subtitle: this.permohonan.jenis_permohonan.jenis_permohonan_huraian,
-              id: 53
+              subtitle: this.permohonan.jenis_permohonan
+                .jenis_permohonan_huraian,
+              id: 2
             },
             {
               title: "Dihantar",
               subtitle: this.date(this.permohonan.created_at),
-              id: 2
+              id: 3
             },
             {
               title: "Jumlah dokumen dihantar",
               subtitle: this.permohonan.dokumen_permohonans_count,
-              id: 3
+              id: 4
             },
             {
               title: "Jumlah laporan dikeluarkan",
               subtitle: this.permohonan.laporans_count,
-              id: 4
+              id: 5
             },
-            { title: "Id", subtitle: this.permohonan.permohonan_id, id: 5 }
+            { title: "Id", subtitle: this.permohonan.permohonan_id, id: 6 },
+            {
+              title: "Dokumen permohonan",
+              subtitle: this.dokumen.file_link,
+              id: 7
+            }
           ];
           this.loaded = true;
         });

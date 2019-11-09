@@ -29,7 +29,7 @@
           :rules="[v => /.+@.+/.test(v)  || 'Sila isi bahagian ini']"
           required
           :error-messages="email.error"
-        ></v-text-field>
+      ></v-text-field>
 
         <v-select
           v-model="role"

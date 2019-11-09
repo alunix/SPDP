@@ -51,7 +51,7 @@
               <td>{{p.pelantik.name}}</td>
               <td>{{p.penilai.name}}</td>
               <td>{{date(p.created_at)}}</td>
-              <td>{{date(p.tarikhAkhir)}}</td>
+              <td>{{date(p.due_date)}}</td>
               <td>{{p.tempoh}}</td>
             </tr>
           </tbody>
@@ -87,16 +87,15 @@ export default {
       fetch(page_url)
         .then(res => res.json())
         .then(res => {
-          console.log(res);
           this.penilaians = res.data;
           that.makePagination(res);
         });
     },
-    date(created_at) {
-      if (!created_at) {
+    date(date) {
+      if (!date) {
         return null;
       }
-      return dayjs(created_at).format("LLL");
+      return dayjs(date).format("LLL");
     },
     show(id) {
       let that = this;

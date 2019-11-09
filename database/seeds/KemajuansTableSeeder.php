@@ -7,7 +7,7 @@ use SPDP\Permohonan;
 use SPDP\JenisPermohonan;
 use SPDP\StatusPermohonan;
 
-class KemajuanTableSeeder extends Seeder
+class KemajuansTableSeeder extends Seeder
 {
     public function run() {
         $faker = Faker::create();

@@ -87,6 +87,7 @@ export default {
         .then(res => {
           this.permohonans = res.data;
           that.makePagination(res);
+          console.log(res);
         });
     },
     date(created_at) {

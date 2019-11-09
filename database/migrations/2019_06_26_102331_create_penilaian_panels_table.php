@@ -18,7 +18,7 @@ class CreatePenilaianPanelsTable extends Migration
             $table->integer('permohonanID')->unsigned();
             $table->integer('id_pelantik')->unsigned();
             $table->integer('id_penilai')->unsigned();
-            $table->dateTime('tarikhAkhir');
+            $table->dateTime('due_date');
             $table->integer('tempoh');
 
             $table->foreign('permohonanID')->references('permohonan_id')->on('permohonans');

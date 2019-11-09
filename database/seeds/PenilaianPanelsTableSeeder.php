@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use SPDP\Permohonan;
 use SPDP\User;
 
-class PenilaianPanelTableSeeder extends Seeder
+class PenilaianPanelsTableSeeder extends Seeder
 {
     public function run()
     {
@@ -16,13 +16,12 @@ class PenilaianPanelTableSeeder extends Seeder
         $id = Permohonan::all()->pluck('permohonan_id')->toArray();
         $panel = User::where('role', 'penilai')->pluck('id');
 
-
         for ($i = 0; $i < 60; $i++) {
             DB::table('penilaian_panels')->insert([
                 'permohonanID' => $faker->randomElement($id),
                 'id_pelantik' => 2,
                 'id_penilai' => $faker->randomElement($panel),
-                'tarikhAkhir' => $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now', $timezone = 'Singapore'),
+                'due_date' => $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now', $timezone = 'Singapore'),
                 'tempoh' => rand(150, 180),
                 'created_at' => $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now', $timezone = 'Singapore'),
                 'updated_at' => $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now', $timezone = 'Singapore'),

@@ -1,13 +1,13 @@
 <template>
   <v-container>
     <v-card>
-      <v-row class="left-padding" :align="center" :justify="start">
+      <v-row class="left-padding" align="center" justify="start">
         <v-col class="divider" cols="3" md="6">
           <h3>Pengguna</h3>
           <hr />
         </v-col>
 
-        <v-row style="padding-right:45px" class="padding-right" :align="center" :justify="end">
+        <v-row style="padding-right:45px" class="padding-right" align="center" justify="end">
           <v-btn v-on:click="setUserId();showModel()" color="primary" small>
             <v-icon left dark>mdi-plus</v-icon>Baru
           </v-btn>
@@ -17,12 +17,12 @@
         </v-row>
       </v-row>
 
-      <v-row :align="center" :justify="center">
+      <v-row align="center" justify="center">
         <div style="padding-left:35px">
           <p>{{ pagination.total }} pengguna</p>
         </div>
 
-        <v-row style="padding-right:45px" class="padding-right" :align="center" :justify="end">
+        <v-row style="padding-right:45px" class="padding-right" align="center" justify="end">
           <v-btn
             :disabled="!pagination.prev_page_url"
             v-on:click="fetchUsers(pagination.prev_page_url)"
@@ -37,12 +37,22 @@
         </v-row>
       </v-row>
 
-      <v-row :align="center" :justify="center">
+      <v-row align="center" justify="center">
         <v-progress-circular v-if="!loaded" :size="25" :width="2" color="blue-grey" indeterminate></v-progress-circular>
       </v-row>
 
+      <v-text-field
+        style="width:500px"
+        class="mx-4"
+        flat
+        hide-details
+        label="Search"
+        prepend-inner-icon="search"
+        solo-inverted
+      ></v-text-field>
+
       <div v-if="loaded">
-        <v-row :align="center" :justify="center">
+        <v-row align="center" justify="center">
           <v-col>
             <table class="table table-hover">
               <thead class="thead-light">
@@ -97,7 +107,6 @@ export default {
       users: [],
       permohonan_id: "",
       pagination: {},
-      center: "center",
       start: "start",
       end: "end",
       user_id: "",

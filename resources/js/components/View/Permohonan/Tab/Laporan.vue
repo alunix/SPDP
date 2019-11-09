@@ -1,14 +1,14 @@
 <template>
   <div>
-    <v-row :align="alignment" :justify="justify">
+    <v-row align="center" justify="center">
       <div style="padding-left:20px; padding-top:20px">
         <p>{{ pagination.total }} keputusan</p>
       </div>
       <v-row
         style="padding-right:25px; padding-top:8px; padding-bottom:8px"
         class="padding-right"
-        :align="alignment"
-        :justify="end"
+        align="center"
+        justify="end"
       >
         <v-btn
           :disabled="!pagination.prev_page_url"
@@ -63,9 +63,6 @@ export default {
   data() {
     return {
       laporans: [],
-      alignment: "center",
-      end: "end",
-      justify: "center",
       pagination: {},
       permohonan_id: this.permohonan_id_props
     };

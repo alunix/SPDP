@@ -19,7 +19,7 @@ class UserController extends Controller
     public function getRole()
     {
         $role = auth()->user()->role;
-        return $role;
+        return response()->json($role);
     }
 
     public function store(Request $request)

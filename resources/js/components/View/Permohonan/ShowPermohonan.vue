@@ -14,6 +14,7 @@
         </v-card>
       </v-col>
       <v-col v-if="loaded" cols="12" md="8">
+        <laporanUpload v-if="isFakulti" :permohonan_id_props="id"></laporanUpload>
         <tabPermohonan :permohonan_id_props="id"></tabPermohonan>
       </v-col>
     </v-row>
@@ -23,6 +24,7 @@
 <script>
 import dayjs from "dayjs";
 import tabPermohonan from "./tabPermohonan";
+import laporanUpload from "../Approval/LaporanUpload";
 export default {
   components: {
     tabPermohonan
@@ -31,14 +33,27 @@ export default {
     return {
       loaded: false,
       permohonan: {},
-      id: ""
+      id: "",
+      role: "",
+      isFakulti: false
     };
   },
   created() {
     this.id = this.$route.params.id;
+    this.getRole();
     this.showPermohonan(this.id);
   },
   methods: {
+    getRole() {
+      fetch("/api/role")
+        .then(res => res.json())
+        .then(res => {
+          this.role = res;
+          if (this.role == "fakulti") {
+            this.isFakulti = true;
+          }
+        });
+    },
     showPermohonan(id) {
       fetch("/api/permohonan/" + id)
         .then(res => res.json())

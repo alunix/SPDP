@@ -40,7 +40,8 @@ const routes = [
     {
         path: "/pengguna",
         name: "pengguna",
-        component: require("./components/View/Pengguna/Pengguna.vue").default
+        component: require("./components/View/Pengguna/SenaraiPengguna.vue")
+            .default
     },
     {
         path: "*",
@@ -99,6 +100,11 @@ Vue.component(
 Vue.component(
     "tabPermohonan",
     require("./components/View/Permohonan/TabPermohonan.vue").default
+);
+//Approval view
+Vue.component(
+    "laporanUpload",
+    require("./components/View/Approval/LaporanUpload.vue").default
 );
 
 const router = new VueRouter({

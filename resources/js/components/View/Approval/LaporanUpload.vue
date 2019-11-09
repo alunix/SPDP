@@ -4,7 +4,6 @@
     <v-divider></v-divider>
 
     <v-col cols="12" md="12">
-      <p class="text-left">Left aligned text on all viewport sizes.</p>
       <v-radio-group v-model="radios" :mandatory="false">
         <v-radio color="success" label="Lulus" value="true"></v-radio>
         <v-radio color="red" label="Perlu penambahbaikkan" value="false"></v-radio>

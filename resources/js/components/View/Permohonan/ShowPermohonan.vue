@@ -3,9 +3,18 @@
     <v-row>
       <v-col cols="6" md="4">
         <v-card v-if="loaded">
-          <v-list v-for="list in lists" :key="list.id" two-line subheader>
+          <v-list
+            :flat="true"
+            :disabled="false"
+            v-for="list in lists"
+            :key="list.id"
+            two-line
+            subheader
+          >
             <v-list-item>
               <v-list-item-content>
+                <!-- <p>{{list.title}}</p>
+                <div class="text--primary">{{list.subtitle}}</div>-->
                 <v-list-item-title>{{list.title}}</v-list-item-title>
                 <v-list-item-subtitle>{{list.subtitle}}</v-list-item-subtitle>
               </v-list-item-content>

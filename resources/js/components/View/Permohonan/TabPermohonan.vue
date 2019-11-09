@@ -22,8 +22,8 @@ export default {
     return {
       loaded: false,
       dataBind: [],
-      currentTab: "tab-kemajuan",
-      tabs: ["Kemajuan", "Laporan", "Dokumen"],
+      currentTab: "tab-laporan",
+      tabs: ["Laporan", "Dokumen", "Kemajuan"],
       dokumens: [],
       kemajuans: [],
       laporans: [],

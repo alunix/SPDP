@@ -42,6 +42,7 @@
       </v-row>
 
       <v-text-field
+        v-model="searchText"
         style="width:500px"
         class="mx-4"
         flat
@@ -75,7 +76,8 @@
                   <td>{{u.name}}</td>
                   <td>{{u.email}}</td>
                   <td>{{u.role|uppercase}}</td>
-                  <td>{{u.fakulti.fnama_kod}}</td>
+                  <td v-if="u.role == 'fakulti'">{{u.fakulti.fnama_kod}}</td>
+                  <td v-else></td>
                   <td>{{date(u.created_at)}}</td>
                   <td>
                     <!-- <v-btn v-on:click="setUserId(u.id);showModel()" color="normal" small>Edit</v-btn> -->
@@ -113,8 +115,12 @@ export default {
       start: "start",
       end: "end",
       user_id: "",
-      loaded: false
+      loaded: false,
+      searchText: ""
     };
+  },
+  watch: {
+    searchText: "searchUsers"
   },
   filters: {
     uppercase: function(value) {
@@ -128,6 +134,13 @@ export default {
     this.fetchUsers();
   },
   methods: {
+    searchUsers(text) {
+      fetch("/api/user/search/" + text)
+        .then(res => res.json())
+        .then(res => {
+          this.users = res;
+        });
+    },
     fetchUsers(page_url) {
       let that = this;
       this.loaded = false;
@@ -135,7 +148,6 @@ export default {
       fetch(page_url)
         .then(res => res.json())
         .then(res => {
-          console.log(res);
           this.users = res.data;
           that.makePagination(res);
           this.loaded = true;

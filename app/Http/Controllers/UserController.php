@@ -12,7 +12,7 @@ class UserController extends Controller
 {
     public function getUsers()
     {
-        $users = User::with('fakulti:fakulti_id,fnama_kod,fakulti_id')->where('role', 'fakulti')->orderBy('created_at', 'desc')->paginate(10);
+        $users = User::with('fakulti:fakulti_id,fnama_kod,fakulti_id')->orderBy('created_at', 'desc')->paginate(10);
         return $users;
     }
 
@@ -20,6 +20,16 @@ class UserController extends Controller
     {
         $role = auth()->user()->role;
         return response()->json($role);
+    }
+
+    public function searchUsers(Request $request, $query)
+    {
+        $users = User::with('fakulti:fakulti_id,fnama_kod,fakulti_id')->where('name', 'like', '%' . $query . '%')
+            ->orWhere('email', 'like', '%' . $query . '%')
+            ->orWhere('role', 'like', '%' . $query . '%')
+            ->get();
+
+        return $users;
     }
 
     public function store(Request $request)

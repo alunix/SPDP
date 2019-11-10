@@ -12,7 +12,11 @@
       <v-textarea solo name="input-7-4" label="Komen laporan(Tidak diwajibkan)"></v-textarea>
     </v-col>
 
-    <v-row style="padding-right:20px;padding-bottom:20px" allign="center" justify="end">
+    <v-row
+      style="padding-right:20px;padding-bottom:20px;margin-top:-20px"
+      allign="center"
+      justify="end"
+    >
       <v-btn small color="primary">Hantar laporan</v-btn>
     </v-row>
   </v-card>

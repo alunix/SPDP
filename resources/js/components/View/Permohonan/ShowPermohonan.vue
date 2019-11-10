@@ -16,8 +16,9 @@
         </v-card>
       </v-col>
       <v-col v-if="loaded" cols="12" md="8">
-        <LaporanUpload v-if="isFakulti" :permohonan_id_props="id"></LaporanUpload>
-        <PermohonanTab v-if="!permohonan.status_permohonan_id == 1" :permohonan_id_props="id"></PermohonanTab>
+        <LantikPenilai v-if="isFakulti" :permohonan_id_props="id"></LantikPenilai>
+        <!-- <LaporanUpload v-if="isFakulti" :permohonan_id_props="id"></LaporanUpload> -->
+        <PermohonanTab v-if="permohonan.status_permohonan_id != 1" :permohonan_id_props="id"></PermohonanTab>
       </v-col>
     </v-row>
   </v-container>

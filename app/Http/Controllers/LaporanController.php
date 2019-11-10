@@ -17,7 +17,6 @@ use SPDP\Support\Collection;
 
 class LaporanController extends Controller
 {
-
     public function index()
     {
         $laporan = Laporan::all();
@@ -27,7 +26,6 @@ class LaporanController extends Controller
     {
         $permohonan = Permohonan::findOrFail($id);
         $laporans = Laporan::with('id_penghantar_nama:id,name,role')->whereIn('dokumen_permohonan_id', $permohonan->dokumen_permohonans->pluck('dokumen_permohonan_id'))->orderBy('created_at', 'desc')->paginate(5);
-        // return response()->json($laporans);
         return response()->json($laporans);
     }
 
@@ -39,7 +37,7 @@ class LaporanController extends Controller
         $dokumen_permohonans_id = DokumenPermohonan::whereIn('permohonan_id', $permohonans_id)->pluck('dokumen_permohonan_id');
 
         //check whether fakulti does have permohonans
-        if (count($permohonans_id) == 0 || count($dokumen_permohonans_id) == 0) {
+        if (sizeof($permohonans_id) <= 0 || count($dokumen_permohonans_id) <= 0) {
             abort(404);
         }
 

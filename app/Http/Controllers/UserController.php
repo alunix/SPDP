@@ -16,6 +16,13 @@ class UserController extends Controller
         return $users;
     }
 
+    public function getPanelPenilai()
+    {
+        $users = User::where('role', 'penilai')->orderBy('created_at', 'desc')->paginate(10);
+        return $users;
+    }
+
+
     public function getRole()
     {
         $role = auth()->user()->role;

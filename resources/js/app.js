@@ -105,6 +105,10 @@ Vue.component(
     "LaporanUpload",
     require("./components/View/Approval/LaporanUpload.vue").default
 );
+Vue.component(
+    "LantikPenilai",
+    require("./components/View/Approval/LantikPenilai.vue").default
+);
 
 const router = new VueRouter({
     mode: "history",

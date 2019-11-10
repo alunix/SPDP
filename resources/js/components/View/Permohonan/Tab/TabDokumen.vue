@@ -114,7 +114,7 @@ export default {
       this.laporans_props = laporans;
     },
     openFile(file_link) {
-      return window.open("/storage/cadangan/" + file_link);
+      return window.open("/storage/permohonan/" + file_link);
     }
   }
 };

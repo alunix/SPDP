@@ -19,18 +19,19 @@
 
       <v-row align="center" justify="center">
         <div style="padding-left:35px">
-          <p>{{ pagination.total }} pengguna</p>
+          <p v-if="!searchText">{{ pagination.total }} pengguna</p>
+          <p v-else>{{ users.length }} keputusan</p>
         </div>
 
         <v-row style="padding-right:45px" class="padding-right" align="center" justify="end">
           <v-btn
-            :disabled="!pagination.prev_page_url"
+            :disabled="!pagination.prev_page_url || searchText.length > 0"
             v-on:click="fetchUsers(pagination.prev_page_url)"
             small
           >Prev</v-btn>
           <div class="divider" />
           <v-btn
-            :disabled="!pagination.next_page_url"
+            :disabled="!pagination.next_page_url || searchText.length > 0"
             v-on:click="fetchUsers(pagination.next_page_url)"
             small
           >Next</v-btn>
@@ -80,8 +81,6 @@
                   <td v-else></td>
                   <td>{{date(u.created_at)}}</td>
                   <td>
-                    <!-- <v-btn v-on:click="setUserId(u.id);showModel()" color="normal" small>Edit</v-btn> -->
-
                     <b-dropdown
                       size="sm"
                       id="dropdown-left"
@@ -120,8 +119,7 @@ export default {
     };
   },
   watch: {
-    // searchText: { handler: "searchUsers", immediate: true }
-    searchText: "searchUsers"
+    searchText: { handler: "searchUsers", immediate: true }
   },
   filters: {
     uppercase: function(value) {
@@ -131,9 +129,6 @@ export default {
       return value.toString().toUpperCase();
     }
   },
-  created() {
-    this.fetchUsers();
-  },
   methods: {
     searchUsers(text) {
       if (text) {
@@ -141,7 +136,6 @@ export default {
         fetch("/api/user/search/" + text)
           .then(res => res.json())
           .then(res => {
-            console.log(res);
             this.users = res;
             this.loaded = true;
           });

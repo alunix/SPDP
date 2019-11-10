@@ -15,7 +15,8 @@ use SPDP\User;
 class DokumenPermohonanClass
 {
 
-    public function create($permohonan, $fileNameWithExt, $fileNameToStore, $request, $fileSize) {
+    public function create($permohonan, $fileNameWithExt, $fileNameToStore, $request, $fileSize)
+    {
         $dp = new DokumenPermohonan();
         $dp->permohonan_id = $permohonan->permohonan_id;
         $dp->file_name = $fileNameWithExt;
@@ -26,7 +27,8 @@ class DokumenPermohonanClass
         $dp->save();
     }
 
-    public function update($permohonan, Request $request, $attached) {
+    public function update($permohonan, Request $request, $attached)
+    {
         //Handle file upload
         if ($request->hasFile($attached)) {
             $fileNameWithExt = $request->file($attached)->getClientOriginalName();
@@ -43,7 +45,6 @@ class DokumenPermohonanClass
         }
 
         $fileSize = $request->file($attached)->getSize();
-
         $dp = new DokumenPermohonan();
         $dp->permohonan_id = $permohonan->permohonan_id;
         $dp->file_name = $fileNameWithExt;
@@ -62,14 +63,13 @@ class DokumenPermohonanClass
 
         $user = $this->getEmailPenambahbaikkan($permohonan, $status_permohonan);
         //Hantar email kepada penghantar
-        Notification::route('mail', $user->email)->notify(new DokumenPenambahbaikkan($dp)); //hantar email kepada penghantar
+        // Notification::route('mail', $user->email)->notify(new DokumenPenambahbaikkan($dp)); //hantar email kepada penghantar
 
         //$email = $this->getEmailPenambahbaikkan($permohonan,$status_permohonan);
-
-
     }
 
-    public function getStatusPermohonan($status_permohonan_id) {
+    public function getStatusPermohonan($status_permohonan_id)
+    {
         switch ($status_permohonan_id) {
             case 8:
                 return 12;
@@ -90,7 +90,8 @@ class DokumenPermohonanClass
         }
     }
 
-    public function getEmailPenambahbaikkan($permohonan, $status_permohonan_id) {
+    public function getEmailPenambahbaikkan($permohonan, $status_permohonan_id)
+    {
         switch ($status_permohonan_id) {
             case 8:
                 $panel = $permohonan->penilaian_panels->pluck('id_penilai');
@@ -119,7 +120,8 @@ class DokumenPermohonanClass
         return $user;
     }
 
-    public function show($id) {
+    public function show($id)
+    {
         $permohonan = Permohonan::findOrFail($id);
         // return view('fakulti.kemajuan-permohonan')->with('kjs', $permohonan->kemajuan_permohonans)->with('permohonan', $permohonan)->with('dokumen_permohonans', $permohonan->dokumen_permohonans);
     }

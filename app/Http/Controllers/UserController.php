@@ -22,13 +22,14 @@ class UserController extends Controller
         return response()->json($role);
     }
 
-    public function searchUsers(Request $request, $query)
+    public function searchUsers($query)
     {
-        $users = User::with('fakulti:fakulti_id,fnama_kod,fakulti_id')->where('name', 'like', '%' . $query . '%')
-            ->orWhere('email', 'like', '%' . $query . '%')
-            ->orWhere('role', 'like', '%' . $query . '%')
-            ->get();
-
+        if ($query) {
+            $users = User::with('fakulti:fakulti_id,fnama_kod,fakulti_id')->where('name', 'like', '%' . $query . '%')
+                ->orWhere('email', 'like', '%' . $query . '%')
+                ->orWhere('role', 'like', '%' . $query . '%')
+                ->get();
+        }
         return $users;
     }
 

@@ -120,6 +120,7 @@ export default {
     };
   },
   watch: {
+    // searchText: { handler: "searchUsers", immediate: true }
     searchText: "searchUsers"
   },
   filters: {
@@ -135,11 +136,18 @@ export default {
   },
   methods: {
     searchUsers(text) {
-      fetch("/api/user/search/" + text)
-        .then(res => res.json())
-        .then(res => {
-          this.users = res;
-        });
+      if (text) {
+        this.loaded = false;
+        fetch("/api/user/search/" + text)
+          .then(res => res.json())
+          .then(res => {
+            console.log(res);
+            this.users = res;
+            this.loaded = true;
+          });
+      } else {
+        this.fetchUsers();
+      }
     },
     fetchUsers(page_url) {
       let that = this;

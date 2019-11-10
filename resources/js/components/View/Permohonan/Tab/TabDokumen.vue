@@ -82,7 +82,6 @@ export default {
 
   methods: {
     fetchDokumens(page_url) {
-      // let that = this;
       page_url = page_url || "/api/senarai-dokumen/" + this.permohonan_id;
       fetch(page_url)
         .then(res => res.json())

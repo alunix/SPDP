@@ -63,7 +63,6 @@ export default {
       fetch("/api/permohonan/" + id)
         .then(res => res.json())
         .then(res => {
-          console.log(res);
           this.permohonan = res.permohonan;
           this.dokumen = res.dokumen;
           this.lists = [

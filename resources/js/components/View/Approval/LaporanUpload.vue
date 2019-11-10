@@ -1,14 +1,14 @@
 <template>
   <v-card min-height="360px" class="pa-2" outlined tile>
-    <h3>Muat naik laporan</h3>
+    <h3 class="subheading black--text">Muat naik laporan</h3>
     <v-divider></v-divider>
 
-    <v-col cols="12" md="12">
-      <v-radio-group v-model="radios" :mandatory="false">
-        <v-radio color="success" label="Lulus" value="true"></v-radio>
+    <v-col md="12">
+      <v-radio-group class="mt-n4" v-model="radios" :mandatory="false">
+        <v-radio color="success" label="Lulus permohonan" value="true"></v-radio>
         <v-radio color="red" label="Perlu penambahbaikkan" value="false"></v-radio>
       </v-radio-group>
-      <v-file-input label="Laporan"></v-file-input>
+      <v-file-input class="mt-n4" label="Laporan"></v-file-input>
       <v-textarea solo name="input-7-4" label="Komen laporan(Tidak diwajibkan)"></v-textarea>
     </v-col>
 

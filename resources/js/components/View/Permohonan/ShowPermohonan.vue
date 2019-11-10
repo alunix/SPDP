@@ -2,34 +2,26 @@
   <v-container>
     <v-row>
       <v-col cols="6" md="4">
-        <v-card v-if="loaded">
-          <v-list
-            :flat="true"
-            :disabled="false"
-            v-for="list in lists"
-            :key="list.id"
-            two-line
-            subheader
-          >
-            <v-list-item>
-              <v-list-item-content>
-                <!-- <p>{{list.title}}</p>
-                <div class="text--primary">{{list.subtitle}}</div>-->
-                <v-list-item-title>{{list.title}}</v-list-item-title>
-                <v-list-item-subtitle>{{list.subtitle}}</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list>
+        <v-card class="py-4" v-if="loaded">
+          <v-card-text v-for="list in lists" :key="list.id">
+            <v-layout row class="my-n5 px-3 pt-1">
+              <v-flex xs6>
+                <p>{{list.title}}</p>
+              </v-flex>
+              <v-flex xs6>
+                <div class="text--primary">{{list.subtitle}}</div>
+              </v-flex>
+            </v-layout>
+          </v-card-text>
         </v-card>
       </v-col>
       <v-col v-if="loaded" cols="12" md="8">
         <LaporanUpload v-if="isFakulti" :permohonan_id_props="id"></LaporanUpload>
-        <PermohonanTab v-if="!permohonan.status_permohonan_id == 1" :permohonan_id_props="id"></PermohonanTab>
+        <PermohonanTab v-if="!permohonan.status_permohonan_id == 1" :permohonan_id_props="id"></PermohonanTab>
       </v-col>
     </v-row>
   </v-container>
 </template>
-
 <script>
 import dayjs from "dayjs";
 export default {
@@ -67,12 +59,12 @@ export default {
           this.dokumen = res.dokumen;
           this.lists = [
             {
-              title: "Tajuk permohonan",
+              title: "Tajuk permohonan",
               subtitle: this.permohonan.doc_title,
               id: 1
             },
             {
-              title: "Jenis permohonan",
+              title: "Jenis permohonan",
               subtitle: this.permohonan.jenis_permohonan
                 .jenis_permohonan_huraian,
               id: 2
@@ -83,18 +75,18 @@ export default {
               id: 3
             },
             {
-              title: "Jumlah dokumen dihantar",
+              title: "Jumlah dokumen dihantar",
               subtitle: this.permohonan.dokumen_permohonans_count,
               id: 4
             },
             {
-              title: "Jumlah laporan dikeluarkan",
+              title: "Jumlah laporan dikeluarkan",
               subtitle: this.permohonan.laporans_count,
               id: 5
             },
             { title: "Id", subtitle: this.permohonan.permohonan_id, id: 6 },
             {
-              title: "Dokumen permohonan",
+              title: "Dokumen permohonan",
               subtitle: this.dokumen.file_link,
               id: 7
             }

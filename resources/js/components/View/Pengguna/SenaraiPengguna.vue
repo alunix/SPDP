@@ -140,6 +140,7 @@ export default {
             this.loaded = true;
           });
       } else {
+        //Fetch all users if not searching
         this.fetchUsers();
       }
     },

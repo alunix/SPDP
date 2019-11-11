@@ -40,6 +40,16 @@ class UserController extends Controller
         return $users;
     }
 
+    public function searchPenilai($query)
+    {
+        if ($query) {
+            $users = User::where('role', 'penilai')->where('name', 'like', '%' . $query . '%')
+                ->orWhere('email', 'like', '%' . $query . '%')
+                ->get();
+        }
+        return $users;
+    }
+
     public function store(Request $request)
     {
         if ($request->input('role') == 'Fakulti') {

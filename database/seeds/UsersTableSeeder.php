@@ -12,11 +12,11 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        $roles = ['penilai', 'pjk', 'senat', 'jppa'];
+        $roles = ['penilai', 'pjk', 'senat', 'jppa', 'fakulti'];
         $fakultis_id = Fakulti::all()->pluck('fakulti_id')->toArray();
 
         for ($i = 0; $i < 60; $i++) {
-            // $role = $faker->randomElement($roles);
+            $role = $faker->randomElement($roles);
             // if ($role == 'fakulti') {
             //     $fakulti_id = $faker->randomElement($fakultis_id);
             // } else {
@@ -24,7 +24,7 @@ class UsersTableSeeder extends Seeder
             // }
             DB::table('users')->insert([
                 'name' => $faker->firstNameMale,
-                'role' => $faker->randomElement($roles),
+                'role' => 'penilai',
                 // 'fakulti_id' => $fakulti_id,
                 'email' => $faker->email,
                 'password' => Hash::make($faker->password),

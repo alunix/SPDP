@@ -3,24 +3,16 @@
     <v-card>
       <v-row class="left-padding" align="center" justify="start">
         <v-col class="divider" cols="3" md="6">
-          <h3>Pengguna</h3>
+          <h3>Lantik Panel Penilai</h3>
           <hr />
         </v-col>
-
-        <v-row style="padding-right:45px" class="padding-right" align="center" justify="end">
-          <v-btn v-on:click="setUserId();showModel()" color="primary" small>
-            <v-icon left dark>mdi-plus</v-icon>Baru
-          </v-btn>
-          <modal height="auto" width="25%" :scrollable="true" name="ModalPengguna">
-            <ModalPengguna :user_id_props="user_id" @event="fetchUsers"></ModalPengguna>
-          </modal>
-        </v-row>
       </v-row>
 
       <v-row align="center" justify="center">
         <div style="padding-left:35px">
-          <p v-if="!searchText">{{ pagination.total }} pengguna</p>
+          <p v-if="!searchText">{{ pagination.total }} penilai</p>
           <p v-else>{{ users.length }} keputusan</p>
+          <p v-if="selectedPenilai.length">{{ selectedPenilai.length }} penilai dilantik</p>
         </div>
 
         <v-row style="padding-right:45px" class="padding-right" align="center" justify="end">
@@ -38,10 +30,6 @@
         </v-row>
       </v-row>
 
-      <v-row align="center" justify="center">
-        <v-progress-circular v-if="!loaded" :size="25" :width="2" color="blue-grey" indeterminate></v-progress-circular>
-      </v-row>
-
       <v-text-field
         v-model="searchText"
         style="width:500px"
@@ -53,6 +41,23 @@
         solo-inverted
       ></v-text-field>
 
+      <!-- <v-btn
+        :disabled="!pagination.prev_page_url || searchText.length > 0"
+        v-on:click="fetchUsers(pagination.prev_page_url)"
+        small
+      >Prev</v-btn> -->
+
+      <v-row align="center" justify="center">
+        <v-progress-circular
+          class="my-10"
+          v-if="!loaded"
+          :size="25"
+          :width="2"
+          color="blue-grey"
+          indeterminate
+        ></v-progress-circular>
+      </v-row>
+
       <div v-if="loaded">
         <v-row align="center" justify="center">
           <v-col>
@@ -62,10 +67,8 @@
                   <th scope="col">NO</th>
                   <th scope="col">NAME</th>
                   <th scope="col">EMAIL</th>
-                  <th scope="col">PERANAN</th>
-                  <th scope="col">FAKULTI</th>
                   <th scope="col">TARIKH DICIPTA</th>
-                  <th></th>
+                  <th scope="col">LANTIK</th>
                 </tr>
               </thead>
 
@@ -76,21 +79,9 @@
                   >{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
                   <td>{{u.name}}</td>
                   <td>{{u.email}}</td>
-                  <td>{{u.role|uppercase}}</td>
-                  <td v-if="u.role == 'fakulti'">{{u.fakulti.fnama_kod}}</td>
-                  <td v-else></td>
                   <td>{{date(u.created_at)}}</td>
                   <td>
-                    <b-dropdown
-                      size="sm"
-                      id="dropdown-left"
-                      text="More"
-                      variant="white"
-                      class="m-2"
-                    >
-                      <b-dropdown-item v-on:click="setUserId(u.id);showModel()">Lihat pengguna</b-dropdown-item>
-                      <b-dropdown-item style="color:#ff0000;" href="#">Padam/Delete pengguna</b-dropdown-item>
-                    </b-dropdown>
+                    <v-checkbox v-model="selectedPenilai" :value="u.id">Lantik Penilai</v-checkbox>
                   </td>
                 </tr>
               </tbody>
@@ -115,25 +106,18 @@ export default {
       end: "end",
       user_id: "",
       loaded: false,
-      searchText: ""
+      searchText: "",
+      selectedPenilai: []
     };
   },
   watch: {
     searchText: { handler: "searchUsers", immediate: true }
   },
-  filters: {
-    uppercase: function(value) {
-      if (!value) {
-        return "";
-      }
-      return value.toString().toUpperCase();
-    }
-  },
   methods: {
     searchUsers(text) {
       if (text) {
         this.loaded = false;
-        fetch("/api/user/search/" + text)
+        fetch("/api/panel-penilai/search/" + text)
           .then(res => res.json())
           .then(res => {
             this.users = res;
@@ -146,13 +130,21 @@ export default {
     fetchUsers(page_url) {
       let that = this;
       this.loaded = false;
-      page_url = page_url || "api/users";
+      page_url = page_url || "/api/senarai-panel-penilai";
       fetch(page_url)
         .then(res => res.json())
         .then(res => {
           this.users = res.data;
+          console.log(res);
           that.makePagination(res);
           this.loaded = true;
+        })
+        .catch(error => {
+          if (error.response.status === 422) {
+            this.errors = error.response.data.errors || {};
+            this.error = true;
+            console.log(error);
+          }
         });
     },
     setUserId(id) {
@@ -181,12 +173,6 @@ export default {
         per_page: res.per_page
       };
       this.pagination = pagination;
-    },
-    setPermohonanId(id) {
-      this.permohonan_id = id;
-    },
-    showModel() {
-      this.$modal.show("ModalPengguna");
     }
   }
 };

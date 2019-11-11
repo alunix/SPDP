@@ -2,7 +2,7 @@
   <v-container>
     <v-card>
       <v-row class="left-padding" align="center" justify="start">
-        <v-col class="divider" cols="3" md="6">
+        <v-col class="divider mb-n2" cols="3" md="6">
           <h3>Lantik Panel Penilai</h3>
           <hr />
         </v-col>
@@ -12,7 +12,7 @@
         <div style="padding-left:35px">
           <p v-if="!searchText">{{ pagination.total }} penilai</p>
           <p v-else>{{ users.length }} keputusan</p>
-          <p v-if="selectedPenilai.length">{{ selectedPenilai.length }} penilai dilantik</p>
+          <p>{{ selectedPenilai.length }} penilai dilantik</p>
         </div>
 
         <v-row style="padding-right:45px" class="padding-right" align="center" justify="end">
@@ -30,22 +30,29 @@
         </v-row>
       </v-row>
 
-      <v-text-field
-        v-model="searchText"
-        style="width:500px"
-        class="mx-4"
-        flat
-        hide-details
-        label="Search"
-        prepend-inner-icon="search"
-        solo-inverted
-      ></v-text-field>
-
-      <!-- <v-btn
-        :disabled="!pagination.prev_page_url || searchText.length > 0"
-        v-on:click="fetchUsers(pagination.prev_page_url)"
-        small
-      >Prev</v-btn> -->
+      <v-layout row class="px-3 pt-1">
+        <v-flex xs6>
+          <v-text-field
+            v-model="searchText"
+            style="width:500px"
+            class="mx-4"
+            flat
+            hide-details
+            label="Search"
+            prepend-inner-icon="search"
+            solo-inverted
+          ></v-text-field>
+        </v-flex>
+        <v-flex xs6>
+          <v-btn
+            style="margin-left:255px"
+            :disabled="!selectedPenilai.length"
+            v-on:click="fetchUsers(pagination.prev_page_url)"
+            normal
+            color="primary"
+          >Hantar</v-btn>
+        </v-flex>
+      </v-layout>
 
       <v-row align="center" justify="center">
         <v-progress-circular
@@ -113,6 +120,14 @@ export default {
   watch: {
     searchText: { handler: "searchUsers", immediate: true }
   },
+  // filters: {
+  //   highlight: function(words, query) {
+  //     return words.replace(
+  //       query,
+  //       '<span class="highlight">' + query + "</span>"
+  //     );
+  //   }
+  // },
   methods: {
     searchUsers(text) {
       if (text) {
@@ -135,7 +150,6 @@ export default {
         .then(res => res.json())
         .then(res => {
           this.users = res.data;
-          console.log(res);
           that.makePagination(res);
           this.loaded = true;
         })

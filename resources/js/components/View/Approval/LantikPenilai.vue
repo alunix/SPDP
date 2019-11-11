@@ -8,94 +8,98 @@
         </v-col>
       </v-row>
 
-      <v-row align="center" justify="center">
-        <div style="padding-left:35px">
-          <p v-if="!searchText">{{ pagination.total }} penilai</p>
-          <p v-else>{{ users.length }} keputusan</p>
-          <p>{{ selectedPenilai.length }} penilai dilantik</p>
-        </div>
-
-        <v-row style="padding-right:45px" class="padding-right" align="center" justify="end">
-          <v-btn
-            :disabled="!pagination.prev_page_url || searchText.length > 0"
-            v-on:click="fetchUsers(pagination.prev_page_url)"
-            small
-          >Prev</v-btn>
-          <div class="divider" />
-          <v-btn
-            :disabled="!pagination.next_page_url || searchText.length > 0"
-            v-on:click="fetchUsers(pagination.next_page_url)"
-            small
-          >Next</v-btn>
-        </v-row>
-      </v-row>
-
-      <v-layout row class="px-3 pt-1">
-        <v-flex xs6>
-          <v-text-field
-            v-model="searchText"
-            style="width:500px"
-            class="mx-4"
-            flat
-            hide-details
-            label="Search"
-            prepend-inner-icon="search"
-            solo-inverted
-          ></v-text-field>
-        </v-flex>
-        <v-flex xs6>
-          <v-btn
-            style="margin-left:255px"
-            :disabled="!selectedPenilai.length"
-            v-on:click="fetchUsers(pagination.prev_page_url)"
-            normal
-            color="primary"
-          >Hantar</v-btn>
-        </v-flex>
-      </v-layout>
-
-      <v-row align="center" justify="center">
-        <v-progress-circular
-          class="my-10"
-          v-if="!loaded"
-          :size="25"
-          :width="2"
-          color="blue-grey"
-          indeterminate
-        ></v-progress-circular>
-      </v-row>
-
-      <div v-if="loaded">
+      <v-form ref="form" @submit.prevent="submit">
         <v-row align="center" justify="center">
-          <v-col>
-            <table class="table table-hover">
-              <thead class="thead-light">
-                <tr>
-                  <th scope="col">NO</th>
-                  <th scope="col">NAME</th>
-                  <th scope="col">EMAIL</th>
-                  <th scope="col">TARIKH DICIPTA</th>
-                  <th scope="col">LANTIK</th>
-                </tr>
-              </thead>
+          <div style="padding-left:35px">
+            <p v-if="!searchText">{{ pagination.total }} penilai</p>
+            <p v-else>{{ users.length }} keputusan</p>
+            <p>{{ selectedPenilai.length }} penilai dilantik</p>
+          </div>
 
-              <tbody id="permohonans-add">
-                <tr class="tr-shadow td-cursor" v-for="(u, index) in users" v-bind:key="u.id">
-                  <th
-                    scope="row"
-                  >{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
-                  <td>{{u.name}}</td>
-                  <td>{{u.email}}</td>
-                  <td>{{date(u.created_at)}}</td>
-                  <td>
-                    <v-checkbox v-model="selectedPenilai" :value="u.id">Lantik Penilai</v-checkbox>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </v-col>
+          <v-row style="padding-right:45px" class="padding-right" align="center" justify="end">
+            <v-btn
+              style="margin-left:255px"
+              :disabled="!selectedPenilai.length"
+              v-on:click="fetchUsers(pagination.prev_page_url)"
+              normal
+              color="primary"
+            >Hantar</v-btn>
+          </v-row>
         </v-row>
-      </div>
+
+        <v-layout row class="px-3 pt-1">
+          <v-flex xs6>
+            <v-text-field
+              v-model="searchText"
+              style="width:500px"
+              class="mx-4"
+              flat
+              hide-details
+              label="Search"
+              prepend-inner-icon="search"
+              solo-inverted
+            ></v-text-field>
+          </v-flex>
+
+          <v-flex xs6>
+            <v-btn
+              style="margin-left:248px"
+              :disabled="!pagination.prev_page_url || searchText.length > 0"
+              v-on:click="fetchUsers(pagination.prev_page_url)"
+              small
+            >Prev</v-btn>
+            <div class="divider" />
+            <v-btn
+              :disabled="!pagination.next_page_url || searchText.length > 0"
+              v-on:click="fetchUsers(pagination.next_page_url)"
+              small
+            >Next</v-btn>
+          </v-flex>
+        </v-layout>
+
+        <v-row align="center" justify="center">
+          <v-progress-circular
+            class="my-10"
+            v-if="!loaded"
+            :size="25"
+            :width="2"
+            color="blue-grey"
+            indeterminate
+          ></v-progress-circular>
+        </v-row>
+
+        <div v-if="loaded">
+          <v-row align="center" justify="center">
+            <v-col>
+              <table class="table table-hover">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">NO</th>
+                    <th scope="col">NAME</th>
+                    <th scope="col">EMAIL</th>
+                    <th scope="col">TARIKH DICIPTA</th>
+                    <th scope="col">LANTIK</th>
+                  </tr>
+                </thead>
+
+                <tbody id="permohonans-add">
+                  <tr class="tr-shadow td-cursor" v-for="(u, index) in users" v-bind:key="u.id">
+                    <th
+                      scope="row"
+                    >{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
+                    <td>{{u.name}}</td>
+                    <td>{{u.email}}</td>
+                    <td>{{date(u.created_at)}}</td>
+                    <td>
+                      <v-checkbox v-model="selectedPenilai" :value="u.id">Lantik Penilai</v-checkbox>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </v-col>
+          </v-row>
+        </div>
+      </v-form>
     </v-card>
   </v-container>
 </template>
@@ -161,22 +165,11 @@ export default {
           }
         });
     },
-    setUserId(id) {
-      this.user_id = id;
-    },
     date(created_at) {
       if (!created_at) {
         return null;
       }
       return dayjs(created_at).format("LLL");
-    },
-    show(id) {
-      let that = this;
-      this.$router
-        .push({ name: "permohonan", params: { id: id } })
-        .catch(err => {
-          console.log("all good");
-        });
     },
     makePagination(res) {
       let pagination = {
@@ -187,6 +180,39 @@ export default {
         per_page: res.per_page
       };
       this.pagination = pagination;
+    },
+    submit() {
+      // this.loading = true;
+      // let formData = new FormData();
+      // formData.append("file_link", this.file_link);
+      // formData.append("jenis_permohonan_id", this.jenis_permohonan_id);
+      // formData.append("doc_title", this.doc_title);
+      // formData.append("komen", this.komen);
+      // this.loaded = false;
+      // this.success = false;
+      // this.errors = {};
+      // axios
+      //   .post("api/permohonan/submit", formData, {
+      //     headers: {
+      //       "Content-Type": "multipart/form-data"
+      //     }
+      //   })
+      //   .then(res => {
+      //     this.success = true;
+      //     this.jenis_permohonan_id = "";
+      //     this.doc_title = "";
+      //     this.komen = "";
+      //     this.file_link = "";
+      //     this.fileName = "";
+      //     this.loading = false;
+      //     this.$emit("event");
+      //   })
+      //   .catch(error => {
+      //     if (error.response.status === 422) {
+      //       this.errors = error.response.data.errors || {};
+      //       this.error = true;
+      //     }
+      //   });
     }
   }
 };

@@ -71,7 +71,7 @@ class PermohonanController extends Controller
     public function pelantikanPenilaiSubmit(PenilaianPJK $pp, Request $request, $id)
     {
         $this->validate($request, [
-            'checked' => 'required',
+            'selectedPenilai' => 'required',
         ]);
         return $pp->pelantikanPenilaiSubmit($request, $id);
     }

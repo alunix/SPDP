@@ -1,12 +1,15 @@
 <template>
   <v-container>
-    <v-card>
+    <v-card class="mt-n3">
       <v-row class="left-padding" align="center" justify="start">
         <v-col class="divider mb-n2" cols="3" md="6">
           <h3>Lantik Panel Penilai</h3>
           <hr />
         </v-col>
+        <v-switch style="margin-left:150px" color="red" v-model="people" label="Penambahbaikkan" value="John"></v-switch>
       </v-row>
+
+      
 
       <v-form ref="form" @submit.prevent="submit">
         <v-row align="center" justify="center">
@@ -23,7 +26,7 @@
               v-on:click="fetchUsers(pagination.prev_page_url)"
               normal
               color="primary"
-            >Hantar</v-btn>
+            >Seterusnya</v-btn>
           </v-row>
         </v-row>
 
@@ -41,9 +44,8 @@
             ></v-text-field>
           </v-flex>
 
-          <v-flex xs6>
+          <v-row justify="end" class="mr-4">
             <v-btn
-              style="margin-left:248px"
               :disabled="!pagination.prev_page_url || searchText.length > 0"
               v-on:click="fetchUsers(pagination.prev_page_url)"
               small
@@ -54,7 +56,7 @@
               v-on:click="fetchUsers(pagination.next_page_url)"
               small
             >Next</v-btn>
-          </v-flex>
+          </v-row>
         </v-layout>
 
         <v-row align="center" justify="center">

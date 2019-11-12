@@ -69,8 +69,8 @@ class PenilaianPJK
             $penilaian = new PenilaianPanelClass();
             $penilaian = $penilaian->create($permohonan, $selectedPenilai[0], $request);
             //Send email to panel penilai
-            $penilai = User::findOrFail($selectedPenilai[0]);
-            Notification::route('mail', $penilai->email)->notify(new PelantikanPanelPenilai($permohonan, $penilaian, $penilai)); //hantar email kepada panel penilai
+            // $penilai = User::findOrFail($selectedPenilai[0]);
+            // Notification::route('mail', $penilai->email)->notify(new PelantikanPanelPenilai($permohonan, $penilaian, $penilai)); //hantar email kepada panel penilai
 
             $msg = [
                 'message' => 'Panel penilai dipilih dan emel telah dihantar',

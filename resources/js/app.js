@@ -6,12 +6,6 @@ import Vuetify from "vuetify";
 import dayjs from "dayjs";
 import LocalizedFormat from "dayjs/plugin/localizedFormat";
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
 require("./bootstrap");
 
 dayjs.extend(LocalizedFormat);
@@ -24,8 +18,8 @@ window.Vue = require("vue");
 const routes = [
     {
         path: "/senarai-permohonan",
-        name: "permohonans",
-        component: require("./components/permohonans.vue").default
+        name: "SenaraiPermohonan",
+        component: require("./components/SenaraiPermohonan.vue").default
     },
     {
         path: "/dashboard",
@@ -44,9 +38,10 @@ const routes = [
             .default
     },
     {
-        path: "/pengguna",
+        path: "/senarai-pengguna",
         name: "pengguna",
-        component: require("./components/View/Pengguna/Pengguna.vue").default
+        component: require("./components/View/Pengguna/SenaraiPengguna.vue")
+            .default
     },
     {
         path: "*",
@@ -68,18 +63,17 @@ Vue.component(
 Vue.component("senarai", require("./components/view/senarai.vue")).default;
 //Tabs
 Vue.component(
-    "tab-dokumen",
-    require("./components/view/Permohonan/Dokumen.vue").default
+    "TabDokumen",
+    require("./components/view/Permohonan/Tab/TabDokumen.vue").default
 );
 Vue.component(
-    "tab-laporan",
-    require("./components/view/Permohonan/Laporan.vue").default
+    "TabLaporan",
+    require("./components/view/Permohonan/Tab/TabLaporan.vue").default
 );
 Vue.component(
-    "tab-kemajuan",
-    require("./components/view/Permohonan/Kemajuan.vue").default
+    "TabKemajuan",
+    require("./components/view/Permohonan/Tab/TabKemajuan.vue").default
 );
-Vue.component("permohonans", require("./components/permohonans.vue").default);
 Vue.component(
     "tabSenaraiBaru",
     require("./components/View/SenaraiPermohonan/tabSenaraiBaru.vue").default
@@ -100,6 +94,20 @@ Vue.component("apexchart", VueApexCharts).default;
 Vue.component(
     "senaraiPermohonan",
     require("./components/view/SenaraiPermohonan/SenaraiPermohonan.vue").default
+);
+//Component
+Vue.component(
+    "PermohonanTab",
+    require("./components/View/Permohonan/PermohonanTab.vue").default
+);
+//Approval view
+Vue.component(
+    "LaporanUpload",
+    require("./components/View/Approval/LaporanUpload.vue").default
+);
+Vue.component(
+    "LantikPenilai",
+    require("./components/View/Approval/LantikPenilai.vue").default
 );
 
 const router = new VueRouter({

@@ -12,14 +12,42 @@ class UserController extends Controller
 {
     public function getUsers()
     {
-        $users = User::orderBy('created_at', 'desc')->paginate(10);
+        $users = User::with('fakulti:fakulti_id,fnama_kod,fakulti_id')->orderBy('created_at', 'desc')->paginate(10);
         return $users;
     }
+
+    public function getPanelPenilai()
+    {
+        $users = User::where('role', 'penilai')->orderBy('created_at', 'desc')->paginate(10);
+        return $users;
+    }
+
 
     public function getRole()
     {
         $role = auth()->user()->role;
-        return $role;
+        return response()->json($role);
+    }
+
+    public function searchUsers($query)
+    {
+        if ($query) {
+            $users = User::with('fakulti:fakulti_id,fnama_kod,fakulti_id')->where('name', 'like', '%' . $query . '%')
+                ->orWhere('email', 'like', '%' . $query . '%')
+                ->orWhere('role', 'like', '%' . $query . '%')
+                ->get();
+        }
+        return $users;
+    }
+
+    public function searchPenilai($query)
+    {
+        if ($query) {
+            $users = User::where('role', 'penilai')->where('name', 'like', '%' . $query . '%')
+                ->orWhere('email', 'like', '%' . $query . '%')
+                ->get();
+        }
+        return $users;
     }
 
     public function store(Request $request)

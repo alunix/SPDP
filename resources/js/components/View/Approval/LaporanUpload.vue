@@ -1,0 +1,50 @@
+<template>
+  <v-card min-height="360px" class="pa-2" outlined tile>
+    <h3 class="subheading black--text">Muat naik laporan</h3>
+    <v-divider></v-divider>
+
+    <v-col md="12">
+      <v-radio-group class="mt-n4" v-model="radios" :mandatory="false">
+        <v-radio color="success" label="Lulus permohonan" value="true"></v-radio>
+        <v-radio color="red" label="Perlu penambahbaikkan" value="false"></v-radio>
+      </v-radio-group>
+      <v-file-input class="mt-n4" label="Laporan"></v-file-input>
+      <v-textarea solo name="input-7-4" label="Komen laporan(Tidak diwajibkan)"></v-textarea>
+    </v-col>
+
+    <v-row
+      style="padding-right:20px;padding-bottom:20px;margin-top:-20px"
+      allign="center"
+      justify="end"
+    >
+      <v-btn small color="primary">Hantar laporan</v-btn>
+    </v-row>
+  </v-card>
+</template>
+<script>
+export default {
+  props: ["permohonan_id_props"],
+  data() {
+    return {
+      loaded: false,
+      radios: [],
+      permohonan_id: this.permohonan_id_props
+    };
+  },
+  methods: {
+    date(created_at) {
+      if (!created_at) {
+        return null;
+      }
+      return dayjs(created_at).format("LLL");
+    },
+    currentTabComponent(tab) {
+      this.currentTab = "Tab" + tab;
+      return this.currentTab;
+    },
+    getDataBind() {
+      return { permohonan_id_props: this.permohonan_id };
+    }
+  }
+};
+</script>

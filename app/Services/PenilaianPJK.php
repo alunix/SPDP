@@ -57,12 +57,10 @@ class PenilaianPJK
     public function pelantikanPenilaiSubmit(Request $request, $id)
     {
         try {
-            /* Find permohonan id then change the status permohonan */
             $permohonan = Permohonan::findOrFail($id);
             $permohonan->status_permohonan_id = 2;
             $permohonan->save();
 
-            //Create a new kemajuan permohonan for each progress
             $kp = new KemajuanPermohonanClass();
             $kp->create($permohonan);
             //retrieve id of panel penilai

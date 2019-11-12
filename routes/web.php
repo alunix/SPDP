@@ -35,6 +35,9 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function () {
 	Route::post('/user/store', 'UserController@store')->name('register.panel_penilai.submit');
 	Route::get('/user/{id}/edit', 'UserController@edit')->name('api.user.edit');
 	Route::post('/user/{id}/update', 'UserController@update')->name('api.user.update');
+	Route::get('/user/search/{query}', 'UserController@searchUsers')->name('api.user.search');
+	Route::get('/senarai-panel-penilai', 'UserController@getPanelPenilai')->name('api.penilai.all');
+	Route::get('/panel-penilai/search/{query}', 'UserController@searchPenilai')->name('api.user.search');
 });
 
 // /*-----------------------Fakulti------------- */

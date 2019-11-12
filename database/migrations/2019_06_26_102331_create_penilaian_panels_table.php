@@ -14,14 +14,14 @@ class CreatePenilaianPanelsTable extends Migration
     public function up()
     {
         Schema::create('penilaian_panels', function (Blueprint $table) {
-            $table->increments('penilaian_id');
-            $table->integer('permohonanID')->unsigned();
+            $table->increments('id');
+            $table->integer('permohonan_id')->unsigned();
             $table->integer('id_pelantik')->unsigned();
             $table->integer('id_penilai')->unsigned();
-            $table->dateTime('tarikhAkhir');
+            $table->dateTime('due_date');
             $table->integer('tempoh');
 
-            $table->foreign('permohonanID')->references('permohonan_id')->on('permohonans');
+            $table->foreign('permohonan_id')->references('permohonan_id')->on('permohonans');
             $table->foreign('id_pelantik')->references('id')->on('users');
             $table->foreign('id_penilai')->references('id')->on('users');
             $table->timestamps();

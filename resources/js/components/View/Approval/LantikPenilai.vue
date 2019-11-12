@@ -111,6 +111,11 @@
                       <v-btn v-if="selectedPenilai.includes(u.id)" small>
                         <v-icon left>mdi-calendar</v-icon>TETAPKAN
                       </v-btn>
+                      <v-date-picker
+                        v-model="due_date"
+                        color="green lighten-1"
+                        header-color="primary"
+                      ></v-date-picker>
                     </td>
                   </tr>
                 </tbody>
@@ -139,7 +144,8 @@ export default {
       loaded: false,
       searchText: "",
       selectedPenilai: [],
-      permohonan: this.permohonan_props
+      permohonan: this.permohonan_props,
+      due_date: []
     };
   },
   watch: {

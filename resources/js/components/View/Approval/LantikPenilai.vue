@@ -92,6 +92,7 @@
                     <th scope="col">EMAIL</th>
                     <th scope="col">TARIKH DICIPTA</th>
                     <th scope="col">LANTIK</th>
+                    <th scope="col">TARIKH HANTAR LAPORAN</th>
                   </tr>
                 </thead>
 
@@ -104,7 +105,12 @@
                     <td>{{u.email}}</td>
                     <td>{{date(u.created_at)}}</td>
                     <td>
-                      <v-checkbox v-model="selectedPenilai" :value="u">Lantik Penilai</v-checkbox>
+                      <v-checkbox v-model="selectedPenilai" :value="u.id">Lantik Penilai</v-checkbox>
+                    </td>
+                    <td>
+                      <v-btn v-if="selectedPenilai.includes(u.id)" small>
+                        <v-icon left>mdi-calendar</v-icon>TETAPKAN
+                      </v-btn>
                     </td>
                   </tr>
                 </tbody>
@@ -137,8 +143,7 @@ export default {
     };
   },
   watch: {
-    searchText: { handler: "searchUsers", immediate: true },
-    selectedPenilai: "showPenilai"
+    searchText: { handler: "searchUsers", immediate: true }
   },
   methods: {
     searchUsers(text) {
@@ -169,7 +174,6 @@ export default {
           if (error.response.status === 422) {
             this.errors = error.response.data.errors || {};
             this.error = true;
-            console.log(error);
           }
         });
     },
@@ -178,9 +182,6 @@ export default {
         return null;
       }
       return dayjs(created_at).format("LLL");
-    },
-    showPenilai() {
-      console.log(this.permohonan);
     },
     makePagination(res) {
       let pagination = {

@@ -7,12 +7,13 @@
             <p>Tajuk Permohonan</p>
             <p>Jenis Permohonan</p>
           </v-flex>
-          <v-flex v-for="p in permohonan" :key="p.id" xs6>
-            <div class="text--primary">{{p.doc_title}}</div>
-            <!-- <div class="text--primary">{{p.jenis_permohonan.jenis_permohonan_huraian}}</div> -->
+          <v-flex v-model="permohonan" xs6>
+            <div class="text--primary">{{permohonan.doc_title}}</div>
+            <div class="text--primary">{{permohonan.jenis_permohonan_id}}</div>
           </v-flex>
         </v-layout>
       </v-card-text>
+
       <v-col>
         <table class="table table-hover">
           <thead class="thead-light">

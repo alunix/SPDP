@@ -1,13 +1,18 @@
 <template>
   <div class="card-body">
-    <v-alert v-if="success" type="success">Permohonan berjaya dihantar</v-alert>
-    <v-alert v-if="error" type="error">Permohonan tidak dapat dihantar</v-alert>
     <h4>Permohonan baru</h4>
     <hr />
 
     <v-form ref="form" @submit.prevent="submit">
+      <v-alert type="error" v-if="error">
+        <b></b>
+        <ul>
+          <li v-for="error in errors" v-bind:key="error[0]">{{ error[0] }}</li>
+        </ul>
+      </v-alert>
+      <v-alert v-if="success" type="success">Permohonan berjaya dihantar</v-alert>
       <v-select
-        v-model="jenis_permohonan_id"
+        v-model="jenis_permohonan"
         item-text="name"
         item-value="value"
         :items="jenis"
@@ -17,7 +22,7 @@
       ></v-select>
 
       <v-text-field
-        v-model="doc_title"
+        v-model="nama_program"
         label="Nama program/kursus"
         :rules="[v => !!v || 'Sila isi bahagian ini']"
         required
@@ -37,11 +42,11 @@
       <input
         style="display:none;"
         type="file"
-        id="file_link"
+        id="fail_permohonan"
         accept=".pdf"
         v-on:change="filePreview"
-        name="file_link"
-        ref="file_link"
+        name="fail_permohonan"
+        ref="fail_permohonan"
       />
 
       <v-textarea
@@ -101,11 +106,11 @@ export default {
           value: "8"
         }
       ],
-      jenis_permohonan_id: "",
-      doc_title: "",
+      jenis_permohonan: "",
+      nama_program: "",
       komen: "",
       fileName: "",
-      file_link: null,
+      fail_permohonan: null,
       errors: {},
       success: false,
       error: false,
@@ -117,18 +122,18 @@ export default {
   },
   methods: {
     filePreview(event) {
-      this.file_link = event.target.files[0];
+      this.fail_permohonan = event.target.files[0];
       this.fileName = event.target.files[0].name;
     },
     pickFile() {
-      this.$refs.file_link.click();
+      this.$refs.fail_permohonan.click();
     },
     submit() {
       this.loading = true;
       let formData = new FormData();
-      formData.append("file_link", this.file_link);
-      formData.append("jenis_permohonan_id", this.jenis_permohonan_id);
-      formData.append("doc_title", this.doc_title);
+      formData.append("fail_permohonan", this.fail_permohonan);
+      formData.append("jenis_permohonan", this.jenis_permohonan);
+      formData.append("nama_program", this.nama_program);
       formData.append("komen", this.komen);
       this.loaded = false;
       this.success = false;
@@ -140,18 +145,21 @@ export default {
           }
         })
         .then(res => {
+          this.error = false;
           this.success = true;
-          this.jenis_permohonan_id = "";
-          this.doc_title = "";
+          this.jenis_permohonan = "";
+          this.nama_program = "";
           this.komen = "";
-          this.file_link = "";
+          this.fail_permohonan = "";
           this.fileName = "";
           this.loading = false;
           this.$emit("event");
         })
         .catch(error => {
+          this.loading = false;
           if (error.response.status === 422) {
             this.errors = error.response.data.errors || {};
+            this.success = false;
             this.error = true;
           }
         });

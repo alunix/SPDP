@@ -52,9 +52,9 @@ class PermohonanController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'jenis_permohonan_id' => 'required|integer|max:255',
-            'doc_title' => 'required|string',
-            'file_link' => 'required|mimes:pdf|max:1999',
+            'jenis_permohonan' => 'required|integer|max:255',
+            'nama_program' => 'required|string',
+            'fail_permohonan' => 'required|mimes:pdf|max:1999',
         ]);
         $pc = new PermohonanClass();
         return $permohonan = $pc->create($request);
@@ -73,6 +73,7 @@ class PermohonanController extends Controller
         $this->validate($request, [
             'selectedPenilai' => 'required',
         ]);
+        Debugbar::info($request->all());
         return $pp->pelantikanPenilaiSubmit($request, $id);
     }
 

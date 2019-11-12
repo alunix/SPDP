@@ -181,6 +181,7 @@ export default {
           this.$emit("event");
         })
         .catch(error => {
+          this.loading = false;
           if (error.response.status === 422) {
             this.errors = error.response.data.errors;
             this.success = false;

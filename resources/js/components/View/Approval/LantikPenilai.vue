@@ -6,10 +6,21 @@
           <h3>Lantik Panel Penilai</h3>
           <hr />
         </v-col>
-        <v-switch style="margin-left:150px" color="red" v-model="people" label="Penambahbaikkan" value="John"></v-switch>
+        <modal height="30%" width="50%" :scrollable="true" name="ModalLantikPenilai">
+          <ModalLantikPenilai
+            :panel_penilai_props="selectedPenilai"
+            :permohonan_props="permohonan"
+            @event="fetchUsers"
+          ></ModalLantikPenilai>
+        </modal>
+        <!-- <v-switch
+          style="margin-left:150px"
+          color="red"
+          v-model="people"
+          label="Penambahbaikkan"
+          value="John"
+        ></v-switch>-->
       </v-row>
-
-      
 
       <v-form ref="form" @submit.prevent="submit">
         <v-row align="center" justify="center">
@@ -23,7 +34,7 @@
             <v-btn
               style="margin-left:255px"
               :disabled="!selectedPenilai.length"
-              v-on:click="fetchUsers(pagination.prev_page_url)"
+              v-on:click="showModel()"
               normal
               color="primary"
             >Seterusnya</v-btn>
@@ -85,7 +96,7 @@
                 </thead>
 
                 <tbody id="permohonans-add">
-                  <tr class="tr-shadow td-cursor" v-for="(u, index) in users" v-bind:key="u.id">
+                  <tr class="tr-shadow" v-for="(u, index) in users" v-bind:key="u.id">
                     <th
                       scope="row"
                     >{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
@@ -93,7 +104,7 @@
                     <td>{{u.email}}</td>
                     <td>{{date(u.created_at)}}</td>
                     <td>
-                      <v-checkbox v-model="selectedPenilai" :value="u.id">Lantik Penilai</v-checkbox>
+                      <v-checkbox v-model="selectedPenilai" :value="u">Lantik Penilai</v-checkbox>
                     </td>
                   </tr>
                 </tbody>
@@ -109,6 +120,7 @@
 <script>
 import dayjs from "dayjs";
 export default {
+  props: ["permohonan_props"],
   data() {
     return {
       users: [],
@@ -120,20 +132,14 @@ export default {
       user_id: "",
       loaded: false,
       searchText: "",
-      selectedPenilai: []
+      selectedPenilai: [],
+      permohonan: this.permohonan_props
     };
   },
   watch: {
-    searchText: { handler: "searchUsers", immediate: true }
+    searchText: { handler: "searchUsers", immediate: true },
+    selectedPenilai: "showPenilai"
   },
-  // filters: {
-  //   highlight: function(words, query) {
-  //     return words.replace(
-  //       query,
-  //       '<span class="highlight">' + query + "</span>"
-  //     );
-  //   }
-  // },
   methods: {
     searchUsers(text) {
       if (text) {
@@ -173,6 +179,9 @@ export default {
       }
       return dayjs(created_at).format("LLL");
     },
+    showPenilai() {
+      console.log(this.permohonan);
+    },
     makePagination(res) {
       let pagination = {
         total: res.total,
@@ -182,6 +191,9 @@ export default {
         per_page: res.per_page
       };
       this.pagination = pagination;
+    },
+    showModel() {
+      this.$modal.show("ModalLantikPenilai");
     },
     submit() {
       // this.loading = true;

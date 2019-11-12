@@ -18,7 +18,7 @@ class UserController extends Controller
 
     public function getPanelPenilai()
     {
-        $users = User::where('role', 'penilai')->orderBy('created_at', 'desc')->paginate(10);
+        $users = User::where('role', 'penilai')->orderBy('created_at', 'desc')->select('id', 'name', 'email', 'created_at')->paginate(10);
         return $users;
     }
 
@@ -45,6 +45,7 @@ class UserController extends Controller
         if ($query) {
             $users = User::where('role', 'penilai')->where('name', 'like', '%' . $query . '%')
                 ->orWhere('email', 'like', '%' . $query . '%')
+                ->select('id', 'name', 'email', 'created_at')
                 ->get();
         }
         return $users;

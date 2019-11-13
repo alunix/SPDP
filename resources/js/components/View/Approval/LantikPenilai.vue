@@ -34,12 +34,40 @@
             <v-btn
               style="margin-left:255px"
               :disabled="!selectedPenilai.length"
-              v-on:click="showModel()"
               normal
               color="primary"
             >Seterusnya</v-btn>
           </v-row>
         </v-row>
+
+        <span style="margin-left:15px">Tetapkan tarikh hantar laporan</span>
+
+        <v-dialog ref="dialog" v-model="modal" :return-value.sync="date" persistent width="290px">
+          <template v-slot:activator="{ on }">
+            <v-text-field
+              v-model="date"
+              label="Picker in dialog"
+              prepend-icon="event"
+              readonly
+              v-on="on"
+            ></v-text-field>
+
+            <v-btn v-on:click="showDate = !showDate" style="margin-left:15px" regular>
+              <v-icon left>mdi-calendar</v-icon>
+            </v-btn>
+          </template>
+          <v-date-picker v-model="date" scrollable>
+            <v-spacer></v-spacer>
+            <v-btn text color="primary" @click="modal = false">Cancel</v-btn>
+            <v-btn text color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
+          </v-date-picker>
+
+          <v-date-picker v-if="showDate == true" v-model="selectedPenilai.due_date" scrollable>
+            <v-spacer></v-spacer>
+            <v-btn text color="primary" @click="showDate = false">Cancel</v-btn>
+            <v-btn text color="primary" @click="showDate = false">OK</v-btn>
+          </v-date-picker>
+        </v-dialog>
 
         <v-layout row class="px-3 pt-1">
           <v-flex xs6>
@@ -111,11 +139,11 @@
                       <v-btn v-if="selectedPenilai.includes(u.id)" small>
                         <v-icon left>mdi-calendar</v-icon>Tetapkan
                       </v-btn>
-                      <v-date-picker
+                      <!-- <v-date-picker
                         v-model="selectedPenilai.due_date"
                         color="green lighten-1"
                         header-color="primary"
-                      ></v-date-picker>
+                      ></v-date-picker>-->
                     </td>
                   </tr>
                 </tbody>
@@ -145,7 +173,8 @@ export default {
       searchText: "",
       selectedPenilai: [],
       permohonan: this.permohonan_props,
-      due_date: []
+      due_date: [],
+      showDate: false
     };
   },
   watch: {

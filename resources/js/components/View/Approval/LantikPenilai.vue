@@ -32,42 +32,37 @@
 
           <v-row style="padding-right:45px" class="padding-right" align="center" justify="end">
             <v-btn
-              style="margin-left:255px"
+              style="margin-left:255px;"
               :disabled="!selectedPenilai.length"
               normal
               color="primary"
-            >Seterusnya</v-btn>
+            >Hantar</v-btn>
           </v-row>
         </v-row>
 
         <span style="margin-left:15px">Tetapkan tarikh hantar laporan</span>
 
-        <v-dialog ref="dialog" v-model="modal" :return-value.sync="date" persistent width="290px">
+        <v-dialog
+          ref="dialog"
+          v-model="modal"
+          :return-value.sync="due_date"
+          persistent
+          width="290px"
+        >
           <template v-slot:activator="{ on }">
-            <v-text-field
-              v-model="date"
-              label="Picker in dialog"
-              prepend-icon="event"
-              readonly
-              v-on="on"
-            ></v-text-field>
-
-            <v-btn v-on:click="showDate = !showDate" style="margin-left:15px" regular>
+            <v-btn v-on="on" v-model="due_date" style="margin-left:30px;" regular>
               <v-icon left>mdi-calendar</v-icon>
+              {{due_date_format(due_date)}}
             </v-btn>
           </template>
-          <v-date-picker v-model="date" scrollable>
+          <v-date-picker :min="min_date" v-model="due_date" scrollable>
             <v-spacer></v-spacer>
             <v-btn text color="primary" @click="modal = false">Cancel</v-btn>
-            <v-btn text color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
-          </v-date-picker>
-
-          <v-date-picker v-if="showDate == true" v-model="selectedPenilai.due_date" scrollable>
-            <v-spacer></v-spacer>
-            <v-btn text color="primary" @click="showDate = false">Cancel</v-btn>
-            <v-btn text color="primary" @click="showDate = false">OK</v-btn>
+            <v-btn text color="primary" @click="$refs.dialog.save(due_date)">OK</v-btn>
           </v-date-picker>
         </v-dialog>
+
+        <span style="margin-left:260px">{{tempoh}} hari diberikan</span>
 
         <v-layout row class="px-3 pt-1">
           <v-flex xs6>
@@ -120,7 +115,6 @@
                     <th scope="col">EMAIL</th>
                     <th scope="col">TARIKH DICIPTA</th>
                     <th scope="col">LANTIK</th>
-                    <th scope="col">TARIKH HANTAR LAPORAN</th>
                   </tr>
                 </thead>
 
@@ -134,16 +128,6 @@
                     <td>{{date(u.created_at)}}</td>
                     <td>
                       <v-checkbox v-model="selectedPenilai" :value="u.id">Lantik Penilai</v-checkbox>
-                    </td>
-                    <td>
-                      <v-btn v-if="selectedPenilai.includes(u.id)" small>
-                        <v-icon left>mdi-calendar</v-icon>Tetapkan
-                      </v-btn>
-                      <!-- <v-date-picker
-                        v-model="selectedPenilai.due_date"
-                        color="green lighten-1"
-                        header-color="primary"
-                      ></v-date-picker>-->
                     </td>
                   </tr>
                 </tbody>
@@ -173,13 +157,18 @@ export default {
       searchText: "",
       selectedPenilai: [],
       permohonan: this.permohonan_props,
-      due_date: [],
-      showDate: false
+      showDate: false,
+      due_date: new Date().toISOString().substr(0, 10),
+      min_date: new Date().toISOString().substr(0, 10),
+      menu: false,
+      modal: false,
+      menu2: false,
+      tempoh: 0
     };
   },
   watch: {
     searchText: { handler: "searchUsers", immediate: true },
-    selectedPenilai: "showPenilai"
+    due_date: "setTempoh"
   },
   methods: {
     searchUsers(text) {
@@ -195,8 +184,11 @@ export default {
         this.fetchUsers();
       }
     },
-    showPenilai() {
-      console.log(this.selectedPenilai);
+    setTempoh() {
+      const today = dayjs(new Date());
+      const due_date = dayjs(this.due_date);
+      let tempoh = due_date.diff(today, "day");
+      this.tempoh = tempoh;
     },
     fetchUsers(page_url) {
       let that = this;
@@ -213,6 +205,7 @@ export default {
           if (error.response.status === 422) {
             this.errors = error.response.data.errors || {};
             this.error = true;
+            console.log(error);
           }
         });
     },
@@ -221,6 +214,9 @@ export default {
         return null;
       }
       return dayjs(created_at).format("LLL");
+    },
+    due_date_format(date) {
+      return dayjs(date).format("DD-MM-YYYY");
     },
     makePagination(res) {
       let pagination = {

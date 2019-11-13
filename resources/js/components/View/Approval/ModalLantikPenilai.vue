@@ -53,7 +53,9 @@ export default {
       // loaded: false,
       // searchText: "",
       selectedPenilai: this.panel_penilai_props,
-      permohonan: this.permohonan_props
+      permohonan: this.permohonan_props,
+      date: new Date().toJSON(),
+      time: new Date().toJSON()
     };
   },
   created() {

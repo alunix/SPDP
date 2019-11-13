@@ -109,10 +109,10 @@
                     </td>
                     <td>
                       <v-btn v-if="selectedPenilai.includes(u.id)" small>
-                        <v-icon left>mdi-calendar</v-icon>TETAPKAN
+                        <v-icon left>mdi-calendar</v-icon>Tetapkan
                       </v-btn>
                       <v-date-picker
-                        v-model="due_date"
+                        v-model="selectedPenilai.due_date"
                         color="green lighten-1"
                         header-color="primary"
                       ></v-date-picker>
@@ -149,7 +149,8 @@ export default {
     };
   },
   watch: {
-    searchText: { handler: "searchUsers", immediate: true }
+    searchText: { handler: "searchUsers", immediate: true },
+    selectedPenilai: "showPenilai"
   },
   methods: {
     searchUsers(text) {
@@ -164,6 +165,9 @@ export default {
       } else {
         this.fetchUsers();
       }
+    },
+    showPenilai() {
+      console.log(this.selectedPenilai);
     },
     fetchUsers(page_url) {
       let that = this;

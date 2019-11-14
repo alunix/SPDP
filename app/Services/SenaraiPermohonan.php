@@ -33,7 +33,7 @@ class SenaraiPermohonan
 
     public function pjk()
     {
-        $permohonans = Permohonan::with(['user.fakulti:fakulti_id,fnama_kod', 'jenis_permohonan:id,jenis_permohonan_huraian', 'status_permohonan:status_id,status_permohonan_huraian'])
+        $permohonans = Permohonan::with(['user.fakulti:fakulti_id,kod', 'jenis_permohonan:id,huraian', 'status_permohonan:status_id,huraian'])
             ->where('jenis_permohonan_id', '!=', '8')->where('status_permohonan_id', '=', '1')->paginate(10);
         return $permohonans;
     }

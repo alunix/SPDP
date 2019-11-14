@@ -69,7 +69,7 @@ class PerluPenambahbaikkan extends Notification
         return (new MailMessage)
         ->greeting('Salam sejahtera ' . $this->penghantar->name)
         ->line('Permohonan ID: '. $this->permohonan->permohonan_id)
-        ->line('Jenis permohonan: '. $this->permohonan->jenis_permohonan->jenis_permohonan_huraian)
+        ->line('Jenis permohonan: '. $this->permohonan->jenis_permohonan->huraian)
         ->line('Permohonan anda perlu penambahbaikkan oleh '.$this->pihakMeluluskan())
         ->line('Laporan telah dikeluarkan')
         ->action('Lihat laporan', route('fakulti.kemajuanPermohonan',$this->permohonan->permohonan_id))

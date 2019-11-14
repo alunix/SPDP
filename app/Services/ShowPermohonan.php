@@ -32,7 +32,7 @@ class ShowPermohonan
 
     public function show($permohonan)
     {
-        $permohonan = Permohonan::with(['jenis_permohonan:id,jenis_permohonan_huraian'])->where('permohonan_id', $permohonan->permohonan_id)
+        $permohonan = Permohonan::with(['jenis_permohonan:id,huraian'])->where('permohonan_id', $permohonan->permohonan_id)
             ->withCount(['dokumen_permohonans', 'laporans', 'kemajuan_permohonans'])->get();
         $dokumen = Permohonan::find($permohonan[0]->permohonan_id)->dokumen_permohonan();
         return response()->json(['permohonan' => $permohonan[0], 'dokumen' => $dokumen]);

@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{$permohonan->jenis_permohonan->jenis_permohonan_huraian}}</div>
+                <div class="card-header">{{$permohonan->jenis_permohonan->huraian}}</div>
 
             <div class="card-body">
                         @csrf
@@ -33,7 +33,7 @@
                             <label for="fakulti" class="col-md-4 col-form-label text-md-right">{{ __('Fakulti') }}</label>
 
                             <div class="col-md-6">
-                                <input id="fakulti" type="text"  value="{{ $permohonan->user->fakulti->fnama_kod}}" class="form-control" name="fakulti"  required autofocus readonly>
+                                <input id="fakulti" type="text"  value="{{ $permohonan->user->fakulti->kod}}" class="form-control" name="fakulti"  required autofocus readonly>
 
                                
                             </div>
@@ -107,7 +107,7 @@
 <td> {{$laporan->id_penghantar_nama->name}}</td>
 <td> {{$laporan->id_penghantar_nama->role}}</td>
 <td> {{$laporan->komen}}</td>
-<td> {{$laporan->versi_laporan}}</td>
+<td> {{$laporan->versi}}</td>
 <td> {{$laporan->created_at}}</td>
 
 

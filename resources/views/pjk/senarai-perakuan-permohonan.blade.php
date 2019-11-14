@@ -34,11 +34,11 @@
                                            
                                                 <td>{{$loop->iteration}}</td>
                                                 <td>{{$permohonan->permohonan_id}}</td>
-                                                <td>{{$permohonan->jenis_permohonan->jenis_permohonan_huraian}}</td>
+                                                <td>{{$permohonan->jenis_permohonan->huraian}}</td>
                                                 <td>{{$permohonan->version_counts()}}</td>
                                                 <td>{{$permohonan->doc_title}}</td>   
                                                 <td>{{$permohonan->user->name}} </td>
-                                                <td>{{$permohonan->user->fakulti->fnama_kod}} </td> 
+                                                <td>{{$permohonan->user->fakulti->kod}} </td> 
                                                 <td>{{$permohonan->updated_at->format('h:i a d/m/Y')}}  </td> 
                                                 <td>
                                                     <div class="table-data-feature">

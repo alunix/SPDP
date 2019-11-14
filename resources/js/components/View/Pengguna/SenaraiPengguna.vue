@@ -77,7 +77,7 @@
                   <td>{{u.name}}</td>
                   <td>{{u.email}}</td>
                   <td>{{u.role|uppercase}}</td>
-                  <td v-if="u.role == 'fakulti'">{{u.fakulti.fnama_kod}}</td>
+                  <td v-if="u.role == 'fakulti'">{{u.fakulti.kod}}</td>
                   <td v-else></td>
                   <td>{{date(u.created_at)}}</td>
                   <td>

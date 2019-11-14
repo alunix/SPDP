@@ -30,8 +30,8 @@ class Analitik
      
             $A=  DB::table("permohonans") 
             ->join('jenis_permohonans','jenis_permohonans.id','=','permohonans.jenis_permohonan_id')
-            ->selectRaw("year(permohonans.created_at) as years, jenis_permohonans.jenis_permohonan_huraian as huraian,count(permohonan_id) as count") 
-            ->groupBy('jenis_permohonan_huraian') 
+            ->selectRaw("year(permohonans.created_at) as years, jenis_permohonans.huraian as huraian,count(permohonan_id) as count") 
+            ->groupBy('huraian') 
             ->get();
     
             $pie_chart = new PermohonanChart();
@@ -84,15 +84,15 @@ public function annual($year_report){
     } 
    
     $chart = new JenisPermohonanChart();       
-    $chart->labels( $permohonans->pluck('fnama_kod')); 
+    $chart->labels( $permohonans->pluck('kod')); 
     $chart->dataset('Permohonan sepanjang tahun '.$year_report, 'bar',$A);
 
      /*--------------------------------- Jenis permohonan pie chart----------------------------------- */
      $jenis=  DB::table("permohonans") 
     ->join('jenis_permohonans','jenis_permohonans.id','=','permohonans.jenis_permohonan_id')
     ->whereYear('permohonans.created_at', $year_report)
-    ->selectRaw("jenis_permohonans.jenis_permohonan_huraian as huraian,count(permohonan_id) as count") 
-    ->groupBy('jenis_permohonan_huraian') 
+    ->selectRaw("jenis_permohonans.huraian as huraian,count(permohonan_id) as count") 
+    ->groupBy('huraian') 
     ->get();
 
     $pie_chart = new PermohonanChart();

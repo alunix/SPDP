@@ -13,7 +13,7 @@
                
                 <form method="POST" action="{{ route('analitik.permohonan.submit') }}">
               
-                <h5>Jenis permohonan tertinggi: {{$highest_jp_id->jenis_permohonan->jenis_permohonan_huraian}} dengan {{$highest_count_jp}} kali</h5>
+                <h5>Jenis permohonan tertinggi: {{$highest_jp_id->jenis_permohonan->huraian}} dengan {{$highest_count_jp}} kali</h5>
 
                 @csrf
 

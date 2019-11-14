@@ -49,7 +49,7 @@
           <td>{{l.laporan_id}}</td>
           <td>{{l.id_penghantar_nama.role|uppercase}}</td>
           <td>{{l.komen}}</td>
-          <td>{{l.versi_laporan}}</td>
+          <td>{{l.versi}}</td>
           <td>{{date(l.created_at)}}</td>
         </tr>
       </tbody>

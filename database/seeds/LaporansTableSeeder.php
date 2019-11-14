@@ -25,7 +25,7 @@ class LaporansTableSeeder extends Seeder
             'tajuk_fail' => $faker->word.'_'.rand(10000, 1000000).'.pdf',
             'tajuk_fail_link' => 'Laporan '.$faker->word,
             'komen' => $faker->sentence,
-            'versi_laporan' => rand(1,10),
+            'versi' => rand(1,10),
             'created_at' => $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now', $timezone = 'Singapore'),
             'updated_at' => $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now', $timezone = 'Singapore'),
 

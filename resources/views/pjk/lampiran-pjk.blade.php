@@ -111,7 +111,7 @@
 <td> {{$laporan->id_penghantar_nama->name}}</td>
 <td> {{$laporan->id_penghantar_nama->role}}</td>
 <td> {{$laporan->komen}}</td>
-<td> {{$laporan->versi_laporan}}</td>
+<td> {{$laporan->versi}}</td>
 <td> {{$laporan->created_at}}</td>
 
 

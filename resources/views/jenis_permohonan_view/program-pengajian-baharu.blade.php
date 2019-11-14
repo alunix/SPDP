@@ -22,7 +22,7 @@
                         <div class="form-group row">
                             <label for="fakulti" class="col-md-4 col-form-label text-md-right">{{ __('Fakulti') }}</label>
                             <div class="col-md-6">
-                                <input id="fakulti" type="text"  value="{{ $permohonan->user->fakulti->fnama_kod}}" class="form-control" name="fakulti"  required autofocus readonly>
+                                <input id="fakulti" type="text"  value="{{ $permohonan->user->fakulti->kod}}" class="form-control" name="fakulti"  required autofocus readonly>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -92,7 +92,7 @@
 <td> {{$laporan->id_penghantar_nama->name}}</td>
 <td> {{$laporan->id_penghantar_nama->role}}</td>
 <td> {{$laporan->komen}}</td>
-<td> {{$laporan->versi_laporan}}</td>
+<td> {{$laporan->versi}}</td>
 <td> {{$laporan->created_at}}</td>
 </tr>
 @endforeach

@@ -45,7 +45,7 @@ class DokumenPenambahbaikkan extends Notification
         ->greeting('Salam sejahtera ')
         ->line('Dokumen permohonan id: '. $this->dp->dokumen_permohonan_id)
         ->line('Versi :'. $this->dp->versi)
-        ->line('Jenis permohonan: '. $this->dp->permohonan->jenis_permohonan_huraian)
+        ->line('Jenis permohonan: '. $this->dp->permohonan->huraian)
         ->action('Sila tekan sini', route('view-permohonan-baharu',$this->dp->permohonan_id))
         ->line('Terima kasih');
     }

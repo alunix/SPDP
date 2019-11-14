@@ -67,7 +67,7 @@ class PenilaianPJK
 
             $penilaian = new PenilaianPanelClass();
             $penilaian = $penilaian->create($permohonan, $request);
-            
+
             //Send email to panel penilai
             // $penilai = User::findOrFail($selectedPenilai[0]);
             // Notification::route('mail', $penilai->email)->notify(new PelantikanPanelPenilai($permohonan, $penilaian, $penilai)); //hantar email kepada panel penilai
@@ -82,7 +82,7 @@ class PenilaianPJK
     public function showPerakuanPjk($id)
     {
         $permohonan = Permohonan::findOrFail($id);
-        $jp = $permohonan->jenis_permohonan->jenis_permohonan_kod;
+        $jp = $permohonan->jenis_permohonan->kod;
         $status_permohonan = $permohonan->value('status_permohonan_id');
 
         switch ($jp) {
@@ -119,7 +119,7 @@ class PenilaianPJK
 
     public function uploadPerakuanPjk($request, $permohonan)
     {
-        $jp = $permohonan->jenis_permohonan->jenis_permohonan_kod;
+        $jp = $permohonan->jenis_permohonan->kod;
 
         switch ($jp) {
             case 'program_baharu':

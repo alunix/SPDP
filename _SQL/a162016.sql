@@ -7,8 +7,10 @@
 -- Server version: 5.6.26
 -- PHP Version: 5.5.28
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+SET SQL_MODE
+= "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone
+= "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -26,14 +28,23 @@ SET time_zone = "+00:00";
 -- Table structure for table `dokumen_permohonans`
 --
 
-CREATE TABLE IF NOT EXISTS `dokumen_permohonans` (
-  `dokumen_permohonan_id` int(10) unsigned NOT NULL,
-  `permohonan_id` int(10) unsigned NOT NULL,
-  `file_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `file_link` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `file_size` int(11) NOT NULL,
-  `komen` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `versi` int(11) NOT NULL,
+CREATE TABLE
+IF NOT EXISTS `dokumen_permohonans`
+(
+  `dokumen_permohonan_id` int
+(10) unsigned NOT NULL,
+  `permohonan_id` int
+(10) unsigned NOT NULL,
+  `file_name` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `file_link` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `file_size` int
+(11) NOT NULL,
+  `komen` varchar
+(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `versi` int
+(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -42,7 +53,10 @@ CREATE TABLE IF NOT EXISTS `dokumen_permohonans` (
 -- Dumping data for table `dokumen_permohonans`
 --
 
-INSERT INTO `dokumen_permohonans` (`dokumen_permohonan_id`, `permohonan_id`, `file_name`, `file_link`, `file_size`, `komen`, `versi`, `created_at`, `updated_at`) VALUES
+INSERT INTO `dokumen_permohonans` (`
+dokumen_permohonan_id`,
+`permohonan_id
+`, `file_name`, `file_link`, `file_size`, `komen`, `versi`, `created_at`, `updated_at`) VALUES
 (1, 1, 'TUTORIAL 5 A162016.pdf', 'TUTORIAL 5 A162016_1557316526.pdf', 145, NULL, 1, '2019-05-08 11:55:26', '2019-05-08 11:55:26'),
 (2, 2, 'TUTORIAL 5 A162016.pdf', 'TUTORIAL 5 A162016_1557317036.pdf', 145, NULL, 1, '2019-05-08 12:03:56', '2019-05-08 12:03:56'),
 (3, 10, 'permohonan.pdf', 'permohonan45634.pdf', 123, NULL, 7, '2019-03-03 22:31:33', '2019-05-12 08:53:28'),
@@ -149,10 +163,15 @@ INSERT INTO `dokumen_permohonans` (`dokumen_permohonan_id`, `permohonan_id`, `fi
 -- Table structure for table `fakultis`
 --
 
-CREATE TABLE IF NOT EXISTS `fakultis` (
-  `fakulti_id` int(10) unsigned NOT NULL,
-  `f_nama` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fnama_kod` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+CREATE TABLE
+IF NOT EXISTS `fakultis`
+(
+  `fakulti_id` int
+(10) unsigned NOT NULL,
+  `f_nama` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `kod` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -161,7 +180,10 @@ CREATE TABLE IF NOT EXISTS `fakultis` (
 -- Dumping data for table `fakultis`
 --
 
-INSERT INTO `fakultis` (`fakulti_id`, `f_nama`, `fnama_kod`, `created_at`, `updated_at`) VALUES
+INSERT INTO `fakultis` (`
+fakulti_id`,
+`f_nama
+`, `kod`, `created_at`, `updated_at`) VALUES
 (1, 'Fakulti Sains Sosial dan Kemanusiaan', 'FSSK', NULL, NULL),
 (2, 'Fakulti Sains dan Teknologi', 'FST', NULL, NULL),
 (3, 'Fakulti Ekonomi dan Pengurusan', 'FEP', NULL, NULL),
@@ -182,10 +204,15 @@ INSERT INTO `fakultis` (`fakulti_id`, `f_nama`, `fnama_kod`, `created_at`, `upda
 -- Table structure for table `jenis_permohonans`
 --
 
-CREATE TABLE IF NOT EXISTS `jenis_permohonans` (
-  `id` int(10) unsigned NOT NULL,
-  `jenis_permohonan_kod` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `jenis_permohonan_huraian` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+CREATE TABLE
+IF NOT EXISTS `jenis_permohonans`
+(
+  `id` int
+(10) unsigned NOT NULL,
+  `kod` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `huraian` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -194,7 +221,10 @@ CREATE TABLE IF NOT EXISTS `jenis_permohonans` (
 -- Dumping data for table `jenis_permohonans`
 --
 
-INSERT INTO `jenis_permohonans` (`id`, `jenis_permohonan_kod`, `jenis_permohonan_huraian`, `created_at`, `updated_at`) VALUES
+INSERT INTO `jenis_permohonans` (`
+id`,
+`kod
+`, `huraian`, `created_at`, `updated_at`) VALUES
 (1, 'program_baharu', 'Program Pengajian Baharu', NULL, NULL),
 (2, 'semakan_program', 'Semakan Program Pengajian', NULL, NULL),
 (3, 'kursus_teras_baharu', 'Kursus Teras Baharu', NULL, NULL),
@@ -210,10 +240,15 @@ INSERT INTO `jenis_permohonans` (`id`, `jenis_permohonan_kod`, `jenis_permohonan
 -- Table structure for table `kemajuan_permohonans`
 --
 
-CREATE TABLE IF NOT EXISTS `kemajuan_permohonans` (
-  `id` int(10) unsigned NOT NULL,
-  `permohonan_id` int(10) unsigned NOT NULL,
-  `status_permohonan` int(10) unsigned DEFAULT NULL,
+CREATE TABLE
+IF NOT EXISTS `kemajuan_permohonans`
+(
+  `id` int
+(10) unsigned NOT NULL,
+  `permohonan_id` int
+(10) unsigned NOT NULL,
+  `status_permohonan` int
+(10) unsigned DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -222,7 +257,10 @@ CREATE TABLE IF NOT EXISTS `kemajuan_permohonans` (
 -- Dumping data for table `kemajuan_permohonans`
 --
 
-INSERT INTO `kemajuan_permohonans` (`id`, `permohonan_id`, `status_permohonan`, `created_at`, `updated_at`) VALUES
+INSERT INTO `kemajuan_permohonans` (`
+id`,
+`permohonan_id
+`, `status_permohonan`, `created_at`, `updated_at`) VALUES
 (1, 1, 1, '2019-05-08 11:55:26', '2019-05-08 11:55:26'),
 (2, 2, 1, '2019-05-08 12:03:56', '2019-05-08 12:03:56'),
 (3, 2, 9, '2019-05-17 06:44:41', '2019-05-17 06:44:41'),
@@ -310,14 +348,23 @@ INSERT INTO `kemajuan_permohonans` (`id`, `permohonan_id`, `status_permohonan`, 
 -- Table structure for table `laporans`
 --
 
-CREATE TABLE IF NOT EXISTS `laporans` (
-  `laporan_id` int(10) unsigned NOT NULL,
-  `dokumen_permohonan_id` int(10) unsigned NOT NULL,
-  `id_penghantar` int(10) unsigned NOT NULL,
-  `tajuk_fail` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tajuk_fail_link` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `komen` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `versi_laporan` int(11) NOT NULL,
+CREATE TABLE
+IF NOT EXISTS `laporans`
+(
+  `laporan_id` int
+(10) unsigned NOT NULL,
+  `dokumen_permohonan_id` int
+(10) unsigned NOT NULL,
+  `id_penghantar` int
+(10) unsigned NOT NULL,
+  `tajuk_fail` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tajuk_fail_link` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `komen` varchar
+(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `versi` int
+(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -326,7 +373,10 @@ CREATE TABLE IF NOT EXISTS `laporans` (
 -- Dumping data for table `laporans`
 --
 
-INSERT INTO `laporans` (`laporan_id`, `dokumen_permohonan_id`, `id_penghantar`, `tajuk_fail`, `tajuk_fail_link`, `komen`, `versi_laporan`, `created_at`, `updated_at`) VALUES
+INSERT INTO `laporans` (`
+laporan_id`,
+`dokumen_permohonan_id
+`, `id_penghantar`, `tajuk_fail`, `tajuk_fail_link`, `komen`, `versi`, `created_at`, `updated_at`) VALUES
 (1, 21, 2, 'Agile Gantt chart1.pdf', 'Agile Gantt chart1_1558075481.pdf', NULL, 1, '2019-05-17 06:44:41', '2019-05-17 06:44:41'),
 (2, 44, 3, 'Agile Gantt chart1.pdf', 'Agile Gantt chart1_1558955539.pdf', NULL, 1, '2019-05-27 11:12:19', '2019-05-27 11:12:19'),
 (3, 44, 3, 'Agile Gantt chart1.pdf', 'Agile Gantt chart1_1558955564.pdf', NULL, 1, '2019-05-27 11:12:44', '2019-05-27 11:12:44'),
@@ -360,17 +410,25 @@ INSERT INTO `laporans` (`laporan_id`, `dokumen_permohonan_id`, `id_penghantar`, 
 -- Table structure for table `migrations`
 --
 
-CREATE TABLE IF NOT EXISTS `migrations` (
-  `id` int(10) unsigned NOT NULL,
-  `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int(11) NOT NULL
+CREATE TABLE
+IF NOT EXISTS `migrations`
+(
+  `id` int
+(10) unsigned NOT NULL,
+  `migration` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int
+(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `migrations`
 --
 
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+INSERT INTO `migrations` (`
+id`,
+`migration
+`, `batch`) VALUES
 (2, '2014_10_12_100000_create_password_resets_table', 1),
 (3, '2018_10_20_223422_create_jenis_permohonans_table', 1),
 (19, '2019_02_13_144136_create_status_permohonans_table', 8),
@@ -391,12 +449,19 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- Table structure for table `notifications`
 --
 
-CREATE TABLE IF NOT EXISTS `notifications` (
-  `notifications_id` int(10) unsigned NOT NULL,
-  `notificationDetails` int(10) unsigned NOT NULL,
-  `notificationLocation` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `userFired` int(10) unsigned NOT NULL,
-  `userToNotify` int(10) unsigned NOT NULL,
+CREATE TABLE
+IF NOT EXISTS `notifications`
+(
+  `notifications_id` int
+(10) unsigned NOT NULL,
+  `notificationDetails` int
+(10) unsigned NOT NULL,
+  `notificationLocation` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `userFired` int
+(10) unsigned NOT NULL,
+  `userToNotify` int
+(10) unsigned NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -405,7 +470,10 @@ CREATE TABLE IF NOT EXISTS `notifications` (
 -- Dumping data for table `notifications`
 --
 
-INSERT INTO `notifications` (`notifications_id`, `notificationDetails`, `notificationLocation`, `userFired`, `userToNotify`, `created_at`, `updated_at`) VALUES
+INSERT INTO `notifications` (`
+notifications_id`,
+`notificationDetails
+`, `notificationLocation`, `userFired`, `userToNotify`, `created_at`, `updated_at`) VALUES
 (1, 16, 'senaraiPermohonanBaharu', 1, 2, '2019-05-26 05:16:30', '2019-05-26 05:16:30');
 
 -- --------------------------------------------------------
@@ -414,9 +482,13 @@ INSERT INTO `notifications` (`notifications_id`, `notificationDetails`, `notific
 -- Table structure for table `password_resets`
 --
 
-CREATE TABLE IF NOT EXISTS `password_resets` (
-  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+CREATE TABLE
+IF NOT EXISTS `password_resets`
+(
+  `email` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -426,13 +498,20 @@ CREATE TABLE IF NOT EXISTS `password_resets` (
 -- Table structure for table `penilaian_panels`
 --
 
-CREATE TABLE IF NOT EXISTS `penilaian_panels` (
-  `penilaian_id` int(10) unsigned NOT NULL,
-  `permohonanID` int(10) unsigned NOT NULL,
-  `id_pelantik` int(10) unsigned NOT NULL,
-  `id_penilai` int(10) unsigned NOT NULL,
+CREATE TABLE
+IF NOT EXISTS `penilaian_panels`
+(
+  `penilaian_id` int
+(10) unsigned NOT NULL,
+  `permohonanID` int
+(10) unsigned NOT NULL,
+  `id_pelantik` int
+(10) unsigned NOT NULL,
+  `id_penilai` int
+(10) unsigned NOT NULL,
   `tarikhAkhir` datetime NOT NULL,
-  `tempoh` int(11) NOT NULL,
+  `tempoh` int
+(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -441,7 +520,10 @@ CREATE TABLE IF NOT EXISTS `penilaian_panels` (
 -- Dumping data for table `penilaian_panels`
 --
 
-INSERT INTO `penilaian_panels` (`penilaian_id`, `permohonanID`, `id_pelantik`, `id_penilai`, `tarikhAkhir`, `tempoh`, `created_at`, `updated_at`) VALUES
+INSERT INTO `penilaian_panels` (`
+penilaian_id`,
+`permohonanID
+`, `id_pelantik`, `id_penilai`, `tarikhAkhir`, `tempoh`, `created_at`, `updated_at`) VALUES
 (1, 34, 2, 3, '2019-10-01 12:00:00', 96, '2019-06-26 15:20:45', '2019-06-26 15:20:45'),
 (2, 67, 2, 3, '2018-12-31 12:00:00', 182, '2019-07-01 17:16:50', '2019-07-01 17:16:50');
 
@@ -451,12 +533,19 @@ INSERT INTO `penilaian_panels` (`penilaian_id`, `permohonanID`, `id_pelantik`, `
 -- Table structure for table `permohonans`
 --
 
-CREATE TABLE IF NOT EXISTS `permohonans` (
-  `permohonan_id` int(10) unsigned NOT NULL,
-  `doc_title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `jenis_permohonan_id` int(10) unsigned NOT NULL,
-  `id_penghantar` int(10) unsigned NOT NULL,
-  `status_permohonan_id` int(10) unsigned NOT NULL,
+CREATE TABLE
+IF NOT EXISTS `permohonans`
+(
+  `permohonan_id` int
+(10) unsigned NOT NULL,
+  `doc_title` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `jenis_permohonan_id` int
+(10) unsigned NOT NULL,
+  `id_penghantar` int
+(10) unsigned NOT NULL,
+  `status_permohonan_id` int
+(10) unsigned NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -465,7 +554,10 @@ CREATE TABLE IF NOT EXISTS `permohonans` (
 -- Dumping data for table `permohonans`
 --
 
-INSERT INTO `permohonans` (`permohonan_id`, `doc_title`, `jenis_permohonan_id`, `id_penghantar`, `status_permohonan_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `permohonans` (`
+permohonan_id`,
+`doc_title
+`, `jenis_permohonan_id`, `id_penghantar`, `status_permohonan_id`, `created_at`, `updated_at`) VALUES
 (1, 'Sarjana Muda A', 1, 1, 4, '2019-05-08 11:55:26', '2019-05-27 11:53:33'),
 (2, 'Sarjana Muda A', 2, 1, 9, '2019-05-08 12:03:56', '2019-05-17 06:44:41'),
 (3, 'permohonan.pdf', 6, 6, 4, '2019-05-12 08:41:16', '2019-05-12 08:41:16'),
@@ -540,9 +632,13 @@ INSERT INTO `permohonans` (`permohonan_id`, `doc_title`, `jenis_permohonan_id`, 
 -- Table structure for table `status_permohonans`
 --
 
-CREATE TABLE IF NOT EXISTS `status_permohonans` (
-  `status_id` int(10) unsigned NOT NULL,
-  `status_permohonan_huraian` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+CREATE TABLE
+IF NOT EXISTS `status_permohonans`
+(
+  `status_id` int
+(10) unsigned NOT NULL,
+  `huraian` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -551,7 +647,10 @@ CREATE TABLE IF NOT EXISTS `status_permohonans` (
 -- Dumping data for table `status_permohonans`
 --
 
-INSERT INTO `status_permohonans` (`status_id`, `status_permohonan_huraian`, `created_at`, `updated_at`) VALUES
+INSERT INTO `status_permohonans` (`
+status_id`,
+`huraian
+`, `created_at`, `updated_at`) VALUES
 (1, 'Belum disemak ', NULL, NULL),
 (2, 'Diluluskan oleh PJK, permohonan akan disemak oleh panel penilai', NULL, NULL),
 (3, 'Diluluskan oleh panel penilai', NULL, NULL),
@@ -575,11 +674,17 @@ INSERT INTO `status_permohonans` (`status_id`, `status_permohonan_huraian`, `cre
 -- Table structure for table `tetapan_aliran_kerjas`
 --
 
-CREATE TABLE IF NOT EXISTS `tetapan_aliran_kerjas` (
-  `tetapan_id` int(10) unsigned NOT NULL,
-  `id_pjk` int(10) unsigned NOT NULL,
-  `id_jppa` int(10) unsigned NOT NULL,
-  `id_senat` int(10) unsigned NOT NULL,
+CREATE TABLE
+IF NOT EXISTS `tetapan_aliran_kerjas`
+(
+  `tetapan_id` int
+(10) unsigned NOT NULL,
+  `id_pjk` int
+(10) unsigned NOT NULL,
+  `id_jppa` int
+(10) unsigned NOT NULL,
+  `id_senat` int
+(10) unsigned NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -588,7 +693,10 @@ CREATE TABLE IF NOT EXISTS `tetapan_aliran_kerjas` (
 -- Dumping data for table `tetapan_aliran_kerjas`
 --
 
-INSERT INTO `tetapan_aliran_kerjas` (`tetapan_id`, `id_pjk`, `id_jppa`, `id_senat`, `created_at`, `updated_at`) VALUES
+INSERT INTO `tetapan_aliran_kerjas` (`
+tetapan_id`,
+`id_pjk
+`, `id_jppa`, `id_senat`, `created_at`, `updated_at`) VALUES
 (1, 2, 5, 5, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -597,24 +705,36 @@ INSERT INTO `tetapan_aliran_kerjas` (`tetapan_id`, `id_pjk`, `id_jppa`, `id_sena
 -- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(10) unsigned NOT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `role` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+CREATE TABLE
+IF NOT EXISTS `users`
+(
+  `id` int
+(10) unsigned NOT NULL,
+  `name` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `role` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar
+(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `fakulti_id` int(10) unsigned DEFAULT NULL
+  `fakulti_id` int
+(10) unsigned DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `role`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `fakulti_id`) VALUES
+INSERT INTO `users` (`
+id`,
+`name
+`, `role`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `fakulti_id`) VALUES
 (1, 'Siti', 'fakulti', 'fakulti@gmail.com', NULL, '$2y$10$lEWIaBxks3MDljNXvuTSNe9NV40m6GC7gfGOP/h71t9abM03Ybqk2', 'EKHBEqkbH1AbHle3TBQ9QXueEX0p1C7N0ET9MpQlMUk7YYuayeerwT2AKBnb', '2019-04-30 10:53:41', '2019-05-12 13:52:03', 1),
 (2, 'Dalbir Singh', 'pjk', 'dalbir@gmail.com', NULL, '$2y$10$XJH2EzccTNY6qLTLlIUq0O4M0Q1cxkXNqpRXB28q28THN8l5UrG0S', 'zlxxyxAOyNnGjfTsIWf1tJvJRdsYEtvSfa0JyqDOWWDSOL1lew6XdZcoCzCi', '2019-04-30 10:56:33', '2019-05-15 15:20:59', NULL),
 (3, 'Penilai 1', 'penilai', 'penilai1@gmail.com', NULL, '$2y$10$L9sVV4yXaG8YBzdJ7oY22umwij1a3mOSB2ACU8DA6muKTL4nQw3Hq', 'GocJxPubiFrzDJ5Ha2Cc3q5MZcD1rY8tDNHWztqj14Xv0BRONbLWsyfmm5ZP', '2019-04-30 10:56:47', '2019-04-30 10:56:47', NULL),
@@ -632,97 +752,128 @@ INSERT INTO `users` (`id`, `name`, `role`, `email`, `email_verified_at`, `passwo
 -- Indexes for table `dokumen_permohonans`
 --
 ALTER TABLE `dokumen_permohonans`
-  ADD PRIMARY KEY (`dokumen_permohonan_id`),
-  ADD KEY `dokumen_permohonans_permohonan_id_foreign` (`permohonan_id`);
+ADD PRIMARY KEY
+(`dokumen_permohonan_id`),
+ADD KEY `dokumen_permohonans_permohonan_id_foreign`
+(`permohonan_id`);
 
 --
 -- Indexes for table `fakultis`
 --
 ALTER TABLE `fakultis`
-  ADD PRIMARY KEY (`fakulti_id`);
+ADD PRIMARY KEY
+(`fakulti_id`);
 
 --
 -- Indexes for table `jenis_permohonans`
 --
 ALTER TABLE `jenis_permohonans`
-  ADD PRIMARY KEY (`id`);
+ADD PRIMARY KEY
+(`id`);
 
 --
 -- Indexes for table `kemajuan_permohonans`
 --
 ALTER TABLE `kemajuan_permohonans`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `kemajuan_permohonans_status_permohonan_foreign` (`status_permohonan`);
+ADD PRIMARY KEY
+(`id`),
+ADD KEY `kemajuan_permohonans_status_permohonan_foreign`
+(`status_permohonan`);
 
 --
 -- Indexes for table `laporans`
 --
 ALTER TABLE `laporans`
-  ADD PRIMARY KEY (`laporan_id`),
-  ADD KEY `laporans_dokumen_permohonan_id_foreign` (`dokumen_permohonan_id`),
-  ADD KEY `laporans_id_penghantar_foreign` (`id_penghantar`);
+ADD PRIMARY KEY
+(`laporan_id`),
+ADD KEY `laporans_dokumen_permohonan_id_foreign`
+(`dokumen_permohonan_id`),
+ADD KEY `laporans_id_penghantar_foreign`
+(`id_penghantar`);
 
 --
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
-  ADD PRIMARY KEY (`id`);
+ADD PRIMARY KEY
+(`id`);
 
 --
 -- Indexes for table `notifications`
 --
 ALTER TABLE `notifications`
-  ADD PRIMARY KEY (`notifications_id`),
-  ADD KEY `notifications_userfired_foreign` (`userFired`),
-  ADD KEY `notifications_notificationdetails_foreign` (`notificationDetails`),
-  ADD KEY `notifications_usertonotify_foreign` (`userToNotify`);
+ADD PRIMARY KEY
+(`notifications_id`),
+ADD KEY `notifications_userfired_foreign`
+(`userFired`),
+ADD KEY `notifications_notificationdetails_foreign`
+(`notificationDetails`),
+ADD KEY `notifications_usertonotify_foreign`
+(`userToNotify`);
 
 --
 -- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
-  ADD KEY `password_resets_email_index` (`email`);
+ADD KEY `password_resets_email_index`
+(`email`);
 
 --
 -- Indexes for table `penilaian_panels`
 --
 ALTER TABLE `penilaian_panels`
-  ADD PRIMARY KEY (`penilaian_id`),
-  ADD KEY `penilaian_panels_permohonanid_foreign` (`permohonanID`),
-  ADD KEY `penilaian_panels_id_pelantik_foreign` (`id_pelantik`),
-  ADD KEY `penilaian_panels_id_penilai_foreign` (`id_penilai`);
+ADD PRIMARY KEY
+(`penilaian_id`),
+ADD KEY `penilaian_panels_permohonanid_foreign`
+(`permohonanID`),
+ADD KEY `penilaian_panels_id_pelantik_foreign`
+(`id_pelantik`),
+ADD KEY `penilaian_panels_id_penilai_foreign`
+(`id_penilai`);
 
 --
 -- Indexes for table `permohonans`
 --
 ALTER TABLE `permohonans`
-  ADD PRIMARY KEY (`permohonan_id`),
-  ADD KEY `permohonans_id_penghantar_foreign` (`id_penghantar`),
-  ADD KEY `permohonans_jenis_permohonan_id_foreign` (`jenis_permohonan_id`),
-  ADD KEY `permohonans_status_permohonan_id_foreign` (`status_permohonan_id`);
+ADD PRIMARY KEY
+(`permohonan_id`),
+ADD KEY `permohonans_id_penghantar_foreign`
+(`id_penghantar`),
+ADD KEY `permohonans_jenis_permohonan_id_foreign`
+(`jenis_permohonan_id`),
+ADD KEY `permohonans_status_permohonan_id_foreign`
+(`status_permohonan_id`);
 
 --
 -- Indexes for table `status_permohonans`
 --
 ALTER TABLE `status_permohonans`
-  ADD PRIMARY KEY (`status_id`);
+ADD PRIMARY KEY
+(`status_id`);
 
 --
 -- Indexes for table `tetapan_aliran_kerjas`
 --
 ALTER TABLE `tetapan_aliran_kerjas`
-  ADD PRIMARY KEY (`tetapan_id`),
-  ADD KEY `tetapan_aliran_kerjas_id_pjk_foreign` (`id_pjk`),
-  ADD KEY `tetapan_aliran_kerjas_id_jppa_foreign` (`id_jppa`),
-  ADD KEY `tetapan_aliran_kerjas_id_senat_foreign` (`id_senat`);
+ADD PRIMARY KEY
+(`tetapan_id`),
+ADD KEY `tetapan_aliran_kerjas_id_pjk_foreign`
+(`id_pjk`),
+ADD KEY `tetapan_aliran_kerjas_id_jppa_foreign`
+(`id_jppa`),
+ADD KEY `tetapan_aliran_kerjas_id_senat_foreign`
+(`id_senat`);
 
 --
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`),
-  ADD KEY `users_fakulti_id_foreign` (`fakulti_id`);
+ADD PRIMARY KEY
+(`id`),
+ADD UNIQUE KEY `users_email_unique`
+(`email`),
+ADD KEY `users_fakulti_id_foreign`
+(`fakulti_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -732,62 +883,74 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `dokumen_permohonans`
 --
 ALTER TABLE `dokumen_permohonans`
-  MODIFY `dokumen_permohonan_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=100;
+  MODIFY `dokumen_permohonan_id` int
+(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=100;
 --
 -- AUTO_INCREMENT for table `fakultis`
 --
 ALTER TABLE `fakultis`
-  MODIFY `fakulti_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+  MODIFY `fakulti_id` int
+(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `jenis_permohonans`
 --
 ALTER TABLE `jenis_permohonans`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+  MODIFY `id` int
+(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `kemajuan_permohonans`
 --
 ALTER TABLE `kemajuan_permohonans`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=81;
+  MODIFY `id` int
+(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=81;
 --
 -- AUTO_INCREMENT for table `laporans`
 --
 ALTER TABLE `laporans`
-  MODIFY `laporan_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
+  MODIFY `laporan_id` int
+(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=65;
+  MODIFY `id` int
+(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=65;
 --
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `notifications_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `notifications_id` int
+(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `penilaian_panels`
 --
 ALTER TABLE `penilaian_panels`
-  MODIFY `penilaian_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `penilaian_id` int
+(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `permohonans`
 --
 ALTER TABLE `permohonans`
-  MODIFY `permohonan_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=68;
+  MODIFY `permohonan_id` int
+(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=68;
 --
 -- AUTO_INCREMENT for table `status_permohonans`
 --
 ALTER TABLE `status_permohonans`
-  MODIFY `status_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
+  MODIFY `status_id` int
+(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `tetapan_aliran_kerjas`
 --
 ALTER TABLE `tetapan_aliran_kerjas`
-  MODIFY `tetapan_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `tetapan_id` int
+(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+  MODIFY `id` int
+(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
 --
 -- Constraints for dumped tables
 --
@@ -796,58 +959,92 @@ ALTER TABLE `users`
 -- Constraints for table `dokumen_permohonans`
 --
 ALTER TABLE `dokumen_permohonans`
-  ADD CONSTRAINT `dokumen_permohonans_permohonan_id_foreign` FOREIGN KEY (`permohonan_id`) REFERENCES `permohonans` (`permohonan_id`);
+ADD CONSTRAINT `dokumen_permohonans_permohonan_id_foreign` FOREIGN KEY
+(`permohonan_id`) REFERENCES `permohonans`
+(`permohonan_id`);
 
 --
 -- Constraints for table `kemajuan_permohonans`
 --
 ALTER TABLE `kemajuan_permohonans`
-  ADD CONSTRAINT `kemajuan_permohonans_status_permohonan_foreign` FOREIGN KEY (`status_permohonan`) REFERENCES `status_permohonans` (`status_id`);
+ADD CONSTRAINT `kemajuan_permohonans_status_permohonan_foreign` FOREIGN KEY
+(`status_permohonan`) REFERENCES `status_permohonans`
+(`status_id`);
 
 --
 -- Constraints for table `laporans`
 --
 ALTER TABLE `laporans`
-  ADD CONSTRAINT `laporans_dokumen_permohonan_id_foreign` FOREIGN KEY (`dokumen_permohonan_id`) REFERENCES `dokumen_permohonans` (`dokumen_permohonan_id`),
-  ADD CONSTRAINT `laporans_id_penghantar_foreign` FOREIGN KEY (`id_penghantar`) REFERENCES `users` (`id`);
+ADD CONSTRAINT `laporans_dokumen_permohonan_id_foreign` FOREIGN KEY
+(`dokumen_permohonan_id`) REFERENCES `dokumen_permohonans`
+(`dokumen_permohonan_id`),
+ADD CONSTRAINT `laporans_id_penghantar_foreign` FOREIGN KEY
+(`id_penghantar`) REFERENCES `users`
+(`id`);
 
 --
 -- Constraints for table `notifications`
 --
 ALTER TABLE `notifications`
-  ADD CONSTRAINT `notifications_notificationdetails_foreign` FOREIGN KEY (`notificationDetails`) REFERENCES `status_permohonans` (`status_id`),
-  ADD CONSTRAINT `notifications_userfired_foreign` FOREIGN KEY (`userFired`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `notifications_usertonotify_foreign` FOREIGN KEY (`userToNotify`) REFERENCES `users` (`id`);
+ADD CONSTRAINT `notifications_notificationdetails_foreign` FOREIGN KEY
+(`notificationDetails`) REFERENCES `status_permohonans`
+(`status_id`),
+ADD CONSTRAINT `notifications_userfired_foreign` FOREIGN KEY
+(`userFired`) REFERENCES `users`
+(`id`),
+ADD CONSTRAINT `notifications_usertonotify_foreign` FOREIGN KEY
+(`userToNotify`) REFERENCES `users`
+(`id`);
 
 --
 -- Constraints for table `penilaian_panels`
 --
 ALTER TABLE `penilaian_panels`
-  ADD CONSTRAINT `penilaian_panels_id_pelantik_foreign` FOREIGN KEY (`id_pelantik`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `penilaian_panels_id_penilai_foreign` FOREIGN KEY (`id_penilai`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `penilaian_panels_permohonanid_foreign` FOREIGN KEY (`permohonanID`) REFERENCES `permohonans` (`permohonan_id`);
+ADD CONSTRAINT `penilaian_panels_id_pelantik_foreign` FOREIGN KEY
+(`id_pelantik`) REFERENCES `users`
+(`id`),
+ADD CONSTRAINT `penilaian_panels_id_penilai_foreign` FOREIGN KEY
+(`id_penilai`) REFERENCES `users`
+(`id`),
+ADD CONSTRAINT `penilaian_panels_permohonanid_foreign` FOREIGN KEY
+(`permohonanID`) REFERENCES `permohonans`
+(`permohonan_id`);
 
 --
 -- Constraints for table `permohonans`
 --
 ALTER TABLE `permohonans`
-  ADD CONSTRAINT `permohonans_id_penghantar_foreign` FOREIGN KEY (`id_penghantar`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `permohonans_jenis_permohonan_id_foreign` FOREIGN KEY (`jenis_permohonan_id`) REFERENCES `jenis_permohonans` (`id`),
-  ADD CONSTRAINT `permohonans_status_permohonan_id_foreign` FOREIGN KEY (`status_permohonan_id`) REFERENCES `status_permohonans` (`status_id`);
+ADD CONSTRAINT `permohonans_id_penghantar_foreign` FOREIGN KEY
+(`id_penghantar`) REFERENCES `users`
+(`id`),
+ADD CONSTRAINT `permohonans_jenis_permohonan_id_foreign` FOREIGN KEY
+(`jenis_permohonan_id`) REFERENCES `jenis_permohonans`
+(`id`),
+ADD CONSTRAINT `permohonans_status_permohonan_id_foreign` FOREIGN KEY
+(`status_permohonan_id`) REFERENCES `status_permohonans`
+(`status_id`);
 
 --
 -- Constraints for table `tetapan_aliran_kerjas`
 --
 ALTER TABLE `tetapan_aliran_kerjas`
-  ADD CONSTRAINT `tetapan_aliran_kerjas_id_jppa_foreign` FOREIGN KEY (`id_jppa`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `tetapan_aliran_kerjas_id_pjk_foreign` FOREIGN KEY (`id_pjk`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `tetapan_aliran_kerjas_id_senat_foreign` FOREIGN KEY (`id_senat`) REFERENCES `users` (`id`);
+ADD CONSTRAINT `tetapan_aliran_kerjas_id_jppa_foreign` FOREIGN KEY
+(`id_jppa`) REFERENCES `users`
+(`id`),
+ADD CONSTRAINT `tetapan_aliran_kerjas_id_pjk_foreign` FOREIGN KEY
+(`id_pjk`) REFERENCES `users`
+(`id`),
+ADD CONSTRAINT `tetapan_aliran_kerjas_id_senat_foreign` FOREIGN KEY
+(`id_senat`) REFERENCES `users`
+(`id`);
 
 --
 -- Constraints for table `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `users_fakulti_id_foreign` FOREIGN KEY (`fakulti_id`) REFERENCES `fakultis` (`fakulti_id`);
+ADD CONSTRAINT `users_fakulti_id_foreign` FOREIGN KEY
+(`fakulti_id`) REFERENCES `fakultis`
+(`fakulti_id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

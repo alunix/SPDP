@@ -81,7 +81,7 @@ export default {
             {
               title: "Jenis permohonan",
               subtitle: this.permohonan.jenis_permohonan
-                .jenis_permohonan_huraian,
+                .huraian,
               id: 2
             },
             {

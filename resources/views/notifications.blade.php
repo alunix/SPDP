@@ -28,7 +28,7 @@
 						@foreach($notifications as $permohonan)
 						<tr>
 						<th scope="row">{{$loop->iteration}}</th>
-						<td> {{$permohonan->status->status_permohonan_huraian}}</td> 
+						<td> {{$permohonan->status->huraian}}</td> 
 						<td> {{$permohonan->created_at}}</td> 
 					
 

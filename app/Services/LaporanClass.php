@@ -46,7 +46,7 @@ class LaporanClass
             $laporan->komen = $request->input('summary-ckeditor');
             $laporan->tajuk_fail = $fileNameWithExt;
             $laporan->tajuk_fail_link = $fileNameToStore;
-            $laporan->versi_laporan = 1;
+            $laporan->versi = 1;
             $laporan->save();
         } else {
 
@@ -56,7 +56,7 @@ class LaporanClass
             $laporan->komen = $request->input('summary-ckeditor');
             $laporan->tajuk_fail = $fileNameWithExt;
             $laporan->tajuk_fail_link = $fileNameToStore;
-            $laporan->versi_laporan = count($laporan_count) + 1;
+            $laporan->versi = count($laporan_count) + 1;
             $laporan->save();
         }
     }

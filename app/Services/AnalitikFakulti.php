@@ -37,8 +37,8 @@ class AnalitikFakulti
         ->join('users','users.id','=','permohonans.id_penghantar')
         ->join('jenis_permohonans','jenis_permohonans.id','=','permohonans.jenis_permohonan_id')
         ->where('users.fakulti_id', $fakulti_id)
-        ->selectRaw("year(permohonans.created_at) as years, jenis_permohonans.jenis_permohonan_huraian as huraian,count(permohonan_id) as count") 
-        ->groupBy('jenis_permohonan_huraian') 
+        ->selectRaw("year(permohonans.created_at) as years, jenis_permohonans.huraian as huraian,count(permohonan_id) as count") 
+        ->groupBy('huraian') 
         ->get();
 
         $pie_chart = new PermohonanChart();
@@ -84,13 +84,13 @@ class AnalitikFakulti
         ->join('users','users.id','=','permohonans.id_penghantar')
         ->whereYear('permohonans.created_at', $year_report)
         ->where('users.fakulti_id', $fakulti_id)
-        ->selectRaw("DATE_FORMAT(permohonans.created_at,'%Y') as years,jenis_permohonans.jenis_permohonan_huraian as huraian,count(permohonan_id) as count") 
-        ->groupBy('jenis_permohonan_huraian') 
+        ->selectRaw("DATE_FORMAT(permohonans.created_at,'%Y') as years,jenis_permohonans.huraian as huraian,count(permohonan_id) as count") 
+        ->groupBy('huraian') 
         ->get();
       
         $pie_chart = new PermohonanChart();
         $pie_chart->labels($jenis->pluck('huraian'));
-        $pie_chart->dataset('Permohonan fakulti '.$fakulti->fnama_kod, 'pie',$jenis->pluck('count'))->backgroundColor(['#3366CC','#DC3912','#FF9900','#109618','#990099','#3B3EAC','#0099C6','#DD4477'])->options([
+        $pie_chart->dataset('Permohonan fakulti '.$fakulti->kod, 'pie',$jenis->pluck('count'))->backgroundColor(['#3366CC','#DC3912','#FF9900','#109618','#990099','#3B3EAC','#0099C6','#DD4477'])->options([
             'backgroundColor'=> ['#C5CAE9', '#283593'],
         ]);
         
@@ -106,7 +106,7 @@ class AnalitikFakulti
         
         $line_chart = new JenisPermohonanChart();
         $line_chart->labels($Z->pluck('years'));
-        $line_chart->dataset('Permohonan fakulti '.$fakulti->fnama_kod, 'line',$Z->pluck('count'))->options([
+        $line_chart->dataset('Permohonan fakulti '.$fakulti->kod, 'line',$Z->pluck('count'))->options([
             'backgroundColor'=> ['#C5CAE9', '#283593'],
         ]);
 
@@ -122,7 +122,7 @@ class AnalitikFakulti
 
         $bar_chart = new JenisPermohonanChart();
         $bar_chart->labels($improvements->pluck('years'));
-        $bar_chart->dataset('Permohonan fakulti '.$fakulti->fnama_kod, 'line',$improvements->pluck('count'))->options([
+        $bar_chart->dataset('Permohonan fakulti '.$fakulti->kod, 'line',$improvements->pluck('count'))->options([
             'backgroundColor'=> ['#C5CAE9', '#283593'],
         ]);
 

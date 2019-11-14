@@ -30,7 +30,7 @@
 @foreach($permohonans as $permohonan)
 <tr>
 <th scope="row">{{$permohonan->id}}</th>
-<td>{{$permohonan->jenis_permohonan->jenis_permohonan_huraian}} </td>
+<td>{{$permohonan->jenis_permohonan->huraian}} </td>
 <td>{{$permohonan->doc_title}}</td>   
 <td>{{$permohonan->user->name}} </td>
 <td>{{$permohonan->fakulti}} </td> 

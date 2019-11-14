@@ -15,10 +15,10 @@
       <tbody>
         <tr class="tr-shadow" v-for="(p, index) in permohonans" v-bind:key="p.permohonan_id">
           <th scope="row">{{index+1}}</th>
-          <td>{{p.jenis_permohonan.jenis_permohonan_huraian}}</td>
+          <td>{{p.jenis_permohonan.huraian}}</td>
           <td>{{p.doc_title}}</td>
           <td>{{p.user.name}}</td>
-          <td>{{p.user.fakulti.fnama_kod}}</td>
+          <td>{{p.user.fakulti.kod}}</td>
           <td>{{p.created_at}}</td>
         </tr>
         <tr class="spacer"></tr>

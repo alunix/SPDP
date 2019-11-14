@@ -45,7 +45,7 @@ class PermohonanBaharu extends Notification
         return (new MailMessage)
                     ->greeting('Salam sejahtera ' . $this->penilai->name)
                     ->line('Anda telah menerima permohonan baharu')
-                    ->line('Jenis permohonan: '. $this->permohonan->jenis_permohonan->jenis_permohonan_huraian)
+                    ->line('Jenis permohonan: '. $this->permohonan->jenis_permohonan->huraian)
                     ->action('Lihat permohonan baharu', route('view-permohonan-baharu',$this->permohonan->permohonan_id))
                     ->line('Terima kasih');
     }
@@ -61,7 +61,7 @@ class PermohonanBaharu extends Notification
         return (new MailMessage)
                     ->greeting('Salam sejahtera ' . $this->penilai->name)
                     ->line('Anda telah menerima permohonan baharu')
-                    ->line('Jenis permohonan: '. $this->permohonan->jenis_permohonan->jenis_permohonan_huraian)
+                    ->line('Jenis permohonan: '. $this->permohonan->jenis_permohonan->huraian)
                     ->action('Lihat permohonan baharu', route('view-permohonan-baharu',$this->permohonan->permohonan_id))
                     ->line('Terima kasih');
     }

@@ -53,7 +53,7 @@ class HomeController extends Controller
         }
 
         $chart = new JenisPermohonanChart();
-        $chart->labels($permohonans->pluck('fnama_kod'));
+        $chart->labels($permohonans->pluck('kod'));
         $chart->dataset('Permohonan sepanjang tahun ' . $year, 'bar', $A);
 
         /*------------------ Line chart for jumlah dokumen permohonan in a year--------------*/
@@ -71,8 +71,8 @@ class HomeController extends Controller
 
         $A = DB::table("permohonans")
             ->join('jenis_permohonans', 'jenis_permohonans.id', '=', 'permohonans.jenis_permohonan_id')
-            ->selectRaw("year(permohonans.created_at) as years, jenis_permohonans.jenis_permohonan_huraian as huraian,count(permohonan_id) as count")
-            ->groupBy('jenis_permohonan_huraian')
+            ->selectRaw("year(permohonans.created_at) as years, jenis_permohonans.huraian as huraian,count(permohonan_id) as count")
+            ->groupBy('huraian')
             ->get();
 
         $pie_chart = new JenisPermohonanChart();
@@ -117,8 +117,8 @@ class HomeController extends Controller
             ->join('fakultis', 'users.fakulti_id', '=', 'fakultis.fakulti_id')
             ->whereYear('permohonans.created_at', $year)
             ->where('fakultis.fakulti_id', '=', $fakulti_id)
-            ->selectRaw("month(permohonans.created_at) as month, jenis_permohonans.jenis_permohonan_huraian as huraian,count(permohonan_id) as count")
-            ->groupBy('jenis_permohonan_huraian')
+            ->selectRaw("month(permohonans.created_at) as month, jenis_permohonans.huraian as huraian,count(permohonan_id) as count")
+            ->groupBy('huraian')
             ->get();
 
         $pie_chart = [];

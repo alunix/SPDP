@@ -41,7 +41,7 @@ class DokumenPermohonanController extends Controller
 
         $permohonan = Permohonan::findOrFail($id);
 
-        if ($permohonan->status_permohonan_id != 8 && $permohonan->status_permohonan_id != 9 && $permohonan->status_permohonan_id != 10 && $permohonan->status_permohonan_id != 11) {
+        if ($permohonan->status_id != 8 && $permohonan->status_id != 9 && $permohonan->status_id != 10 && $permohonan->status_id != 11) {
             $msg = [
                 'error' => 'Permohonan masih tidak memerlukan penambahbaikkan',
             ];

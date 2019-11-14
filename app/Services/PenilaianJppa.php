@@ -24,7 +24,7 @@ class PenilaianJppa
         $laporan->createLaporan( $request,$permohonan,$attached);
 
         /* Update status */
-        $permohonan -> status_permohonan_id = 5;       
+        $permohonan -> status_id = 5;       
         $permohonan ->save();
 
         $id_senat = TetapanAliranKerja::all()->first()->id_senat;
@@ -54,7 +54,7 @@ class PenilaianJppa
         
         $permohonan=Permohonan::find($permohonan->id);
         $sp = new StatusPermohonanClass();
-        $permohonan->status_permohonan_id = 5;
+        $permohonan->status_id = 5;
         $permohonan->save();
 
         $kj = new KemajuanPermohonanClass();

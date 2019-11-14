@@ -23,7 +23,7 @@ class PenilaianPenilai
         $lc->createLaporan($request,$permohonan,$attached);
 
         /* Status semakan permohonan telah dikemaskini berdasarkan progress */
-        $permohonan -> status_permohonan_id = 3;
+        $permohonan -> status_id = 3;
         $permohonan ->save();
 
         //Hantar email kepada penghantar

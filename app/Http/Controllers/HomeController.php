@@ -81,8 +81,8 @@ class HomeController extends Controller
             'colorCount' => 10, 'dimensions' => [800, 800]
         ]);
 
-        $permohonan_in_progress = Permohonan::where('status_permohonan_id', '!=', 1)->orWhere('status_permohonan_id', '!=', 6)->orWhere('status_permohonan_id', '!=', 7)->get()->count();
-        $permohonan_diluluskan = Permohonan::where('status_permohonan_id', '=', 6)->orWhere('status_permohonan_id', '=', 7)->get()->count();
+        $permohonan_in_progress = Permohonan::where('status_id', '!=', 1)->orWhere('status_id', '!=', 6)->orWhere('status_id', '!=', 7)->get()->count();
+        $permohonan_diluluskan = Permohonan::where('status_id', '=', 6)->orWhere('status_id', '=', 7)->get()->count();
         $permohonan_diperakui = $this->permohonanDiperakukan();
 
         // return view ('panel_penilai.senarai-testing')->with('permohonans',$permohonan_baharu)->with('chart',$chart)->with('line_chart',$line_chart)->with('pie_chart',$pie_chart)->with('permohonan_in_progress', $permohonan_in_progress)->with('permohonan_diluluskan',$permohonan_diluluskan)->with('permohonan_diperakui',$permohonan_diperakui);
@@ -126,8 +126,8 @@ class HomeController extends Controller
         $pie_chart['data'] = $permohonans->pluck('count');
         $pie_chart['id'] = 'Jenis permohonan tahun';
 
-        $progress = Permohonan::where('status_permohonan_id', '!=', 1)->orWhere('status_permohonan_id', '!=', 6)->orWhere('status_permohonan_id', '!=', 7)->select('id')->count();
-        $lulus = Permohonan::where('status_permohonan_id', '=', 6)->orWhere('status_permohonan_id', '=', 7)->select('id')->count();
+        $progress = Permohonan::where('status_id', '!=', 1)->orWhere('status_id', '!=', 6)->orWhere('status_id', '!=', 7)->select('id')->count();
+        $lulus = Permohonan::where('status_id', '=', 6)->orWhere('status_id', '=', 7)->select('id')->count();
 
         return response()->json([
             'dokumens' => $dokumens, 'permohonans' => $permohonans,
@@ -163,7 +163,7 @@ class HomeController extends Controller
         $role = auth()->user()->role;
         switch ($role) {
             case 'pjk':
-                $permohonans = Permohonan::where('jenis_id', '!=', '8')->where('status_permohonan_id', '=', 3)->get();
+                $permohonans = Permohonan::where('jenis_id', '!=', '8')->where('status_id', '=', 3)->get();
                 return $permohonans;
                 break;
             default:

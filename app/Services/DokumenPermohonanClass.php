@@ -54,8 +54,8 @@ class DokumenPermohonanClass
         $dp->versi = ((int) $permohonan->version_counts()) + 1;
         $dp->save();
 
-        $status_permohonan = $permohonan->status_permohonan_id;
-        $permohonan->status_permohonan_id = $this->getStatusPermohonan($status_permohonan);
+        $status_permohonan = $permohonan->status_id;
+        $permohonan->status_id = $this->getStatusPermohonan($status_permohonan);
         $permohonan->save();
 
         $kp = new KemajuanPermohonanClass();
@@ -68,9 +68,9 @@ class DokumenPermohonanClass
         //$email = $this->getEmailPenambahbaikkan($permohonan,$status_permohonan);
     }
 
-    public function getStatusPermohonan($status_permohonan_id)
+    public function getStatusPermohonan($status_id)
     {
-        switch ($status_permohonan_id) {
+        switch ($status_id) {
             case 8:
                 return 12;
                 break;
@@ -90,9 +90,9 @@ class DokumenPermohonanClass
         }
     }
 
-    public function getEmailPenambahbaikkan($permohonan, $status_permohonan_id)
+    public function getEmailPenambahbaikkan($permohonan, $status_id)
     {
-        switch ($status_permohonan_id) {
+        switch ($status_id) {
             case 8:
                 $panel = $permohonan->penilaian_panels->pluck('id_penilai');
                 $user = User::findOrFail($panel);

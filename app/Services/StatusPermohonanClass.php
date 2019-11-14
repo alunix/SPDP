@@ -41,7 +41,7 @@ class StatusPermohonanClass
         switch ($jp) {
             case 'program_baharu':
             case 'semakan_program': //same condition yang akan lalui panel penilai
-                if ($permohonan->status_permohonan_id == 1)
+                if ($permohonan->status_id == 1)
                     return '2'; //if no laporan are found that means permohonan masih disemak oleh panel penilai
                 else
                     return '4';

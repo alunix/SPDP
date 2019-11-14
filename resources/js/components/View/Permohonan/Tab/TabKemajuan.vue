@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- @if(($permohonan->status_permohonan_id == 8 or $permohonan->status_permohonan_id == 9 or $permohonan->status_permohonan_id == 10 or $permohonan->status_permohonan_id == 11  ) and (Auth::user()->role == "fakulti"))
+    <!-- @if(($permohonan->status_id == 8 or $permohonan->status_id == 9 or $permohonan->status_id == 10 or $permohonan->status_id == 11  ) and (Auth::user()->role == "fakulti"))
             <a class="btn icon-btn btn-info" style="font-size:14px" href="{{ route('dokumenPermohonan.penambahbaikkan.show',$permohonan->id) }}">
             Muat naik penambahbaikkan
     </a>-->

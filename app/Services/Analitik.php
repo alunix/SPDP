@@ -55,7 +55,7 @@ class Analitik
     }
 
 public function annual($year_report){
-    $lulus = Permohonan::where('status_permohonan_id',6)->orWhere('status_permohonan_id',7)->whereYear('created_at',$year_report)->get(); //find permohonan yang sudah dilulus
+    $lulus = Permohonan::where('status_id',6)->orWhere('status_id',7)->whereYear('created_at',$year_report)->get(); //find permohonan yang sudah dilulus
         
     if($lulus->count()!=0){
         for($i=0;$i<$lulus->count();++$i){
@@ -140,7 +140,7 @@ public function annual($year_report){
 
     //Kemajuan permohonan yang diluluskan
     $kp_6_7 = Fakulti::with(['permohonans' => function($query) use ($year_report) {
-        $query->where('permohonans.status_permohonan_id', 6)->orWhere('permohonans.status_permohonan_id',7); //specify which table created at to query
+        $query->where('permohonans.status_id', 6)->orWhere('permohonans.status_id',7); //specify which table created at to query
       }])->get()->sortBy('fakulti_id');
 
 

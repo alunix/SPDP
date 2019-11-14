@@ -17,7 +17,7 @@ class PermohonansTableSeeder extends Seeder
             'doc_title' => 'Sarjana Muda '.$faker->word,
             'jenis_id' => $faker->randomElement($j),
             'id_penghantar' => 1,
-            'status_permohonan_id' => rand(1,15),
+            'status_id' => rand(1,15),
             'created_at' => $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now', $timezone = 'Singapore'),
             'updated_at' =>$faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now', $timezone = 'Singapore'),
 

@@ -32,7 +32,7 @@ class PenilaianPJK
 
         $permohonan = Permohonan::find($permohonan->id);
         $sp = new StatusPermohonanClass();
-        $permohonan->status_permohonan_id = $sp->getStatusPermohonan($permohonan);
+        $permohonan->status_id = $sp->getStatusPermohonan($permohonan);
         $permohonan->save();
 
         //Hantar email kepada penghantar
@@ -40,7 +40,7 @@ class PenilaianPJK
         Notification::route('mail', $penghantar->email)->notify(new PermohonanDiluluskan($permohonan, $penghantar)); //hantar email kepada penghantar
 
         //If permohonan perlu diluluskan oleh JPPA
-        if ($permohonan->status_permohonan_id == 4) {
+        if ($permohonan->status_id == 4) {
             $email = TetapanAliranKerja::all()->first()->email_jppa;
             $pemeriksa = User::where('email', $email)->first();
             Notification::route('mail', $pemeriksa->email)->notify(new PermohonanBaharu($permohonan, $pemeriksa));
@@ -59,7 +59,7 @@ class PenilaianPJK
     {
         try {
             $permohonan = Permohonan::findOrFail($id);
-            $permohonan->status_permohonan_id = 2;
+            $permohonan->status_id = 2;
             $permohonan->save();
 
             $kp = new KemajuanPermohonanClass();
@@ -83,7 +83,7 @@ class PenilaianPJK
     {
         $permohonan = Permohonan::findOrFail($id);
         $jp = $permohonan->jenis_permohonan->kod;
-        $status_permohonan = $permohonan->value('status_permohonan_id');
+        $status_permohonan = $permohonan->value('status_id');
 
         switch ($jp) {
             case 'program_baharu':
@@ -182,7 +182,7 @@ class PenilaianPJK
 
         /*Status semakan permohonan telah dikemaskini berdasarkan progress */
         $sp = new StatusPermohonanClass();
-        $permohonan->status_permohonan_id = $sp->getStatusPermohonan($permohonan);
+        $permohonan->status_id = $sp->getStatusPermohonan($permohonan);
         $permohonan->save();
 
         //Hantar email kepada penghantar dan next pemeriksa
@@ -190,7 +190,7 @@ class PenilaianPJK
         Notification::route('mail', $penghantar->email)->notify(new PermohonanDiluluskan($permohonan, $penghantar));
 
         //If permohonan perlu diluluskan oleh JPPA
-        if ($permohonan->status_permohonan_id == 4) {
+        if ($permohonan->status_id == 4) {
             $id_jppa = TetapanAliranKerja::all()->first()->id_jppa;
             $pemeriksa = User::find($id_jppa);
             Notification::route('mail', $pemeriksa->email)->notify(new PermohonanBaharu($permohonan, $pemeriksa));
@@ -210,7 +210,7 @@ class PenilaianPJK
     public function semakanKursusTeras(Request $request, $permohonan)
     {
 
-        $status_permohonan = $permohonan->status_permohonan_id;
+        $status_permohonan = $permohonan->status_id;
         if ($status_permohonan == '1') // if permohonan require minority changes then create a new perakuan
             return $this->createPerakuanPjk($request, $permohonan);
         else if ($status_permohonan == '3')
@@ -223,7 +223,7 @@ class PenilaianPJK
     {
 
         /* Cari permohonan since penilaian belongs to permohonan then baru boleh cari penilaian through eloquent relationship */
-        $status_permohonan = $permohonan->status_permohonan_id;
+        $status_permohonan = $permohonan->status_id;
 
         if ($status_permohonan == '1') // if permohonan require minority changes then create a new perakuan
             return $this->createPerakuanPjk($request, $permohonan);

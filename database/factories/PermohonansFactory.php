@@ -16,7 +16,7 @@ $factory->define(SPDP\Permohonan::class, function (Faker $faker) {
         'doc_title'=>'permohonan.pdf',
         'jenis_id'=> $faker->randomElement($jp),
         'id_penghantar'=>$faker->randomElement($users_id),
-        'status_permohonan_id'=>$faker->randomElement($sp),
+        'status_id'=>$faker->randomElement($sp),
 
 
 

@@ -42,7 +42,7 @@ class PermohonanClass
         $permohonan->doc_title = $request->input('nama_program');
         $permohonan->jenis_id = $request->input('jenis_permohonan');
         $permohonan->id_penghantar = $user_id;
-        $permohonan->status_permohonan_id = 1;
+        $permohonan->status_id = 1;
         $permohonan->save();
 
         $dk = new DokumenPermohonanClass();
@@ -71,7 +71,7 @@ class PermohonanClass
         $laporan = new LaporanClass();
         $laporan->createLaporan($request, $permohonan, $attached);
 
-        $permohonan->status_permohonan_id = $this->getStatusPenambahbaikkan();
+        $permohonan->status_id = $this->getStatusPenambahbaikkan();
         $permohonan->save();
 
         //Create a new kemajuan permohonan for each progress

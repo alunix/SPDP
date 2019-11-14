@@ -11,7 +11,7 @@ use \Staudenmeir\EloquentHasManyDeep\HasRelationships; //hasManyDeep package tha
 class Permohonan extends Model
 {
     protected $fillable = [
-        'nama_penghantar', 'fakulti', 'file_link', 'status_program', 'file_name', 'doc_title', 'jenis_permohonan', 'status_permohonan_id', 'id',
+        'nama_penghantar', 'fakulti', 'file_link', 'status_program', 'file_name', 'doc_title', 'jenis_permohonan', 'status_id', 'id',
     ];
 
     protected $table = 'permohonans';
@@ -61,7 +61,7 @@ class Permohonan extends Model
 
     public function status_permohonan()
     {
-        return $this->belongsTo('SPDP\StatusPermohonan', 'status_permohonan_id');
+        return $this->belongsTo('SPDP\StatusPermohonan', 'status_id');
     }
 
     public function kemajuan_permohonans()

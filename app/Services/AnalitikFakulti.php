@@ -128,7 +128,7 @@ class AnalitikFakulti
             ->join('users', 'users.id', '=', 'permohonans.id_penghantar')
             ->join('fakultis', 'fakultis.fakulti_id', '=', 'users.fakulti_id')
             ->whereYear('permohonans.created_at', $year_report)
-            ->where('permohonans.status_permohonan_id', 6)->orWhere('permohonans.status_permohonan_id', 7)
+            ->where('permohonans.status_id', 6)->orWhere('permohonans.status_id', 7)
             ->where('users.fakulti_id', $fakulti_id)
             ->get();
 

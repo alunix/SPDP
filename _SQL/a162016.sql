@@ -544,7 +544,7 @@ IF NOT EXISTS `permohonans`
 (10) unsigned NOT NULL,
   `id_penghantar` int
 (10) unsigned NOT NULL,
-  `status_permohonan_id` int
+  `status_id` int
 (10) unsigned NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -557,7 +557,7 @@ IF NOT EXISTS `permohonans`
 INSERT INTO `permohonans` (`
 permohonan_id`,
 `doc_title
-`, `jenis_id`, `id_penghantar`, `status_permohonan_id`, `created_at`, `updated_at`) VALUES
+`, `jenis_id`, `id_penghantar`, `status_id`, `created_at`, `updated_at`) VALUES
 (1, 'Sarjana Muda A', 1, 1, 4, '2019-05-08 11:55:26', '2019-05-27 11:53:33'),
 (2, 'Sarjana Muda A', 2, 1, 9, '2019-05-08 12:03:56', '2019-05-17 06:44:41'),
 (3, 'permohonan.pdf', 6, 6, 4, '2019-05-12 08:41:16', '2019-05-12 08:41:16'),
@@ -842,7 +842,7 @@ ADD KEY `permohonans_id_penghantar_foreign`
 ADD KEY `permohonans_jenis_permohonan_id_foreign`
 (`jenis_id`),
 ADD KEY `permohonans_status_permohonan_id_foreign`
-(`status_permohonan_id`);
+(`status_id`);
 
 --
 -- Indexes for table `status_permohonans`
@@ -1021,7 +1021,7 @@ ADD CONSTRAINT `permohonans_jenis_permohonan_id_foreign` FOREIGN KEY
 (`jenis_id`) REFERENCES `jenis_permohonans`
 (`id`),
 ADD CONSTRAINT `permohonans_status_permohonan_id_foreign` FOREIGN KEY
-(`status_permohonan_id`) REFERENCES `status_permohonans`
+(`status_id`) REFERENCES `status_permohonans`
 (`status_id`);
 
 --

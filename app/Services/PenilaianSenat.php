@@ -26,7 +26,7 @@ class PenilaianSenat
         $penghantar = User::find($permohonan->id_penghantar);
         Notification::route('mail', $penghantar->email)->notify(new PermohonanDiluluskan($permohonan, $penghantar)); //hantar email kepada penghantar
 
-        $permohonan->status_permohonan_id = 6;
+        $permohonan->status_id = 6;
         $permohonan->save();
 
 

@@ -47,7 +47,7 @@
                 scope="row"
               >{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
               <td>{{p.id}}</td>
-              <td>{{p.permohonan_id}}</td>
+              <td>{{p.id}}</td>
               <td>{{p.pelantik.name}}</td>
               <td>{{p.penilai.name}}</td>
               <td>{{date(p.created_at)}}</td>

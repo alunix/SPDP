@@ -33,7 +33,7 @@ class LaporanController extends Controller
     {
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
-        $permohonans_id = $user->permohonans->pluck('permohonan_id');
+        $permohonans_id = $user->permohonans->pluck('id');
         $dokumen_permohonans_id = DokumenPermohonan::whereIn('permohonan_id', $permohonans_id)->pluck('dokumen_permohonan_id');
 
         //check whether fakulti does have permohonans

@@ -99,7 +99,7 @@ export default {
               subtitle: this.permohonan.laporans_count,
               id: 5
             },
-            { title: "Id", subtitle: this.permohonan.permohonan_id, id: 6 },
+            { title: "Id", subtitle: this.permohonan.id, id: 6 },
             {
               title: "Dokumen permohonan",
               subtitle: this.dokumen.file_link,
@@ -120,7 +120,7 @@ export default {
       return this.currentTab;
     },
     getDataBind() {
-      return { permohonan_id_props: this.permohonan.permohonan_id };
+      return { permohonan_id_props: this.permohonan.id };
     }
   }
 };

@@ -45,7 +45,7 @@ class PermohonanController extends Controller
 
         $permohonan = Permohonan::find($id);
         $pc = new PermohonanClass();
-        $pc->storePermohonanTidakDilulus($request, $permohonan->permohonan_id);
+        $pc->storePermohonanTidakDilulus($request, $permohonan->id);
         return redirect()->route('home');
     }
 
@@ -64,7 +64,7 @@ class PermohonanController extends Controller
     {
         $permohonan = Permohonan::find($id);
         $users = User::where('role', 'penilai')->get();
-        $dp = DokumenPermohonan::where('permohonan_id', $permohonan->permohonan_id)->orderBy('versi', 'DESC')->first();
+        $dp = DokumenPermohonan::where('permohonan_id', $permohonan->id)->orderBy('versi', 'DESC')->first();
         return view('pjk.pjk-melantik-penilai')->with('users', $users)->with('permohonan', $permohonan)->with('dp', $dp);
     }
 

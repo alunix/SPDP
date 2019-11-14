@@ -13,7 +13,7 @@ class PenilaianPanelsTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        $id = Permohonan::all()->pluck('permohonan_id')->toArray();
+        $id = Permohonan::all()->pluck('id')->toArray();
         $panel = User::where('role', 'penilai')->pluck('id');
 
         for ($i = 0; $i < 60; $i++) {

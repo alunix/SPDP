@@ -21,7 +21,7 @@ class CreatePenilaianPanelsTable extends Migration
             $table->dateTime('due_date');
             $table->integer('tempoh');
 
-            $table->foreign('permohonan_id')->references('permohonan_id')->on('permohonans');
+            $table->foreign('permohonan_id')->references('id')->on('permohonans');
             $table->foreign('id_pelantik')->references('id')->on('users');
             $table->foreign('id_penilai')->references('id')->on('users');
             $table->timestamps();

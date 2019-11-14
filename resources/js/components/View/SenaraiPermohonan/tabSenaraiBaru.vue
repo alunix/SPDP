@@ -39,14 +39,14 @@
             <tr
               class="tr-shadow td-cursor"
               v-for="(p, index) in permohonans"
-              v-bind:key="p.permohonan_id"
-              v-on:click="show(p.permohonan_id)"
+              v-bind:key="p.id"
+              v-on:click="show(p.id)"
             >
               <th
                 scope="row"
               >{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
               <td>{{p.jenis_permohonan.huraian}}</td>
-              <td>{{p.permohonan_id}}</td>
+              <td>{{p.id}}</td>
               <td>{{p.doc_title}}</td>
               <td>{{p.user.name}}</td>
               <td>{{p.user.fakulti.kod}}</td>

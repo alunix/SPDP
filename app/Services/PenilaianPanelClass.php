@@ -21,7 +21,7 @@ class PenilaianPanelClass
 
         foreach ($selectedPenilai as $penilai) {
             $penilaian = new PenilaianPanel();
-            $penilaian->permohonan_id = $permohonan->permohonan_id;
+            $penilaian->permohonan_id = $permohonan->id;
             $penilaian->id_pelantik = auth()->user()->id;
             $penilaian->id_penilai = $penilai;
             $penilaian->due_date = $to;

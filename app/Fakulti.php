@@ -44,7 +44,7 @@ class Fakulti extends Model
             [
                 'fakulti_id', // Local key on the "countries" table.
                 'id', // Local key on the "users" table.
-                'permohonan_id'  // Local key on the "posts" table.
+                'id'  // Local key on the "posts" table.
             ]
         );
     }
@@ -63,7 +63,7 @@ class Fakulti extends Model
             [
                 'fakulti_id', // Local key on the "countries" table.
                 'id', // Local key on the "users" table.
-                'permohonan_id'  // Local key on the "posts" table.
+                'id'  // Local key on the "posts" table.
             ]
         );
     }

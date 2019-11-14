@@ -42,7 +42,7 @@ class HomeController extends Controller
         $sp = new SenaraiPermohonan();
         $permohonan_baharu = $this->senaraiPermohonan($sp)->count();
         $permohonans = Fakulti::with(['permohonans' => function ($query) use ($year) {
-            $query->select(['permohonan_id', 'permohonans.created_at']);
+            $query->select(['id', 'permohonans.created_at']);
             $query->whereYear('permohonans.created_at', $year); //specify which table created at to query
         }])->get()->sortBy('fakulti_id');
 
@@ -71,7 +71,7 @@ class HomeController extends Controller
 
         $A = DB::table("permohonans")
             ->join('jenis_permohonans', 'jenis_permohonans.id', '=', 'permohonans.jenis_permohonan_id')
-            ->selectRaw("year(permohonans.created_at) as years, jenis_permohonans.huraian as huraian,count(permohonan_id) as count")
+            ->selectRaw("year(permohonans.created_at) as years, jenis_permohonans.huraian as huraian,count(id) as count")
             ->groupBy('huraian')
             ->get();
 
@@ -95,7 +95,7 @@ class HomeController extends Controller
 
         /*------------------ Line chart for jumlah dokumen permohonan in a year--------------*/
         $dokumens =  DB::table("dokumen_permohonans")
-            ->join('permohonans', 'dokumen_permohonans.permohonan_id', '=', 'permohonans.permohonan_id')
+            ->join('permohonans', 'dokumen_permohonans.permohonan_id', '=', 'permohonans.id')
             ->join('users', 'permohonans.id_penghantar', '=', 'users.id')
             ->join('fakultis', 'users.fakulti_id', '=', 'fakultis.fakulti_id')
             ->whereYear('dokumen_permohonans.created_at', $year)
@@ -117,7 +117,7 @@ class HomeController extends Controller
             ->join('fakultis', 'users.fakulti_id', '=', 'fakultis.fakulti_id')
             ->whereYear('permohonans.created_at', $year)
             ->where('fakultis.fakulti_id', '=', $fakulti_id)
-            ->selectRaw("month(permohonans.created_at) as month, jenis_permohonans.huraian as huraian,count(permohonan_id) as count")
+            ->selectRaw("month(permohonans.created_at) as month, jenis_permohonans.huraian as huraian,count(id) as count")
             ->groupBy('huraian')
             ->get();
 
@@ -126,8 +126,8 @@ class HomeController extends Controller
         $pie_chart['data'] = $permohonans->pluck('count');
         $pie_chart['id'] = 'Jenis permohonan tahun';
 
-        $progress = Permohonan::where('status_permohonan_id', '!=', 1)->orWhere('status_permohonan_id', '!=', 6)->orWhere('status_permohonan_id', '!=', 7)->select('permohonan_id')->count();
-        $lulus = Permohonan::where('status_permohonan_id', '=', 6)->orWhere('status_permohonan_id', '=', 7)->select('permohonan_id')->count();
+        $progress = Permohonan::where('status_permohonan_id', '!=', 1)->orWhere('status_permohonan_id', '!=', 6)->orWhere('status_permohonan_id', '!=', 7)->select('id')->count();
+        $lulus = Permohonan::where('status_permohonan_id', '=', 6)->orWhere('status_permohonan_id', '=', 7)->select('id')->count();
 
         return response()->json([
             'dokumens' => $dokumens, 'permohonans' => $permohonans,

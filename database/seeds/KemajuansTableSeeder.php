@@ -11,7 +11,7 @@ class KemajuansTableSeeder extends Seeder
 {
     public function run() {
         $faker = Faker::create();
-        $p = Permohonan::all()->pluck('permohonan_id')->toArray();
+        $p = Permohonan::all()->pluck('id')->toArray();
         $s = StatusPermohonan::all()->pluck('status_id')->toArray();
 
         for($i=0; $i<1000; $i++) {

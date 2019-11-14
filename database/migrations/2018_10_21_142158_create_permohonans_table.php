@@ -16,7 +16,7 @@ class CreatePermohonansTable extends Migration
         Schema::create('permohonans', function (Blueprint $table) {
             
             
-            $table->increments('permohonan_id');
+            $table->increments('id');
             $table->string('doc_title');
             $table->integer('jenis_permohonan_id')->unsigned();
             // $table->integer('dokumen_permohonan_id')->unsigned();

@@ -16,12 +16,11 @@ class PelantikanPanelPenilai extends Notification
      *
      * @return void
      */
-    public function __construct($permohonan,$penilaian,$penilai)
+    public function __construct($permohonan, $penilaian, $penilai)
     {
-        $this->permohonan= $permohonan;
-        $this->penilaian= $penilaian;
-        $this->penilai= $penilai;
-    
+        $this->permohonan = $permohonan;
+        $this->penilaian = $penilaian;
+        $this->penilai = $penilai;
     }
 
     /**
@@ -44,13 +43,12 @@ class PelantikanPanelPenilai extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-        ->greeting('Salam sejahtera ' . $this->penilai->name)
-        ->line('Anda telah dilantik untuk menilai permohonan ini')
-        ->line('Jenis permohonan: '. $this->permohonan->jenis_permohonan->huraian)
-        ->line('Sila keluarkan laporan sebelum tarikh '. $this->penilaian->tarikhAkhir)
-        ->action('Lihat permohonan baharu', route('view-permohonan-baharu',$this->permohonan->permohonan_id))
-        ->line('Terima kasih');
-
+            ->greeting('Salam sejahtera ' . $this->penilai->name)
+            ->line('Anda telah dilantik untuk menilai permohonan ini')
+            ->line('Jenis permohonan: ' . $this->permohonan->jenis_permohonan->huraian)
+            ->line('Sila keluarkan laporan sebelum tarikh ' . $this->penilaian->tarikhAkhir)
+            ->action('Lihat permohonan baharu', route('view-permohonan-baharu', $this->permohonan->id))
+            ->line('Terima kasih');
     }
 
     /**

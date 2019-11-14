@@ -13,7 +13,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="tr-shadow" v-for="(p, index) in permohonans" v-bind:key="p.permohonan_id">
+        <tr class="tr-shadow" v-for="(p, index) in permohonans" v-bind:key="p.id">
           <th scope="row">{{index+1}}</th>
           <td>{{p.jenis_permohonan.huraian}}</td>
           <td>{{p.doc_title}}</td>
@@ -32,7 +32,7 @@ export default {
   data() {
     return {
       permohonans: [],
-      permohonan_id: ""
+      id: ""
     };
   },
   created() {
@@ -48,7 +48,7 @@ export default {
         });
     },
     setPermohonanId(id) {
-      this.permohonan_id = id;
+      this.id = id;
     },
     showModel() {
       this.$modal.show("permohonan_baharu");

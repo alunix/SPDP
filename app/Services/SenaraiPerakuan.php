@@ -45,7 +45,7 @@ class SenaraiPerakuan
         if (empty((array) $permohonans_id)) { //check if array object is empty
             $permohonans = new Permohonan();
         } else {
-            $permohonans = Permohonan::whereIn('permohonan_id', $permohonans_id)->where('status_permohonan_id', '=', '12')->paginate(10);
+            $permohonans = Permohonan::whereIn('id', $permohonans_id)->where('status_permohonan_id', '=', '12')->paginate(10);
         }
         return $permohonans;
     }

@@ -9,7 +9,7 @@ class RedirectPermohonan
 
     public function redirect($permohonan)
     {
-        $permohonan = Permohonan::findOrFail($permohonan->permohonan_id);
+        $permohonan = Permohonan::findOrFail($permohonan->id);
         $dp = $permohonan->dokumen_permohonans->pluck('dokumen_permohonan_id');
         $laporans = Laporan::whereIn('dokumen_permohonan_id', $dp)->get();
         $role = auth()->user()->role;

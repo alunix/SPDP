@@ -42,7 +42,7 @@ class SenaraiPermohonan
     {
         $user_id = auth()->user()->id;
         $permohonans =  DB::table("permohonans")
-            ->join('penilaian_panels', 'penilaian_panels.permohonanID', '=', 'permohonans.permohonan_id')
+            ->join('penilaian_panels', 'penilaian_panels.permohonanID', '=', 'permohonans.id')
             ->join('users', 'users.id', '=', 'penilaian_panels.id_penilai')
             ->where('permohonans.status_permohonan_id', 2)
             ->where('penilaian_panels.id_penilai', $user_id)
@@ -51,8 +51,8 @@ class SenaraiPermohonan
         if (empty((array) $permohonans)) { //check if array object is empty
             $permohonans = new Permohonan();
         } else {
-            $id = $permohonans->pluck('permohonan_id');
-            $permohonans = Permohonan::whereIn('permohonan_id', $id)->get();
+            $id = $permohonans->pluck('id');
+            $permohonans = Permohonan::whereIn('id', $id)->get();
         }
 
         return $permohonans;

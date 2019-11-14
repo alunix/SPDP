@@ -13,7 +13,7 @@ class LaporansTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        $p = Permohonan::all()->pluck('permohonan_id')->toArray();
+        $p = Permohonan::all()->pluck('id')->toArray();
         $j = JenisPermohonan::all()->pluck('id')->toArray();
         $d = DokumenPermohonan::all()->pluck('dokumen_permohonan_id')->toArray();
         $role = User::where('role', '!=', 'fakulti')->pluck('id')->toArray();

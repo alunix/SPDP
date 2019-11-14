@@ -15,7 +15,7 @@ class Permohonan extends Model
     ];
 
     protected $table = 'permohonans';
-    protected $primaryKey = 'permohonan_id';
+    protected $primaryKey = 'id';
 
     public function version_counts()
     {
@@ -44,7 +44,7 @@ class Permohonan extends Model
             'SPDP\DokumenPermohonan',
             'permohonan_id', // Foreign key on users table...
             'dokumen_permohonan_id', // Foreign key on permohonan table...
-            'permohonan_id', //Local key on permohonan table
+            'id', //Local key on permohonan table
             'dokumen_permohonan_id'
         ); //Local key on users table
     }

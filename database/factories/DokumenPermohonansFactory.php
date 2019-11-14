@@ -8,7 +8,7 @@ use SPDP\Permohonan;
 
 $factory->define(SPDP\DokumenPermohonan::class, function (Faker $faker) {
    
-    $permohonans_id = Permohonan::all()->pluck('permohonan_id');
+    $permohonans_id = Permohonan::all()->pluck('id');
    
 
     return [

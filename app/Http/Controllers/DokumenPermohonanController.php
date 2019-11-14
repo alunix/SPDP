@@ -12,13 +12,15 @@ use SPDP\Services\ShowPermohonan;
 
 class DokumenPermohonanController extends Controller
 {
-    public function show($id) {
+    public function show($id)
+    {
         $permohonan = Permohonan::findOrFail($id);
         $dokumen_permohonans = DokumenPermohonan::with(['laporans'])->where('permohonan_id', $id)->orderBy('created_at', 'desc')->paginate(10);
         return response()->json($dokumen_permohonans);
     }
 
-    public function showPenambahbaikkan($id) {
+    public function showPenambahbaikkan($id)
+    {
         $permohonan = Permohonan::findOrFail($id);
         $sp = new ShowPermohonan();
         $dp =  $sp->getBoolPermohonan($permohonan);
@@ -31,7 +33,8 @@ class DokumenPermohonanController extends Controller
         }
     }
 
-    public function uploadPenambahbaikkan(Request $request, $id) {
+    public function uploadPenambahbaikkan(Request $request, $id)
+    {
         $this->validate($request, [
             'dokumen' => 'required|file|max:1999',
         ]);
@@ -42,7 +45,7 @@ class DokumenPermohonanController extends Controller
             $msg = [
                 'error' => 'Permohonan masih tidak memerlukan penambahbaikkan',
             ];
-            return redirect()->route('dokumenPermohonan.penambahbaikkan.show', [$permohonan->permohonan_id])->with('permohonan', $permohonan)->with('jenis_permohonan', $permohonan->jenis_permohonan)->with($msg);
+            return redirect()->route('dokumenPermohonan.penambahbaikkan.show', [$permohonan->id])->with('permohonan', $permohonan)->with('jenis_permohonan', $permohonan->jenis_permohonan)->with($msg);
             die();
         }
 
@@ -59,12 +62,13 @@ class DokumenPermohonanController extends Controller
             $msg = [
                 'message' => 'Dokumen berjaya dimuat naik',
             ];
-            return redirect()->route('dokumenPermohonan.penambahbaikkan.show', [$permohonan->permohonan_id])->with($msg);
+            return redirect()->route('dokumenPermohonan.penambahbaikkan.show', [$permohonan->id])->with($msg);
         }
     }
 
     #API
-    public function downloadDokumen($file_link) {
+    public function downloadDokumen($file_link)
+    {
         return response(Storage::disk('local')->get('storage/cadangan_permohonan_baharu/' . $file_link), 200)
             ->header('Content-Type', 'application/pdf');
     }

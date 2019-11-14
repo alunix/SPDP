@@ -32,9 +32,9 @@ class ShowPermohonan
 
     public function show($permohonan)
     {
-        $permohonan = Permohonan::with(['jenis_permohonan:id,huraian'])->where('permohonan_id', $permohonan->permohonan_id)
+        $permohonan = Permohonan::with(['jenis_permohonan:id,huraian'])->where('id', $permohonan->id)
             ->withCount(['dokumen_permohonans', 'laporans', 'kemajuan_permohonans'])->get();
-        $dokumen = Permohonan::find($permohonan[0]->permohonan_id)->dokumen_permohonan();
+        $dokumen = Permohonan::find($permohonan[0]->id)->dokumen_permohonan();
         return response()->json(['permohonan' => $permohonan[0], 'dokumen' => $dokumen]);
     }
 
@@ -59,9 +59,9 @@ class ShowPermohonan
         if ($permohonans == null) {
             abort(404);
         }
-        $permohonans_id = $permohonans->pluck('permohonan_id');
+        $permohonans_id = $permohonans->pluck('id');
         for ($i = 0; $i < count($permohonans_id); $i++) {
-            if ($permohonan->permohonan_id == $permohonans_id[$i]) {
+            if ($permohonan->id == $permohonans_id[$i]) {
                 $rp = new RedirectPermohonan();
                 return $rp->redirectPermohonan($permohonan);
             }
@@ -82,7 +82,7 @@ class ShowPermohonan
         } else {
             $user_id = auth()->user()->id;
             $user = User::find($user_id);
-            $permohonans_id = $user->permohonans->pluck('permohonan_id');
+            $permohonans_id = $user->permohonans->pluck('id');
 
             //check whether fakulti does have permohonans
             if (!sizeof($permohonans_id) > 0) {
@@ -90,7 +90,7 @@ class ShowPermohonan
                 die();
             }
             for ($i = 0; $i < count($permohonans_id); $i++) {
-                if ($permohonan->permohonan_id == $permohonans_id[$i]) {
+                if ($permohonan->id == $permohonans_id[$i]) {
                     return true;
                 }
             }

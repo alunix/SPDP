@@ -259,7 +259,7 @@ export default {
       this.success = false;
       this.errors = {};
       axios
-        .post("/api/" + this.permohonan.permohonan_id + "/pelantikan-penilai", {
+        .post("/api/" + this.permohonan.id + "/pelantikan-penilai", {
           selectedPenilai: this.selectedPenilai,
           due_date: this.due_date,
           headers: {

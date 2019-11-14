@@ -18,7 +18,7 @@ class Analitik
     public function dashboard()
     {
         $sort_sums_years = Permohonan::select(
-            DB::raw('count(permohonan_id) as total_permohonans'),
+            DB::raw('count(id) as total_permohonans'),
             DB::raw("DATE_FORMAT(created_at,'%Y') as years")
             )->groupBy('years')->get(); 
     
@@ -30,7 +30,7 @@ class Analitik
      
             $A=  DB::table("permohonans") 
             ->join('jenis_permohonans','jenis_permohonans.id','=','permohonans.jenis_permohonan_id')
-            ->selectRaw("year(permohonans.created_at) as years, jenis_permohonans.huraian as huraian,count(permohonan_id) as count") 
+            ->selectRaw("year(permohonans.created_at) as years, jenis_permohonans.huraian as huraian,count(id) as count") 
             ->groupBy('huraian') 
             ->get();
     
@@ -91,7 +91,7 @@ public function annual($year_report){
      $jenis=  DB::table("permohonans") 
     ->join('jenis_permohonans','jenis_permohonans.id','=','permohonans.jenis_permohonan_id')
     ->whereYear('permohonans.created_at', $year_report)
-    ->selectRaw("jenis_permohonans.huraian as huraian,count(permohonan_id) as count") 
+    ->selectRaw("jenis_permohonans.huraian as huraian,count(id) as count") 
     ->groupBy('huraian') 
     ->get();
 

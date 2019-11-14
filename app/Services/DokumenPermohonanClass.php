@@ -18,7 +18,7 @@ class DokumenPermohonanClass
     public function create($permohonan, $fileNameWithExt, $fileNameToStore, $request, $fileSize)
     {
         $dp = new DokumenPermohonan();
-        $dp->permohonan_id = $permohonan->permohonan_id;
+        $dp->permohonan_id = $permohonan->id;
         $dp->file_name = $fileNameWithExt;
         $dp->file_link = $fileNameToStore;
         $dp->file_size = $fileSize / 1000;
@@ -46,7 +46,7 @@ class DokumenPermohonanClass
 
         $fileSize = $request->file($attached)->getSize();
         $dp = new DokumenPermohonan();
-        $dp->permohonan_id = $permohonan->permohonan_id;
+        $dp->permohonan_id = $permohonan->id;
         $dp->file_name = $fileNameWithExt;
         $dp->file_link = $fileNameToStore;
         $dp->file_size = $fileSize / 1000;

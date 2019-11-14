@@ -13,7 +13,7 @@ use SPDP\DokumenPermohonan;
 
 class ShowPermohonan
 {
-    public function show($permohonan)
+    public function redirect($permohonan)
     {
         $role = auth()->user()->role;
         switch ($role) {
@@ -24,10 +24,18 @@ class ShowPermohonan
                 return $this->penilai($permohonan);
                 break;
             default:
-                $rp = new RedirectPermohonan();
-                return $rp->redirect($permohonan);
+                // $rp = new RedirectPermohonan();
+                return $this->show($permohonan);
                 break;
         }
+    }
+
+    public function show($permohonan)
+    {
+        $permohonan = Permohonan::with(['jenis_permohonan:id,jenis_permohonan_huraian'])->where('permohonan_id', $permohonan->permohonan_id)
+            ->withCount(['dokumen_permohonans', 'laporans', 'kemajuan_permohonans'])->get();
+        $dokumen = Permohonan::find($permohonan[0]->permohonan_id)->dokumen_permohonan();
+        return response()->json(['permohonan' => $permohonan[0], 'dokumen' => $dokumen]);
     }
 
     public function fakulti($permohonan)
@@ -36,10 +44,7 @@ class ShowPermohonan
         if ($dp == false) {
             abort(403, 'Tidak dibenarkan');
         } else {
-            $permohonan = Permohonan::with(['jenis_permohonan:id,jenis_permohonan_huraian'])->where('permohonan_id', $permohonan->permohonan_id)
-                ->withCount(['dokumen_permohonans', 'laporans', 'kemajuan_permohonans'])->get();
-            $dokumen = Permohonan::find($permohonan[0]->permohonan_id)->dokumen_permohonan();
-            return response()->json(['permohonan' => $permohonan[0], 'dokumen' => $dokumen]);
+            return $this->showPermohonan($permohonan);
         }
     }
 

@@ -16,8 +16,8 @@
         </v-card>
       </v-col>
       <v-col v-if="loaded" cols="12" md="8">
-        <LantikPenilai v-if="isFakulti" :permohonan_props="permohonan"></LantikPenilai>
-        <!-- <LaporanUpload v-if="isFakulti" :permohonan_id_props="id"></LaporanUpload> -->
+        <LantikPenilai v-if="!isFakulti && !showLaporan" :permohonan_props="permohonan"></LantikPenilai>
+        <LaporanUpload v-if="!isFakulti && showLaporan" :permohonan_id_props="id"></LaporanUpload>
         <PermohonanTab v-if="permohonan.status_permohonan_id != 1" :permohonan_id_props="id"></PermohonanTab>
       </v-col>
     </v-row>
@@ -33,12 +33,14 @@ export default {
       dokumen: {},
       id: "",
       role: "",
-      isFakulti: false
+      isFakulti: false,
+      showLaporan: false
     };
   },
   created() {
     this.id = this.$route.params.id;
     this.getRole();
+    this.showComponent();
     this.showPermohonan(this.id);
   },
   methods: {
@@ -51,6 +53,18 @@ export default {
             this.isFakulti = true;
           }
         });
+    },
+    showComponent() {
+      if (!isFakulti && this.role != "pjk") {
+        this.showLaporan = true;
+      }
+      if (
+        this.role == "pjk" &&
+        this.permohonan.jenis_permohonan_id == 1 &&
+        this.permohonan.status_permohonan_id == 1
+      ) {
+        showLaporan = false;
+      } else showLaporan = true;
     },
     showPermohonan(id) {
       fetch("/api/permohonan/" + id)

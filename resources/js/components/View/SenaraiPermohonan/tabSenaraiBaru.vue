@@ -1,11 +1,11 @@
 <template>
   <v-container>
-    <v-row :align="alignment" :justify="justify">
+    <v-row align="center" center="center">
       <div style="padding-left:20px">
         <p>{{ pagination.total }} permohonan</p>
       </div>
 
-      <v-row style="padding-right:45px" class="padding-right" :align="alignment" :justify="end">
+      <v-row style="padding-right:45px" class="padding-right" align="center" :justify="end">
         <v-btn
           :disabled="!pagination.prev_page_url"
           v-on:click="fetchPermohonans(pagination.prev_page_url)"
@@ -20,7 +20,7 @@
       </v-row>
     </v-row>
 
-    <v-row :align="alignment" :justify="justify">
+    <v-row align="center" justify="center">
       <v-col>
         <table class="table table-hover">
           <thead class="thead-light">
@@ -68,8 +68,7 @@ export default {
       permohonans: [],
       permohonan_id: "",
       pagination: {},
-      alignment: "center",
-      justify: "center",
+      center: "center",
       start: "start",
       end: "end",
       api: ""

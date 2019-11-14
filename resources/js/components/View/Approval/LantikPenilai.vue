@@ -2,6 +2,19 @@
   <v-container>
     <v-card class="mt-n3">
       <v-row class="left-padding" align="center" justify="start">
+        <v-snackbar
+          v-if="success"
+          v-model="snackbar"
+          color="success"
+          :multi-line="false"
+          :timeout="6000"
+          :top="true"
+          :vertical="true"
+        >
+          {{snackbarMessage}}
+          <v-btn dark text @click="snackbar = false">Close</v-btn>
+        </v-snackbar>
+
         <v-col class="divider mb-n2" cols="3" md="6">
           <h3>Lantik Panel Penilai</h3>
           <hr />
@@ -164,7 +177,11 @@ export default {
       menu: false,
       modal: false,
       menu2: false,
-      tempoh: 0
+      tempoh: 0,
+      success: false,
+      snackbar: {},
+      snackbarMessage:
+        "Panel penilai telah dilantik dan permohonan telah diemel kepada penilai"
     };
   },
   watch: {

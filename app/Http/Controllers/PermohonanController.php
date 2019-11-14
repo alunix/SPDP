@@ -87,7 +87,7 @@ class PermohonanController extends Controller
     {
         $permohonan = Permohonan::findOrFail($id);
         $show = new ShowPermohonan();
-        return $show->show($permohonan);
+        return $show->redirect($permohonan);
     }
 
     public function pelantikanPenilaiSubmit(PenilaianPJK $pp, Request $request, $id)

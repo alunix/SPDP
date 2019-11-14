@@ -18,7 +18,7 @@ class PenilaianPanelsTableSeeder extends Seeder
 
         for ($i = 0; $i < 60; $i++) {
             DB::table('penilaian_panels')->insert([
-                'permohonanID' => $faker->randomElement($id),
+                'permohonan_id' => $faker->randomElement($id),
                 'id_pelantik' => 2,
                 'id_penilai' => $faker->randomElement($panel),
                 'due_date' => $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now', $timezone = 'Singapore'),

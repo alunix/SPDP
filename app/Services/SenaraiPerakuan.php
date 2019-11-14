@@ -41,7 +41,7 @@ class SenaraiPerakuan
     {
         $user_id = auth()->user()->id;
         $pp = PenilaianPanel::where('id_penilai', $user_id)->get();
-        $permohonans_id = $pp->pluck('permohonanID');
+        $permohonans_id = $pp->pluck('permohonan_id');
         if (empty((array) $permohonans_id)) { //check if array object is empty
             $permohonans = new Permohonan();
         } else {

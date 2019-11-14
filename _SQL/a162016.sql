@@ -503,7 +503,7 @@ IF NOT EXISTS `penilaian_panels`
 (
   `penilaian_id` int
 (10) unsigned NOT NULL,
-  `permohonanID` int
+  `permohonan_id` int
 (10) unsigned NOT NULL,
   `id_pelantik` int
 (10) unsigned NOT NULL,
@@ -522,7 +522,7 @@ IF NOT EXISTS `penilaian_panels`
 
 INSERT INTO `penilaian_panels` (`
 penilaian_id`,
-`permohonanID
+`permohonan_id
 `, `id_pelantik`, `id_penilai`, `tarikhAkhir`, `tempoh`, `created_at`, `updated_at`) VALUES
 (1, 34, 2, 3, '2019-10-01 12:00:00', 96, '2019-06-26 15:20:45', '2019-06-26 15:20:45'),
 (2, 67, 2, 3, '2018-12-31 12:00:00', 182, '2019-07-01 17:16:50', '2019-07-01 17:16:50');
@@ -825,7 +825,7 @@ ALTER TABLE `penilaian_panels`
 ADD PRIMARY KEY
 (`penilaian_id`),
 ADD KEY `penilaian_panels_permohonanid_foreign`
-(`permohonanID`),
+(`permohonan_id`),
 ADD KEY `penilaian_panels_id_pelantik_foreign`
 (`id_pelantik`),
 ADD KEY `penilaian_panels_id_penilai_foreign`
@@ -1007,7 +1007,7 @@ ADD CONSTRAINT `penilaian_panels_id_penilai_foreign` FOREIGN KEY
 (`id_penilai`) REFERENCES `users`
 (`id`),
 ADD CONSTRAINT `penilaian_panels_permohonanid_foreign` FOREIGN KEY
-(`permohonanID`) REFERENCES `permohonans`
+(`permohonan_id`) REFERENCES `permohonans`
 (`permohonan_id`);
 
 --

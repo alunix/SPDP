@@ -42,7 +42,7 @@ class SenaraiPermohonan
     {
         $user_id = auth()->user()->id;
         $permohonans =  DB::table("permohonans")
-            ->join('penilaian_panels', 'penilaian_panels.permohonanID', '=', 'permohonans.id')
+            ->join('penilaian_panels', 'penilaian_panels.permohonan_id', '=', 'permohonans.id')
             ->join('users', 'users.id', '=', 'penilaian_panels.id_penilai')
             ->where('permohonans.status_id', 2)
             ->where('penilaian_panels.id_penilai', $user_id)

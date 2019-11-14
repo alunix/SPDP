@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class PenilaianPanel extends Model
 {
     protected $fillable = [
-        'permohonanID'
+        'permohonan_id'
 
 
     ];
@@ -15,7 +15,7 @@ class PenilaianPanel extends Model
 
     public function permohonan()
     {
-        return $this->belongsTo('SPDP\Permohonan', 'permohonanID'); // set the foreign key (second parameter)
+        return $this->belongsTo('SPDP\Permohonan', 'permohonan_id'); // set the foreign key (second parameter)
 
     }
 

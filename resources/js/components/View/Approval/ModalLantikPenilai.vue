@@ -9,7 +9,7 @@
           </v-flex>
           <v-flex v-model="permohonan" xs6>
             <div class="text--primary">{{permohonan.doc_title}}</div>
-            <div class="text--primary">{{permohonan.jenis_permohonan_id}}</div>
+            <div class="text--primary">{{permohonan.jenis_id}}</div>
           </v-flex>
         </v-layout>
       </v-card-text>

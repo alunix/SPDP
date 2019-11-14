@@ -23,13 +23,13 @@ class Analitik
             )->groupBy('years')->get(); 
     
             $jenis_permohonan = Permohonan::select(
-                DB::raw('count(jenis_permohonan_id) as count_jenis_permohonan'),
-                DB::raw("(jenis_permohonan_id) as id")
-                )->orderBy('count_jenis_permohonan','desc')->groupBy('jenis_permohonan_id')->first(); 
+                DB::raw('count(jenis_id) as count_jenis_permohonan'),
+                DB::raw("(jenis_id) as id")
+                )->orderBy('count_jenis_permohonan','desc')->groupBy('jenis_id')->first(); 
             
      
             $A=  DB::table("permohonans") 
-            ->join('jenis_permohonans','jenis_permohonans.id','=','permohonans.jenis_permohonan_id')
+            ->join('jenis_permohonans','jenis_permohonans.id','=','permohonans.jenis_id')
             ->selectRaw("year(permohonans.created_at) as years, jenis_permohonans.huraian as huraian,count(id) as count") 
             ->groupBy('huraian') 
             ->get();
@@ -89,7 +89,7 @@ public function annual($year_report){
 
      /*--------------------------------- Jenis permohonan pie chart----------------------------------- */
      $jenis=  DB::table("permohonans") 
-    ->join('jenis_permohonans','jenis_permohonans.id','=','permohonans.jenis_permohonan_id')
+    ->join('jenis_permohonans','jenis_permohonans.id','=','permohonans.jenis_id')
     ->whereYear('permohonans.created_at', $year_report)
     ->selectRaw("jenis_permohonans.huraian as huraian,count(id) as count") 
     ->groupBy('huraian') 

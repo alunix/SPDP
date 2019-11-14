@@ -14,7 +14,7 @@ class PenilaianJppa
 {   
     public function uploadPerakuan(Request $request, $permohonan) {
 
-        $jp =$permohonan->jenis_permohonan_id;
+        $jp =$permohonan->jenis_id;
         
         if($jp!=8) {
 

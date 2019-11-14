@@ -28,14 +28,14 @@ class AnalitikFakulti
         $jenis_permohonan =  DB::table("permohonans")
             ->join('users', 'users.id', '=', 'permohonans.id_penghantar')
             ->where('users.fakulti_id', $fakulti_id)
-            ->selectRaw("count(jenis_permohonan_id) as count_jenis_permohonan,(jenis_permohonan_id) as id")
+            ->selectRaw("count(jenis_id) as count_jenis_permohonan,(jenis_id) as id")
             ->orderBy('count_jenis_permohonan', 'desc')
-            ->groupBy('jenis_permohonan_id')
+            ->groupBy('jenis_id')
             ->first();
 
         $A =  DB::table("permohonans")
             ->join('users', 'users.id', '=', 'permohonans.id_penghantar')
-            ->join('jenis_permohonans', 'jenis_permohonans.id', '=', 'permohonans.jenis_permohonan_id')
+            ->join('jenis_permohonans', 'jenis_permohonans.id', '=', 'permohonans.jenis_id')
             ->where('users.fakulti_id', $fakulti_id)
             ->selectRaw("year(permohonans.created_at) as years, jenis_permohonans.huraian as huraian,count(id) as count")
             ->groupBy('huraian')
@@ -77,7 +77,7 @@ class AnalitikFakulti
 
         //----------------- Chart for Permohonan-------------------------
         $jenis =  DB::table("permohonans")
-            ->join('jenis_permohonans', 'jenis_permohonans.id', '=', 'permohonans.jenis_permohonan_id')
+            ->join('jenis_permohonans', 'jenis_permohonans.id', '=', 'permohonans.jenis_id')
             ->join('users', 'users.id', '=', 'permohonans.id_penghantar')
             ->whereYear('permohonans.created_at', $year_report)
             ->where('users.fakulti_id', $fakulti_id)

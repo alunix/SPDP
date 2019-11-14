@@ -15,12 +15,12 @@ class RedirectPermohonan
         $role = auth()->user()->role;
 
         if ($role == 'pjk') {
-            if (($permohonan->status_permohonan_id == 1 && $permohonan->jenis_permohonan_id != 8) || $permohonan->status_permohonan_id == 3 || $permohonan->status_permohonan_id == 13)
+            if (($permohonan->status_permohonan_id == 1 && $permohonan->jenis_id != 8) || $permohonan->status_permohonan_id == 3 || $permohonan->status_permohonan_id == 13)
                 return $this->redirectPermohonan($permohonan);
             else
                 return view('jenis_permohonan_view.default_permohonan')->with('permohonan', $permohonan)->with('laporans', $laporans);
         } else if ($role == 'jppa') {
-            if (($permohonan->status_permohonan_id == 1 && $permohonan->jenis_permohonan_id == 8) || $permohonan->status_permohonan_id == 4 || $permohonan->status_permohonan_id == 14)
+            if (($permohonan->status_permohonan_id == 1 && $permohonan->jenis_id == 8) || $permohonan->status_permohonan_id == 4 || $permohonan->status_permohonan_id == 14)
                 return $this->redirectPermohonan($permohonan);
             else
                 return view('jenis_permohonan_view.default_permohonan')->with('permohonan', $permohonan)->with('laporans', $laporans);

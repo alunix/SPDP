@@ -540,7 +540,7 @@ IF NOT EXISTS `permohonans`
 (10) unsigned NOT NULL,
   `doc_title` varchar
 (191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `jenis_permohonan_id` int
+  `jenis_id` int
 (10) unsigned NOT NULL,
   `id_penghantar` int
 (10) unsigned NOT NULL,
@@ -557,7 +557,7 @@ IF NOT EXISTS `permohonans`
 INSERT INTO `permohonans` (`
 permohonan_id`,
 `doc_title
-`, `jenis_permohonan_id`, `id_penghantar`, `status_permohonan_id`, `created_at`, `updated_at`) VALUES
+`, `jenis_id`, `id_penghantar`, `status_permohonan_id`, `created_at`, `updated_at`) VALUES
 (1, 'Sarjana Muda A', 1, 1, 4, '2019-05-08 11:55:26', '2019-05-27 11:53:33'),
 (2, 'Sarjana Muda A', 2, 1, 9, '2019-05-08 12:03:56', '2019-05-17 06:44:41'),
 (3, 'permohonan.pdf', 6, 6, 4, '2019-05-12 08:41:16', '2019-05-12 08:41:16'),
@@ -840,7 +840,7 @@ ADD PRIMARY KEY
 ADD KEY `permohonans_id_penghantar_foreign`
 (`id_penghantar`),
 ADD KEY `permohonans_jenis_permohonan_id_foreign`
-(`jenis_permohonan_id`),
+(`jenis_id`),
 ADD KEY `permohonans_status_permohonan_id_foreign`
 (`status_permohonan_id`);
 
@@ -1018,7 +1018,7 @@ ADD CONSTRAINT `permohonans_id_penghantar_foreign` FOREIGN KEY
 (`id_penghantar`) REFERENCES `users`
 (`id`),
 ADD CONSTRAINT `permohonans_jenis_permohonan_id_foreign` FOREIGN KEY
-(`jenis_permohonan_id`) REFERENCES `jenis_permohonans`
+(`jenis_id`) REFERENCES `jenis_permohonans`
 (`id`),
 ADD CONSTRAINT `permohonans_status_permohonan_id_foreign` FOREIGN KEY
 (`status_permohonan_id`) REFERENCES `status_permohonans`

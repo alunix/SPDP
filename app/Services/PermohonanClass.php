@@ -40,7 +40,7 @@ class PermohonanClass
 
         $permohonan = new Permohonan();
         $permohonan->doc_title = $request->input('nama_program');
-        $permohonan->jenis_permohonan_id = $request->input('jenis_permohonan');
+        $permohonan->jenis_id = $request->input('jenis_permohonan');
         $permohonan->id_penghantar = $user_id;
         $permohonan->status_permohonan_id = 1;
         $permohonan->save();
@@ -52,7 +52,7 @@ class PermohonanClass
         $kp->create($permohonan);
 
         // //Hantar email kepada pemeriksa        
-        // if ($permohonan->jenis_permohonan_id == 8)
+        // if ($permohonan->jenis_id == 8)
         //     $email = TetapanAliranKerja::all()->first()->jppa->email;
         // else
         //     $email = TetapanAliranKerja::all()->first()->pjk->email;

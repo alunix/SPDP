@@ -60,7 +60,7 @@ export default {
       }
       if (
         this.role == "pjk" &&
-        this.permohonan.jenis_permohonan_id == 1 &&
+        this.permohonan.jenis_id == 1 &&
         this.permohonan.status_permohonan_id == 1
       ) {
         showLaporan = false;

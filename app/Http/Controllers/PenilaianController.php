@@ -40,7 +40,7 @@ class PenilaianController extends Controller
 
         $permohonan =Permohonan::find($id);
 
-        if($permohonan->jenis_permohonan_id!=8)
+        if($permohonan->jenis_id!=8)
         return view('jppa.lampiran-perakuan-jppa')->with('permohonan',$permohonan)->with('penilaian',$permohonan->penilaian);
         else
         return view('jppa.lampiran-perakuan-penjumudan')->with('permohonan',$permohonan);

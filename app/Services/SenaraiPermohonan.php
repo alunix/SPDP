@@ -34,7 +34,7 @@ class SenaraiPermohonan
     public function pjk()
     {
         $permohonans = Permohonan::with(['user.fakulti:fakulti_id,kod', 'jenis_permohonan:id,huraian', 'status_permohonan:status_id,huraian'])
-            ->where('jenis_permohonan_id', '!=', '8')->where('status_permohonan_id', '=', '1')->paginate(10);
+            ->where('jenis_id', '!=', '8')->where('status_permohonan_id', '=', '1')->paginate(10);
         return $permohonans;
     }
 
@@ -59,7 +59,7 @@ class SenaraiPermohonan
     }
     public function jppa()
     {
-        $permohonans = Permohonan::where('jenis_permohonan_id', 8)->where('status_permohonan_id', 1)->orWhere('status_permohonan_id', 4)->get();
+        $permohonans = Permohonan::where('jenis_id', 8)->where('status_permohonan_id', 1)->orWhere('status_permohonan_id', 4)->get();
         return $permohonans;
     }
     public function senat()

@@ -58,7 +58,7 @@ class HomeController extends Controller
 
         /*------------------ Line chart for jumlah dokumen permohonan in a year--------------*/
         $Z =  DB::table("dokumen_permohonans")
-            //->join('jenis_permohonans','jenis_permohonans.id','=','permohonans.jenis_permohonan_id')
+            //->join('jenis_permohonans','jenis_permohonans.id','=','permohonans.jenis_id')
             ->selectRaw("DATE_FORMAT(dokumen_permohonans.created_at,'%M') as months, count(dokumen_permohonan_id) as count")
             ->groupBy('months')
             ->get();
@@ -70,7 +70,7 @@ class HomeController extends Controller
         ]);
 
         $A = DB::table("permohonans")
-            ->join('jenis_permohonans', 'jenis_permohonans.id', '=', 'permohonans.jenis_permohonan_id')
+            ->join('jenis_permohonans', 'jenis_permohonans.id', '=', 'permohonans.jenis_id')
             ->selectRaw("year(permohonans.created_at) as years, jenis_permohonans.huraian as huraian,count(id) as count")
             ->groupBy('huraian')
             ->get();
@@ -112,7 +112,7 @@ class HomeController extends Controller
 
         /*----------Permohonans-----------*/
         $permohonans =  DB::table("permohonans")
-            ->join('jenis_permohonans', 'jenis_permohonans.id', '=', 'permohonans.jenis_permohonan_id')
+            ->join('jenis_permohonans', 'jenis_permohonans.id', '=', 'permohonans.jenis_id')
             ->join('users', 'permohonans.id_penghantar', '=', 'users.id')
             ->join('fakultis', 'users.fakulti_id', '=', 'fakultis.fakulti_id')
             ->whereYear('permohonans.created_at', $year)
@@ -163,7 +163,7 @@ class HomeController extends Controller
         $role = auth()->user()->role;
         switch ($role) {
             case 'pjk':
-                $permohonans = Permohonan::where('jenis_permohonan_id', '!=', '8')->where('status_permohonan_id', '=', 3)->get();
+                $permohonans = Permohonan::where('jenis_id', '!=', '8')->where('status_permohonan_id', '=', 3)->get();
                 return $permohonans;
                 break;
             default:

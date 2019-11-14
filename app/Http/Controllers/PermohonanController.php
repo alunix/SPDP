@@ -11,7 +11,7 @@ use SPDP\Services\PenilaianPJK;
 use SPDP\Services\SenaraiPermohonan;
 use SPDP\Services\SenaraiPerakuan;
 use SPDP\Services\ShowPermohonan;
-use Redirect, Response;
+use Redirect, Response, Debugbar;
 
 class PermohonanController extends Controller
 {
@@ -68,15 +68,6 @@ class PermohonanController extends Controller
         return view('pjk.pjk-melantik-penilai')->with('users', $users)->with('permohonan', $permohonan)->with('dp', $dp);
     }
 
-    public function pelantikanPenilaiSubmit(PenilaianPJK $pp, Request $request, $id)
-    {
-        $this->validate($request, [
-            'selectedPenilai' => 'required',
-        ]);
-        Debugbar::info($request->all());
-        return $pp->pelantikanPenilaiSubmit($request, $id);
-    }
-
     /*API START  */
     public function api_permohonanDihantar()
     {
@@ -97,5 +88,14 @@ class PermohonanController extends Controller
         $permohonan = Permohonan::findOrFail($id);
         $show = new ShowPermohonan();
         return $show->show($permohonan);
+    }
+
+    public function pelantikanPenilaiSubmit(PenilaianPJK $pp, Request $request, $id)
+    {
+        $this->validate($request, [
+            'due_date' => 'required|after:today',
+            'selectedPenilai' => 'required'
+        ]);
+        return $pp->pelantikanPenilaiSubmit($request, $id);
     }
 }

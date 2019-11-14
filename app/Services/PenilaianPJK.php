@@ -17,6 +17,7 @@ use SPDP\Notifications\PermohonanBaharu;
 use SPDP\Notifications\PelantikanPanelPenilai;
 use SPDP\Notifications\PermohonanDiluluskan;
 use SPDP\TetapanAliranKerja;
+use Debugbar;
 
 
 class PenilaianPJK
@@ -63,20 +64,13 @@ class PenilaianPJK
 
             $kp = new KemajuanPermohonanClass();
             $kp->create($permohonan);
-            //retrieve id of panel penilai
-            $selectedPenilai = $request->input('checked');
-            //Create a new penilaian in penilaian panel table
+
             $penilaian = new PenilaianPanelClass();
-            $penilaian = $penilaian->create($permohonan, $selectedPenilai[0], $request);
+            $penilaian = $penilaian->create($permohonan, $request);
+            
             //Send email to panel penilai
             // $penilai = User::findOrFail($selectedPenilai[0]);
             // Notification::route('mail', $penilai->email)->notify(new PelantikanPanelPenilai($permohonan, $penilaian, $penilai)); //hantar email kepada panel penilai
-
-            $msg = [
-                'message' => 'Panel penilai dipilih dan emel telah dihantar',
-            ];
-
-            return redirect()->route('penilaian.show')->with($msg);
         } catch (\Illuminate\Database\QueryException $e) {
             $errorCode = $e->errorInfo[1];
             if ($errorCode == 1062) {

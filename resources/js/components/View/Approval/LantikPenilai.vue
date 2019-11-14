@@ -22,7 +22,7 @@
         ></v-switch>-->
       </v-row>
 
-      <v-form ref="form" @submit.prevent="submit">
+      <v-form ref="form" method="post" @submit.prevent="submit">
         <v-row align="center" justify="center">
           <div style="padding-left:35px">
             <p v-if="!searchText">{{ pagination.total }} penilai</p>
@@ -32,6 +32,7 @@
 
           <v-row style="padding-right:45px" class="padding-right" align="center" justify="end">
             <v-btn
+              @click="submit"
               style="margin-left:255px;"
               :disabled="!selectedPenilai.length"
               normal
@@ -232,37 +233,36 @@ export default {
       this.$modal.show("ModalLantikPenilai");
     },
     submit() {
-      // this.loading = true;
-      // let formData = new FormData();
-      // formData.append("file_link", this.file_link);
-      // formData.append("jenis_permohonan_id", this.jenis_permohonan_id);
-      // formData.append("doc_title", this.doc_title);
-      // formData.append("komen", this.komen);
-      // this.loaded = false;
-      // this.success = false;
-      // this.errors = {};
-      // axios
-      //   .post("api/permohonan/submit", formData, {
-      //     headers: {
-      //       "Content-Type": "multipart/form-data"
-      //     }
-      //   })
-      //   .then(res => {
-      //     this.success = true;
-      //     this.jenis_permohonan_id = "";
-      //     this.doc_title = "";
-      //     this.komen = "";
-      //     this.file_link = "";
-      //     this.fileName = "";
-      //     this.loading = false;
-      //     this.$emit("event");
-      //   })
-      //   .catch(error => {
-      //     if (error.response.status === 422) {
-      //       this.errors = error.response.data.errors || {};
-      //       this.error = true;
-      //     }
-      //   });
+      this.loading = true;
+      var payloadData = {
+        selectedPenilai: this.selectedPenilai,
+        due_date: this.due_date
+      };
+      this.loaded = false;
+      this.success = false;
+      this.errors = {};
+      axios
+        .post("/api/" + this.permohonan.permohonan_id + "/pelantikan-penilai", {
+          selectedPenilai: this.selectedPenilai,
+          due_date: this.due_date,
+          headers: {
+            "Content-Type": "multipart/form-data"
+          },
+          _method: "patch"
+        })
+        .then(res => {
+          this.success = true;
+          this.selectedPenilai = [];
+          this.due_date = new Date().toISOString().substr(0, 10);
+          this.loading = false;
+          // this.$emit("event");
+        })
+        .catch(error => {
+          if (error.response.status === 422) {
+            this.errors = error.response.data.errors || {};
+            this.error = true;
+          }
+        });
     }
   }
 };

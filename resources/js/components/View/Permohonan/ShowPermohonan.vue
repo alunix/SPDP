@@ -15,9 +15,9 @@
           </v-card-text>
         </v-card>
       </v-col>
-      <v-col v-if="loaded" cols="12" md="8">
-        <LantikPenilai v-if="!showLaporan" :permohonan_props="permohonan"></LantikPenilai>
-        <LaporanUpload v-if="showLaporan" :permohonan_id_props="id"></LaporanUpload>
+      <v-col v-if="showLaporan == true || showLaporan == false" cols="12" md="8">
+        <LantikPenilai v-if="showLaporan == false" :permohonan_props="permohonan"></LantikPenilai>
+        <LaporanUpload v-if="showLaporan == true" :permohonan_id_props="id"></LaporanUpload>
         <PermohonanTab v-if="permohonan.status_permohonan_id != 1" :permohonan_id_props="id"></PermohonanTab>
       </v-col>
     </v-row>
@@ -33,15 +33,15 @@ export default {
       dokumen: {},
       id: "",
       role: "",
-      showLaporan: false,
+      showLaporan: "",
       loaded: false
     };
   },
   created() {
     this.id = this.$route.params.id;
     this.getRole();
-    this.showComponent();
     this.showPermohonan(this.id);
+    // this.showComponent();
   },
   methods: {
     getRole() {
@@ -49,26 +49,11 @@ export default {
         .then(res => res.json())
         .then(res => {
           this.role = res;
+          this.showComponent(this.role);
         });
     },
-    showComponent() {
-      if (this.role != "pjk" && this.role != "fakulti") {
-        this.showLaporan == true;
-      }
-      if (
-        this.role == "pjk"
-        // &&
-        // this.permohonan.jenis_id == 1
-        //&&
-        // this.permohonan.status_id == 1
-      ) {
-        // this.showLaporan = false;
-        console.log(this.permohonan);
-      } else {
-        this.showLaporan = true;
-      }
-    },
     showPermohonan(id) {
+      console.log(this.role);
       fetch("/api/permohonan/" + id)
         .then(res => res.json())
         .then(res => {
@@ -110,6 +95,17 @@ export default {
           this.loaded = true;
         });
     },
+    showComponent(role) {
+      if (role == "pjk") {
+        // console.log(this.permohonan);
+        if (this.permohonan.jenis_id == 1 && this.permohonan.status_id == 1) {
+          this.showLaporan = false;
+        } else this.showLaporan = true;
+      } else {
+        this.showLaporan = true;
+      }
+    },
+
     date(created_at) {
       if (!created_at) {
         return null;

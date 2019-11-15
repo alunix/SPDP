@@ -15,7 +15,7 @@
           </v-card-text>
         </v-card>
       </v-col>
-      <v-col v-if="showLaporan == true || showLaporan == false" cols="12" md="8">
+      <v-col v-if="loaded" cols="12" md="8">
         <LantikPenilai v-if="showLaporan == false" :permohonan_props="permohonan"></LantikPenilai>
         <LaporanUpload v-if="showLaporan == true" :permohonan_id_props="id"></LaporanUpload>
         <PermohonanTab v-if="permohonan.status_permohonan_id != 1" :permohonan_id_props="id"></PermohonanTab>
@@ -34,27 +34,24 @@ export default {
       id: "",
       role: "",
       showLaporan: "",
-      loaded: false
+      loaded: false,
+      id: this.$route.params.id
     };
   },
   created() {
-    this.id = this.$route.params.id;
     this.getRole();
-    this.showPermohonan(this.id);
-    // this.showComponent();
   },
   methods: {
     getRole() {
       fetch("/api/role")
         .then(res => res.json())
         .then(res => {
-          this.role = res;
-          this.showComponent(this.role);
+          this.showPermohonan(res);
+          // console.log(res);
         });
     },
-    showPermohonan(id) {
-      console.log(this.role);
-      fetch("/api/permohonan/" + id)
+    showPermohonan(role) {
+      fetch("/api/permohonan/" + this.id)
         .then(res => res.json())
         .then(res => {
           this.permohonan = res.permohonan;
@@ -92,6 +89,27 @@ export default {
               id: 7
             }
           ];
+          if (role == "pjk") {
+            if (
+              this.permohonan.jenis_id == 1 &&
+              this.permohonan.status_id == 1
+            ) {
+              this.showLaporan = false;
+            } else {
+              console.log("Else pjk");
+              this.showLaporan = true;
+            }
+          } else {
+            console.log("Else");
+          }
+
+          // if (!["fakulti", "pjk"].includes(role)) {
+          //   this.showLaporan = true;
+          //   console.log("Else if not pjk fakulti");
+          // } else {
+          //   this.showLaporan = true;
+          //   console.log("Else not pjk fakulti");
+          // }
           this.loaded = true;
         });
     },

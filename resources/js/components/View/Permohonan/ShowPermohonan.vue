@@ -16,8 +16,8 @@
         </v-card>
       </v-col>
       <v-col v-if="loaded" cols="12" md="8">
-        <LantikPenilai v-if="showLaporan == false" :permohonan_props="permohonan"></LantikPenilai>
-        <LaporanUpload v-if="showLaporan == true" :permohonan_id_props="id"></LaporanUpload>
+        <LantikPenilai v-if="!showLaporan && !isFakulti " :permohonan_props="permohonan"></LantikPenilai>
+        <LaporanUpload v-if="showLaporan && !isFakulti" :permohonan_id_props="id"></LaporanUpload>
         <PermohonanTab v-if="permohonan.status_permohonan_id != 1" :permohonan_id_props="id"></PermohonanTab>
       </v-col>
     </v-row>
@@ -33,9 +33,10 @@ export default {
       dokumen: {},
       id: "",
       role: "",
-      showLaporan: "",
+      showLaporan: true,
       loaded: false,
-      id: this.$route.params.id
+      id: this.$route.params.id,
+      isFakulti: false
     };
   },
   created() {
@@ -46,8 +47,13 @@ export default {
       fetch("/api/role")
         .then(res => res.json())
         .then(res => {
+          //get users role
+          if (res == "fakulti") {
+            this.isFakulti = true;
+          } else {
+            this.isFakulti = false;
+          }
           this.showPermohonan(res);
-          // console.log(res);
         });
     },
     showPermohonan(role) {
@@ -90,40 +96,22 @@ export default {
             }
           ];
           if (role == "pjk") {
+            console.log("PJK");
             if (
               this.permohonan.jenis_id == 1 &&
               this.permohonan.status_id == 1
             ) {
               this.showLaporan = false;
-            } else {
-              console.log("Else pjk");
+            }
+
+            if (!["fakulti", "pjk"].includes(role)) {
               this.showLaporan = true;
             }
           } else {
-            console.log("Else");
           }
-
-          // if (!["fakulti", "pjk"].includes(role)) {
-          //   this.showLaporan = true;
-          //   console.log("Else if not pjk fakulti");
-          // } else {
-          //   this.showLaporan = true;
-          //   console.log("Else not pjk fakulti");
-          // }
           this.loaded = true;
         });
     },
-    showComponent(role) {
-      if (role == "pjk") {
-        // console.log(this.permohonan);
-        if (this.permohonan.jenis_id == 1 && this.permohonan.status_id == 1) {
-          this.showLaporan = false;
-        } else this.showLaporan = true;
-      } else {
-        this.showLaporan = true;
-      }
-    },
-
     date(created_at) {
       if (!created_at) {
         return null;

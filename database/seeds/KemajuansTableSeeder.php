@@ -17,7 +17,7 @@ class KemajuansTableSeeder extends Seeder
         for($i=0; $i<1000; $i++) {
             DB::table('kemajuan_permohonans')->insert([
             'permohonan_id' =>  $faker->randomElement($p),
-            'status_permohonan' => $faker->randomElement($s),
+            'status_id' => $faker->randomElement($s),
             'created_at' => $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now', $timezone = 'Singapore'),
             'updated_at' => $faker->dateTimeBetween($startDate = '-6 months', $endDate = 'now', $timezone = 'Singapore'),
         ]);

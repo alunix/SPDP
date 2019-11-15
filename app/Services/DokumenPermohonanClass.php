@@ -54,18 +54,18 @@ class DokumenPermohonanClass
         $dp->versi = ((int) $permohonan->version_counts()) + 1;
         $dp->save();
 
-        $status_permohonan = $permohonan->status_id;
-        $permohonan->status_id = $this->getStatusPermohonan($status_permohonan);
+        $status_id = $permohonan->status_id;
+        $permohonan->status_id = $this->getStatusPermohonan($status_id);
         $permohonan->save();
 
         $kp = new KemajuanPermohonanClass();
         $kp->create($permohonan);
 
-        $user = $this->getEmailPenambahbaikkan($permohonan, $status_permohonan);
+        $user = $this->getEmailPenambahbaikkan($permohonan, $status_id);
         //Hantar email kepada penghantar
         // Notification::route('mail', $user->email)->notify(new DokumenPenambahbaikkan($dp)); //hantar email kepada penghantar
 
-        //$email = $this->getEmailPenambahbaikkan($permohonan,$status_permohonan);
+        //$email = $this->getEmailPenambahbaikkan($permohonan,$status_id);
     }
 
     public function getStatusPermohonan($status_id)
@@ -123,6 +123,6 @@ class DokumenPermohonanClass
     public function show($id)
     {
         $permohonan = Permohonan::findOrFail($id);
-        // return view('fakulti.kemajuan-permohonan')->with('kjs', $permohonan->kemajuan_permohonans)->with('permohonan', $permohonan)->with('dokumen_permohonans', $permohonan->dokumen_permohonans);
+        // return view('fakulti.kemajuan-permohonan')->with('kjs', $permohonan->kemajuan_permohonans)->with('permohonan', $permohonan)->with('dokumens', $permohonan->dokumens);
     }
 }

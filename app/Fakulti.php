@@ -49,7 +49,7 @@ class Fakulti extends Model
         );
     }
 
-    public function dokumen_permohonans()
+    public function dokumens()
     {
         return $this->hasManyDeep(
 

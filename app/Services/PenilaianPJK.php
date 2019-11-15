@@ -83,7 +83,7 @@ class PenilaianPJK
     {
         $permohonan = Permohonan::findOrFail($id);
         $jp = $permohonan->jenis_permohonan->kod;
-        $status_permohonan = $permohonan->value('status_id');
+        $status_id = $permohonan->value('status_id');
 
         switch ($jp) {
             case 'program_baharu':
@@ -96,9 +96,9 @@ class PenilaianPJK
             case 'semakan_kursus_teras':
             case 'semakan_kursus_elektif':
             case 'semakan_program':
-                if ($status_permohonan == '1') // if permohonan require minority changes then create a new perakuan
+                if ($status_id == '1') // if permohonan require minority changes then create a new perakuan
                     return $this->viewKursusTerasElektifBaharu($id);
-                else if ($status_permohonan == '3')
+                else if ($status_id == '3')
                     return  $this->viewProgramBaharu($id);
                 else
                     return;
@@ -155,7 +155,7 @@ class PenilaianPJK
         if ($permohonan == null)
             abort(403);
 
-        $dp = $permohonan->dokumen_permohonans->pluck('dokumen_permohonan_id');
+        $dp = $permohonan->dokumens->pluck('dokumen_permohonan_id');
         $laporans = Laporan::whereIn('dokumen_permohonan_id', $dp)->get();
         return view('pjk.lampiran-pjk')->with('permohonan', $permohonan)->with('laporans', $laporans);
     }
@@ -167,7 +167,7 @@ class PenilaianPJK
         if ($permohonan == null)
             abort(403);
 
-        $dp = $permohonan->dokumen_permohonans->pluck('dokumen_permohonan_id');
+        $dp = $permohonan->dokumens->pluck('dokumen_permohonan_id');
         $laporans = Laporan::whereIn('dokumen_permohonan_id', $dp)->get();
         return view('pjk.perakuan-pjk')->with('permohonan', $permohonan)->with('laporans', $laporans);;
     }
@@ -210,10 +210,10 @@ class PenilaianPJK
     public function semakanKursusTeras(Request $request, $permohonan)
     {
 
-        $status_permohonan = $permohonan->status_id;
-        if ($status_permohonan == '1') // if permohonan require minority changes then create a new perakuan
+        $status_id = $permohonan->status_id;
+        if ($status_id == '1') // if permohonan require minority changes then create a new perakuan
             return $this->createPerakuanPjk($request, $permohonan);
-        else if ($status_permohonan == '3')
+        else if ($status_id == '3')
             return $this->updateLaporanPanel($request, $permohonan);
         else
             return;
@@ -223,11 +223,11 @@ class PenilaianPJK
     {
 
         /* Cari permohonan since penilaian belongs to permohonan then baru boleh cari penilaian through eloquent relationship */
-        $status_permohonan = $permohonan->status_id;
+        $status_id = $permohonan->status_id;
 
-        if ($status_permohonan == '1') // if permohonan require minority changes then create a new perakuan
+        if ($status_id == '1') // if permohonan require minority changes then create a new perakuan
             return $this->createPerakuanPjk($request, $permohonan);
-        else if ($status_permohonan == '3')
+        else if ($status_id == '3')
             return $this->updateLaporanPanel($request, $permohonan);
         else
             return;

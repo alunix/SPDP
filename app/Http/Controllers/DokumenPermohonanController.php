@@ -15,8 +15,8 @@ class DokumenPermohonanController extends Controller
     public function show($id)
     {
         $permohonan = Permohonan::findOrFail($id);
-        $dokumen_permohonans = DokumenPermohonan::with(['laporans'])->where('permohonan_id', $id)->orderBy('created_at', 'desc')->paginate(10);
-        return response()->json($dokumen_permohonans);
+        $dokumens = DokumenPermohonan::with(['laporans'])->where('permohonan_id', $id)->orderBy('created_at', 'desc')->paginate(10);
+        return response()->json($dokumens);
     }
 
     public function showPenambahbaikkan($id)
@@ -28,7 +28,7 @@ class DokumenPermohonanController extends Controller
         if ($dp == 0) {
             abort(403, 'Tidak dibenarkan');
         } else {
-            $dps = $permohonan->dokumen_permohonans;
+            $dps = $permohonan->dokumens;
             return view('fakulti.dokumen-permohonan-penambahbaikkan')->with('permohonan', $permohonan)->with('dps', $dps);
         }
     }

@@ -13,16 +13,16 @@ class CreateDokumenPermohonansTable extends Migration
      */
     public function up()
     {
-        Schema::create('dokumen_permohonans', function (Blueprint $table) {
-            
+        Schema::create('dokumens', function (Blueprint $table) {
+
             $table->increments('dokumen_permohonan_id');
             $table->integer('permohonan_id')->unsigned();
             $table->string('file_name'); //To show the name of the file
             $table->string('file_link');
-            $table->integer('file_size'); 
+            $table->integer('file_size');
             $table->string('komen')->nullable();
             $table->integer('versi');
-            
+
             $table->foreign('permohonan_id')->references('permohonan_id')->on('permohonans');
 
             $table->timestamps();
@@ -36,6 +36,6 @@ class CreateDokumenPermohonansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dokumen_permohonans');
+        Schema::dropIfExists('dokumens');
     }
 }

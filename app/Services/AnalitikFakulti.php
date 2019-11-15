@@ -92,11 +92,11 @@ class AnalitikFakulti
         ]);
 
         //----------------- Chart for dokumen permohonan-------------------------
-        $dokumen_permohonans = $fakulti->dokumen_permohonans;
+        $dokumens = $fakulti->dokumens;
 
-        $Z =  DB::table("dokumen_permohonans")
+        $Z =  DB::table("dokumens")
             ->whereYear('created_at', $year_report)
-            ->selectRaw("DATE_FORMAT(dokumen_permohonans.created_at,'%Y') as years,count(dokumen_permohonan_id) as count")
+            ->selectRaw("DATE_FORMAT(dokumens.created_at,'%Y') as years,count(dokumen_permohonan_id) as count")
             ->orderBy('years', 'asc')
             ->groupBy('years')
             ->get();
@@ -135,6 +135,6 @@ class AnalitikFakulti
         $permohonans_id = Permohonan::whereIn('id', $lulus->pluck('id'))->get();
         $improvements_list =  Permohonan::whereIn('id', $improvements->pluck('id'))->get();
 
-        return view('pjk.fakulti-analitik-2')->with('improvements_list', $improvements_list)->with('permohonan_lulus', $permohonans_id)->with('pie_chart', $pie_chart)->with('bar_chart', $bar_chart)->with('line_chart', $line_chart)->with('fakulti', $fakulti)->with('dokumen_permohonans', $dokumen_permohonans)->with('permohonans', $permohonans)->with('jumlah_penambahbaikkan', $improvements)->with('improvements', $improvements)->with('year_report', $year_report);
+        return view('pjk.fakulti-analitik-2')->with('improvements_list', $improvements_list)->with('permohonan_lulus', $permohonans_id)->with('pie_chart', $pie_chart)->with('bar_chart', $bar_chart)->with('line_chart', $line_chart)->with('fakulti', $fakulti)->with('dokumens', $dokumens)->with('permohonans', $permohonans)->with('jumlah_penambahbaikkan', $improvements)->with('improvements', $improvements)->with('year_report', $year_report);
     }
 }

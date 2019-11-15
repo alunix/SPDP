@@ -57,9 +57,9 @@ class HomeController extends Controller
         $chart->dataset('Permohonan sepanjang tahun ' . $year, 'bar', $A);
 
         /*------------------ Line chart for jumlah dokumen permohonan in a year--------------*/
-        $Z =  DB::table("dokumen_permohonans")
+        $Z =  DB::table("dokumens")
             //->join('jenis_permohonans','jenis_permohonans.id','=','permohonans.jenis_id')
-            ->selectRaw("DATE_FORMAT(dokumen_permohonans.created_at,'%M') as months, count(dokumen_permohonan_id) as count")
+            ->selectRaw("DATE_FORMAT(dokumens.created_at,'%M') as months, count(dokumen_permohonan_id) as count")
             ->groupBy('months')
             ->get();
 
@@ -94,13 +94,13 @@ class HomeController extends Controller
         $year = date('Y');
 
         /*------------------ Line chart for jumlah dokumen permohonan in a year--------------*/
-        $dokumens =  DB::table("dokumen_permohonans")
-            ->join('permohonans', 'dokumen_permohonans.permohonan_id', '=', 'permohonans.id')
+        $dokumens =  DB::table("dokumens")
+            ->join('permohonans', 'dokumens.permohonan_id', '=', 'permohonans.id')
             ->join('users', 'permohonans.id_penghantar', '=', 'users.id')
             ->join('fakultis', 'users.fakulti_id', '=', 'fakultis.fakulti_id')
-            ->whereYear('dokumen_permohonans.created_at', $year)
+            ->whereYear('dokumens.created_at', $year)
             ->where('fakultis.fakulti_id', '=', $fakulti_id)
-            ->selectRaw("DATE_FORMAT(dokumen_permohonans.created_at,'%M') as months,month(dokumen_permohonans.created_at) as month,count(dokumen_permohonans.dokumen_permohonan_id) as count")
+            ->selectRaw("DATE_FORMAT(dokumens.created_at,'%M') as months,month(dokumens.created_at) as month,count(dokumens.dokumen_permohonan_id) as count")
             ->orderBy('month', 'asc')
             ->groupBy('months')
             ->get();

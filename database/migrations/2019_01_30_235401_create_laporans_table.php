@@ -21,9 +21,9 @@ class CreateLaporansTable extends Migration
             $table->string('tajuk_fail_link');
             $table->string('komen')->nullable();
             $table->integer('versi');
-            $table->foreign('dokumen_permohonan_id')->references('dokumen_permohonan_id')->on('dokumen_permohonans');
+            $table->foreign('dokumen_permohonan_id')->references('dokumen_permohonan_id')->on('dokumens');
             $table->foreign('id_penghantar')->references('id')->on('users');
-           
+
             $table->timestamps();
         });
     }

@@ -11,20 +11,19 @@ use \Staudenmeir\EloquentHasManyDeep\HasRelationships; //hasManyDeep package tha
 class Permohonan extends Model
 {
     protected $fillable = [
-        'nama_penghantar', 'fakulti', 'file_link', 'status_program', 'file_name', 'doc_title', 'jenis_permohonan', 'status_id', 'id',
+        'nama_penghantar', 'fakulti', 'file_link', 'status_program', 'file_name', 'doc_title', 'jenis_permohonan', 'status_id',
     ];
 
     protected $table = 'permohonans';
-    protected $primaryKey = 'id';
 
     public function version_counts()
     {
-        return $this->dokumen_permohonans()->count();
+        return $this->dokumens()->count();
     }
 
     public function dokumen_permohonan()
     {
-        return $this->dokumen_permohonans()->orderBy('created_at', 'DESC')->select('file_link')->first(); //retrieve dokumen terkini
+        return $this->dokumens()->orderBy('created_at', 'DESC')->select('file_link')->first(); //retrieve dokumen terkini
     }
 
     public function user()
@@ -69,7 +68,7 @@ class Permohonan extends Model
         return $this->hasMany('SPDP\KemajuanPermohonan', 'permohonan_id');
     }
 
-    public function dokumen_permohonans()
+    public function dokumens()
     {
         return $this->hasMany('SPDP\DokumenPermohonan', 'permohonan_id');
     }

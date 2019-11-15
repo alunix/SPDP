@@ -35,8 +35,8 @@ class LaporanClass
         }
         //get the role of the current user
         $user_id = auth()->user()->id;
-        // $laporans_id = $permohonan->dokumen_permohonans->where('id_penghantar',$user_id);
-        $laporans_id = $permohonan->dokumen_permohonans->pluck('dokumen_permohonan_id');
+        // $laporans_id = $permohonan->dokumens->where('id_penghantar',$user_id);
+        $laporans_id = $permohonan->dokumens->pluck('dokumen_permohonan_id');
         $laporan_count = Laporan::where('id_penghantar', $user_id)->where('dokumen_permohonan_id', $laporans_id)->get();
 
         if ($laporans_id == null) {

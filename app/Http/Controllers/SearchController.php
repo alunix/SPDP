@@ -41,8 +41,8 @@ class SearchController extends Controller
             ->where('doc_title', 'LIKE', '%' . $q . '%')
             ->get();
 
-        $dokumens =  DB::table("dokumen_permohonans")
-            ->join('permohonans', 'permohonans.id', '=', 'dokumen_permohonans.permohonan_id')
+        $dokumens =  DB::table("dokumens")
+            ->join('permohonans', 'permohonans.id', '=', 'dokumens.permohonan_id')
             ->join('users', 'users.id', '=', 'permohonans.id_penghantar')
             ->join('fakultis', 'fakultis.fakulti_id', '=', 'users.fakulti_id')
             ->where('users.fakulti_id', $fakulti_id)
@@ -51,8 +51,8 @@ class SearchController extends Controller
 
 
         $laporans =  DB::table("laporans")
-            ->join('dokumen_permohonans', 'dokumen_permohonans.dokumen_permohonan_id', '=', 'laporans.dokumen_permohonan_id')
-            ->join('permohonans', 'permohonans.id', '=', 'dokumen_permohonans.permohonan_id')
+            ->join('dokumens', 'dokumens.dokumen_permohonan_id', '=', 'laporans.dokumen_permohonan_id')
+            ->join('permohonans', 'permohonans.id', '=', 'dokumens.permohonan_id')
             ->join('users', 'users.id', '=', 'permohonans.id_penghantar')
             ->join('fakultis', 'fakultis.fakulti_id', '=', 'users.fakulti_id')
             ->where('users.fakulti_id', $fakulti_id)

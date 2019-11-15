@@ -33,7 +33,7 @@ class ShowPermohonan
     public function show($permohonan)
     {
         $permohonan = Permohonan::with(['jenis_permohonan:id,huraian'])->where('id', $permohonan->id)
-            ->withCount(['dokumen_permohonans', 'laporans', 'kemajuan_permohonans'])->get();
+            ->withCount(['dokumens', 'laporans', 'kemajuan_permohonans'])->get();
         $dokumen = Permohonan::find($permohonan[0]->id)->dokumen_permohonan();
         return response()->json(['permohonan' => $permohonan[0], 'dokumen' => $dokumen]);
     }
@@ -44,7 +44,7 @@ class ShowPermohonan
         if ($dp == false) {
             abort(403, 'Tidak dibenarkan');
         } else {
-            return $this->showPermohonan($permohonan);
+            return $this->show($permohonan);
         }
     }
 

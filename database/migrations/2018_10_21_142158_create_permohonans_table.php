@@ -14,8 +14,8 @@ class CreatePermohonansTable extends Migration
     public function up()
     {
         Schema::create('permohonans', function (Blueprint $table) {
-            
-            
+
+
             $table->increments('id');
             $table->string('doc_title');
             $table->integer('jenis_id')->unsigned();
@@ -26,7 +26,7 @@ class CreatePermohonansTable extends Migration
             $table->foreign('id_penghantar')->references('id')->on('users');
             $table->foreign('jenis_id')->references('id')->on('jenis_permohonans');
             $table->foreign('status_id')->references('status_id')->on('status_permohonans');
-            // $table->foreign('dokumen_permohohonan_id')->references('dokumen_permohonan_id')->on('dokumen_permohonans');  
+            // $table->foreign('dokumen_permohohonan_id')->references('dokumen_permohonan_id')->on('dokumens');  
 
             $table->timestamps();
         });

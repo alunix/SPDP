@@ -55,16 +55,16 @@ export default {
         });
     },
     showComponent() {
-      if (!isFakulti && this.role != "pjk") {
-        this.showLaporan = true;
+      if (!this.isFakulti && this.role != "pjk") {
+        this.showLaporan == true;
       }
       if (
         this.role == "pjk" &&
         this.permohonan.jenis_id == 1 &&
         this.permohonan.status_id == 1
       ) {
-        showLaporan = false;
-      } else showLaporan = true;
+        this.showLaporan = false;
+      } else this.showLaporan = true;
     },
     showPermohonan(id) {
       fetch("/api/permohonan/" + id)

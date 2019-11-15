@@ -25,11 +25,11 @@ SET time_zone
 -- --------------------------------------------------------
 
 --
--- Table structure for table `dokumen_permohonans`
+-- Table structure for table `dokumens`
 --
 
 CREATE TABLE
-IF NOT EXISTS `dokumen_permohonans`
+IF NOT EXISTS `dokumens`
 (
   `dokumen_permohonan_id` int
 (10) unsigned NOT NULL,
@@ -50,10 +50,10 @@ IF NOT EXISTS `dokumen_permohonans`
 ) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `dokumen_permohonans`
+-- Dumping data for table `dokumens`
 --
 
-INSERT INTO `dokumen_permohonans` (`
+INSERT INTO `dokumens` (`
 dokumen_permohonan_id`,
 `permohonan_id
 `, `file_name`, `file_link`, `file_size`, `komen`, `versi`, `created_at`, `updated_at`) VALUES
@@ -247,7 +247,7 @@ IF NOT EXISTS `kemajuan_permohonans`
 (10) unsigned NOT NULL,
   `permohonan_id` int
 (10) unsigned NOT NULL,
-  `status_permohonan` int
+  `status_id` int
 (10) unsigned DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -260,7 +260,7 @@ IF NOT EXISTS `kemajuan_permohonans`
 INSERT INTO `kemajuan_permohonans` (`
 id`,
 `permohonan_id
-`, `status_permohonan`, `created_at`, `updated_at`) VALUES
+`, `status_id`, `created_at`, `updated_at`) VALUES
 (1, 1, 1, '2019-05-08 11:55:26', '2019-05-08 11:55:26'),
 (2, 2, 1, '2019-05-08 12:03:56', '2019-05-08 12:03:56'),
 (3, 2, 9, '2019-05-17 06:44:41', '2019-05-17 06:44:41'),
@@ -749,9 +749,9 @@ id`,
 --
 
 --
--- Indexes for table `dokumen_permohonans`
+-- Indexes for table `dokumens`
 --
-ALTER TABLE `dokumen_permohonans`
+ALTER TABLE `dokumens`
 ADD PRIMARY KEY
 (`dokumen_permohonan_id`),
 ADD KEY `dokumen_permohonans_permohonan_id_foreign`
@@ -778,7 +778,7 @@ ALTER TABLE `kemajuan_permohonans`
 ADD PRIMARY KEY
 (`id`),
 ADD KEY `kemajuan_permohonans_status_permohonan_foreign`
-(`status_permohonan`);
+(`status_id`);
 
 --
 -- Indexes for table `laporans`
@@ -880,9 +880,9 @@ ADD KEY `users_fakulti_id_foreign`
 --
 
 --
--- AUTO_INCREMENT for table `dokumen_permohonans`
+-- AUTO_INCREMENT for table `dokumens`
 --
-ALTER TABLE `dokumen_permohonans`
+ALTER TABLE `dokumens`
   MODIFY `dokumen_permohonan_id` int
 (10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=100;
 --
@@ -956,9 +956,9 @@ ALTER TABLE `users`
 --
 
 --
--- Constraints for table `dokumen_permohonans`
+-- Constraints for table `dokumens`
 --
-ALTER TABLE `dokumen_permohonans`
+ALTER TABLE `dokumens`
 ADD CONSTRAINT `dokumen_permohonans_permohonan_id_foreign` FOREIGN KEY
 (`permohonan_id`) REFERENCES `permohonans`
 (`permohonan_id`);
@@ -968,7 +968,7 @@ ADD CONSTRAINT `dokumen_permohonans_permohonan_id_foreign` FOREIGN KEY
 --
 ALTER TABLE `kemajuan_permohonans`
 ADD CONSTRAINT `kemajuan_permohonans_status_permohonan_foreign` FOREIGN KEY
-(`status_permohonan`) REFERENCES `status_permohonans`
+(`status_id`) REFERENCES `status_permohonans`
 (`status_id`);
 
 --
@@ -976,7 +976,7 @@ ADD CONSTRAINT `kemajuan_permohonans_status_permohonan_foreign` FOREIGN KEY
 --
 ALTER TABLE `laporans`
 ADD CONSTRAINT `laporans_dokumen_permohonan_id_foreign` FOREIGN KEY
-(`dokumen_permohonan_id`) REFERENCES `dokumen_permohonans`
+(`dokumen_permohonan_id`) REFERENCES `dokumens`
 (`dokumen_permohonan_id`),
 ADD CONSTRAINT `laporans_id_penghantar_foreign` FOREIGN KEY
 (`id_penghantar`) REFERENCES `users`

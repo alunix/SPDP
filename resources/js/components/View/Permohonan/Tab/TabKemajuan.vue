@@ -42,7 +42,7 @@
               <th
                 scope="row"
               >{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
-              <td>{{k.status_permohonan.huraian}}</td>
+              <td>{{k.status_id.huraian}}</td>
               <td>{{date(k.created_at)}}</td>
             </tr>
           </tbody>
@@ -59,7 +59,7 @@ export default {
     return {
       kemajuans: [
         {
-          status_permohonan: {
+          status_id: {
             huraian: ""
           }
         }

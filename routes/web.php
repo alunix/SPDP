@@ -29,6 +29,8 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function () {
 	Route::get('/panel-penilai/search/{query}', 'UserController@searchPenilai')->name('api.user.search');
 	// 	/*-----------------------Pelantikan penilai---------------------------------------------*/
 	Route::patch('/{id}/pelantikan-penilai', 'PermohonanController@pelantikanPenilaiSubmit')->name('pelantikan_penilai.submit');
+	//Upload laporan
+	
 });
 
 // /*-----------------------Fakulti------------- */

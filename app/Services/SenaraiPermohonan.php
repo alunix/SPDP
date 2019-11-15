@@ -41,30 +41,18 @@ class SenaraiPermohonan
     public function penilai()
     {
         $user_id = auth()->user()->id;
-        $permohonans =  DB::table("permohonans")
-            ->join('penilaian_panels', 'penilaian_panels.permohonan_id', '=', 'permohonans.id')
-            ->join('users', 'users.id', '=', 'penilaian_panels.id_penilai')
-            ->where('permohonans.status_id', 2)
-            ->where('penilaian_panels.id_penilai', $user_id)
-            ->get();
-
-        if (empty((array) $permohonans)) { //check if array object is empty
-            $permohonans = new Permohonan();
-        } else {
-            $id = $permohonans->pluck('id');
-            $permohonans = Permohonan::whereIn('id', $id)->get();
-        }
-
+        $penilaian = PenilaianPanel::where('id_penilai', $user_id)->pluck('permohonan_id');
+        $permohonans = Permohonan::with(['user.fakulti:fakulti_id,kod', 'jenis_permohonan:id,huraian', 'status_permohonan:status_id,huraian'])->whereIn('id', $penilaian)->where('status_id', 2)->paginate(10);
         return $permohonans;
     }
     public function jppa()
     {
-        $permohonans = Permohonan::where('jenis_id', 8)->where('status_id', 1)->orWhere('status_id', 4)->get();
+        $permohonans = Permohonan::with(['user.fakulti:fakulti_id,kod', 'jenis_permohonan:id,huraian', 'status_permohonan:status_id,huraian'])->where('jenis_id', 8)->where('status_id', 1)->orWhere('status_id', 4)->paginate(10);
         return $permohonans;
     }
     public function senat()
     {
-        $permohonans = Permohonan::where('status_id', '=', '5')->get();
+        $permohonans = Permohonan::with(['user.fakulti:fakulti_id,kod', 'jenis_permohonan:id,huraian', 'status_permohonan:status_id,huraian'])->where('status_id', '=', '5')->paginate(10);
         return $permohonans;
     }
 }

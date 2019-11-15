@@ -24,7 +24,6 @@ class ShowPermohonan
                 return $this->penilai($permohonan);
                 break;
             default:
-                // $rp = new RedirectPermohonan();
                 return $this->show($permohonan);
                 break;
         }
@@ -62,8 +61,7 @@ class ShowPermohonan
         $permohonans_id = $permohonans->pluck('id');
         for ($i = 0; $i < count($permohonans_id); $i++) {
             if ($permohonan->id == $permohonans_id[$i]) {
-                $rp = new RedirectPermohonan();
-                return $rp->redirectPermohonan($permohonan);
+                return $this->show($permohonan);
             }
         }
         abort(404);
@@ -72,40 +70,20 @@ class ShowPermohonan
 
     public function getBoolPermohonan($permohonan)
     {
-        if ($permohonan == null) {
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
+        $permohonans_id = $user->permohonans->pluck('id');
+
+        //check whether fakulti does have permohonans
+        if (!sizeof($permohonans_id) > 0) {
             return false;
+            die();
         }
-
-        $isFakulti = $this->isFakulti();
-        if ($isFakulti == false) {
-            return true;
-        } else {
-            $user_id = auth()->user()->id;
-            $user = User::find($user_id);
-            $permohonans_id = $user->permohonans->pluck('id');
-
-            //check whether fakulti does have permohonans
-            if (!sizeof($permohonans_id) > 0) {
-                return false;
-                die();
+        for ($i = 0; $i < count($permohonans_id); $i++) {
+            if ($permohonan->id == $permohonans_id[$i]) {
+                return true;
             }
-            for ($i = 0; $i < count($permohonans_id); $i++) {
-                if ($permohonan->id == $permohonans_id[$i]) {
-                    return true;
-                }
-            }
-            return false;
         }
-    }
-
-    public function isFakulti()
-    {
-        $role = auth()->user()->role;
-
-        if (!$role == 'fakulti') {
-            return 0;
-        } else {
-            return 1;
-        }
+        return false;
     }
 }

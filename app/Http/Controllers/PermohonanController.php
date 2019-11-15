@@ -15,26 +15,10 @@ use Redirect, Response, Debugbar;
 
 class PermohonanController extends Controller
 {
-    public function permohonanDihantar()
-    {
-        return view('fakulti.senarai_permohonan_dihantar');
-    }
-
-    public function showListPermohonanBaharu()
-    {
-        return view('pjk.pjk-view-permohonan-baharu');
-    }
-
     public function senaraiPerakuan()
     {
         $sp = new SenaraiPerakuan();
         return  $sp->senaraiPerakuan();
-    }
-
-    public function permohonanTidakDilulus(Request $request, $id)
-    {
-        $permohonan = Permohonan::find($id);
-        return view('laporan.permohonan-tidak-dilulus')->with('permohonan', $permohonan)->with('jenis_permohonan', $permohonan->jenis_permohonan);
     }
 
     public function storePermohonanTidakDilulus(Request $request, $id)
@@ -58,14 +42,6 @@ class PermohonanController extends Controller
         ]);
         $pc = new PermohonanClass();
         return $permohonan = $pc->create($request);
-    }
-
-    public function  showPelantikanPenilai($id)
-    {
-        $permohonan = Permohonan::find($id);
-        $users = User::where('role', 'penilai')->get();
-        $dp = DokumenPermohonan::where('permohonan_id', $permohonan->id)->orderBy('versi', 'DESC')->first();
-        return view('pjk.pjk-melantik-penilai')->with('users', $users)->with('permohonan', $permohonan)->with('dp', $dp);
     }
 
     /*API START  */

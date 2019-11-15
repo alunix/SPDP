@@ -16,8 +16,8 @@
         </v-card>
       </v-col>
       <v-col v-if="loaded" cols="12" md="8">
-        <LantikPenilai v-if="!isFakulti && !showLaporan" :permohonan_props="permohonan"></LantikPenilai>
-        <LaporanUpload v-if="!isFakulti && showLaporan" :permohonan_id_props="id"></LaporanUpload>
+        <LantikPenilai v-if="!showLaporan" :permohonan_props="permohonan"></LantikPenilai>
+        <LaporanUpload v-if="showLaporan" :permohonan_id_props="id"></LaporanUpload>
         <PermohonanTab v-if="permohonan.status_permohonan_id != 1" :permohonan_id_props="id"></PermohonanTab>
       </v-col>
     </v-row>
@@ -33,8 +33,8 @@ export default {
       dokumen: {},
       id: "",
       role: "",
-      isFakulti: false,
-      showLaporan: false
+      showLaporan: false,
+      loaded: false
     };
   },
   created() {
@@ -49,22 +49,24 @@ export default {
         .then(res => res.json())
         .then(res => {
           this.role = res;
-          if (this.role == "fakulti") {
-            this.isFakulti = true;
-          }
         });
     },
     showComponent() {
-      if (!this.isFakulti && this.role != "pjk") {
+      if (this.role != "pjk" && this.role != "fakulti") {
         this.showLaporan == true;
       }
       if (
-        this.role == "pjk" &&
-        this.permohonan.jenis_id == 1 &&
-        this.permohonan.status_id == 1
+        this.role == "pjk"
+        // &&
+        // this.permohonan.jenis_id == 1
+        //&&
+        // this.permohonan.status_id == 1
       ) {
-        this.showLaporan = false;
-      } else this.showLaporan = true;
+        // this.showLaporan = false;
+        console.log(this.permohonan);
+      } else {
+        this.showLaporan = true;
+      }
     },
     showPermohonan(id) {
       fetch("/api/permohonan/" + id)

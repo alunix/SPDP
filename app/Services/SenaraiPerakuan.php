@@ -42,17 +42,13 @@ class SenaraiPerakuan
         $user_id = auth()->user()->id;
         $pp = PenilaianPanel::where('id_penilai', $user_id)->get();
         $permohonans_id = $pp->pluck('permohonan_id');
-        if (empty((array) $permohonans_id)) { //check if array object is empty
-            $permohonans = new Permohonan();
-        } else {
-            $permohonans = Permohonan::whereIn('id', $permohonans_id)->where('status_id', '=', '12')->paginate(10);
-        }
+        $permohonans = Permohonan::with(['user.fakulti:fakulti_id,kod', 'jenis_permohonan:id,huraian'])->whereIn('id', $permohonans_id)->where('status_id', '=', '12')->paginate(10);
         return $permohonans;
     }
 
     public function jppa()
     {
-        $permohonans = Permohonan::where('status_id', '=', '4')->orWhere('status_id', '=', '14')->paginate(10);
+        $permohonans = Permohonan::with(['user.fakulti:fakulti_id,kod', 'jenis_permohonan:id,huraian'])->where('status_id', '=', '4')->orWhere('status_id', '=', '14')->paginate(10);
         return $permohonans;
     }
 

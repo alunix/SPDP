@@ -12,7 +12,6 @@ use SPDP\Services\PenilaianPenilai;
 
 class PenilaianController extends Controller
 {
-
     public function showPerakuanPjk($id)
     {
         $pp = new PenilaianPJK();
@@ -30,11 +29,8 @@ class PenilaianController extends Controller
         return $penilaian->uploadPerakuanPjk($request, $permohonan);
     }
 
-
-
     public function uploadPerakuanJppa(Request $request, $id)
     {
-
         $this->validate($request, [
             'perakuan_jppa' => 'required|file|max:1999',
         ]);
@@ -44,13 +40,6 @@ class PenilaianController extends Controller
         return $pj->uploadPerakuan($request, $permohonan);
     }
 
-    public function showLaporanPenilai($id)
-    {
-        $permohonan = Permohonan::find($id);
-        return view('panel_penilai.panel-lulus-permohonan')->with('permohonan', $permohonan);
-    }
-
-
     public function uploadLaporanPenilai(PenilaianPenilai $pp, Request $request, $id)
     {
         $this->validate($request, [
@@ -59,13 +48,6 @@ class PenilaianController extends Controller
 
         $permohonan = Permohonan::find($id);
         return $pp->uploadLaporanPenilai($request, $permohonan);
-    }
-
-    public function showPerakuanSenat($id)
-    {
-        $pp = new PenilaianSenat();
-        $permohonan = Permohonan::find($id);
-        return $pp->showPerakuanSenat($permohonan);
     }
 
     public function uploadPerakuanSenat(Request $request, $id)

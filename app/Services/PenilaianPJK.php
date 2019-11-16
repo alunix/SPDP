@@ -57,26 +57,20 @@ class PenilaianPJK
 
     public function pelantikanPenilaiSubmit(Request $request, $id)
     {
-        try {
-            $permohonan = Permohonan::findOrFail($id);
-            $permohonan->status_id = 2;
-            $permohonan->save();
+        $permohonan = Permohonan::findOrFail($id);
+        $permohonan->status_id = 2;
+        $permohonan->save();
 
-            $kp = new KemajuanPermohonanClass();
-            $kp->create($permohonan);
+        $kp = new KemajuanPermohonanClass();
+        $kp->create($permohonan);
 
-            $penilaian = new PenilaianPanelClass();
-            $penilaian = $penilaian->create($permohonan, $request);
+        $penilaian = new PenilaianPanelClass();
+        $penilaian = $penilaian->create($permohonan, $request);
 
-            //Send email to panel penilai
-            // $penilai = User::findOrFail($selectedPenilai[0]);
-            // Notification::route('mail', $penilai->email)->notify(new PelantikanPanelPenilai($permohonan, $penilaian, $penilai)); //hantar email kepada panel penilai
-        } catch (\Illuminate\Database\QueryException $e) {
-            $errorCode = $e->errorInfo[1];
-            if ($errorCode == 1062) {
-                return 'Duplicate Entry for';
-            }
-        }
+        //Send email to panel penilai
+        // $penilai = User::findOrFail($selectedPenilai[0]);
+        // Notification::route('mail', $penilai->email)->notify(new PelantikanPanelPenilai($permohonan, $penilaian, $penilai)); //hantar email kepada panel penilai
+
     }
 
     public function showPerakuanPjk($id)
@@ -100,18 +94,9 @@ class PenilaianPJK
                     return $this->viewKursusTerasElektifBaharu($id);
                 else if ($status_id == '3')
                     return  $this->viewProgramBaharu($id);
-                else
-                    return;
-                break;
-            case 'akreditasi_penuh':
-                return view('jenis_permohonan_view.program_pengajian_baharu')->with('permohonan', $permohonan)->with('penilaian', $permohonan->penilaian);
-                break;
-
-            case 'penjumudan_program':
-                return view('jenis_permohonan_view.penjumudan_program')->with('permohonan', $permohonan)->with('penilaian', $permohonan->penilaian);
                 break;
             default:
-                return view('/home');
+                return;
                 break;
         }
     }
@@ -131,16 +116,8 @@ class PenilaianPJK
                 return $this->createPerakuanPjk($request, $permohonan);
                 break;
             case 'semakan_kursus_teras':
-                return $this->semakanKursusTeras($request, $permohonan);
-                break;
             case 'semakan_kursus_elektif':
-                return $this->semakanKursusElektif($request, $permohonan);
-                break;
-            case 'akreditasi_penuh':
-                return view('jenis_permohonan_view.program_pengajian_baharu')->with('permohonan', $permohonan)->with('penilaian', $permohonan->penilaian);
-                break;
-            case 'penjumudan_program':
-                return view('jenis_permohonan_view.penjumudan_program')->with('permohonan', $permohonan)->with('penilaian', $permohonan->penilaian);
+                return $this->semakanKursus($request, $permohonan);
                 break;
             default:
                 return;
@@ -148,33 +125,8 @@ class PenilaianPJK
         }
     }
 
-    public function viewProgramBaharu($id)
-    {
-        $permohonan = Permohonan::findOrFail($id);
-
-        if ($permohonan == null)
-            abort(403);
-
-        $dp = $permohonan->dokumens->pluck('dokumen_permohonan_id');
-        $laporans = Laporan::whereIn('dokumen_permohonan_id', $dp)->get();
-        return view('pjk.lampiran-pjk')->with('permohonan', $permohonan)->with('laporans', $laporans);
-    }
-
-    public function viewKursusTerasElektifBaharu($id)
-    {
-        $permohonan = Permohonan::find($id);
-
-        if ($permohonan == null)
-            abort(403);
-
-        $dp = $permohonan->dokumens->pluck('dokumen_permohonan_id');
-        $laporans = Laporan::whereIn('dokumen_permohonan_id', $dp)->get();
-        return view('pjk.perakuan-pjk')->with('permohonan', $permohonan)->with('laporans', $laporans);;
-    }
-
     public function updateLaporanPanel(Request $request, $permohonan)
     {
-
         //Upload perakuan
         $attached = 'perakuan_pjk';
         $laporan = new LaporanClass();
@@ -207,27 +159,12 @@ class PenilaianPJK
         return redirect()->route('home')->with($msg);
     }
 
-    public function semakanKursusTeras(Request $request, $permohonan)
+    public function semakanKursus(Request $request, $permohonan)
     {
-
-        $status_id = $permohonan->status_id;
-        if ($status_id == '1') // if permohonan require minority changes then create a new perakuan
+        $status_permohonan = $permohonan->status_permohonan_id;
+        if ($status_permohonan == '1') // if permohonan require minority changes then create a new perakuan
             return $this->createPerakuanPjk($request, $permohonan);
-        else if ($status_id == '3')
-            return $this->updateLaporanPanel($request, $permohonan);
-        else
-            return;
-    }
-
-    public function semakanKursusElektif(Request $request, $permohonan)
-    {
-
-        /* Cari permohonan since penilaian belongs to permohonan then baru boleh cari penilaian through eloquent relationship */
-        $status_id = $permohonan->status_id;
-
-        if ($status_id == '1') // if permohonan require minority changes then create a new perakuan
-            return $this->createPerakuanPjk($request, $permohonan);
-        else if ($status_id == '3')
+        else if ($status_permohonan == '3')
             return $this->updateLaporanPanel($request, $permohonan);
         else
             return;

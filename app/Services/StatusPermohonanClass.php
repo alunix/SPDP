@@ -30,7 +30,7 @@ class StatusPermohonanClass
                 return $this->jppa();
                 break;
             default:
-                return view('/login');
+                return;
                 break;
         }
     }
@@ -59,7 +59,7 @@ class StatusPermohonanClass
                 return 7;
                 break;
             default:
-                return view('/home');
+                return;
                 break;
         }
     }

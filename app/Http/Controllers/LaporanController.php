@@ -3,17 +3,9 @@
 namespace SPDP\Http\Controllers;
 
 use SPDP\Permohonan;
-use SPDP\DokumenPermohonan;
-use SPDP\User;
-use SPDP\Penilaian;
 use SPDP\Laporan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
-use SPDP\Services\PermohonanClass;
-use SPDP\Services\RedirectPermohonan;
-use SPDP\Services\PenilaianPJK;
-use SPDP\Services\SenaraiPermohonan;
-use SPDP\Support\Collection;
+use SPDP\Services\LaporanClass;
 
 class LaporanController extends Controller
 {
@@ -28,7 +20,10 @@ class LaporanController extends Controller
     {
         $this->validate($request, [
             'kelulusan' => 'required|string',
-            'fail_permohonan' => 'required|mimes:pdf|max:1999',
+            'laporan' => 'required|mimes:pdf|max:1999',
         ]);
+
+        $laporan = new LaporanClass();
+        return $laporan->createLaporan($id, $request);
     }
 }

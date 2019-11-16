@@ -26,6 +26,11 @@ class Permohonan extends Model
         return $this->dokumens()->orderBy('created_at', 'DESC')->select('file_link')->first(); //retrieve dokumen terkini
     }
 
+    public function latest_dokumen()
+    {
+        return $this->dokumens()->orderBy('created_at', 'DESC')->first(); //retrieve dokumen terkini
+    }
+
     public function user()
     {
         return $this->belongsTo('SPDP\User', 'id_penghantar');

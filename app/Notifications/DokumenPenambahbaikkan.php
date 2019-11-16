@@ -18,9 +18,9 @@ class DokumenPenambahbaikkan extends Notification
      */
     public function __construct($dp)
     {
-        $this->dp=$dp;
+        $this->dp = $dp;
     }
-    
+
 
     /**
      * Get the notification's delivery channels.
@@ -42,14 +42,14 @@ class DokumenPenambahbaikkan extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-        ->greeting('Salam sejahtera ')
-        ->line('Dokumen permohonan id: '. $this->dp->dokumen_permohonan_id)
-        ->line('Versi :'. $this->dp->versi)
-        ->line('Jenis permohonan: '. $this->dp->permohonan->huraian)
-        ->action('Sila tekan sini', route('view-permohonan-baharu',$this->dp->permohonan_id))
-        ->line('Terima kasih');
+            ->greeting('Salam sejahtera ')
+            ->line('Dokumen permohonan id: ' . $this->dp->dokumen_permohonan_id)
+            ->line('Versi :' . $this->dp->versi)
+            ->line('Jenis permohonan: ' . $this->dp->permohonan->huraian)
+            ->action('Sila tekan sini', '/permohonan/' . $this->dp->permohonan_id)
+            ->line('Terima kasih');
     }
-    
+
 
     /**
      * Get the array representation of the notification.

@@ -71,7 +71,7 @@ class PerluPenambahbaikkan extends Notification
             ->line('Jenis permohonan: ' . $this->permohonan->jenis_permohonan->huraian)
             ->line('Permohonan anda perlu penambahbaikkan oleh ' . $this->pihakMeluluskan())
             ->line('Laporan telah dikeluarkan')
-            ->action('Lihat laporan', route('fakulti.kemajuanPermohonan', $this->permohonan->id))
+            ->action('Lihat laporan', '/permohonan/' . $this->permohonan->id)
             ->line('Terima kasih');
     }
 

@@ -2,19 +2,20 @@
 
 namespace SPDP\Services;
 
-use SPDP\Penilaian;
-use SPDP\Permohonan;
 use SPDP\User;
 use SPDP\Laporan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use Notification;
+use SPDP\Notifications\PermohonanBaharu;
+use SPDP\Notifications\PermohonanDiluluskan;
+use SPDP\TetapanAliranKerja;
 
 class LaporanClass
 {
     public function create(Request $request, $permohonan)
     {
         $attachedLocation = 'public/laporan';
-        $laporan = $request->input('laporan');
+        $laporan = 'laporan';
 
         if ($request->hasFile($laporan)) {
             $fileNameWithExt = $request->file($laporan)->getClientOriginalName();
@@ -33,7 +34,7 @@ class LaporanClass
         $laporan_count = Laporan::where('id_penghantar', $user_id)->whereIn('dokumen_permohonan_id', $laporans_id)->count();
 
         $laporan = new Laporan();
-        $laporan->dokumen_permohonan_id = $permohonan->dokumen_permohonan()->dokumen_permohonan_id; //retrieve latest dokumen_permohonan_id from permohonan has many dokumen permohonans
+        $laporan->dokumen_permohonan_id = $permohonan->latest_dokumen()->dokumen_permohonan_id; //retrieve latest dokumen_permohonan_id from permohonan has many dokumen permohonans
         $laporan->id_penghantar = auth()->user()->id;
         $laporan->komen = $request->input('komen');
         $laporan->tajuk_fail = $fileNameWithExt;
@@ -55,8 +56,10 @@ class LaporanClass
         $permohonan->save();
         $kp = new KemajuanPermohonanClass();
         $kp->create($permohonan);
-        return $this->sendEmail($permohonan);
-        //send email to next pemeriksa and penghantar
+        //Hantar email kepada penghantar
+        $penghantar = User::find($permohonan->id_penghantar);
+        Notification::route('mail', $penghantar->email)->notify(new PermohonanDiluluskan($permohonan, $penghantar));
+        return $this->sendEmailPemeriksa($permohonan);
     }
 
     public function permohonanTidakLulus($permohonan)
@@ -69,30 +72,24 @@ class LaporanClass
         Notification::route('mail', $penghantar->email)->notify(new PerluPenambahbaikkan($permohonan, $penghantar)); //hantar email kepada penghantar
     }
 
-    public function sendEmail($permohonan)
+    public function sendEmailPemeriksa($permohonan)
     {
-        //Hantar email kepada penghantar
-        $penghantar = User::find($permohonan->id_penghantar);
-        Notification::route('mail', $penghantar->email)->notify(new PermohonanDiluluskan($permohonan, $penghantar));
-
-        $role = auth()->user()->role;
+        $user = auth()->user();
+        $role = $user->role;
         switch ($role) {
             case 'penilai':
-                return 3;
+                $id_pjk = TetapanAliranKerja::all()->first()->id_pjk;
+                $pjk = User::find($id_pjk);
+                Notification::route('mail', $pjk->email)->notify(new LaporanDikeluarkan($permohonan, $pjk, $user));
                 break;
             case 'jppa':
-                return 5;
-                break;
-            case 'senat':
-                return 6;
+                $id_senat = TetapanAliranKerja::all()->first()->id_senat;
+                $senat = User::find($id_senat);
+                Notification::route('mail', $senat->email)->notify(new PermohonanBaharu($permohonan, $senat));
                 break;
             default:
                 return;
         }
-
-        $id_pjk = TetapanAliranKerja::all()->first()->id_pjk;
-        $pjk = User::find($id_pjk);
-        Notification::route('mail', $pjk->email)->notify(new LaporanDikeluarkan($permohonan, $pjk, $panel));
     }
 
     public function getStatusKelulusan($permohonan)

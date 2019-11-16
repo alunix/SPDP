@@ -19,13 +19,7 @@
           <h3>Lantik Panel Penilai</h3>
           <hr />
         </v-col>
-        <modal height="30%" width="50%" :scrollable="true" name="ModalLantikPenilai">
-          <ModalLantikPenilai
-            :panel_penilai_props="selectedPenilai"
-            :permohonan_props="permohonan"
-            @event="fetchUsers"
-          ></ModalLantikPenilai>
-        </modal>
+
         <!-- <v-switch
           style="margin-left:150px"
           color="red"
@@ -246,15 +240,8 @@ export default {
       };
       this.pagination = pagination;
     },
-    showModel() {
-      this.$modal.show("ModalLantikPenilai");
-    },
     submit() {
       this.loading = true;
-      var payloadData = {
-        selectedPenilai: this.selectedPenilai,
-        due_date: this.due_date
-      };
       this.loaded = false;
       this.success = false;
       this.errors = {};
@@ -262,9 +249,6 @@ export default {
         .post("/api/" + this.permohonan.id + "/pelantikan-penilai", {
           selectedPenilai: this.selectedPenilai,
           due_date: this.due_date,
-          headers: {
-            "Content-Type": "multipart/form-data"
-          },
           _method: "patch"
         })
         .then(res => {

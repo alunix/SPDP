@@ -6,6 +6,7 @@ use SPDP\Permohonan;
 use SPDP\Laporan;
 use Illuminate\Http\Request;
 use SPDP\Services\LaporanClass;
+use Debugbar;
 
 class LaporanController extends Controller
 {
@@ -23,7 +24,8 @@ class LaporanController extends Controller
             'laporan' => 'required|mimes:pdf|max:1999',
         ]);
 
+        $permohonan = Permohonan::find($id);
         $laporan = new LaporanClass();
-        return $laporan->create($id, $request);
+        return $laporan->create($request, $permohonan);
     }
 }

@@ -47,7 +47,7 @@ class PelantikanPanelPenilai extends Notification
             ->line('Anda telah dilantik untuk menilai permohonan ini')
             ->line('Jenis permohonan: ' . $this->permohonan->jenis_permohonan->huraian)
             ->line('Sila keluarkan laporan sebelum tarikh ' . $this->penilaian->tarikhAkhir)
-            ->action('Lihat permohonan baharu', route('view-permohonan-baharu', $this->permohonan->id))
+            ->action('Lihat permohonan baharu', '/permohonan/' . $this->permohonan->id)
             ->line('Terima kasih');
     }
 

@@ -56,10 +56,6 @@ Vue.component(
     require("./components/PermohonanModal.vue").default
 );
 Vue.component(
-    "ModalLantikPenilai",
-    require("./components/View/Approval/ModalLantikPenilai.vue").default
-);
-Vue.component(
     "ModalPengguna",
     require("./components/View/Pengguna/ModalPengguna.vue").default
 );

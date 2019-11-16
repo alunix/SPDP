@@ -96,7 +96,6 @@ export default {
             }
           ];
           if (role == "pjk") {
-            console.log("PJK");
             if (
               this.permohonan.jenis_id == 1 &&
               this.permohonan.status_id == 1

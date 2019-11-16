@@ -65,7 +65,7 @@ class PermohonanDiluluskan extends Notification
             ->line('Jenis permohonan: ' . $this->permohonan->jenis_permohonan->huraian)
             ->line('Permohonan anda telah diluluskan oleh ' . $this->pihakMeluluskan())
             ->line('Laporan telah dikeluarkan')
-            ->action('Lihat laporan', route('fakulti.kemajuanPermohonan', $this->permohonan->id))
+            ->action('Lihat laporan',  '/permohonan/' . $this->permohonan->id)
             ->line('Terima kasih');
     }
 

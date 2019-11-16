@@ -61,7 +61,7 @@ class PermohonanBaharu extends Notification
             ->greeting('Salam sejahtera ' . $this->penilai->name)
             ->line('Anda telah menerima permohonan baharu')
             ->line('Jenis permohonan: ' . $this->permohonan->jenis_permohonan->huraian)
-            ->action('Lihat permohonan baharu', route('view-permohonan-baharu', $this->permohonan->id))
+            ->action('Lihat permohonan baharu', '/permohonan/' . $this->permohonan->id)
             ->line('Terima kasih');
     }
 

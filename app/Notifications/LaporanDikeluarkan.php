@@ -41,13 +41,14 @@ class LaporanDikeluarkan extends Notification
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
-    {
+    {   
+        // $url = url('/invoice/'.$this->invoice->id);
         return (new MailMessage)
             ->greeting('Salam sejahtera ' . $this->pjk->name)
             ->line('Permohonan Id: ' . $this->permohonan->id)
             ->line('Laporan telah dikeluarkan oleh ' . $this->panel->name . ' (User ID ' . $this->panel->id . ')')
             ->line('Jenis permohonan: ' . $this->permohonan->jenis_permohonan->huraian)
-            ->action('Lihat laporan', route('fakulti.kemajuanPermohonan', $this->permohonan->id))
+            ->action('Lihat laporan', '/permohonan/' . $this->permohonan->id)
             ->line('Terima kasih');
     }
 

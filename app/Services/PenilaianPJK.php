@@ -8,7 +8,6 @@ use SPDP\User;
 use SPDP\Services\LaporanClass;
 use SPDP\Services\PenilaianPanelClass;
 use SPDP\Services\KemajuanPermohonanClass;
-use SPDP\Services\StatusPermohonanClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Notification;
@@ -24,15 +23,8 @@ class PenilaianPJK
 {
     public function createPerakuanPjk(Request $request, $permohonan)
     {
-        $penilaian = new PenilaianClass();
-        $penilaian = $penilaian->create($permohonan);
-        $attached = 'perakuan_pjk';
-        $laporan = new LaporanClass();
-        $laporan->createLaporan($request, $penilaian, $attached);
-
         $permohonan = Permohonan::find($permohonan->id);
-        $sp = new StatusPermohonanClass();
-        $permohonan->status_id = $sp->getStatusPermohonan($permohonan);
+        $permohonan->status_id = $this->getStatusPermohonan($permohonan);
         $permohonan->save();
 
         //Hantar email kepada penghantar
@@ -71,6 +63,31 @@ class PenilaianPJK
         // $penilai = User::findOrFail($selectedPenilai[0]);
         // Notification::route('mail', $penilai->email)->notify(new PelantikanPanelPenilai($permohonan, $penilaian, $penilai)); //hantar email kepada panel penilai
 
+    }
+
+    public function getStatusPermohonan($permohonan)
+    {
+        $jp = $permohonan->jenis_permohonan->kod;
+        switch ($jp) {
+            case 'program_baharu':
+            case 'semakan_program': //same condition yang akan lalui panel penilai
+                if ($permohonan->status_id == 1)
+                    return 2; //if no laporan are found that means permohonan masih disemak oleh panel penilai
+                else
+                    return 4;
+                break;
+            case 'kursus_teras_baharu':
+            case 'semakan_kursus_teras': //will figure out the rest 3/3/2019
+                return 4;
+                break;
+            case 'kursus_elektif_baharu':
+            case 'semakan_kursus_elektif':
+                return 7;
+                break;
+            default:
+                return;
+                break;
+        }
     }
 
     public function showPerakuanPjk($id)
@@ -133,8 +150,7 @@ class PenilaianPJK
         $laporan->createLaporan($request, $permohonan, $attached);
 
         /*Status semakan permohonan telah dikemaskini berdasarkan progress */
-        $sp = new StatusPermohonanClass();
-        $permohonan->status_id = $sp->getStatusPermohonan($permohonan);
+        $permohonan->status_id = $this->getStatusPermohonan($permohonan);
         $permohonan->save();
 
         //Hantar email kepada penghantar dan next pemeriksa

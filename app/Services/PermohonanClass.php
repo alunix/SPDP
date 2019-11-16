@@ -16,7 +16,6 @@ use SPDP\Notifications\PermohonanBaharu;
 
 class PermohonanClass
 {
-
     public function create(Request $request)
     {
         //Handle file upload
@@ -52,64 +51,14 @@ class PermohonanClass
         $kp->create($permohonan);
 
         // //Hantar email kepada pemeriksa        
-        // if ($permohonan->jenis_id == 8)
-        //     $email = TetapanAliranKerja::all()->first()->jppa->email;
-        // else
-        //     $email = TetapanAliranKerja::all()->first()->pjk->email;
+        if ($permohonan->jenis_id == 8)
+            $email = TetapanAliranKerja::all()->first()->jppa->email;
+        else
+            $email = TetapanAliranKerja::all()->first()->pjk->email;
 
-        // $pemeriksa = User::where('email', $email)->first();
-        // Notification::route('mail', $pemeriksa->email)->notify(new PermohonanBaharu($permohonan, $pemeriksa)); //hantar email kepada penghantar
+        $pemeriksa = User::where('email', $email)->first();
+        Notification::route('mail', $pemeriksa->email)->notify(new PermohonanBaharu($permohonan, $pemeriksa)); //hantar email kepada penghantar
 
         return response()->json('Success');
-    }
-
-    public function storePermohonanTidakDilulus(Request $request, $id)
-    {
-        $attached = 'dokumen';
-        $permohonan = Permohonan::findOrFail($id);
-
-        $laporan = new LaporanClass();
-        $laporan->createLaporan($request, $permohonan, $attached);
-
-        $permohonan->status_id = $this->getStatusPenambahbaikkan();
-        $permohonan->save();
-
-        //Create a new kemajuan permohonan for each progress
-        $kp = new KemajuanPermohonanClass();
-        $kp->create($permohonan);
-
-        //Hantar email kepada penghantar
-        $penghantar = User::find($permohonan->id_penghantar);
-        Notification::route('mail', $penghantar->email)->notify(new PerluPenambahbaikkan($permohonan, $penghantar)); //hantar email kepada penghantar
-
-        $msg = [
-            'message' => 'Laporan berjaya dimuat naik',
-        ];
-
-        return redirect()->route('home')->with($msg);
-    }
-
-    public function getStatusPenambahbaikkan()
-    {
-        $role = auth()->user()->role;
-
-        switch ($role) {
-
-            case 'pjk':
-                return 9;
-                break;
-            case 'senat':
-                return 11;
-                break;
-            case 'penilai':
-                return 8;
-                break;
-            case 'jppa':
-                return 10;
-                break;
-            default:
-                return;
-                break;
-        }
     }
 }

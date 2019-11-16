@@ -24,6 +24,6 @@ class LaporanController extends Controller
         ]);
 
         $laporan = new LaporanClass();
-        return $laporan->createLaporan($id, $request);
+        return $laporan->create($id, $request);
     }
 }

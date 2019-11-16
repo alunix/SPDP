@@ -17,7 +17,7 @@ class PermohonanController extends Controller
 {
     public function senaraiPerakuan()
     {
-        $sp = new SenaraiPerakuan();
+        $sp = new SenaraiPermohonan();
         return  $sp->senaraiPerakuan();
     }
 
@@ -31,17 +31,6 @@ class PermohonanController extends Controller
         $pc = new PermohonanClass();
         $pc->storePermohonanTidakDilulus($request, $permohonan->id);
         return redirect()->route('home');
-    }
-
-    public function store(Request $request)
-    {
-        $this->validate($request, [
-            'jenis_permohonan' => 'required|integer|max:255',
-            'nama_program' => 'required|string',
-            'fail_permohonan' => 'required|mimes:pdf|max:1999',
-        ]);
-        $pc = new PermohonanClass();
-        return $permohonan = $pc->create($request);
     }
 
     /*API START  */
@@ -73,5 +62,16 @@ class PermohonanController extends Controller
             'selectedPenilai' => 'required'
         ]);
         return $pp->pelantikanPenilaiSubmit($request, $id);
+    }
+
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'jenis_permohonan' => 'required|integer|max:255',
+            'nama_program' => 'required|string',
+            'fail_permohonan' => 'required|mimes:pdf|max:1999',
+        ]);
+        $pc = new PermohonanClass();
+        return $permohonan = $pc->create($request);
     }
 }

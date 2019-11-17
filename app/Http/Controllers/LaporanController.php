@@ -24,7 +24,7 @@ class LaporanController extends Controller
             'laporan' => 'required|mimes:pdf|max:1999',
         ]);
 
-        $permohonan = Permohonan::find($id);
+        $permohonan = Permohonan::findOrFail($id);
         $laporan = new LaporanClass();
         return $laporan->create($request, $permohonan);
     }

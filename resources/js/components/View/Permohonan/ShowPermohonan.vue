@@ -16,7 +16,12 @@
         </v-card>
       </v-col>
       <v-col v-if="loaded" cols="12" md="8">
-        <LantikPenilai v-if="!showLaporan && !isFakulti " :permohonan_props="permohonan"></LantikPenilai>
+        <LantikPenilai
+          v-if="!showLaporan && !isFakulti"
+          v-show="toggleLantikPenilai"
+          @event="closeComponent"
+          :permohonan_props="permohonan"
+        ></LantikPenilai>
         <LaporanUpload v-if="showLaporan && !isFakulti" :permohonan_id_props="id"></LaporanUpload>
         <PermohonanTab v-if="permohonan.status_permohonan_id != 1" :permohonan_id_props="id"></PermohonanTab>
       </v-col>
@@ -36,7 +41,9 @@ export default {
       showLaporan: true,
       loaded: false,
       id: this.$route.params.id,
-      isFakulti: false
+      isFakulti: false,
+      showComponent: null,
+      toggleLantikPenilai : false
     };
   },
   created() {
@@ -123,6 +130,10 @@ export default {
     },
     getDataBind() {
       return { permohonan_id_props: this.permohonan.id };
+    },
+    closeComponent() {
+      this.showComponent = false;
+      console.log("Hello");
     }
   }
 };

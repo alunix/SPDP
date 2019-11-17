@@ -256,7 +256,7 @@ export default {
           this.selectedPenilai = [];
           this.due_date = new Date().toISOString().substr(0, 10);
           this.loading = false;
-          // this.$emit("event");
+          this.$emit("event");
         })
         .catch(error => {
           if (error.response.status === 422) {

@@ -81,11 +81,8 @@ export default {
       axios
         .post("/api/upload-laporan/" + this.permohonan_id, formData, {
           headers: {
-            // laporan: this.laporan,
-            // kelulusan: this.kelulusan,
             "Content-Type": "multipart/form-data"
           }
-          // _method: "patch"
         })
         .then(res => {
           console.log(res);

@@ -7,7 +7,7 @@ use SPDP\PenilaianPanel;
 
 class SenaraiPermohonan
 {
-    public function index()
+    public function senaraiPermohonanBaru()
     {
         $role = auth()->user()->role;
         $data =  Permohonan::with(['user.fakulti:fakulti_id,kod', 'jenis_permohonan:id,huraian', 'status_permohonan:status_id,huraian']);

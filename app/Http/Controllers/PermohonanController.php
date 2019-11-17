@@ -45,7 +45,7 @@ class PermohonanController extends Controller
     public function api_showListPermohonanBaharu()
     {
         $sp = new SenaraiPermohonan();
-        return $sp->index();
+        return $sp->senaraiPermohonanBaru();
     }
 
     public function show($id)

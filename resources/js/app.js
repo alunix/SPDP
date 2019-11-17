@@ -5,13 +5,14 @@ import BootstrapVue from "bootstrap-vue";
 import Vuetify from "vuetify";
 import dayjs from "dayjs";
 import LocalizedFormat from "dayjs/plugin/localizedFormat";
+import Vuex from 'vuex'
 
 require("./bootstrap");
 
 dayjs.extend(LocalizedFormat);
 
 window.Vue = require("vue");
-[VModal, VueRouter, VueApexCharts, BootstrapVue, Vuetify, dayjs].forEach(x =>
+[VModal, VueRouter, VueApexCharts, BootstrapVue, Vuetify, dayjs, Vuex].forEach(x =>
     Vue.use(x)
 );
 
@@ -22,7 +23,7 @@ const routes = [
         component: require("./components/SenaraiPermohonan.vue").default
     },
     {
-        path: "/dashboard",
+        path: "/home",
         name: "dashboard",
         component: require("./components/View/Dashboard/Dashboard.vue").default
     },

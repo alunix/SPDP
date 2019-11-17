@@ -234,6 +234,7 @@ export default {
           _method: "patch"
         })
         .then(res => {
+          this.error = false;
           this.selectedPenilai = [];
           this.due_date = new Date().toISOString().substr(0, 10);
           this.loading = false;

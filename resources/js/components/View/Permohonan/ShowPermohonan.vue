@@ -45,7 +45,7 @@
           :permohonan_id_props="id"
           @event="hideLaporanUpload"
         ></LaporanUpload>
-        <PermohonanTab v-if="permohonan.status_permohonan_id != 1" :permohonan_id_props="id"></PermohonanTab>
+        <PermohonanTab :permohonan_id_props="id"></PermohonanTab>
       </v-col>
     </v-row>
   </v-container>
@@ -120,6 +120,9 @@ export default {
             }
           ];
           if (role == "pjk") {
+            console.log(this.permohonan.status_id);
+            console.log(this.permohonan.jenis_id);
+
             if (
               (this.permohonan.jenis_id == 1 &&
                 this.permohonan.status_id == 1) ||

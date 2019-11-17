@@ -35,7 +35,7 @@
         allign="center"
         justify="end"
       >
-        <v-btn type="submit" small color="primary">Hantar laporan</v-btn>
+        <v-btn :loading="loading" type="submit" small color="primary">Hantar laporan</v-btn>
       </v-row>
     </v-form>
   </v-card>
@@ -49,7 +49,8 @@ export default {
       kelulusan: [],
       permohonan_id: this.permohonan_id_props,
       fileName: "",
-      laporan: null
+      laporan: null,
+      loading: false
     };
   },
   watch: {},
@@ -75,6 +76,7 @@ export default {
       return { permohonan_id_props: this.permohonan_id };
     },
     submit() {
+      this.loading = true;
       let formData = new FormData();
       formData.append("laporan", this.laporan);
       formData.append("kelulusan", this.kelulusan);
@@ -85,10 +87,12 @@ export default {
           }
         })
         .then(res => {
+          this.loading = false;
           this.$emit("event");
         })
         .catch(error => {
           if (error.response.status === 422) {
+            this.loading = false;
             this.errors = error.response.data.errors || {};
             this.error = true;
           }

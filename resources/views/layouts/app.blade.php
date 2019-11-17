@@ -50,7 +50,7 @@
                     <div class="header__navbar nav-item">
                         <ul class="list-unstyled">
                             <li class="has-sub">
-                                <router-link to="/dashboard">
+                            <router-link :to="{name: 'dashboard'}">
                                     <i class="fas fa-tachometer-alt"></i>Papan pemuka
                                     <span class="bot-line"></span>
                                 </router-link>
@@ -134,15 +134,11 @@
             @guest
             @yield('content')
             @else
-
             <v-app id="app">
                 <router-view>
                     </<router-view>
             </v-app>
-
-
             @endguest
-
         </main>
         @yield('div')
     </div>

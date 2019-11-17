@@ -15,6 +15,7 @@ use Charts;
 use Illuminate\Support\Carbon;
 use SPDP\Fakulti;
 use Illuminate\Support\Facades\DB;
+use SPDP\PenilaianPanel;
 
 class HomeController extends Controller
 {
@@ -39,8 +40,7 @@ class HomeController extends Controller
     public function dashboard($role)
     {
         $year = date('Y');
-        $sp = new SenaraiPermohonan();
-        $permohonan_baharu = $this->senaraiPermohonan($sp)->count();
+        $permohonan_baharu = $this->permohonanCount();
         $permohonans = Fakulti::with(['permohonans' => function ($query) use ($year) {
             $query->select(['permohonans.id', 'permohonans.created_at']);
             $query->whereYear('permohonans.created_at', $year); //specify which table created at to query
@@ -49,7 +49,7 @@ class HomeController extends Controller
         $count_permohonan = $permohonans->pluck('permohonans');
 
         for ($i = 0; $i < sizeof($count_permohonan); $i++) {
-            $A[$i] = count($count_permohonan[$i]);  //calculate count of permohoann in each fakulti
+            $A[$i] = count($count_permohonan[$i]);  //calculate count of permohonan in each fakulti
         }
 
         $chart = new JenisPermohonanChart();
@@ -71,7 +71,7 @@ class HomeController extends Controller
 
         $A = DB::table("permohonans")
             ->join('jenis_permohonans', 'jenis_permohonans.id', '=', 'permohonans.jenis_id')
-            ->selectRaw("year(permohonans.created_at) as years, jenis_permohonans.huraian as huraian,count(id) as count")
+            ->selectRaw("year(permohonans.created_at) as years, jenis_permohonans.huraian as huraian,count(permohonans.id) as count")
             ->groupBy('huraian')
             ->get();
 
@@ -81,9 +81,11 @@ class HomeController extends Controller
             'colorCount' => 10, 'dimensions' => [800, 800]
         ]);
 
-        $permohonan_in_progress = Permohonan::where('status_id', '!=', 1)->orWhere('status_id', '!=', 6)->orWhere('status_id', '!=', 7)->get()->count();
-        $permohonan_diluluskan = Permohonan::where('status_id', '=', 6)->orWhere('status_id', '=', 7)->get()->count();
-        $permohonan_diperakui = $this->permohonanDiperakukan();
+        $progress = Permohonan::where('status_id', '!=', 1)->orWhere('status_id', '!=', 6)->orWhere('status_id', '!=', 7)->count();
+        $lulus = Permohonan::where('status_id', '=', 6)->orWhere('status_id', '=', 7)->count();
+        $diperakui = $this->permohonanDiperakukan();
+
+        return response()->json(['progress' => $progress, 'lulus' => $lulus, 'diperakui' => $diperakui, 'line_chart' => $line_chart, 'pie_chart' => $pie_chart]);
 
         // return view ('panel_penilai.senarai-testing')->with('permohonans',$permohonan_baharu)->with('chart',$chart)->with('line_chart',$line_chart)->with('pie_chart',$pie_chart)->with('permohonan_in_progress', $permohonan_in_progress)->with('permohonan_diluluskan',$permohonan_diluluskan)->with('permohonan_diperakui',$permohonan_diperakui);
     }
@@ -130,32 +132,10 @@ class HomeController extends Controller
         $lulus = Permohonan::where('status_id', '=', 6)->orWhere('status_id', '=', 7)->select('id')->count();
 
         return response()->json([
-            'dokumens' => $dokumens, 'permohonans' => $permohonans,
+            'permohonans' => $permohonans->count(),
             'lulus' => $lulus, 'progress' => $progress, 'line_chart' => $line_chart,
             'pie_chart' => $pie_chart
         ]);
-    }
-
-    public function senaraiPermohonan($sp)
-    {
-        $role = auth()->user()->role;
-        switch ($role) {
-            case 'pjk':
-                return $sp->pjk();
-                break;
-            case 'senat':
-                return $sp->senat();
-                break;
-            case 'penilai':
-                return $sp->penilai();
-                break;
-            case 'jppa':
-                return $sp->jppa();
-                break;
-            default:
-                return;
-                break;
-        }
     }
 
     public function permohonanDiperakukan()
@@ -171,5 +151,31 @@ class HomeController extends Controller
                 return $permohonans;
                 break;
         }
+    }
+
+    public function permohonanCount()
+    {
+        $role = auth()->user()->role;
+        $data =  Permohonan::select('id');
+        switch ($role) {
+            case 'pjk':
+                $data->where('jenis_id', '!=', '8')->where('status_id', '=', '1');
+                break;
+            case 'jppa':
+                $data->where('jenis_id', 8)->where('status_id', 1)->orWhere('status_id', 4);
+                break;
+            case 'penilai':
+                $user_id = auth()->user()->id;
+                $penilaian = PenilaianPanel::where('id_penilai', $user_id)->pluck('permohonan_id');
+                $data->whereIn('id', $penilaian)->where('status_id', 2);
+                break;
+            case 'senat':
+                $data->where('status_id', '=', '5');
+                break;
+            default:
+                return;
+                break;
+        }
+        return $data->count();
     }
 }

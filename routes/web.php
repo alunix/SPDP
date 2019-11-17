@@ -1,6 +1,6 @@
 <?php
 Auth::routes();
-Route::post('/search', 'SearchController@search')->name('search');
+// Route::post('/search', 'SearchController@search')->name('search');
 /*----------------------- API REST VUE ------------- */
 Route::group(['prefix' => 'api', 'middleware' => 'auth'], function () {
 	Route::get('/role', 'UserController@getRole')->name('api.role');
@@ -32,6 +32,15 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function () {
 	//Upload laporan
 	Route::post('/upload-laporan/{id}', 'LaporanController@store')->name('api.laporan.store');
 });
+
+Route::get('{any}', function () {
+	return view('layouts.app');
+})->where('any', '.*')->middleware('auth');
+
+
+// Route::get('/{vue_capture?}', function () {
+// 	return view('layouts.app');
+// })->where('vue_capture', '[\/\w\.-]*');
 
 // /*-----------------------Fakulti------------- */
 // Route::group(['middleware' => 'auth'], function () {
@@ -101,7 +110,3 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function () {
 // 	Route::patch('/permohonan/{permohonan}/lampiran-perakuan-senat', 'PenilaianController@uploadPerakuanJppa')->name('senat.perakuan.submit');
 // 	Route::get('/permohonan/{permohonan}/lampiran-perakuan-senat', 'PenilaianController@showPerakuanJppa')->name('senat.perakuan.show');
 // });
-
-Route::get('{any}', function () {
-	return view('layouts/app');
-})->where('any', '.*')->middleware('auth');

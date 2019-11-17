@@ -51,10 +51,8 @@ class ShowPermohonan
     {
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
-
         $permohonans = new SenaraiPermohonan();
         $permohonans = $permohonans->penilai();
-
         if ($permohonans == null) {
             abort(404);
         }

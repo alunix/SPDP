@@ -27,10 +27,19 @@
     <div class="row m-t-25">
       <div class="col-md-6 col-lg-3">
         <div class="statistic__item statistic__item--green">
-          <h2 class="number" style="color:white">{{permohonans.length}}</h2>
+          <h2 class="number" style="color:white">{{permohonans}}</h2>
           <span class="desc" style="color:white">permohonan dihantar</span>
           <div class="icon">
             <i class="zmdi zmdi-file"></i>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="statistic__item statistic__item--orange">
+          <h2 class="number" style="color:white">{{permohonans}}</h2>
+          <span class="desc" style="color:white">permohonan untuk diperakui</span>
+          <div class="icon">
+            <i class="zmdi zmdi-alert-circle-o"></i>
           </div>
         </div>
       </div>
@@ -99,7 +108,6 @@ export default {
     return {
       permohonans: [],
       lulus: "",
-      dokumens: [],
       progress: "",
       loaded: false,
       pieChart: [],
@@ -118,7 +126,6 @@ export default {
           this.permohonans = res.permohonans;
           this.progress = res.progress;
           this.lulus = res.lulus;
-          this.dokumens = res.dokumens;
           this.lineChart = {
             options: {
               chart: {

@@ -26,6 +26,6 @@ class LaporanController extends Controller
 
         $permohonan = Permohonan::findOrFail($id);
         $laporan = new LaporanClass();
-        return $laporan->create($request, $permohonan);
+        return $laporan->storeLaporan($request, $permohonan);
     }
 }

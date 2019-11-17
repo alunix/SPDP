@@ -1,6 +1,19 @@
 <template>
   <v-container>
     <v-row>
+      <v-snackbar
+        v-if="success"
+        v-model="snackbar"
+        color="success"
+        :multi-line="false"
+        :timeout="6000"
+        :top="true"
+        :vertical="true"
+      >
+        {{snackbarMessage}}
+        <v-btn dark text @click="snackbar = false">Close</v-btn>
+      </v-snackbar>
+
       <v-col cols="6" md="4">
         <v-card class="py-4" v-if="loaded">
           <v-card-text v-for="list in lists" :key="list.id">
@@ -8,8 +21,14 @@
               <v-flex xs6>
                 <p>{{list.title}}</p>
               </v-flex>
-              <v-flex xs6>
+              <v-flex xs6 v-if="list.id != 7">
                 <div class="text--primary">{{list.subtitle}}</div>
+              </v-flex>
+              <v-flex xs6 v-else>
+                <v-btn small @click="openFile(list.subtitle)">
+                  Muat turun
+                  <v-icon right dark>mdi-download</v-icon>
+                </v-btn>
               </v-flex>
             </v-layout>
           </v-card-text>
@@ -17,12 +36,15 @@
       </v-col>
       <v-col v-if="loaded" cols="12" md="8">
         <LantikPenilai
-          v-if="!showLaporan && !isFakulti"
-          v-show="toggleLantikPenilai"
-          @event="closeComponent"
+          v-if="showLantikPenilai"
           :permohonan_props="permohonan"
+          @event="hideLantikPenilai"
         ></LantikPenilai>
-        <LaporanUpload v-if="showLaporan && !isFakulti" :permohonan_id_props="id"></LaporanUpload>
+        <LaporanUpload
+          v-if="showLaporanUpload"
+          :permohonan_id_props="id"
+          @event="hideLaporanUpload"
+        ></LaporanUpload>
         <PermohonanTab v-if="permohonan.status_permohonan_id != 1" :permohonan_id_props="id"></PermohonanTab>
       </v-col>
     </v-row>
@@ -38,12 +60,14 @@ export default {
       dokumen: {},
       id: "",
       role: "",
-      showLaporan: true,
+      showLaporanUpload: false,
+      showLantikPenilai: false,
       loaded: false,
       id: this.$route.params.id,
-      isFakulti: false,
-      showComponent: null,
-      toggleLantikPenilai : false
+      // isFakulti: false,
+      success: false,
+      snackbar: {},
+      snackbarMessage: ""
     };
   },
   created() {
@@ -54,12 +78,6 @@ export default {
       fetch("/api/role")
         .then(res => res.json())
         .then(res => {
-          //get users role
-          if (res == "fakulti") {
-            this.isFakulti = true;
-          } else {
-            this.isFakulti = false;
-          }
           this.showPermohonan(res);
         });
     },
@@ -104,16 +122,47 @@ export default {
           ];
           if (role == "pjk") {
             if (
-              this.permohonan.jenis_id == 1 &&
-              this.permohonan.status_id == 1
+              (this.permohonan.jenis_id == 1 &&
+                this.permohonan.status_id == 1) ||
+              (this.permohonan.jenis_id == 2 &&
+                this.permohonan.status_id == 1) ||
+              (this.permohonan.jenis_id == 3 &&
+                this.permohonan.status_id == 1) ||
+              (this.permohonan.jenis_id == 5 &&
+                this.permohonan.status_id == 1) ||
+              (this.permohonan.jenis_id == 6 && this.permohonan.status_id == 1)
             ) {
-              this.showLaporan = false;
+              this.showLantikPenilai = true;
+            } else if (
+              (this.permohonan.jenis_id == 6 &&
+                this.permohonan.status_id == 1) ||
+              this.permohonan.status_id == 13
+            ) {
+              this.showLaporanUpload = true;
             }
-
-            if (!["fakulti", "pjk"].includes(role)) {
-              this.showLaporan = true;
+          } else if (role == "penilai") {
+            if (
+              this.permohonan.status_id == 2 ||
+              this.permohonan.status_id == 12
+            ) {
+              this.showLaporanUpload = true;
             }
-          } else {
+          } else if (role == "jppa") {
+            if (
+              this.permohonan.status_id == 2 ||
+              (this.permohonan.status_id == 1 &&
+                this.permohonan.jenis_id == 8) ||
+              this.permohonan.status_id == 14
+            ) {
+              this.showLaporanUpload = true;
+            }
+          } else if (role == "senat" && this.permohonan.status_id == 11) {
+            if (
+              this.permohonan.status_id == 11 ||
+              this.permohonan.status_id == 15
+            ) {
+              this.showLaporanUpload = true;
+            }
           }
           this.loaded = true;
         });
@@ -131,9 +180,19 @@ export default {
     getDataBind() {
       return { permohonan_id_props: this.permohonan.id };
     },
-    closeComponent() {
-      this.showComponent = false;
-      console.log("Hello");
+    hideLantikPenilai() {
+      this.showLantikPenilai = false;
+      this.snackbarMessage =
+        "Panel penilai telah dilantik dan permohonan telah diemel kepada penilai";
+      this.success = true;
+    },
+    hideLaporanUpload() {
+      this.showLaporanUpload = false;
+      this.snackbarMessage = "Laporan telah dimuat naik";
+      this.success = true;
+    },
+    openFile(file_link) {
+      return window.open("/storage/permohonan/" + file_link);
     }
   }
 };

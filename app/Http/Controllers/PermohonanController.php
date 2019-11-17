@@ -72,6 +72,6 @@ class PermohonanController extends Controller
             'fail_permohonan' => 'required|mimes:pdf|max:1999',
         ]);
         $pc = new PermohonanClass();
-        return $permohonan = $pc->create($request);
+        return $pc->create($request);
     }
 }

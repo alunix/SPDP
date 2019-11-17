@@ -3,9 +3,7 @@
 namespace SPDP\Services;
 
 use SPDP\Permohonan;
-use SPDP\Penilaian;
 use SPDP\PenilaianPanel;
-use Illuminate\Support\Facades\DB;
 
 class SenaraiPermohonan
 {
@@ -60,7 +58,6 @@ class SenaraiPermohonan
                 return;
                 break;
         }
-
         return $permohonans->paginate(10);
     }
 }

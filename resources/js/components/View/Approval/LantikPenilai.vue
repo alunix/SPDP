@@ -2,31 +2,10 @@
   <v-container>
     <v-card class="mt-n3">
       <v-row class="left-padding" align="center" justify="start">
-        <v-snackbar
-          v-if="success"
-          v-model="snackbar"
-          color="success"
-          :multi-line="false"
-          :timeout="6000"
-          :top="true"
-          :vertical="true"
-        >
-          {{snackbarMessage}}
-          <v-btn dark text @click="snackbar = false">Close</v-btn>
-        </v-snackbar>
-
         <v-col class="divider mb-n2" cols="3" md="6">
           <h3>Lantik Panel Penilai</h3>
           <hr />
         </v-col>
-
-        <!-- <v-switch
-          style="margin-left:150px"
-          color="red"
-          v-model="people"
-          label="Penambahbaikkan"
-          value="John"
-        ></v-switch>-->
       </v-row>
 
       <v-form ref="form" method="post" @submit.prevent="submit">
@@ -171,11 +150,7 @@ export default {
       menu: false,
       modal: false,
       menu2: false,
-      tempoh: 0,
-      success: false,
-      snackbar: {},
-      snackbarMessage:
-        "Panel penilai telah dilantik dan permohonan telah diemel kepada penilai"
+      tempoh: 0
     };
   },
   watch: {
@@ -252,10 +227,10 @@ export default {
           _method: "patch"
         })
         .then(res => {
-          this.success = true;
           this.selectedPenilai = [];
           this.due_date = new Date().toISOString().substr(0, 10);
           this.loading = false;
+          //Show success message and hide component
           this.$emit("event");
         })
         .catch(error => {

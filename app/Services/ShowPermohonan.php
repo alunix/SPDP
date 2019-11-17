@@ -33,7 +33,7 @@ class ShowPermohonan
     {
         $permohonan = Permohonan::with(['jenis_permohonan:id,huraian'])->where('id', $permohonan->id)
             ->withCount(['dokumens', 'laporans', 'kemajuan_permohonans'])->get();
-        $dokumen = Permohonan::find($permohonan[0]->id)->dokumen_permohonan();
+        $dokumen = Permohonan::find($permohonan[0]->id)->latest_dokumen();
         return response()->json(['permohonan' => $permohonan[0], 'dokumen' => $dokumen]);
     }
 

@@ -12,7 +12,7 @@ use SPDP\TetapanAliranKerja;
 
 class LaporanClass
 {
-    public function create(Request $request, $permohonan)
+    public function storeLaporan(Request $request, $permohonan)
     {
         $attachedLocation = 'public/laporan';
         $laporan = 'laporan';
@@ -28,7 +28,18 @@ class LaporanClass
         } else {
             $fileNameToStore = 'noPDF.pdf';
         }
+        $this->createLaporan($permohonan, $fileNameWithExt, $fileNameToStore, $request);
 
+        $kelulusan = $request->input('kelulusan');
+        if ($kelulusan == "true") {
+            return $this->permohonanLulus($permohonan);
+        } else {
+            return $this->permohonanTidakLulus($permohonan);
+        }
+    }
+
+    public function createLaporan($permohonan, $fileNameWithExt, $fileNameToStore, $request)
+    {
         $user_id = auth()->user()->id;
         $laporans_id = $permohonan->dokumens->pluck('dokumen_permohonan_id');
         $laporan_count = Laporan::where('id_penghantar', $user_id)->whereIn('dokumen_permohonan_id', $laporans_id)->count();
@@ -41,13 +52,6 @@ class LaporanClass
         $laporan->tajuk_fail_link = $fileNameToStore;
         $laporan->versi = $laporan_count + 1;
         $laporan->save();
-
-        $kelulusan = $request->input('kelulusan');
-        if ($kelulusan == "true") {
-            return $this->permohonanLulus($permohonan);
-        } else {
-            return $this->permohonanTidakLulus($permohonan);
-        }
     }
 
     public function permohonanLulus($permohonan)

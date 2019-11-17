@@ -85,7 +85,7 @@ export default {
           }
         })
         .then(res => {
-          console.log(res);
+          this.$emit("event");
         })
         .catch(error => {
           if (error.response.status === 422) {

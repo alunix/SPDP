@@ -64,7 +64,6 @@ export default {
       showLantikPenilai: false,
       loaded: false,
       id: this.$route.params.id,
-      // isFakulti: false,
       success: false,
       snackbar: {},
       snackbarMessage: ""

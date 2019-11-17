@@ -3,19 +3,10 @@
 namespace SPDP\Http\Controllers;
 
 use SPDP\Permohonan;
-use SPDP\DokumenPermohonan;
-use SPDP\User;
-use Illuminate\Http\Request;
-use SPDP\Services\PenilaianPJK;
-use SPDP\Services\SenaraiPermohonan;
-use SPDP\Services\ShowPermohonan;
-use SPDP\Charts\PermohonanChart;
 use SPDP\Charts\JenisPermohonanChart;
-use Charts;
-use Illuminate\Support\Carbon;
 use SPDP\Fakulti;
-use Illuminate\Support\Facades\DB;
 use SPDP\PenilaianPanel;
+use DB;
 
 class HomeController extends Controller
 {

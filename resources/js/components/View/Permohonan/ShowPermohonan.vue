@@ -133,7 +133,7 @@ export default {
             ) {
               this.showLantikPenilai = true;
             } else if (
-              (this.permohonan.jenis_id == 6 &&
+              (this.permohonan.jenis_id == 4 &&
                 this.permohonan.status_id == 1) ||
               this.permohonan.status_id == 13
             ) {

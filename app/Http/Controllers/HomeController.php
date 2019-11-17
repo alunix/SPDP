@@ -42,7 +42,7 @@ class HomeController extends Controller
         $sp = new SenaraiPermohonan();
         $permohonan_baharu = $this->senaraiPermohonan($sp)->count();
         $permohonans = Fakulti::with(['permohonans' => function ($query) use ($year) {
-            $query->select(['id', 'permohonans.created_at']);
+            $query->select(['permohonans.id', 'permohonans.created_at']);
             $query->whereYear('permohonans.created_at', $year); //specify which table created at to query
         }])->get()->sortBy('fakulti_id');
 
@@ -117,7 +117,7 @@ class HomeController extends Controller
             ->join('fakultis', 'users.fakulti_id', '=', 'fakultis.fakulti_id')
             ->whereYear('permohonans.created_at', $year)
             ->where('fakultis.fakulti_id', '=', $fakulti_id)
-            ->selectRaw("month(permohonans.created_at) as month, jenis_permohonans.huraian as huraian,count(id) as count")
+            ->selectRaw("month(permohonans.created_at) as month, jenis_permohonans.huraian as huraian,count(permohonans.id) as count")
             ->groupBy('huraian')
             ->get();
 

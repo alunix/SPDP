@@ -23,15 +23,9 @@
     <link href="{{ asset('vendor/mdi-font/css/material-design-iconic-font.min.css')}}" rel="stylesheet" media="all">
     <!-- <link href="{{ asset('vendor/bootstrap-4.1/bootstrap.min.css')}}" rel="stylesheet" media="all"> -->
     <link href="{{ asset('css/theme.css')}}" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous"> -->
-
     <!--CoolAdmin script-->
     <!-- Jquery JS-->
     <script src="{{asset('vendor/jquery-3.2.1.min.js') }}" defer></script>
-    <!-- Bootstrap JS-->
-    <script src="{{asset('vendor/bootstrap-4.1/popper.min.js') }}" defer></script>
-    <script src="{{asset('vendor/bootstrap-4.1/bootstrap.min.js') }}" defer></script>
-    <!-- Vendor JS       -->
     <!-- Main JS-->
     <script src="{{asset('js/main.js')}}" defer></script>
     <!-- Vuetify icon -->

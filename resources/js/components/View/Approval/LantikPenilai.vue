@@ -1,6 +1,12 @@
 <template>
   <v-container>
     <v-card class="mt-n3">
+      <v-alert type="error" v-if="error">
+        <b></b>
+        <ul>
+          <li v-for="error in errors" v-bind:key="error[0]">{{ error[0] }}</li>
+        </ul>
+      </v-alert>
       <v-row class="left-padding" align="center" justify="start">
         <v-col class="divider mb-n2" cols="3" md="6">
           <h3>Lantik Panel Penilai</h3>
@@ -150,7 +156,8 @@ export default {
       menu: false,
       modal: false,
       menu2: false,
-      tempoh: 0
+      tempoh: 0,
+      error: false
     };
   },
   watch: {
@@ -235,8 +242,10 @@ export default {
         })
         .catch(error => {
           if (error.response.status === 422) {
+            this.error = false;
             this.errors = error.response.data.errors || {};
             this.error = true;
+            this.loaded = true;
           }
         });
     }

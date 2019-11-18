@@ -71,39 +71,10 @@ return [
             'model' => SPDP\User::class,
         ],
 
-        'programs' => [
-            'driver' => 'eloquent',
-            'model' => SPDP\Program::class,
-        ],
-
-        // 'operators' => [
-        //     'driver' => 'eloquent',
-        //     'model' => busplannersystem\Operator::class,
-
-        // ],
-
-        // 'penilaians' => [
-        //     'driver' => 'eloquent',
-        //     'model' =>  busplannersystem\Penilaian::class,
-
-
-        // ],
-
         'users' => [
             'driver' => 'database',
             'table' => 'users',
         ],
-
-        'admins' => [
-            'driver' => 'database',
-            'table' => 'admins',
-        ],
-
-        'operators' => [
-            'driver' => 'database',
-            'table' => 'operators',
-        ],
-
 
     ],
 
@@ -125,16 +96,6 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
-            'table' => 'password_resets',
-            'expire' => 60,
-        ],
-        'admins' => [
-            'provider' => 'admins',
-            'table' => 'password_resets',
-            'expire' => 60,
-        ],
-        'operators' => [
-            'provider' => 'operators',
             'table' => 'password_resets',
             'expire' => 60,
         ],

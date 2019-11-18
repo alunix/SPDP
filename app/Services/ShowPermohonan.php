@@ -42,9 +42,8 @@ class ShowPermohonan
         $dp =  $this->getBoolPermohonan($permohonan);
         if ($dp == false) {
             abort(403, 'Tidak dibenarkan');
-        } else {
-            return $this->show($permohonan);
         }
+        return $this->show($permohonan);
     }
 
     public function penilai($permohonan)
@@ -52,15 +51,16 @@ class ShowPermohonan
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
         $permohonans = new SenaraiPermohonan();
-        $permohonans = $permohonans->penilai();
-        if ($permohonans == null) {
+        $permohonans = $permohonans->senaraiPermohonanBaru();
+
+        if (!$permohonans) {
             abort(404);
-        }
-        $permohonans_id = $permohonans->pluck('id');
+        };
+        $permohonans_id = $permohonans->pluck('id')->toArray();
         if (in_array($permohonan->id, $permohonans_id)) {
             return $this->show($permohonan);
         } else {
-            abort(404);
+            return false;
         }
     }
 
@@ -69,7 +69,7 @@ class ShowPermohonan
     {
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
-        $permohonans_id = $user->permohonans->pluck('id');
+        $permohonans_id = $user->permohonans->pluck('id')->toArray();
 
         //check whether fakulti does have permohonans
         if (sizeof($permohonans_id) <= 0) {

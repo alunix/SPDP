@@ -57,12 +57,11 @@ class ShowPermohonan
             abort(404);
         }
         $permohonans_id = $permohonans->pluck('id');
-        for ($i = 0; $i < count($permohonans_id); $i++) {
-            if ($permohonan->id == $permohonans_id[$i]) {
-                return $this->show($permohonan);
-            }
+        if (in_array($permohonan->id, $permohonans_id)) {
+            return $this->show($permohonan);
+        } else {
+            abort(404);
         }
-        abort(404);
     }
 
 
@@ -73,15 +72,13 @@ class ShowPermohonan
         $permohonans_id = $user->permohonans->pluck('id');
 
         //check whether fakulti does have permohonans
-        if (!sizeof($permohonans_id) > 0) {
+        if (sizeof($permohonans_id) <= 0) {
             return false;
-            die();
         }
-        for ($i = 0; $i < count($permohonans_id); $i++) {
-            if ($permohonan->id == $permohonans_id[$i]) {
-                return true;
-            }
+        if (in_array($permohonan->id, $permohonans_id)) {
+            return true;
+        } else {
+            return false;
         }
-        return false;
     }
 }

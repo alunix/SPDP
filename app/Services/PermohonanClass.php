@@ -36,7 +36,6 @@ class PermohonanClass
 
         //Permohonan baharu
         $user_id = auth()->user()->id;
-
         $permohonan = new Permohonan();
         $permohonan->doc_title = $request->input('nama_program');
         $permohonan->jenis_id = $request->input('jenis_permohonan');
@@ -50,15 +49,18 @@ class PermohonanClass
         $kp = new KemajuanPermohonanClass();
         $kp->create($permohonan);
 
+        $this->sendEmail($permohonan);
+    }
+
+    public function sendEmail($permohonan)
+    {
         // //Hantar email kepada pemeriksa        
         if ($permohonan->jenis_id == 8)
             $email = TetapanAliranKerja::all()->first()->jppa->email;
         else
             $email = TetapanAliranKerja::all()->first()->pjk->email;
-
         $pemeriksa = User::where('email', $email)->first();
         Notification::route('mail', $pemeriksa->email)->notify(new PermohonanBaharu($permohonan, $pemeriksa)); //hantar email kepada penghantar
-
         return response()->json('Success');
     }
 }

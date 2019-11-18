@@ -41,8 +41,7 @@ class LaporanClass
     public function createLaporan($permohonan, $fileNameWithExt, $fileNameToStore, $request)
     {
         $user_id = auth()->user()->id;
-        $laporans_id = $permohonan->dokumens->pluck('dokumen_permohonan_id');
-        $laporan_count = Laporan::where('id_penghantar', $user_id)->whereIn('dokumen_permohonan_id', $laporans_id)->count();
+        $laporan_count = $this->getAmountOfLaporan($permohonan);
 
         $laporan = new Laporan();
         $laporan->dokumen_permohonan_id = $permohonan->latest_dokumen()->dokumen_permohonan_id; //retrieve latest dokumen_permohonan_id from permohonan has many dokumen permohonans
@@ -52,6 +51,14 @@ class LaporanClass
         $laporan->tajuk_fail_link = $fileNameToStore;
         $laporan->versi = $laporan_count + 1;
         $laporan->save();
+    }
+
+    public function getAmountOfLaporan($permohonan)
+    {
+        $user_id = auth()->user()->id;
+        $laporans_id = $permohonan->dokumens->pluck('dokumen_permohonan_id');
+        $laporans = Laporan::where('id_penghantar', $user_id)->whereIn('dokumen_permohonan_id', $laporans_id)->count();
+        return $laporans;
     }
 
     public function permohonanLulus($permohonan)

@@ -111,6 +111,22 @@ Vue.component(
     require("./components/View/Approval/LantikPenilai.vue").default
 );
 
+//Laravel passport components
+Vue.component(
+    'passport-clients',
+    require('./components/passport/Clients.vue').default
+);
+
+Vue.component(
+    'passport-authorized-clients',
+    require('./components/passport/AuthorizedClients.vue').default
+);
+
+Vue.component(
+    'passport-personal-access-tokens',
+    require('./components/passport/PersonalAccessTokens.vue').default
+);
+
 const router = new VueRouter({
     mode: "history",
     routes // short for `routes: routes`

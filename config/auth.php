@@ -42,29 +42,10 @@ return [
         ],
 
         'api' => [
-            'driver' => 'token',
+            'driver' => 'passport',
             'provider' => 'users',
         ],
 
-        'admin' => [
-            'driver' => 'session',
-            'provider' => 'admins',
-        ],
-
-        'admin-api' => [
-            'driver' => 'token',
-            'provider' => 'admins',
-        ],
-
-        'operator' => [
-            'driver' => 'session',
-            'provider' => 'operators',
-        ],
-
-        'operator-api' => [
-            'driver' => 'token',
-            'provider' => 'operators',
-        ],
     ],
 
     /*
@@ -123,7 +104,7 @@ return [
             'table' => 'operators',
         ],
 
-        
+
     ],
 
     /*

@@ -9,7 +9,7 @@ use SPDP\Laporan;
 use SPDP\Penilaian;
 use SPDP\Services\ShowPermohonan;
 
-class KemajuanPermohonanClass
+class CreateKemajuan
 {
     public function create(Permohonan $permohonan)
     {

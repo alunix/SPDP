@@ -6,8 +6,8 @@ namespace SPDP\Services;
 use SPDP\Permohonan;
 use SPDP\User;
 use SPDP\Services\LaporanClass;
-use SPDP\Services\PenilaianPanelClass;
-use SPDP\Services\KemajuanPermohonanClass;
+use SPDP\Services\CreatePenilaianPanel;
+use SPDP\Services\CreateKemajuan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Notification;
@@ -38,7 +38,7 @@ class PenilaianPJK
             Notification::route('mail', $pemeriksa->email)->notify(new PermohonanBaharu($permohonan, $pemeriksa));
         }
 
-        $kj = new KemajuanPermohonanClass();
+        $kj = new CreateKemajuan();
         $kj->create($permohonan);
 
         $msg = [
@@ -53,10 +53,10 @@ class PenilaianPJK
         $permohonan->status_id = 2;
         $permohonan->save();
 
-        $kp = new KemajuanPermohonanClass();
+        $kp = new CreateKemajuan();
         $kp->create($permohonan);
 
-        $penilaian = new PenilaianPanelClass();
+        $penilaian = new CreatePenilaianPanel();
         $penilaian = $penilaian->create($permohonan, $request);
 
         //Send email to panel penilai
@@ -165,7 +165,7 @@ class PenilaianPJK
         }
 
         //Kemajuan permohonan baharu
-        $kj = new KemajuanPermohonanClass();
+        $kj = new CreateKemajuan();
         $kj->create($permohonan);
 
         $msg = [

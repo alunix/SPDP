@@ -65,7 +65,7 @@ class LaporanClass
     {
         $permohonan->status_id = $this->getStatusKelulusan($permohonan);
         $permohonan->save();
-        $kp = new KemajuanPermohonanClass();
+        $kp = new CreateKemajuan();
         $kp->create($permohonan);
         //Hantar email kepada penghantar
         $penghantar = User::find($permohonan->id_penghantar);
@@ -77,7 +77,7 @@ class LaporanClass
     {
         $permohonan->status_id = $this->getStatusPenambahbaikkan();
         $permohonan->save();
-        $kp = new KemajuanPermohonanClass();
+        $kp = new CreateKemajuan();
         $kp->create($permohonan);
         $penghantar = User::find($permohonan->id_penghantar);
         Notification::route('mail', $penghantar->email)->notify(new PerluPenambahbaikkan($permohonan, $penghantar)); //hantar email kepada penghantar

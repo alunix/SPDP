@@ -5,11 +5,7 @@ namespace SPDP\Services;
 use SPDP\User;
 use SPDP\Services\RedirectPermohonan;
 use SPDP\Permohonan;
-use SPDP\Penilaian;
-use SPDP\Services\KemajuanPermohonanClass;
 use SPDP\Services\SenaraiPermohonan;
-use SPDP\Support\Collection;
-use SPDP\DokumenPermohonan;
 
 class ShowPermohonan
 {
@@ -39,7 +35,11 @@ class ShowPermohonan
 
     public function fakulti($permohonan)
     {
-        $dp =  $this->getBoolPermohonan($permohonan);
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
+        $permohonans_id = $user->permohonans->pluck('id')->toArray();
+
+        $dp =  $this->userHavePermohonan($permohonan, $permohonans_id);
         if ($dp == false) {
             abort(403, 'Tidak dibenarkan');
         }
@@ -57,21 +57,13 @@ class ShowPermohonan
             abort(404);
         };
         $permohonans_id = $permohonans->pluck('id')->toArray();
-        if (in_array($permohonan->id, $permohonans_id)) {
-            return $this->show($permohonan);
-        } else {
-            return false;
-        }
+        return $this->userHavePermohonan($permohonan, $permohonans_id);
     }
 
 
-    public function getBoolPermohonan($permohonan)
+    public function userHavePermohonan($permohonan, $permohonans_id)
     {
-        $user_id = auth()->user()->id;
-        $user = User::find($user_id);
-        $permohonans_id = $user->permohonans->pluck('id')->toArray();
-
-        //check whether fakulti does have permohonans
+        //check whether user does have permohonans
         if (sizeof($permohonans_id) <= 0) {
             return false;
         }

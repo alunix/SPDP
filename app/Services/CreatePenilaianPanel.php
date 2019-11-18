@@ -7,7 +7,7 @@ use Notification;
 use Carbon\Carbon;
 use Debugbar;
 
-class PenilaianPanelClass
+class CreatePenilaianPanel
 {
 
     public function create($permohonan, $request)

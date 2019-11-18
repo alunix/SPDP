@@ -4,7 +4,7 @@ namespace SPDP\Services;
 
 use SPDP\Permohonan;
 use Illuminate\Http\Request;
-use SPDP\Services\KemajuanPermohonanClass;
+use SPDP\Services\CreateKemajuan;
 use SPDP\DokumenPermohonan;
 use SPDP\Notifications\DokumenPenambahbaikkan;
 use Notification;
@@ -12,7 +12,7 @@ use SPDP\TetapanAliranKerja;
 use SPDP\User;
 
 
-class DokumenPermohonanClass
+class DokumenClass
 {
 
     public function create($permohonan, $fileNameWithExt, $fileNameToStore, $request, $fileSize)
@@ -58,7 +58,7 @@ class DokumenPermohonanClass
         $permohonan->status_id = $this->getStatusPermohonan($status_id);
         $permohonan->save();
 
-        $kp = new KemajuanPermohonanClass();
+        $kp = new CreateKemajuan();
         $kp->create($permohonan);
 
         $user = $this->getEmailPenambahbaikkan($permohonan, $status_id);

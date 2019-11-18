@@ -6,8 +6,8 @@ use SPDP\Permohonan;
 use SPDP\User;
 use SPDP\TetapanAliranKerja;
 use Illuminate\Http\Request;
-use SPDP\Services\KemajuanPermohonanClass;
-use SPDP\Services\DokumenPermohonanClass;
+use SPDP\Services\CreateKemajuan;
+use SPDP\Services\DokumenClass;
 use SPDP\Services\LaporanClass;
 use SPDP\Notifications\PerluPenambahbaikkan;
 use Notification;
@@ -43,10 +43,10 @@ class PermohonanClass
         $permohonan->status_id = 1;
         $permohonan->save();
 
-        $dk = new DokumenPermohonanClass();
+        $dk = new DokumenClass();
         $dk->create($permohonan, $fileNameWithExt, $fileNameToStore, $request, $fileSize);
 
-        $kp = new KemajuanPermohonanClass();
+        $kp = new CreateKemajuan();
         $kp->create($permohonan);
 
         $this->sendEmail($permohonan);

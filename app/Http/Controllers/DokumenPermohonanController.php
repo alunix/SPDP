@@ -6,7 +6,7 @@ namespace SPDP\Http\Controllers;
 use Illuminate\Http\Request;
 use SPDP\Permohonan;
 use SPDP\DokumenPermohonan;
-use SPDP\Services\DokumenPermohonanClass;
+use SPDP\Services\DokumenClass;
 use SPDP\Services\ShowPermohonan;
 
 
@@ -57,7 +57,7 @@ class DokumenPermohonanController extends Controller
         } else {
             $attached = 'dokumen';
             $permohonan = Permohonan::findOrFail($id);
-            $dp = new DokumenPermohonanClass();
+            $dp = new DokumenClass();
             $dp->update($permohonan, $request, $attached);
             $msg = [
                 'message' => 'Dokumen berjaya dimuat naik',

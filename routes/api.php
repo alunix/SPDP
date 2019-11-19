@@ -21,12 +21,12 @@ use Illuminate\Http\Request;
 //     Route::get('/permohonan_dihantar','PermohonanController@api_permohonanDihantar')->name('api.permohonan.dihantar');
 // });
 
-Route::middleware('auth:api')->group( function(){
+Route::middleware('auth:api')->group(function () {
     // Route::get('/permohonan_dihantar','PermohonanController@api_permohonanDihantar')->name('api.permohonan.dihantar');
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
-}); 
+});
+Route::post('/login', 'Auth\API\AuthController@login')->name('api.login');
 
-// Route::get('/permohonan_dihantar','PermohonanController@api_permohonanDihantar')->name('api.permohonan.dihantar');
 

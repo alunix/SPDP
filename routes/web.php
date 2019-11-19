@@ -1,8 +1,8 @@
 <?php
-Auth::routes();
+
 // Route::post('/search', 'SearchController@search')->name('search');
 /*----------------------- API REST VUE ------------- */
-Route::group(['prefix' => 'api', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'api', 'middleware' => 'auth:api'], function () {
 	Route::get('/role', 'UserController@getRole')->name('api.role');
 	/* Fakulti */
 	Route::get('/senarai-permohonan-dihantar', 'PermohonanController@api_permohonanDihantar')->name('api.permohonan.dihantar');
@@ -30,8 +30,11 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function () {
 	// 	/*-----------------------Pelantikan penilai---------------------------------------------*/
 	Route::patch('/{id}/pelantikan-penilai', 'PermohonanController@pelantikanPenilaiSubmit')->name('pelantikan_penilai.submit');
 	//Upload laporan
-	Route::post('/upload-laporan/{id}', 'LaporanController@store')->name('api.laporan.store');
+	// Route::post('/upload-laporan/{id}', 'LaporanController@store')->name('api.laporan.store');
+	
 });
+
+Auth::routes();
 
 Route::get('{any}', function () {
 	return view('layouts.app');

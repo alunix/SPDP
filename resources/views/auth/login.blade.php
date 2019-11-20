@@ -10,7 +10,7 @@
             </div>--}}
 
             <div class="card-body">
-                <form class="form-prevent-double-submits" method="POST" action="{{ route('api.login') }}">
+                <form class="form-prevent-double-submits" method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="form-group row">
                         <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('Alamat e-mel') }}</label>

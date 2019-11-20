@@ -18,10 +18,10 @@ class AuthController extends Controller
         if (!auth()->attempt($credentials)) {
             return response()->json(['error' => 'Wrong email and password'], 401);
         }
-        // $user = User::where('email', $credentials['email'])->first();
-        // $token = $user->createToken('auth_token')->accessToken;
-        // return response()->json(['user' => $user, 'access_token' => $token], 200);
-        return response()->json(auth()->user());
+        $user = User::where('email', $credentials['email'])->first();
+        $token = $user->createToken('auth_token')->accessToken;
+        return response()->json(['user' => $user, 'access_token' => $token], 200);
+        // return response()->json(auth()->user());
     }
 
     /**

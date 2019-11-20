@@ -50,7 +50,7 @@
                     <div class="header__navbar nav-item">
                         <ul class="list-unstyled">
                             <li class="has-sub">
-                            <router-link :to="{name: 'dashboard'}">
+                                <router-link :to="{name: 'dashboard'}">
                                     <i class="fas fa-tachometer-alt"></i>Papan pemuka
                                     <span class="bot-line"></span>
                                 </router-link>
@@ -71,7 +71,7 @@
                             </li>
                             @endif
                             <li>
-                                <router-link to="/analitik">
+                                <router-link :to="{name: 'analitik'}">
                                     <i class="fas fa-chart-bar"></i>
                                     <span class="bot-line"></span>Analitik</a>
                                 </router-link>

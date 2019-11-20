@@ -56,32 +56,25 @@ class Analitik
 
     public function annual($year_report)
     {
-        $lulus = Permohonan::where('status_id', 6)->orWhere('status_id', 7)->whereYear('created_at', $year_report)->get(); //find permohonan yang sudah dilulus
+        $lulus = Permohonan::where('status_id', 6)->orWhere('status_id', 7)->whereYear('created_at', $year_report)->select('created_at', 'updated_at')->get(); //find permohonan yang sudah dilulus
 
-        if ($lulus->count() != 0) {
+        if ($lulus->count() > 0) {
             for ($i = 0; $i < $lulus->count(); ++$i) {
                 $start_time = $lulus[$i]->created_at;
                 $end_time = $lulus[$i]->updated_at;
                 $permohonan_duration[$i] = $start_time->diffInHours($end_time);
             }
-
             $avg_duration =  array_sum($permohonan_duration) / $lulus->count();
         } else
             $avg_duration = 0;
-
-
         /*--------------------------------- Fakulti permohonan chart----------------------------------- */
         $permohonans = Fakulti::with(['permohonans' => function ($query) use ($year_report) {
             $query->whereYear('permohonans.created_at', $year_report); //specify which table created at to query
         }])->get()->sortBy('fakulti_id');
-
-
         $count_permohonan = $permohonans->pluck('permohonans');
-
         for ($i = 0; $i < $count_permohonan->count(); $i++) {
             $A[$i] = count($count_permohonan[$i]);  //calculate count of permohoann in each fakulti
         }
-
         $chart = new JenisPermohonanChart();
         $chart->labels($permohonans->pluck('kod'));
         $chart->dataset('Permohonan sepanjang tahun ' . $year_report, 'bar', $A);

@@ -5,16 +5,22 @@ import BootstrapVue from "bootstrap-vue";
 import Vuetify from "vuetify";
 import dayjs from "dayjs";
 import LocalizedFormat from "dayjs/plugin/localizedFormat";
-import Vuex from 'vuex'
+import Vuex from "vuex";
 
 require("./bootstrap");
 
 dayjs.extend(LocalizedFormat);
 
 window.Vue = require("vue");
-[VModal, VueRouter, VueApexCharts, BootstrapVue, Vuetify, dayjs, Vuex].forEach(x =>
-    Vue.use(x)
-);
+[
+    VModal,
+    VueRouter,
+    VueApexCharts,
+    BootstrapVue,
+    Vuetify,
+    dayjs,
+    Vuex
+].forEach(x => Vue.use(x));
 
 const routes = [
     {
@@ -42,6 +48,12 @@ const routes = [
         path: "/senarai-pengguna",
         name: "pengguna",
         component: require("./components/View/Pengguna/SenaraiPengguna.vue")
+            .default
+    },
+    {
+        path: "/analitik",
+        name: "analitik",
+        component: require("./components/View/Analitik/DashboardAnalitik.vue")
             .default
     },
     {
@@ -113,18 +125,18 @@ Vue.component(
 
 //Laravel passport components
 Vue.component(
-    'passport-clients',
-    require('./components/passport/Clients.vue').default
+    "passport-clients",
+    require("./components/passport/Clients.vue").default
 );
 
 Vue.component(
-    'passport-authorized-clients',
-    require('./components/passport/AuthorizedClients.vue').default
+    "passport-authorized-clients",
+    require("./components/passport/AuthorizedClients.vue").default
 );
 
 Vue.component(
-    'passport-personal-access-tokens',
-    require('./components/passport/PersonalAccessTokens.vue').default
+    "passport-personal-access-tokens",
+    require("./components/passport/PersonalAccessTokens.vue").default
 );
 
 const router = new VueRouter({

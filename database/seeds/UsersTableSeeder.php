@@ -24,7 +24,7 @@ class UsersTableSeeder extends Seeder
             // }
             DB::table('users')->insert([
                 'name' => $faker->firstNameMale,
-                'role' => 'penilai',
+                'role' => $role,
                 // 'fakulti_id' => $fakulti_id,
                 'email' => $faker->email,
                 'password' => Hash::make($faker->password),

@@ -16,7 +16,7 @@ class FakultiController extends Controller
     public function getFakultis()
     {
         $fakultis = Fakulti::select('f_nama', 'fakulti_id')->get();
-        return $fakultis;
+        return response()->json($fakultis);
     }
 
     public function analitik(Request $request)

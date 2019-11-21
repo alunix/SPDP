@@ -70,7 +70,7 @@ class PenilaianPJK
         $jp = $permohonan->jenis_permohonan->kod;
         switch ($jp) {
             case 'program_baharu':
-            case 'semakan_program': //same condition yang akan lalui panel penilai
+            case 'semakan_program':
                 if ($permohonan->status_id == 1)
                     return 2; //if no laporan are found that means permohonan masih disemak oleh panel penilai
                 else

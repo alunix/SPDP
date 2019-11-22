@@ -50,7 +50,7 @@ class DokumenClass
         $dp->file_name = $fileNameWithExt;
         $dp->file_link = $fileNameToStore;
         $dp->file_size = $fileSize / 1000;
-        $dp->komen = $request->input('summary-ckeditor');
+        $dp->komen = $request->input('komen');
         $dp->versi = ((int) $permohonan->version_counts()) + 1;
         $dp->save();
 
@@ -61,7 +61,7 @@ class DokumenClass
         $kp = new CreateKemajuan();
         $kp->create($permohonan);
 
-        $user = $this->getEmailPenambahbaikkan($permohonan, $status_id);
+        // $user = $this->getEmailPenambahbaikkan($permohonan, $status_id);
         //Hantar email kepada penghantar
         // Notification::route('mail', $user->email)->notify(new DokumenPenambahbaikkan($dp)); //hantar email kepada penghantar
 

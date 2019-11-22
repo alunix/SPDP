@@ -22,7 +22,6 @@ class UserController extends Controller
         return $users;
     }
 
-
     public function getRole()
     {
         $role = auth()->user()->role;

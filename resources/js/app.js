@@ -66,11 +66,15 @@ const routes = [
 //Modal
 Vue.component(
     "PermohonanModal",
-    require("./components/PermohonanModal.vue").default
+    require("./components/Modal/PermohonanModal.vue").default
 );
 Vue.component(
     "ModalPengguna",
     require("./components/View/Pengguna/ModalPengguna.vue").default
+);
+Vue.component(
+    "ModalUploadDokumen",
+    require("./components/Modal/ModalUploadDokumen.vue").default
 );
 //View
 Vue.component("senarai", require("./components/view/senarai.vue")).default;

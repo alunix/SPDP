@@ -28,7 +28,7 @@ class LaporanClass
         } else {
             $fileNameToStore = 'noPDF.pdf';
         }
-        $this->createLaporan($permohonan, $fileNameWithExt, $fileNameToStore, $request);
+        $this->createLaporanObject($permohonan, $fileNameWithExt, $fileNameToStore, $request);
 
         $kelulusan = $request->input('kelulusan');
         if ($kelulusan == "true") {
@@ -38,7 +38,7 @@ class LaporanClass
         }
     }
 
-    public function createLaporan($permohonan, $fileNameWithExt, $fileNameToStore, $request)
+    public function createLaporanObject($permohonan, $fileNameWithExt, $fileNameToStore, $request)
     {
         $user_id = auth()->user()->id;
         $laporan_count = $this->getAmountOfLaporan($permohonan);

@@ -7,7 +7,7 @@
           <hr />
         </v-col>
         <v-row style="padding-right:45px" class="padding-right" :align="center" :justify="end">
-          <v-btn v-on:click="showModel()" color="primary" normal>
+          <v-btn v-on:click="showModel()" color="primary" small>
             <v-icon left dark>mdi-plus</v-icon>Permohonan
           </v-btn>
           <modal height="auto" width="25%" :scrollable="true" name="permohonan_baharu">
@@ -81,7 +81,7 @@
 </template>
 
 <script>
-import permohonanModal from "./PermohonanModal";
+import permohonanModal from "./Modal/PermohonanModal";
 import dayjs from "dayjs";
 export default {
   data() {
@@ -104,7 +104,7 @@ export default {
   methods: {
     fetchPermohonans(page_url) {
       let that = this;
-       this.loaded = false;
+      this.loaded = false;
       page_url = page_url || "api/senarai-permohonan-dihantar";
       fetch(page_url)
         .then(res => res.json())

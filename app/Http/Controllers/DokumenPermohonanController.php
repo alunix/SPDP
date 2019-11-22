@@ -19,51 +19,16 @@ class DokumenPermohonanController extends Controller
         return response()->json($dokumens);
     }
 
-    public function showPenambahbaikkan($id)
-    {
-        $permohonan = Permohonan::findOrFail($id);
-        $sp = new ShowPermohonan();
-        $dp =  $sp->getBoolPermohonan($permohonan);
-
-        if ($dp == 0) {
-            abort(403, 'Tidak dibenarkan');
-        } else {
-            $dps = $permohonan->dokumens;
-            return view('fakulti.dokumen-permohonan-penambahbaikkan')->with('permohonan', $permohonan)->with('dps', $dps);
-        }
-    }
-
     public function uploadPenambahbaikkan(Request $request, $id)
     {
         $this->validate($request, [
-            'dokumen' => 'required|file|max:1999',
+            'dokumen' => 'required|mimes:pdf|max:1999',
         ]);
 
+        $attached = 'dokumen';
         $permohonan = Permohonan::findOrFail($id);
-
-        if ($permohonan->status_id != 8 && $permohonan->status_id != 9 && $permohonan->status_id != 10 && $permohonan->status_id != 11) {
-            $msg = [
-                'error' => 'Permohonan masih tidak memerlukan penambahbaikkan',
-            ];
-            return redirect()->route('dokumenPermohonan.penambahbaikkan.show', [$permohonan->id])->with('permohonan', $permohonan)->with('jenis_permohonan', $permohonan->jenis_permohonan)->with($msg);
-            die();
-        }
-
-        $sp = new ShowPermohonan();
-        $dp = $sp->getBoolPermohonan($permohonan);
-
-        if ($dp == 0) {
-            abort(403, 'Tidak dibenarkan');
-        } else {
-            $attached = 'dokumen';
-            $permohonan = Permohonan::findOrFail($id);
-            $dp = new DokumenClass();
-            $dp->update($permohonan, $request, $attached);
-            $msg = [
-                'message' => 'Dokumen berjaya dimuat naik',
-            ];
-            return redirect()->route('dokumenPermohonan.penambahbaikkan.show', [$permohonan->id])->with($msg);
-        }
+        $dp = new DokumenClass();
+        return $dp->update($permohonan, $request, $attached);
     }
 
     #API

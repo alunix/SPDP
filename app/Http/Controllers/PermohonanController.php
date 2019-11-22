@@ -21,18 +21,6 @@ class PermohonanController extends Controller
         return  $sp->senaraiPerakuan();
     }
 
-    public function storePermohonanTidakDilulus(Request $request, $id)
-    {
-        $this->validate($request, [
-            'dokumen' => 'required|file|max:1999',
-        ]);
-
-        $permohonan = Permohonan::find($id);
-        $pc = new PermohonanClass();
-        $pc->storePermohonanTidakDilulus($request, $permohonan->id);
-        return redirect()->route('home');
-    }
-
     /*API START  */
     public function api_permohonanDihantar()
     {

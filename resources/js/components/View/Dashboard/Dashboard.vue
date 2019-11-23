@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-container>
     <div>
       <div class="col-md-12">
         <div class="au-breadcrumb-content">
@@ -95,7 +95,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </v-container>
 </template>
 
 <script>

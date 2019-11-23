@@ -40,12 +40,13 @@
 
         @else
         <header class="header-desktop3 d-none d-lg-block">
-            <div class="section__content section__content--p35">
+            <!-- <div class="section__content section__content--p35"> -->
+            <div class="container">
                 <div class="header3-wrap">
                     <div class="header__logo">
-                        <a href="#">
+                        <router-link :to="{name: 'dashboard'}">
                             <img src="img/latest.png" alt="Persona" style="height:50px" />
-                        </a>
+                        </router-link>
                     </div>
                     <div class="header__navbar nav-item">
                         <ul class="list-unstyled">
@@ -119,7 +120,7 @@
             </div>
         </header>
         @endguest
-        <main class="container" style="background-color:white">
+        <main>
             <!-- Message in blade testing on 27/1/2019 by Bezane -->
             @if (Session::has('message'))
             <div class="alert alert-success" role="alert">

@@ -67,6 +67,7 @@ class Analitik
             $avg_duration =  array_sum($permohonan_duration) / $lulus->count();
         } else
             $avg_duration = 0;
+            
         /*--------------------------------- Fakulti permohonan chart----------------------------------- */
         $permohonans = Fakulti::with(['permohonans' => function ($query) use ($year_report) {
             $query->whereYear('permohonans.created_at', $year_report); //specify which table created at to query
@@ -106,7 +107,6 @@ class Analitik
         $line_chart->dataset('Dokumen permohonan', 'line', $Z->pluck('count'))->options([
             'backgroundColor' => ['#C5CAE9', '#283593'], 'dimensions' => [1000, 800]
         ]);
-
 
         /*--------------------------------- Table------------------------------------ */
         $permohonans = Fakulti::with(['permohonans' => function ($query) use ($year_report) {

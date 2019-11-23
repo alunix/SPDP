@@ -9,7 +9,7 @@ class Fakulti extends Model
     use \Staudenmeir\EloquentHasManyDeep\HasRelationships; //hasManyDeep package that is used to connect more than 3 tables
     protected $primaryKey = 'fakulti_id';
     protected $fillable = [
-        'fakulti_id'
+        'fakulti_id', 'kod', 'f_nama'
     ];
     protected $table = 'fakultis';
 

@@ -77,8 +77,7 @@
                   <td>{{u.name}}</td>
                   <td>{{u.email}}</td>
                   <td>{{u.role|uppercase}}</td>
-                  <td v-if="u.role == 'fakulti'">{{u.fakulti.kod}}</td>
-                  <td v-else></td>
+                  <td>{{u.fakulti? u.fakulti.kod : ""}}</td>
                   <td>{{date(u.created_at)}}</td>
                   <td>
                     <b-dropdown
@@ -138,6 +137,7 @@ export default {
           .then(res => {
             this.users = res;
             this.loaded = true;
+            console.log(this.users);
           });
       } else {
         //Fetch all users if not searching

@@ -32,6 +32,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function () {
 	//Upload laporan
 	// Route::post('/upload-laporan/{id}', 'LaporanController@store')->name('api.laporan.store');
 	Route::post('/muat-naik-penambahbaikkan/{permohonan}', 'DokumenPermohonanController@uploadPenambahbaikkan')->name('dokumenPermohonan.penambahbaikkan.submit');
+	Route::get('/analytics', 'ChartController@analitik')->name('api.analytics');
 });
 Route::get('{any}', function () {
 	return view('layouts.app');

@@ -24,7 +24,7 @@
             solo
           ></v-select>
         </v-col>
-        <v-col class="d-flex" cols="12" sm="2">
+        <v-col @click="getAnalytics" class="d-flex" cols="12" sm="2">
           <v-btn style="margin-bottom:30px" normal>Search</v-btn>
         </v-col>
       </v-app-bar>
@@ -82,6 +82,7 @@ export default {
       ],
       fakultis: [],
       start_date: "",
+      end_date: "",
       fakulti: ""
     };
   },
@@ -94,49 +95,46 @@ export default {
         .then(res => res.json())
         .then(res => {
           this.fakultis = res;
-          this.fakultis.unshift({ fakulti_id: 0, f_nama: "Semua fakulti" });
+          // this.fakultis.unshift({ fakulti_id: 0, f_nama: "Semua fakulti" });
           // console.log(this.fakultis);
         });
-    }
+    },
     // pickFile() {
     //   this.$refs.fail_permohonan.click();
     // },
-    // submit() {
-    //   this.loading = true;
-    //   let formData = new FormData();
-    //   formData.append("fail_permohonan", this.fail_permohonan);
-    //   formData.append("jenis_permohonan", this.jenis_permohonan);
-    //   formData.append("nama_program", this.nama_program);
-    //   formData.append("komen", this.komen);
-    //   this.loaded = false;
-    //   this.success = false;
-    //   this.errors = {};
-    //   axios
-    //     .post("api/permohonan/submit", formData, {
-    //       headers: {
-    //         "Content-Type": "multipart/form-data"
-    //       }
-    //     })
-    //     .then(res => {
-    //       this.error = false;
-    //       this.success = true;
-    //       this.jenis_permohonan = "";
-    //       this.nama_program = "";
-    //       this.komen = "";
-    //       this.fail_permohonan = "";
-    //       this.fileName = "";
-    //       this.loading = false;
-    //       this.$emit("event");
-    //     })
-    //     .catch(error => {
-    //       this.loading = false;
-    //       if (error.response.status === 422) {
-    //         this.errors = error.response.data.errors || {};
-    //         this.success = false;
-    //         this.error = true;
-    //       }
-    //     });
-    // }
+    getAnalytics() {
+      this.loading = true;
+      // this.loaded = false;
+      axios
+        .get("api/analytics", {
+          headers: {
+            start_date : this.start_date,
+            end_date : this.end_date,
+            fakulti: this.fakulti,
+          }
+        })
+        // .then(res => res.json())
+        .then(res => {
+          console.log(res);
+          // this.error = false;
+          // this.success = true;
+          // this.jenis_permohonan = "";
+          // this.nama_program = "";
+          // this.komen = "";
+          // this.fail_permohonan = "";
+          // this.fileName = "";
+          // this.loading = false;
+          // this.$emit("event");
+        })
+        .catch(error => {
+          this.loading = false;
+          if (error.response.status === 422) {
+            this.errors = error.response.data.errors || {};
+            this.success = false;
+            this.error = true;
+          }
+        });
+    }
   }
 };
 </script>

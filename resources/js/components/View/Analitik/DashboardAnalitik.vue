@@ -28,6 +28,7 @@
           <v-btn style="margin-bottom:30px" normal>Search</v-btn>
         </v-col>
       </v-app-bar>
+
       <v-row>
         <div class="col-lg-6">
           <div class="au-card recent-report">

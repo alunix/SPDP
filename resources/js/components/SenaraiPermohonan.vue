@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <v-card>
       <v-row class="left-padding" :align="center" :justify="start">
         <v-col class="divider" cols="3" md="6">

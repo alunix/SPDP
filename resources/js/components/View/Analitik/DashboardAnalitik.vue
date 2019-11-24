@@ -105,15 +105,14 @@ export default {
     getAnalytics() {
       this.loading = true;
       // this.loaded = false;
-      axios
-        .get("api/analytics", {
+      fetch("api/analytics", {
           headers: {
             start_date : this.start_date,
             end_date : this.end_date,
             fakulti: this.fakulti,
           }
         })
-        // .then(res => res.json())
+        .then(res => res.json())
         .then(res => {
           console.log(res);
           // this.error = false;

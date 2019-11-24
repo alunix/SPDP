@@ -11,11 +11,10 @@ use Charts;
 use Illuminate\Support\Facades\DB;
 use SPDP\Services\AnalitikFakulti;
 use Carbon\Carbon;
-
+use Debugbar;
 
 class Analitik
 {
-
     public function dashboard()
     {
         $sort_sums_years = Permohonan::select(
@@ -50,135 +49,73 @@ class Analitik
         $highest_jp_id = $jenis_permohonan->id;
         $highest_jp_id = Permohonan::find($highest_jp_id); // find jenis permohonan huraian through eloquent
         $highest_count_jp = $jenis_permohonan->count_jenis_permohonan;
-
-
         return view('pjk.analitik-permohonan-menu')->with('chart', $chart)->with('pie_chart', $pie_chart)->with('sort_sum_years', $sort_sums_years)->with('highest_jp_id', $highest_jp_id)->with('highest_count_jp', $highest_count_jp);
     }
 
     public function analitik($request)
-    {   
-        $start_date = $request->input('start_date' , Carbon::today()->startOfMonth()->toDateString());
-        $end_date = $request->input('end_date' , Carbon::today()->toDateString());
+    {
+        $start_date = $request->input('start_date', Carbon::today()->startOfMonth()->toDateString());
+        $end_date = $request->input('end_date', Carbon::today()->toDateString());
+        $fakulti = $request->input('fakulti', "");
 
-        // $permohonan_lulus = Permohonan::where('status_id', 6)->orWhere('status_id', 7)
-        // ->whereBetween('created_at', [$start_date, $end_date])
-        // ->select('created_at', 'updated_at')->get(); //find permohonan yang sudah dilulus
+        # permohonan lulus
+        $avg_lulus_duration = DB::table('permohonans')->where('status_id', 6)->orWhere('status_id', 7)
+            ->whereBetween('created_at', [$start_date, $end_date])
+            ->selectRaw('avg(datediff(updated_at, created_at)) as avg_duration')->value('avg_duration');
 
+        # jenis permohonan pie chart
+        $jenis =  DB::table("permohonans")
+            ->join('jenis_permohonans', 'jenis_permohonans.id', '=', 'permohonans.jenis_id')
+            ->whereBetween('permohonans.created_at', [$start_date, $end_date])
+            ->selectRaw("jenis_permohonans.huraian as huraian,count(permohonans.id) as count")
+            ->groupBy('huraian')
+            ->get();
 
+        $pie_chart = [];
+        $pie_chart['labels'] = $jenis->pluck('huraian');
+        $pie_chart['id'] = 'Jenis permohonan';
+        $pie_chart['series'] = $jenis->pluck('count');
 
-        // $permohonan_lulus = DB::table('permh('status_id', 6)->orWhere('status_id', 7)
-        // ->whereBetween('created_at', [$start_date, $end_date])
-        // ->selectRaw('avg(datediff(ss, start_date, end_date)) as avg_seconds')->get(); //find permohonan yang sudah dilulus
-        
-        
-        
-        // $duration = [];
-        // $lulus_count = $permohonan_lulus->count();
-        // if ($lulus_count > 0) {
-        //     foreach($permohonan_lulus as $lulus) {
-        //         array_push($duration, ($lulus->created_at)->diffInDays($lulus->updated_at));
-        //     }
-        //     $avg_duration = array_sum($duration)/ $lulus_count;
-        // } else
-        //     $avg_duration = 0;
-        
-        // return $avg_duration;
+        # line chart for jumlah dokumens
+        $dokumens =  DB::table("dokumens")
+            ->whereBetween('created_at', [$start_date, $end_date])
+            ->selectRaw("DATE_FORMAT(dokumens.created_at,'%M-%Y') as date,count(dokumen_permohonan_id) as count")
+            ->orderBy('created_at', 'asc')
+            ->groupBy('date')
+            ->get();
 
-        // /*--------------------------------- Fakulti permohonan chart----------------------------------- */
-        // $permohonans = Fakulti::with(['permohonans' => function ($query) use ($year_report) {
-        //     $query->whereYear('permohonans.created_at', $year_report); //specify which table created at to query
-        // }])->get()->sortBy('fakulti_id');
-        // $count_permohonan = $permohonans->pluck('permohonans');
-        // for ($i = 0; $i < $count_permohonan->count(); $i++) {
-        //     $A[$i] = count($count_permohonan[$i]);  //calculate count of permohoann in each fakulti
-        // }
-        // $chart = new JenisPermohonanChart();
-        // $chart->labels($permohonans->pluck('kod'));
-        // $chart->dataset('Permohonan sepanjang tahun ' . $year_report, 'bar', $A);
+        $line_chart = [];
+        $line_chart['labels'] = $dokumens->pluck('months');
+        $line_chart['series'] = $dokumens->pluck('count');
+        $line_chart['id'] = 'Dokumen dihantar';
 
-        // /*--------------------------------- Jenis permohonan pie chart----------------------------------- */
-        // $jenis =  DB::table("permohonans")
-        //     ->join('jenis_permohonans', 'jenis_permohonans.id', '=', 'permohonans.jenis_id')
-        //     ->whereYear('permohonans.created_at', $year_report)
-        //     ->selectRaw("jenis_permohonans.huraian as huraian,count(id) as count")
-        //     ->groupBy('huraian')
-        //     ->get();
+        # table
+        $datas = Fakulti::withCount([
+            'permohonans as permohonans_count' => function ($query) use ($start_date, $end_date) {
+                $query->whereBetween('permohonans.created_at', [$start_date, $end_date]);
+            }, 'permohonans as lulus_count' => function ($query) use ($start_date, $end_date) {
+                $query->whereBetween('permohonans.created_at', [$start_date, $end_date])
+                    ->where('permohonans.status_id', 6)->orWhere('permohonans.status_id', 7);
+            }, 'kemajuan_permohonans as penambahbaikkan_count' => function ($query) use ($start_date, $end_date) {
+                $query->whereBetween('permohonans.created_at', [$start_date, $end_date])
+                    ->where('kemajuan_permohonans.status_id', 8)
+                    ->orWhere('kemajuan_permohonans.status_id', 9)
+                    ->orWhere('kemajuan_permohonans.status_id', 10)
+                    ->orWhere('kemajuan_permohonans.status_id', 11);
+            }, 'dokumens as dokumens_count' => function ($query) use ($start_date, $end_date) {
+                $query->whereBetween('dokumens.created_at', [$start_date, $end_date]);
+            }
+        ])->get();
 
-        // $pie_chart = new PermohonanChart();
-        // $pie_chart->labels($jenis->pluck('huraian'));
-        // $pie_chart->dataset('Permohonan sepanjang beberapa tahun', 'pie', $jenis->pluck('count'))->backgroundColor(['#3366CC', '#DC3912', '#FF9900', '#109618', '#990099', '#3B3EAC', '#0099C6', '#DD4477'])->options([
-        //     'backgroundColor' => ['#C5CAE9', '#283593'], 'dimensions' => [1000, 800]
-        // ]);
+        # bar chart permohonan
+        $bar_chart = [];
+        $bar_chart['labels'] = $datas->pluck('kod');
+        $bar_chart['series'] = $datas->pluck('permohonans_count');
+        $bar_chart['id'] = 'Jumlah permohonan dari ' . $start_date . ' sehingga ' . $end_date;
 
-        // /*------------------ Line chart for jumlah dokumen permohonan in a year--------------*/
-        // $Z =  DB::table("dokumens")
-        //     ->whereYear('dokumens.created_at', $year_report)
-        //     ->selectRaw("DATE_FORMAT(dokumens.created_at,'%M') as months, month(dokumens.created_at) as month,count(dokumen_permohonan_id) as count")
-        //     ->orderBy('month', 'asc')
-        //     ->groupBy('months')
-        //     ->get();
-
-        // $line_chart = new JenisPermohonanChart();
-        // $line_chart->labels($Z->pluck('months'));
-        // $line_chart->dataset('Dokumen permohonan', 'line', $Z->pluck('count'))->options([
-        //     'backgroundColor' => ['#C5CAE9', '#283593'], 'dimensions' => [1000, 800]
-        // ]);
-
-        // /*--------------------------------- Table------------------------------------ */
-        // $permohonans = Fakulti::with(['permohonans' => function ($query) use ($year_report) {
-        //     $query->whereYear('permohonans.created_at', $year_report); //specify which table created at to query
-        // }])->get()->sortBy('fakulti_id');
-
-        // $count_permohonan = $permohonans->pluck('permohonans');
-
-        // for ($i = 0; $i < $count_permohonan->count(); $i++) {
-        //     $Z[$i] = count($count_permohonan[$i]);  //calculate count of permohoann in each fakulti
-        // }
-
-        // //Kemajuan permohonan perlu penambahbaikkan
-        // $kp_8 = Fakulti::with(['kemajuan_permohonans' => function ($query) use ($year_report) {
-        //     $query->whereYear('permohonans.created_at', $year_report)->where('kemajuan_permohonans.status_id', 8)->orWhere('kemajuan_permohonans.status_id', 9)->orWhere('kemajuan_permohonans.status_id', 10)->orWhere('kemajuan_permohonans.status_id', 11); //specify which table created at to query
-        // }])->get()->sortBy('fakulti_id');
-
-        // $kp_list = $kp_8->pluck('kemajuan_permohonans');
-
-        // for ($i = 0; $i < $kp_list->count(); $i++) {
-        //     $B[$i] = count($kp_list[$i]);  //calculate count of kemajuan permohoann in each fakulti
-        // }
-
-        // //Kemajuan permohonan yang diluluskan
-        // $kp_6_7 = Fakulti::with(['permohonans' => function ($query) use ($year_report) {
-        //     $query->where('permohonans.status_id', 6)->orWhere('permohonans.status_id', 7); //specify which table created at to query
-        // }])->get()->sortBy('fakulti_id');
-
-
-        // $kp_6_list =  $kp_6_7->pluck('permohonans');
-
-        // for ($i = 0; $i < $kp_6_list->count(); $i++) {
-        //     $C[$i] = count($kp_6_list[$i]);  //calculate count of kemajuan permohoann in each fakulti
-        // }
-
-        // $fakulti_nama = $permohonans->pluck('f_nama');
-        // $fakulti_id = $permohonans->pluck('fakulti_id');
-
-        // //Dokumen permohonans for each fakulti
-        // $dokumens = Fakulti::with('dokumens')->get()->sortBy('fakulti_id')->pluck('dokumens');
-
-        // for ($i = 0; $i < $dokumens->count(); $i++) {
-        //     $doc[$i] = count($dokumens[$i]);  //calculate count of kemajuan permohoann in each fakulti
-        // }
-
-        // for ($i = 0; $i < $permohonans->count(); $i++) {
-        //     $D[$i] = array(
-        //         'fakulti_nama' => $fakulti_nama[$i],
-        //         'jumlah_permohonan' => $Z[$i],
-        //         'jumlah_diluluskan' => $C[$i],
-        //         'jumlah_penambahbaikkan' => $B[$i],
-        //         'jumlah_dokumen_permohonan' => $doc[$i],
-        //         'fakulti_id' => $fakulti_id[$i]
-        //     );  //calculate count of permohoann in each fakulti
-        // }
-
-        // return view('pjk.analitik')->with('chart', $chart)->with('year_report', $year_report)->with('avg_duration', $avg_duration)->with('pie_chart', $pie_chart)->with('permohonans', $D)->with('line_chart', $line_chart)->with('lulus', $lulus);
+        return response()->json([
+            'bar_chart' => $bar_chart, 'avg_lulus_duration' => $avg_lulus_duration,
+            'pie_chart' => $pie_chart, 'line_chart' => $line_chart, 'datas' => $datas
+        ]);
     }
 }

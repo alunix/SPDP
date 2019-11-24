@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <div>
+    
       <div class="col-md-12">
         <div class="au-breadcrumb-content">
           <div class="au-breadcrumb-left">
@@ -21,7 +21,7 @@
           </form>
         </div>
       </div>
-    </div>
+    
     <!-- End Top -->
     <hr />
     <div class="row m-t-25">

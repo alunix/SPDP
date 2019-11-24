@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use SPDP\Services\AnalitikFakulti;
 use Carbon\Carbon;
 use Debugbar;
+use SPDP\DokumenPermohonan;
 
 class Analitik
 {
@@ -54,8 +55,10 @@ class Analitik
 
     public function analitik($request)
     {
-        $start_date = $request->input('start_date', Carbon::today()->startOfMonth()->toDateString());
+        $start_date = $request->input('start_date', '2014-01-01');
         $end_date = $request->input('end_date', Carbon::today()->toDateString());
+        // $start_date = $request->input('start_date', Carbon::today()->startOfMonth()->toDateString());
+        // $end_date = $request->input('end_date', Carbon::today()->toDateString());
         $fakulti = $request->input('fakulti', "");
 
         # permohonan lulus
@@ -85,7 +88,7 @@ class Analitik
             ->get();
 
         $line_chart = [];
-        $line_chart['labels'] = $dokumens->pluck('months');
+        $line_chart['labels'] = $dokumens->pluck('date');
         $line_chart['series'] = $dokumens->pluck('count');
         $line_chart['id'] = 'Dokumen dihantar';
 

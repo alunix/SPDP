@@ -16,10 +16,10 @@ class PermohonanDiluluskan extends Notification
      *
      * @return void
      */
-    public function __construct($permohonan,$penghantar)
+    public function __construct($permohonan, $penghantar)
     {
-        $this->permohonan=$permohonan;
-        $this->penghantar=$penghantar;
+        $this->permohonan = $permohonan;
+        $this->penghantar = $penghantar;
     }
 
     /**
@@ -37,42 +37,41 @@ class PermohonanDiluluskan extends Notification
     {
         $role = auth()->user()->role;
         switch ($role) {
-          
+
             case 'pjk':
-                    return 'Pusat Jaminan Kualiti';
-                break; 
+                return 'Pusat Jaminan Kualiti';
+                break;
             case 'senat':
                 return 'Senat';
-            break; 
+                break;
             case 'penilai':
-                    return 'Panel penilai';
-                break; 
+                return 'Panel penilai';
+                break;
             case 'jppa':
-                    return 'Jawatankuasa Perancangan dan Perkembangan Akademik (JPPA)';
-                break; 
+                return 'Jawatankuasa Perancangan dan Perkembangan Akademik (JPPA)';
+                break;
             default:
-                    return view ('/login'); 
+                return;
                 break;
         }
-        
     }
 
-    
+
     public function toMail($notifiable)
     {
         return (new MailMessage)
-        ->greeting('Salam sejahtera ' . $this->penghantar->name)
-        ->line('Permohonan ID: '. $this->permohonan->permohonan_id)
-        ->line('Jenis permohonan: '. $this->permohonan->jenis_permohonan->jenis_permohonan_huraian)
-        ->line('Permohonan anda telah diluluskan oleh '.$this->pihakMeluluskan())
-        ->line('Laporan telah dikeluarkan')
-        ->action('Lihat laporan', route('fakulti.kemajuanPermohonan',$this->permohonan->permohonan_id))
-        ->line('Terima kasih');
+            ->greeting('Salam sejahtera ' . $this->penghantar->name)
+            ->line('Permohonan ID: ' . $this->permohonan->id)
+            ->line('Jenis permohonan: ' . $this->permohonan->jenis_permohonan->huraian)
+            ->line('Permohonan anda telah diluluskan oleh ' . $this->pihakMeluluskan())
+            ->line('Laporan telah dikeluarkan')
+            ->action('Lihat laporan',  '/permohonan/' . $this->permohonan->id)
+            ->line('Terima kasih');
     }
 
-    
 
-   
+
+
     public function toArray($notifiable)
     {
         return [

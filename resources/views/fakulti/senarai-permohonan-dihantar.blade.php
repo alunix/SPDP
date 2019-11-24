@@ -8,9 +8,6 @@
                             <div class="col-md-12">
                             <div class="au-breadcrumb-content">
                                 <div class="au-breadcrumb-left">
-                                <div class="overview-wrap">
-                                    <h2 class="title-1">Senarai permohonan dihantar</h2>
-                                </div>
                                 </div>
                                 <a href="{{route('permohonan.index')}}" class="btn btn-success mb-2" id="create-permohonan"> <i class="zmdi zmdi-plus"></i>
                                         Permohonan Baharu</a> 
@@ -42,12 +39,12 @@
                             <tr class="tr-shadow">
                                 <th scope="row">{{$loop->iteration}}</th>
                                 <td> {{$permohonan->permohonan_id}}</td>  
-                                <td> {{$permohonan->jenis_permohonan->jenis_permohonan_huraian}}</td>   
+                                <td> {{$permohonan->jenis_permohonan->huraian}}</td>   
                                 <td> {{$permohonan->version_counts()}}</td>
                                 <td> {{$permohonan->doc_title}}</td>                 
                                 <td>{{$permohonan->user->name}}</td>
                                 <td> {{$permohonan->created_at->format('h:i a d/m/Y') }}</td>
-                                <td>{{$permohonan->status_permohonan->status_permohonan_huraian}} </td>
+                                <td>{{$permohonan->status_permohonan->huraian}} </td>
                                 <td> {{$permohonan->updated_at->format('h:i a d/m/Y') }}</td>
                                 <td>
                                     <div class="table-data-feature">

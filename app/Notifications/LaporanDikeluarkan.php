@@ -16,10 +16,10 @@ class LaporanDikeluarkan extends Notification
      *
      * @return void
      */
-    public function __construct($permohonan,$pjk,$panel)
+    public function __construct($permohonan, $pjk, $panel)
     {
-        $this->permohonan= $permohonan;
-        $this->pjk=$pjk;
+        $this->permohonan = $permohonan;
+        $this->pjk = $pjk;
         $this->panel = $panel;
     }
 
@@ -41,14 +41,15 @@ class LaporanDikeluarkan extends Notification
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
-    {
+    {   
+        // $url = url('/invoice/'.$this->invoice->id);
         return (new MailMessage)
-        ->greeting('Salam sejahtera ' . $this->pjk->name)
-        ->line('Permohonan Id: '.$this->permohonan->permohonan_id)
-        ->line('Laporan telah dikeluarkan oleh '.$this->panel->name.' (User ID '.$this->panel->id.')')        
-        ->line('Jenis permohonan: '. $this->permohonan->jenis_permohonan->jenis_permohonan_huraian)
-        ->action('Lihat laporan', route('fakulti.kemajuanPermohonan',$this->permohonan->permohonan_id))
-        ->line('Terima kasih');
+            ->greeting('Salam sejahtera ' . $this->pjk->name)
+            ->line('Permohonan Id: ' . $this->permohonan->id)
+            ->line('Laporan telah dikeluarkan oleh ' . $this->panel->name . ' (User ID ' . $this->panel->id . ')')
+            ->line('Jenis permohonan: ' . $this->permohonan->jenis_permohonan->huraian)
+            ->action('Lihat laporan', '/permohonan/' . $this->permohonan->id)
+            ->line('Terima kasih');
     }
 
     /**

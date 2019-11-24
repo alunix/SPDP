@@ -6,13 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class JenisPermohonan extends Model
 {
-    protected $fillable = [
-        'jenis_permohonan_kod','jenis_permohonan_huraian',
-  
-  
-     ];
+   protected $fillable = [
+      'kod', 'huraian',
 
-     public function permohonan(){
-        return $this->hasOne('SPDP\Permohonan');
-     }
+
+   ];
+
+   public function permohonan()
+   {
+      return $this->hasOne('SPDP\Permohonan');
+   }
 }

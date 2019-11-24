@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class StatusPermohonan extends Model
 {
     protected $fillable = [
-       'status_permohonan_huraian',
- 
- 
+        'huraian',
+
+
     ];
 
-    protected $primaryKey='status_id';
+    protected $primaryKey = 'status_id';
 }

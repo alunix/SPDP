@@ -15,8 +15,8 @@ class CreateJenisPermohonansTable extends Migration
     {
         Schema::create('jenis_permohonans', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('jenis_permohonan_kod');
-            $table->string('jenis_permohonan_huraian');
+            $table->string('kod');
+            $table->string('huraian');
 
             $table->timestamps();
         });

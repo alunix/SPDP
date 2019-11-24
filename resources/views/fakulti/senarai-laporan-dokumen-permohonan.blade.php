@@ -38,7 +38,7 @@
 <td><a href ="<?php echo asset("storage/cadangan_permohonan_baharu/$laporan->tajuk_fail_link")?>">{{ basename($laporan->tajuk_fail_link) }}</td> </a>
 <td> {{$laporan->id_penghantar_nama->name}}</td>
 <td> {{$laporan->id_penghantar_nama->role}}</td>
-<td> {{$laporan->versi_laporan}}</td>
+<td> {{$laporan->versi}}</td>
 <td> {{$laporan->created_at}}</td>
 
 

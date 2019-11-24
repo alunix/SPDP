@@ -16,11 +16,10 @@ class PermohonanBaharu extends Notification
      *
      * @return void
      */
-    public function __construct($permohonan,$penilai)
+    public function __construct($permohonan, $penilai)
     {
-        $this->permohonan= $permohonan;
-        $this->penilai= $penilai;
-    
+        $this->permohonan = $permohonan;
+        $this->penilai = $penilai;
     }
 
     /**
@@ -43,11 +42,11 @@ class PermohonanBaharu extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->greeting('Salam sejahtera ' . $this->penilai->name)
-                    ->line('Anda telah menerima permohonan baharu')
-                    ->line('Jenis permohonan: '. $this->permohonan->jenis_permohonan->jenis_permohonan_huraian)
-                    ->action('Lihat permohonan baharu', route('view-permohonan-baharu',$this->permohonan->permohonan_id))
-                    ->line('Terima kasih');
+            ->greeting('Salam sejahtera ' . $this->penilai->name)
+            ->line('Anda telah menerima permohonan baharu')
+            ->line('Jenis permohonan: ' . $this->permohonan->jenis_permohonan->huraian)
+            ->action('Lihat permohonan baharu', '/permohonan/' . $this->permohonan->id)
+            ->line('Terima kasih');
     }
 
     /**
@@ -59,11 +58,11 @@ class PermohonanBaharu extends Notification
     public function toDatabase($notifiable)
     {
         return (new MailMessage)
-                    ->greeting('Salam sejahtera ' . $this->penilai->name)
-                    ->line('Anda telah menerima permohonan baharu')
-                    ->line('Jenis permohonan: '. $this->permohonan->jenis_permohonan->jenis_permohonan_huraian)
-                    ->action('Lihat permohonan baharu', route('view-permohonan-baharu',$this->permohonan->permohonan_id))
-                    ->line('Terima kasih');
+            ->greeting('Salam sejahtera ' . $this->penilai->name)
+            ->line('Anda telah menerima permohonan baharu')
+            ->line('Jenis permohonan: ' . $this->permohonan->jenis_permohonan->huraian)
+            ->action('Lihat permohonan baharu', '/permohonan/' . $this->permohonan->id)
+            ->line('Terima kasih');
     }
 
     public function toArray($notifiable)

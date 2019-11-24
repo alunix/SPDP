@@ -16,7 +16,7 @@ class CreateFakultisTable extends Migration
         Schema::create('fakultis', function (Blueprint $table) {
             $table->increments('fakulti_id');
             $table->string('f_nama');
-            $table->string('fnama_kod');
+            $table->string('kod');
 
             $table->timestamps();
         });

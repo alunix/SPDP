@@ -3,90 +3,61 @@
 namespace SPDP\Services;
 
 use SPDP\Permohonan;
-use SPDP\Penilaian;
 use SPDP\PenilaianPanel;
-use Illuminate\Support\Facades\DB;
-
-
 
 class SenaraiPermohonan
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {           
+    public function senaraiPermohonanBaru()
+    {
         $role = auth()->user()->role;
+        $data =  Permohonan::with(['user.fakulti:fakulti_id,kod', 'jenis_permohonan:id,huraian', 'status_permohonan:status_id,huraian']);
         switch ($role) {
             case 'pjk':
-            $permohonans= $this->pjk();
-            break;
+                $data->where('jenis_id', '!=', '8')->where('status_id', '=', '1');
+                break;
             case 'jppa':
-            $permohonans= $this->jppa();
-                break; 
+                $data->where('jenis_id', 8)->where('status_id', 1)->orWhere('status_id', 4);
+                break;
             case 'penilai':
-            $permohonans= $this->penilai();
-                break; 
+                $user_id = auth()->user()->id;
+                $penilaian = PenilaianPanel::where('id_penilai', $user_id)->pluck('permohonan_id');
+                $data->whereIn('id', $penilaian)->where('status_id', 2);
+                break;
             case 'senat':
-            $permohonans= $this->senat();
+                $data->where('status_id', '=', '5');
                 break;
             default:
-                    return null;
+                return;
                 break;
-        }        
-        return view ('pjk.pjk-view-permohonan-baharu')->with('permohonans',$permohonans);
-       
+        }
+        return $data->paginate(10);
     }
 
-    public function pjk(){
-     $permohonans = Permohonan::where('jenis_permohonan_id','!=','8')->where('status_permohonan_id','=','1')->get();
-     return $permohonans;
+    public function senaraiPerakuan()
+    {
+        $role = auth()->user()->role;
+        $permohonans = Permohonan::with(['user.fakulti:fakulti_id,kod', 'jenis_permohonan:id,huraian']);
+
+        switch ($role) {
+            case 'pjk':
+                $permohonans->where('jenis_id', '!=', '8')->where('status_id', '=', 3)->orWhere('status_id', '=', 13);
+                break;
+            case 'jppa':
+                $permohonans->where('status_id', '=', '4')->orWhere('status_id', '=', '14');
+                break;
+            case 'penilai':
+                $user_id = auth()->user()->id;
+                $pp = PenilaianPanel::where('id_penilai', $user_id)->get();
+                $permohonans_id = $pp->pluck('permohonan_id');
+                $permohonans->whereIn('id', $permohonans_id)->where('status_id', '=', '12');
+                break;
+            case 'senat':
+                $permohonans->where('status_id', '=', '5')->orWhere('status_id', '=', '15');
+                break;
+            default:
+                return;
+                break;
+        }
+        return $permohonans->paginate(10);
     }
-    
-    public function perakuanPjk(){
-
-            $permohonans = Permohonan::where('jenis_permohonan_id','!=','8')->where('status_permohonan_id','=',3)->get();
-            return view ('pjk.senarai-perakuan-penilaian')->with('permohonans',$permohonans);
-    }
-    
-    public function penilai(){
-
-        $user_id = auth()->user()->id;
-       
-        $permohonans=  DB::table("permohonans") 
-        ->join('penilaian_panels','penilaian_panels.permohonanID','=','permohonans.permohonan_id')
-        ->join('users','users.id','=','penilaian_panels.id_penilai')
-        ->where('permohonans.status_permohonan_id',2)
-        ->where('penilaian_panels.id_penilai',$user_id)       
-        ->get();
-        
-         if (empty((array) $permohonans)) { //check if array object is empty
-            $permohonans= new Permohonan();
-        }
-
-        else{
-            $id = $permohonans->pluck('permohonan_id');
-            $permohonans = Permohonan::whereIn('permohonan_id',$id)->get();
-        }
-
-        return $permohonans;
-                
-        }
-    public function jppa(){
-
-        $permohonans = Permohonan::where('jenis_permohonan_id',8)->where('status_permohonan_id',1)->orWhere('status_permohonan_id',4)->get();
-
-        return $permohonans;
-      
-        }
-    public function senat(){        
-        $permohonans = Permohonan::where('status_permohonan_id','=','5')->get();
-        return $permohonans;
-                
-        }
-    
-
-   
 }

@@ -42,29 +42,10 @@ return [
         ],
 
         'api' => [
-            'driver' => 'token',
+            'driver' => 'passport',
             'provider' => 'users',
         ],
 
-        'admin' => [
-            'driver' => 'session',
-            'provider' => 'admins',
-        ],
-
-        'admin-api' => [
-            'driver' => 'token',
-            'provider' => 'admins',
-        ],
-
-        'operator' => [
-            'driver' => 'session',
-            'provider' => 'operators',
-        ],
-
-        'operator-api' => [
-            'driver' => 'token',
-            'provider' => 'operators',
-        ],
     ],
 
     /*
@@ -90,40 +71,11 @@ return [
             'model' => SPDP\User::class,
         ],
 
-        'programs' => [
-            'driver' => 'eloquent',
-            'model' => SPDP\Program::class,
-        ],
-
-        // 'operators' => [
-        //     'driver' => 'eloquent',
-        //     'model' => busplannersystem\Operator::class,
-
-        // ],
-
-        // 'penilaians' => [
-        //     'driver' => 'eloquent',
-        //     'model' =>  busplannersystem\Penilaian::class,
-
-
-        // ],
-
         'users' => [
             'driver' => 'database',
             'table' => 'users',
         ],
 
-        'admins' => [
-            'driver' => 'database',
-            'table' => 'admins',
-        ],
-
-        'operators' => [
-            'driver' => 'database',
-            'table' => 'operators',
-        ],
-
-        
     ],
 
     /*
@@ -144,16 +96,6 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
-            'table' => 'password_resets',
-            'expire' => 60,
-        ],
-        'admins' => [
-            'provider' => 'admins',
-            'table' => 'password_resets',
-            'expire' => 60,
-        ],
-        'operators' => [
-            'provider' => 'operators',
             'table' => 'password_resets',
             'expire' => 60,
         ],

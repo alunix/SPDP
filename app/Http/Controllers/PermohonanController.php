@@ -1,6 +1,7 @@
 <?php
 
 namespace SPDP\Http\Controllers;
+
 use SPDP\Permohonan;
 use SPDP\DokumenPermohonan;
 use SPDP\User;
@@ -10,94 +11,55 @@ use SPDP\Services\PenilaianPJK;
 use SPDP\Services\SenaraiPermohonan;
 use SPDP\Services\SenaraiPerakuan;
 use SPDP\Services\ShowPermohonan;
-use Redirect,Response;
+use Redirect, Response, Debugbar;
 
 class PermohonanController extends Controller
 {
-   
-    public function index()
-    {
-        $permohonans = Permohonan::all();
-        return view ('fakulti.fakulti-insert-permohonan')->with('permohonans',$permohonans);
-    }
-   
-    public function permohonanDihantar()
-    {   
-        $user_id =auth()->user()->id;
-        $user= User::find($user_id);
-        return view ('fakulti.senarai-permohonan-dihantar')->with('permohonans',$user->permohonans);
-    }
-
-    public function showListPermohonanBaharu()
-    {  
-        $sp = new SenaraiPermohonan();
-        return  $sp->index();
-    }
-
     public function senaraiPerakuan()
     {
-        $sp = new SenaraiPerakuan();
+        $sp = new SenaraiPermohonan();
         return  $sp->senaraiPerakuan();
     }
 
-    public function permohonanTidakDilulus(Request $request,$id)
+    /*API START  */
+    public function api_permohonanDihantar()
     {
-        $permohonan= Permohonan::find($id);
-        return view('laporan.permohonan-tidak-dilulus')->with('permohonan',$permohonan)->with('jenis_permohonan',$permohonan->jenis_permohonan);
+        $id = auth()->user()->id;
+        $permohonans = Permohonan::with(['jenis_permohonan:id,huraian', 'status_permohonan:status_id,huraian'])
+            ->where('id_penghantar', $id)->orderBy('created_at', 'desc')->paginate(10);
+        return $permohonans;
     }
 
-     public function storePermohonanTidakDilulus(Request $request,$id)
-     {    
-        $this->validate($request,[
-            'dokumen' => 'required|file|max:1999',
+    public function api_showListPermohonanBaharu()
+    {
+        $sp = new SenaraiPermohonan();
+        return $sp->senaraiPermohonanBaru();
+    }
+
+    public function show($id)
+    {
+        $permohonan = Permohonan::findOrFail($id);
+        $show = new ShowPermohonan();
+        return $show->redirect($permohonan);
+    }
+
+    public function pelantikanPenilaiSubmit(PenilaianPJK $pp, Request $request, $id)
+    {
+        $this->validate($request, [
+            'due_date' => 'required|after:today',
+            'selectedPenilai' => 'required'
         ]);
-        
-        $permohonan = Permohonan::find($id);
-        $pc = new PermohonanClass();
-        $pc->storePermohonanTidakDilulus($request,$permohonan->permohonan_id);
-        return redirect()->route('home');
-     }
+        return $pp->pelantikanPenilaiSubmit($request, $id);
+    }
 
     public function store(Request $request)
     {
-        $this->validate($request,[
-            'nama_penghantar' => 'required|string|max:20',
-            'jenis_permohonan_id' => 'required|integer|max:255',
-            'file_link' => 'required|mimes:pdf|max:1999',
+        $this->validate($request, [
+            'jenis_permohonan' => 'required|integer|max:255',
+            'nama_program' => 'required|string',
+            'fail_permohonan' => 'required|mimes:pdf|max:1999',
         ]);
-      
-        $pc = new PermohonanClass();       
-        return $permohonan = $pc->create($request);
-    }  
-    public function show($id)  {
-        
-        /* Main function but mcm tak betul , testing other possibilities */
-        $permohonan= Permohonan::find($id);
-        
-          
-        if($permohonan==null){
-            abort(403,'Tidak dibenarkan');
-         }
-
-        $show = new ShowPermohonan();
-        return $show->show($permohonan);
+        $pc = new PermohonanClass();
+        return $pc->create($request);
     }
-   
-    public function  showPelantikanPenilai($id) {
-
-        $permohonan = Permohonan::find($id);
-        $users = User::where('role','penilai')->get();
-        $dp = DokumenPermohonan::where('permohonan_id',$permohonan->permohonan_id)->orderBy('versi', 'DESC')->first();
-        return view ('pjk.pjk-melantik-penilai')->with('users',$users)->with('permohonan',$permohonan)->with('dp',$dp);
-    }
-
-  
-    public function pelantikanPenilaiSubmit(PenilaianPJK $pp,Request $request, $id)    {      
-        
-        $this->validate($request,[
-            'checked' => 'required',
-        ]);
-            return $pp->pelantikanPenilaiSubmit($request,$id);
-    }
-
 }

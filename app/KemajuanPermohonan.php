@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class KemajuanPermohonan extends Model
 {
     protected $fillable = [
-        'permohonan_id', 'status_permohonan' 
+        'permohonan_id', 'status_id' 
  
  
     ];
@@ -15,7 +15,7 @@ class KemajuanPermohonan extends Model
     protected $table = 'kemajuan_permohonans';
 
     public function statusPermohonan(){
-         return $this->belongsTo('SPDP\StatusPermohonan','status_permohonan');
+         return $this->belongsTo('SPDP\StatusPermohonan','status_id');
      }
  
 }

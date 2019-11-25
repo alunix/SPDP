@@ -28,63 +28,42 @@
           <v-btn style="margin-bottom:30px" normal>Search</v-btn>
         </v-col>
       </v-app-bar>
+    </v-row>
 
+    <v-card>
       <v-row>
-        <div class="col-lg-6">
-          <div class="au-card recent-report">
-            <div class="au-card-inner">
-              <h3 class="title-2">Jumlah permohonan mengikut fakulti</h3>
-              <div class="chart-info"></div>
-              <div class="recent-report__chart">
-                <apexchart
-                  v-if="loaded"
-                  width="500"
-                  height="200"
-                  type="bar"
-                  :options="line_chart.options"
-                  :series="line_chart.series"
-                ></apexchart>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="au-card recent-report">
-            <div class="au-card-inner">
-              <h3 class="title-2">Jenis permohonan</h3>
-              <div class="recent-report__chart">
-                <apexchart
-                  v-if="loaded"
-                  width="500"
-                  height="200"
-                  type="donut"
-                  :options="pie_chart.options"
-                  :series="pie_chart.series"
-                ></apexchart>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="au-card recent-report">
-            <div class="au-card-inner">
-              <h3 class="title-2">Dokumen dihantar</h3>
-              <div class="recent-report__chart">
-                <apexchart
-                  v-if="loaded"
-                  width="500"
-                  type="bar"
-                  :options="bar_chart.options"
-                  :series="bar_chart.series"
-                ></apexchart>
-              </div>
-            </div>
-          </div>
-        </div>
+        <v-col cols="7" sm="6" md="8">
+          <apexchart
+            v-if="loaded"
+            width="500"
+            height="200"
+            type="bar"
+            :options="line_chart.options"
+            :series="line_chart.series"
+          ></apexchart>
+        </v-col>
+        <v-col cols="9" sm="5" md="4">
+          <apexchart
+            v-if="loaded"
+            width="400"
+            height="200"
+            type="donut"
+            :options="pie_chart.options"
+            :series="pie_chart.series"
+          ></apexchart>
+
+          <!-- <apexchart
+              v-if="loaded"
+              width="500"
+              type="bar"
+              :options="bar_chart.options"
+              :series="bar_chart.series"
+          ></apexchart>-->
+        </v-col>
       </v-row>
 
       <v-row v-if="loaded" align="center" justify="center">
-        <v-col>
+        <table>
           <table class="table table-hover">
             <thead class="thead-light">
               <tr>
@@ -108,9 +87,9 @@
               </tr>
             </tbody>
           </table>
-        </v-col>
+        </table>
       </v-row>
-    </v-row>
+    </v-card>
   </v-container>
 </template>
 
@@ -135,7 +114,8 @@ export default {
       datas: [],
       bar_chart: [],
       line_chart: [],
-      pie_chart: []
+      pie_chart: [],
+      errors: []
     };
   },
   created() {
@@ -153,14 +133,16 @@ export default {
     getAnalytics() {
       this.loading = true;
       // this.loaded = false;
-      fetch("api/analytics", {
-        headers: {
-          start_date: this.start_date,
-          end_date: this.end_date,
-          fakulti: this.fakulti
-        }
-      })
-        .then(res => res.json())
+      console.log(this.fakulti);
+      axios
+        .get("api/analytics", {
+          params: {
+            start_date: this.start_date,
+            end_date: this.end_date,
+            fakulti: this.fakulti
+          }
+        })
+        .then(res => res.data)
         .then(res => {
           console.log(res);
           this.datas = res.datas;
@@ -209,11 +191,12 @@ export default {
         })
         .catch(error => {
           this.loading = false;
-          if (error.response.status === 422) {
-            this.errors = error.response.data.errors || {};
-            this.success = false;
-            this.error = true;
-          }
+          // if (error.response.status === 422) {
+          // this.errors = error.response.data.errors || {};
+          console.log(error);
+          // this.success = false;
+          // this.error = true;
+          // }
         });
     }
   }

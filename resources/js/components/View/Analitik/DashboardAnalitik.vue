@@ -99,12 +99,32 @@ export default {
   data() {
     return {
       date_pickers: [
-        { desc: "1 hari lepas", value: dayjs().subtract(1, "day") },
-        { desc: "7 hari lepas", value: dayjs().subtract(7, "day") },
-        { desc: "30 hari lepas", value: dayjs().subtract(30, "day") },
-        { desc: "90 hari lepas", value: dayjs().subtract(90, "day") },
+        {
+          desc: "1 hari lepas",
+          value: dayjs()
+            .subtract(1, "day")
+            .format("YYYY-MM-DD")
+        },
+        {
+          desc: "7 hari lepas",
+          value: dayjs()
+            .subtract(7, "day")
+            .format("YYYY-MM-DD")
+        },
+        {
+          desc: "30 hari lepas",
+          value: dayjs()
+            .subtract(30, "day")
+            .format("YYYY-MM-DD")
+        },
+        {
+          desc: "90 hari lepas",
+          value: dayjs()
+            .subtract(90, "day")
+            .format("YYYY-MM-DD")
+        },
         { desc: "12 bulan lepas", value: dayjs().subtract(12, "month") },
-        { desc: "Custom date range", value: "custom_date_range" }
+        { desc: "Custom date range", value: null }
       ],
       fakultis: [],
       start_date: "",
@@ -132,8 +152,7 @@ export default {
     },
     getAnalytics() {
       this.loading = true;
-      // this.loaded = false;
-      console.log(this.fakulti);
+      this.loaded = false;
       axios
         .get("api/analytics", {
           params: {
@@ -144,7 +163,6 @@ export default {
         })
         .then(res => res.data)
         .then(res => {
-          console.log(res);
           this.datas = res.datas;
           this.bar_chart = {
             options: {
@@ -191,12 +209,11 @@ export default {
         })
         .catch(error => {
           this.loading = false;
-          console.log(error);
-          // if (error.response.status === 422) {
-          //   this.errors = error.response.data.errors || {};
-          //   this.success = false;
-          //   this.error = true;
-          // }
+          if (error.response.status === 422) {
+            this.errors = error.response.data.errors || {};
+            this.success = false;
+            this.error = true;
+          }
         });
     }
   }

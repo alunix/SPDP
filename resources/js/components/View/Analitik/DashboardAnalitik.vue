@@ -191,11 +191,11 @@ export default {
         })
         .catch(error => {
           this.loading = false;
-          // if (error.response.status === 422) {
-          // this.errors = error.response.data.errors || {};
           console.log(error);
-          // this.success = false;
-          // this.error = true;
+          // if (error.response.status === 422) {
+          //   this.errors = error.response.data.errors || {};
+          //   this.success = false;
+          //   this.error = true;
           // }
         });
     }

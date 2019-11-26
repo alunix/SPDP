@@ -38,7 +38,7 @@ class LaporanClass
         }
     }
 
-    public function createLaporanObject($permohonan, $fileNameWithExt, $fileNameToStore, $request)
+    private function createLaporanObject($permohonan, $fileNameWithExt, $fileNameToStore, $request)
     {
         $user_id = auth()->user()->id;
         $laporan_count = $this->getAmountOfLaporan($permohonan);
@@ -53,7 +53,7 @@ class LaporanClass
         $laporan->save();
     }
 
-    public function getAmountOfLaporan($permohonan)
+    private function getAmountOfLaporan($permohonan)
     {
         $user_id = auth()->user()->id;
         $laporans_id = $permohonan->dokumens->pluck('dokumen_permohonan_id');
@@ -61,7 +61,7 @@ class LaporanClass
         return $laporans;
     }
 
-    public function permohonanLulus($permohonan)
+    private function permohonanLulus($permohonan)
     {
         $permohonan->status_id = $this->getStatusKelulusan($permohonan);
         $permohonan->save();
@@ -73,7 +73,7 @@ class LaporanClass
         return $this->sendEmailPemeriksa($permohonan);
     }
 
-    public function permohonanTidakLulus($permohonan)
+    private function permohonanTidakLulus($permohonan)
     {
         $permohonan->status_id = $this->getStatusPenambahbaikkan();
         $permohonan->save();
@@ -83,7 +83,7 @@ class LaporanClass
         Notification::route('mail', $penghantar->email)->notify(new PerluPenambahbaikkan($permohonan, $penghantar)); //hantar email kepada penghantar
     }
 
-    public function sendEmailPemeriksa($permohonan)
+    private function sendEmailPemeriksa($permohonan)
     {
         $user = auth()->user();
         $role = $user->role;
@@ -103,7 +103,7 @@ class LaporanClass
         }
     }
 
-    public function getStatusKelulusan($permohonan)
+    private function getStatusKelulusan($permohonan)
     {
         $role = auth()->user()->role;
         $jp = $permohonan->jenis_permohonan->kod;
@@ -141,7 +141,7 @@ class LaporanClass
         }
     }
 
-    public function getStatusPenambahbaikkan()
+    private function getStatusPenambahbaikkan()
     {
         $role = auth()->user()->role;
 

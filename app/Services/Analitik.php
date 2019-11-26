@@ -22,59 +22,28 @@ class Analitik
         $end_date = $request->input('end_date') ?: Carbon::today()->toDateString();
         $fakulti = $request->input('fakulti');
 
-        Debugbar::info($start_date);
-
         # permohonan lulus
-        $avg_lulus_duration = DB::table('permohonans')
-            ->where('status_id', 6)->orWhere('status_id', 7)
-            ->whereBetween('created_at', [$start_date, $end_date])
-            ->selectRaw('avg(datediff(updated_at, created_at)) as avg_duration')->value('avg_duration');
+        $avg_lulus_duration = $this->average_lulus_duration($start_date, $end_date);
 
         # jenis permohonan pie chart query
-        $jenis_query =  DB::table("permohonans")
-            ->join('jenis_permohonans', 'jenis_permohonans.id', '=', 'permohonans.jenis_id')
-            ->join('users', 'users.id', '=', 'permohonans.id_penghantar')
-            ->whereBetween('permohonans.created_at', [$start_date, $end_date])
-            ->selectRaw("jenis_permohonans.huraian as huraian,count(permohonans.id) as count")
-            ->groupBy('huraian');
+        $jenis_query = $this->jenis_query($start_date, $end_date);
 
         # line chart for jumlah dokumens query
-        $dokumens_query =  DB::table("dokumens")
-            ->join('permohonans', 'permohonans.id', '=', 'dokumens.permohonan_id')
-            ->join('users', 'users.id', '=', 'permohonans.id_penghantar')
-            ->whereBetween('dokumens.created_at', [$start_date, $end_date])
-            ->selectRaw("DATE_FORMAT(dokumens.created_at,'%M-%Y') as date,count(dokumen_permohonan_id) as count")
-            ->orderBy('dokumens.created_at', 'asc')
-            ->groupBy('date');
+        $dokumens_query = $this->dokumens_query($start_date, $end_date);
 
         # table query
-        $query_table = Fakulti::withCount([
-            'permohonans as permohonans_count' => function ($query) use ($start_date, $end_date) {
-                $query->whereBetween('permohonans.created_at', [$start_date, $end_date]);
-            }, 'permohonans as lulus_count' => function ($query) use ($start_date, $end_date) {
-                $query->whereBetween('permohonans.created_at', [$start_date, $end_date])
-                    ->where('permohonans.status_id', 6)->orWhere('permohonans.status_id', 7);
-            }, 'kemajuan_permohonans as penambahbaikkan_count' => function ($query) use ($start_date, $end_date) {
-                $query->whereBetween('permohonans.created_at', [$start_date, $end_date])
-                    ->where('kemajuan_permohonans.status_id', 8)
-                    ->orWhere('kemajuan_permohonans.status_id', 9)
-                    ->orWhere('kemajuan_permohonans.status_id', 10)
-                    ->orWhere('kemajuan_permohonans.status_id', 11);
-            }, 'dokumens as dokumens_count' => function ($query) use ($start_date, $end_date) {
-                $query->whereBetween('dokumens.created_at', [$start_date, $end_date]);
-            }
-        ]);
+        $table_query = $this->table_query($start_date, $end_date);
 
         # preparing query
         $dokumens = [];
         $datas = [];
         $jenis = [];
         if (!$fakulti) {
-            $datas = $query_table->get();
+            $datas = $table_query->get();
             $dokumens = $dokumens_query->get();
             $jenis = $jenis_query->get();
         } else {
-            $datas = $query_table->where('fakulti_id', $fakulti)->get();
+            $datas = $table_query->where('fakulti_id', $fakulti)->get();
             $dokumens = $dokumens_query->where('users.fakulti_id', $fakulti)->get();
             $jenis = $jenis_query->where('users.fakulti_id', $fakulti)->get();
         }
@@ -101,5 +70,62 @@ class Analitik
             'bar_chart' => $bar_chart, 'avg_lulus_duration' => $avg_lulus_duration,
             'pie_chart' => $pie_chart, 'line_chart' => $line_chart, 'datas' => $datas
         ]);
+    }
+
+    private function  average_lulus_duration($start_date, $end_date)
+    {
+        $query = DB::table('permohonans')
+            ->where('status_id', 6)->orWhere('status_id', 7)
+            ->whereBetween('created_at', [$start_date, $end_date])
+            ->selectRaw('avg(datediff(updated_at, created_at)) as avg_duration')->value('avg_duration');
+
+        return $query;
+    }
+
+    private function jenis_query($start_date, $end_date)
+    {
+        $query = DB::table("permohonans")
+            ->join('jenis_permohonans', 'jenis_permohonans.id', '=', 'permohonans.jenis_id')
+            ->join('users', 'users.id', '=', 'permohonans.id_penghantar')
+            ->whereBetween('permohonans.created_at', [$start_date, $end_date])
+            ->selectRaw("jenis_permohonans.huraian as huraian,count(permohonans.id) as count")
+            ->groupBy('huraian');
+
+        return $query;
+    }
+
+    private function dokumens_query($start_date, $end_date)
+    {
+        $query = DB::table("dokumens")
+            ->join('permohonans', 'permohonans.id', '=', 'dokumens.permohonan_id')
+            ->join('users', 'users.id', '=', 'permohonans.id_penghantar')
+            ->whereBetween('dokumens.created_at', [$start_date, $end_date])
+            ->selectRaw("DATE_FORMAT(dokumens.created_at,'%M-%Y') as date,count(dokumen_permohonan_id) as count")
+            ->orderBy('dokumens.created_at', 'asc')
+            ->groupBy('date');
+
+        return $query;
+    }
+
+    private function table_query($start_date, $end_date)
+    {
+        $query =  Fakulti::withCount([
+            'permohonans as permohonans_count' => function ($query) use ($start_date, $end_date) {
+                $query->whereBetween('permohonans.created_at', [$start_date, $end_date]);
+            }, 'permohonans as lulus_count' => function ($query) use ($start_date, $end_date) {
+                $query->whereBetween('permohonans.created_at', [$start_date, $end_date])
+                    ->where('permohonans.status_id', 6)->orWhere('permohonans.status_id', 7);
+            }, 'kemajuan_permohonans as penambahbaikkan_count' => function ($query) use ($start_date, $end_date) {
+                $query->whereBetween('permohonans.created_at', [$start_date, $end_date])
+                    ->where('kemajuan_permohonans.status_id', 8)
+                    ->orWhere('kemajuan_permohonans.status_id', 9)
+                    ->orWhere('kemajuan_permohonans.status_id', 10)
+                    ->orWhere('kemajuan_permohonans.status_id', 11);
+            }, 'dokumens as dokumens_count' => function ($query) use ($start_date, $end_date) {
+                $query->whereBetween('dokumens.created_at', [$start_date, $end_date]);
+            }
+        ]);
+
+        return $query;
     }
 }

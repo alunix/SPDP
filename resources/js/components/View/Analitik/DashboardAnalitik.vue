@@ -124,7 +124,7 @@ export default {
             .format("YYYY-MM-DD")
         },
         { desc: "12 bulan lepas", value: dayjs().subtract(12, "month") },
-        { desc: "Custom date range", value: null }
+        { desc: "Custom date range", value: "" }
       ],
       fakultis: [],
       start_date: "",

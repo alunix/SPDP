@@ -27,7 +27,7 @@ class PermohonanController extends Controller
         $id = auth()->user()->id;
         $permohonans = Permohonan::with(['jenis_permohonan:id,huraian', 'status_permohonan:status_id,huraian'])
             ->where('id_penghantar', $id)->orderBy('created_at', 'desc')->paginate(10);
-        return $permohonans;
+        return response()->json($permohonans);
     }
 
     public function api_showListPermohonanBaharu()

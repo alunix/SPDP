@@ -50,52 +50,50 @@
       </v-row>
 
       <v-row align="center" justify="center">
-        <v-progress-circular style="padding-top:40px" v-if="!loaded" :size="25" :width="2" color="blue-grey" indeterminate></v-progress-circular>
+        <v-progress-circular
+          style="padding-top:40px"
+          v-if="!loaded"
+          :size="25"
+          :width="2"
+          color="blue-grey"
+          indeterminate
+        ></v-progress-circular>
       </v-row>
-  
-      <div v-if="loaded">
-        <v-row align="center" justify="center">
-          <v-col>
-            <table class="table table-hover">
-              <thead class="thead-light">
-                <tr>
-                  <th scope="col">NO</th>
-                  <th scope="col">NAME</th>
-                  <th scope="col">EMAIL</th>
-                  <th scope="col">PERANAN</th>
-                  <th scope="col">FAKULTI</th>
-                  <th scope="col">TARIKH DICIPTA</th>
-                  <th></th>
-                </tr>
-              </thead>
 
-              <tbody id="permohonans-add">
-                <tr class="tr-shadow td-cursor" v-for="(u, index) in users" v-bind:key="u.id">
-                  <th
-                    scope="row"
-                  >{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
-                  <td>{{u.name}}</td>
-                  <td>{{u.email}}</td>
-                  <td>{{u.role|uppercase}}</td>
-                  <td>{{u.fakulti? u.fakulti.kod : ""}}</td>
-                  <td>{{date(u.created_at)}}</td>
-                  <td>
-                    <b-dropdown
-                      size="sm"
-                      id="dropdown-left"
-                      text="More"
-                      variant="white"
-                      class="m-2"
-                    >
-                      <b-dropdown-item v-on:click="setUserId(u.id);showModel()">Lihat pengguna</b-dropdown-item>
-                      <b-dropdown-item style="color:#ff0000;" href="#">Padam/Delete pengguna</b-dropdown-item>
-                    </b-dropdown>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </v-col>
-        </v-row>
+      <div v-if="loaded">
+        <v-simple-table fixed-header height="auto">
+          <template v-slot:default>
+            <thead>
+              <tr>
+                <th scope="col">NO</th>
+                <th scope="col">NAME</th>
+                <th scope="col">EMAIL</th>
+                <th scope="col">PERANAN</th>
+                <th scope="col">FAKULTI</th>
+                <th scope="col">TARIKH DICIPTA</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(u, index) in users" v-bind:key="u.id">
+                <th
+                  scope="row"
+                >{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
+                <td>{{u.name}}</td>
+                <td>{{u.email}}</td>
+                <td>{{u.role|uppercase}}</td>
+                <td>{{u.fakulti? u.fakulti.kod : ""}}</td>
+                <td>{{date(u.created_at)}}</td>
+                <td>
+                  <b-dropdown size="sm" id="dropdown-left" text="More" variant="white" class="m-2">
+                    <b-dropdown-item v-on:click="setUserId(u.id);showModel()">Lihat pengguna</b-dropdown-item>
+                    <b-dropdown-item style="color:#ff0000;" href="#">Padam/Delete pengguna</b-dropdown-item>
+                  </b-dropdown>
+                </td>
+              </tr>
+            </tbody>
+          </template>
+        </v-simple-table>
       </div>
     </v-card>
   </v-container>
@@ -193,4 +191,12 @@ export default {
 };
 </script>
 <style>
+.tr-shadow {
+  -webkit-box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.03);
+  -moz-box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.03);
+  box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.03);
+}
+td {
+  font-size: 24px;
+}
 </style>

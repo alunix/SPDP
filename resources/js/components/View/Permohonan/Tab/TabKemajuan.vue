@@ -29,24 +29,26 @@
     </v-row>
     <div class="row justify-content-center">
       <div class="container">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">No</th>
-              <th scope="col">Status Permohonan</th>
-              <th scope="col">Tarikh/Masa</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="tr-shadow" v-for="(k, index) in kemajuans" v-bind:key="k.id">
-              <th
-                scope="row"
-              >{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
-              <td>{{k.status_permohonan.huraian}}</td>
-              <td>{{date(k.created_at)}}</td>
-            </tr>
-          </tbody>
-        </table>
+        <v-simple-table fixed-header height="auto">
+          <template v-slot:default>
+            <thead>
+              <tr>
+                <th scope="col">No</th>
+                <th scope="col">Status Permohonan</th>
+                <th scope="col">Tarikh/Masa</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="tr-shadow" v-for="(k, index) in kemajuans" v-bind:key="k.id">
+                <th
+                  scope="row"
+                >{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
+                <td>{{k.status_permohonan.huraian}}</td>
+                <td>{{date(k.created_at)}}</td>
+              </tr>
+            </tbody>
+          </template>
+        </v-simple-table>
       </div>
     </div>
   </div>

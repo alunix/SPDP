@@ -23,37 +23,39 @@
         >Next</v-btn>
       </v-row>
     </v-row>
-    <table v-if="laporans.length" class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col">No</th>
-          <th scope="col">Laporan</th>
-          <th scope="col">Dihantar</th>
-          <th scope="col">Laporan Id</th>
-          <th scope="col">Pihak</th>
-          <th scope="col">Komen</th>
-          <th scope="col">Versi</th>
-          <th scope="col">Tarikh/Masa</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          class="tr-shadow td-cursor"
-          v-for="(l, index) in laporans"
-          v-bind:key="l.laporan_id"
-          v-on:click="openFile(l.tajuk_fail_link)"
-        >
-          <th scope="row">{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
-          <td>{{l.tajuk_fail_link}}</td>
-          <td>{{l.id_penghantar_nama.name || " "}}</td>
-          <td>{{l.laporan_id}}</td>
-          <td>{{l.id_penghantar_nama.role|uppercase}}</td>
-          <td>{{l.komen}}</td>
-          <td>{{l.versi}}</td>
-          <td>{{date(l.created_at)}}</td>
-        </tr>
-      </tbody>
-    </table>
+    <v-simple-table fixed-header height="auto">
+      <template v-slot:default>
+        <thead>
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">Laporan</th>
+            <th scope="col">Dihantar</th>
+            <th scope="col">Laporan Id</th>
+            <th scope="col">Pihak</th>
+            <th scope="col">Komen</th>
+            <th scope="col">Versi</th>
+            <th scope="col">Tarikh/Masa</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            class="tr-shadow td-cursor"
+            v-for="(l, index) in laporans"
+            v-bind:key="l.laporan_id"
+            v-on:click="openFile(l.tajuk_fail_link)"
+          >
+            <th scope="row">{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
+            <td>{{l.tajuk_fail_link}}</td>
+            <td>{{l.id_penghantar_nama.name || " "}}</td>
+            <td>{{l.laporan_id}}</td>
+            <td>{{l.id_penghantar_nama.role|uppercase}}</td>
+            <td>{{l.komen}}</td>
+            <td>{{l.versi}}</td>
+            <td>{{date(l.created_at)}}</td>
+          </tr>
+        </tbody>
+      </template>
+    </v-simple-table>
   </div>
 </template>
 <script>

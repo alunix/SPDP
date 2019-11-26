@@ -84,7 +84,6 @@ export default {
       fetch(page_url)
         .then(res => res.json())
         .then(res => {
-          console.log(res);
           this.permohonans = res.data;
           that.makePagination(res);
         });

@@ -42,38 +42,40 @@
 
       <v-row v-else :align="center" :justify="center">
         <v-col>
-          <table class="table table-hover">
-            <thead class="thead-light">
-              <tr>
-                <th scope="col">NO</th>
-                <th scope="col">JENIS</th>
-                <th scope="col">ID</th>
-                <th scope="col">TAJUK</th>
-                <th scope="col">TARIKH HANTAR</th>
-                <th scope="col">STATUS</th>
-                <th scope="col">TARIKH STATUS</th>
-              </tr>
-            </thead>
+          <v-simple-table fixed-header height="auto">
+            <template v-slot:default>
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">NO</th>
+                  <th scope="col">JENIS</th>
+                  <th scope="col">ID</th>
+                  <th scope="col">TAJUK</th>
+                  <th scope="col">TARIKH HANTAR</th>
+                  <th scope="col">STATUS</th>
+                  <th scope="col">TARIKH STATUS</th>
+                </tr>
+              </thead>
 
-            <tbody id="permohonans-add">
-              <tr
-                class="tr-shadow td-cursor"
-                v-for="(p, index) in permohonans"
-                v-bind:key="p.id"
-                v-on:click="show(p.id)"
-              >
-                <th
-                  scope="row"
-                >{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
-                <td>{{p.jenis_permohonan.huraian}}</td>
-                <td>{{p.id}}</td>
-                <td>{{p.doc_title}}</td>
-                <td>{{date(p.created_at)}}</td>
-                <td>{{p.status_permohonan.huraian}}</td>
-                <td>{{date(p.updated_at)}}</td>
-              </tr>
-            </tbody>
-          </table>
+              <tbody id="permohonans-add">
+                <tr
+                  class="tr-shadow td-cursor"
+                  v-for="(p, index) in permohonans"
+                  v-bind:key="p.id"
+                  v-on:click="show(p.id)"
+                >
+                  <th
+                    scope="row"
+                  >{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
+                  <td>{{p.jenis_permohonan.huraian}}</td>
+                  <td>{{p.id}}</td>
+                  <td>{{p.doc_title}}</td>
+                  <td>{{date(p.created_at)}}</td>
+                  <td>{{p.status_permohonan.huraian}}</td>
+                  <td>{{date(p.updated_at)}}</td>
+                </tr>
+              </tbody>
+            </template>
+          </v-simple-table>
         </v-col>
       </v-row>
     </v-card>
@@ -109,7 +111,6 @@ export default {
       fetch(page_url)
         .then(res => res.json())
         .then(res => {
-          console.log(res);
           this.permohonans = res.data;
           that.makePagination(res);
           this.loaded = true;

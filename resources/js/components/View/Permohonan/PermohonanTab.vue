@@ -63,7 +63,6 @@ export default {
         this.permohonan.status_id == 11
       ) {
         this.upload = false;
-        console.log(this.permohonan);
       }
     },
     date(created_at) {
@@ -74,7 +73,6 @@ export default {
     },
     currentTabComponent(tab) {
       this.currentTab = "Tab" + tab;
-      console.log(this.permohonan);
       return this.currentTab;
     },
     getDataBind() {

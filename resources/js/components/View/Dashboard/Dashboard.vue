@@ -122,7 +122,6 @@ export default {
       fetch("api/dashboard")
         .then(res => res.json())
         .then(res => {
-          console.log(res);
           this.permohonans = res.permohonans;
           this.progress = res.progress;
           this.lulus = res.lulus;

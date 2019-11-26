@@ -17,42 +17,42 @@
         </v-row>
       </v-row>
 
-      <v-row align="center" justify="center">
+      <v-row align="center" justify="start">
         <div style="padding-left:35px">
           <p v-if="!searchText">{{ pagination.total }} pengguna</p>
           <p v-else>{{ users.length }} keputusan</p>
         </div>
+      </v-row>
 
-        <v-row style="padding-right:45px" class="padding-right" align="center" justify="end">
-          <v-btn
-            :disabled="!pagination.prev_page_url || searchText.length > 0"
-            v-on:click="fetchUsers(pagination.prev_page_url)"
-            small
-          >Prev</v-btn>
-          <div class="divider" />
-          <v-btn
-            :disabled="!pagination.next_page_url || searchText.length > 0"
-            v-on:click="fetchUsers(pagination.next_page_url)"
-            small
-          >Next</v-btn>
-        </v-row>
+      <v-row class="padding-right" align="center" justify="start">
+        <v-text-field
+          v-model="searchText"
+          style="padding-left:20px"
+          class="mx-4"
+          flat
+          hide-details
+          label="Search"
+          prepend-inner-icon="search"
+          solo-inverted
+        ></v-text-field>
+
+        <v-btn
+          :disabled="!pagination.prev_page_url || searchText.length > 0"
+          v-on:click="fetchUsers(pagination.prev_page_url)"
+          small
+        >Prev</v-btn>
+        <div class="divider" />
+        <v-btn
+          :disabled="!pagination.next_page_url || searchText.length > 0"
+          v-on:click="fetchUsers(pagination.next_page_url)"
+          small
+        >Next</v-btn>
       </v-row>
 
       <v-row align="center" justify="center">
-        <v-progress-circular v-if="!loaded" :size="25" :width="2" color="blue-grey" indeterminate></v-progress-circular>
+        <v-progress-circular style="padding-top:40px" v-if="!loaded" :size="25" :width="2" color="blue-grey" indeterminate></v-progress-circular>
       </v-row>
-
-      <v-text-field
-        v-model="searchText"
-        style="width:500px"
-        class="mx-4"
-        flat
-        hide-details
-        label="Search"
-        prepend-inner-icon="search"
-        solo-inverted
-      ></v-text-field>
-
+  
       <div v-if="loaded">
         <v-row align="center" justify="center">
           <v-col>

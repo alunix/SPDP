@@ -31,6 +31,9 @@ class Analitik
         # line chart for jumlah dokumens query
         $dokumens_query = $this->dokumens_query($start_date, $end_date);
 
+        # line chart for permohonan lulus
+        $lulus_query = $this->lulus_query($start_date, $end_date);
+
         # table query
         $table_query = $this->table_query($start_date, $end_date);
 
@@ -38,15 +41,20 @@ class Analitik
         $dokumens = [];
         $datas = [];
         $jenis = [];
+        $lulus = [];
         if (!$fakulti) {
             $datas = $table_query->get();
             $dokumens = $dokumens_query->get();
             $jenis = $jenis_query->get();
+            $lulus = $lulus_query->get();
         } else {
             $datas = $table_query->where('fakulti_id', $fakulti)->get();
             $dokumens = $dokumens_query->where('users.fakulti_id', $fakulti)->get();
             $jenis = $jenis_query->where('users.fakulti_id', $fakulti)->get();
+            $lulus = $lulus_query->where('users.fakulti_id', $fakulti)->get();
         }
+
+        //TODO create a line chart approved at
 
         #line chart dokumen dihantar
         $line_chart = [];
@@ -68,18 +76,32 @@ class Analitik
 
         return response()->json([
             'bar_chart' => $bar_chart, 'avg_lulus_duration' => $avg_lulus_duration,
-            'pie_chart' => $pie_chart, 'line_chart' => $line_chart, 'datas' => $datas
+            'pie_chart' => $pie_chart, 'line_chart' => $line_chart, 'datas' => $datas,
+            'lulus' => $lulus
         ]);
     }
 
     private function  average_lulus_duration($start_date, $end_date)
     {
+
         $query = DB::table('permohonans')
             ->where('status_id', 6)->orWhere('status_id', 7)
             ->whereBetween('created_at', [$start_date, $end_date])
             ->selectRaw('avg(datediff(updated_at, created_at)) as avg_duration')->value('avg_duration');
 
         return $query;
+    }
+
+    private function lulus_query($start_date, $end_date)
+    {
+        $lulus = DB::table("permohonans")->where('status_id', 6)->orWhere('status_id', 7)
+            ->join('users', 'users.id', '=', 'permohonans.id_penghantar')
+            ->whereBetween('permohonans.updated_at', [$start_date, $end_date])
+            ->selectRaw("DATE_FORMAT(permohonans.updated_at,'%M-%Y') as date,count(permohonans.id) as count")
+            ->orderBy('permohonans.updated_at', 'asc')
+            ->groupBy('date');
+
+        return $lulus;
     }
 
     private function jenis_query($start_date, $end_date)

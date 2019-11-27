@@ -32,6 +32,7 @@
       <v-divider></v-divider>
 
       <v-row>
+        <span>Dokumen dihantar</span>
         <v-col cols="7" sm="6" md="8">
           <apexchart
             v-if="loaded"
@@ -163,6 +164,7 @@ export default {
         })
         .then(res => res.data)
         .then(res => {
+          console.log(res);
           this.datas = res.datas;
           this.bar_chart = {
             options: {

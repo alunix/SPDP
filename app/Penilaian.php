@@ -55,7 +55,4 @@ class Penilaian extends Model
 
       return $this->belongsTo('SPDP\User', 'penilaian_senat'); // set the foreign key (second parameter)
    }
-
-   public function laporan_panel_penilai()
-   { }
 }

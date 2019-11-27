@@ -1,11 +1,12 @@
 <template>
   <v-container fluid>
-    <v-row align="center">
-      <v-app-bar style="padding-top:10px" :outlined="false" min-height="60px">
+    <v-card>
+      <v-row style="margin-bottom:-40px" align="center" justify="center">
         <v-col class="d-flex" cols="12" sm="5">
           <v-select
             item-text="desc"
             item-value="value"
+            style="padding-left:20px"
             label="Sila pilih tarikh/masa"
             :items="date_pickers"
             dense
@@ -27,17 +28,16 @@
         <v-col @click="getAnalytics" class="d-flex" cols="12" sm="2">
           <v-btn style="margin-bottom:30px" normal>Search</v-btn>
         </v-col>
-      </v-app-bar>
-    </v-row>
+      </v-row>
+      <v-divider></v-divider>
 
-    <v-card>
       <v-row>
         <v-col cols="7" sm="6" md="8">
           <apexchart
             v-if="loaded"
             width="500"
             height="200"
-            type="bar"
+            type="line"
             :options="line_chart.options"
             :series="line_chart.series"
           ></apexchart>
@@ -52,19 +52,19 @@
             :series="pie_chart.series"
           ></apexchart>
 
-          <!-- <apexchart
-              v-if="loaded"
-              width="500"
-              type="bar"
-              :options="bar_chart.options"
-              :series="bar_chart.series"
-          ></apexchart>-->
+          <apexchart
+            v-if="loaded"
+            width="500"
+            type="bar"
+            :options="bar_chart.options"
+            :series="bar_chart.series"
+          ></apexchart>
         </v-col>
       </v-row>
 
       <v-row v-if="loaded" align="center" justify="center">
-        <table>
-          <table class="table table-hover">
+        <v-simple-table fixed-header height="auto">
+          <template v-slot:default>
             <thead class="thead-light">
               <tr>
                 <th scope="col">No</th>
@@ -86,8 +86,8 @@
                 <td>{{data.dokumens_count}}</td>
               </tr>
             </tbody>
-          </table>
-        </table>
+          </template>
+        </v-simple-table>
       </v-row>
     </v-card>
   </v-container>

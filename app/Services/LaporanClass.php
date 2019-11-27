@@ -28,8 +28,11 @@ class LaporanClass
         } else {
             $fileNameToStore = 'noPDF.pdf';
         }
+        
+        # add laporan data to database
         $this->createLaporanObject($permohonan, $fileNameWithExt, $fileNameToStore, $request);
 
+        # check checkbox kelulusan
         $kelulusan = $request->input('kelulusan');
         if ($kelulusan == "true") {
             return $this->permohonanLulus($permohonan);

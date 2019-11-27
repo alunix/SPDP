@@ -119,10 +119,4 @@ class DokumenClass
 
         return $user;
     }
-
-    public function show($id)
-    {
-        $permohonan = Permohonan::findOrFail($id);
-        // return view('fakulti.kemajuan-permohonan')->with('kjs', $permohonan->kemajuan_permohonans)->with('permohonan', $permohonan)->with('dokumens', $permohonan->dokumens);
-    }
 }

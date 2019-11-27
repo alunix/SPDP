@@ -3,7 +3,6 @@
 namespace SPDP\Services;
 
 use SPDP\User;
-use SPDP\Services\RedirectPermohonan;
 use SPDP\Permohonan;
 use SPDP\Services\SenaraiPermohonan;
 

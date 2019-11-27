@@ -8,10 +8,7 @@ use SPDP\TetapanAliranKerja;
 use Illuminate\Http\Request;
 use SPDP\Services\CreateKemajuan;
 use SPDP\Services\DokumenClass;
-use SPDP\Services\LaporanClass;
-use SPDP\Notifications\PerluPenambahbaikkan;
 use Notification;
-use SPDP\Services\NotificationClass;
 use SPDP\Notifications\PermohonanBaharu;
 
 class PermohonanClass

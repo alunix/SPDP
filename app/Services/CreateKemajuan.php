@@ -3,11 +3,7 @@
 namespace SPDP\Services;
 
 use SPDP\Permohonan;
-use Illuminate\Http\Request;
 use SPDP\KemajuanPermohonan;
-use SPDP\Laporan;
-use SPDP\Penilaian;
-use SPDP\Services\ShowPermohonan;
 
 class CreateKemajuan
 {

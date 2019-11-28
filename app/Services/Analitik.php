@@ -54,9 +54,13 @@ class Analitik
             $lulus = $lulus_query->where('users.fakulti_id', $fakulti)->get();
         }
 
-        //TODO create a line chart approved at
+        # line chart permohonan lulus
+        $lulus_chart = [];
+        $lulus_chart['labels'] = $lulus->pluck('date');
+        $lulus_chart['series'] = $lulus->pluck('count');
+        $lulus_chart['id'] = 'Permonan diluluskan';
 
-        #line chart dokumen dihantar
+        # line chart dokumen dihantar
         $line_chart = [];
         $line_chart['labels'] = $dokumens->pluck('date');
         $line_chart['series'] = $dokumens->pluck('count');
@@ -77,13 +81,12 @@ class Analitik
         return response()->json([
             'bar_chart' => $bar_chart, 'avg_lulus_duration' => $avg_lulus_duration,
             'pie_chart' => $pie_chart, 'line_chart' => $line_chart, 'datas' => $datas,
-            'lulus' => $lulus
+            'lulus_chart' => $lulus_chart
         ]);
     }
 
     private function  average_lulus_duration($start_date, $end_date)
     {
-
         $query = DB::table('permohonans')
             ->where('status_id', 6)->orWhere('status_id', 7)
             ->whereBetween('created_at', [$start_date, $end_date])
@@ -131,7 +134,7 @@ class Analitik
 
     private function table_query($start_date, $end_date)
     {
-        $query =  Fakulti::withCount([
+        $query =  Fakulti::select('fakulti_id', 'f_nama', 'kod')->withCount([
             'permohonans as permohonans_count' => function ($query) use ($start_date, $end_date) {
                 $query->whereBetween('permohonans.created_at', [$start_date, $end_date]);
             }, 'permohonans as lulus_count' => function ($query) use ($start_date, $end_date) {

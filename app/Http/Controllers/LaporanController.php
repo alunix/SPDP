@@ -23,7 +23,7 @@ class LaporanController extends Controller
         $this->validate($request, [
             'kelulusan' => 'required|string',
             'laporan' => 'required|mimes:pdf|max:1999',
-        ]);
+    ]);
 
         $permohonan = Permohonan::findOrFail($id);
         $laporan = new LaporanClass();
@@ -32,7 +32,7 @@ class LaporanController extends Controller
 
     public function laporanDokumen($dokumen_id)
     {
-        $dokumen =  DokumenPermohonan::find($dokumen_id);
-        return $dokumen->laporans;
+        $laporans = Laporan::with('id_penghantar_nama:id,name,role')->where('dokumen_permohonan_id', $dokumen_id)->paginate(5);
+        return response()->json($laporans);
     }
 }

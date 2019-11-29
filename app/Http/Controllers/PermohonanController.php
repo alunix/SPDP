@@ -15,13 +15,6 @@ use Redirect, Response, Debugbar;
 
 class PermohonanController extends Controller
 {
-    public function senaraiPerakuan()
-    {
-        $sp = new SenaraiPermohonan();
-        return  $sp->senaraiPerakuan();
-    }
-
-    /*API START  */
     public function api_permohonanDihantar()
     {
         $id = auth()->user()->id;
@@ -61,5 +54,11 @@ class PermohonanController extends Controller
         ]);
         $pc = new PermohonanClass();
         return $pc->create($request);
+    }
+
+    public function senaraiPerakuan()
+    {
+        $sp = new SenaraiPermohonan();
+        return  $sp->senaraiPerakuan();
     }
 }

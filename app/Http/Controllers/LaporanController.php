@@ -7,6 +7,7 @@ use SPDP\Laporan;
 use Illuminate\Http\Request;
 use SPDP\Services\LaporanClass;
 use Debugbar;
+use SPDP\DokumenPermohonan;
 
 class LaporanController extends Controller
 {
@@ -27,5 +28,11 @@ class LaporanController extends Controller
         $permohonan = Permohonan::findOrFail($id);
         $laporan = new LaporanClass();
         return $laporan->storeLaporan($request, $permohonan);
+    }
+
+    public function laporanDokumen($dokumen_id)
+    {
+        $dokumen =  DokumenPermohonan::find($dokumen_id);
+        return $dokumen->laporans;
     }
 }

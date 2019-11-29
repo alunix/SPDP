@@ -12,7 +12,8 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function () {
 	/*----------------------- Senarai dokumen permohonan ------------- */
 	Route::get('/senarai-dokumen/{permohonan}', 'DokumenPermohonanController@show')->name('api.dokumen.dihantar');
 	Route::get('/senarai-kemajuan/{permohonan}', 'KemajuanPermohonanController@show')->name('api.kemajuan.index');
-	Route::get('/senarai-laporan/{permohonan}', 'LaporanController@show')->name('api.laporan.index');
+	Route::get('/senarai-laporan-dokumen/{permohonan}', 'LaporanController@show')->name('api.laporan.index');
+	Route::get('/senarai-laporan/{dokumen_id}', 'LaporanController@laporanDokumen')->name('api.laporan.dokumen');
 	Route::get('/dokumen/{file_link}', 'DokumenPermohonanController@downloadDokumen')->name('api.dokumen.download');
 	/*----------------------- PJK menerima program pengajian daripada fakulti ------------- */
 	Route::get('/senarai-permohonan-baharu', 'PermohonanController@api_showListPermohonanBaharu')->name('api.senaraiPermohonan');
@@ -36,7 +37,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function () {
 });
 Route::get('{any}', function () {
 	return view('layouts.app');
-})->where('any', '.*');
+})->where('any', '.*')->middleware('auth');
 
 
 

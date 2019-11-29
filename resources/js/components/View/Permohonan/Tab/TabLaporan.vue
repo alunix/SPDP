@@ -61,12 +61,13 @@
 <script>
 import dayjs from "dayjs";
 export default {
-  props: ["permohonan_id_props"],
+  props: ["permohonan_id_props", "dokumen_id_props"],
   data() {
     return {
       laporans: [],
       pagination: {},
-      permohonan_id: this.permohonan_id_props
+      permohonan_id: this.permohonan_id_props,
+      dokumen_id: this.dokumen_id_props
     };
   },
   created() {
@@ -82,7 +83,13 @@ export default {
   },
   methods: {
     fetchLaporans(page_url) {
-      page_url = page_url || "/api/senarai-laporan/" + this.permohonan_id;
+      // check whether props is permohonan id or dokumen id
+      if (this.permohonan_id != "") {
+        page_url = page_url || "/api/senarai-laporan/" + this.permohonan_id;
+      } else {
+        page_url =
+          page_url || "/api/senarai-laporan-dokumen/" + this.dokumen_id;
+      }
       fetch(page_url)
         .then(res => res.json())
         .then(res => {

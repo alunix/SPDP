@@ -19,7 +19,7 @@
       </v-row>
     </v-row>
     <modal :adaptive="true" width="50%" height="50%" name="modal-laporan">
-      <tab-laporan :laporans_props="laporans_props"></tab-laporan>
+      <tab-laporan :dokumen_id_props="dokumen_id"></tab-laporan>
     </modal>
     <v-simple-table fixed-header height="auto">
       <template v-slot:default>
@@ -51,7 +51,7 @@
             <td>{{date(d.created_at)}}</td>
             <th>
               <v-btn
-                v-on:click.stop="setLaporansProps(d.laporans);showLaporan()"
+                v-on:click.stop="setDokumenIdProps(d.dokumen_permohonan_id);showLaporan()"
                 color="primary"
                 small
               >Laporan</v-btn>
@@ -75,6 +75,7 @@ export default {
       alignment: "center",
       justify: "center",
       permohonan_id: this.permohonan_id_props,
+      dokumen_id: "",
       end: "end"
     };
   },
@@ -111,8 +112,8 @@ export default {
     showLaporan() {
       this.$modal.show("modal-laporan");
     },
-    setLaporansProps(laporans) {
-      this.laporans_props = laporans;
+    setDokumenIdProps(id) {
+      this.dokumen_id = id;
     },
     openFile(file_link) {
       return window.open("/storage/permohonan/" + file_link);

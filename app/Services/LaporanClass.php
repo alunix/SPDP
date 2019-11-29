@@ -70,7 +70,7 @@ class LaporanClass
         $permohonan->save();
         $kp = new CreateKemajuan();
         $kp->create($permohonan);
-        //Hantar email kepada penghantar
+        # hantar email kepada penghantar
         $penghantar = User::find($permohonan->id_penghantar);
         Notification::route('mail', $penghantar->email)->notify(new PermohonanDiluluskan($permohonan, $penghantar));
         return $this->sendEmailPemeriksa($permohonan);

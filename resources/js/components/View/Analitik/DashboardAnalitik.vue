@@ -207,10 +207,11 @@ export default {
       fakultis: [],
       start_date:  dayjs()
         .subtract(10, "day")
-        // .format("DD-MM-YYYY"),
-        .format("YYYY-MM-DD"),
+        .format("DD-MM-YYYY"),
+        // .format("YYYY-MM-DD"),
       select_date: "",
-      end_date: dayjs().format("YYYY-MM-DD"),
+      // end_date: dayjs().format("YYYY-MM-DD"),
+      end_date: dayjs().format("DD-MM-YYYY"),
       fakulti: "",
       loaded: false,
       datas: [],
@@ -243,7 +244,10 @@ export default {
       this.loaded = false;
       var start_date = "";
       if (this.select_date == "") {
-        start_date = this.start_date;
+        start_date = this.formatData(this.start_date);
+        var endDate = this.formatData(this.end_date);
+        console.log(start_date);
+        console.log(endDate);
       } else {
         start_date = this.select_date;
       }
@@ -251,7 +255,7 @@ export default {
         .get("api/analytics", {
           params: {
             start_date: start_date,
-            end_date: this.end_date,
+            end_date: this.formatData(this.end_date),
             fakulti: this.fakulti
           }
         })
@@ -340,7 +344,18 @@ export default {
             this.error = true;
           }
         });
-    }
+    },
+    formatData(date) {
+      if (!date){
+        return null
+      } 
+      else {
+        // const [year, month, day] = date.split('-')
+        const [day, month, year] = date.split('-');
+        return `${year}-${month}-${day}`;
+      }
+      },
+    
   }
 };
 </script>

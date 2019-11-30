@@ -123,7 +123,7 @@ class Analitik
     {
         $query = DB::table("dokumens")
             ->join('permohonans', 'permohonans.id', '=', 'dokumens.permohonan_id')
-            ->join('users', 'users.id', '=', 'permohonans.id_penghantar')
+            ->join('users', 'users.id', '=', 'permohonans.id_penghantar')   
             ->whereBetween('dokumens.created_at', [$start_date, $end_date])
             ->selectRaw("DATE_FORMAT(dokumens.created_at,'%M-%Y') as date,count(dokumen_permohonan_id) as count")
             ->orderBy('dokumens.created_at', 'asc')

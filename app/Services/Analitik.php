@@ -18,11 +18,8 @@ class Analitik
 {
     public function analitik($request)
     {
-        // $start_date = '2015-01-01';
-        // $end_date = '2019-10-11';
         $start_date = $request->input('start_date') ?: Carbon::today()->startOfMonth()->toDateString();
         $end_date = $request->input('end_date') ?: Carbon::today()->toDateString();
-
         $fakulti = $request->input('fakulti');
 
         # permohonan lulus

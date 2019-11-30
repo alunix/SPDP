@@ -40,6 +40,7 @@
             >
               <template v-slot:activator="{ on }">
                 <v-text-field
+                  style="margin-bottom:18px"
                   v-model="start_date"
                   label="Start date"
                   prepend-icon="event"
@@ -66,6 +67,7 @@
             >
               <template v-slot:activator="{ on }">
                 <v-text-field
+                  style="margin-bottom:18px"
                   v-model="end_date"
                   label="End date"
                   prepend-icon="event"
@@ -205,9 +207,10 @@ export default {
       fakultis: [],
       start_date:  dayjs()
         .subtract(10, "day")
-        .format("DD-MM-YYYY"),
+        // .format("DD-MM-YYYY"),
+        .format("YYYY-MM-DD"),
       select_date: "",
-      end_date: dayjs().format("DD-MM-YYYY"),
+      end_date: dayjs().format("YYYY-MM-DD"),
       fakulti: "",
       loaded: false,
       datas: [],

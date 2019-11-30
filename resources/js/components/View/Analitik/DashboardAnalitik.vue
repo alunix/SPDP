@@ -2,8 +2,8 @@
   <v-content>
     <v-container fluid>
       <v-card>
-        <v-row style="margin-bottom:-40px;max-width:700px" align="center" justify="center">
-          <v-col class="d-flex" cols="12" sm="5">
+        <v-row style="margin-bottom:-40px;max-width:1000px" align="center" justify="center">
+          <v-col>
             <v-select
               item-text="desc"
               item-value="value"
@@ -17,35 +17,7 @@
             ></v-select>
           </v-col>
 
-        <!-- <v-col class="d-flex" cols="12" sm="5">
-          <v-menu
-            v-if="start_date == ''"
-            ref="menu"
-            max-width="200px"
-            v-model="menu"
-            :close-on-content-click="false"
-            :return-value.sync="date"
-            transition="scale-transition"
-            offset-y
-          >
-            <template v-slot:activator="{ on }">
-              <v-text-field
-                v-model="date"
-                label="Picker in menu"
-                prepend-icon="event"
-                readonly
-                v-on="on"
-              ></v-text-field>
-            </template>
-            <v-date-picker v-model="date" no-title scrollable>
-              <v-spacer></v-spacer>
-              <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
-              <v-btn text color="primary" @click="$refs.menu.save(date)">OK</v-btn>
-            </v-date-picker>
-          </v-menu>
-        </v-col> -->
-
-          <v-col class="d-flex" cols="12" sm="5">
+          <v-col>
             <v-select
               item-text="f_nama"
               item-value="fakulti_id"
@@ -56,6 +28,59 @@
               solo
             ></v-select>
           </v-col>
+
+          <v-col v-if="start_date == ''">
+            <v-menu
+              ref="menu"
+              v-model="menu"
+              :close-on-content-click="false"
+              :return-value.sync="date"
+              transition="scale-transition"
+              offset-y
+            >
+              <template v-slot:activator="{ on }">
+                <v-text-field
+                  v-model="date"
+                  label="Start date"
+                  prepend-icon="event"
+                  readonly
+                  v-on="on"
+                ></v-text-field>
+              </template>
+              <v-date-picker v-model="date" no-title scrollable>
+                <v-spacer></v-spacer>
+                <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
+                <v-btn text color="primary" @click="$refs.menu.save(date)">OK</v-btn>
+              </v-date-picker>
+            </v-menu>
+          </v-col>
+
+          <v-col v-if="start_date == ''">
+            <v-menu
+              ref="menu"
+              v-model="menu"
+              :close-on-content-click="false"
+              :return-value.sync="date"
+              transition="scale-transition"
+              offset-y
+            >
+              <template v-slot:activator="{ on }">
+                <v-text-field
+                  v-model="date"
+                  label="End date"
+                  prepend-icon="event"
+                  readonly
+                  v-on="on"
+                ></v-text-field>
+              </template>
+              <v-date-picker v-model="date" no-title scrollable>
+                <v-spacer></v-spacer>
+                <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
+                <v-btn text color="primary" @click="$refs.menu.save(date)">OK</v-btn>
+              </v-date-picker>
+            </v-menu>
+          </v-col>
+
           <v-col @click="getAnalytics" class="d-flex" cols="12" sm="2">
             <v-btn style="margin-bottom:30px" normal>Search</v-btn>
           </v-col>

@@ -13,7 +13,7 @@
               :full-width="false"
               dense
               solo
-              v-model="start_date"
+              v-model="select_date"
             ></v-select>
           </v-col>
 
@@ -29,54 +29,54 @@
             ></v-select>
           </v-col>
 
-          <v-col v-if="start_date == ''">
+          <v-col v-if="select_date == ''">
             <v-menu
               ref="menu"
               v-model="menu"
               :close-on-content-click="false"
-              :return-value.sync="date"
+              :return-value.sync="start_date"
               transition="scale-transition"
               offset-y
             >
               <template v-slot:activator="{ on }">
                 <v-text-field
-                  v-model="date"
+                  v-model="start_date"
                   label="Start date"
                   prepend-icon="event"
                   readonly
                   v-on="on"
                 ></v-text-field>
               </template>
-              <v-date-picker v-model="date" no-title scrollable>
+              <v-date-picker v-model="start_date" no-title scrollable>
                 <v-spacer></v-spacer>
                 <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
-                <v-btn text color="primary" @click="$refs.menu.save(date)">OK</v-btn>
+                <v-btn text color="primary" @click="$refs.menu.save(start_date)">OK</v-btn>
               </v-date-picker>
             </v-menu>
           </v-col>
 
-          <v-col v-if="start_date == ''">
+          <v-col v-if="select_date == ''">
             <v-menu
-              ref="menu"
-              v-model="menu"
+              ref="menu1"
+              v-model="menu1"
               :close-on-content-click="false"
-              :return-value.sync="date"
+              :return-value.sync="end_date"
               transition="scale-transition"
               offset-y
             >
               <template v-slot:activator="{ on }">
                 <v-text-field
-                  v-model="date"
+                  v-model="end_date"
                   label="End date"
                   prepend-icon="event"
                   readonly
                   v-on="on"
                 ></v-text-field>
               </template>
-              <v-date-picker v-model="date" no-title scrollable>
+              <v-date-picker v-model="end_date" no-title scrollable>
                 <v-spacer></v-spacer>
-                <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
-                <v-btn text color="primary" @click="$refs.menu.save(date)">OK</v-btn>
+                <v-btn text color="primary" @click="menu1 = false">Cancel</v-btn>
+                <v-btn text color="primary" @click="$refs.menu1.save(end_date)">OK</v-btn>
               </v-date-picker>
             </v-menu>
           </v-col>
@@ -203,8 +203,11 @@ export default {
         { desc: "Custom date range", value: "" }
       ],
       fakultis: [],
-      start_date: "",
-      end_date: "",
+      start_date:  dayjs()
+        .subtract(10, "day")
+        .format("DD-MM-YYYY"),
+      select_date: "",
+      end_date: dayjs().format("DD-MM-YYYY"),
       fakulti: "",
       loaded: false,
       datas: [],
@@ -212,7 +215,9 @@ export default {
       line_chart: [],
       pie_chart: [],
       lulus_chart: [],
-      errors: []
+      errors: [],
+      menu: false,
+      menu1: false
     };
   },
   created() {
@@ -233,10 +238,16 @@ export default {
     getAnalytics() {
       this.loading = true;
       this.loaded = false;
+      var start_date = "";
+      if (this.select_date == "") {
+        start_date = this.start_date;
+      } else {
+        start_date = this.select_date;
+      }
       axios
         .get("api/analytics", {
           params: {
-            start_date: this.start_date,
+            start_date: start_date,
             end_date: this.end_date,
             fakulti: this.fakulti
           }

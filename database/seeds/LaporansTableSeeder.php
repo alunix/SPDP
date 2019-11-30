@@ -18,7 +18,7 @@ class LaporansTableSeeder extends Seeder
         $d = DokumenPermohonan::all()->pluck('dokumen_permohonan_id')->toArray();
         $role = User::where('role', '!=', 'fakulti')->pluck('id')->toArray();
 
-        for($i=0; $i<800; $i++){
+        for($i=0; $i<4000; $i++){
             DB::table('laporans')->insert([
             'dokumen_permohonan_id' =>  $faker->randomElement($d),
             'id_penghantar' => $faker->randomElement($role),

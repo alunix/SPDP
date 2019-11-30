@@ -2,10 +2,10 @@
   <v-content>
     <v-container fluid>
       <v-card>
-        <v-row style="margin-bottom:-40px;max-width:1000px" align="center" justify="center">
+        <v-row style="margin-bottom:-40px;max-width:700px" align="center" justify="center">
           <v-col class="d-flex" cols="12" sm="5">
             <v-select
-            item-text="desc"
+              item-text="desc"
               item-value="value"
               style="padding-left:20px;max-width:500px"
               label="Sila pilih tarikh/masa"
@@ -16,32 +16,35 @@
               v-model="start_date"
             ></v-select>
           </v-col>
-          <v-col v-if="start_date == ''" cols="12" sm="6" md="4">
-            <v-menu
-              ref="menu"
-              v-model="menu"
-              :close-on-content-click="false"
-              :return-value.sync="date"
-              transition="scale-transition"
-              offset-y
-              min-width="290px"
-            >
-              <template v-slot:activator="{ on }">
-                <v-text-field
-                  v-model="date"
-                  label="Picker in menu"
-                  prepend-icon="event"
-                  readonly
-                  v-on="on"
-                ></v-text-field>
-              </template>
-              <v-date-picker v-model="date" no-title scrollable>
-                <v-spacer></v-spacer>
-                <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
-                <v-btn text color="primary" @click="$refs.menu.save(date)">OK</v-btn>
-              </v-date-picker>
-            </v-menu>
-          </v-col>
+
+        <!-- <v-col class="d-flex" cols="12" sm="5">
+          <v-menu
+            v-if="start_date == ''"
+            ref="menu"
+            max-width="200px"
+            v-model="menu"
+            :close-on-content-click="false"
+            :return-value.sync="date"
+            transition="scale-transition"
+            offset-y
+          >
+            <template v-slot:activator="{ on }">
+              <v-text-field
+                v-model="date"
+                label="Picker in menu"
+                prepend-icon="event"
+                readonly
+                v-on="on"
+              ></v-text-field>
+            </template>
+            <v-date-picker v-model="date" no-title scrollable>
+              <v-spacer></v-spacer>
+              <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
+              <v-btn text color="primary" @click="$refs.menu.save(date)">OK</v-btn>
+            </v-date-picker>
+          </v-menu>
+        </v-col> -->
+
           <v-col class="d-flex" cols="12" sm="5">
             <v-select
               item-text="f_nama"

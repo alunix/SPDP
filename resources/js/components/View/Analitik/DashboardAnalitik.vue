@@ -75,6 +75,7 @@
                   v-on="on"
                 ></v-text-field>
               </template>
+
               <v-date-picker v-model="end_date" no-title scrollable>
                 <v-spacer></v-spacer>
                 <v-btn text color="primary" @click="menu1 = false">Cancel</v-btn>
@@ -205,13 +206,11 @@ export default {
         { desc: "Custom date range", value: "" }
       ],
       fakultis: [],
-      start_date:  dayjs()
+      start_date: dayjs()
         .subtract(10, "day")
-        .format("DD-MM-YYYY"),
-        // .format("YYYY-MM-DD"),
+        .format("YYYY-MM-DD"),
       select_date: "",
-      // end_date: dayjs().format("YYYY-MM-DD"),
-      end_date: dayjs().format("DD-MM-YYYY"),
+      end_date: dayjs().format("YYYY-MM-DD"),
       fakulti: "",
       loaded: false,
       datas: [],
@@ -244,10 +243,8 @@ export default {
       this.loaded = false;
       var start_date = "";
       if (this.select_date == "") {
-        start_date = this.formatData(this.start_date);
-        var endDate = this.formatData(this.end_date);
-        console.log(start_date);
-        console.log(endDate);
+        start_date = this.start_date;
+        var endDate = this.end_date;
       } else {
         start_date = this.select_date;
       }
@@ -255,7 +252,7 @@ export default {
         .get("api/analytics", {
           params: {
             start_date: start_date,
-            end_date: this.formatData(this.end_date),
+            end_date: this.end_date,
             fakulti: this.fakulti
           }
         })
@@ -346,16 +343,13 @@ export default {
         });
     },
     formatData(date) {
-      if (!date){
-        return null
-      } 
-      else {
-        // const [year, month, day] = date.split('-')
-        const [day, month, year] = date.split('-');
+      if (!date) {
+        return null;
+      } else {
+        const [day, month, year] = date.split("-");
         return `${year}-${month}-${day}`;
       }
-      },
-    
+    }
   }
 };
 </script>

@@ -95,7 +95,6 @@ export default {
       fetch(page_url)
         .then(res => res.json())
         .then(res => {
-          console.log(res.data);
           this.laporans = res.data;
           this.makePagination(res);
         });

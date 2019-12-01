@@ -36,7 +36,7 @@ return [
     | choice installed on your machine before you begin development.
     |
     */
-    
+
     'connections' => [
 
         'sqlite' => [
@@ -52,7 +52,6 @@ return [
             'database' => RDS_DB_NAME,
             'username' => RDS_USERNAME,
             'password' => RDS_PASSWORD,
-            'unix_socket' => env('DB_SOCKET', ''),
             // 'host' => env('DB_HOST', '127.0.0.1'),
             // 'port' => env('DB_PORT', '3306'),
             // 'database' => env('DB_DATABASE', 'forge'),

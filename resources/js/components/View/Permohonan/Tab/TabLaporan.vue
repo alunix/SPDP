@@ -83,8 +83,6 @@ export default {
   },
   methods: {
     fetchLaporans(page_url) {
-      console.log(this.permohonan_id);
-      console.log(this.dokumen_id);
       // check whether props is permohonan id or dokumen id
       if (this.permohonan_id != undefined) {
         page_url = page_url || "/api/senarai-laporan/" + this.permohonan_id;

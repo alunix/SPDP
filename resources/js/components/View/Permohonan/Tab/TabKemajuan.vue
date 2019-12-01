@@ -1,9 +1,5 @@
 <template>
   <div>
-    <!-- @if(($permohonan->status_id == 8 or $permohonan->status_id == 9 or $permohonan->status_id == 10 or $permohonan->status_id == 11  ) and (Auth::user()->role == "fakulti"))
-            <a class="btn icon-btn btn-info" style="font-size:14px" href="{{ route('dokumenPermohonan.penambahbaikkan.show',$permohonan->id) }}">
-            Muat naik penambahbaikkan
-    </a>-->
     <v-row :align="alignment" :justify="justify">
       <div style="padding-left:20px; padding-top:20px">
         <p>{{ pagination.total }} keputusan</p>

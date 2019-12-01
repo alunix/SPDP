@@ -22,40 +22,42 @@
 
     <v-row :justify="justify">
       <v-col>
-        <table class="table table-hover">
-          <thead class="thead-light">
-            <tr>
-              <th scope="col">No</th>
-              <th scope="col">PENILAIAN ID</th>
-              <th scope="col">PERMOHONAN ID</th>
-              <th scope="col">PELANTIK</th>
-              <th scope="col">PENILAI</th>
-              <th scope="col">TARIKH PERNILAIAN BERMULA</th>
-              <th scope="col">TARIKH AKHIR/DEADLINE</th>
-              <th scope="col">TEMPOH(HARI)</th>
-            </tr>
-          </thead>
+        <v-simple-table fixed-header height="auto">
+          <template v-slot:default>
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">No</th>
+                <th scope="col">PENILAIAN ID</th>
+                <th scope="col">PERMOHONAN ID</th>
+                <th scope="col">PELANTIK</th>
+                <th scope="col">PENILAI</th>
+                <th scope="col">TARIKH PERNILAIAN BERMULA</th>
+                <th scope="col">TARIKH AKHIR/DEADLINE</th>
+                <th scope="col">TEMPOH(HARI)</th>
+              </tr>
+            </thead>
 
-          <tbody id="permohonans-add">
-            <tr
-              class="tr-shadow td-cursor"
-              v-for="(p, index) in penilaians"
-              v-bind:key="p.penilaian_id"
-              v-on:click="show(p.penilaian_id)"
-            >
-              <th
-                scope="row"
-              >{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
-              <td>{{p.id}}</td>
-              <td>{{p.id}}</td>
-              <td>{{p.pelantik.name}}</td>
-              <td>{{p.penilai.name}}</td>
-              <td>{{date(p.created_at)}}</td>
-              <td>{{date(p.due_date)}}</td>
-              <td>{{p.tempoh}}</td>
-            </tr>
-          </tbody>
-        </table>
+            <tbody id="permohonans-add">
+              <tr
+                class="tr-shadow td-cursor"
+                v-for="(p, index) in penilaians"
+                v-bind:key="p.penilaian_id"
+                v-on:click="show(p.penilaian_id)"
+              >
+                <th
+                  scope="row"
+                >{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
+                <td>{{p.id}}</td>
+                <td>{{p.id}}</td>
+                <td>{{p.pelantik.name}}</td>
+                <td>{{p.penilai.name}}</td>
+                <td>{{date(p.created_at)}}</td>
+                <td>{{date(p.due_date)}}</td>
+                <td>{{p.tempoh}}</td>
+              </tr>
+            </tbody>
+          </template>
+        </v-simple-table>
       </v-col>
     </v-row>
   </v-container>

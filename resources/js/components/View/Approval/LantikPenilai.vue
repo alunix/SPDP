@@ -100,31 +100,33 @@
         <div v-if="loaded">
           <v-row align="center" justify="center">
             <v-col>
-              <table class="table table-hover">
-                <thead class="thead-light">
-                  <tr>
-                    <th scope="col">NO</th>
-                    <th scope="col">NAME</th>
-                    <th scope="col">EMAIL</th>
-                    <th scope="col">TARIKH DICIPTA</th>
-                    <th scope="col">LANTIK</th>
-                  </tr>
-                </thead>
+              <v-simple-table fixed-header height="auto">
+                <template v-slot:default>
+                  <thead class="thead-light">
+                    <tr>
+                      <th scope="col">NO</th>
+                      <th scope="col">NAME</th>
+                      <th scope="col">EMAIL</th>
+                      <th scope="col">TARIKH DICIPTA</th>
+                      <th scope="col">LANTIK</th>
+                    </tr>
+                  </thead>
 
-                <tbody id="permohonans-add">
-                  <tr class="tr-shadow" v-for="(u, index) in users" v-bind:key="u.id">
-                    <th
-                      scope="row"
-                    >{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
-                    <td>{{u.name}}</td>
-                    <td>{{u.email}}</td>
-                    <td>{{date(u.created_at)}}</td>
-                    <td>
-                      <v-checkbox v-model="selectedPenilai" :value="u.id">Lantik Penilai</v-checkbox>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                  <tbody id="permohonans-add">
+                    <tr class="tr-shadow" v-for="(u, index) in users" v-bind:key="u.id">
+                      <th
+                        scope="row"
+                      >{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
+                      <td>{{u.name}}</td>
+                      <td>{{u.email}}</td>
+                      <td>{{date(u.created_at)}}</td>
+                      <td>
+                        <v-checkbox v-model="selectedPenilai" :value="u.id">Lantik Penilai</v-checkbox>
+                      </td>
+                    </tr>
+                  </tbody>
+                </template>
+              </v-simple-table>
             </v-col>
           </v-row>
         </div>

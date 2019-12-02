@@ -17,6 +17,8 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
     <link href="{{ asset('css/styles.scss') }}" rel="stylesheet">
     <!-- CoolAdmin template styles-->
     <link href="{{ asset('css/font-face.css')}}" rel="stylesheet" media="all">

@@ -125,6 +125,7 @@ export default {
           this.permohonans = res.permohonans;
           this.progress = res.progress;
           this.lulus = res.lulus;
+          console.log(res);
           this.lineChart = {
             options: {
               chart: {

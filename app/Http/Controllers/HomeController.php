@@ -7,6 +7,8 @@ use SPDP\Charts\JenisPermohonanChart;
 use SPDP\Fakulti;
 use SPDP\PenilaianPanel;
 use DB;
+use SPDP\Services\SenaraiPermohonan;
+use Debugbar;
 
 class HomeController extends Controller
 {
@@ -31,7 +33,8 @@ class HomeController extends Controller
     public function dashboard($role)
     {
         $year = date('Y');
-        $permohonan_baharu = $this->permohonanCount();
+        $senarai = new SenaraiPermohonan();
+        $permohonan_baharu = $senarai->queryPermohonanBaru()->count();
         $permohonans = Fakulti::with(['permohonans' => function ($query) use ($year) {
             $query->select(['permohonans.id', 'permohonans.created_at']);
             $query->whereYear('permohonans.created_at', $year); //specify which table created at to query
@@ -147,26 +150,24 @@ class HomeController extends Controller
     public function permohonanCount()
     {
         $role = auth()->user()->role;
-        $data =  Permohonan::select('id');
         switch ($role) {
             case 'pjk':
-                $data->where('jenis_id', '!=', '8')->where('status_id', '=', '1');
+                return Permohonan::where('jenis_id', '!=', '8')->where('status_id', '=', '1')->count();
                 break;
             case 'jppa':
-                $data->where('jenis_id', 8)->where('status_id', 1)->orWhere('status_id', 4);
+                return Permohonan::where('jenis_id', 8)->where('status_id', 1)->orWhere('status_id', 4)->count();
                 break;
             case 'penilai':
                 $user_id = auth()->user()->id;
                 $penilaian = PenilaianPanel::where('id_penilai', $user_id)->pluck('permohonan_id');
-                $data->whereIn('id', $penilaian)->where('status_id', 2);
+                return Permohonan::whereIn('id', $penilaian)->where('status_id', 2)->count();
                 break;
             case 'senat':
-                $data->where('status_id', '=', '5');
+                return Permohonan::where('status_id', '=', '5')->count();
                 break;
             default:
                 return;
                 break;
         }
-        return $data->count();
     }
 }

@@ -4,12 +4,20 @@ namespace SPDP\Services;
 
 use SPDP\Permohonan;
 use SPDP\PenilaianPanel;
+use Debugbar;
 
 class SenaraiPermohonan
 {
     public function senaraiPermohonanBaru()
     {
+        $data = $this->queryPermohonanBaru();
+        return $data->paginate(10);
+    }
+
+    public function queryPermohonanBaru()
+    {
         $role = auth()->user()->role;
+
         $data =  Permohonan::with(['user.fakulti:fakulti_id,kod', 'jenis_permohonan:id,huraian', 'status_permohonan:status_id,huraian']);
         switch ($role) {
             case 'pjk':
@@ -27,10 +35,10 @@ class SenaraiPermohonan
                 $data->where('status_id', '=', '5');
                 break;
             default:
-                return;
+                return null;
                 break;
         }
-        return $data->paginate(10);
+        return $data;
     }
 
     public function senaraiPerakuan()

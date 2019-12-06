@@ -77,7 +77,7 @@ class PenilaianPJK
                     return 4;
                 break;
             case 'kursus_teras_baharu':
-            case 'semakan_kursus_teras': //will figure out the rest 3/3/2019
+            case 'semakan_kursus_teras': 
                 return 4;
                 break;
             case 'kursus_elektif_baharu':

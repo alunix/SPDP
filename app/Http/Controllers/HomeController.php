@@ -35,33 +35,26 @@ class HomeController extends Controller
         $year = date('Y');
         $senarai = new SenaraiPermohonan();
         $permohonan_baharu = $senarai->queryPermohonanBaru()->count();
-        $permohonans = Fakulti::with(['permohonans' => function ($query) use ($year) {
+        $permohonans = Fakulti::withCount(['permohonans' => function ($query) use ($year) {
             $query->select(['permohonans.id', 'permohonans.created_at']);
             $query->whereYear('permohonans.created_at', $year); //specify which table created at to query
         }])->get()->sortBy('fakulti_id');
 
         $count_permohonan = $permohonans->pluck('permohonans');
-
-        for ($i = 0; $i < sizeof($count_permohonan); $i++) {
-            $A[$i] = count($count_permohonan[$i]);  //calculate count of permohonan in each fakulti
-        }
-
-        $chart = new JenisPermohonanChart();
-        $chart->labels($permohonans->pluck('kod'));
-        $chart->dataset('Permohonan sepanjang tahun ' . $year, 'bar', $A);
+        $bar_chart = [];
+        $bar_chart['labels'] = $permohonans->pluck('kod');
+        $bar_chart['data'] = $permohonans;
 
         /*------------------ Line chart for jumlah dokumen permohonan in a year--------------*/
         $Z =  DB::table("dokumens")
-            //->join('jenis_permohonans','jenis_permohonans.id','=','permohonans.jenis_id')
-            ->selectRaw("DATE_FORMAT(dokumens.created_at,'%M') as months, count(dokumen_permohonan_id) as count")
+            ->selectRaw("DATE_FORMAT(dokumens.created_at,'%M') as months, month(dokumens.created_at) as month, count(dokumen_permohonan_id) as count")
+            ->orderBy('month', 'asc')
             ->groupBy('months')
             ->get();
 
-        $line_chart = new JenisPermohonanChart();
-        $line_chart->labels($Z->pluck('months'));
-        $line_chart->dataset('Dokumen permohonan', 'line', $Z->pluck('count'))->options([
-            'backgroundColor' => ['#C5CAE9', '#283593'], 'dimensions' => [500, 500]
-        ]);
+        $line_chart = [];
+        $line_chart['labels'] = $Z->pluck('months');
+        $line_chart['dataset'] = $Z->pluck('count');
 
         $A = DB::table("permohonans")
             ->join('jenis_permohonans', 'jenis_permohonans.id', '=', 'permohonans.jenis_id')
@@ -69,19 +62,15 @@ class HomeController extends Controller
             ->groupBy('huraian')
             ->get();
 
-        $pie_chart = new JenisPermohonanChart();
-        $pie_chart->labels($A->pluck('huraian'));
-        $pie_chart->dataset('Jenis permohonan tahun ' . $year, 'pie', $A->pluck('count'))->color(['#3366CC', '#DC3912', '#FF9900', '#109618', '#990099', '#3B3EAC', '#0099C6', '#DD4477'])->options([
-            'colorCount' => 10, 'dimensions' => [800, 800]
-        ]);
+        $pie_chart = [];
+        $pie_chart['labels'] = $A->pluck('huraian');
+        $pie_chart['dataset'] = $A->pluck('count');
 
         $progress = Permohonan::where('status_id', '!=', 1)->orWhere('status_id', '!=', 6)->orWhere('status_id', '!=', 7)->count();
         $lulus = Permohonan::where('status_id', '=', 6)->orWhere('status_id', '=', 7)->count();
-        $diperakui = $this->permohonanDiperakukan();
+        $diperakui = $this->permohonanDiperakukan()->count();
 
-        return response()->json(['progress' => $progress, 'lulus' => $lulus, 'diperakui' => $diperakui, 'line_chart' => $line_chart, 'pie_chart' => $pie_chart]);
-
-        // return view ('panel_penilai.senarai-testing')->with('permohonans',$permohonan_baharu)->with('chart',$chart)->with('line_chart',$line_chart)->with('pie_chart',$pie_chart)->with('permohonan_in_progress', $permohonan_in_progress)->with('permohonan_diluluskan',$permohonan_diluluskan)->with('permohonan_diperakui',$permohonan_diperakui);
+        return response()->json(['permohonan_baharu' => $permohonan_baharu, 'progress' => $progress, 'lulus' => $lulus, 'diperakui' => $diperakui, 'line_chart' => $line_chart, 'pie_chart' => $pie_chart]);
     }
 
     public function fakulti()

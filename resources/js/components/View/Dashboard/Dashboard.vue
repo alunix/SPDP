@@ -1,27 +1,26 @@
 <template>
   <v-container>
-    
-      <div class="col-md-12">
-        <div class="au-breadcrumb-content">
-          <div class="au-breadcrumb-left">
-            <div class="overview-wrap">
-              <h2 class="title-1">gambaran keseluruhan</h2>
-            </div>
+    <div class="col-md-12">
+      <div class="au-breadcrumb-content">
+        <div class="au-breadcrumb-left">
+          <div class="overview-wrap">
+            <h2 class="title-1">gambaran keseluruhan</h2>
           </div>
-          <form class="au-form-icon--sm" action="/search" method="post">
-            <input
-              class="au-input--w300 au-input--style2"
-              type="text"
-              name="input-search"
-              placeholder="Cari permohonan dan laporan"
-            />
-            <button class="au-btn--submit2" type="submit">
-              <i class="zmdi zmdi-search"></i>
-            </button>
-          </form>
         </div>
+        <form class="au-form-icon--sm" action="/search" method="post">
+          <input
+            class="au-input--w300 au-input--style2"
+            type="text"
+            name="input-search"
+            placeholder="Cari permohonan dan laporan"
+          />
+          <button class="au-btn--submit2" type="submit">
+            <i class="zmdi zmdi-search"></i>
+          </button>
+        </form>
       </div>
-    
+    </div>
+
     <!-- End Top -->
     <hr />
     <div class="row m-t-25">
@@ -36,7 +35,7 @@
       </div>
       <div class="col-md-6 col-lg-3">
         <div class="statistic__item statistic__item--orange">
-          <h2 class="number" style="color:white">{{permohonans}}</h2>
+          <h2 class="number" style="color:white">{{diperakui}}</h2>
           <span class="desc" style="color:white">permohonan untuk diperakui</span>
           <div class="icon">
             <i class="zmdi zmdi-alert-circle-o"></i>
@@ -107,6 +106,7 @@ export default {
   data() {
     return {
       permohonans: [],
+      diperakui: "",
       lulus: "",
       progress: "",
       loaded: false,
@@ -125,7 +125,7 @@ export default {
           this.permohonans = res.permohonans;
           this.progress = res.progress;
           this.lulus = res.lulus;
-          console.log(res);
+          this.diperakui = res.diperakui;
           this.lineChart = {
             options: {
               chart: {

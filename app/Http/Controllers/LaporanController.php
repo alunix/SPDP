@@ -23,7 +23,7 @@ class LaporanController extends Controller
         $this->validate($request, [
             'kelulusan' => 'required|string',
             'laporan' => 'required|mimes:pdf|max:1999',
-    ]);
+        ]);
 
         $permohonan = Permohonan::findOrFail($id);
         $laporan = new LaporanClass();

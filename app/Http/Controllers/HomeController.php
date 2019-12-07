@@ -8,7 +8,9 @@ use SPDP\Fakulti;
 use SPDP\PenilaianPanel;
 use DB;
 use SPDP\Services\SenaraiPermohonan;
+use SPDP\Services\LaporanClass;
 use Debugbar;
+use SPDP\Laporan;
 
 class HomeController extends Controller
 {
@@ -35,7 +37,8 @@ class HomeController extends Controller
         $role = auth()->user()->role;
         $year = date('Y');
         $senarai = new SenaraiPermohonan();
-        $permohonan_baharu = $senarai->queryPermohonanBaru()->count();
+        $baru_count = $senarai->queryPermohonanBaru()->count();
+        $permohonan_baharu = $senarai->senaraiPermohonanBaru()->take(5);
         $permohonans = Fakulti::withCount(['permohonans' => function ($query) use ($year) {
             $query->select(['permohonans.id', 'permohonans.created_at']);
             $query->whereYear('permohonans.created_at', $year); //specify which table created at to query
@@ -71,8 +74,20 @@ class HomeController extends Controller
         $lulus = Permohonan::where('status_id', '=', 6)->orWhere('status_id', '=', 7)->count();
         $senarai = new SenaraiPermohonan();
         $perakuan_count = $senarai->querySenaraiPerakuan()->count();
+        $laporan = new LaporanClass();
+        $laporans = $laporan->getLaporans();
 
-        return response()->json(['role' => $role, 'permohonan_baharu' => $permohonan_baharu, 'progress' => $progress, 'lulus' => $lulus, 'diperakui' => $perakuan_count, 'line_chart' => $line_chart, 'pie_chart' => $pie_chart]);
+        return response()->json([
+            'role' => $role,
+            'permohonan_baharu_count' => $baru_count,
+            'permohonans' => $permohonan_baharu,
+            'progress' => $progress,
+            'lulus' => $lulus,
+            'diperakui' => $perakuan_count,
+            'line_chart' => $line_chart,
+            'pie_chart' => $pie_chart,
+            'laporans' => $laporans
+        ]);
     }
 
     public function fakulti()

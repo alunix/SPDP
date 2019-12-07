@@ -1,6 +1,6 @@
 <template>
   <div v-if="loaded" class="row m-t-25">
-    <div class="col-md-6 col-lg-3">
+    <!-- <div class="col-md-6 col-lg-3">
       <div class="statistic__item statistic__item--green">
         <h2 class="number" style="color:white">{{permohonans}}</h2>
         <span class="desc" style="color:white">permohonan dihantar</span>
@@ -8,7 +8,7 @@
           <i class="zmdi zmdi-file"></i>
         </div>
       </div>
-    </div>
+    </div>-->
     <div class="col-md-6 col-lg-3">
       <div class="statistic__item statistic__item--orange">
         <h2 class="number" style="color:white">{{diperakui}}</h2>
@@ -36,24 +36,67 @@
         </div>
       </div>
     </div>
+    <!-- TODO work on showing laporans -->
     <div class="col-lg-6">
       <div class="au-card recent-report">
         <div class="au-card-inner">
-          <h3 class="title-2">Dokumen permohonan dihantar</h3>
-          <div class="chart-info"></div>
-          <div class="recent-report__chart">
-            <apexchart
-              width="500"
-              type="bar"
-              :options="lineChart.options"
-              :series="lineChart.series"
-            ></apexchart>
-          </div>
+          <h3 class="title-2">Laporan dikeluarkan</h3>
+          <v-simple-table fixed-header height="auto">
+            <template v-slot:default>
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">NO</th>
+                  <th scope="col">JENIS</th>
+                  <th scope="col">TARIKH HANTAR</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr
+                  class="tr-shadow td-cursor"
+                  v-for="(p, index) in permohonans"
+                  v-bind:key="p.id"
+                  v-on:click="show(p.id)"
+                >
+                  <th scope="row">{{index + 1}}</th>
+                  <td>{{p.jenis_permohonan.huraian}}</td>
+                  <td>{{date(p.created_at)}}</td>
+                </tr>
+              </tbody>
+            </template>
+          </v-simple-table>
         </div>
       </div>
     </div>
     <div class="col-lg-6">
       <div class="au-card recent-report">
+        <h3 class="title-2">Senarai permohonan baharu</h3>
+        <v-simple-table fixed-header height="auto">
+          <template v-slot:default>
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">NO</th>
+                <th scope="col">JENIS</th>
+                <th scope="col">TARIKH HANTAR</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr
+                class="tr-shadow td-cursor"
+                v-for="(p, index) in permohonans"
+                v-bind:key="p.id"
+                v-on:click="show(p.id)"
+              >
+                <th scope="row">{{index + 1}}</th>
+                <td>{{p.jenis_permohonan.huraian}}</td>
+                <td>{{date(p.created_at)}}</td>
+              </tr>
+            </tbody>
+          </template>
+        </v-simple-table>
+      </div>
+      <!-- <div class="au-card recent-report">
         <div class="au-card-inner">
           <h3 class="title-2">Jenis permohonan</h3>
           <div class="recent-report__chart">
@@ -65,13 +108,15 @@
             ></apexchart>
           </div>
         </div>
-      </div>
+      </div>-->
     </div>
   </div>
 </template>
 
 <script>
 import VueApexCharts from "vue-apexcharts";
+import dayjs from "dayjs";
+("");
 export default {
   components: {
     apexchart: VueApexCharts
@@ -85,7 +130,8 @@ export default {
       loaded: false,
       pieChart: [],
       lineChart: [],
-      role: ""
+      role: "",
+      laporans: []
     };
   },
   created() {
@@ -101,6 +147,7 @@ export default {
           this.lulus = res.lulus;
           this.role = res.role;
           this.diperakui = res.diperakui;
+          this.laporans = res.laporans;
           this.lineChart = {
             options: {
               chart: {
@@ -128,6 +175,12 @@ export default {
           };
           this.loaded = true;
         });
+    },
+    date(created_at) {
+      if (!created_at) {
+        return null;
+      }
+      return dayjs(created_at).format("LLL");
     }
   }
 };

@@ -28,7 +28,7 @@ class LaporanClass
         } else {
             $fileNameToStore = 'noPDF.pdf';
         }
-        
+
         # add laporan data to database
         $this->createLaporanObject($permohonan, $fileNameWithExt, $fileNameToStore, $request);
 
@@ -104,6 +104,15 @@ class LaporanClass
             default:
                 return;
         }
+    }
+
+    public function getLaporans()
+    {
+        $user_id = auth()->user()->id;
+        $dokumens_id = Laporan::where('id_penghantar', $user_id)->pluck('dokumen_permohonan_id')->toArray();
+        $dokumens_id = array_unique($dokumens_id);
+        $laporans = Laporan::whereIn('dokumen_permohonan_id', $dokumens_id)->where('id_penghantar', '!=', $user_id)->take(5);
+        return response()->json($laporans);
     }
 
     private function getStatusKelulusan($permohonan)

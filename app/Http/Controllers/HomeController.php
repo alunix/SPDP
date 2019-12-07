@@ -116,7 +116,9 @@ class HomeController extends Controller
 
         return response()->json([
             'permohonans' => $permohonans->count(),
-            'lulus' => $lulus, 'progress' => $progress, 'line_chart' => $line_chart,
+            'lulus' => $lulus, 
+            'progress' => $progress, 
+            'line_chart' => $line_chart,
             'pie_chart' => $pie_chart
         ]);
     }

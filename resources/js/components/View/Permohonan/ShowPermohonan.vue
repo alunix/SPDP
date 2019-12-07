@@ -35,13 +35,16 @@
         </v-card>
       </v-col>
       <v-col v-if="loaded" cols="12" md="8">
+        <v-col v-if="canSwitchTab">
+          <v-switch v-model="switchTab" label="Muat naik laporan" color="indigo" value="indigo" hide-details></v-switch>
+        </v-col>
         <LantikPenilai
           v-if="showLantikPenilai"
           :permohonan_props="permohonan"
           @event="hideLantikPenilai"
         ></LantikPenilai>
         <LaporanUpload
-          v-if="showLaporanUpload"
+          v-if="showLaporanUpload || switchTab"
           :permohonan_id_props="id"
           @event="hideLaporanUpload"
         ></LaporanUpload>
@@ -66,7 +69,9 @@ export default {
       id: this.$route.params.id,
       success: false,
       snackbar: {},
-      snackbarMessage: ""
+      snackbarMessage: "",
+      switchTab: false,
+      canSwitchTab: false
     };
   },
   created() {
@@ -85,6 +90,10 @@ export default {
         .then(res => res.json())
         .then(res => {
           this.permohonan = res.permohonan;
+          if (this.permohonan.jenis_id == 2 || this.permohonan.jenis_id == 5 || this.permohonan.jenis_id == 3) {
+            this.canSwitchTab = true;
+          }
+          console.log(this.permohonan);
           this.dokumen = res.dokumen;
           this.lists = [
             {

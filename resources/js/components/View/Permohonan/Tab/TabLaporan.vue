@@ -4,6 +4,7 @@
       <div style="padding-left:20px; padding-top:20px">
         <p>{{ pagination.total }} keputusan</p>
       </div>
+
       <v-row
         style="padding-right:25px; padding-top:8px; padding-bottom:8px"
         class="padding-right"
@@ -23,6 +24,7 @@
         >Next</v-btn>
       </v-row>
     </v-row>
+
     <v-simple-table fixed-header height="auto">
       <template v-slot:default>
         <thead>

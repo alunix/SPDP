@@ -36,7 +36,14 @@
       </v-col>
       <v-col v-if="loaded" cols="12" md="8">
         <v-col v-if="canSwitchTab">
-          <v-switch v-model="switchTab" label="Muat naik laporan" color="indigo" value="indigo" hide-details></v-switch>
+          <v-switch
+            v-model="switchLaporan"
+            @change="changeLaporan(switchLaporan)"
+            label="Muat naik laporan"
+            color="primary"
+            :value="true"
+            hide-details
+          ></v-switch>
         </v-col>
         <LantikPenilai
           v-if="showLantikPenilai"
@@ -44,7 +51,7 @@
           @event="hideLantikPenilai"
         ></LantikPenilai>
         <LaporanUpload
-          v-if="showLaporanUpload || switchTab"
+          v-if="showLaporanUpload"
           :permohonan_id_props="id"
           @event="hideLaporanUpload"
         ></LaporanUpload>
@@ -70,7 +77,7 @@ export default {
       success: false,
       snackbar: {},
       snackbarMessage: "",
-      switchTab: false,
+      switchLaporan: false,
       canSwitchTab: false
     };
   },
@@ -85,15 +92,29 @@ export default {
           this.showPermohonan(res);
         });
     },
+    changeLaporan(value) {
+      if (value == true) {
+        this.showLantikPenilai = false;
+        this.showLaporanUpload = true;
+      } else {
+        this.showLantikPenilai = true;
+        this.showLaporanUpload = false;
+      }
+    },
     showPermohonan(role) {
       fetch("/api/permohonan/" + this.id)
         .then(res => res.json())
         .then(res => {
           this.permohonan = res.permohonan;
-          if (this.permohonan.jenis_id == 2 || this.permohonan.jenis_id == 5 || this.permohonan.jenis_id == 3) {
+          // pjk can switch between lantik and upload if jenis permohonan match
+          if (
+            (this.permohonan.jenis_id == 2 ||
+              this.permohonan.jenis_id == 5 ||
+              this.permohonan.jenis_id == 3) &&
+            role == "pjk"
+          ) {
             this.canSwitchTab = true;
           }
-          console.log(this.permohonan);
           this.dokumen = res.dokumen;
           this.lists = [
             {

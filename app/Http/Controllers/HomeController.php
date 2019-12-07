@@ -25,13 +25,14 @@ class HomeController extends Controller
                 return $this->fakulti();
                 break;
             default:
-                return $this->dashboard($role);
+                return $this->dashboard();
                 break;
         }
     }
 
-    public function dashboard($role)
+    public function dashboard()
     {
+        $role = auth()->user()->role;
         $year = date('Y');
         $senarai = new SenaraiPermohonan();
         $permohonan_baharu = $senarai->queryPermohonanBaru()->count();
@@ -68,13 +69,15 @@ class HomeController extends Controller
 
         $progress = Permohonan::where('status_id', '!=', 1)->orWhere('status_id', '!=', 6)->orWhere('status_id', '!=', 7)->count();
         $lulus = Permohonan::where('status_id', '=', 6)->orWhere('status_id', '=', 7)->count();
-        $diperakui = $this->permohonanDiperakukan()->count();
+        $senarai = new SenaraiPermohonan();
+        $perakuan_count = $senarai->querySenaraiPerakuan()->count();
 
-        return response()->json(['permohonan_baharu' => $permohonan_baharu, 'progress' => $progress, 'lulus' => $lulus, 'diperakui' => $diperakui, 'line_chart' => $line_chart, 'pie_chart' => $pie_chart]);
+        return response()->json(['role' => $role, 'permohonan_baharu' => $permohonan_baharu, 'progress' => $progress, 'lulus' => $lulus, 'diperakui' => $perakuan_count, 'line_chart' => $line_chart, 'pie_chart' => $pie_chart]);
     }
 
     public function fakulti()
     {
+        $role = auth()->user()->role;
         $fakulti_id = auth()->user()->fakulti_id;
         $year = date('Y');
 
@@ -115,28 +118,29 @@ class HomeController extends Controller
         $lulus = Permohonan::where('status_id', '=', 6)->orWhere('status_id', '=', 7)->select('id')->count();
 
         return response()->json([
+            'role' => $role,
             'permohonans' => $permohonans->count(),
-            'lulus' => $lulus, 
-            'progress' => $progress, 
+            'lulus' => $lulus,
+            'progress' => $progress,
             'line_chart' => $line_chart,
             'pie_chart' => $pie_chart
         ]);
     }
 
-    public function permohonanDiperakukan()
-    {
-        $role = auth()->user()->role;
-        switch ($role) {
-            case 'pjk':
-                $permohonans = Permohonan::where('jenis_id', '!=', '8')->where('status_id', '=', 3)->get();
-                return $permohonans;
-                break;
-            default:
-                $permohonans = new Permohonan();
-                return $permohonans;
-                break;
-        }
-    }
+    // public function permohonanDiperakukan()
+    // {
+    //     $role = auth()->user()->role;
+    //     switch ($role) {
+    //         case 'pjk':
+    //             $permohonans = Permohonan::where('jenis_id', '!=', '8')->where('status_id', '=', 3)->get();
+    //             return $permohonans;
+    //             break;
+    //         default:
+    //             $permohonans = new Permohonan();
+    //             return $permohonans;
+    //             break;
+    //     }
+    // }
 
     public function permohonanCount()
     {

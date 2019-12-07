@@ -23,7 +23,7 @@
 
     <!-- End Top -->
     <hr />
-    <div class="row m-t-25">
+    <div v-if="loaded" class="row m-t-25">
       <div class="col-md-6 col-lg-3">
         <div class="statistic__item statistic__item--green">
           <h2 class="number" style="color:white">{{permohonans}}</h2>
@@ -67,7 +67,6 @@
             <div class="chart-info"></div>
             <div class="recent-report__chart">
               <apexchart
-                v-if="loaded"
                 width="500"
                 type="bar"
                 :options="lineChart.options"
@@ -83,7 +82,6 @@
             <h3 class="title-2">Jenis permohonan</h3>
             <div class="recent-report__chart">
               <apexchart
-                v-if="loaded"
                 width="500"
                 type="donut"
                 :options="pieChart.options"
@@ -111,7 +109,8 @@ export default {
       progress: "",
       loaded: false,
       pieChart: [],
-      lineChart: []
+      lineChart: [],
+      role: ""
     };
   },
   created() {
@@ -125,6 +124,7 @@ export default {
           this.permohonans = res.permohonans;
           this.progress = res.progress;
           this.lulus = res.lulus;
+          this.role = res.role;
           this.diperakui = res.diperakui;
           this.lineChart = {
             options: {

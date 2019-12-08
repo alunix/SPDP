@@ -8,10 +8,10 @@
         <modal height="auto" width="25%" :scrollable="true" name="uploadDokumenModal">
           <ModalUploadDokumen :permohonan_id_props="permohonan.id"></ModalUploadDokumen>
         </modal>
-        <v-row align="center" justify="end">
+        <v-row v-show="isFakulti" align="center" justify="end">
           <v-btn
             v-on:click="showModel()"
-            :disabled="upload"
+            :disabled="!upload"
             style="margin-bottom:20px; margin-right:15px"
             small
           >
@@ -45,25 +45,33 @@ export default {
       lists: [],
       pagination: {},
       permohonan: this.permohonan_props,
-      upload: true
+      upload: false,
+      isFakulti: false
     };
   },
   components: {
     ModalUploadDokumen
   },
   created() {
-    this.uploadButton();
+    this.getRole();
   },
   methods: {
-    uploadButton() {
-      if (
-        this.permohonan.status_id == 8 ||
-        this.permohonan.status_id == 9 ||
-        this.permohonan.status_id == 10 ||
-        this.permohonan.status_id == 11
-      ) {
-        this.upload = false;
-      }
+    getRole() {
+      fetch("/api/role")
+        .then(res => res.json())
+        .then(res => {
+          if (res == "fakulti") {
+            this.isFakulti = true;
+            if (
+              this.permohonan.status_id == 8 ||
+              this.permohonan.status_id == 9 ||
+              this.permohonan.status_id == 10 ||
+              this.permohonan.status_id == 11
+            ) {
+              this.upload = true;
+            }
+          }
+        });
     },
     date(created_at) {
       if (!created_at) {

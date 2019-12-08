@@ -106,13 +106,16 @@ class LaporanClass
         }
     }
 
-    public function getLaporans()
+    public function getLaporansDashboard()
     {
         $user_id = auth()->user()->id;
         $dokumens_id = Laporan::where('id_penghantar', $user_id)->pluck('dokumen_permohonan_id')->toArray();
         $dokumens_id = array_unique($dokumens_id);
-        $laporans = Laporan::whereIn('dokumen_permohonan_id', $dokumens_id)->where('id_penghantar', '!=', $user_id)->take(5);
-        return response()->json($laporans);
+        $laporans = Laporan::with('id_penghantar_nama:id,role')
+            ->whereIn('dokumen_permohonan_id', $dokumens_id)
+            ->where('id_penghantar', '!=', $user_id)
+            ->take(5)->get();
+        return $laporans;
     }
 
     private function getStatusKelulusan($permohonan)

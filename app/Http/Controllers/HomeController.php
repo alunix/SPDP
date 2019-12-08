@@ -2,6 +2,7 @@
 
 namespace SPDP\Http\Controllers;
 
+use Barryvdh\Debugbar\Twig\Extension\Debug;
 use SPDP\Permohonan;
 use SPDP\Charts\JenisPermohonanChart;
 use SPDP\Fakulti;
@@ -75,7 +76,7 @@ class HomeController extends Controller
         $senarai = new SenaraiPermohonan();
         $perakuan_count = $senarai->querySenaraiPerakuan()->count();
         $laporan = new LaporanClass();
-        $laporans = $laporan->getLaporans();
+        $laporans = $laporan->getLaporansDashboard();
 
         return response()->json([
             'role' => $role,

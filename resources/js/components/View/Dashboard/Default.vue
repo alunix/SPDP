@@ -46,21 +46,23 @@
               <thead class="thead-light">
                 <tr>
                   <th scope="col">NO</th>
-                  <th scope="col">JENIS</th>
-                  <th scope="col">TARIKH HANTAR</th>
+                  <th scope="col">LAPORAN</th>
+                  <th scope="col">PIHAK</th>
+                  <th scope="col">TARIKH DIKELUARKAN</th>
                 </tr>
               </thead>
 
               <tbody>
                 <tr
                   class="tr-shadow td-cursor"
-                  v-for="(p, index) in permohonans"
-                  v-bind:key="p.id"
-                  v-on:click="show(p.id)"
+                  v-for="(l, index) in laporans"
+                  v-bind:key="l.id"
+                  v-on:click="show(l.id)"
                 >
                   <th scope="row">{{index + 1}}</th>
-                  <td>{{p.jenis_permohonan.huraian}}</td>
-                  <td>{{date(p.created_at)}}</td>
+                  <td>{{l.tajuk_fail}}</td>
+                  <td>{{(l.id_penghantar_nama.role).toUpperCase()}}</td>
+                  <td>{{date(l.created_at)}}</td>
                 </tr>
               </tbody>
             </template>
@@ -148,6 +150,7 @@ export default {
           this.role = res.role;
           this.diperakui = res.diperakui;
           this.laporans = res.laporans;
+          console.log(res.laporans);
           this.lineChart = {
             options: {
               chart: {

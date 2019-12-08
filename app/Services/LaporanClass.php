@@ -114,6 +114,7 @@ class LaporanClass
         $laporans = Laporan::with('id_penghantar_nama:id,role')
             ->whereIn('dokumen_permohonan_id', $dokumens_id)
             ->where('id_penghantar', '!=', $user_id)
+            ->orderBy('created_at', 'desc')
             ->take(5)->get();
         return $laporans;
     }

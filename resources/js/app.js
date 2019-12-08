@@ -29,7 +29,7 @@ const routes = [
         component: require("./components/SenaraiPermohonan.vue").default
     },
     {
-        path: "/",
+        path: "/home",
         name: "dashboard",
         component: require("./components/View/Dashboard/Dashboard.vue").default
     },

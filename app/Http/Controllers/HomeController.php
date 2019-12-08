@@ -40,37 +40,6 @@ class HomeController extends Controller
         $senarai = new SenaraiPermohonan();
         $baru_count = $senarai->queryPermohonanBaru()->count();
         $permohonan_baharu = $senarai->senaraiPermohonanBaru()->take(5);
-        $permohonans = Fakulti::withCount(['permohonans' => function ($query) use ($year) {
-            $query->select(['permohonans.id', 'permohonans.created_at']);
-            $query->whereYear('permohonans.created_at', $year); //specify which table created at to query
-        }])->get()->sortBy('fakulti_id');
-
-        $count_permohonan = $permohonans->pluck('permohonans');
-        $bar_chart = [];
-        $bar_chart['labels'] = $permohonans->pluck('kod');
-        $bar_chart['data'] = $permohonans;
-
-        /*------------------ Line chart for jumlah dokumen permohonan in a year--------------*/
-        $Z =  DB::table("dokumens")
-            ->selectRaw("DATE_FORMAT(dokumens.created_at,'%M') as months, month(dokumens.created_at) as month, count(dokumen_permohonan_id) as count")
-            ->orderBy('month', 'asc')
-            ->groupBy('months')
-            ->get();
-
-        $line_chart = [];
-        $line_chart['labels'] = $Z->pluck('months');
-        $line_chart['dataset'] = $Z->pluck('count');
-
-        $A = DB::table("permohonans")
-            ->join('jenis_permohonans', 'jenis_permohonans.id', '=', 'permohonans.jenis_id')
-            ->selectRaw("year(permohonans.created_at) as years, jenis_permohonans.huraian as huraian,count(permohonans.id) as count")
-            ->groupBy('huraian')
-            ->get();
-
-        $pie_chart = [];
-        $pie_chart['labels'] = $A->pluck('huraian');
-        $pie_chart['dataset'] = $A->pluck('count');
-
         $progress = Permohonan::where('status_id', '!=', 1)->orWhere('status_id', '!=', 6)->orWhere('status_id', '!=', 7)->count();
         $lulus = Permohonan::where('status_id', '=', 6)->orWhere('status_id', '=', 7)->count();
         $senarai = new SenaraiPermohonan();
@@ -85,8 +54,6 @@ class HomeController extends Controller
             'progress' => $progress,
             'lulus' => $lulus,
             'diperakui' => $perakuan_count,
-            'line_chart' => $line_chart,
-            'pie_chart' => $pie_chart,
             'laporans' => $laporans
         ]);
     }
@@ -142,21 +109,6 @@ class HomeController extends Controller
             'pie_chart' => $pie_chart
         ]);
     }
-
-    // public function permohonanDiperakukan()
-    // {
-    //     $role = auth()->user()->role;
-    //     switch ($role) {
-    //         case 'pjk':
-    //             $permohonans = Permohonan::where('jenis_id', '!=', '8')->where('status_id', '=', 3)->get();
-    //             return $permohonans;
-    //             break;
-    //         default:
-    //             $permohonans = new Permohonan();
-    //             return $permohonans;
-    //             break;
-    //     }
-    // }
 
     public function permohonanCount()
     {

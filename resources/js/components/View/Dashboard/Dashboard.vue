@@ -30,19 +30,17 @@ export default {
     };
   },
   created() {
-    this.getRole();
-  },
-  methods: {
-    getRole() {
-      fetch("api/role")
-        .then(res => res.json())
-        .then(res => {
-          this.role = res;
-          if (this.role != "fakulti") {
-            this.showDefaultDashboard = true;
-          }
-        });
-    }
+    this.$store
+      .dispatch("fetchRole")
+      .then(data => {
+        this.role = data;
+        if (this.role != "fakulti") {
+          this.showDefaultDashboard = true;
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 };
 </script>

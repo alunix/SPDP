@@ -1,6 +1,7 @@
 <?php
 Auth::routes();
 // Route::post('/search', 'SearchController@search')->name('search');
+Route::get('api/is_user_authenticated', 'UserController@isUserAuthenticated')->name('api.isUserAuthenticated');
 /*----------------------- API REST VUE ------------- */
 Route::group(['prefix' => 'api', 'middleware' => 'auth'], function () {
 	Route::get('/role', 'UserController@getRole')->name('api.role');

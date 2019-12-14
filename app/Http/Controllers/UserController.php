@@ -7,17 +7,28 @@ use Illuminate\Http\Request;
 use SPDP\Fakulti;
 use SPDP\Services\CreateUser;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    public function isUserAuthenticated()
+    {
+        if (Auth::check()) {
+            // return "true";
+            return response()->json("true");
+            // return "true";
+        } else {
+            return response()->json('false');
+            // return "false";
+        }
+    }
     public function getUsers()
     {
         $role = auth()->user()->role;
-        if($role == 'pjk') {
+        if ($role == 'pjk') {
             $users = User::with('fakulti:fakulti_id,kod,fakulti_id')->orderBy('created_at', 'desc')->paginate(10);
             return $users;
-        }
-        else {
+        } else {
             abort(404);
         }
     }

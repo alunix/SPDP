@@ -6,6 +6,7 @@ import Vuetify from 'vuetify';
 import dayjs from 'dayjs';
 import LocalizedFormat from 'dayjs/plugin/localizedFormat';
 import Vuex from 'vuex';
+import 'es6-promise/auto';
 
 require('./bootstrap');
 
@@ -13,6 +14,31 @@ dayjs.extend(LocalizedFormat);
 
 window.Vue = require('vue');
 [ VModal, VueRouter, VueApexCharts, BootstrapVue, Vuetify, dayjs, Vuex ].forEach((x) => Vue.use(x));
+
+const store = new Vuex.Store({
+	state: {
+		role: '',
+		authenticated: false
+	},
+	mutations: {
+		setRole(state, payload) {
+			// example of modifying before storing
+			state.role = String(payload);
+		}
+	},
+	actions: {
+		fetchRole(store) {
+			return fetch('/api/role')
+				.then(function(response) {
+					return response.json();
+				})
+				.then(function(data) {
+					store.commit('setRole', data);
+					return store.state.role;
+				});
+		}
+	}
+});
 
 const routes = [
 	{
@@ -37,12 +63,7 @@ const routes = [
 	},
 	{
 		path: '/senarai-pengguna',
-        name: 'pengguna',
-        beforeRouteEnter(to, from, next) {
-            const answer = getRole();
-            console.log(answer);
-            
-        },
+		name: 'pengguna',
 		component: require('./components/View/Pengguna/SenaraiPengguna.vue').default
 	},
 	{
@@ -63,23 +84,34 @@ const router = new VueRouter({
 	routes // short for `routes: routes`
 });
 
-function getRole() {
-    
+function is_user_authenticated() {
+	fetch('/api/is_user_authenticated').then((res) => res.json()).then((res) => {
+		return res;
+	});
 }
 
-// router.beforeEach((to, from, next) => {
-// 	const csrf = $('meta[name="csrf-token"]').attr('content');
-// 	var isAuthenticated = false;
-// 	if (csrf) {
-// 		isAuthenticated = true;
-// 	}
-// 	if (!isAuthenticated) next('/login');
-// 	else next();
-// });
-
-// vue router functions 
-
-
+router.beforeEach((to, from, next) => {
+	// fetch('/api/is_user_authenticated').then((res) => res.json()).then((res) => {
+	// 	if (res != 'true') {
+	// 		const login = router.push('/login');
+	// 		next(login);
+	// 		// console.log('need login');
+	// 	} else next();
+	// });
+	// fetch('/api/is_user_authenticated').then((res) => res.json()).then((res) => {
+	// 	if (res != 'true') {
+	// 		const login = router.push('/login');
+	// 		// next(login)
+	// 		next(login);
+	// 	} else next();
+	// });
+	var authenticated = is_user_authenticated();
+	if (authenticated != 'true') {
+		const login = router.push('/login');
+		next(login);
+		// console.log('need login');
+	} else next();
+});
 
 //Modal
 Vue.component('PermohonanModal', require('./components/Modal/PermohonanModal.vue').default);
@@ -112,5 +144,6 @@ Vue.component('passport-personal-access-tokens', require('./components/passport/
 const app = new Vue({
 	el: '#app',
 	vuetify: new Vuetify(),
-	router
+	router,
+	store
 });

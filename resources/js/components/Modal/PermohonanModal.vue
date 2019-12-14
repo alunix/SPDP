@@ -62,6 +62,7 @@
         <v-btn
           color="normal"
           accept=".pdf"
+          :disabled="loading"
           class="mr-4"
           @click="$modal.hide('permohonan_baharu')"
         >Batal</v-btn>

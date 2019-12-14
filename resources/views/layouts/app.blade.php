@@ -79,12 +79,14 @@
                                     <span class="bot-line"></span>Analitik</a>
                                 </router-link>
                             </li>
+                            @if(Auth::user()->role == "pjk")
                             <li>
                                 <router-link :to="{name: 'pengguna'}">
                                     <i class="fas fa-users"></i>
                                     <span class="bot-line"></span>Pengguna</a>
                                 </router-link>
                             </li>
+                            @endif
                         </ul>
                     </div>
                     <div class="header__tool">

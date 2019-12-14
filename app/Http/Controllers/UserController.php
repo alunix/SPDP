@@ -12,8 +12,14 @@ class UserController extends Controller
 {
     public function getUsers()
     {
-        $users = User::with('fakulti:fakulti_id,kod,fakulti_id')->orderBy('created_at', 'desc')->paginate(10);
-        return $users;
+        $role = auth()->user()->role;
+        if($role == 'pjk') {
+            $users = User::with('fakulti:fakulti_id,kod,fakulti_id')->orderBy('created_at', 'desc')->paginate(10);
+            return $users;
+        }
+        else {
+            abort(404);
+        }
     }
 
     public function getPanelPenilai()

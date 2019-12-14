@@ -31,9 +31,11 @@ export default {
   },
   created() {
     this.$store
-      .dispatch("fetchRole")
-      .then(data => {
-        this.role = data;
+      .dispatch("fetchUser")
+      .then(res => res.json())
+      .then(res => {
+        this.role = res.role;
+        console.log(res);
         if (this.role != "fakulti") {
           this.showDefaultDashboard = true;
         }

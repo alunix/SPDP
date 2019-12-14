@@ -4,7 +4,7 @@ Auth::routes();
 Route::get('api/is_user_authenticated', 'UserController@isUserAuthenticated')->name('api.isUserAuthenticated');
 /*----------------------- API REST VUE ------------- */
 Route::group(['prefix' => 'api', 'middleware' => 'auth'], function () {
-	Route::get('/role', 'UserController@getRole')->name('api.role');
+	Route::get('/get_user_info', 'UserController@getUserInfo')->name('api.user_info');
 	/* Fakulti */
 	Route::get('/senarai-permohonan-dihantar', 'PermohonanController@api_permohonanDihantar')->name('api.permohonan.dihantar');
 	Route::post('/permohonan/submit', 'PermohonanController@store')->name('api.permohonan.submit');

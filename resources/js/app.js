@@ -17,25 +17,26 @@ window.Vue = require('vue');
 
 const store = new Vuex.Store({
 	state: {
-		role: '',
+		user: [],
 		authenticated: false
 	},
 	mutations: {
-		setRole(state, payload) {
-			// example of modifying before storing
-			state.role = String(payload);
+		setUser(state, payload) {
+			state.user = payload;
 		}
 	},
 	actions: {
-		fetchRole(store) {
-			return fetch('/api/role')
-				.then(function(response) {
-					return response.json();
-				})
-				.then(function(data) {
-					store.commit('setRole', data);
-					return store.state.role;
-				});
+		fetchUser(store) {
+			return (
+				fetch('/api/get_user_info')
+					// .then(function(response) {
+					// 	return response.json();
+					// })
+					.then(function(data) {
+						store.commit('setUser', data);
+						return store.state.user;
+					})
+			);
 		}
 	}
 });
@@ -90,28 +91,28 @@ function is_user_authenticated() {
 	});
 }
 
-router.beforeEach((to, from, next) => {
-	// fetch('/api/is_user_authenticated').then((res) => res.json()).then((res) => {
-	// 	if (res != 'true') {
-	// 		const login = router.push('/login');
-	// 		next(login);
-	// 		// console.log('need login');
-	// 	} else next();
-	// });
-	// fetch('/api/is_user_authenticated').then((res) => res.json()).then((res) => {
-	// 	if (res != 'true') {
-	// 		const login = router.push('/login');
-	// 		// next(login)
-	// 		next(login);
-	// 	} else next();
-	// });
-	var authenticated = is_user_authenticated();
-	if (authenticated != 'true') {
-		const login = router.push('/login');
-		next(login);
-		// console.log('need login');
-	} else next();
-});
+// router.beforeEach((to, from, next) => {
+// 	// fetch('/api/is_user_authenticated').then((res) => res.json()).then((res) => {
+// 	// 	if (res != 'true') {
+// 	// 		const login = router.push('/login');
+// 	// 		next(login);
+// 	// 		// console.log('need login');
+// 	// 	} else next();
+// 	// });
+// 	// fetch('/api/is_user_authenticated').then((res) => res.json()).then((res) => {
+// 	// 	if (res != 'true') {
+// 	// 		const login = router.push('/login');
+// 	// 		// next(login)
+// 	// 		next(login);
+// 	// 	} else next();
+// 	// });
+// 	var authenticated = is_user_authenticated();
+// 	if (authenticated != 'true') {
+// 		const login = router.push('/login');
+// 		next(login);
+// 		// console.log('need login');
+// 	} else next();
+// });
 
 //Modal
 Vue.component('PermohonanModal', require('./components/Modal/PermohonanModal.vue').default);

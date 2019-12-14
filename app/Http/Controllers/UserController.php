@@ -14,12 +14,9 @@ class UserController extends Controller
     public function isUserAuthenticated()
     {
         if (Auth::check()) {
-            // return "true";
             return response()->json("true");
-            // return "true";
         } else {
             return response()->json('false');
-            // return "false";
         }
     }
     public function getUsers()
@@ -39,10 +36,13 @@ class UserController extends Controller
         return $users;
     }
 
-    public function getRole()
+    public function getUserInfo()
     {
-        $role = auth()->user()->role;
-        return response()->json($role);
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
+        // $user = "dsd";
+        // return response()->json($user);
+        return $user;
     }
 
     public function searchUsers($query)

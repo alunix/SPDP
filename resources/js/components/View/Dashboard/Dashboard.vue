@@ -35,7 +35,6 @@ export default {
       .then(res => res.json())
       .then(res => {
         this.role = res.role;
-        console.log(res);
         if (this.role != "fakulti") {
           this.showDefaultDashboard = true;
         }

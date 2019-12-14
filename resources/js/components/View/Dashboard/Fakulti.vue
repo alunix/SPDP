@@ -17,7 +17,7 @@
           <i class="zmdi zmdi-alert-circle-o"></i>
         </div>
       </div>
-    </div> -->
+    </div>-->
     <div class="col-md-6 col-lg-3">
       <div class="statistic__item statistic__item--blue">
         <h2 class="number" style="color:white">{{progress}}</h2>

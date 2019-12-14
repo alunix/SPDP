@@ -53,26 +53,27 @@ export default {
     ModalUploadDokumen
   },
   created() {
-    this.getRole();
+    this.$store
+      .dispatch("fetchUser")
+      .then(res => res.json())
+      .then(res => {
+        if (res.role == "fakulti") {
+          this.isFakulti = true;
+          if (
+            this.permohonan.status_id == 8 ||
+            this.permohonan.status_id == 9 ||
+            this.permohonan.status_id == 10 ||
+            this.permohonan.status_id == 11
+          ) {
+            this.upload = true;
+          }
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
   },
   methods: {
-    getRole() {
-      fetch("/api/role")
-        .then(res => res.json())
-        .then(res => {
-          if (res == "fakulti") {
-            this.isFakulti = true;
-            if (
-              this.permohonan.status_id == 8 ||
-              this.permohonan.status_id == 9 ||
-              this.permohonan.status_id == 10 ||
-              this.permohonan.status_id == 11
-            ) {
-              this.upload = true;
-            }
-          }
-        });
-    },
     date(created_at) {
       if (!created_at) {
         return null;

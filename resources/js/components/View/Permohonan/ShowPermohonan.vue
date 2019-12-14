@@ -82,16 +82,21 @@ export default {
     };
   },
   created() {
-    this.getRole();
+    this.$store
+      .dispatch("fetchUser")
+      .then(res => res.json())
+      .then(res => {
+        this.role = res.role;
+        if (this.role != "fakulti") {
+          this.showDefaultDashboard = true;
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    this.showPermohonan();
   },
   methods: {
-    getRole() {
-      fetch("/api/role")
-        .then(res => res.json())
-        .then(res => {
-          this.showPermohonan(res);
-        });
-    },
     changeLaporan(value) {
       if (value == true) {
         this.showLantikPenilai = false;
@@ -101,7 +106,7 @@ export default {
         this.showLaporanUpload = false;
       }
     },
-    showPermohonan(role) {
+    showPermohonan() {
       fetch("/api/permohonan/" + this.id)
         .then(res => res.json())
         .then(res => {
@@ -111,7 +116,7 @@ export default {
             (this.permohonan.jenis_id == 2 ||
               this.permohonan.jenis_id == 5 ||
               this.permohonan.jenis_id == 3) &&
-            role == "pjk"
+            this.role == "pjk"
           ) {
             this.canSwitchTab = true;
           }
@@ -149,7 +154,7 @@ export default {
               id: 7
             }
           ];
-          if (role == "pjk") {
+          if (this.role == "pjk") {
             if (
               (this.permohonan.jenis_id == 1 &&
                 this.permohonan.status_id == 1) ||
@@ -169,14 +174,14 @@ export default {
             ) {
               this.showLaporanUpload = true;
             }
-          } else if (role == "penilai") {
+          } else if (this.role == "penilai") {
             if (
               this.permohonan.status_id == 2 ||
               this.permohonan.status_id == 12
             ) {
               this.showLaporanUpload = true;
             }
-          } else if (role == "jppa") {
+          } else if (this.role == "jppa") {
             if (
               this.permohonan.status_id == 2 ||
               (this.permohonan.status_id == 1 &&
@@ -185,7 +190,7 @@ export default {
             ) {
               this.showLaporanUpload = true;
             }
-          } else if (role == "senat" && this.permohonan.status_id == 11) {
+          } else if (this.role == "senat" && this.permohonan.status_id == 11) {
             if (
               this.permohonan.status_id == 11 ||
               this.permohonan.status_id == 15
@@ -194,6 +199,9 @@ export default {
             }
           }
           this.loaded = true;
+        })
+        .catch(error => {
+          console.log(error);
         });
     },
     date(created_at) {

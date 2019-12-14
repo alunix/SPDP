@@ -27,16 +27,10 @@ const store = new Vuex.Store({
 	},
 	actions: {
 		fetchUser(store) {
-			return (
-				fetch('/api/get_user_info')
-					// .then(function(response) {
-					// 	return response.json();
-					// })
-					.then(function(data) {
-						store.commit('setUser', data);
-						return store.state.user;
-					})
-			);
+			return fetch('/api/get_user_info').then(function(data) {
+				store.commit('setUser', data);
+				return store.state.user;
+			});
 		}
 	}
 });
@@ -65,7 +59,13 @@ const routes = [
 	{
 		path: '/senarai-pengguna',
 		name: 'pengguna',
-		component: require('./components/View/Pengguna/SenaraiPengguna.vue').default
+		component: require('./components/View/Pengguna/SenaraiPengguna.vue').default,
+		beforeEnter: (to, from, next) => {
+			store.dispatch('fetchUser').then((res) => res.json()).then((res) => {
+				if (res.role == 'pjk') next();
+				else next('/home');
+			});
+		}
 	},
 	{
 		path: '/analitik',
@@ -75,7 +75,6 @@ const routes = [
 	{
 		path: '*',
 		name: 'NotFound',
-		// meta: { requiresAuth: true },
 		component: require('./components/view/ErrorHandling/404.vue').default
 	}
 ];
@@ -87,32 +86,19 @@ const router = new VueRouter({
 
 function is_user_authenticated() {
 	fetch('/api/is_user_authenticated').then((res) => res.json()).then((res) => {
+		console.log(res);
 		return res;
 	});
 }
 
-// router.beforeEach((to, from, next) => {
-// 	// fetch('/api/is_user_authenticated').then((res) => res.json()).then((res) => {
-// 	// 	if (res != 'true') {
-// 	// 		const login = router.push('/login');
-// 	// 		next(login);
-// 	// 		// console.log('need login');
-// 	// 	} else next();
-// 	// });
-// 	// fetch('/api/is_user_authenticated').then((res) => res.json()).then((res) => {
-// 	// 	if (res != 'true') {
-// 	// 		const login = router.push('/login');
-// 	// 		// next(login)
-// 	// 		next(login);
-// 	// 	} else next();
-// 	// });
-// 	var authenticated = is_user_authenticated();
-// 	if (authenticated != 'true') {
-// 		const login = router.push('/login');
-// 		next(login);
-// 		// console.log('need login');
-// 	} else next();
-// });
+router.beforeEach((to, from, next) => {
+	// if (authenticated != 'true') {
+	// 	const login = router.push('/login');
+	// 	// next(login);
+	// 	// console.log('need login');
+	// } else next();
+	next();
+});
 
 //Modal
 Vue.component('PermohonanModal', require('./components/Modal/PermohonanModal.vue').default);

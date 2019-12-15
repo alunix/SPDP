@@ -39,8 +39,8 @@ class ShowPermohonan
         $permohonans_id = $user->permohonans->pluck('id')->toArray();
 
         $dp =  $this->userHavePermohonan($permohonan, $permohonans_id);
-        if ($dp == false) {
-            abort(403, 'Tidak dibenarkan');
+        if (!$dp) {
+            abort(403);
         }
         return $this->show($permohonan);
     }
@@ -50,7 +50,7 @@ class ShowPermohonan
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
         $permohonans = new SenaraiPermohonan();
-        $permohonans = $permohonans->senaraiPermohonanBaru();
+        $permohonans = $permohonans->queryPermohonanBaru()->count();
 
         if (!$permohonans) {
             abort(404);
@@ -62,7 +62,7 @@ class ShowPermohonan
 
     public function userHavePermohonan($permohonan, $permohonans_id)
     {
-        //check whether user does have permohonans
+        // check whether user does have permohonans
         if (sizeof($permohonans_id) <= 0) {
             return false;
         }

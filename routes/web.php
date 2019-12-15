@@ -8,7 +8,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function () {
 	/* Fakulti */
 	Route::get('/senarai-permohonan-dihantar', 'PermohonanController@api_permohonanDihantar')->name('api.permohonan.dihantar');
 	Route::post('/permohonan/submit', 'PermohonanController@store')->name('api.permohonan.submit');
-	Route::get('/permohonan/{permohonan}', 'PermohonanController@show')->name('api.permohonan.show');
+	Route::get('/permohonan/{id}', 'PermohonanController@show')->name('api.permohonan.show');
 
 	/*----------------------- Senarai dokumen permohonan ------------- */
 	Route::get('/senarai-dokumen/{permohonan}', 'DokumenPermohonanController@show')->name('api.dokumen.dihantar');

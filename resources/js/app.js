@@ -54,7 +54,17 @@ const routes = [
 	{
 		path: '/permohonan/:id',
 		name: 'permohonan',
-		component: require('./components/view/Permohonan/ShowPermohonan.vue').default
+		component: require('./components/view/Permohonan/ShowPermohonan.vue').default,
+		beforeEnter: (to, from, next) => {
+			var id = to.params.id;
+			fetch('/api/permohonan/' + id).then((res) => {
+				if (res.status == 404 || res.status == 403) {
+					next({ name: 'NotFound' });
+				} else {
+					next();
+				}
+			});
+		}
 	},
 	{
 		path: '/senarai-pengguna',
@@ -63,7 +73,7 @@ const routes = [
 		beforeEnter: (to, from, next) => {
 			store.dispatch('fetchUser').then((res) => res.json()).then((res) => {
 				if (res.role == 'pjk') next();
-				else next('/home');
+				else next({ name: 'NotFound' });
 			});
 		}
 	},
@@ -71,6 +81,11 @@ const routes = [
 		path: '/analitik',
 		name: 'analitik',
 		component: require('./components/View/Analitik/DashboardAnalitik.vue').default
+	},
+	{
+		path: '/403-tidak-dibenarkan',
+		name: 'ForbidenAccess',
+		component: require('./components/view/ErrorHandling/403.vue').default
 	},
 	{
 		path: '*',
@@ -81,24 +96,17 @@ const routes = [
 
 const router = new VueRouter({
 	mode: 'history',
-	routes // short for `routes: routes`
+	routes
 });
 
-function is_user_authenticated() {
-	fetch('/api/is_user_authenticated').then((res) => res.json()).then((res) => {
-		console.log(res);
-		return res;
-	});
-}
-
-router.beforeEach((to, from, next) => {
-	// if (authenticated != 'true') {
-	// 	const login = router.push('/login');
-	// 	// next(login);
-	// 	// console.log('need login');
-	// } else next();
-	next();
-});
+// router.beforeEach((to, from, next) => {
+// 	// if (authenticated != 'true') {
+// 	// 	const login = router.push('/login');
+// 	// 	// next(login);
+// 	// 	// console.log('need login');
+// 	// } else next();
+// 	next();
+// });
 
 //Modal
 Vue.component('PermohonanModal', require('./components/Modal/PermohonanModal.vue').default);

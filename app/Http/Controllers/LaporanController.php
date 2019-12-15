@@ -6,8 +6,6 @@ use SPDP\Permohonan;
 use SPDP\Laporan;
 use Illuminate\Http\Request;
 use SPDP\Services\LaporanClass;
-use Debugbar;
-use SPDP\DokumenPermohonan;
 
 class LaporanController extends Controller
 {

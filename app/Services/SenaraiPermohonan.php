@@ -21,7 +21,7 @@ class SenaraiPermohonan
         $data =  Permohonan::with(['user.fakulti:fakulti_id,kod', 'jenis_permohonan:id,huraian', 'status_permohonan:status_id,huraian']);
         switch ($role) {
             case 'pjk':
-                $data->where('jenis_id', '!=', '8')->where('status_id', '=', '1');
+                $data->where('jenis_id', '!=', 8)->where('status_id', '=', 1);
                 break;
             case 'jppa':
                 $data->where('jenis_id', 8)->where('status_id', 1)->orWhere('status_id', 4);
@@ -32,7 +32,7 @@ class SenaraiPermohonan
                 $data->whereIn('id', $penilaian)->where('status_id', 2);
                 break;
             case 'senat':
-                $data->where('status_id', '=', '5');
+                $data->where('status_id', '=', 5);
                 break;
             default:
                 return null;
@@ -54,19 +54,19 @@ class SenaraiPermohonan
 
         switch ($role) {
             case 'pjk':
-                $datas->where('jenis_id', '!=', '8')->where('status_id', '=', 3)->orWhere('status_id', '=', 13);
+                $datas->where('jenis_id', '!=', 8)->where('status_id', '=', 3)->orWhere('status_id', '=', 13);
                 break;
             case 'jppa':
-                $datas->where('status_id', '=', '4')->orWhere('status_id', '=', '14');
+                $datas->where('status_id', '=', 4)->orWhere('status_id', '=', 14);
                 break;
             case 'penilai':
                 $user_id = auth()->user()->id;
                 $pp = PenilaianPanel::where('id_penilai', $user_id)->get();
                 $datas_id = $pp->pluck('permohonan_id');
-                $datas->whereIn('id', $datas_id)->where('status_id', '=', '12');
+                $datas->whereIn('id', $datas_id)->where('status_id', '=', 12);
                 break;
             case 'senat':
-                $datas->where('status_id', '=', '5')->orWhere('status_id', '=', '15');
+                $datas->where('status_id', '=', 5)->orWhere('status_id', '=', 15);
                 break;
             default:
                 return;

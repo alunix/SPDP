@@ -4,8 +4,6 @@ namespace SPDP\Http\Controllers;
 
 use SPDP\User;
 use Illuminate\Http\Request;
-use SPDP\Fakulti;
-use SPDP\Services\CreateUser;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 

@@ -3,15 +3,11 @@
 namespace SPDP\Http\Controllers;
 
 use SPDP\Permohonan;
-use SPDP\DokumenPermohonan;
-use SPDP\User;
 use Illuminate\Http\Request;
 use SPDP\Services\PermohonanClass;
 use SPDP\Services\PenilaianPJK;
 use SPDP\Services\SenaraiPermohonan;
-use SPDP\Services\SenaraiPerakuan;
 use SPDP\Services\ShowPermohonan;
-use Redirect, Response, Debugbar;
 
 class PermohonanController extends Controller
 {

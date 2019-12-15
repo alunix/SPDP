@@ -8,11 +8,6 @@ use SPDP\Services\AnalitikFakulti;
 
 class FakultiController extends Controller
 {
-    public function permohonanBaru()
-    {
-        return view('fakulti.permohonan-baharu');
-    }
-
     public function getFakultis()
     {
         $fakultis = Fakulti::select('f_nama', 'fakulti_id')->get();

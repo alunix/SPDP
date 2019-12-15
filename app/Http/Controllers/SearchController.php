@@ -3,12 +3,10 @@
 namespace SPDP\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Input;
 use SPDP\User;
 use SPDP\Permohonan;
 use SPDP\DokumenPermohonan;
 use SPDP\Laporan;
-use SPDP\Fakulti;
 use Illuminate\Support\Facades\DB;
 
 class SearchController extends Controller

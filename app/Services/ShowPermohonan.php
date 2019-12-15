@@ -47,8 +47,6 @@ class ShowPermohonan
 
     public function penilai($permohonan)
     {
-        $user_id = auth()->user()->id;
-        $user = User::find($user_id);
         $permohonans = new SenaraiPermohonan();
         $permohonans = $permohonans->queryPermohonanBaru()->count();
 

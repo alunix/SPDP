@@ -45,6 +45,8 @@ return [
             'driver' => 'token',
             // 'driver' => 'passport',
             'provider' => 'users',
+            # hashing to the token 
+            // 'hash' => true,
         ],
 
     ],

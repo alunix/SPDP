@@ -23,7 +23,7 @@ class CreatePenilaiansTable extends Migration
             $table->integer('status_penilaian');
 
 
-            $table->foreign('permohonan_id_penilaian')->references('permohonan_id')->on('permohonans');
+            $table->foreign('permohonan_id_penilaian')->references('id')->on('permohonans');
             $table->foreign('penilaian_pjk')->references('id')->on('users');
             $table->foreign('penilaian_panel_1')->references('id')->on('users');
             $table->foreign('penilaian_jppa')->references('id')->on('users');

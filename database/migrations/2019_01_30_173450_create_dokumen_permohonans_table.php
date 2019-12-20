@@ -22,9 +22,7 @@ class CreateDokumenPermohonansTable extends Migration
             $table->integer('file_size');
             $table->string('komen')->nullable();
             $table->integer('versi');
-
-            $table->foreign('permohonan_id')->references('permohonan_id')->on('permohonans');
-
+            $table->foreign('permohonan_id')->references('id')->on('permohonans');
             $table->timestamps();
         });
     }

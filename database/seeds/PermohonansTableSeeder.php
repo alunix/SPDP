@@ -17,7 +17,7 @@ class PermohonansTableSeeder extends Seeder
             DB::table('permohonans')->insert([
                 'doc_title' => 'Sarjana Muda ' . $faker->word,
                 'jenis_id' => $faker->randomElement($j),
-                'id_penghantar' => 1,
+                'id_penghantar' => 7,
                 'status_id' => rand(1, 15),
                 'created_at' => $created_at,
                 'updated_at' => $faker->dateTimeBetween($startDate = $created_at, $endDate = 'now', $timezone = 'Singapore'),

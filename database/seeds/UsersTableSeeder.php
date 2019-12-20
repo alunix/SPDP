@@ -5,7 +5,10 @@ use Carbon\Carbon;
 use Faker\Factory as Faker;
 use SPDP\JenisPermohonan;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 use SPDP\Fakulti;
+use Illuminate\Support\Str;
+
 
 class UsersTableSeeder extends Seeder
 {
@@ -15,19 +18,20 @@ class UsersTableSeeder extends Seeder
         $roles = ['penilai', 'pjk', 'senat', 'jppa', 'fakulti'];
         $fakultis_id = Fakulti::all()->pluck('fakulti_id')->toArray();
 
-        for ($i = 0; $i < 60; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             $role = $faker->randomElement($roles);
-            // if ($role == 'fakulti') {
-            //     $fakulti_id = $faker->randomElement($fakultis_id);
-            // } else {
-            //     $fakulti_id = "";
-            // }
+            if ($role == 'fakulti') {
+                $fakulti_id = $faker->randomElement($fakultis_id);
+            } else {
+                $fakulti_id = null;
+            }
             DB::table('users')->insert([
                 'name' => $faker->firstNameMale,
                 'role' => $role,
-                // 'fakulti_id' => $fakulti_id,
+                'fakulti_id' => $fakulti_id,
                 'email' => $faker->email,
-                'password' => Hash::make($faker->password),
+                'api_token' => Str::random(80),
+                'password' => Hash::make('popo97'),
                 'created_at' => $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now', $timezone = 'Singapore'),
                 'updated_at' => $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now', $timezone = 'Singapore'),
 

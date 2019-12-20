@@ -98,12 +98,7 @@
                                 <div class="account-dropdown js-dropdown">
                                     <div class="account-dropdown__body">
                                         <div class="account-dropdown__item">
-                                            <router-link to="/settings">
-                                                <i class="zmdi zmdi-settings"></i>Settings</a>
-                                            </router-link>
-                                        </div>
-                                        <div class="account-dropdown__item">
-                                            <router-link to="/workflow_settings">
+                                            <router-link to="/workflow-settings">
                                                 <i class="#"></i>Email workflow settings
                                             </router-link>
                                         </div>

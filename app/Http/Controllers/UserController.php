@@ -93,9 +93,13 @@ class UserController extends Controller
         $user->save();
     }
 
-    public function edit($id)
+    public function edit($id = null)
     {
-        $user = User::find($id);
+        if (!$id) {
+            $user = auth()->user();
+        } else {
+            $user = User::findOrFail($id);
+        }
         return $user;
     }
 

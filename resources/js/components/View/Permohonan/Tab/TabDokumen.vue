@@ -48,7 +48,7 @@
             <td>{{d.komen}}</td>
             <td>{{d.versi}}</td>
             <td>{{d.laporans.count}}</td>
-            <td>{{date(d.created_at)}}</td>
+            <td>{{d.created_at | date}}</td>
             <th>
               <v-btn
                 v-on:click.stop="setDokumenIdProps(d.dokumen_permohonan_id);showLaporan()"
@@ -63,7 +63,6 @@
   </div>
 </template>
 <script>
-import dayjs from "dayjs";
 export default {
   props: ["permohonan_id_props"],
   data() {
@@ -92,12 +91,6 @@ export default {
           this.dokumens = res.data;
           this.makePagination(res);
         });
-    },
-    date(created_at) {
-      if (!created_at) {
-        return null;
-      }
-      return dayjs(created_at).format("LLL");
     },
     makePagination(res) {
       let pagination = {

@@ -53,7 +53,7 @@
             <td>{{l.id_penghantar_nama.role|uppercase}}</td>
             <td>{{l.komen}}</td>
             <td>{{l.versi}}</td>
-            <td>{{date(l.created_at)}}</td>
+            <td>{{l.created_at}}</td>
           </tr>
         </tbody>
       </template>
@@ -61,7 +61,6 @@
   </div>
 </template>
 <script>
-import dayjs from "dayjs";
 export default {
   props: ["permohonan_id_props", "dokumen_id_props"],
   data() {
@@ -108,12 +107,6 @@ export default {
         per_page: res.per_page
       };
       this.pagination = pagination;
-    },
-    date(created_at) {
-      if (!created_at) {
-        return null;
-      }
-      return dayjs(created_at).format("LLL");
     },
     openFile(tajuk_fail_link) {
       return window.open("/storage/laporan/" + tajuk_fail_link);

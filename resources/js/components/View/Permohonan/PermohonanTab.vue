@@ -74,12 +74,6 @@ export default {
       });
   },
   methods: {
-    date(created_at) {
-      if (!created_at) {
-        return null;
-      }
-      return dayjs(created_at).format("LLL");
-    },
     currentTabComponent(tab) {
       this.currentTab = "Tab" + tab;
       return this.currentTab;

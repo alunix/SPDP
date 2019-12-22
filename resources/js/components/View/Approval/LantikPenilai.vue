@@ -119,7 +119,7 @@
                       >{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
                       <td>{{u.name}}</td>
                       <td>{{u.email}}</td>
-                      <td>{{date(u.created_at)}}</td>
+                      <td>{{u.created_at | date}}</td>
                       <td>
                         <v-checkbox v-model="selectedPenilai" :value="u.id">Lantik Penilai</v-checkbox>
                       </td>
@@ -136,7 +136,6 @@
 </template>
 
 <script>
-import dayjs from "dayjs";
 export default {
   props: ["permohonan_props"],
   data() {
@@ -204,12 +203,6 @@ export default {
             console.log(error);
           }
         });
-    },
-    date(created_at) {
-      if (!created_at) {
-        return null;
-      }
-      return dayjs(created_at).format("LLL");
     },
     due_date_format(date) {
       return dayjs(date).format("DD-MM-YYYY");

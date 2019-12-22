@@ -53,7 +53,7 @@
                   <th scope="row">{{index + 1}}</th>
                   <td>{{l.tajuk_fail}}</td>
                   <td>{{(l.id_penghantar_nama.role).toUpperCase()}}</td>
-                  <td>{{date(l.created_at)}}</td>
+                  <td>{{l.created_at | date}}</td>
                 </tr>
               </tbody>
             </template>
@@ -83,7 +83,7 @@
               >
                 <th scope="row">{{index + 1}}</th>
                 <td>{{p.jenis_permohonan.huraian}}</td>
-                <td>{{date(p.created_at)}}</td>
+                <td>{{p.created_at | date}}</td>
               </tr>
             </tbody>
           </template>
@@ -94,7 +94,6 @@
 </template>
 
 <script>
-import dayjs from "dayjs";
 ("");
 export default {
   data() {
@@ -124,12 +123,6 @@ export default {
           this.laporans = res.laporans;
           this.loaded = true;
         });
-    },
-    date(created_at) {
-      if (!created_at) {
-        return null;
-      }
-      return dayjs(created_at).format("LLL");
     }
   }
 };

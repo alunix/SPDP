@@ -61,7 +61,6 @@
   </v-container>
 </template>
 <script>
-import dayjs from "dayjs";
 export default {
   data() {
     return {
@@ -203,12 +202,6 @@ export default {
         .catch(error => {
           console.log(error);
         });
-    },
-    date(created_at) {
-      if (!created_at) {
-        return null;
-      }
-      return dayjs(created_at).format("LLL");
     },
     currentTabComponent(tab) {
       this.currentTab = "tab-" + tab.toString().toLowerCase();

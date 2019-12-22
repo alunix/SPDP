@@ -83,7 +83,7 @@
                 <td>{{u.email}}</td>
                 <td>{{u.role|uppercase}}</td>
                 <td>{{u.fakulti? u.fakulti.kod : ""}}</td>
-                <td>{{date(u.created_at)}}</td>
+                <td>{{u.created_at | date}}</td>
                 <td>
                   <b-dropdown size="sm" id="dropdown-left" text="More" variant="white" class="m-2">
                     <b-dropdown-item v-on:click="setUserId(u.id);showModel()">Lihat pengguna</b-dropdown-item>
@@ -100,7 +100,6 @@
 </template>
 
 <script>
-import dayjs from "dayjs";
 export default {
   data() {
     return {
@@ -135,7 +134,6 @@ export default {
           .then(res => {
             this.users = res;
             this.loaded = true;
-            console.log(this.users);
           });
       } else {
         //Fetch all users if not searching
@@ -156,12 +154,6 @@ export default {
     },
     setUserId(id) {
       this.user_id = id;
-    },
-    date(created_at) {
-      if (!created_at) {
-        return null;
-      }
-      return dayjs(created_at).format("LLL");
     },
     show(id) {
       let that = this;

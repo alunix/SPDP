@@ -40,7 +40,7 @@
                   scope="row"
                 >{{(index + 1) + (pagination.per_page * (pagination.current_page - 1) )}}</th>
                 <td>{{k.status_permohonan.huraian}}</td>
-                <td>{{date(k.created_at)}}</td>
+                <td>{{k.created_at | date}}</td>
               </tr>
             </tbody>
           </template>
@@ -50,7 +50,6 @@
   </div>
 </template>
 <script>
-import dayjs from "dayjs";
 export default {
   props: ["permohonan_id_props"],
   data() {
@@ -92,12 +91,6 @@ export default {
         per_page: res.per_page
       };
       this.pagination = pagination;
-    },
-    date(created_at) {
-      if (!created_at) {
-        return null;
-      }
-      return dayjs(created_at).format("LLL");
     }
   }
 };

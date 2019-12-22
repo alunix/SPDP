@@ -51,8 +51,8 @@
                 <td>{{p.id}}</td>
                 <td>{{p.pelantik.name}}</td>
                 <td>{{p.penilai.name}}</td>
-                <td>{{date(p.created_at)}}</td>
-                <td>{{date(p.due_date)}}</td>
+                <td>{{p.created_at | date}}</td>
+                <td>{{p.due_date | date}}</td>
                 <td>{{p.tempoh}}</td>
               </tr>
             </tbody>
@@ -64,7 +64,6 @@
 </template>
 
 <script>
-import dayjs from "dayjs";
 export default {
   data() {
     return {
@@ -92,12 +91,6 @@ export default {
           this.penilaians = res.data;
           that.makePagination(res);
         });
-    },
-    date(date) {
-      if (!date) {
-        return null;
-      }
-      return dayjs(date).format("LLL");
     },
     show(id) {
       let that = this;

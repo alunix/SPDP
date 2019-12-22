@@ -208,6 +208,13 @@ Vue.component(
     require("./components/passport/PersonalAccessTokens.vue").default
 );
 
+// global filter
+Vue.filter('date', function (value) {
+    if (!value) return '';
+    return dayjs(value).format("LLL");
+})
+
+
 const app = new Vue({
     el: "#app",
     vuetify: new Vuetify(),

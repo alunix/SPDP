@@ -136,7 +136,7 @@
             @else
             <v-app id="app">
                 <router-view>
-                    </<router-view>
+                </<router-view>
             </v-app>
             @endguest
         </main>

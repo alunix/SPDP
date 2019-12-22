@@ -69,9 +69,9 @@
                   <td>{{p.jenis_permohonan.huraian}}</td>
                   <td>{{p.id}}</td>
                   <td>{{p.doc_title}}</td>
-                  <td>{{date(p.created_at)}}</td>
+                  <td>{{p.created_at|date}}</td>
                   <td>{{p.status_permohonan.huraian}}</td>
-                  <td>{{date(p.updated_at)}}</td>
+                  <td>{{p.updated_at | date}}</td>
                 </tr>
               </tbody>
             </template>
@@ -84,7 +84,6 @@
 
 <script>
 import permohonanModal from "./Modal/PermohonanModal";
-import dayjs from "dayjs";
 export default {
   data() {
     return {
@@ -115,12 +114,6 @@ export default {
           that.makePagination(res);
           this.loaded = true;
         });
-    },
-    date(created_at) {
-      if (!created_at) {
-        return null;
-      }
-      return dayjs(created_at).format("LLL");
     },
     show(id) {
       let that = this;

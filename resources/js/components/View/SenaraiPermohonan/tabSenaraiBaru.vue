@@ -51,7 +51,7 @@
                 <td>{{p.doc_title}}</td>
                 <td>{{p.user.name}}</td>
                 <td>{{p.user.fakulti.kod}}</td>
-                <td>{{date(p.created_at)}}</td>
+                <td>{{p.created_at | date}}</td>
               </tr>
             </tbody>
           </template>
@@ -62,7 +62,6 @@
 </template>
 
 <script>
-import dayjs from "dayjs";
 export default {
   data() {
     return {
@@ -89,12 +88,6 @@ export default {
           this.permohonans = res.data;
           that.makePagination(res);
         });
-    },
-    date(created_at) {
-      if (!created_at) {
-        return null;
-      }
-      return dayjs(created_at).format("LLL");
     },
     show(id) {
       let that = this;

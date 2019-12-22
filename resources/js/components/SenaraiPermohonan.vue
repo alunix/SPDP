@@ -69,7 +69,7 @@
                   <td>{{p.jenis_permohonan.huraian}}</td>
                   <td>{{p.id}}</td>
                   <td>{{p.doc_title}}</td>
-                  <td>{{p.created_at|date}}</td>
+                  <td>{{p.created_at | date}}</td>
                   <td>{{p.status_permohonan.huraian}}</td>
                   <td>{{p.updated_at | date}}</td>
                 </tr>

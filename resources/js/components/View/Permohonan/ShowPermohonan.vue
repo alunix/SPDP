@@ -25,7 +25,7 @@
                 <div class="text--primary">{{list.subtitle}}</div>
               </v-flex>
               <v-flex xs6 v-else>
-                <v-btn small @click="openFile(list.subtitle)">
+                <v-btn v-show="dokumen.length" small @click="openFile(list.subtitle)">
                   Muat turun
                   <v-icon right dark>mdi-download</v-icon>
                 </v-btn>
@@ -61,6 +61,7 @@
   </v-container>
 </template>
 <script>
+import dayjs from "dayjs";
 export default {
   data() {
     return {
@@ -115,11 +116,13 @@ export default {
             (this.permohonan.jenis_id == 2 ||
               this.permohonan.jenis_id == 5 ||
               this.permohonan.jenis_id == 3) &&
-            this.role == "pjk"
+            this.role == "pjk" && this.permohonan.status_id == 1
           ) {
             this.canSwitchTab = true;
           }
-          this.dokumen = res.dokumen;
+          if (res.dokumen) {
+            this.dokumen = res.dokumen;
+          }
           this.lists = [
             {
               title: "Tajuk permohonan",
@@ -203,6 +206,12 @@ export default {
           console.log(error);
         });
     },
+    date(created_at) {
+      if (!created_at) {
+        return "";
+      }
+      return dayjs(created_at).format("LLL");
+    },
     currentTabComponent(tab) {
       this.currentTab = "tab-" + tab.toString().toLowerCase();
       return this.currentTab;
@@ -215,11 +224,13 @@ export default {
       this.snackbarMessage =
         "Panel penilai telah dilantik dan permohonan telah diemel kepada penilai";
       this.success = true;
+      this.canSwitchTab = false
     },
     hideLaporanUpload() {
       this.showLaporanUpload = false;
       this.snackbarMessage = "Laporan telah dimuat naik";
       this.success = true;
+      this.canSwitchTab = false
     },
     openFile(file_link) {
       return window.open("/storage/permohonan/" + file_link);

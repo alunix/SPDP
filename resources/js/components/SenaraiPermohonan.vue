@@ -108,11 +108,13 @@ export default {
       this.loaded = false;
       page_url = page_url || "api/senarai-permohonan-dihantar";
       fetch(page_url)
-        .then(res => res.json())
+        // .then(res => res.json())
+        .then(res => res.text())
         .then(res => {
-          this.permohonans = res.data;
-          that.makePagination(res);
-          this.loaded = true;
+          console.log(res);
+          // this.permohonans = res.data;
+          // that.makePagination(res);
+          // this.loaded = true;
         });
     },
     show(id) {

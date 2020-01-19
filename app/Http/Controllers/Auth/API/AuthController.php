@@ -23,6 +23,11 @@ class AuthController extends Controller
         return response()->json(['user' => $user, 'access_token' => $token], 200);
         // return response()->json(auth()->user());
     }
+    
+    public function showLoginPage(Request $request)
+    {
+        return view('auth.login');
+    }
 
     /**
      * Returns Authenticated User Details

@@ -38,8 +38,6 @@ class UserController extends Controller
     {
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
-        // $user = "dsd";
-        // return response()->json($user);
         return $user;
     }
 

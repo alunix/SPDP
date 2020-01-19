@@ -65,13 +65,17 @@ class RegisterController extends Controller
      * @return \SPDP\User
      */
     protected function create(array $data)
-    {
+    {   
+        $user = new User();
+        $user->name = $data['name'];
+        $user->email = $data['email'];
+        $user->password = $data['password'];
+        $user->name = $data['name'];
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'role' => $data['role'],
-            // 'api_token' => Str::random(80),
         ]);
     }
 

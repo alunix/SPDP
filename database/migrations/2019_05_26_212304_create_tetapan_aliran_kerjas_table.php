@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use SPDP\User;
 
 class CreateTetapanAliranKerjasTable extends Migration
 {
@@ -25,6 +26,20 @@ class CreateTetapanAliranKerjasTable extends Migration
 
             $table->timestamps();
         });
+
+        $pjk = User::where('role', 'pjk')->first();
+        $jppa = User::where('role', 'jppa')->first();
+        $senat = User::where('role', 'senat')->first();
+
+        DB::table('tetapan_aliran_kerjas')->insert(
+            [
+                [
+                    'id_pjk' => $pjk->id,
+                    'id_jppa' => $jppa->id,
+                    'id_senat' => $senat->id,
+                ]
+            ]
+        );
     }
 
     /**

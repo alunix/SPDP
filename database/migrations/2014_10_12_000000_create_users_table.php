@@ -31,7 +31,7 @@ class CreateUsersTable extends Migration
             $table->foreign('fakulti_id')->references('fakulti_id')->on('fakultis');
         });
 
-        // $ftsm_id = Fakulti::where('kod', 'ftsm')->first()->value('fakulti_id');
+        $ftsm_id = Fakulti::where('kod', 'ftsm')->first()->value('fakulti_id');
 
         DB::table('users')->insert(
             [
@@ -50,11 +50,31 @@ class CreateUsersTable extends Migration
                     'role' => 'fakulti',
                     'email' => 'fakulti@gmail.com',
                     'password' => Hash::make('popo97'),
-                    'fakulti_id' => 12,
+                    'fakulti_id' => $ftsm_id,
                     'email_verified_at' => null,
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now()
-                    ]
+                ],
+                [
+                    'name' => 'JPPA',
+                    'role' => 'jppa',
+                    'email' => 'jppa@gmail.com',
+                    'password' => Hash::make('popo97'),
+                    'fakulti_id' => null,
+                    'email_verified_at' => null,
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ],
+                [
+                    'name' => 'Senat',
+                    'role' => 'senat',
+                    'email' => 'senat@gmail.com',
+                    'password' => Hash::make('popo97'),
+                    'fakulti_id' => null,
+                    'email_verified_at' => null,
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ]
             ]
         );
     }

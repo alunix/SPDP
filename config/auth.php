@@ -1,4 +1,5 @@
 <?php
+use SPDP\User;
 
 return [
 
@@ -68,13 +69,13 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => SPDP\User::class,
+            'model' => User::class
         ],
 
-        'users' => [
-            'driver' => 'database',
-            'table' => 'users',
-        ],
+        // 'users' => [
+        //     'driver' => 'database',
+        //     'table' => 'users',
+        // ],
 
     ],
 

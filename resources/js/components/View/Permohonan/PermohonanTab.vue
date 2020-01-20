@@ -8,6 +8,7 @@
         <modal height="auto" width="25%" :scrollable="true" name="uploadDokumenModal">
           <ModalUploadDokumen :permohonan_id_props="permohonan.id"></ModalUploadDokumen>
         </modal>
+
         <v-row v-show="isFakulti" align="center" justify="end">
           <v-btn
             v-on:click="showModel()"
@@ -19,6 +20,7 @@
             <v-icon right dark>mdi-plus</v-icon>
           </v-btn>
         </v-row>
+        
         <v-tabs fixed-tabs>
           <v-tab v-for="tab in tabs" v-bind:key="tab" @click="currentTabComponent(tab)">{{tab}}</v-tab>
         </v-tabs>

@@ -15,6 +15,7 @@
       </v-snackbar>
 
       <v-col cols="6" md="4">
+        
         <v-card class="py-4" v-if="loaded">
           <v-card-text v-for="list in lists" :key="list.id">
             <v-layout row class="my-n5 px-3 pt-1">
@@ -33,6 +34,26 @@
             </v-layout>
           </v-card-text>
         </v-card>
+        
+        <!-- <v-card class="py-4" v-if="loaded">
+          <v-card-text v-for="list in lists" :key="list.id">
+            <v-layout row class="my-n5 px-3 pt-1">
+              <v-flex xs6>
+                <p>{{list.title}}</p>
+              </v-flex>
+              <v-flex xs6 v-if="list.id != 7">
+                <div class="text--primary">{{list.subtitle}}</div>
+              </v-flex>
+              <v-flex xs6 v-else>
+                <v-btn v-show="dokumen.length" small @click="openFile(list.subtitle)">
+                  Muat turun
+                  <v-icon right dark>mdi-download</v-icon>
+                </v-btn>
+              </v-flex>
+            </v-layout>
+          </v-card-text>
+        </v-card> -->
+
       </v-col>
       <v-col v-if="loaded" cols="12" md="8">
         <v-col v-if="canSwitchTab">

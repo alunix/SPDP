@@ -36,8 +36,7 @@ const store = new Vuex.Store({
     actions: {
         fetchUser(store) {
             return axios.get("/api/get_user_info").then(function(data) {
-                console.log(data);
-                store.commit("setUser", data);
+                store.commit("setUser", data.data);
                 return store.state.user;
             });
         }
@@ -83,10 +82,9 @@ const routes = [
             .default,
         beforeEnter: (to, from, next) => {
             store
-                .dispatch("fetchUser")
-                .then(res => res.json())
+                .axios.get("fetchUser")
                 .then(res => {
-                    if (res.role == "pjk") next();
+                    if (res.data.role == "pjk") next();
                     else next({ name: "NotFound" });
                 });
         }

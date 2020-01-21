@@ -91,11 +91,10 @@ export default {
         page_url =
           page_url || "/api/senarai-laporan-dokumen/" + this.dokumen_id;
       }
-      fetch(page_url)
-        .then(res => res.json())
+      axios.get(page_url)
         .then(res => {
-          this.laporans = res.data;
-          this.makePagination(res);
+          this.laporans = res.data.data;
+          this.makePagination(res.data);
         });
     },
     makePagination(res) {

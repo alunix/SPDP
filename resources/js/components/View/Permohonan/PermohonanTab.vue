@@ -57,7 +57,6 @@ export default {
   created() {
     this.$store
       .dispatch("fetchUser")
-      .then(res => res.json())
       .then(res => {
         if (res.role == "fakulti") {
           this.isFakulti = true;

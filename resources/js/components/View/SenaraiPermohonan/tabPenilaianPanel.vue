@@ -85,11 +85,10 @@ export default {
     fetchPenilaians(page_url) {
       let that = this;
       page_url = page_url || "api/senarai-penilaian";
-      fetch(page_url)
-        .then(res => res.json())
+      axios.get(page_url)
         .then(res => {
-          this.penilaians = res.data;
-          that.makePagination(res);
+          this.penilaians = res.data.data;
+          that.makePagination(res.data);
         });
     },
     show(id) {

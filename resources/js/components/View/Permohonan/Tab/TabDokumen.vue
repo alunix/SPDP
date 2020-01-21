@@ -85,11 +85,10 @@ export default {
   methods: {
     fetchDokumens(page_url) {
       page_url = page_url || "/api/senarai-dokumen/" + this.permohonan_id;
-      fetch(page_url)
-        .then(res => res.json())
+      axios.get(page_url)
         .then(res => {
-          this.dokumens = res.data;
-          this.makePagination(res);
+          this.dokumens = res.data.data;
+          this.makePagination(res.data);
         });
     },
     makePagination(res) {

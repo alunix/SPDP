@@ -32,7 +32,6 @@ export default {
   created() {
     this.$store
       .dispatch("fetchUser")
-      .then(res => res.json())
       .then(res => {
         this.role = res.role;
         if (this.role != "fakulti") {

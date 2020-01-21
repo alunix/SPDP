@@ -129,10 +129,9 @@ export default {
     searchUsers(text) {
       if (text) {
         this.loaded = false;
-        fetch("/api/user/search/" + text)
-          .then(res => res.json())
+        axios.get("/api/user/search/" + text)
           .then(res => {
-            this.users = res;
+            this.users = res.data;
             this.loaded = true;
           });
       } else {
@@ -144,11 +143,10 @@ export default {
       let that = this;
       this.loaded = false;
       page_url = page_url || "api/users";
-      fetch(page_url)
-        .then(res => res.json())
+      axios.get(page_url)
         .then(res => {
-          this.users = res.data;
-          that.makePagination(res);
+          this.users = res.data.data;
+          that.makePagination(res.data);
           this.loaded = true;
         });
     },

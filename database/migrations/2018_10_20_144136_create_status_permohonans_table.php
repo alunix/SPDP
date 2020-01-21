@@ -23,7 +23,7 @@ class CreateStatusPermohonansTable extends Migration
         DB::table('status_permohonans')->insert(
             [
                 [
-                    'huraian' => 'Program Pengajian Baharu',
+                    'huraian' => 'Belum disemak',
                 ],
                 [
                     'huraian' => 'Diluluskan oleh PJK, permohonan akan disemak oleh panel penilai',

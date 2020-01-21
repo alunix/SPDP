@@ -86,11 +86,8 @@ export default {
   created() {
     this.$store
       .dispatch("fetchUser")
-      // .then(res => res.json())
       .then(res => {
-        console.log(res);
-        this.role = res.data.role;
-        console.log(this.role);
+        this.role = res.role;
         if (this.role != "fakulti") {
           this.showDefaultDashboard = true;
         }
@@ -111,10 +108,8 @@ export default {
       }
     },
     showPermohonan() {
-      axios.get("api/permohonan/" + this.id)
-        // .then(res => res.json())
+      axios.get("/api/permohonan/" + this.id)
         .then(res => {
-          // console.log(res.data);
           this.permohonan = res.data.permohonan;
           // pjk can switch between lantik and upload if jenis permohonan match
           if (

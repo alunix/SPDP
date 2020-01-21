@@ -113,10 +113,9 @@ export default {
   },
   methods: {
     getFakultis() {
-      fetch("api/fakultis")
-        .then(res => res.json())
+      axios.get("api/fakultis")
         .then(res => {
-          this.fakultis = res;
+          this.fakultis = res.data;
         });
     },
     isEditingMode() {
@@ -126,14 +125,13 @@ export default {
         this.loaded = true;
       } else {
         this.mode = "Kemaskini";
-        fetch("api/user/" + this.user_id + "/edit")
-          .then(res => res.json())
+        axios.get("api/user/" + this.user_id + "/edit")
           .then(res => {
-            this.name = res.name;
-            this.email = res.email;
-            this.role = this.getRoleString(res.role);
-            if (res.fakulti_id) {
-              this.fakulti = res.fakulti_id;
+            this.name = res.data.name;
+            this.email = res.data.email;
+            this.role = this.getRoleString(res.data.role);
+            if (res.data.fakulti_id) {
+              this.fakulti = res.data.fakulti_id;
             }
             this.api = "api/user/" + this.user_id + "/update";
             this.loaded = true;

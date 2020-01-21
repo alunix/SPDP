@@ -75,11 +75,11 @@ export default {
   methods: {
     fetchKemajuans(page_url) {
       page_url = page_url || "/api/senarai-kemajuan/" + this.permohonan_id;
-      fetch(page_url)
-        .then(res => res.json())
+      axios.get(page_url)
         .then(res => {
-          this.kemajuans = res.data;
-          this.makePagination(res);
+          this.kemajuans = res.data.data;
+          console.log(this.kemajuans);
+          this.makePagination(res.data);
         });
     },
     makePagination(res) {

@@ -107,14 +107,10 @@ export default {
       let that = this;
       this.loaded = false;
       page_url = page_url || "api/senarai-permohonan-dihantar";
-      // page_url = page_url || "api/user";
-      fetch(page_url)
-        .then(res => res.json())
-        // .then(res => res.text())
+      axios.get(page_url)
         .then(res => {
-          console.log(res);
-          this.permohonans = res.data;
-          that.makePagination(res);
+          this.permohonans = res.data.data;
+          that.makePagination(res.data);
           this.loaded = true;
         })
         .catch(err => {

@@ -93,38 +93,37 @@ export default {
   },
   methods: {
     loadDashboard() {
-      fetch("api/dashboard")
-        .then(res => res.json())
+      axios.get("api/dashboard")
         .then(res => {
-          this.permohonans = res.permohonans;
-          this.progress = res.progress;
-          this.lulus = res.lulus;
-          this.role = res.role;
-          this.diperakui = res.diperakui;
+          this.permohonans = res.data.permohonans;
+          this.progress = res.data.progress;
+          this.lulus = res.data.lulus;
+          this.role = res.data.role;
+          this.diperakui = res.data.diperakui;
           this.lineChart = {
             options: {
               chart: {
-                id: res.line_chart.id
+                id: res.data.line_chart.id
               },
               xaxis: {
-                categories: res.line_chart.labels
+                categories: res.data.line_chart.labels
               }
             },
             series: [
               {
                 name: "Jumlah",
-                data: res.line_chart.data
+                data: res.data.line_chart.data
               }
             ]
           };
           this.pieChart = {
             options: {
               chart: {
-                id: res.pie_chart.id
+                id: res.data.pie_chart.id
               },
-              labels: res.pie_chart.labels
+              labels: res.data.pie_chart.labels
             },
-            series: res.pie_chart.data
+            series: res.data.pie_chart.data
           };
           this.loaded = true;
         });

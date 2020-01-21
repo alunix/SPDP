@@ -112,15 +112,14 @@ export default {
   },
   methods: {
     loadDashboard() {
-      fetch("api/dashboard")
-        .then(res => res.json())
+      axios.get("api/dashboard")
         .then(res => {
-          this.permohonans = res.permohonans;
-          this.progress = res.progress;
-          this.lulus = res.lulus;
-          this.role = res.role;
-          this.diperakui = res.diperakui;
-          this.laporans = res.laporans;
+          this.permohonans = res.data.permohonans;
+          this.progress = res.data.progress;
+          this.lulus = res.data.lulus;
+          this.role = res.data.role;
+          this.diperakui = res.data.diperakui;
+          this.laporans = res.data.laporans;
           this.loaded = true;
         });
     }

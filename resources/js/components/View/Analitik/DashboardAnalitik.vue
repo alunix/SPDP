@@ -228,10 +228,9 @@ export default {
   },
   methods: {
     fetchFakultis() {
-      fetch("/api/fakultis")
-        .then(res => res.json())
+      axios.get("/api/fakultis")
         .then(res => {
-          this.fakultis = res;
+          this.fakultis = res.data;
           this.fakultis.unshift({
             fakulti_id: 0,
             f_nama: "Semua fakulti"

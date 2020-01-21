@@ -86,9 +86,11 @@ export default {
   created() {
     this.$store
       .dispatch("fetchUser")
-      .then(res => res.json())
+      // .then(res => res.json())
       .then(res => {
-        this.role = res.role;
+        console.log(res);
+        this.role = res.data.role;
+        console.log(this.role);
         if (this.role != "fakulti") {
           this.showDefaultDashboard = true;
         }
@@ -109,11 +111,11 @@ export default {
       }
     },
     showPermohonan() {
-      fetch("/api/permohonan/" + this.id)
-        .then(res => res.json())
+      axios.get("api/permohonan/" + this.id)
+        // .then(res => res.json())
         .then(res => {
-          this.permohonan = res.permohonan;
-          console.log(res);
+          // console.log(res.data);
+          this.permohonan = res.data.permohonan;
           // pjk can switch between lantik and upload if jenis permohonan match
           if (
             (this.permohonan.jenis_id == 2 ||
@@ -123,9 +125,11 @@ export default {
           ) {
             this.canSwitchTab = true;
           }
+
           if (res.dokumen) {
             this.dokumen = res.dokumen;
           }
+
           this.lists = [
             {
               title: "Tajuk permohonan",

@@ -35,7 +35,8 @@ const store = new Vuex.Store({
     },
     actions: {
         fetchUser(store) {
-            return fetch("/api/get_user_info").then(function(data) {
+            return axios.get("/api/get_user_info").then(function(data) {
+                console.log(data);
                 store.commit("setUser", data);
                 return store.state.user;
             });

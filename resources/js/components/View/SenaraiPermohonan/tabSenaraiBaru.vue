@@ -82,11 +82,10 @@ export default {
     fetchPermohonans(page_url) {
       let that = this;
       page_url = page_url || "api/senarai-permohonan-baharu";
-      fetch(page_url)
-        .then(res => res.json())
+      axios.get(page_url)
         .then(res => {
-          this.permohonans = res.data;
-          that.makePagination(res);
+          this.permohonans = res.data.data;
+          that.makePagination(res.data);
         });
     },
     show(id) {

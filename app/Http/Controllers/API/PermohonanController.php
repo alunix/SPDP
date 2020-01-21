@@ -2,8 +2,13 @@
 
 namespace SPDP\Http\Controllers\API;
 
-use Illuminate\Http\Request;
 use SPDP\Http\Controllers\Controller;
+use SPDP\Permohonan;
+use Illuminate\Http\Request;
+use SPDP\Services\PermohonanClass;
+use SPDP\Services\PenilaianPJK;
+use SPDP\Services\SenaraiPermohonan;
+use SPDP\Services\ShowPermohonan;
 
 class PermohonanController extends Controller
 {
@@ -12,6 +17,13 @@ class PermohonanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function api_permohonanDihantar()
+    {
+        // $permohonans = Permohonan::with(['jenis_permohonan:id,huraian', 'status_permohonan:status_id,huraian'])
+        // ->orderBy('created_at', 'desc')->paginate(10);
+        // return response()->json($permohonans);
+    }
+
     public function index()
     {
         //

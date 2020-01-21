@@ -107,6 +107,7 @@ export default {
       let that = this;
       this.loaded = false;
       page_url = page_url || "api/senarai-permohonan-dihantar";
+      // page_url = page_url || "api/user";
       fetch(page_url)
         .then(res => res.json())
         // .then(res => res.text())
@@ -115,7 +116,10 @@ export default {
           this.permohonans = res.data;
           that.makePagination(res);
           this.loaded = true;
-        });
+        })
+        .catch(err => {
+          console.log(err);
+        });;
     },
     show(id) {
       let that = this;

@@ -87,7 +87,7 @@
                 <td>
                   <b-dropdown size="sm" id="dropdown-left" text="More" variant="white" class="m-2">
                     <b-dropdown-item v-on:click="setUserId(u.id);showModel()">Lihat pengguna</b-dropdown-item>
-                    <b-dropdown-item style="color:#ff0000;" href="#">Padam/Delete pengguna</b-dropdown-item>
+                    <!-- <b-dropdown-item style="color:#ff0000;" href="#">Padam/Delete pengguna</b-dropdown-item> -->
                   </b-dropdown>
                 </td>
               </tr>

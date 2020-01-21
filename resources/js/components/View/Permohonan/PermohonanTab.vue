@@ -12,7 +12,7 @@
         <v-row v-show="isFakulti" align="center" justify="end">
           <v-btn
             v-on:click="showModel()"
-            :disabled="!upload"
+            v-show="upload"
             style="margin-bottom:20px; margin-right:15px"
             small
           >
@@ -20,7 +20,7 @@
             <v-icon right dark>mdi-plus</v-icon>
           </v-btn>
         </v-row>
-        
+
         <v-tabs fixed-tabs>
           <v-tab v-for="tab in tabs" v-bind:key="tab" @click="currentTabComponent(tab)">{{tab}}</v-tab>
         </v-tabs>

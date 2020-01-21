@@ -13,11 +13,6 @@ class PermohonanController extends Controller
 {
     public function api_permohonanDihantar()
     {
-        // $id = auth()->guard('api')->user()->id;
-        // $id = auth()->user()->id;
-        // $permohonans = Permohonan::with(['jenis_permohonan:id,huraian', 'status_permohonan:status_id,huraian'])
-        //     ->where('id_penghantar', $id)->orderBy('created_at', 'desc')->paginate(10);
-        // return response()->json($permohonans, 200);
         $permohonans = Permohonan::with(['jenis_permohonan:id,huraian', 'status_permohonan:status_id,huraian'])
         ->orderBy('created_at', 'desc')->paginate(10);
         return response()->json($permohonans);

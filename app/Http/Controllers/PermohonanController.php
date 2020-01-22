@@ -11,10 +11,10 @@ use SPDP\Services\ShowPermohonan;
 
 class PermohonanController extends Controller
 {
-    public function api_permohonanDihantar()
+    public function permohonanDihantar()
     {
         $permohonans = Permohonan::with(['jenis_permohonan:id,huraian', 'status_permohonan:status_id,huraian'])
-        ->orderBy('created_at', 'desc')->paginate(10);
+            ->orderBy('created_at', 'desc')->paginate(10);
         return response()->json($permohonans);
     }
 

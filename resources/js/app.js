@@ -118,15 +118,6 @@ const router = new VueRouter({
     routes
 });
 
-// router.beforeEach((to, from, next) => {
-// 	// if (authenticated != 'true') {
-// 	// 	const login = router.push('/login');
-// 	// 	// next(login);
-// 	// 	// console.log('need login');
-// 	// } else next();
-// 	next();
-// });
-
 //Modal
 Vue.component(
     "PermohonanModal",

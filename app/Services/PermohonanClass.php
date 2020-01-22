@@ -51,7 +51,7 @@ class PermohonanClass
 
     public function sendEmail($permohonan)
     {
-        // //Hantar email kepada pemeriksa        
+        //Hantar email kepada pemeriksa        
         if ($permohonan->jenis_id == 8)
             $email = TetapanAliranKerja::all()->first()->jppa->email;
         else

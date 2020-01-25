@@ -85,16 +85,31 @@
                 <td>{{u.fakulti? u.fakulti.kod : ""}}</td>
                 <td>{{u.created_at | date}}</td>
                 <td>
-                    <v-menu offset-y>
-                     <template v-slot:activator="{ on }">
-                        <v-icon v-on="on">mdi-dots-vertical</v-icon>
-                    </template>
-                      <v-list>
-                        <v-list-item>
-                          <v-list-item-title @click="" v-on:click="setUserId(u.id); showModel()">Lihat pengguna</v-list-item-title>
-                        </v-list-item>
-                      </v-list>
-                    </v-menu>
+                    <v-hover
+                      v-slot:default="{ hover }"
+                      open-delay="200"
+                    >
+                      <v-card
+                        :elevation="hover ? 8 : 2"
+                        class="mx-auto"
+                        height="24"
+                        max-width="20"
+                        
+                      >
+                        <v-menu offset-y>
+                          <template v-slot:activator="{ on }">
+                            <v-icon v-on="on">mdi-dots-vertical</v-icon>
+                          </template>
+                          <v-list>
+                            <v-list-item>
+                              <v-list-item-title v-on:click="setUserId(u.id); showModel()">Lihat pengguna</v-list-item-title>
+                            </v-list-item>
+                          </v-list>
+                        </v-menu>
+                      </v-card>
+                    </v-hover>
+                    
+                   
                 </td>
               </tr>
             </tbody>
@@ -117,7 +132,7 @@ export default {
       end: "end",
       user_id: "",
       loaded: false,
-      searchText: ""
+      searchText: "",
     };
   },
   watch: {

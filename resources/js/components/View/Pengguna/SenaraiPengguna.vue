@@ -85,7 +85,27 @@
                 <td>{{u.fakulti? u.fakulti.kod : ""}}</td>
                 <td>{{u.created_at | date}}</td>
                 <td>
-                    <v-hover
+                   <!-- <v-hover
+                      v-slot:default="{ hover }"
+                      open-delay="200"
+                    > -->
+                    <v-menu offset-y>
+                          <template v-slot:activator="{ on }">
+                            <v-btn  @mouseover="hover = true"
+                              @mouseleave="hover = false" x-small v-on="on" :text="hover ? false : true" color="normal">
+                              <v-icon >mdi-dots-vertical</v-icon>
+                            </v-btn>
+                          </template>
+
+                          <v-list>
+                            <v-list-item>
+                              <v-list-item-title v-on:click="setUserId(u.id); showModel()">Lihat pengguna</v-list-item-title>
+                            </v-list-item>
+                          </v-list>
+                          
+                    </v-menu>
+                   <!-- </v-hover> -->
+                    <!-- <v-hover
                       v-slot:default="{ hover }"
                       open-delay="200"
                     >
@@ -98,7 +118,6 @@
                       >
                         <v-menu offset-y>
                           <template v-slot:activator="{ on }">
-                            <!-- <v-icon v-on="on">mdi-dots-vertical</v-icon> -->
                             <v-icon v-on="on">mdi-dots-vertical</v-icon>
                           </template>
                           <v-list>
@@ -108,7 +127,7 @@
                           </v-list>
                         </v-menu>
                       </v-card>
-                    </v-hover>
+                    </!-->  
                     
                    
                 </td>
@@ -134,6 +153,7 @@ export default {
       user_id: "",
       loaded: false,
       searchText: "",
+      hover: false
     };
   },
   watch: {

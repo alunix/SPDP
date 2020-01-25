@@ -92,12 +92,13 @@
                       <v-card
                         :elevation="hover ? 8 : 2"
                         class="mx-auto"
-                        height="24"
-                        max-width="20"
-                        
+                        height="26"
+                        max-width="22"
+                        style="padding-right: 20px"
                       >
                         <v-menu offset-y>
                           <template v-slot:activator="{ on }">
+                            <!-- <v-icon v-on="on">mdi-dots-vertical</v-icon> -->
                             <v-icon v-on="on">mdi-dots-vertical</v-icon>
                           </template>
                           <v-list>

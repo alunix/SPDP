@@ -1,7 +1,7 @@
 import VModal from "vue-js-modal";
 import VueRouter from "vue-router";
 import VueApexCharts from "vue-apexcharts";
-import BootstrapVue from "bootstrap-vue";
+import BootstrapVue, { CardPlugin } from "bootstrap-vue";
 import Vuetify from "vuetify";
 import dayjs from "dayjs";
 import LocalizedFormat from "dayjs/plugin/localizedFormat";
@@ -88,7 +88,7 @@ const routes = [
             .default,
         beforeEnter: (to, from, next) => {
             store.dispatch("fetchUser").then(res => {
-                if (res.data.role == "pjk") next();
+                if (res.role == "pjk") next();
                 else next({ name: "NotFound" });
             });
         }

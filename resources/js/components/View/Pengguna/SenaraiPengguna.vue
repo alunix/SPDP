@@ -85,10 +85,16 @@
                 <td>{{u.fakulti? u.fakulti.kod : ""}}</td>
                 <td>{{u.created_at | date}}</td>
                 <td>
-                  <b-dropdown size="sm" id="dropdown-left" text="More" variant="white" class="m-2">
-                    <b-dropdown-item v-on:click="setUserId(u.id);showModel()">Lihat pengguna</b-dropdown-item>
-                    <!-- <b-dropdown-item style="color:#ff0000;" href="#">Padam/Delete pengguna</b-dropdown-item> -->
-                  </b-dropdown>
+                    <v-menu offset-y>
+                     <template v-slot:activator="{ on }">
+                        <v-icon v-on="on">mdi-dots-vertical</v-icon>
+                    </template>
+                      <v-list>
+                        <v-list-item>
+                          <v-list-item-title @click="" v-on:click="setUserId(u.id); showModel()">Lihat pengguna</v-list-item-title>
+                        </v-list-item>
+                      </v-list>
+                    </v-menu>
                 </td>
               </tr>
             </tbody>

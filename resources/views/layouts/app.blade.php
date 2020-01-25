@@ -120,16 +120,6 @@
         </header>
         @endguest
         <main>
-            <!-- Message in blade testing on 27/1/2019 by Bezane -->
-            @if (Session::has('message'))
-            <div class="alert alert-success" role="alert">
-                {{Session::get('message')}}
-            </div>
-            @elseif (Session::has('error'))
-            <div class="alert alert-warning" role="alert">
-                {{Session::get('error')}}
-            </div>
-            @endif
             <!-- End message -->
             @guest
             @yield('content')

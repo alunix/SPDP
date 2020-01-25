@@ -66,13 +66,19 @@ const routes = [
             .default,
         beforeEnter: (to, from, next) => {
             var id = to.params.id;
-            fetch("/api/permohonan/" + id).then(res => {
-                if (res.status == 404 || res.status == 403) {
-                    next({ name: "NotFound" });
-                } else {
+            axios
+                .get("/api/permohonan/" + id)
+                .then(res => {
                     next();
-                }
-            });
+                })
+                .catch(function(error) {
+                    if (
+                        error.response.status == 404 ||
+                        error.response.status == 403
+                    ) {
+                        next({ name: "NotFound" });
+                    }
+                });
         }
     },
     {
@@ -81,12 +87,10 @@ const routes = [
         component: require("./components/View/Pengguna/SenaraiPengguna.vue")
             .default,
         beforeEnter: (to, from, next) => {
-            store
-                .axios.get("fetchUser")
-                .then(res => {
-                    if (res.data.role == "pjk") next();
-                    else next({ name: "NotFound" });
-                });
+            store.dispatch("fetchUser").then(res => {
+                if (res.data.role == "pjk") next();
+                else next({ name: "NotFound" });
+            });
         }
     },
     {
@@ -98,8 +102,7 @@ const routes = [
     {
         path: "/tetapan",
         name: "tetapan",
-        component: require("./components/View/Pengguna/Tetapan.vue")
-            .default
+        component: require("./components/View/Pengguna/Tetapan.vue").default
     },
     {
         path: "/403-tidak-dibenarkan",
@@ -159,13 +162,16 @@ Vue.component(
     "tabPenilaianPanel",
     require("./components/View/SenaraiPermohonan/tabPenilaianPanel.vue").default
 );
+
 //Chart library
 Vue.component("apexchart", VueApexCharts).default;
+
 //Component
 Vue.component(
     "PermohonanTab",
     require("./components/View/Permohonan/PermohonanTab.vue").default
 );
+
 //Approval view
 Vue.component(
     "LaporanUpload",
@@ -199,11 +205,10 @@ Vue.component(
 );
 
 // global filter
-Vue.filter('date', function (value) {
-    if (!value) return '';
+Vue.filter("date", function(value) {
+    if (!value) return "";
     return dayjs(value).format("LLL");
-})
-
+});
 
 const app = new Vue({
     el: "#app",

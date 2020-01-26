@@ -32,7 +32,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/dokumen/{file_link}', 'DokumenPermohonanController@downloadDokumen')->name('api.dokumen.download');
 
     /*----------------------- PJK menerima program pengajian daripada fakulti ------------- */
-    Route::get('/senarai-permohonan-baharu', 'PermohonanController@api_showListPermohonanBaharu')->name('api.senaraiPermohonan');
+    Route::get('/senarai-permohonan-baharu', 'PermohonanController@showListPermohonanBaharu')->name('api.senaraiPermohonan');
     Route::get('/senarai-perakuan', 'PermohonanController@senaraiPerakuan')->name('api.senaraiPerakuan');
     Route::get('/dashboard', 'HomeController@index')->middleware('auth')->name('home');
     Route::get('/senarai-penilaian', 'PenilaianPanelController@index')->name('penilaian.show');

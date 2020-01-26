@@ -32,7 +32,7 @@ class ShowPermohonan
         return response()->json(['permohonan' => $permohonan[0], 'dokumen' => $dokumen]);
     }
 
-    public function fakulti($permohonan)
+    private function fakulti($permohonan)
     {
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
@@ -45,20 +45,26 @@ class ShowPermohonan
         return $this->show($permohonan);
     }
 
-    public function penilai($permohonan)
+    private function penilai($permohonan)
     {
         $permohonans = new SenaraiPermohonan();
-        $permohonans = $permohonans->queryPermohonanBaru()->count();
+        $permohonans = $permohonans->queryPermohonanBaru()->get();
 
         if (!$permohonans) {
             abort(404);
         };
+
         $permohonans_id = $permohonans->pluck('id')->toArray();
-        return $this->userHavePermohonan($permohonan, $permohonans_id);
+        $can_view = $this->userHavePermohonan($permohonan, $permohonans_id);
+
+        if(!$can_view) {
+            abort(403);
+        }
+        return $this->show($permohonan);
     }
 
 
-    public function userHavePermohonan($permohonan, $permohonans_id)
+    private function userHavePermohonan($permohonan, $permohonans_id)
     {
         // check whether user does have permohonans
         if (sizeof($permohonans_id) <= 0) {

@@ -97,8 +97,8 @@ class HomeController extends Controller
         $pie_chart['data'] = $permohonans->pluck('count');
         $pie_chart['id'] = 'Jenis permohonan tahun';
 
-        $progress = Permohonan::where('status_id', '!=', 1)->orWhere('status_id', '!=', 6)->orWhere('status_id', '!=', 7)->select('id')->count();
-        $lulus = Permohonan::where('status_id', '=', 6)->orWhere('status_id', '=', 7)->select('id')->count();
+        $progress = Permohonan::where('id_penghantar', auth()->user()->id)->where('status_id', '!=', 1)->orWhere('status_id', '!=', 6)->orWhere('status_id', '!=', 7)->count();
+        $lulus = Permohonan::where('id_penghantar', auth()->user()->id)->where('status_id', '=', 6)->orWhere('status_id', '=', 7)->count();
 
         return response()->json([
             'role' => $role,
@@ -108,29 +108,5 @@ class HomeController extends Controller
             'line_chart' => $line_chart,
             'pie_chart' => $pie_chart
         ]);
-    }
-
-    public function permohonanCount()
-    {
-        $role = auth()->user()->role;
-        switch ($role) {
-            case 'pjk':
-                return Permohonan::where('jenis_id', '!=', '8')->where('status_id', '=', '1')->count();
-                break;
-            case 'jppa':
-                return Permohonan::where('jenis_id', 8)->where('status_id', 1)->orWhere('status_id', 4)->count();
-                break;
-            case 'penilai':
-                $user_id = auth()->user()->id;
-                $penilaian = PenilaianPanel::where('id_penilai', $user_id)->pluck('permohonan_id');
-                return Permohonan::whereIn('id', $penilaian)->where('status_id', 2)->count();
-                break;
-            case 'senat':
-                return Permohonan::where('status_id', '=', '5')->count();
-                break;
-            default:
-                return;
-                break;
-        }
     }
 }

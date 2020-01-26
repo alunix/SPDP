@@ -23,9 +23,6 @@ class TetapanAliranKerjaController extends Controller
         $selectedPjk =$tetapan->value('id_pjk');
         $selectedJppa =$tetapan->value('id_jppa');
         $selectedSenat =$tetapan->value('id_senat');
-
-       
-
         return view ('pjk.tetapan-aliran-kerja')->with('setting',$tetapan)->with('pjks',$pjks)->with('jppas',$jppas)->with('senats',$senats)->with('selectedPjk',$selectedPjk)->with('selectedJppa',$selectedJppa)->with('selectedSenat',$selectedSenat);
     }
 

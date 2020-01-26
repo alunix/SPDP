@@ -29,6 +29,7 @@ class ShowPermohonan
         $permohonan = Permohonan::with(['jenis_permohonan:id,huraian'])->where('id', $permohonan->id)
             ->withCount(['dokumens', 'laporans', 'kemajuan_permohonans'])->get();
         $dokumen = Permohonan::find($permohonan[0]->id)->latest_dokumen();
+        
         return response()->json(['permohonan' => $permohonan[0], 'dokumen' => $dokumen]);
     }
 
@@ -36,13 +37,9 @@ class ShowPermohonan
     {
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
-        $permohonans_id = $user->permohonans->pluck('id')->toArray();
-
-        $dp =  $this->userHavePermohonan($permohonan, $permohonans_id);
-        if (!$dp) {
-            abort(403);
-        }
-        return $this->show($permohonan);
+        $permohonans_id = Permohonan::where('id_penghantar', $user_id)->pluck('id')->toArray();
+        
+        return $this->userHavePermohonan($permohonan, $permohonans_id);
     }
 
     private function penilai($permohonan)
@@ -54,13 +51,7 @@ class ShowPermohonan
             abort(404);
         };
 
-        $permohonans_id = $permohonans->pluck('id')->toArray();
-        $can_view = $this->userHavePermohonan($permohonan, $permohonans_id);
-
-        if(!$can_view) {
-            abort(403);
-        }
-        return $this->show($permohonan);
+        return $this->userHavePermohonan($permohonan, $permohonans->pluck('id')->toArray());
     }
 
 
@@ -68,12 +59,12 @@ class ShowPermohonan
     {
         // check whether user does have permohonans
         if (sizeof($permohonans_id) <= 0) {
-            return false;
+            abort(404);
         }
         if (in_array($permohonan->id, $permohonans_id)) {
-            return true;
+            return $this->show($permohonan);
         } else {
-            return false;
+            abort(404);
         }
     }
 }
